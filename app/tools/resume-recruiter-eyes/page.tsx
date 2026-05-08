@@ -3,21 +3,25 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { RecruiterReport } from '@/components/recruiter-report'
+import { RewrittenResume } from '@/components/rewritten-resume'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
-type ViewState = 'input' | 'loading' | 'result' | 'error'
+type ViewState = 'input' | 'loading' | 'result' | 'rewritten' | 'error'
 
 export default function ResumeRecruiterEyesPage() {
   const [resumeText, setResumeText] = useState('')
   const [jdText, setJdText] = useState('')
   const [state, setState] = useState<ViewState>('input')
   const [result, setResult] = useState('')
+  const [rewrittenResume, setRewrittenResume] = useState('')
+  const [applying, setApplying] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
   const [isMemberUser, setIsMemberUser] = useState(false)
   const [isClient, setIsClient] = useState(false)
   const progressBarRef = useRef<HTMLDivElement>(null)
   const resultRef = useRef<HTMLDivElement>(null)
+  const rewrittenRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsClient(true)
@@ -28,7 +32,43 @@ export default function ResumeRecruiterEyesPage() {
     if (state === 'result' && resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
+    if (state === 'rewritten' && rewrittenRef.current) {
+      rewrittenRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }, [state])
+
+  const applyChanges = async () => {
+    if (!result || applying) return
+    setApplying(true)
+    setErrorMessage('')
+    try {
+      const response = await fetch('/api/tool', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          toolId: 'resume-rewrite-applied',
+          inputs: { resume: resumeText, analysis: result },
+        }),
+      })
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || 'Could not apply the changes — try again.')
+      }
+      const data = await response.json()
+      setRewrittenResume(data.result)
+      setState('rewritten')
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Unknown error'
+      setErrorMessage(msg)
+      setState('error')
+    } finally {
+      setApplying(false)
+    }
+  }
+
+  const backToReport = () => {
+    setState('result')
+  }
 
   const startLoadingSteps = () => {
     const steps = [1, 2, 3]
@@ -350,7 +390,12 @@ export default function ResumeRecruiterEyesPage() {
               </p>
             </div>
 
-            <RecruiterReport result={result} isMember={isMemberUser} />
+            <RecruiterReport
+              result={result}
+              isMember={isMemberUser}
+              onApplyChanges={isMemberUser ? applyChanges : undefined}
+              applying={applying}
+            />
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <button
@@ -389,6 +434,32 @@ export default function ResumeRecruiterEyesPage() {
                 Start over
               </button>
             </div>
+          </div>
+        )}
+
+        {/* REWRITTEN RESUME */}
+        {state === 'rewritten' && rewrittenResume && (
+          <div ref={rewrittenRef}>
+            <div style={{ marginBottom: '24px' }}>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  marginBottom: '8px',
+                  letterSpacing: '-0.02em',
+                  fontFamily: 'Figtree, sans-serif',
+                  color: '#F2F0FF',
+                }}
+              >
+                The recruiter&apos;s notes, applied.
+              </h2>
+              <p style={{ color: '#8B8AA0', fontSize: '15px' }}>
+                Three moves applied. Everything else preserved exactly. Ready to copy and submit.
+              </p>
+            </div>
+
+            <RewrittenResume resume={rewrittenResume} onBack={backToReport} />
           </div>
         )}
 

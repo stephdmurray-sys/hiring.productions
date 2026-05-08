@@ -7,6 +7,11 @@ interface RecruiterReportProps {
   result: string
   /** When false, body content of non-decision sections is blurred and an upgrade card is shown inline. */
   isMember: boolean
+  /** When provided + isMember, shows an "Apply these changes" CTA below the moves
+   * that triggers the parent to run the rewrite-applied API call. */
+  onApplyChanges?: () => void
+  /** When true, the apply CTA shows as loading (the rewrite call is in flight). */
+  applying?: boolean
 }
 
 type SectionKind =
@@ -599,7 +604,7 @@ function InlineUpgradeCard() {
 
 // === Main component =============================================
 
-export function RecruiterReport({ result, isMember }: RecruiterReportProps) {
+export function RecruiterReport({ result, isMember, onApplyChanges, applying = false }: RecruiterReportProps) {
   const sections = parseSections(result)
   const today = new Date().toLocaleDateString('en-US', {
     month: 'long',
@@ -762,6 +767,76 @@ export function RecruiterReport({ result, isMember }: RecruiterReportProps) {
         }
         return element
       })}
+
+      {/* Apply-changes CTA — members only, lives at the end of the report */}
+      {isMember && onApplyChanges && (
+        <div
+          style={{
+            marginTop: '20px',
+            padding: '28px 32px',
+            background: 'linear-gradient(135deg, #FAF6FF 0%, #FFF4F1 100%)',
+            border: '1px solid rgba(108,71,255,0.2)',
+            borderRadius: '12px',
+            textAlign: 'center',
+          }}
+        >
+          <div
+            style={{
+              fontSize: '11px',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              color: '#7A6CFF',
+              marginBottom: '8px',
+            }}
+          >
+            One more thing
+          </div>
+          <h3
+            style={{
+              fontSize: '20px',
+              fontWeight: 900,
+              color: '#1A1A22',
+              fontFamily: 'Figtree, sans-serif',
+              letterSpacing: '-0.02em',
+              margin: '0 0 8px 0',
+              lineHeight: 1.25,
+            }}
+          >
+            Want this in a finished resume?
+          </h3>
+          <p
+            style={{
+              fontSize: '14px',
+              color: '#5A5A6E',
+              lineHeight: 1.55,
+              margin: '0 0 18px 0',
+            }}
+          >
+            Apply all three moves and get your resume back, ready to copy or download. No editing on your end.
+          </p>
+          <button
+            onClick={onApplyChanges}
+            disabled={applying}
+            style={{
+              padding: '14px 28px',
+              background: applying
+                ? '#A78BFA'
+                : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              color: '#ffffff',
+              border: 'none',
+              borderRadius: '10px',
+              fontWeight: 800,
+              fontSize: '15px',
+              fontFamily: 'Figtree, sans-serif',
+              cursor: applying ? 'wait' : 'pointer',
+              transition: 'background 0.2s ease',
+            }}
+          >
+            {applying ? 'Rewriting your resume...' : 'Apply these changes — see my resume rewritten'}
+          </button>
+        </div>
+      )}
 
       {/* Document footer */}
       <div
