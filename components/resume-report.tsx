@@ -195,11 +195,13 @@ function SignalsSection({
   tone,
   title,
   eyebrow,
+  description,
 }: {
   section: Section
   tone: 'red' | 'green'
   title: string
   eyebrow: string
+  description?: string
 }) {
   // Split body into items: each item is one paragraph (separated by blank lines)
   const items = section.body
@@ -210,7 +212,7 @@ function SignalsSection({
   const accent = tone === 'red' ? '#C73E5A' : '#1F8A55'
 
   return (
-    <SectionShell title={title} accentColor={accent} eyebrow={eyebrow}>
+    <SectionShell title={title} accentColor={accent} eyebrow={eyebrow} description={description}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {items.map((item, i) => {
           const { quote, comment } = splitQuoteAndComment(item)
@@ -243,7 +245,12 @@ function SignalsSection({
 function PhraseLandsOnSection({ section }: { section: Section }) {
   const { quote, comment } = splitQuoteAndComment(section.body.trim())
   return (
-    <SectionShell title="The phrase a recruiter will land on" accentColor="#7A6CFF" eyebrow="The line">
+    <SectionShell
+      title="The phrase a recruiter will land on"
+      accentColor="#7A6CFF"
+      eyebrow="The line"
+      description="If a recruiter has six seconds, this is the line their eye stops on. It's the strongest single signal that AI was involved."
+    >
       <div
         style={{
           padding: '20px 24px',
@@ -312,7 +319,12 @@ function MissingMetricsSection({ section }: { section: Section }) {
   if (current) blocks.push(current)
 
   return (
-    <SectionShell title="What's missing for the two most recent roles" accentColor="#7A6CFF" eyebrow="What's missing">
+    <SectionShell
+      title="What's missing for the two most recent roles"
+      accentColor="#7A6CFF"
+      eyebrow="What's missing"
+      description="Beyond word choice, the structural tell of an AI resume is the absence of role-specific metrics that any real candidate would know. Here's what's absent for each of your last two roles."
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {blocks.map((b, i) => (
           <div
@@ -396,7 +408,12 @@ function ProbesSection({ section }: { section: Section }) {
     .filter(Boolean)
 
   return (
-    <SectionShell title="What a recruiter will probe in the interview" accentColor="#7A6CFF" eyebrow="Cross-examination">
+    <SectionShell
+      title="If you make it to interview, here's what they'll probe"
+      accentColor="#7A6CFF"
+      eyebrow="Cross-examination"
+      description="When a resume looks AI-polished but still gets through, recruiters use specific probing questions to see if the claims hold up. These are the ones they'd ask about your resume."
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         {rawItems.map((item, i) => (
           <div
@@ -433,7 +450,12 @@ function ProbesSection({ section }: { section: Section }) {
 
 function MyReadSection({ section }: { section: Section }) {
   return (
-    <SectionShell title="My read" accentColor="#7A6CFF" eyebrow="The call">
+    <SectionShell
+      title="The call I'd make"
+      accentColor="#7A6CFF"
+      eyebrow="The call"
+      description="Putting all the signals together — would I keep reading this resume, or set it aside? Here's the honest answer."
+    >
       <div
         style={{
           padding: '18px 22px',
@@ -452,165 +474,193 @@ function MyReadSection({ section }: { section: Section }) {
   )
 }
 
-function NextMovesSection({ section }: { section: Section }) {
-  // Items are numbered. Each item may contain "Quote" → "Rewrite" pairs.
-  // We split on lines starting with "1." "2." "3." or `^\d+\.`
-  const items: string[] = []
-  let buf = ''
-  for (const raw of section.body.split('\n')) {
-    if (/^\s*\d+\./.test(raw)) {
-      if (buf.trim()) items.push(buf.trim())
-      buf = raw.replace(/^\s*\d+\.\s*/, '')
-    } else {
-      buf += '\n' + raw
+interface MoveBlock {
+  num: number
+  kind: 'rewrite' | 'add' | 'unknown'
+  current?: string
+  rewrite?: string
+  addTo?: string
+  addThis?: string
+  why?: string
+  rawFallback?: string
+}
+
+function parseMoveBlocks(body: string): MoveBlock[] {
+  // Split on **Move N:** headers
+  const moves: MoveBlock[] = []
+  const sections = body.split(/\n(?=\s*\*\*Move\s*\d)/i)
+  for (const raw of sections) {
+    const text = raw.trim()
+    if (!text) continue
+
+    const headerMatch = text.match(/^\s*\*\*Move\s*(\d+):\s*(Rewrite|Add)\*\*/i)
+    if (!headerMatch) {
+      // Fallback for unstructured items — keep raw text
+      const numFallback = text.match(/^\s*(\d+)\./)
+      if (numFallback) {
+        moves.push({
+          num: parseInt(numFallback[1], 10),
+          kind: 'unknown',
+          rawFallback: text.replace(/^\s*\d+\.\s*/, '').trim(),
+        })
+      }
+      continue
     }
+
+    const num = parseInt(headerMatch[1], 10)
+    const kind = headerMatch[2].toLowerCase() === 'add' ? 'add' : 'rewrite'
+
+    // Extract labeled fields. Tolerate double or single colons, tolerate quotes.
+    const grab = (label: string): string | undefined => {
+      const re = new RegExp(`^\\s*${label}\\s*:\\s*(.+?)\\s*$`, 'im')
+      const m = text.match(re)
+      if (!m) return undefined
+      return m[1].replace(/^"|"$/g, '').trim() || undefined
+    }
+
+    const block: MoveBlock = { num, kind }
+    if (kind === 'rewrite') {
+      block.current = grab('Current')
+      block.rewrite = grab('Rewrite')
+    } else {
+      block.addTo = grab('Add to')
+      block.addThis = grab('Add this')
+    }
+    block.why = grab('Why')
+
+    // If we got nothing structured, fall back to raw
+    if (!block.current && !block.rewrite && !block.addTo && !block.addThis && !block.why) {
+      block.kind = 'unknown'
+      block.rawFallback = text.replace(/^\s*\*\*Move[^*]+\*\*\s*/i, '').trim()
+    }
+
+    moves.push(block)
   }
-  if (buf.trim()) items.push(buf.trim())
+  return moves
+}
+
+function MoveCard({ move }: { move: MoveBlock }) {
+  const numStyle = {
+    width: '32px',
+    height: '32px',
+    borderRadius: '50%',
+    background: '#FF4F6A',
+    color: '#ffffff',
+    fontWeight: 800,
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    marginTop: '2px',
+  } as const
+
+  const labelStyle = {
+    fontSize: '10px',
+    fontWeight: 800,
+    textTransform: 'uppercase' as const,
+    letterSpacing: '0.1em',
+    marginBottom: '4px',
+  }
+
+  const beforeBox = {
+    padding: '12px 14px',
+    background: '#FFE4E0',
+    borderRadius: '8px',
+    fontSize: '14px',
+    color: '#7A1F2E',
+    fontStyle: 'italic' as const,
+    lineHeight: 1.5,
+  }
+  const afterBox = {
+    padding: '12px 14px',
+    background: '#DFF5E6',
+    borderRadius: '8px',
+    fontSize: '14px',
+    color: '#1F5436',
+    fontStyle: 'italic' as const,
+    lineHeight: 1.5,
+  }
+  const whyBox = {
+    fontSize: '13px',
+    color: '#5A5A6E',
+    fontStyle: 'italic' as const,
+    marginTop: '10px',
+    paddingLeft: '12px',
+    borderLeft: '2px solid #ECECF2',
+  }
+
+  if (move.kind === 'unknown' && move.rawFallback) {
+    return (
+      <div style={{ display: 'flex', gap: '14px' }}>
+        <div style={numStyle}>{move.num}</div>
+        <div style={{ flex: 1, fontSize: '15px', color: '#1A1A22', lineHeight: 1.65 }}>
+          {renderInline(move.rawFallback, `mv-${move.num}`, 'green')}
+        </div>
+      </div>
+    )
+  }
+
+  if (move.kind === 'add') {
+    return (
+      <div style={{ display: 'flex', gap: '14px' }}>
+        <div style={numStyle}>{move.num}</div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: '13px', fontWeight: 700, color: '#1A1A22', marginBottom: '12px' }}>
+            Add a new line to{' '}
+            <span style={{ color: '#7A6CFF' }}>{move.addTo || 'your resume'}</span>
+          </div>
+          {move.addThis && (
+            <div style={{ ...afterBox, marginBottom: 0 }}>
+              <div style={{ ...labelStyle, color: '#1F8A55' }}>Add this</div>
+              {`"${move.addThis}"`}
+            </div>
+          )}
+          {move.why && <div style={whyBox}>{move.why}</div>}
+        </div>
+      </div>
+    )
+  }
+
+  // Rewrite move
+  return (
+    <div style={{ display: 'flex', gap: '14px' }}>
+      <div style={numStyle}>{move.num}</div>
+      <div style={{ flex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8px' }}>
+          {move.current && (
+            <div style={beforeBox}>
+              <div style={{ ...labelStyle, color: '#C73E5A' }}>Current</div>
+              {`"${move.current}"`}
+            </div>
+          )}
+          {move.rewrite && (
+            <div style={afterBox}>
+              <div style={{ ...labelStyle, color: '#1F8A55' }}>Rewrite to</div>
+              {`"${move.rewrite}"`}
+            </div>
+          )}
+        </div>
+        {move.why && <div style={whyBox}>{move.why}</div>}
+      </div>
+    </div>
+  )
+}
+
+function NextMovesSection({ section }: { section: Section }) {
+  const moves = parseMoveBlocks(section.body)
 
   return (
-    <SectionShell title="Your next three moves" accentColor="#FF4F6A" eyebrow="What to fix">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-        {items.map((item, i) => {
-          // Try to detect quote → quote pattern (current → rewrite)
-          const quotes = item.match(/(["'][^"']+["'])/g) || []
-
-          if (quotes.length >= 2) {
-            // Before/after style
-            const beforeIdx = item.indexOf(quotes[0])
-            const afterIdx = item.indexOf(quotes[1], beforeIdx + 1)
-            const lead = item.slice(0, beforeIdx).replace(/[—–-]+$/, '').trim()
-            const between = item.slice(beforeIdx + quotes[0].length, afterIdx).trim()
-            const trail = item.slice(afterIdx + quotes[1].length).trim()
-
-            return (
-              <div key={`mv-${i}`} style={{ display: 'flex', gap: '14px' }}>
-                <div
-                  style={{
-                    width: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    background: '#FF4F6A',
-                    color: '#ffffff',
-                    fontWeight: 800,
-                    fontSize: '13px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    marginTop: '2px',
-                  }}
-                >
-                  {i + 1}
-                </div>
-                <div style={{ flex: 1 }}>
-                  {lead && (
-                    <div style={{ fontSize: '14px', color: '#3A3A4A', marginBottom: '10px', fontWeight: 500 }}>
-                      {lead}
-                    </div>
-                  )}
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr',
-                      gap: '8px',
-                      marginBottom: trail ? '10px' : 0,
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: '12px 14px',
-                        background: '#FFE4E0',
-                        borderRadius: '8px',
-                        fontSize: '14px',
-                        color: '#7A1F2E',
-                        fontStyle: 'italic',
-                        position: 'relative',
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: '10px',
-                          fontWeight: 800,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
-                          color: '#C73E5A',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        Current
-                      </div>
-                      {quotes[0]}
-                    </div>
-                    <div
-                      style={{
-                        padding: '12px 14px',
-                        background: '#DFF5E6',
-                        borderRadius: '8px',
-                        fontSize: '14px',
-                        color: '#1F5436',
-                        fontStyle: 'italic',
-                      }}
-                    >
-                      <div
-                        style={{
-                          fontSize: '10px',
-                          fontWeight: 800,
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.08em',
-                          color: '#1F8A55',
-                          marginBottom: '4px',
-                        }}
-                      >
-                        Rewrite
-                      </div>
-                      {quotes[1]}
-                    </div>
-                  </div>
-                  {between && (
-                    <div style={{ fontSize: '13px', color: '#6B6B7B', marginTop: '6px' }}>{between}</div>
-                  )}
-                  {trail && (
-                    <div style={{ fontSize: '13px', color: '#6B6B7B', marginTop: '6px' }}>{trail}</div>
-                  )}
-                </div>
-              </div>
-            )
-          }
-
-          // Single-quote / no-quote item — render as a numbered paragraph
-          return (
-            <div key={`mv-${i}`} style={{ display: 'flex', gap: '14px' }}>
-              <div
-                style={{
-                  width: '28px',
-                  height: '28px',
-                  borderRadius: '50%',
-                  background: '#FF4F6A',
-                  color: '#ffffff',
-                  fontWeight: 800,
-                  fontSize: '13px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  marginTop: '2px',
-                }}
-              >
-                {i + 1}
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  fontSize: '15px',
-                  color: '#1A1A22',
-                  lineHeight: 1.65,
-                }}
-              >
-                {renderInline(item, `mv-${i}`, 'green')}
-              </div>
-            </div>
-          )
-        })}
+    <SectionShell
+      title="Three rewrites to remove the AI tells"
+      accentColor="#FF4F6A"
+      eyebrow="What to fix"
+      description="Specific edits — not advice. Each one targets a line we already flagged. Use the rewrites verbatim, or adapt them in your own voice."
+    >
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {moves.map((m, i) => (
+          <MoveCard key={`mv-${i}-${m.num}`} move={m} />
+        ))}
       </div>
     </SectionShell>
   )
@@ -620,11 +670,13 @@ function SectionShell({
   title,
   accentColor,
   eyebrow,
+  description,
   children,
 }: {
   title: string
   accentColor: string
   eyebrow: string
+  description?: string
   children: ReactNode
 }) {
   return (
@@ -657,6 +709,20 @@ function SectionShell({
         >
           {title}
         </h2>
+        {description && (
+          <p
+            style={{
+              fontSize: '14px',
+              color: '#5A5A6E',
+              fontStyle: 'italic',
+              lineHeight: 1.55,
+              marginTop: '12px',
+              marginBottom: 0,
+            }}
+          >
+            {description}
+          </p>
+        )}
       </div>
       {children}
     </div>
@@ -746,6 +812,7 @@ export function ResumeReport({ result }: ResumeReportProps) {
                 tone="red"
                 title="What reads as AI"
                 eyebrow="Red flags"
+                description="These are the specific lines a recruiter's eye snags on as suspicious — not vibes, actual phrases that pattern-match to AI output."
               />
             )
           case 'humanStrengths':
@@ -756,6 +823,7 @@ export function ResumeReport({ result }: ResumeReportProps) {
                 tone="green"
                 title="What reads as human"
                 eyebrow="What's working"
+                description="These are the lines that prove a person wrote this. They're what saves the resume even when other parts look AI-polished — protect them."
               />
             )
           case 'phraseLandsOn':
