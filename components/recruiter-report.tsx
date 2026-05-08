@@ -484,6 +484,20 @@ function SectionShell({
 
 // Inline upgrade card shown to non-members between sections
 function InlineUpgradeCard() {
+  const inclusions = [
+    {
+      label: 'The whole monologue',
+      sub: 'on this resume — and any other one you run, with or without a job description',
+    },
+    {
+      label: 'LinkedIn Profile Rewriter',
+      sub: 'your audition reel, with the actual rewrites — not advice',
+    },
+    {
+      label: 'The Rehearsal Room',
+      sub: 'interview prep in a hiring manager’s voice — questions, answer evals, the whole thing',
+    },
+  ]
   return (
     <div
       style={{
@@ -508,11 +522,61 @@ function InlineUpgradeCard() {
       >
         Want the rest of the read?
       </div>
-      <div style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.3, marginBottom: '12px' }}>
+      <div
+        style={{
+          fontSize: '20px',
+          fontWeight: 900,
+          lineHeight: 1.3,
+          marginBottom: '20px',
+          letterSpacing: '-0.01em',
+        }}
+      >
         That was the verdict. Members see the whole monologue — what they skip, what makes them pause, and the call they make in 30 seconds.
       </div>
-      <div style={{ fontSize: '14px', color: '#B8B6CF', marginBottom: '20px', lineHeight: 1.5 }}>
-        $20/year. All four inside looks. Cancel anytime.
+
+      <div
+        style={{
+          fontSize: '11px',
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.12em',
+          color: '#8B8AA0',
+          marginBottom: '12px',
+        }}
+      >
+        And while you’re a member, you also get
+      </div>
+      <ul style={{ margin: 0, padding: 0, listStyle: 'none', marginBottom: '20px' }}>
+        {inclusions.map((item, i) => (
+          <li
+            key={i}
+            style={{
+              position: 'relative',
+              paddingLeft: '20px',
+              marginBottom: '10px',
+              fontSize: '14px',
+              lineHeight: 1.5,
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute',
+                left: '4px',
+                top: '8px',
+                width: '7px',
+                height: '7px',
+                borderRadius: '50%',
+                background: '#A78BFA',
+              }}
+            />
+            <span style={{ fontWeight: 700, color: '#F2F0FF' }}>{item.label}</span>{' '}
+            <span style={{ color: '#B8B6CF' }}>— {item.sub}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div style={{ fontSize: '13px', color: '#8B8AA0', marginBottom: '16px' }}>
+        $20/year. Unlimited runs. Cancel anytime.
       </div>
       <StripeCheckoutButton
         style={{
