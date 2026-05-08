@@ -46,13 +46,23 @@ function parseSections(markdown: string): Section[] {
 
   for (const raw of lines) {
     const line = raw.trimEnd()
-    // Match **Heading:**  (with optional trailing colon inside or outside the asterisks)
+    // Match **Heading:** — but only treat it as a NEW top-level section
+    // when the heading matches one of our known top-level kinds.
+    // Otherwise it's a sub-heading inside the current section (e.g. role
+    // titles inside Missing Metrics, or Move blocks inside Next Moves)
+    // and it stays in the body for that section's own parser to handle.
     const m = line.match(/^\s*\*\*(.+?):?\*\*\s*$/)
     if (m) {
-      if (current) sections.push(current)
       const heading = m[1].replace(/:$/, '').trim()
-      current = { kind: classifyHeading(heading), heading, body: '' }
-    } else if (current) {
+      const kind = classifyHeading(heading)
+      if (kind !== 'unknown') {
+        if (current) sections.push(current)
+        current = { kind, heading, body: '' }
+        continue
+      }
+      // Unknown heading — fall through to body append below
+    }
+    if (current) {
       current.body += (current.body ? '\n' : '') + line
     }
   }
