@@ -9,6 +9,12 @@ interface ToolPageShellProps {
   toolDescription: string
   category: 'candidate' | 'hiring'
   isFree?: boolean
+  /**
+   * When true (default), wraps children in ToolGate so non-members see a
+   * full-page paywall. Set to false when the page renders its own form
+   * and handles gating inline at the result level (preview pattern).
+   */
+  gated?: boolean
   children: React.ReactNode
 }
 
@@ -17,6 +23,7 @@ export function ToolPageShell({
   toolDescription,
   category,
   isFree = false,
+  gated = true,
   children,
 }: ToolPageShellProps) {
   const categoryPillColor = category === 'candidate' ? '#A78BFA' : '#FF4F6A'
@@ -107,14 +114,18 @@ export function ToolPageShell({
         </div>
       </section>
 
-      {/* Tool Content Wrapped in Gate */}
-      <ToolGate
-        toolName={toolName}
-        toolDescription={toolDescription}
-        isFree={isFree}
-      >
-        {children}
-      </ToolGate>
+      {/* Tool Content — auto-gated unless the page opts out */}
+      {gated ? (
+        <ToolGate
+          toolName={toolName}
+          toolDescription={toolDescription}
+          isFree={isFree}
+        >
+          {children}
+        </ToolGate>
+      ) : (
+        <>{children}</>
+      )}
 
       <Footer />
     </div>

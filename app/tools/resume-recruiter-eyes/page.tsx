@@ -1,240 +1,433 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Eye } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
-import { ToolResult } from '@/components/tool-result'
+import { RecruiterReport } from '@/components/recruiter-report'
+import { isMember, activateMembership, clearMembership } from '@/lib/membership'
+
+type ViewState = 'input' | 'loading' | 'result' | 'error'
 
 export default function ResumeRecruiterEyesPage() {
   const [resumeText, setResumeText] = useState('')
-  const [roleInput, setRoleInput] = useState('')
+  const [jdText, setJdText] = useState('')
+  const [state, setState] = useState<ViewState>('input')
   const [result, setResult] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isMemberUser, setIsMemberUser] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+  const progressBarRef = useRef<HTMLDivElement>(null)
+  const resultRef = useRef<HTMLDivElement>(null)
 
-  const handleSubmit = async () => {
-    if (resumeText.length < 200) {
-      setError('Paste more of your resume for an accurate read — at least a few paragraphs.')
+  useEffect(() => {
+    setIsClient(true)
+    setIsMemberUser(isMember())
+  }, [])
+
+  useEffect(() => {
+    if (state === 'result' && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [state])
+
+  const startLoadingSteps = () => {
+    const steps = [1, 2, 3]
+    let i = 0
+    const interval = setInterval(() => {
+      if (i < steps.length) {
+        setCurrentStep(i + 1)
+        i++
+      } else {
+        clearInterval(interval)
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = '100%'
+        }
+      }
+    }, 800)
+    return interval
+  }
+
+  const runAnalysis = async () => {
+    if (!resumeText.trim() || resumeText.length < 100) {
+      alert('Paste at least 100 characters of resume text.')
       return
     }
 
-    setLoading(true)
-    setError('')
-    setResult('')
+    setState('loading')
+    setCurrentStep(0)
+    const interval = startLoadingSteps()
 
     try {
+      const inputs: Record<string, string> = { resume: resumeText }
+      if (jdText.trim()) {
+        inputs.jobDescription = jdText.trim()
+      }
+
       const response = await fetch('/api/tool', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          toolId: 'resume-recruiter-eyes',
-          inputs: {
-            resume: resumeText,
-            ...(roleInput && { role: roleInput }),
-          },
-        }),
+        body: JSON.stringify({ toolId: 'resume-recruiter-eyes', inputs }),
       })
 
-      const data = await response.json()
+      clearInterval(interval)
 
       if (!response.ok) {
-        setError(data.error || 'Failed to process your resume')
-      } else {
-        setResult(data.result)
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || 'Something went wrong reading your resume.')
       }
+
+      const data = await response.json()
+      setResult(data.result)
+      setState('result')
     } catch (err) {
-      setError('An error occurred. Please try again.')
-      console.error('[v0] Submit error:', err)
-    } finally {
-      setLoading(false)
+      clearInterval(interval)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
+      setErrorMessage(msg)
+      setState('error')
+    }
+  }
+
+  const editAndRecheck = () => {
+    setState('input')
+    setResult('')
+    setErrorMessage('')
+    setCurrentStep(0)
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = '0%'
+    }
+  }
+
+  const startOver = () => {
+    setResumeText('')
+    setJdText('')
+    editAndRecheck()
+  }
+
+  // Dev toggle: simulate member/non-member without going through Stripe
+  const toggleMembership = () => {
+    if (isMemberUser) {
+      clearMembership()
+      setIsMemberUser(false)
+    } else {
+      activateMembership('dev@hiring.productions')
+      setIsMemberUser(true)
     }
   }
 
   return (
     <ToolPageShell
       toolName="Your Resume, Through a Recruiter's Eyes"
-      toolDescription="See the internal monologue of a recruiter reading your resume in the first 6 seconds."
+      toolDescription="The internal monologue of a recruiter reading your resume. What they notice, what they skip, what makes them pause, and the call they make in 30 seconds."
       category="candidate"
       isFree={false}
+      gated={false}
     >
-      {/* Input Section */}
-      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
-        {/* Resume Label */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-          }}
-        >
-          PASTE YOUR RESUME
-        </label>
-
-        {/* Resume Textarea */}
-        <textarea
-          value={resumeText}
-          onChange={(e) => setResumeText(e.target.value)}
-          placeholder="Paste your full resume text here — the more detail the more accurate the read."
-          rows={14}
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '16px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            resize: 'vertical',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = '#6C47FF'
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = 'rgba(255,255,255,0.08)'
-          }}
-        />
-
-        {/* Character Count */}
+      {/* Dev toggle — only visible in development */}
+      {isClient && process.env.NODE_ENV === 'development' && (
         <div
           style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '12px',
-            color: '#8B8AA0',
-            textAlign: 'right',
-            marginTop: '6px',
-          }}
-        >
-          {resumeText.length.toLocaleString()} characters
-        </div>
-
-        {/* Target Role Label */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            background: '#1A1A22',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: '8px',
+            padding: '10px 14px',
+            zIndex: 50,
             fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          TARGET ROLE (OPTIONAL)
-        </label>
-
-        {/* Target Role Input */}
-        <input
-          type="text"
-          value={roleInput}
-          onChange={(e) => setRoleInput(e.target.value)}
-          placeholder="e.g. Senior Product Manager at a Series B startup"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '16px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
+            fontFamily: 'Figtree, sans-serif',
             color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = '#6C47FF'
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
-          }}
-        />
-
-        {/* Submit Button */}
-        <button
-          onClick={handleSubmit}
-          disabled={loading || resumeText.length === 0}
-          style={{
-            width: '100%',
-            marginTop: '24px',
-            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-            border: 'none',
-            borderRadius: '10px',
-            padding: '15px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: '16px',
-            color: 'white',
-            cursor: loading || resumeText.length === 0 ? 'not-allowed' : 'pointer',
-            opacity: loading || resumeText.length === 0 ? 0.7 : 1,
-            transition: 'opacity 0.2s',
           }}
         >
-          {loading ? 'Reading your resume...' : result ? 'Read it again →' : 'Get the recruiter\'s read →'}
-        </button>
-
-        {/* Minimum Character Warning */}
-        {error && resumeText.length < 200 && (
-          <div
+          <div style={{ marginBottom: '6px', color: '#8B8AA0' }}>
+            Dev: {isMemberUser ? 'MEMBER' : 'NON-MEMBER'}
+          </div>
+          <button
+            onClick={toggleMembership}
             style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 400,
-              fontSize: '13px',
-              color: '#FF4F6A',
-              marginTop: '12px',
+              padding: '4px 10px',
+              background: '#6C47FF',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 700,
             }}
           >
-            {error}
+            Toggle
+          </button>
+        </div>
+      )}
+
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px 60px' }}>
+        {/* INPUT */}
+        {state === 'input' && (
+          <div>
+            <div
+              style={{
+                background: '#1A1A22',
+                border: '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '12px',
+                padding: '32px',
+                marginBottom: '24px',
+              }}
+            >
+              {/* Resume */}
+              <div style={{ marginBottom: '24px' }}>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    color: '#8B8AA0',
+                    marginBottom: '10px',
+                  }}
+                >
+                  Your resume
+                </label>
+                <div style={{ position: 'relative' }}>
+                  <textarea
+                    value={resumeText}
+                    onChange={(e) => setResumeText(e.target.value.slice(0, 8000))}
+                    placeholder="Paste your full resume here — text only. The more detail, the more accurate the read."
+                    style={{
+                      width: '100%',
+                      minHeight: '240px',
+                      padding: '16px',
+                      background: '#0F0F12',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      borderRadius: '8px',
+                      color: '#F2F0FF',
+                      fontFamily: 'Figtree, monospace',
+                      fontSize: '13px',
+                      lineHeight: 1.7,
+                      resize: 'vertical',
+                      boxSizing: 'border-box',
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '12px',
+                      right: '12px',
+                      fontSize: '11px',
+                      color: '#8B8AA0',
+                    }}
+                  >
+                    {resumeText.length.toLocaleString()} / 8,000
+                  </span>
+                </div>
+              </div>
+
+              {/* Job description (optional) */}
+              <div style={{ marginBottom: '24px' }}>
+                <label
+                  style={{
+                    display: 'block',
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                    color: '#8B8AA0',
+                    marginBottom: '10px',
+                  }}
+                >
+                  Target job description{' '}
+                  <span style={{ color: '#6B6B7B', fontWeight: 500, textTransform: 'none', letterSpacing: 0 }}>
+                    — optional but recommended for a tailored read
+                  </span>
+                </label>
+                <textarea
+                  value={jdText}
+                  onChange={(e) => setJdText(e.target.value.slice(0, 8000))}
+                  placeholder="Paste the full job description for the role you're targeting. Without this you'll get a general read; with it, you'll see exactly where you fit and where you don't."
+                  style={{
+                    width: '100%',
+                    minHeight: '160px',
+                    padding: '16px',
+                    background: '#0F0F12',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: '8px',
+                    color: '#F2F0FF',
+                    fontFamily: 'Figtree, monospace',
+                    fontSize: '13px',
+                    lineHeight: 1.7,
+                    resize: 'vertical',
+                    boxSizing: 'border-box',
+                  }}
+                />
+              </div>
+
+              <button
+                onClick={runAnalysis}
+                style={{
+                  width: '100%',
+                  padding: '14px 24px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontWeight: 800,
+                  fontSize: '15px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                }}
+              >
+                Get the recruiter&apos;s read
+              </button>
+
+              <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
+                {isMemberUser
+                  ? 'Members see the full read.'
+                  : 'See the verdict free. The full monologue is for members.'}
+              </p>
+            </div>
           </div>
         )}
 
-        {/* Other Error Messages */}
-        {error && resumeText.length >= 200 && (
-          <div
-            style={{
-              background: '#1A1A22',
-              border: '1px solid rgba(255,79,106,0.3)',
-              borderRadius: '10px',
-              padding: '16px 20px',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 400,
-              fontSize: '14px',
-              color: '#FF4F6A',
-              marginTop: '12px',
-            }}
-          >
-            {error}
+        {/* LOADING */}
+        {state === 'loading' && (
+          <div style={{ textAlign: 'center', padding: '80px 24px' }}>
+            <div style={{ marginBottom: '40px' }}>
+              <div
+                style={{
+                  width: '100%',
+                  height: '3px',
+                  background: 'rgba(255,255,255,0.06)',
+                  borderRadius: '2px',
+                  overflow: 'hidden',
+                  marginBottom: '32px',
+                }}
+              >
+                <div
+                  ref={progressBarRef}
+                  style={{
+                    height: '100%',
+                    background: 'linear-gradient(90deg, #6C47FF, #FF4F6A)',
+                    width: '0%',
+                    transition: 'width 0.8s ease',
+                  }}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: '16px',
+                color: '#F2F0FF',
+                fontWeight: 600,
+                fontFamily: 'Figtree, sans-serif',
+              }}
+            >
+              {currentStep <= 1 && 'Reading your resume...'}
+              {currentStep === 2 && (jdText.trim() ? 'Mapping it against the role...' : 'Forming an opinion...')}
+              {currentStep === 3 && 'Writing the report...'}
+            </div>
+          </div>
+        )}
+
+        {/* RESULT */}
+        {state === 'result' && result && (
+          <div ref={resultRef}>
+            <div style={{ marginBottom: '32px' }}>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  marginBottom: '8px',
+                  letterSpacing: '-0.02em',
+                  fontFamily: 'Figtree, sans-serif',
+                  color: '#F2F0FF',
+                }}
+              >
+                Here&apos;s what a recruiter sees.
+              </h2>
+              <p style={{ color: '#8B8AA0', fontSize: '15px' }}>
+                Read it like you&apos;re hearing it from a colleague over coffee. Direct. Specific. Yours to use.
+              </p>
+            </div>
+
+            <RecruiterReport result={result} isMember={isMemberUser} />
+
+            <div style={{ marginTop: '32px', textAlign: 'center' }}>
+              <button
+                onClick={editAndRecheck}
+                style={{
+                  padding: '14px 28px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontWeight: 800,
+                  fontSize: '15px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                  marginRight: '12px',
+                }}
+              >
+                Edit and re-check
+              </button>
+              <button
+                onClick={startOver}
+                style={{
+                  padding: '12px 20px',
+                  background: 'transparent',
+                  color: '#8B8AA0',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(139,138,160,0.4)',
+                  textUnderlineOffset: '4px',
+                }}
+              >
+                Start over
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ERROR */}
+        {state === 'error' && (
+          <div style={{ textAlign: 'center', padding: '60px 24px' }}>
+            <h2
+              style={{
+                fontSize: '28px',
+                fontWeight: 900,
+                marginBottom: '12px',
+                fontFamily: 'Figtree, sans-serif',
+                color: '#F2F0FF',
+              }}
+            >
+              Something broke on our end.
+            </h2>
+            <p style={{ color: '#8B8AA0', fontSize: '15px', marginBottom: '32px', maxWidth: '500px', margin: '0 auto 32px' }}>
+              {errorMessage || 'The analyzer didn’t come back. Try once more.'}
+            </p>
+            <button
+              onClick={editAndRecheck}
+              style={{
+                padding: '14px 28px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: 800,
+                fontSize: '15px',
+                fontFamily: 'Figtree, sans-serif',
+                cursor: 'pointer',
+              }}
+            >
+              Try again
+            </button>
           </div>
         )}
       </div>
-
-      {/* Results Section */}
-      {result && (
-        <div
-          style={{
-            marginTop: '40px',
-            maxWidth: '680px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            padding: '0 40px',
-          }}
-        >
-          <ToolResult result={result} />
-        </div>
-      )}
     </ToolPageShell>
   )
 }
