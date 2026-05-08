@@ -281,29 +281,42 @@ function PhraseLandsOnSection({ section }: { section: Section }) {
   )
 }
 
+// Normalize various dash characters and bullet glyphs to a plain hyphen,
+// so the parser can use a single regex regardless of what the model emitted.
+function normalizeDashes(s: string): string {
+  return s
+    .replace(/[—–]/g, '-') // em-dash, en-dash → hyphen
+    .replace(/•/g, '-') // bullet glyph → hyphen
+}
+
+// Aggressively split a chunk of text into individual metrics:
+// handles "- foo", "- foo - bar", "foo - bar", "* foo * bar", and
+// already-split single items.
+function splitMetricsAggressively(input: string): string[] {
+  const text = normalizeDashes(input).trim()
+  if (!text) return []
+
+  // Split on whitespace-bounded bullet markers: " - " or " * ".
+  // Then strip any remaining leading marker from each piece.
+  const pieces = text
+    .split(/\s+[-*]\s+/)
+    .map((p) => p.trim().replace(/^[-*]\s*/, '').trim())
+    .filter(Boolean)
+
+  // If splitting produced nothing splittable AND the input had a leading
+  // "- ", just return the cleaned single item.
+  if (pieces.length === 0 && text) {
+    return [text.replace(/^[-*]\s*/, '').trim()].filter(Boolean)
+  }
+  return pieces
+}
+
 function MissingMetricsSection({ section }: { section: Section }) {
   // Each role is a sub-heading **Title at Company:** followed by metric items.
-  // The model sometimes formats metrics as newline bullets ("- foo\n- bar"),
-  // sometimes as a single inline run ("- foo - bar - baz"). Handle both.
+  // The model is asked to emit newline-separated bullets, but we tolerate
+  // any format the model actually returns (inline, em-dashed, mixed, etc.).
   const blocks: Array<{ role: string; metrics: string[] }> = []
   let current: { role: string; metrics: string[] } | null = null
-
-  function pushMetric(s: string) {
-    if (!current) return
-    const cleaned = s.replace(/^[-*•]\s*/, '').trim()
-    if (cleaned) current.metrics.push(cleaned)
-  }
-
-  function pushAll(line: string) {
-    if (!current) return
-    // If the line has multiple " - " or " * " separators, split inline.
-    if (/\s[-*]\s/.test(line)) {
-      const parts = line.split(/\s+[-*]\s+/).map((p) => p.trim()).filter(Boolean)
-      parts.forEach(pushMetric)
-    } else {
-      pushMetric(line)
-    }
-  }
 
   for (const raw of section.body.split('\n')) {
     const line = raw.trim()
@@ -314,9 +327,25 @@ function MissingMetricsSection({ section }: { section: Section }) {
       current = { role: subMatch[1].replace(/:$/, '').trim(), metrics: [] }
       continue
     }
-    pushAll(line)
+    if (!current) continue
+    splitMetricsAggressively(line).forEach((m) => current!.metrics.push(m))
   }
   if (current) blocks.push(current)
+
+  // Defensive final pass: if any single metric ended up with internal
+  // separators that the per-line split missed (rare, but safe), split it.
+  for (const block of blocks) {
+    const expanded: string[] = []
+    for (const m of block.metrics) {
+      const further = splitMetricsAggressively(m)
+      if (further.length > 1) {
+        expanded.push(...further)
+      } else {
+        expanded.push(m)
+      }
+    }
+    block.metrics = expanded
+  }
 
   return (
     <SectionShell
