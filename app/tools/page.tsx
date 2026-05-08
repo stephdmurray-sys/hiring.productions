@@ -180,12 +180,14 @@ function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
       {/* Title */}
       <h3
         style={{
-          fontSize: '15px',
+          fontSize: '17px',
           fontWeight: 800,
           fontFamily: "'Figtree', sans-serif",
           color: '#F2F0FF',
           marginTop: '14px',
           marginBottom: '0',
+          letterSpacing: '-0.01em',
+          lineHeight: 1.25,
         }}
       >
         {tool.name}
@@ -194,12 +196,12 @@ function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
       {/* Description */}
       <p
         style={{
-          fontSize: '13px',
+          fontSize: '14px',
           fontWeight: 400,
           fontFamily: "'Figtree', sans-serif",
-          color: '#8B8AA0',
+          color: '#B8B6CF',
           lineHeight: 1.6,
-          marginTop: '6px',
+          marginTop: '8px',
           marginBottom: '16px',
           flex: 1,
         }}
@@ -318,15 +320,15 @@ function CoreFourFeature() {
     <section
       style={{
         padding: '20px 24px 80px',
-        maxWidth: '1180px',
+        maxWidth: '900px',
         margin: '0 auto',
       }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+          gap: '24px',
         }}
       >
         {CORE_FOUR.map((tool, idx) => (
@@ -442,9 +444,9 @@ function FeaturedCard({
       <p
         style={{
           fontFamily: "'Figtree', sans-serif",
-          fontSize: '14px',
+          fontSize: '15px',
           fontWeight: 400,
-          color: '#9C9BB0',
+          color: '#C4C2D8',
           lineHeight: 1.6,
           margin: 0,
           flex: 1,
@@ -492,10 +494,28 @@ function FeaturedCard({
 
 // === Page ================================================================
 
+// Tools surfaced in the featured "Core Four" section above — exclude these
+// from the journey-organized list below so the same tool doesn't appear twice.
+const FEATURED_LINKS = new Set<string>([
+  '/resume',
+  '/tools/resume-recruiter-eyes',
+  '/tools/linkedin-rewrite',
+])
+
+function withoutFeatured(moments: typeof candidateMoments) {
+  return moments
+    .map((moment) => ({
+      ...moment,
+      tools: moment.tools.filter((t: any) => !FEATURED_LINKS.has(t.link)),
+    }))
+    .filter((moment) => moment.tools.length > 0)
+}
+
 export default function ToolsPage() {
   const [section, setSection] = useState<'candidates' | 'hiring'>('candidates')
 
-  const activeTools = section === 'candidates' ? candidateMoments : hiringMoments
+  const activeTools =
+    section === 'candidates' ? withoutFeatured(candidateMoments) : hiringMoments
 
   return (
     <div style={{ background: '#0F0F12', minHeight: '100vh' }}>
