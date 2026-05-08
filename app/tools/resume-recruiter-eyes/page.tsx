@@ -3,17 +3,17 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { RecruiterReport } from '@/components/recruiter-report'
-import { RewrittenResume } from '@/components/rewritten-resume'
+import { EditMemo } from '@/components/edit-memo'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
-type ViewState = 'input' | 'loading' | 'result' | 'rewritten' | 'error'
+type ViewState = 'input' | 'loading' | 'result' | 'memo' | 'error'
 
 export default function ResumeRecruiterEyesPage() {
   const [resumeText, setResumeText] = useState('')
   const [jdText, setJdText] = useState('')
   const [state, setState] = useState<ViewState>('input')
   const [result, setResult] = useState('')
-  const [rewrittenResume, setRewrittenResume] = useState('')
+  const [editMemo, setEditMemo] = useState('')
   const [applying, setApplying] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [currentStep, setCurrentStep] = useState(0)
@@ -21,7 +21,7 @@ export default function ResumeRecruiterEyesPage() {
   const [isClient, setIsClient] = useState(false)
   const progressBarRef = useRef<HTMLDivElement>(null)
   const resultRef = useRef<HTMLDivElement>(null)
-  const rewrittenRef = useRef<HTMLDivElement>(null)
+  const memoRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsClient(true)
@@ -32,12 +32,12 @@ export default function ResumeRecruiterEyesPage() {
     if (state === 'result' && resultRef.current) {
       resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-    if (state === 'rewritten' && rewrittenRef.current) {
-      rewrittenRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (state === 'memo' && memoRef.current) {
+      memoRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [state])
 
-  const applyChanges = async () => {
+  const generateMemo = async () => {
     if (!result || applying) return
     setApplying(true)
     setErrorMessage('')
@@ -46,17 +46,17 @@ export default function ResumeRecruiterEyesPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          toolId: 'resume-rewrite-applied',
+          toolId: 'resume-edit-memo',
           inputs: { resume: resumeText, analysis: result },
         }),
       })
       if (!response.ok) {
         const data = await response.json().catch(() => ({}))
-        throw new Error(data.error || 'Could not apply the changes — try again.')
+        throw new Error(data.error || 'Could not generate the edit memo — try again.')
       }
       const data = await response.json()
-      setRewrittenResume(data.result)
-      setState('rewritten')
+      setEditMemo(data.result)
+      setState('memo')
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Unknown error'
       setErrorMessage(msg)
@@ -393,7 +393,7 @@ export default function ResumeRecruiterEyesPage() {
             <RecruiterReport
               result={result}
               isMember={isMemberUser}
-              onApplyChanges={isMemberUser ? applyChanges : undefined}
+              onApplyChanges={isMemberUser ? generateMemo : undefined}
               applying={applying}
             />
 
@@ -437,9 +437,9 @@ export default function ResumeRecruiterEyesPage() {
           </div>
         )}
 
-        {/* REWRITTEN RESUME */}
-        {state === 'rewritten' && rewrittenResume && (
-          <div ref={rewrittenRef}>
+        {/* EDIT MEMO */}
+        {state === 'memo' && editMemo && (
+          <div ref={memoRef}>
             <div style={{ marginBottom: '24px' }}>
               <h2
                 style={{
@@ -452,14 +452,14 @@ export default function ResumeRecruiterEyesPage() {
                   color: '#F2F0FF',
                 }}
               >
-                The recruiter&apos;s notes, applied.
+                The recruiter&apos;s edit memo.
               </h2>
-              <p style={{ color: '#8B8AA0', fontSize: '15px' }}>
-                Three moves applied. Everything else preserved exactly. Ready to copy and submit.
+              <p style={{ color: '#8B8AA0', fontSize: '15px', maxWidth: '620px' }}>
+                Specific direction — not finished writing. You make the edits in your own voice so your resume keeps its voice. When you&apos;re done, run it back through the AI checker.
               </p>
             </div>
 
-            <RewrittenResume resume={rewrittenResume} analysis={result} onBack={backToReport} />
+            <EditMemo memo={editMemo} onBack={backToReport} />
           </div>
         )}
 

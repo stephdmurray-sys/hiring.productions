@@ -803,7 +803,7 @@ export function RecruiterReport({ result, isMember, onApplyChanges, applying = f
               lineHeight: 1.25,
             }}
           >
-            Want this in a finished resume?
+            Want this as an edit memo?
           </h3>
           <p
             style={{
@@ -813,7 +813,7 @@ export function RecruiterReport({ result, isMember, onApplyChanges, applying = f
               margin: '0 0 18px 0',
             }}
           >
-            Apply all three moves and get your resume back, ready to copy or download. No editing on your end.
+            Get a structured action checklist — every line to rewrite, every metric to add, every keyword from the JD, every phrase to strike. You make the edits in your own voice, so your resume actually stays yours (and won&apos;t flag as AI).
           </p>
           <button
             onClick={onApplyChanges}
@@ -833,7 +833,7 @@ export function RecruiterReport({ result, isMember, onApplyChanges, applying = f
               transition: 'background 0.2s ease',
             }}
           >
-            {applying ? 'Rewriting your resume...' : 'Apply these changes — see my resume rewritten'}
+            {applying ? 'Writing your edit memo...' : 'Get my edit memo'}
           </button>
         </div>
       )}
