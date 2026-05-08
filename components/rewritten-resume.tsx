@@ -38,9 +38,12 @@ function extractChangeMarkers(analysis: string | undefined): ChangeMarkers {
 function classifyLine(
   line: string,
   markers: ChangeMarkers,
-): 'rewrite' | 'add' | null {
+): 'rewrite' | 'add' | 'todo' | null {
   const cleaned = line.trim().replace(/^[-*]\s+/, '').trim()
   if (cleaned.length < 8) return null
+
+  // TODO placeholders inserted by the rewrite step for missing metrics.
+  if (/^\[\s*Fill\s*in\s*:/i.test(cleaned)) return 'todo'
 
   // Use a fuzzy substring match in both directions to tolerate minor
   // wording drift between the analysis quote and what the model produced.
@@ -221,7 +224,18 @@ export function RewrittenResume({ resume, analysis, onBack }: RewrittenResumePro
               />
               New lines added
             </div>
-            <div style={{ color: '#7B6BB0', fontStyle: 'italic' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  width: '14px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: '#FF4F6A',
+                }}
+              />
+              Metrics to fill in
+            </div>
+            <div style={{ color: '#7B6BB0', fontStyle: 'italic', flexBasis: '100%' }}>
               Everything not highlighted is exactly as you wrote it.
             </div>
           </div>
@@ -293,6 +307,17 @@ export function RewrittenResume({ resume, analysis, onBack }: RewrittenResumePro
                     borderRadius: '4px',
                     margin: '4px 0',
                   }
+                : change === 'todo'
+                ? {
+                    background: 'rgba(255,79,106,0.10)',
+                    color: '#7A1F2E',
+                    borderLeft: '3px solid #FF4F6A',
+                    paddingTop: '4px',
+                    paddingBottom: '4px',
+                    paddingRight: '10px',
+                    borderRadius: '4px',
+                    margin: '4px 0',
+                  }
                 : {}
 
             // Bullet line
@@ -310,7 +335,14 @@ export function RewrittenResume({ resume, analysis, onBack }: RewrittenResumePro
                     style={{
                       position: 'absolute',
                       left: change ? '8px' : 0,
-                      color: change === 'add' ? '#7A6CFF' : change === 'rewrite' ? '#9080D9' : '#7A6CFF',
+                      color:
+                        change === 'add'
+                          ? '#7A6CFF'
+                          : change === 'rewrite'
+                          ? '#9080D9'
+                          : change === 'todo'
+                          ? '#FF4F6A'
+                          : '#7A6CFF',
                       fontWeight: 700,
                     }}
                   >
@@ -336,6 +368,25 @@ export function RewrittenResume({ resume, analysis, onBack }: RewrittenResumePro
                       }}
                     >
                       New
+                    </span>
+                  )}
+                  {change === 'todo' && (
+                    <span
+                      style={{
+                        marginLeft: '10px',
+                        padding: '1px 8px',
+                        background: '#FF4F6A',
+                        color: '#ffffff',
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        borderRadius: '4px',
+                        verticalAlign: 'middle',
+                        fontFamily: 'Figtree, sans-serif',
+                      }}
+                    >
+                      Fill in
                     </span>
                   )}
                 </div>

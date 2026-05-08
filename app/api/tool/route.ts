@@ -120,6 +120,12 @@ What to do, in order:
 1. Apply Move 1's "Rewrite" — find the exact "Current" line in the resume and replace it with the "Rewrite" line.
 2. Apply Move 2's "Rewrite" — same: find the exact "Current" line and replace it with the "Rewrite" line.
 3. Apply Move 3's "Add" — find the role/section named in "Add to" (e.g. "Brightside Health, Senior Director role") and insert the "Add this" line as a new bullet in that section. Place it in a sensible spot — usually as the first or second bullet for impact.
+4. Inject placeholder bullets for missing metrics. Look at the section "What's missing for the two most recent roles" in the analysis. For each metric listed under each role, insert ONE additional bullet at the end of that role's bullet list, formatted EXACTLY as:
+   - [Fill in: <metric description, copied verbatim from the analysis>]
+   The square brackets and the words "Fill in:" are required — they tell the candidate this is a placeholder they need to replace with their actual number. Do NOT make up numbers. Do NOT rewrite the metric description. Just slot the placeholder in.
+
+Example: if the analysis says "**Brightside Health, Senior Director role:** - Cost per hire figures or budget managed" then in the Brightside section of the rewritten resume you would add:
+   - [Fill in: Cost per hire figures or budget managed]
 
 Critical rules:
 - Return ONLY the rewritten resume. No commentary, no preamble, no "here is your updated resume" header, no sign-off, no explanation of what you changed.
