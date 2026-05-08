@@ -62,15 +62,18 @@ function parseSections(markdown: string): Section[] {
 
 // Splits a paragraph into [quote, commentary] when the quote is followed
 // by an em-dash separator (the model uses "...quote..." — commentary).
+// Only matches double-quoted strings to avoid mangling contractions.
 function splitQuoteAndComment(text: string): { quote: string | null; comment: string } {
-  const m = text.match(/^\s*([""][^""]+[""]|"[^"]+"|'[^']+')\s*[—–-]+\s*(.+)$/s)
+  const m = text.match(/^\s*("[^"]+")\s*[—–-]+\s*(.+)$/s)
   if (m) return { quote: m[1], comment: m[2].trim() }
   return { quote: null, comment: text.trim() }
 }
 
-// Inline render: bold (**), and quoted text becomes a soft highlight.
+// Inline render: bold (**), and double-quoted text becomes a soft highlight.
+// Single quotes are deliberately NOT matched — apostrophes in contractions
+// ("I'd", "leader's") would otherwise be treated as quote delimiters.
 function renderInline(text: string, key: string, quoteTone: 'red' | 'green' | 'indigo' | 'none' = 'indigo'): ReactNode {
-  const parts = text.split(/(\*\*[^*]+\*\*|"[^"]+"|'[^']+')/g)
+  const parts = text.split(/(\*\*[^*]+\*\*|"[^"]+")/g)
   return parts.map((part, i) => {
     if (!part) return null
     if (part.startsWith('**') && part.endsWith('**')) {
@@ -80,7 +83,7 @@ function renderInline(text: string, key: string, quoteTone: 'red' | 'green' | 'i
         </strong>
       )
     }
-    if (/^["'].+["']$/.test(part)) {
+    if (/^".+"$/.test(part)) {
       const palette =
         quoteTone === 'red'
           ? { bg: '#FFE4E0', text: '#7A1F2E' }
@@ -191,12 +194,12 @@ function SignalsSection({
   section,
   tone,
   title,
-  iconLabel,
+  eyebrow,
 }: {
   section: Section
   tone: 'red' | 'green'
   title: string
-  iconLabel: string
+  eyebrow: string
 }) {
   // Split body into items: each item is one paragraph (separated by blank lines)
   const items = section.body
@@ -207,7 +210,7 @@ function SignalsSection({
   const accent = tone === 'red' ? '#C73E5A' : '#1F8A55'
 
   return (
-    <SectionShell title={title} accentColor={accent} iconLabel={iconLabel}>
+    <SectionShell title={title} accentColor={accent} eyebrow={eyebrow}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         {items.map((item, i) => {
           const { quote, comment } = splitQuoteAndComment(item)
@@ -240,7 +243,7 @@ function SignalsSection({
 function PhraseLandsOnSection({ section }: { section: Section }) {
   const { quote, comment } = splitQuoteAndComment(section.body.trim())
   return (
-    <SectionShell title="The phrase a recruiter will land on" accentColor="#7A6CFF" iconLabel="—">
+    <SectionShell title="The phrase a recruiter will land on" accentColor="#7A6CFF" eyebrow="The line">
       <div
         style={{
           padding: '20px 24px',
@@ -272,9 +275,29 @@ function PhraseLandsOnSection({ section }: { section: Section }) {
 }
 
 function MissingMetricsSection({ section }: { section: Section }) {
-  // Each role is a sub-heading **Title at Company:** followed by bullet items.
+  // Each role is a sub-heading **Title at Company:** followed by metric items.
+  // The model sometimes formats metrics as newline bullets ("- foo\n- bar"),
+  // sometimes as a single inline run ("- foo - bar - baz"). Handle both.
   const blocks: Array<{ role: string; metrics: string[] }> = []
   let current: { role: string; metrics: string[] } | null = null
+
+  function pushMetric(s: string) {
+    if (!current) return
+    const cleaned = s.replace(/^[-*•]\s*/, '').trim()
+    if (cleaned) current.metrics.push(cleaned)
+  }
+
+  function pushAll(line: string) {
+    if (!current) return
+    // If the line has multiple " - " or " * " separators, split inline.
+    if (/\s[-*]\s/.test(line)) {
+      const parts = line.split(/\s+[-*]\s+/).map((p) => p.trim()).filter(Boolean)
+      parts.forEach(pushMetric)
+    } else {
+      pushMetric(line)
+    }
+  }
+
   for (const raw of section.body.split('\n')) {
     const line = raw.trim()
     if (!line) continue
@@ -284,71 +307,80 @@ function MissingMetricsSection({ section }: { section: Section }) {
       current = { role: subMatch[1].replace(/:$/, '').trim(), metrics: [] }
       continue
     }
-    const bullet = line.match(/^[-*]\s+(.*)$/)
-    if (bullet && current) {
-      current.metrics.push(bullet[1])
-    } else if (current) {
-      // catch-all — append to last metric or treat as commentary
-      if (current.metrics.length > 0) {
-        current.metrics[current.metrics.length - 1] += ' ' + line
-      } else {
-        current.metrics.push(line)
-      }
-    }
+    pushAll(line)
   }
   if (current) blocks.push(current)
 
   return (
-    <SectionShell title="What's missing for the two most recent roles" accentColor="#7A6CFF" iconLabel="+">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <SectionShell title="What's missing for the two most recent roles" accentColor="#7A6CFF" eyebrow="What's missing">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
         {blocks.map((b, i) => (
           <div
             key={`role-${i}`}
             style={{
-              padding: '18px 20px',
+              padding: '20px 22px',
               background: '#FAFAFB',
-              borderRadius: '8px',
+              borderRadius: '10px',
               border: '1px solid #ECECF2',
             }}
           >
             <div
               style={{
-                fontSize: '14px',
+                fontSize: '10px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
+                color: '#7A6CFF',
+                marginBottom: '4px',
+              }}
+            >
+              Role {i + 1}
+            </div>
+            <div
+              style={{
+                fontSize: '16px',
                 fontWeight: 700,
                 color: '#1A1A22',
-                marginBottom: '12px',
+                marginBottom: '14px',
                 fontFamily: 'Figtree, sans-serif',
+                letterSpacing: '-0.01em',
               }}
             >
               {b.role}
             </div>
-            <ul style={{ margin: 0, paddingLeft: '20px', listStyle: 'none' }}>
-              {b.metrics.map((m, j) => (
-                <li
-                  key={`m-${i}-${j}`}
-                  style={{
-                    position: 'relative',
-                    fontSize: '15px',
-                    color: '#3A3A4A',
-                    lineHeight: 1.7,
-                    paddingLeft: '8px',
-                    marginBottom: '4px',
-                  }}
-                >
-                  <span
+            {b.metrics.length > 0 ? (
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                {b.metrics.map((m, j) => (
+                  <li
+                    key={`m-${i}-${j}`}
                     style={{
-                      position: 'absolute',
-                      left: '-16px',
-                      color: '#7A6CFF',
-                      fontWeight: 700,
+                      position: 'relative',
+                      fontSize: '15px',
+                      color: '#3A3A4A',
+                      lineHeight: 1.65,
+                      paddingLeft: '20px',
+                      marginBottom: '8px',
                     }}
                   >
-                    +
-                  </span>
-                  {renderInline(m, `m-${i}-${j}`, 'none')}
-                </li>
-              ))}
-            </ul>
+                    <span
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: '8px',
+                        width: '8px',
+                        height: '2px',
+                        background: '#7A6CFF',
+                      }}
+                    />
+                    {renderInline(m, `m-${i}-${j}`, 'none')}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div style={{ fontSize: '14px', color: '#9494A5', fontStyle: 'italic' }}>
+                No metrics in this role yet — start here.
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -364,7 +396,7 @@ function ProbesSection({ section }: { section: Section }) {
     .filter(Boolean)
 
   return (
-    <SectionShell title="What a recruiter will probe in the interview" accentColor="#7A6CFF" iconLabel="?">
+    <SectionShell title="What a recruiter will probe in the interview" accentColor="#7A6CFF" eyebrow="Cross-examination">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
         {rawItems.map((item, i) => (
           <div
@@ -401,7 +433,7 @@ function ProbesSection({ section }: { section: Section }) {
 
 function MyReadSection({ section }: { section: Section }) {
   return (
-    <SectionShell title="My read" accentColor="#7A6CFF" iconLabel="*">
+    <SectionShell title="My read" accentColor="#7A6CFF" eyebrow="The call">
       <div
         style={{
           padding: '18px 22px',
@@ -436,7 +468,7 @@ function NextMovesSection({ section }: { section: Section }) {
   if (buf.trim()) items.push(buf.trim())
 
   return (
-    <SectionShell title="Your next three moves" accentColor="#FF4F6A" iconLabel="→">
+    <SectionShell title="Your next three moves" accentColor="#FF4F6A" eyebrow="What to fix">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
         {items.map((item, i) => {
           // Try to detect quote → quote pattern (current → rewrite)
@@ -587,54 +619,44 @@ function NextMovesSection({ section }: { section: Section }) {
 function SectionShell({
   title,
   accentColor,
-  iconLabel,
+  eyebrow,
   children,
 }: {
   title: string
   accentColor: string
-  iconLabel: string
+  eyebrow: string
   children: ReactNode
 }) {
   return (
-    <div style={{ marginBottom: '36px' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          marginBottom: '16px',
-          paddingBottom: '8px',
-          borderBottom: '1px solid #ECECF2',
-        }}
-      >
+    <div style={{ marginBottom: '44px' }}>
+      <div style={{ marginBottom: '20px' }}>
         <div
           style={{
-            width: '24px',
-            height: '24px',
-            borderRadius: '6px',
-            background: accentColor,
-            color: '#ffffff',
-            fontSize: '13px',
+            fontSize: '10px',
             fontWeight: 800,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
+            textTransform: 'uppercase',
+            letterSpacing: '0.16em',
+            color: accentColor,
+            marginBottom: '8px',
           }}
         >
-          {iconLabel}
+          {eyebrow}
         </div>
-        <div
+        <h2
           style={{
-            fontSize: '15px',
-            fontWeight: 800,
+            fontSize: '22px',
+            fontWeight: 900,
             color: '#1A1A22',
             fontFamily: 'Figtree, sans-serif',
-            letterSpacing: '-0.01em',
+            letterSpacing: '-0.02em',
+            margin: 0,
+            paddingBottom: '14px',
+            borderBottom: `2px solid ${accentColor}33`,
+            lineHeight: 1.2,
           }}
         >
           {title}
-        </div>
+        </h2>
       </div>
       {children}
     </div>
@@ -643,7 +665,7 @@ function SectionShell({
 
 function UnknownSection({ section }: { section: Section }) {
   return (
-    <SectionShell title={section.heading} accentColor="#7A6CFF" iconLabel="·">
+    <SectionShell title={section.heading} accentColor="#7A6CFF" eyebrow="Note">
       <div style={{ fontSize: '15px', color: '#3A3A4A', lineHeight: 1.6 }}>
         {renderInline(section.body.trim(), `unk-${section.heading}`, 'indigo')}
       </div>
@@ -723,7 +745,7 @@ export function ResumeReport({ result }: ResumeReportProps) {
                 section={s}
                 tone="red"
                 title="What reads as AI"
-                iconLabel="!"
+                eyebrow="Red flags"
               />
             )
           case 'humanStrengths':
@@ -733,7 +755,7 @@ export function ResumeReport({ result }: ResumeReportProps) {
                 section={s}
                 tone="green"
                 title="What reads as human"
-                iconLabel="+"
+                eyebrow="What's working"
               />
             )
           case 'phraseLandsOn':

@@ -20,14 +20,21 @@ Quote 2–3 specific lines that sound real. Specific tools and stack, weird exac
 The single line in this resume most likely to make a recruiter pause and think "this was written by ChatGPT." Quote it. One sentence on why it triggers that read.
 
 **What's missing for the two most recent roles:**
-For the two most recent roles on the resume (use their actual title and company name), list 3–5 specific metrics that role would realistically have but this resume doesn't include. Be specific to the level and industry — a Senior PM at a B2B SaaS has different metrics than a Director of Engineering at a fintech. Format as:
+For the two most recent roles on the resume (use their actual title and company name), list 3–5 specific metrics that role would realistically have but this resume doesn't include. Be specific to the level and industry — a Senior PM at a B2B SaaS has different metrics than a Director of Engineering at a fintech.
+
+You MUST format this section EXACTLY like this, with each metric on its own line preceded by a hyphen and a space, and a blank line between roles:
 
 **[Title at Company]:**
 - [Specific metric 1]
 - [Specific metric 2]
 - [Specific metric 3]
 
-If the resume has zero metrics for a role, say it directly in the heading line for that role.
+**[Second Title at Second Company]:**
+- [Specific metric 1]
+- [Specific metric 2]
+- [Specific metric 3]
+
+Do NOT join metrics with commas or inline dashes. Each metric is its own line. If the resume has zero metrics for a role, still list 3–5 things they should add; do not skip the role.
 
 **What a recruiter will probe in interview:**
 Two specific interview questions a recruiter would use to test whether the AI-flavored claims hold up. Each must reference a specific line from THIS resume.
