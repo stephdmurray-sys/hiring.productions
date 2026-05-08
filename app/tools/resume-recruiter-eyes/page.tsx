@@ -459,7 +459,7 @@ export default function ResumeRecruiterEyesPage() {
               </p>
             </div>
 
-            <RewrittenResume resume={rewrittenResume} onBack={backToReport} />
+            <RewrittenResume resume={rewrittenResume} analysis={result} onBack={backToReport} />
           </div>
         )}
 

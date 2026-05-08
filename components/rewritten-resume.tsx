@@ -4,10 +4,56 @@ import { useState } from 'react'
 
 interface RewrittenResumeProps {
   resume: string
+  /** The recruiter's analysis (the markdown report). We use it to extract the
+   * exact rewrite and add-this values so we can highlight those lines in
+   * purple in the rendered resume. */
+  analysis?: string
   onBack: () => void
 }
 
-export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
+interface ChangeMarkers {
+  rewrites: string[]
+  additions: string[]
+}
+
+function extractChangeMarkers(analysis: string | undefined): ChangeMarkers {
+  if (!analysis) return { rewrites: [], additions: [] }
+  const rewrites: string[] = []
+  const additions: string[] = []
+  // Split on Move N: headers and walk each block
+  const blocks = analysis.split(/\n\s*\*\*Move\s*\d+:/i).slice(1)
+  for (const block of blocks) {
+    const isAdd = /^\s*Add\b/i.test(block)
+    if (isAdd) {
+      const m = block.match(/Add this\s*:\s*"([^"]+)"/i)
+      if (m && m[1].trim().length > 0) additions.push(m[1].trim())
+    } else {
+      const m = block.match(/Rewrite\s*:\s*"([^"]+)"/i)
+      if (m && m[1].trim().length > 0) rewrites.push(m[1].trim())
+    }
+  }
+  return { rewrites, additions }
+}
+
+function classifyLine(
+  line: string,
+  markers: ChangeMarkers,
+): 'rewrite' | 'add' | null {
+  const cleaned = line.trim().replace(/^[-*]\s+/, '').trim()
+  if (cleaned.length < 8) return null
+
+  // Use a fuzzy substring match in both directions to tolerate minor
+  // wording drift between the analysis quote and what the model produced.
+  for (const r of markers.rewrites) {
+    if (cleaned === r || cleaned.includes(r) || r.includes(cleaned)) return 'rewrite'
+  }
+  for (const a of markers.additions) {
+    if (cleaned === a || cleaned.includes(a) || a.includes(cleaned)) return 'add'
+  }
+  return null
+}
+
+export function RewrittenResume({ resume, analysis, onBack }: RewrittenResumeProps) {
   const [copied, setCopied] = useState(false)
 
   const today = new Date().toLocaleDateString('en-US', {
@@ -42,6 +88,8 @@ export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
   // are short, all caps, or followed by content) and style them. Bullets get
   // a clean prefix.
   const lines = resume.split('\n')
+  const markers = extractChangeMarkers(analysis)
+  const hasMarkers = markers.rewrites.length + markers.additions.length > 0
 
   return (
     <div>
@@ -129,11 +177,55 @@ export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
             color: '#5A5A6E',
             fontStyle: 'italic',
             lineHeight: 1.55,
-            margin: '0 0 28px 0',
+            margin: '0 0 16px 0',
           }}
         >
           The recruiter&apos;s three moves applied to your resume — every other line preserved exactly as you had it. Copy it, paste it, ship it.
         </p>
+
+        {/* Legend — visible when we have markers */}
+        {hasMarkers && (
+          <div
+            style={{
+              display: 'flex',
+              gap: '20px',
+              flexWrap: 'wrap',
+              padding: '12px 16px',
+              background: '#FAF6FF',
+              border: '1px solid rgba(108,71,255,0.15)',
+              borderRadius: '8px',
+              marginBottom: '24px',
+              fontSize: '12px',
+              color: '#3D2A8C',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  width: '14px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: 'rgba(108,71,255,0.35)',
+                }}
+              />
+              Rewritten lines
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span
+                style={{
+                  width: '14px',
+                  height: '4px',
+                  borderRadius: '2px',
+                  background: 'rgba(108,71,255,0.7)',
+                }}
+              />
+              New lines added
+            </div>
+            <div style={{ color: '#7B6BB0', fontStyle: 'italic' }}>
+              Everything not highlighted is exactly as you wrote it.
+            </div>
+          </div>
+        )}
 
         {/* Resume content */}
         <div
@@ -176,6 +268,33 @@ export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
               )
             }
 
+            const change = classifyLine(trimmed, markers)
+
+            const highlightStyle =
+              change === 'add'
+                ? {
+                    background: 'rgba(108,71,255,0.18)',
+                    color: '#2A1B6B',
+                    borderLeft: '3px solid #7A6CFF',
+                    paddingTop: '4px',
+                    paddingBottom: '4px',
+                    paddingRight: '10px',
+                    borderRadius: '4px',
+                    margin: '4px 0',
+                  }
+                : change === 'rewrite'
+                ? {
+                    background: 'rgba(108,71,255,0.08)',
+                    color: '#2A1B6B',
+                    borderLeft: '3px solid rgba(108,71,255,0.4)',
+                    paddingTop: '4px',
+                    paddingBottom: '4px',
+                    paddingRight: '10px',
+                    borderRadius: '4px',
+                    margin: '4px 0',
+                  }
+                : {}
+
             // Bullet line
             if (/^[-*]\s+/.test(trimmed)) {
               return (
@@ -184,19 +303,41 @@ export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
                   style={{
                     paddingLeft: '14px',
                     position: 'relative',
+                    ...highlightStyle,
                   }}
                 >
                   <span
                     style={{
                       position: 'absolute',
-                      left: 0,
-                      color: '#7A6CFF',
+                      left: change ? '8px' : 0,
+                      color: change === 'add' ? '#7A6CFF' : change === 'rewrite' ? '#9080D9' : '#7A6CFF',
                       fontWeight: 700,
                     }}
                   >
                     •
                   </span>
-                  {trimmed.replace(/^[-*]\s+/, '')}
+                  <span style={{ paddingLeft: change ? '8px' : 0, display: 'inline-block' }}>
+                    {trimmed.replace(/^[-*]\s+/, '')}
+                  </span>
+                  {change === 'add' && (
+                    <span
+                      style={{
+                        marginLeft: '10px',
+                        padding: '1px 8px',
+                        background: '#7A6CFF',
+                        color: '#ffffff',
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        borderRadius: '4px',
+                        verticalAlign: 'middle',
+                        fontFamily: 'Figtree, sans-serif',
+                      }}
+                    >
+                      New
+                    </span>
+                  )}
                 </div>
               )
             }
@@ -206,8 +347,31 @@ export function RewrittenResume({ resume, onBack }: RewrittenResumeProps) {
               return <div key={idx} style={{ height: '8px' }} />
             }
 
-            // Regular line
-            return <div key={idx}>{trimmed}</div>
+            // Regular line (rare — most content is bullets or headers)
+            return (
+              <div key={idx} style={highlightStyle}>
+                {trimmed}
+                {change === 'add' && (
+                  <span
+                    style={{
+                      marginLeft: '10px',
+                      padding: '1px 8px',
+                      background: '#7A6CFF',
+                      color: '#ffffff',
+                      fontSize: '9px',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      borderRadius: '4px',
+                      verticalAlign: 'middle',
+                      fontFamily: 'Figtree, sans-serif',
+                    }}
+                  >
+                    New
+                  </span>
+                )}
+              </div>
+            )
           })}
         </div>
 
