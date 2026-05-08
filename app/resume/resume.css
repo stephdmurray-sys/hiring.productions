@@ -1,0 +1,311 @@
+/* Resume Checker - Dark Theme (#0F0F12) */
+
+:root {
+  --bg-dark: #0F0F12;
+  --bg-surface: #1A1A22;
+  --color-primary: #6C47FF;
+  --color-secondary: #FF4F6A;
+  --color-muted: #A78BFA;
+  --color-text-primary: #F2F0FF;
+  --color-text-secondary: #8B8AA0;
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--color-text-primary);
+  font-family: 'Figtree', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Loading State */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 24px;
+}
+
+.loading-steps {
+  list-style: none;
+}
+
+.loading-steps li {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  opacity: 0.4;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.loading-steps li.active {
+  opacity: 1;
+  color: var(--color-text-primary);
+}
+
+.loading-steps li.done {
+  opacity: 0.6;
+  color: #2D6A4F;
+}
+
+/* Button Styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108, 71, 255, 0.35);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--color-muted);
+  border: 1.5px solid rgba(108, 71, 255, 0.5);
+  border-radius: 10px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  background: rgba(108, 71, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Form Inputs */
+textarea,
+input[type="text"],
+input[type="email"] {
+  font-family: 'Figtree', sans-serif;
+  transition: all 0.3s ease;
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.1);
+  outline: none;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.6;
+}
+
+/* Score Ring */
+.score-ring {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
+}
+
+.score-ring svg {
+  transform: rotate(-90deg);
+}
+
+.score-ring .bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 10;
+}
+
+.score-ring .progress {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 377;
+  stroke-dashoffset: 377;
+  transition: stroke-dashoffset 1s ease-out, stroke 0.3s;
+}
+
+.score-ring .progress.high { stroke: #2D6A4F; }
+.score-ring .progress.medium { stroke: #B45309; }
+.score-ring .progress.low { stroke: #DC2626; }
+
+.score-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 42px;
+  color: var(--color-text-primary);
+  font-weight: 900;
+}
+
+.score-grade {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.score-grade.high { background: rgba(45, 106, 79, 0.15); color: #2D6A4F; }
+.score-grade.medium { background: rgba(180, 83, 9, 0.15); color: #B45309; }
+.score-grade.low { background: rgba(220, 38, 38, 0.15); color: #DC2626; }
+
+/* Signal Lists */
+.signal-list {
+  list-style: none;
+}
+
+.signal-item {
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.signal-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.signal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.signal-badge {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.signal-badge.high { background: rgba(220, 38, 38, 0.15); color: #DC2626; }
+.signal-badge.medium { background: rgba(180, 83, 9, 0.15); color: #B45309; }
+.signal-badge.low { background: rgba(45, 106, 79, 0.15); color: #2D6A4F; }
+
+.signal-name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+
+.signal-evidence {
+  font-family: 'Figtree', monospace;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  margin-bottom: 8px;
+  border-left: 3px solid rgba(108, 71, 255, 0.3);
+}
+
+.signal-explanation {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+/* Metrics */
+.metric-box {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 16px;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.metric-value {
+  font-size: 28px;
+  color: var(--color-text-primary);
+  font-weight: 900;
+}
+
+.metric-value.red { color: #DC2626; }
+.metric-value.green { color: #2D6A4F; }
+
+.metric-label {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  input, textarea, button {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}

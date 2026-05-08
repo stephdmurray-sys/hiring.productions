@@ -1,0 +1,392 @@
+.lead-page {
+  background: #0F0F12;
+  color: #F2F0FF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main Content */
+.lead-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px 80px;
+}
+
+.lead-content {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 80px;
+  max-width: 1100px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Left Column */
+.lead-value {
+  max-width: 520px;
+}
+
+.lead-eyebrow {
+  display: inline-block;
+  font-family: 'Figtree', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #8B8AA0;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: rgba(108,71,255,0.12);
+  border-radius: 100px;
+  font-weight: 700;
+}
+
+.lead-headline {
+  font-family: 'Figtree', sans-serif;
+  font-size: clamp(36px, 5vw, 52px);
+  line-height: 1.1;
+  color: #F2F0FF;
+  margin-bottom: 24px;
+  font-weight: 900;
+}
+
+.lead-headline em {
+  font-style: italic;
+  color: #A78BFA;
+}
+
+.lead-description {
+  font-size: 18px;
+  color: #8B8AA0;
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
+
+.lead-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 15px;
+  color: #F2F0FF;
+}
+
+.benefit-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(108,71,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A78BFA;
+  flex-shrink: 0;
+}
+
+.lead-author {
+  font-size: 14px;
+  color: #8B8AA0;
+  font-style: italic;
+}
+
+/* Right Column - Form Card */
+.lead-form-card {
+  background: #1A1A22;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2), 0 12px 40px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.form-card-header {
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.form-badge {
+  display: inline-block;
+  font-family: 'Figtree', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #8B8AA0;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: rgba(108,71,255,0.12);
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.form-card-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: 24px;
+  color: #F2F0FF;
+  font-weight: 900;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-field label {
+  font-family: 'Figtree', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #F2F0FF;
+  letter-spacing: 0.01em;
+}
+
+.form-field input {
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Figtree', sans-serif;
+  color: #F2F0FF;
+  background: rgba(255,255,255,0.05);
+  transition: all 0.2s;
+}
+
+.form-field input::placeholder {
+  color: #8B8AA0;
+}
+
+.form-field input:focus {
+  outline: none;
+  border-color: #6C47FF;
+  background: rgba(108,71,255,0.08);
+  box-shadow: 0 0 0 3px rgba(108,71,255,0.15);
+}
+
+.form-field input:disabled {
+  background: rgba(255,255,255,0.03);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #FF4F6A;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+  padding: 12px;
+  background: rgba(255,79,106,0.12);
+  border-radius: 6px;
+}
+
+.submit-btn {
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #6C47FF, #FF4F6A);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Figtree', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 4px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108,71,255,0.3);
+}
+
+.submit-btn:disabled {
+  background: rgba(108,71,255,0.5);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.form-disclaimer {
+  font-size: 12px;
+  color: #8B8AA0;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Success State */
+.success-container {
+  text-align: center;
+  max-width: 480px;
+}
+
+.success-badge {
+  width: 64px;
+  height: 64px;
+  background: rgba(108,71,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6C47FF;
+  margin: 0 auto 28px;
+}
+
+.success-title {
+  font-family: 'Figtree', sans-serif;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.2;
+  color: #F2F0FF;
+  margin-bottom: 16px;
+  font-weight: 900;
+}
+
+.success-text {
+  color: #8B8AA0;
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background: transparent;
+  color: #A78BFA;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1.5px solid rgba(108,71,255,0.5);
+  font-weight: 700;
+  font-size: 13px;
+  font-family: 'Figtree', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.back-link:hover {
+  background: rgba(108,71,255,0.1);
+  border-color: var(--muted);
+  color: #A78BFA;
+}
+
+/* Download Ready State */
+.download-ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.pdf-cover-wrap {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(108,71,255,0.15);
+}
+
+.pdf-cover-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.download-ready-label {
+  font-family: 'Figtree', sans-serif;
+  font-size: 20px;
+  color: #F2F0FF;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #6C47FF, #FF4F6A);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'Figtree', sans-serif;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108,71,255,0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .lead-content {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    max-width: 480px;
+  }
+
+  .lead-value {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .lead-benefits {
+    align-items: center;
+  }
+
+  .benefit-item {
+    justify-content: flex-start;
+    text-align: left;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 520px) {
+  .lead-main {
+    padding: 24px 20px 60px;
+  }
+
+  .lead-form-card {
+    padding: 28px 24px;
+  }
+
+  .lead-headline {
+    font-size: 32px;
+  }
+
+  .lead-description {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .submit-btn {
+    min-height: 48px;
+    padding: 14px 24px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  input,
+  textarea {
+    font-size: 16px;
+    padding: 12px;
+    min-height: 44px;
+  }
+}

@@ -1,0 +1,657 @@
+
+.consulting-page {
+  --primary: #6C47FF;
+  --secondary: #FF4F6A;
+  --muted: #A78BFA;
+  --text: #F2F0FF;
+  --text-secondary: #8B8AA0;
+  --bg: #0F0F12;
+  --surface: #1A1A22;
+  --border: rgba(255,255,255,0.06);
+  --font-serif: Georgia, serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
+  
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* Hero */
+.consulting-page .hero {
+  background: var(--bg);
+  padding: 0 5vw 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  min-height: 600px;
+}
+
+.consulting-page .hero-inner {
+  flex: 1 1 55%;
+  max-width: 740px;
+  position: relative;
+  z-index: 1;
+  padding: 110px 60px 100px 0;
+}
+
+.consulting-page .hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 1.4rem;
+}
+
+.consulting-page .hero h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  max-width: 720px;
+  margin-bottom: 1.5rem;
+}
+
+.consulting-page .hero h1 em {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.consulting-page .hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.consulting-page .hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.consulting-page .btn-primary {
+  background: linear-gradient(135deg, #6C47FF, #FF4F6A);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.consulting-page .btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108,71,255,0.3);
+}
+
+.consulting-page .btn-secondary {
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1.5px solid rgba(108,71,255,0.5);
+  background: transparent;
+  padding: 14px 28px;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.consulting-page .btn-secondary:hover {
+  border-color: var(--muted);
+  background: rgba(108,71,255,0.1);
+}
+
+/* Award Strip */
+.consulting-page .award-strip {
+  background: var(--surface);
+  padding: 20px 5vw;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.consulting-page .award-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--secondary);
+  flex-shrink: 0;
+}
+
+.consulting-page .award-text {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.consulting-page .award-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* About Section */
+.consulting-page .about {
+  background: var(--bg);
+  padding: 90px 5vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 860px) {
+  .consulting-page .about {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
+
+.consulting-page .about-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.consulting-page .about h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+}
+
+.consulting-page .about h2 em {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.consulting-page .about p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+/* Recruitment Marketing */
+.consulting-page .rec-marketing {
+  background: var(--bg);
+  padding: 90px 5vw;
+}
+
+.consulting-page .rec-marketing h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.15;
+  max-width: 720px;
+  margin-bottom: 3rem;
+}
+
+.consulting-page .rec-marketing h2 em {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.consulting-page .rec-blocks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+@media (max-width: 900px) {
+  .consulting-page .rec-blocks {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .consulting-page .rec-blocks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.consulting-page .rec-block {
+  background: var(--surface);
+  padding: 32px 28px;
+  border-left: 3px solid var(--primary);
+  transition: all 0.2s;
+}
+
+.consulting-page .rec-block:hover {
+  background: rgba(108,71,255,0.05);
+  transform: translateX(8px);
+}
+
+.consulting-page .rec-block-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+}
+
+.consulting-page .rec-block-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* Services */
+.consulting-page .services {
+  padding: 90px 5vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+.consulting-page .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+@media (max-width: 900px) {
+  .consulting-page .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 580px) {
+  .consulting-page .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.consulting-page .service-card {
+  background: var(--surface);
+  padding: 36px 30px;
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+
+.consulting-page .service-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108,71,255,0.12);
+}
+
+.consulting-page .service-num {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.consulting-page .service-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+.consulting-page .service-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* Packages */
+.consulting-page .packages {
+  padding: 90px 5vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--bg);
+}
+
+.consulting-page .packages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 3rem;
+}
+
+@media (max-width: 640px) {
+  .consulting-page .packages-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.consulting-page .package-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px 36px;
+  background: var(--surface);
+  transition: all 0.15s ease;
+}
+
+.consulting-page .package-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(108,71,255,0.12);
+  border-color: var(--primary);
+}
+
+.consulting-page .package-card.featured {
+  background: var(--surface);
+  border-color: var(--primary);
+}
+
+.consulting-page .package-tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: rgba(108,71,255,0.1);
+  padding: 5px 12px;
+  border-radius: 100px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.consulting-page .package-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+  line-height: 1.2;
+}
+
+.consulting-page .package-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* CTA Section */
+.consulting-page .cta-section {
+  background: linear-gradient(135deg, #6C47FF, #FF4F6A);
+  padding: 90px 5vw;
+  text-align: center;
+  margin: 60px 5vw;
+  border-radius: 24px;
+}
+
+.consulting-page .cta-section h2 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.consulting-page .cta-section p {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.consulting-page .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.consulting-page .btn-white {
+  background: #fff;
+  color: #6C47FF;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.consulting-page .btn-white:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,255,255,0.3);
+}
+
+.consulting-page .btn-outline-white {
+  border: 1.5px solid rgba(255,255,255,0.6);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+.consulting-page .btn-outline-white:hover {
+  border-color: #fff;
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+
+/* Modal */
+.consulting-page .modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(13,13,13,0.7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px 20px 60px;
+  overflow-y: auto;
+}
+
+.consulting-page .modal-card {
+  background: var(--surface);
+  border: 1px solid rgba(108,71,255,0.25);
+  border-radius: 12px;
+  padding: 48px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .consulting-page .modal-card {
+    padding: 32px 24px;
+    border-radius: 8px;
+  }
+}
+
+.consulting-page .modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.consulting-page .modal-close:hover {
+  opacity: 1;
+}
+
+.consulting-page .modal-headline {
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.consulting-page .modal-subhead {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0 0 2rem;
+  line-height: 1.6;
+}
+
+.consulting-page .form-group input,
+.consulting-page .form-group textarea {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
+  transition: all 0.2s;
+}
+
+.consulting-page .form-group input:focus,
+.consulting-page .form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108,71,255,0.15);
+}
+
+.consulting-page .form-group label {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.consulting-page .btn-submit {
+  background: linear-gradient(135deg, #6C47FF, #FF4F6A);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 0.5rem;
+}
+
+.consulting-page .btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108,71,255,0.3);
+}
+
+/* Hero photo styling */
+.consulting-page .hero-photo {
+  flex: 0 0 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0 48px 24px;
+}
+
+.consulting-page .hero-photo-circle {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 6px rgba(108,71,255,0.25), 0 24px 60px rgba(0,0,0,0.6);
+}
+
+.consulting-page .hero-photo-circle img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 10%;
+}
+
+@media (max-width: 860px) {
+  .consulting-page .hero {
+    flex-direction: column;
+    min-height: unset;
+  }
+  
+  .consulting-page .hero-inner {
+    padding: 72px 0 48px;
+    max-width: 100%;
+    flex: unset;
+  }
+  
+  .consulting-page .hero-photo {
+    display: none;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .consulting-page .btn-primary,
+  .consulting-page .btn-white,
+  .consulting-page .btn-submit,
+  .consulting-page .btn-secondary {
+    min-height: 48px;
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+}

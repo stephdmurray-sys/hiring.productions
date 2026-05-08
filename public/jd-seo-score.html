@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD SEO Score — Free Job Description Scoring Tool | hiring.productions</title>
+<meta name="description" content="Score your job description across every major job board and AI matching engine. Free tool by hiring.productions.">
+<link rel="icon" href="/favicon.jpg" type="image/jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0F0F12;--surface:#1A1A22;
+  --indigo:#6C47FF;--indigo-lt:rgba(108,71,255,0.15);
+  --coral:#FF4F6A;--coral-lt:rgba(255,79,106,0.15);
+  --lavender:#A78BFA;
+  --text:#F2F0FF;--text2:#8B8AA0;--text3:rgba(255,255,255,0.5);
+  --green:#34D399;--green-bg:rgba(52,211,153,0.15);
+  --amber:#FBBF24;--amber-bg:rgba(251,191,36,0.15);
+  --red:#F87171;--red-bg:rgba(248,113,113,0.15);
+  --border:rgba(255,255,255,0.06);--border-md:rgba(255,255,255,0.12);
+  --r:10px;--rl:16px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Figtree',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+
+/* NAV */
+.nav{border-bottom:1px solid var(--border);background:var(--bg);position:sticky;top:0;z-index:500}
+.nav-inner{max-width:none;margin:0;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Figtree',sans-serif;font-size:18px;color:var(--text);text-decoration:none;display:flex;align-items:baseline;font-weight:700;letter-spacing:-0.02em}
+.logo span{color:var(--text2)}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.nav-link{font-family:'Figtree',sans-serif;font-size:13px;font-weight:600;color:var(--text2);text-decoration:none;transition:color 0.15s}
+.nav-link:hover,.nav-link.active{color:var(--indigo)}
+
+/* SHELL */
+.shell{max-width:920px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{padding:80px 0 60px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;background:var(--green-bg);border:1px solid rgba(52,211,153,0.3);border-radius:100px;padding:6px 16px;margin-bottom:20px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green)}
+.hero h1{font-size:48px;line-height:1.1;font-weight:900;margin-bottom:20px;letter-spacing:-0.02em}
+.hero h1 em{font-style:italic;color:var(--coral)}
+.hero p{font-size:16px;color:var(--text2);line-height:1.7;margin-bottom:24px}
+.stars{display:flex;gap:3px;margin-right:10px}
+.star{color:var(--indigo);font-size:14px}
+.proof{display:flex;align-items:center;font-size:13px;color:var(--text3)}
+
+/* SAMPLE CARD */
+.sample-card{background:var(--surface);border:1px solid var(--border-md);border-radius:var(--rl);overflow:hidden}
+.sample-card-hdr{background:rgba(255,255,255,0.03);padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sample-card-hdr span:first-child{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.sample-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--coral);background:var(--coral-lt);padding:4px 10px;border-radius:100px}
+.sample-body{padding:18px 20px}
+.sample-score-row{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.sample-num{font-size:52px;line-height:1;color:var(--text);font-weight:900}
+.sample-grade{font-size:16px;padding:4px 12px;border-radius:8px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(251,191,36,0.3);display:inline-block;font-weight:700}
+.sample-out{font-size:11px;color:var(--text3);margin-top:4px}
+.sample-gaps{margin-left:auto;font-size:12px;color:var(--coral);text-align:right;line-height:1.4;font-weight:600}
+.sample-gaps span{color:var(--text3);font-weight:400}
+.plat-row{margin-bottom:10px}
+.plat-row-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.plat-name{color:var(--text2);font-weight:500}
+.plat-bar-wrap{height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
+.plat-bar{height:100%;border-radius:3px}
+.sample-more{font-size:12px;color:var(--text3);margin-top:10px;margin-bottom:14px}
+
+/* HERO EMAIL */
+.hero-email-form{display:flex;gap:8px}
+.hero-email-form input{flex:1;background:rgba(255,255,255,0.05);border:1.5px solid var(--border-md);border-radius:var(--r);padding:12px 14px;font-family:inherit;font-size:14px;color:var(--text);outline:none;min-width:0}
+.hero-email-form input:focus{border-color:var(--indigo)}
+.hero-email-form input::placeholder{color:var(--text3)}
+.hero-email-btn{background:linear-gradient(135deg,var(--indigo),var(--coral));color:#fff;border:none;border-radius:var(--r);padding:12px 18px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform 0.15s}
+.hero-email-btn:hover{transform:translateY(-2px)}
+.hero-fine{font-size:12px;color:var(--text3);margin-top:10px}
+.hero-joined{display:flex;align-items:center;gap:8px;background:var(--green-bg);border-radius:var(--r);padding:12px 16px;font-size:14px;color:var(--green);font-weight:600}
+
+/* FORM */
+.form-heading{margin-bottom:28px;padding-top:48px}
+.form-heading h2{font-size:28px;font-weight:900;margin-bottom:8px;letter-spacing:-0.02em}
+.form-heading h2 em{font-style:italic;color:var(--coral)}
+.form-heading p{font-size:14px;color:var(--text3);line-height:1.6}
+
+.step-hdr{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.step-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--coral));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.step-title{font-size:16px;font-weight:700;color:var(--text)}
+.step-sub{font-size:13px;color:var(--text3);margin-left:4px}
+
+.step1{margin-bottom:28px}
+textarea{width:100%;background:var(--surface);border:1.5px solid var(--border-md);border-radius:var(--r);padding:16px 18px;font-family:inherit;font-size:14px;color:var(--text);resize:vertical;min-height:200px;outline:none;line-height:1.7;transition:border-color .15s}
+textarea:focus{border-color:var(--indigo)}
+textarea::placeholder{color:var(--text3)}
+.char-count{font-size:12px;color:var(--text3);text-align:right;margin-top:6px}
+.char-ok{color:var(--green)}
+
+.scoring-toggle-wrap{margin-bottom:20px;margin-top:20px}
+.scoring-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:block}
+.scoring-pills{display:flex;gap:10px;margin-bottom:10px}
+.scoring-pill{display:flex;flex-direction:column;align-items:flex-start;border:1.5px solid var(--border-md);border-radius:100px;padding:10px 20px;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;font-family:'Figtree',sans-serif;font-size:14px;font-weight:600}
+.scoring-pill:hover{border-color:var(--indigo)}
+.scoring-pill.active{background:linear-gradient(135deg,var(--indigo),var(--coral));border-color:transparent;color:#fff}
+.scoring-hint{font-size:13px;color:var(--text3);margin-top:10px;line-height:1.6}
+
+.step2{margin-bottom:32px}
+.questions-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px}
+.q-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--border-md);border-radius:100px;padding:8px 16px;font-size:14px;cursor:pointer;background:transparent;color:var(--text2);user-select:none;font-weight:600;white-space:nowrap;transition:all .14s;font-family:inherit}
+.chip:hover{border-color:var(--indigo);color:var(--lavender)}
+.chip.on{background:linear-gradient(135deg,var(--indigo),var(--coral));border-color:transparent;color:#fff}
+.custom-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid var(--border-md);border-radius:var(--r);padding:10px 14px;font-family:inherit;font-size:14px;color:var(--text);outline:none;margin-top:12px;transition:border-color .15s}
+.custom-input:focus{border-color:var(--indigo)}
+.custom-input::placeholder{color:var(--text3)}
+
+/* SUBMIT */
+.submit-wrap{margin-top:8px}
+.btn-score{width:100%;background:linear-gradient(135deg,var(--indigo),var(--coral));color:#fff;border:none;border-radius:var(--r);padding:18px 28px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s}
+.btn-score:hover{transform:translateY(-2px)}
+.btn-score:disabled{background:var(--surface);color:var(--text3);cursor:not-allowed;transform:none}
+.btn-hint{font-size:12px;color:var(--text3);text-align:center;margin-top:10px;min-height:18px}
+.err-box{background:var(--red-bg);border:1px solid rgba(248,113,113,.3);border-radius:var(--r);padding:14px 16px;font-size:14px;color:var(--red);margin-top:12px}
+
+/* LOADING */
+.loading{text-align:center;padding:80px 0}
+.spinner{width:42px;height:42px;border:3px solid var(--surface);border-top-color:var(--indigo);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading h3{font-size:24px;font-weight:800;color:var(--text);margin-bottom:8px}
+.loading p{font-size:14px;color:var(--text3);margin-bottom:28px}
+.lsteps{list-style:none}
+.lstep{font-size:14px;color:var(--text3);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:10px;transition:color .3s}
+.lstep.act{color:var(--indigo)}
+.lstep.dn{color:var(--green)}
+.lstep-dot{width:8px;height:8px;border-radius:50%;background:var(--surface);flex-shrink:0;transition:background .3s}
+.lstep.act .lstep-dot{background:var(--indigo)}
+.lstep.dn .lstep-dot{background:var(--green)}
+
+/* GATE */
+.gate-wrap{position:relative}
+.gate-blur{filter:blur(6px);pointer-events:none;user-select:none;transition:filter .6s}
+.gate-blur.clear{filter:none;pointer-events:auto;user-select:auto}
+.gate-overlay{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:center;padding-top:16px;background:linear-gradient(to bottom,var(--bg) 0%,var(--bg) 48%,transparent 100%);transition:opacity .4s}
+.gate-overlay.hide{opacity:0;pointer-events:none}
+.gate-card{background:var(--surface);border:1px solid var(--border-md);border-radius:20px;padding:36px 40px 32px;text-align:center;max-width:520px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,0.4)}
+.gate-score{font-size:84px;line-height:1;font-weight:900;margin-bottom:6px;background:linear-gradient(135deg,var(--indigo),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gate-grade{display:inline-block;font-size:20px;padding:8px 18px;border-radius:var(--r);border:1.5px solid;margin-bottom:10px;font-weight:700}
+.gate-role{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:24px}
+.locked-list{margin-bottom:24px;text-align:left}
+.locked-item{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;margin-bottom:8px;font-size:14px;color:var(--text2)}
+.locked-item strong{color:var(--text);display:block;font-size:14px;font-weight:700}
+.locked-item span{font-size:12px;color:var(--text3)}
+.gate-divider{height:1px;background:var(--border);margin-bottom:24px}
+.gate-h{font-size:22px;line-height:1.2;margin-bottom:8px;font-weight:800}
+.gate-h em{font-style:italic;background:linear-gradient(135deg,var(--indigo),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gate-sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.gate-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid var(--border-md);border-radius:var(--r);padding:12px 16px;font-family:inherit;font-size:15px;color:var(--text);outline:none;margin-bottom:12px;transition:border-color .15s}
+.gate-input:focus{border-color:var(--indigo)}
+.gate-input::placeholder{color:var(--text3)}
+.persona-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.persona-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 14px;border-radius:12px;border:2px solid var(--border-md);background:transparent;cursor:pointer;transition:all .15s}
+.persona-card:hover{border-color:var(--indigo)}
+.persona-card.on{border-color:var(--indigo);background:var(--indigo-lt)}
+.persona-card svg{color:var(--text2);transition:color .15s}
+.persona-card.on svg{color:var(--indigo)}
+.persona-label{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;text-align:center;transition:color .15s}
+.persona-card.on .persona-label{color:var(--indigo)}
+.gate-btn{width:100%;background:linear-gradient(135deg,var(--indigo),var(--coral));color:#fff;border:none;border-radius:var(--r);padding:14px 22px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;transition:transform .15s}
+.gate-btn:hover{transform:translateY(-2px)}
+.gate-btn:disabled{background:var(--surface);color:var(--text3);cursor:not-allowed;transform:none}
+.gate-err{font-size:13px;color:var(--red);margin-bottom:10px}
+.gate-fine{font-size:12px;color:var(--text3)}
+.gate-fine a{color:var(--text3);text-decoration:underline;cursor:pointer}
+.gate-saved{font-size:13px;color:var(--green);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* RESULTS */
+.wb-banner{background:var(--green-bg);border:1px solid rgba(52,211,153,.3);border-radius:var(--r);padding:12px 16px;font-size:14px;color:var(--green);margin-bottom:28px;display:flex;align-items:center;gap:10px;font-weight:600}
+.results-hero{display:flex;align-items:flex-start;gap:28px;margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.score-big{font-size:96px;line-height:1;font-weight:900;background:linear-gradient(135deg,var(--indigo),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.score-big small{font-size:28px;color:var(--text3);-webkit-text-fill-color:var(--text3)}
+.score-meta{flex:1;min-width:200px;padding-top:8px}
+.score-role-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.score-grade{display:inline-block;font-size:20px;padding:8px 18px;border-radius:var(--r);border:1.5px solid;margin-bottom:14px;font-weight:700}
+.verdict{font-size:15px;color:var(--text2);line-height:1.8}
+.audit-box{border-radius:var(--r);padding:14px 18px;font-size:14px;margin-bottom:10px;line-height:1.6}
+.audit-box strong{display:block;margin-bottom:4px;font-weight:700}
+.length-audit{display:flex;gap:16px;align-items:flex-start}
+.length-count{flex-shrink:0;text-align:center}
+.length-num{font-size:22px;font-weight:800;line-height:1;display:block}
+.length-unit{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.sec-title{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin:32px 0 14px}
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:8px}
+.plat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 16px 14px}
+.plat-card-name{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.plat-card-score{font-size:34px;line-height:1;font-weight:900}
+.plat-card-score small{font-size:14px;color:var(--text3);font-weight:400}
+.plat-card-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;margin-top:12px;overflow:hidden}
+.plat-card-fill{height:100%;border-radius:2px}
+.plat-card-note{font-size:12px;color:var(--text3);margin-top:8px;line-height:1.5}
+.kw-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:8px}
+.kw-row{display:grid;grid-template-columns:1fr 120px 36px 56px 68px;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--border);font-size:14px}
+.kw-row:last-child{border-bottom:none}
+.kw-name{color:var(--text);font-weight:600}
+.kw-bar-wrap{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
+.kw-bar{height:100%;border-radius:3px}
+.kw-count{text-align:right;color:var(--text2);font-size:12px}
+.kw-target{text-align:right;font-size:11px;color:var(--text3)}
+.badge{font-size:10px;font-weight:700;text-transform:uppercase;padding:3px 10px;border-radius:100px;text-align:center}
+.badge-ok{background:var(--green-bg);color:var(--green)}
+.badge-warn{background:var(--amber-bg);color:var(--amber)}
+.badge-bad{background:var(--red-bg);color:var(--red)}
+.gap-item{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;font-size:14px;line-height:1.7;color:var(--text2)}
+.gap-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.impr-item{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--indigo);border-radius:var(--r);padding:16px 18px;margin-bottom:8px;font-size:14px;line-height:1.7;color:var(--text2)}
+.impr-num{font-size:24px;color:var(--indigo);line-height:1;flex-shrink:0;min-width:24px;font-weight:900}
+.impr-item strong{color:var(--text);display:block;margin-bottom:4px;font-weight:700}
+.act-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn-sm{background:transparent;border:1.5px solid var(--border-md);border-radius:var(--r);padding:12px 18px;font-family:inherit;font-size:14px;color:var(--text2);cursor:pointer;transition:all .14s;font-weight:600}
+.btn-sm:hover{border-color:var(--indigo);color:var(--lavender)}
+
+/* FOOTER */
+.footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.footer-brand{font-size:16px;color:var(--text2);font-weight:700}
+.footer-brand span{color:var(--text3)}
+.footer-tagline{font-size:13px;color:var(--text3)}
+
+@media(max-width:680px){
+  .shell{padding:0 16px 60px}
+  .nav-inner{padding:0 16px;height:56px}
+  .nav-links{gap:16px}
+  .nav-link{font-size:12px}
+  .logo{font-size:16px}
+  .hero{padding:48px 0 40px}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:14px}
+  .sample-card{max-width:100%}
+  .form-heading{padding-top:32px}
+  .form-heading h2{font-size:22px}
+  .questions-grid{grid-template-columns:1fr;gap:12px}
+  .q-card{padding:18px}
+  .chips{gap:6px}
+  .chip{padding:6px 14px;font-size:13px}
+  textarea{min-height:160px;padding:14px 16px;font-size:14px}
+  .btn-score{padding:16px 24px;font-size:15px}
+  .scoring-pills{flex-direction:column;gap:8px}
+  .scoring-pill{padding:12px 18px;border-radius:var(--r)}
+  .loading{padding:60px 0}
+  .loading h3{font-size:20px}
+  .gate-card{padding:28px 22px 24px;border-radius:16px}
+  .gate-score{font-size:64px}
+  .gate-grade{font-size:18px;padding:6px 16px}
+  .gate-h{font-size:20px}
+  .persona-grid{gap:10px}
+  .persona-card{padding:16px 12px}
+  .score-big{font-size:72px}
+  .results-hero{gap:20px}
+  .plats{grid-template-columns:1fr 1fr}
+  .kw-row{grid-template-columns:1fr 80px 30px 44px}
+  .kw-target{display:none}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+<div class="nav-inner">
+<a href="/" class="logo">hiring<span>.productions</span></a>
+<ul class="nav-links">
+<li><a href="/for-companies" class="nav-link">For Companies</a></li>
+<li><a href="/for-candidates" class="nav-link">For Candidates</a></li>
+<li><a href="/tools" class="nav-link">Inside Looks</a></li>
+<li><a href="/membership" class="nav-link">Go Pro</a></li>
+</ul>
+</div>
+</nav>
+
+<main class="shell">
+<section class="hero" id="top">
+<div class="hero-grid">
+<div>
+<div class="hero-badge">Free Inside Look</div>
+<h1>JOB DESCRIPTION<br><em>SEO Score.</em></h1>
+<p>Most JDs are invisible to the candidates you want. Score yours across every major job board and AI matching engine — then get exactly what to fix.</p>
+<div class="proof">
+<span class="stars"><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span></span>
+Free &middot; No account needed &middot; 30 seconds
+</div>
+</div>
+<div class="sample-card">
+<div class="sample-card-hdr"><span>SAMPLE SCORE</span><span class="sample-badge">MID-LEVEL RECRUITER</span></div>
+<div class="sample-body">
+<div class="sample-score-row">
+<span class="sample-num">61</span>
+<span>
+<span class="sample-grade">C+</span>
+<span class="sample-out">out of 100</span>
+</span>
+<span class="sample-gaps"><strong>3 critical gaps</strong><span>keywords &middot; salary &middot; geo</span></span>
+</div>
+<div class="plat-row"><div class="plat-row-top"><span class="plat-name">Indeed</span><span style="color:var(--amber)">58</span></div><div class="plat-bar-wrap"><div class="plat-bar" style="width:58%;background:var(--amber)"></div></div></div>
+<div class="plat-row"><div class="plat-row-top"><span class="plat-name">LinkedIn AI</span><span style="color:var(--indigo)">49</span></div><div class="plat-bar-wrap"><div class="plat-bar" style="width:49%;background:var(--indigo)"></div></div></div>
+<div class="plat-row"><div class="plat-row-top"><span class="plat-name">Google for Jobs</span><span style="color:var(--green)">71</span></div><div class="plat-bar-wrap"><div class="plat-bar" style="width:71%;background:var(--green)"></div></div></div>
+<div class="plat-row"><div class="plat-row-top"><span class="plat-name">ChatGPT Visibility</span><span style="color:var(--coral)">38</span></div><div class="plat-bar-wrap"><div class="plat-bar" style="width:38%;background:var(--coral)"></div></div></div>
+<p class="sample-more">+ 4 more platforms scored in your report</p>
+<form class="hero-email-form" id="heroEmailForm">
+<input type="email" placeholder="your@email.com" id="heroEmail" required autocomplete="email">
+<button type="submit" class="hero-email-btn">Get free inside looks</button>
+</form>
+<p class="hero-fine">New inside look every two weeks. No spam.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="form-section">
+<div class="form-heading">
+<h2>Paste your job description</h2>
+<p>We'll score it across 8 platforms and show you exactly what's hurting your reach.</p>
+</div>
+
+<div class="step1">
+<div class="step-hdr"><span class="step-num">1</span><span class="step-title">Your Job Description</span><span class="step-sub">(paste the full text)</span></div>
+<textarea id="jdText" placeholder="Paste your complete job description here..."></textarea>
+<div class="char-count"><span id="charNum">0</span> / 8,000</div>
+</div>
+
+<div class="scoring-toggle-wrap">
+<span class="scoring-label">Scoring Mode</span>
+<div class="scoring-pills">
+<button type="button" class="scoring-pill active" data-mode="standard">Standard Scoring</button>
+<button type="button" class="scoring-pill" data-mode="strict">Strict Mode</button>
+</div>
+<p class="scoring-hint">Standard mode scores for visibility. Strict mode also penalizes legal and inclusivity issues.</p>
+</div>
+
+<div class="step2">
+<div class="step-hdr"><span class="step-num">2</span><span class="step-title">Quick Context</span><span class="step-sub">(optional but improves accuracy)</span></div>
+<div class="questions-grid">
+<div class="q-card">
+<span class="q-label">Seniority Level</span>
+<div class="chips" id="seniorityChips">
+<button type="button" class="chip" data-val="entry">Entry</button>
+<button type="button" class="chip" data-val="mid">Mid</button>
+<button type="button" class="chip" data-val="senior">Senior</button>
+<button type="button" class="chip" data-val="lead">Lead</button>
+<button type="button" class="chip" data-val="exec">Executive</button>
+</div>
+</div>
+<div class="q-card">
+<span class="q-label">Work Model</span>
+<div class="chips" id="workChips">
+<button type="button" class="chip" data-val="remote">Remote</button>
+<button type="button" class="chip" data-val="hybrid">Hybrid</button>
+<button type="button" class="chip" data-val="onsite">On-site</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="submit-wrap">
+<button type="button" class="btn-score" id="scoreBtn" disabled>
+<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l2.5 2.5"/></svg>
+Score My JD
+</button>
+<p class="btn-hint" id="btnHint">Paste at least 200 characters to score</p>
+</div>
+</div>
+
+<div id="loadingBlock" style="display:none">
+<div class="loading">
+<div class="spinner"></div>
+<h3>Analyzing your job description...</h3>
+<p>Scoring across 8 platforms</p>
+<ul class="lsteps">
+<li class="lstep" id="ls1"><span class="lstep-dot"></span>Reading structure</li>
+<li class="lstep" id="ls2"><span class="lstep-dot"></span>Checking keywords</li>
+<li class="lstep" id="ls3"><span class="lstep-dot"></span>Scoring platforms</li>
+<li class="lstep" id="ls4"><span class="lstep-dot"></span>Building report</li>
+</ul>
+</div>
+</div>
+
+<div id="resultsBlock" style="display:none">
+<!-- Results will be injected here -->
+</div>
+</section>
+
+<footer class="footer">
+<span class="footer-brand">hiring<span>.productions</span></span>
+<span class="footer-tagline">Both sides of hiring. In the open.</span>
+</footer>
+</main>
+
+<script>
+// Simple demo script for dark theme version
+const jdText = document.getElementById('jdText');
+const charNum = document.getElementById('charNum');
+const scoreBtn = document.getElementById('scoreBtn');
+const btnHint = document.getElementById('btnHint');
+
+jdText.addEventListener('input', function() {
+  const len = this.value.length;
+  charNum.textContent = len.toLocaleString();
+  if (len >= 200) {
+    scoreBtn.disabled = false;
+    btnHint.textContent = 'Ready to score';
+    charNum.classList.add('char-ok');
+  } else {
+    scoreBtn.disabled = true;
+    btnHint.textContent = 'Paste at least 200 characters to score';
+    charNum.classList.remove('char-ok');
+  }
+});
+
+// Chip toggle
+document.querySelectorAll('.chips').forEach(group => {
+  group.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      group.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+      this.classList.add('on');
+    });
+  });
+});
+
+// Scoring mode toggle
+document.querySelectorAll('.scoring-pill').forEach(pill => {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.scoring-pill').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Score button demo
+scoreBtn.addEventListener('click', function() {
+  document.getElementById('form-section').querySelector('.form-heading').style.display = 'none';
+  document.querySelector('.step1').style.display = 'none';
+  document.querySelector('.step2').style.display = 'none';
+  document.querySelector('.submit-wrap').style.display = 'none';
+  document.querySelector('.scoring-toggle-wrap').style.display = 'none';
+  document.getElementById('loadingBlock').style.display = 'block';
+  
+  // Simulate loading steps
+  setTimeout(() => document.getElementById('ls1').classList.add('act'), 400);
+  setTimeout(() => { document.getElementById('ls1').classList.remove('act'); document.getElementById('ls1').classList.add('dn'); document.getElementById('ls2').classList.add('act'); }, 1000);
+  setTimeout(() => { document.getElementById('ls2').classList.remove('act'); document.getElementById('ls2').classList.add('dn'); document.getElementById('ls3').classList.add('act'); }, 1800);
+  setTimeout(() => { document.getElementById('ls3').classList.remove('act'); document.getElementById('ls3').classList.add('dn'); document.getElementById('ls4').classList.add('act'); }, 2600);
+  setTimeout(() => {
+    document.getElementById('ls4').classList.remove('act');
+    document.getElementById('ls4').classList.add('dn');
+    document.getElementById('loadingBlock').style.display = 'none';
+    showResults();
+  }, 3400);
+});
+
+function showResults() {
+  const resultsBlock = document.getElementById('resultsBlock');
+  resultsBlock.style.display = 'block';
+  resultsBlock.innerHTML = `
+    <div class="results-hero">
+      <span class="score-big">67<small>/100</small></span>
+      <div class="score-meta">
+        <div class="score-role-lbl">Your JD Score</div>
+        <span class="score-grade" style="background:var(--amber-bg);color:var(--amber);border-color:rgba(251,191,36,0.3)">C+</span>
+        <p class="verdict">Your job description has good structure but is missing key elements that affect discoverability. Three critical gaps are limiting your reach.</p>
+      </div>
+    </div>
+    
+    <div class="sec-title">Platform Scores</div>
+    <div class="plats">
+      <div class="plat-card"><div class="plat-card-name">Indeed</div><div class="plat-card-score">62<small>/100</small></div><div class="plat-card-bar"><div class="plat-card-fill" style="width:62%;background:var(--amber)"></div></div></div>
+      <div class="plat-card"><div class="plat-card-name">LinkedIn</div><div class="plat-card-score">58<small>/100</small></div><div class="plat-card-bar"><div class="plat-card-fill" style="width:58%;background:var(--amber)"></div></div></div>
+      <div class="plat-card"><div class="plat-card-name">Google Jobs</div><div class="plat-card-score">74<small>/100</small></div><div class="plat-card-bar"><div class="plat-card-fill" style="width:74%;background:var(--green)"></div></div></div>
+      <div class="plat-card"><div class="plat-card-name">ZipRecruiter</div><div class="plat-card-score">65<small>/100</small></div><div class="plat-card-bar"><div class="plat-card-fill" style="width:65%;background:var(--amber)"></div></div></div>
+    </div>
+    
+    <div class="sec-title">Critical Gaps</div>
+    <div class="gap-item"><span class="gap-dot" style="background:var(--coral)"></span><div><strong style="color:var(--text);display:block;margin-bottom:4px">Missing salary range</strong>Indeed and LinkedIn heavily penalize posts without compensation. This alone could be costing you 40% of qualified applicants.</div></div>
+    <div class="gap-item"><span class="gap-dot" style="background:var(--amber)"></span><div><strong style="color:var(--text);display:block;margin-bottom:4px">Vague location info</strong>Your post says "flexible" but doesn't specify eligible locations. Google for Jobs won't index properly without explicit geo data.</div></div>
+    <div class="gap-item"><span class="gap-dot" style="background:var(--amber)"></span><div><strong style="color:var(--text);display:block;margin-bottom:4px">Low keyword density</strong>Key skills appear only once. Top-ranking posts repeat core keywords 3-4 times naturally throughout the description.</div></div>
+    
+    <div class="sec-title">Recommendations</div>
+    <div class="impr-item"><span class="impr-num">1</span><div><strong>Add salary range</strong>Even a broad range ($80-120k) dramatically improves visibility. Indeed shows salary-transparent posts 4x more often.</div></div>
+    <div class="impr-item"><span class="impr-num">2</span><div><strong>Specify locations</strong>List eligible states/countries explicitly. "Remote (US)" is better than "Remote" alone.</div></div>
+    <div class="impr-item"><span class="impr-num">3</span><div><strong>Repeat key skills</strong>Mention your top 3 required skills in the intro, requirements, and nice-to-haves sections.</div></div>
+    
+    <div class="act-row">
+      <button class="btn-sm" onclick="location.reload()">Score Another JD</button>
+      <button class="btn-sm" onclick="window.print()">Export Report</button>
+    </div>
+  `;
+}
+
+// Hero email form
+document.getElementById('heroEmailForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('heroEmail').value;
+  if (email) {
+    this.innerHTML = '<div class="hero-joined"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 9l3 3 5-6"/></svg>You\'re in. Check your inbox.</div>';
+  }
+});
+</script>
+</body>
+</html>

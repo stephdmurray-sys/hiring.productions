@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Description SEO Score — Hiring.Productions</title>
+<meta name="description" content="Score your job description across every major job board and AI matching engine. Free tool by Hiring.Productions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F4EE;--paper:#F0ECE3;--sand:#E4DDD1;--stone:#C8BFB0;
+  --terra:#C84B2F;--terra-lt:rgba(200,75,47,0.08);
+  --ink:#1C1917;--ink2:#57534E;--ink3:#A8A29E;
+  --green:#2D6A4F;--green-bg:#D1EAD8;
+  --amber:#B45309;--amber-bg:#FEF3C7;
+  --red:#B91C1C;--red-bg:#FEE2E2;
+  --border:rgba(28,25,23,0.1);--border-md:rgba(28,25,23,0.16);
+  --r:8px;--rl:12px;
+}
+body{background:var(--cream);color:var(--ink);font-family:'Instrument Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+
+/* NAV */
+.nav{border-bottom:1px solid var(--border);background:var(--cream);position:sticky;top:0;z-index:100}
+.nav-inner{max-width:920px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:54px}
+.logo{font-family:Georgia,serif;font-size:18px;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+.logo em{font-style:italic;color:var(--terra)}
+.nav-pill{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--terra);background:var(--terra-lt);border:1px solid rgba(200,75,47,0.2);padding:5px 11px;border-radius:100px}
+.nav-coming{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:5px 11px}
+
+/* SHELL */
+.shell{max-width:920px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{padding:36px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero-grid{display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;background:rgba(200,75,47,0.08);border:1px solid rgba(200,75,47,0.2);border-radius:100px;padding:4px 14px;margin-bottom:14px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#C84B2F}
+.hero-badge-large{padding:8px 28px;font-size:22px;margin-bottom:24px}
+.hero h1{font-family:Georgia,serif;font-size:40px;line-height:1.08;font-weight:normal;margin-bottom:14px;letter-spacing:-0.02em}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero p{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:18px}
+.stars{display:flex;gap:2px;margin-right:10px}
+.star{color:var(--terra);font-size:12px}
+.proof{display:flex;align-items:center;font-size:12px;color:var(--ink3)}
+
+/* SAMPLE CARD */
+.sample-card{background:#fff;border:1px solid var(--border-md);border-radius:var(--rl);overflow:hidden;box-shadow:0 2px 16px rgba(28,25,23,0.07)}
+.sample-card-hdr{background:var(--paper);padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.sample-card-hdr span:first-child{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+.sample-badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--amber);background:var(--amber-bg);padding:2px 7px;border-radius:100px}
+.sample-body{padding:14px 16px}
+.sample-score-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.sample-num{font-family:Georgia,serif;font-size:44px;line-height:1;color:var(--amber);font-weight:normal}
+.sample-grade{font-family:Georgia,serif;font-size:15px;padding:3px 10px;border-radius:6px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(180,83,9,0.27);display:inline-block}
+.sample-out{font-size:10px;color:var(--ink3);margin-top:3px}
+.sample-gaps{margin-left:auto;font-size:11px;color:var(--red);text-align:right;line-height:1.4}
+.sample-gaps strong{display:block}
+.sample-gaps span{color:var(--ink3)}
+.plat-row{margin-bottom:8px}
+.plat-row-top{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.plat-name{color:var(--ink2);font-weight:500}
+.plat-bar-wrap{height:4px;background:var(--sand);border-radius:2px;overflow:hidden}
+.plat-bar{height:100%;border-radius:2px}
+.sample-more{font-size:11px;color:var(--ink3);margin-top:8px;margin-bottom:12px}
+
+/* HERO EMAIL */
+.hero-email-form{display:flex;gap:7px}
+.hero-email-form input{flex:1;background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:inherit;font-size:13px;color:var(--ink);outline:none;min-width:0}
+.hero-email-form input:focus{border-color:var(--terra)}
+.hero-email-form input::placeholder{color:var(--ink3)}
+.hero-email-btn{background:var(--terra);color:#fff;border:none;border-radius:var(--r);padding:9px 14px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hero-email-btn:hover{background:#a83a20}
+.hero-fine{font-size:11px;color:var(--ink3);margin-top:8px}
+.hero-joined{display:flex;align-items:center;gap:8px;background:var(--green-bg);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--green)}
+
+/* FORM */
+.form-heading{margin-bottom:22px}
+.form-heading h2{font-family:Georgia,serif;font-size:24px;font-weight:normal;margin-bottom:6px;letter-spacing:-0.01em}
+.form-heading h2 em{font-style:italic;color:var(--terra)}
+.form-heading p{font-size:13px;color:var(--ink3);line-height:1.6}
+
+.step-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:#fff;flex-shrink:0}
+.step-title{font-size:15px;font-weight:600;color:var(--ink)}
+.step-sub{font-size:13px;color:var(--ink3);margin-left:4px}
+
+.step1{margin-bottom:24px}
+textarea{width:100%;background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;font-family:inherit;font-size:14px;color:var(--ink);resize:vertical;min-height:180px;outline:none;line-height:1.6;transition:border-color .15s}
+textarea:focus{border-color:var(--terra)}
+textarea::placeholder{color:var(--ink3)}
+.char-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);text-align:right;margin-top:5px}
+.char-ok{color:var(--green)}
+
+.scoring-toggle-wrap{margin-bottom:16px;margin-top:16px}
+.scoring-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;display:block}
+.scoring-pills{display:flex;gap:8px;margin-bottom:8px}
+.scoring-pill{display:flex;flex-direction:column;align-items:flex-start;border:1.5px solid rgba(28,25,23,0.15);border-radius:100px;padding:8px 18px;cursor:pointer;background:transparent;color:var(--ink2);transition:all .15s;font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:500}
+.scoring-pill:hover{border-color:var(--terra)}
+.scoring-pill.active{background:var(--terra);border-color:var(--terra);color:#fff}
+.scoring-pill-main{font-size:13px}
+.scoring-pill-sub{font-size:10px;margin-top:2px;opacity:.8}
+.scoring-hint{font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:8px;line-height:1.6}
+
+.step2{margin-bottom:28px}
+.questions-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.q-card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:20px 20px 18px}
+.q-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;font-size:13px;cursor:pointer;background:var(--cream);color:var(--ink2);user-select:none;font-weight:500;white-space:nowrap;transition:all .14s;font-family:inherit}
+.chip:hover{border-color:var(--terra);color:var(--terra)}
+.chip.on{background:var(--terra);border-color:var(--terra);color:#fff}
+.custom-input{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r);padding:9px 12px;font-family:inherit;font-size:13px;color:var(--ink);outline:none;margin-top:10px;transition:border-color .15s}
+.custom-input:focus{border-color:var(--terra)}
+.custom-input::placeholder{color:var(--ink3)}
+
+/* SUBMIT */
+.submit-wrap{margin-top:4px}
+.btn-score{width:100%;background:var(--ink);color:#fff;border:none;border-radius:var(--r);padding:16px 24px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .18s}
+.btn-score:hover{background:var(--terra)}
+.btn-score:disabled{background:var(--sand);color:var(--ink3);cursor:not-allowed}
+.btn-hint{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);text-align:center;margin-top:9px;min-height:18px}
+.err-box{background:var(--red-bg);border:1px solid rgba(185,28,28,.2);border-radius:var(--r);padding:12px 14px;font-size:13px;color:var(--red);margin-top:10px}
+
+/* LOADING */
+.loading{text-align:center;padding:60px 0}
+.spinner{width:38px;height:38px;border:2px solid var(--sand);border-top-color:var(--terra);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 20px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading h3{font-family:Georgia,serif;font-size:22px;font-weight:normal;color:var(--ink);margin-bottom:6px}
+.loading p{font-size:13px;color:var(--ink3);margin-bottom:24px}
+.lsteps{list-style:none}
+.lstep{font-size:13px;color:var(--ink3);margin-bottom:7px;font-family:'DM Mono',monospace;display:flex;align-items:center;justify-content:center;gap:8px;transition:color .3s}
+.lstep.act{color:var(--terra)}
+.lstep.dn{color:var(--green)}
+.lstep-dot{width:6px;height:6px;border-radius:50%;background:var(--sand);flex-shrink:0;transition:background .3s}
+.lstep.act .lstep-dot{background:var(--terra)}
+.lstep.dn .lstep-dot{background:var(--green)}
+
+/* GATE */
+.gate-wrap{position:relative}
+.gate-blur{filter:blur(6px);pointer-events:none;user-select:none;transition:filter .6s}
+.gate-blur.clear{filter:none;pointer-events:auto;user-select:auto}
+.gate-overlay{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;justify-content:center;padding-top:12px;background:linear-gradient(to bottom,var(--cream) 0%,var(--cream) 48%,transparent 100%);transition:opacity .4s}
+.gate-overlay.hide{opacity:0;pointer-events:none}
+.gate-card{background:#fff;border:1px solid var(--border-md);border-radius:16px;padding:32px 36px 28px;text-align:center;max-width:500px;width:100%;box-shadow:0 20px 60px rgba(28,25,23,0.13)}
+.gate-score{font-family:Georgia,serif;font-size:76px;line-height:1;font-weight:normal;margin-bottom:4px}
+.gate-grade{display:inline-block;font-family:Georgia,serif;font-size:18px;padding:6px 16px;border-radius:var(--r);border:1.5px solid;margin-bottom:8px;font-weight:normal}
+.gate-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:20px}
+.locked-list{margin-bottom:20px;text-align:left}
+.locked-item{display:flex;align-items:flex-start;gap:10px;background:var(--paper);border:1px solid var(--border);border-radius:var(--r);padding:9px 13px;margin-bottom:6px;font-size:13px;color:var(--ink2)}
+.locked-item strong{color:var(--ink);display:block;font-size:13px}
+.locked-item span{font-size:11px;color:var(--ink3)}
+.gate-divider{height:1px;background:var(--border);margin-bottom:20px}
+.gate-h{font-family:Georgia,serif;font-size:20px;line-height:1.2;margin-bottom:6px;font-weight:normal}
+.gate-h em{font-style:italic;color:var(--terra)}
+.gate-sub{font-size:13px;color:var(--ink2);line-height:1.65;margin-bottom:18px}
+.gate-input{width:100%;background:var(--paper);border:1.5px solid var(--border);border-radius:var(--r);padding:11px 14px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;margin-bottom:10px;transition:border-color .15s}
+.gate-input:focus{border-color:var(--terra)}
+.gate-input::placeholder{color:var(--ink3)}
+.persona-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.persona-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 12px;border-radius:10px;border:2px solid var(--border);background:#fff;cursor:pointer;transition:all .15s}
+.persona-card:hover{border-color:var(--terra)}
+.persona-card.on{border-color:var(--terra);background:var(--terra-lt)}
+.persona-card svg{transition:color .15s}
+.persona-label{font-size:12px;font-weight:500;color:var(--ink);line-height:1.3;text-align:center;transition:color .15s}
+.persona-card.on .persona-label{color:var(--terra)}
+.gate-btn{width:100%;background:var(--terra);color:#fff;border:none;border-radius:var(--r);padding:13px 20px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;transition:background .18s}
+.gate-btn:hover{background:#a83a20}
+.gate-btn:disabled{background:var(--sand);color:var(--ink3);cursor:not-allowed}
+.gate-err{font-size:12px;color:var(--red);margin-bottom:8px}
+.gate-fine{font-size:11px;color:var(--ink3)}
+.gate-fine a{color:var(--ink3);text-decoration:underline;cursor:pointer}
+.gate-saved{font-size:12px;color:var(--green);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* RESULTS */
+.wb-banner{background:var(--green-bg);border:1px solid rgba(45,106,79,.15);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.results-hero{display:flex;align-items:flex-start;gap:24px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.score-big{font-family:Georgia,serif;font-size:84px;line-height:1;font-weight:normal}
+.score-big small{font-size:26px;color:var(--ink3)}
+.score-meta{flex:1;min-width:180px;padding-top:6px}
+.score-role-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.score-grade{display:inline-block;font-family:Georgia,serif;font-size:19px;padding:7px 16px;border-radius:var(--r);border:1.5px solid;margin-bottom:12px;font-weight:normal}
+.verdict{font-size:14px;color:var(--ink2);line-height:1.75}
+.audit-box{border-radius:var(--r);padding:12px 16px;font-size:13px;margin-bottom:8px;line-height:1.6}
+.audit-box strong{display:block;margin-bottom:2px}
+.length-audit{display:flex;gap:14px;align-items:flex-start}
+.length-count{flex-shrink:0;text-align:center}
+.length-num{font-family:'DM Mono',monospace;font-size:20px;font-weight:600;line-height:1;display:block}
+.length-unit{font-size:10px;letter-spacing:.05em;text-transform:uppercase;opacity:.7}
+.sec-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin:26px 0 12px}
+.plats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:4px}
+.plat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:16px 15px 12px}
+.plat-card-name{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-family:'DM Mono',monospace}
+.plat-card-score{font-family:Georgia,serif;font-size:30px;line-height:1;font-weight:normal}
+.plat-card-score small{font-family:inherit;font-size:13px;color:var(--ink3);font-weight:400}
+.plat-card-bar{height:3px;background:var(--sand);border-radius:2px;margin-top:10px;overflow:hidden}
+.plat-card-fill{height:100%;border-radius:2px}
+.plat-card-note{font-size:11px;color:var(--ink3);margin-top:7px;line-height:1.45}
+.kw-table{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:4px}
+.kw-row{display:grid;grid-template-columns:1fr 110px 32px 52px 64px;align-items:center;gap:9px;padding:10px 16px;border-bottom:1px solid var(--border);font-size:13px}
+.kw-row:last-child{border-bottom:none}
+.kw-name{color:var(--ink);font-weight:500}
+.kw-bar-wrap{height:5px;background:var(--sand);border-radius:3px;overflow:hidden}
+.kw-bar{height:100%;border-radius:3px}
+.kw-count{text-align:right;color:var(--ink2);font-family:'DM Mono',monospace;font-size:11px}
+.kw-target{text-align:right;font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace}
+.badge{font-size:10px;font-weight:600;text-transform:uppercase;padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;text-align:center}
+.badge-ok{background:var(--green-bg);color:var(--green)}
+.badge-warn{background:var(--amber-bg);color:var(--amber)}
+.badge-bad{background:var(--red-bg);color:var(--red)}
+.gap-item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:7px;font-size:13px;line-height:1.6;color:var(--ink2)}
+.gap-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.impr-item{display:flex;gap:14px;background:#fff;border:1px solid var(--border);border-left:3px solid var(--terra);border-radius:var(--r);padding:13px 15px;margin-bottom:7px;font-size:13px;line-height:1.6;color:var(--ink2)}
+.impr-num{font-family:Georgia,serif;font-size:22px;color:var(--terra);line-height:1;flex-shrink:0;min-width:20px;font-weight:normal}
+.impr-item strong{color:var(--ink);display:block;margin-bottom:2px}
+.act-row{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.btn-sm{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:10px 16px;font-family:inherit;font-size:13px;color:var(--ink2);cursor:pointer;transition:all .14s;font-weight:500}
+.btn-sm:hover{border-color:var(--terra);color:var(--terra)}
+
+/* ABOUT STRIP */
+.about-strip{margin-top:52px;padding-top:36px;border-top:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.about-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--terra);margin-bottom:10px}
+.about-p{font-size:13px;color:var(--ink2);line-height:1.7}
+
+/* FOOTER */
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:Georgia,serif;font-size:15px;color:var(--ink2)}
+.footer-brand em{font-style:italic;color:var(--terra)}
+.footer-by{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink3);margin-left:10px;letter-spacing:.06em}
+.footer-tagline{font-size:12px;color:var(--ink3)}
+
+@media(max-width:680px){
+  /* Shell & Nav */
+  .shell{padding:0 16px 60px}
+  .nav-inner{padding:0 16px;height:50px}
+  .nav-coming{display:none}
+  .nav-pill{font-size:9px;padding:4px 9px}
+  .logo{font-size:16px}
+  
+  /* Hero */
+  .hero{padding:24px 0 20px}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .hero h1{font-size:28px;line-height:1.15}
+  .hero p{font-size:13px}
+  .hero-badge-large{padding:6px 18px;font-size:16px;margin-bottom:18px}
+  .proof{flex-wrap:wrap;gap:4px}
+  
+  /* Brand Hero Section - full width white section */
+  .shell > div[style*="background:#FFFFFF"]{padding:40px 16px 32px !important}
+  .shell > div[style*="background:#FFFFFF"] h1{font-size:32px !important;line-height:1.15 !important}
+  .shell > div[style*="background:#FFFFFF"] p{font-size:14px !important}
+  
+  /* Sample Card */
+  .sample-card{margin-top:8px}
+  .sample-num{font-size:36px}
+  .sample-grade{font-size:13px;padding:2px 8px}
+  .sample-score-row{gap:8px;flex-wrap:wrap}
+  .sample-gaps{margin-left:0;text-align:left;margin-top:8px;width:100%}
+  .hero-email-form{flex-direction:column}
+  .hero-email-btn{width:100%;text-align:center;justify-content:center}
+  
+  /* Form */
+  .form-heading h2{font-size:20px}
+  .questions-grid{grid-template-columns:1fr;gap:10px}
+  .q-card{padding:16px}
+  .chips{gap:6px}
+  .chip{padding:5px 12px;font-size:12px}
+  textarea{min-height:150px;padding:12px 14px;font-size:13px}
+  .btn-score{padding:14px 20px;font-size:14px}
+  
+  /* Scoring Toggle */
+  .scoring-pills{flex-direction:column;gap:6px}
+  .scoring-pill{padding:10px 16px;border-radius:var(--r)}
+  .scoring-hint{font-size:11px}
+  
+  /* Loading */
+  .loading{padding:40px 0}
+  .loading h3{font-size:18px}
+  .lstep{font-size:11px}
+  
+  /* Gate */
+  .gate-card{padding:24px 18px 20px;border-radius:12px}
+  .gate-score{font-size:56px}
+  .gate-grade{font-size:16px;padding:5px 14px}
+  .gate-h{font-size:18px}
+  .gate-sub{font-size:12px}
+  .persona-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .persona-card{padding:14px 10px}
+  .persona-label{font-size:11px}
+  .gate-input{padding:10px 12px;font-size:13px}
+  .gate-btn{padding:12px 18px;font-size:13px}
+  .locked-item{padding:8px 12px;font-size:12px}
+  .locked-item strong{font-size:12px}
+  
+  /* Results */
+  .results-hero{flex-direction:column;gap:16px}
+  .score-big{font-size:60px}
+  .score-big small{font-size:20px}
+  .score-meta{min-width:100%;padding-top:0}
+  .verdict{font-size:13px}
+  .audit-box{padding:10px 14px;font-size:12px}
+  .length-audit{flex-direction:column;gap:8px}
+  .sec-title{font-size:9px;margin:20px 0 10px}
+  .plats{grid-template-columns:1fr 1fr;gap:6px}
+  .plat-card{padding:12px 10px 10px}
+  .plat-card-name{font-size:9px}
+  .plat-card-score{font-size:24px}
+  .plat-card-note{font-size:10px}
+  
+  /* Keyword table - mobile card layout */
+  .kw-table{overflow-x:visible;display:flex;flex-direction:column;gap:10px}
+  .kw-row{grid-template-columns:1fr;gap:10px;padding:12px;background:var(--sand);border-radius:8px;border-bottom:none;align-items:flex-start}
+  .kw-name{font-size:13px;font-weight:600;display:block}
+  .kw-bar-wrap{display:flex;width:100%;height:6px;margin-top:6px}
+  .kw-count{font-size:11px;text-align:left;margin-top:6px;display:inline-block}
+  .kw-target{font-size:10px;text-align:left;display:inline-block;margin-left:12px}
+  .badge{font-size:9px;padding:2px 6px}
+  
+  .gap-item{padding:10px 12px;font-size:12px}
+  .impr-item{padding:11px 13px;font-size:12px;gap:10px}
+  .impr-num{font-size:18px}
+  .act-row{flex-direction:column}
+  .btn-sm{width:100%;text-align:center;justify-content:center}
+  
+  /* About Strip */
+  .about-strip{margin-top:36px;padding-top:28px}
+  .about-grid{grid-template-columns:1fr;gap:20px}
+  .about-p{font-size:12px}
+  
+  /* Footer */
+  .footer{flex-direction:column;align-items:flex-start;gap:8px;margin-top:32px;padding-top:16px}
+  .footer-brand{font-size:14px}
+  .footer-by{margin-left:8px;font-size:9px}
+  .footer-tagline{font-size:11px}
+}
+
+@media(max-width:400px){
+  .shell{padding:0 12px 48px}
+  .nav-inner{padding:0 12px}
+  .hero h1{font-size:24px}
+  .hero-badge-large{font-size:14px;padding:5px 14px}
+  .shell > div[style*="background:#FFFFFF"] h1{font-size:26px !important}
+  .sample-num{font-size:30px}
+  .gate-score{font-size:48px}
+  .score-big{font-size:48px}
+  .plats{grid-template-columns:1fr}
+  .persona-grid{grid-template-columns:1fr}
+  .q-card{padding:14px}
+  .chip{padding:4px 10px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo"><em>Hiring</em>.Productions</a>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span class="nav-pill">JD SEO Score</span>
+      <a href="/consulting" class="nav-coming" style="text-decoration:none;color:var(--ink3)">Consulting</a>
+    </div>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- BRAND HERO SECTION -->
+  <div style="background:#FFFFFF;margin:0 calc(-50vw + 50%);padding:64px calc(50vw - 50%) 56px;border-bottom:1px solid rgba(28,25,23,0.1);margin-bottom:0">
+    <div style="max-width:920px;margin:0 auto">
+      <h1 style="font-family:Georgia,serif;font-size:52px;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;color:#1C1917;font-weight:normal">
+        Let&#x27;s face it.<br>
+        Behind every strong hire<br>
+        <em style="font-style:italic;color:#C84B2F">is a real production.</em>
+      </h1>
+      <p style="font-size:18px;color:#57534E;line-height:1.7;max-width:640px;margin-bottom:32px">We provide consulting and free tools to make both sides better. Because in the end, we&#x27;re all on the same team.</p>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <a href="#formSection" onclick="document.getElementById('formSection').scrollIntoView({behavior:'smooth'});return false;" style="display:inline-flex;align-items:center;gap:8px;background:#C84B2F;color:#fff;font-family:'Instrument Sans',sans-serif;font-size:14px;font-weight:600;text-decoration:none;padding:13px 26px;border-radius:100px;letter-spacing:0.02em;transition:opacity 0.2s" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+          <span style="font-size:14px">★</span> Score your JD free &mdash; 30 seconds
+        </a>
+        <a href="/consulting" style="font-family:'Instrument Sans',sans-serif;font-size:14px;color:#6B5E58;text-decoration:none;letter-spacing:0.02em;display:inline-flex;align-items:center;gap:4px" onmouseover="this.style.color='#C84B2F'" onmouseout="this.style.color='#6B5E58'">
+          Consulting &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge hero-badge-large"><span style="margin-right:6px">★</span>Free Tool of the Week</div>
+        <h1>JOB DESCRIPTION<br><em>SEO Score.</em></h1>
+        <p>Most JDs are invisible to the candidates you want. Score yours across every major job board and AI matching engine — then get exactly what to fix.</p>
+        <div class="proof">
+          <div class="stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          Free · No account needed · 30 seconds
+        </div>
+      </div>
+
+      <!-- SAMPLE SCORE CARD -->
+      <div class="sample-card">
+        <div class="sample-card-hdr">
+          <span>Sample score</span>
+          <span class="sample-badge">Mid-Level Recruiter</span>
+        </div>
+        <div class="sample-body">
+          <div class="sample-score-row">
+            <div class="sample-num">61</div>
+            <div>
+              <div class="sample-grade">C+</div>
+              <div class="sample-out">out of 100</div>
+            </div>
+            <div class="sample-gaps">
+              <strong>3 critical gaps</strong>
+              <span>keywords · salary · geo</span>
+            </div>
+          </div>
+          <div class="plat-row">
+            <div class="plat-row-top"><span class="plat-name">Indeed</span><span style="color:var(--amber);font-family:'DM Mono',monospace;font-size:11px">58</span></div>
+            <div class="plat-bar-wrap"><div class="plat-bar" style="width:58%;background:var(--amber)"></div></div>
+          </div>
+          <div class="plat-row">
+            <div class="plat-row-top"><span class="plat-name">LinkedIn AI</span><span style="color:var(--red);font-family:'DM Mono',monospace;font-size:11px">49</span></div>
+            <div class="plat-bar-wrap"><div class="plat-bar" style="width:49%;background:var(--red)"></div></div>
+          </div>
+          <div class="plat-row">
+            <div class="plat-row-top"><span class="plat-name">Google for Jobs</span><span style="color:var(--amber);font-family:'DM Mono',monospace;font-size:11px">71</span></div>
+            <div class="plat-bar-wrap"><div class="plat-bar" style="width:71%;background:var(--amber)"></div></div>
+          </div>
+          <div class="plat-row">
+            <div class="plat-row-top"><span class="plat-name">ChatGPT Visibility</span><span style="color:var(--red);font-family:'DM Mono',monospace;font-size:11px">38</span></div>
+            <div class="plat-bar-wrap"><div class="plat-bar" style="width:38%;background:var(--red)"></div></div>
+          </div>
+          <div class="sample-more">+ 4 more platforms scored in your report</div>
+          <div id="heroSignupWrap">
+            <div class="hero-email-form">
+              <input type="email" id="heroEmail" placeholder="your@email.com">
+              <button class="hero-email-btn" onclick="heroJoin()">Get free tools</button>
+            </div>
+            <div class="hero-fine">New tool every two weeks. No spam.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div id="formSection">
+    <div class="form-heading">
+      <h2>Score your JD — <em>free, right now.</em></h2>
+      <p>No account needed. Paste your JD, pick role type and experience level, get your score in 20 seconds.</p>
+    </div>
+
+    <!-- SCORING MODE TOGGLE -->
+    <div class="scoring-toggle-wrap">
+      <div class="scoring-label">What are you scoring?</div>
+      <div class="scoring-pills">
+        <div class="scoring-pill active" data-mode="posting" onclick="setScoringMode('posting')">
+          <div class="scoring-pill-main">Job Posting</div>
+          <div class="scoring-pill-sub">External · candidate-facing</div>
+        </div>
+        <div class="scoring-pill" data-mode="jd" onclick="setScoringMode('jd')">
+          <div class="scoring-pill-main">Job Description</div>
+          <div class="scoring-pill-sub">Internal · converting to a posting</div>
+        </div>
+      </div>
+      <div class="scoring-hint" id="scoringHint">We'll score your posting for SEO visibility, keyword density, and candidate conversion across 8 platforms.</div>
+    </div>
+
+    <div class="step1">
+      <div class="step-hdr">
+        <div class="step-num">1</div>
+        <span class="step-title">Paste your job description</span>
+      </div>
+      <textarea id="jdText" placeholder="Paste the full job description here — title, responsibilities, requirements, everything. The more complete, the more accurate the score."></textarea>
+      <div class="char-count" id="charCount">0 characters</div>
+    </div>
+
+    <div class="step2">
+      <div class="step-hdr">
+        <div class="step-num">2</div>
+        <span class="step-title">Two quick questions</span>
+        <span class="step-sub">— these change the entire keyword framework</span>
+      </div>
+      <div class="questions-grid">
+        <div class="q-card">
+          <span class="q-label">What kind of role is this?</span>
+          <div class="chips" id="roleChips">
+            <span class="chip" data-v="Recruiting / Talent Acquisition">Recruiting / Talent</span>
+            <span class="chip" data-v="Clinical / Healthcare">Clinical / Healthcare</span>
+            <span class="chip" data-v="Engineering / Tech">Engineering / Tech</span>
+            <span class="chip" data-v="Sales / Business Development">Sales / BD</span>
+            <span class="chip" data-v="Marketing">Marketing</span>
+            <span class="chip" data-v="Operations">Operations</span>
+            <span class="chip" data-v="Finance / Accounting">Finance</span>
+            <span class="chip" data-v="Product / Design">Product / Design</span>
+            <span class="chip" data-v="Customer Success">Customer Success</span>
+            <span class="chip" data-v="__custom__">Other…</span>
+          </div>
+          <input class="custom-input" type="text" id="roleCustom" placeholder="e.g. Registered Dietitian" style="display:none">
+        </div>
+        <div class="q-card">
+          <span class="q-label">What experience level are you hiring for?</span>
+          <div class="chips" id="levelChips">
+            <span class="chip" data-v="Internship">Intern</span>
+            <span class="chip" data-v="Entry-Level">Entry-Level</span>
+            <span class="chip" data-v="Mid-Level">Mid-Level</span>
+            <span class="chip" data-v="Senior">Senior</span>
+            <span class="chip" data-v="Manager">Manager</span>
+            <span class="chip" data-v="Director">Director</span>
+            <span class="chip" data-v="VP / Executive">VP / Exec</span>
+            <span class="chip" data-v="C-Suite">C-Suite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-wrap">
+        <button class="btn-score" id="scoreBtn" disabled onclick="runScore()">Score this JD →</button>
+        <div id="rateLimit" style="font-size:11px;color:var(--ink3);margin-top:8px;text-align:center;font-family:'DM Mono',monospace"></div>
+      <div class="btn-hint" id="btnHint">Add your JD and select role + experience level to begin</div>
+      <div class="err-box" id="errBox" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loadingSection" style="display:none">
+    <div class="loading">
+      <div class="spinner"></div>
+      <h3>Analyzing your JD…</h3>
+      <p>Reading across 8 job boards and AI matching engines</p>
+      <ul class="lsteps" id="lsteps"></ul>
+    </div>
+  </div>
+
+  <!-- RESULTS (gate + blurred content) -->
+  <div id="resultsSection" style="display:none">
+    <div class="gate-wrap">
+      <div class="gate-overlay" id="gateOverlay">
+        <div class="gate-card">
+          <div class="gate-score" id="gateScore">—</div>
+          <div class="gate-grade" id="gateGrade">—</div>
+          <div class="gate-role" id="gateRole">—</div>
+          <div class="locked-list">
+            <div class="locked-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:2px"><rect x="2.5" y="6.5" width="10" height="7.5" rx="1.5" stroke="#A8A29E" stroke-width="1.4"/><path d="M4.5 6.5V4.5a3 3 0 0 1 6 0v2" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="7.5" cy="10.5" r="1" fill="#A8A29E"/></svg>
+              <div><strong>Platform scores</strong><span>Indeed · LinkedIn · Glassdoor · Google for Jobs</span></div>
+            </div>
+            <div class="locked-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:2px"><rect x="2.5" y="6.5" width="10" height="7.5" rx="1.5" stroke="#A8A29E" stroke-width="1.4"/><path d="M4.5 6.5V4.5a3 3 0 0 1 6 0v2" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="7.5" cy="10.5" r="1" fill="#A8A29E"/></svg>
+              <div><strong>AI matching engine scores</strong><span>LinkedIn AI · ZipRecruiter · Eightfold · ChatGPT</span></div>
+            </div>
+            <div class="locked-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:2px"><rect x="2.5" y="6.5" width="10" height="7.5" rx="1.5" stroke="#A8A29E" stroke-width="1.4"/><path d="M4.5 6.5V4.5a3 3 0 0 1 6 0v2" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="7.5" cy="10.5" r="1" fill="#A8A29E"/></svg>
+              <div><strong>Keyword frequency analysis</strong><span>8 role-specific terms with targets and status</span></div>
+            </div>
+            <div class="locked-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:2px"><rect x="2.5" y="6.5" width="10" height="7.5" rx="1.5" stroke="#A8A29E" stroke-width="1.4"/><path d="M4.5 6.5V4.5a3 3 0 0 1 6 0v2" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="7.5" cy="10.5" r="1" fill="#A8A29E"/></svg>
+              <div><strong>Gap analysis + top 5 fixes</strong><span>Ranked by impact, specific and actionable</span></div>
+            </div>
+          </div>
+          <div class="gate-divider"></div>
+          <div class="gate-h">Unlock your <em>full report</em></div>
+          <p class="gate-sub">Join the Hiring.Productions community — free tools and hiring insights for your next move.</p>
+          <input class="gate-input" type="text" id="gFullName" placeholder="Full name">
+          <input class="gate-input" type="email" id="gEmail" placeholder="Work email">
+          <div class="persona-grid">
+            <div class="persona-card" id="pc-hiring" onclick="selectPersona('hiring')">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" id="pi-hiring"><circle cx="12" cy="8" r="3.5" stroke="#A8A29E" stroke-width="1.4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" fill="none"/><path d="M17 11l1.8 1.8 3.2-3.2" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="persona-label" id="pl-hiring">Hiring Professional</span>
+            </div>
+            <div class="persona-card" id="pc-candidate" onclick="selectPersona('candidate')">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" id="pi-candidate"><rect x="4" y="2" width="16" height="20" rx="2" stroke="#A8A29E" stroke-width="1.4" fill="none"/><path d="M8 8h8M8 12h8M8 16h5" stroke="#A8A29E" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span class="persona-label" id="pl-candidate">Job Seeker</span>
+            </div>
+          </div>
+          <button class="gate-btn" id="gateBtn" onclick="handleUnlock()">Unlock my full report →</button>
+          <div class="gate-err" id="gateErr" style="display:none"></div>
+          <div class="gate-saved" id="gateSaved" style="display:none">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Welcome to the community.
+          </div>
+  
+        </div>
+      </div>
+      <div class="gate-blur" id="gateBlur">
+        <div id="resultsInner"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip" id="aboutStrip">
+    <div class="about-grid">
+      <div>
+        <div class="about-label">For Hiring Teams</div>
+        <p class="about-p">JD SEO Score · Resume Scorer · Interview Builder · Offer Letter Generator · ATS Auditor</p>
+      </div>
+      <div>
+        <div class="about-label">For Job Seekers</div>
+        <p class="about-p">Resume Scorer · LinkedIn Auditor · Interview Prep · Salary Negotiation · Cover Letter Builder</p>
+      </div>
+      <div>
+        <div class="about-label">The Newsletter</div>
+        <p class="about-p">Free tools and insights for the people who hire — and the people who get hired.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <span class="footer-brand"><em>Hiring</em>.Productions</span>
+      <span class="footer-by">BY STEPHANIE MURRAY</span>
+    </div>
+    <div class="footer-tagline">Free tools for the people who hire — and the people who get hired.</div>
+  </div>
+
+</div>
+
+<script>
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzTdpvO7ngor7KLoBefA_QXgwk1Y56evx7g9EJa6wxCikVBCyj_-3jbabG1o5qBnZm-/exec";
+const API_ENDPOINT = "/api/score";
+
+var role = "", level = "", jdText = "", persona = "", scoringMode = "posting";
+
+// ── SCORING MODE ──
+function setScoringMode(mode) {
+  scoringMode = mode;
+  var pills = document.querySelectorAll(".scoring-pill");
+  pills.forEach(function(pill) { pill.classList.remove("active"); });
+  document.querySelector(".scoring-pill[data-mode='" + mode + "']").classList.add("active");
+  
+  var hint = document.getElementById("scoringHint");
+  if (mode === "posting") {
+    hint.textContent = "We'll score your posting for SEO visibility, keyword density, and candidate conversion across 8 platforms.";
+  } else {
+    hint.textContent = "We'll score your JD for posting-readiness — what's missing before this can attract the right candidates.";
+  }
+}
+
+// ── SCORING BENCHMARKS & PERCENTILES ──
+var scoreBenchmarks = { low: 30, mid: 50, good: 70, excellent: 85 };
+function getPercentile(score) {
+  if (score < scoreBenchmarks.low) return { pct: 25, msg: "Below typical scores" };
+  if (score < scoreBenchmarks.mid) return { pct: 45, msg: "Below average" };
+  if (score < scoreBenchmarks.good) return { pct: 65, msg: "Average to good" };
+  if (score < scoreBenchmarks.excellent) return { pct: 82, msg: "Better than most JDs" };
+  return { pct: 95, msg: "Top tier scoring" };
+}
+function getGradeMsg(grade) {
+  var msgs = { "A+": "Exceptional posting optimized across all platforms", "A": "Excellent SEO and AI matching signals", "B": "Solid fundamentals with room for improvement", "C": "Notable gaps affecting discoverability", "D": "Significant issues limiting candidate reach", "F": "Critical deficiencies preventing effective posting" };
+  return msgs[grade] || "See details below";
+}
+
+// ── RATE LIMIT TRACKING ──
+var attemptsRemaining = 5;
+function updateAttemptCounter() {
+  try { var stored = localStorage.getItem("hp_attempts_"+(new Date()).toISOString().split("T")[0]); attemptsRemaining = stored ? Math.max(0, 5 - parseInt(stored)) : 5; } catch(e){}
+}
+function trackAttempt() {
+  try { var key = "hp_attempts_"+(new Date()).toISOString().split("T")[0]; var curr = parseInt(localStorage.getItem(key)||"0")+1; localStorage.setItem(key, curr); attemptsRemaining = Math.max(0, 5 - curr); } catch(e){}
+}
+
+// ── COPY TO CLIPBOARD ──
+function copyAllImprovements() {
+  if (!pendingResult || !pendingResult.improvements) return;
+  var text = pendingResult.improvements.map(function(imp, i) {
+    return (i+1) + '. ' + imp.title + '\n   ' + imp.detail;
+  }).join('\n\n');
+  navigator.clipboard.writeText(text).then(function() {
+    var btns = document.querySelectorAll('.btn-sm');
+    btns.forEach(function(b){ if (b.textContent === 'Copy all improvements') { b.textContent = 'Copied!'; setTimeout(function(){ b.textContent = 'Copy all improvements'; }, 2000); } });
+  }).catch(function(){ alert('Unable to copy — please copy manually.'); });
+}
+
+// ── PAGE INITIALIZATION ──
+updateAttemptCounter();
+setTimeout(function(){
+  var rl = document.getElementById("rateLimit");
+  if (rl) rl.textContent = attemptsRemaining + " attempt" + (attemptsRemaining !== 1 ? "s" : "") + " remaining today";
+}, 100);
+
+// ── CTA EMAIL HANDLER ──
+function saveCtaEmail() {
+  var email = document.getElementById("ctaEmail").value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert("Please enter a valid email address");
+    return;
+  }
+  var payload = { firstName: "", email: email, persona: "cta_results", role: role, level: level, score: pendingResult?.overallScore || result?.overallScore || "", grade: pendingResult?.grade || result?.grade || "" };
+  saveToSheet(payload);
+  document.getElementById("ctaEmail").value = "";
+  var btn = event.target;
+  btn.textContent = "✓ Added!";
+  setTimeout(function(){ btn.textContent = "Join free →"; }, 2000);
+}
+
+// ── HERO SIGNUP ──
+function heroJoin() {
+  var email = document.getElementById("heroEmail").value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById("heroEmail").style.borderColor = "var(--red)";
+    return;
+  }
+  saveToSheet({ firstName: "", email: email, persona: "hero_signup", role: "", level: "", score: "", grade: "" });
+  try { localStorage.setItem("hp_hero_email", email); } catch(e) {}
+  document.getElementById("heroSignupWrap").innerHTML = '<div class="hero-joined"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> You\'re in. Tools incoming.</div>';
+}
+document.getElementById("heroEmail").addEventListener("keydown", function(e){ if(e.key==="Enter") heroJoin(); });
+
+// Check already joined
+(function(){
+  try {
+    if (localStorage.getItem("hp_hero_email")) {
+      document.getElementById("heroSignupWrap").innerHTML = '<div class="hero-joined"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> You\'re in. Tools incoming.</div>';
+    }
+  } catch(e) {}
+})();
+
+// ── CHIPS ──
+function bindChips(containerId, setter) {
+  document.querySelectorAll("#" + containerId + " .chip").forEach(function(chip) {
+    chip.addEventListener("click", function() {
+      document.querySelectorAll("#" + containerId + " .chip").forEach(function(c){ c.classList.remove("on"); });
+      chip.classList.add("on");
+      var v = chip.getAttribute("data-v");
+      if (containerId === "roleChips" && v === "__custom__") {
+        document.getElementById("roleCustom").style.display = "block";
+        setter("");
+      } else {
+        if (containerId === "roleChips") document.getElementById("roleCustom").style.display = "none";
+        setter(v);
+      }
+      checkReady();
+    });
+  });
+}
+bindChips("roleChips", function(v){ role = v; });
+bindChips("levelChips", function(v){ level = v; });
+
+document.getElementById("roleCustom").addEventListener("input", function(){ role = this.value.trim(); checkReady(); });
+
+// ── JD TEXT ──
+document.getElementById("jdText").addEventListener("input", function(){
+  jdText = this.value.trim();
+  var len = jdText.length;
+  var cc = document.getElementById("charCount");
+  cc.textContent = len.toLocaleString() + " characters";
+  cc.className = "char-count" + (len > 80 ? " char-ok" : "");
+  checkReady();
+});
+
+function checkReady() {
+  var hasJD = jdText.length > 80;
+  var hasRole = role.trim().length > 2;
+  var hasLevel = level.length > 0;
+  var ok = hasJD && hasRole && hasLevel;
+  document.getElementById("scoreBtn").disabled = !ok;
+  var missing = [];
+  if (!hasJD) missing.push("add your JD");
+  if (!hasRole) missing.push("pick a role");
+  if (!hasLevel) missing.push("select experience level");
+  document.getElementById("btnHint").textContent = ok ? "Scoring across 8 platforms — takes about 20 seconds" : "Still needed: " + missing.join(" · ");
+}
+
+// ── PERSONA ──
+function selectPersona(p) {
+  persona = p;
+  ["hiring","candidate"].forEach(function(x) {
+    var on = x === p;
+    document.getElementById("pc-" + x).classList.toggle("on", on);
+    var col = on ? "var(--terra)" : "var(--ink3)";
+    document.getElementById("pi-" + x).querySelectorAll("circle,path,rect").forEach(function(el){ el.setAttribute("stroke", col); });
+  });
+}
+
+// ── LOADING STEPS ──
+var loadSteps = ["Reading your job description","Extracting role-specific keywords","Scoring traditional job boards","Scoring AI matching engines","Identifying gaps and improvements"];
+var stepTimer, stepIdx = 0;
+function startSteps() {
+  stepIdx = 0;
+  var ul = document.getElementById("lsteps");
+  ul.innerHTML = loadSteps.map(function(s,i){ return '<li class="lstep" id="ls'+i+'"><span class="lstep-dot"></span>'+s+'</li>'; }).join("");
+  document.getElementById("ls0").classList.add("act");
+  stepTimer = setInterval(function(){
+    if (stepIdx < loadSteps.length - 1) {
+      document.getElementById("ls"+stepIdx).classList.remove("act");
+      document.getElementById("ls"+stepIdx).classList.add("dn");
+      stepIdx++;
+      document.getElementById("ls"+stepIdx).classList.add("act");
+    }
+  }, 1600);
+}
+
+// ── RUN SCORE ──
+var pendingResult = null;
+
+async function runScore() {
+  document.getElementById("errBox").style.display = "none";
+  document.getElementById("formSection").style.display = "none";
+  document.getElementById("aboutStrip").style.display = "none";
+  document.getElementById("loadingSection").style.display = "block";
+  startSteps();
+
+  var modeInstruction = scoringMode === "posting" 
+    ? "Score this as an EXTERNAL JOB POSTING optimized for candidate discovery and conversion."
+    : "Score this as an INTERNAL JOB DESCRIPTION being evaluated for posting-readiness. Frame all feedback as what needs to change before this can effectively attract candidates externally. Flag internal language, compliance-first framing, and missing candidate-facing signals.";
+
+  var prompt = "You are a world-class talent acquisition strategist and job board SEO expert with 15+ years of experience. You have deep, research-backed knowledge of how Indeed, LinkedIn, Glassdoor, Google for Jobs, ZipRecruiter, Eightfold AI, and ChatGPT surface roles to candidates. You understand the algorithmic ranking factors for each platform and how AI matching engines parse, score, and surface job postings to candidates.\n\nThe user has told you:\n- Role category: " + role + "\n- Experience level: " + level + "\n- Scoring mode: " + scoringMode + "\n\nExtract everything else directly from the JD text itself — salary, location, employment type, work arrangement, years of experience. Do not ask for information that is present in the text.\n\nCONTEXT RULES — apply before scoring anything:\n1. Work arrangement: If the JD specifies a physical location (city, state, address) without any remote or hybrid language, treat this as an intentional in-person role. Do NOT flag missing remote/hybrid as a gap. Only flag work arrangement if the JD is genuinely ambiguous — no location AND no work arrangement stated.\n2. Salary: If salary or compensation is explicitly stated in any form, do not flag it as missing. Only flag if truly absent.\n3. Experience: If years of experience are stated anywhere in the JD, even in requirements, do not flag as missing.\n4. Employment type: Only flag if there is genuinely no signal — full-time, part-time, contract, 1099 are all valid signals.\n5. Performance metrics: NEVER suggest adding performance metrics, KPIs, hiring targets, success measurement criteria, client satisfaction metrics, or performance indicators as improvements. These belong in onboarding and performance management, not candidate-facing postings. Suggest improving impact language and role scope clarity instead.\n6. Recruiting tools: Recruiting tools (ATS platforms, LinkedIn Recruiter, sourcing tools) should only be flagged if the role requires technical proficiency candidates need to self-assess — like Greenhouse administration or Workday configuration. Do NOT flag tool mentions as missing because candidates expect them. If tools are relevant, frame as: clarifying the tech environment helps experienced practitioners self-select. Do not frame as an SEO gap.\n\nAlso extract the hiring company name from the JD text if present — look for it in the company description, header, or anywhere it appears. Return it in the JSON as companyName. If not found, return an empty string.\n\nRESEARCH-BACKED SCORING FRAMEWORK — base all scores on these known platform ranking factors:\n\nINDEED: Ranks by title relevance (exact match to search query scores highest), job description length (400-600 words optimal, under 300 penalized), salary transparency (disclosed salary gets 30%+ more applicants, ranks higher in filtered searches), location specificity (city + state + zip where possible), apply friction (easy apply preferred), freshness (reposts after 30 days drop in ranking), structured HTML formatting (headers and bullets improve parsing).\n\nLINKEDIN: Algorithmic matching uses title, skills section, seniority level signals, company size context, and keyword density in responsibilities. LinkedIn AI matching (LinkedIn Recruiter AI) scores against candidate profiles — role must contain skills that appear on target candidate profiles. Salary ranges improve apply rates by 40%+. Missing seniority signals cause AI to surface wrong experience levels. Company description and culture signals improve passive candidate engagement. Connection-driven discovery rewards complete, compelling postings.\n\nGLASSDOOR: Heavily weighted toward compensation transparency — roles with salary ranges get significantly higher visibility in searches. Benefits listing improves ranking. Company rating context matters. Candidate reviews of the interview process are indexed. Incomplete postings rank poorly against competitor postings with full details.\n\nGOOGLE FOR JOBS: Requires structured data markup (JobPosting schema) for optimal indexing — title, description, datePosted, validThrough, employmentType, hiringOrganization, jobLocation, baseSalary. Title must match common search queries exactly. Description must contain location, employment type, and salary for rich results eligibility. Word count 300-700 optimal. Duplicate content across multiple job boards reduces ranking.\n\nZIPRECRUITER: AI matching engine \"Phil\" uses title, required skills, experience level, and location to match candidates. Keyword density in responsibilities and requirements section matters significantly. Salary disclosure improves match quality. Clear employment type improves candidate targeting. ZipRecruiter penalizes postings with vague or generic language.\n\nEIGHTFOLD AI: Deep learning model that matches on skills, not just keywords. Scores postings for skills signal density — explicit skill mentions (software, methodologies, competencies) improve match quality. Seniority framing must be consistent throughout — if title says \"Senior\" but requirements say \"2+ years\", the model detects the conflict and degrades match quality. Role impact statements improve candidate relevance scoring.\n\nCHATGPT / AI SEARCH VISIBILITY: Conversational AI search surfaces roles that answer candidate questions naturally. Postings that include context about the team, mission, day-to-day work, and growth opportunity perform better in AI-generated job search responses. Keyword stuffing hurts. Natural language with specific context wins. Salary and location must be explicit for AI to surface in filtered queries.\n\nKEYWORD FRAMEWORK — pick 8 keywords that candidates at " + level + " level actually search when looking for " + role + " roles. Base selections on:\n- Primary job title variations candidates search (e.g. \"recruiter\", \"talent acquisition specialist\", \"technical recruiter\")\n- Core skills and tools relevant to the role (e.g. \"ATS\", \"Greenhouse\", \"LinkedIn Recruiter\")\n- Industry-specific terminology candidates use in their own resumes and searches\n- Seniority indicators relevant to the level (e.g. \"full-cycle\", \"strategic\", \"lead\")\nCount actual occurrences in the JD text. Be precise.\n\nLENGTH SCORING:\n- Under 300 words: SHORT — penalized by Indeed and LinkedIn, insufficient for AI parsing\n- 300-400 words: SHORT — below optimal, acceptable for some roles\n- 400-600 words: IDEAL — sweet spot across all platforms\n- 600-700 words: IDEAL — still strong, good for complex roles\n- Over 700 words: LONG — candidate drop-off risk increases, though some technical roles warrant length\n\nSENIORITY SIGNAL AUDIT:\nCheck for consistency across title, years of experience, responsibilities complexity, compensation range, and reporting structure. Mismatches between these signals cause AI matching engines to surface wrong candidates. Flag any inconsistency specifically.\n\nGAP ANALYSIS — only flag genuine, research-backed gaps that materially affect discoverability or applicant quality:\nCRITICAL gaps (cost you applicants and ranking): missing salary/compensation, work arrangement ambiguity when location is unclear, job title that doesn't match common search queries, employment type missing when not obvious from context\nWARNING gaps (reduce match quality): seniority signal inconsistency, key role-specific keywords missing entirely, no company mission or context, vague responsibilities that prevent skill matching, no benefits or compensation structure hint\nSTRENGTHS: genuine positives that improve SEO or candidate attraction — acknowledge them specifically\n\nNEVER flag as gaps:\n- Missing remote/hybrid when physical location is clearly stated\n- Missing performance metrics, KPIs, hiring goals, or success measurement criteria — these belong in onboarding, not postings\n- Missing \"day in the life\" content for senior roles where candidates expect to define their own structure\n- Years of experience when level is signaled consistently through title and responsibilities\n- Benefits details for contract or freelance roles\n\nTOP 5 IMPROVEMENTS — rank strictly by measurable SEO or applicant quality impact. Each improvement must:\n- Name the specific platform(s) it affects\n- State the approximate impact (e.g. \"+15-20pts on Indeed\", \"improves LinkedIn AI match quality\")\n- Give a concrete, actionable fix — not generic advice\n- Be grounded in how job boards and AI engines actually work\n\n" + modeInstruction + "\n\nAnalyze this job description. The user has told you:\n- Role category: " + role + "\n- Experience level: " + level + "\n\nExtract everything else from the JD text. Before identifying gaps, read the full context carefully. If the JD specifies a physical location (city, state, office address) without any mention of remote or hybrid work, treat this as an intentional in-person role. Do NOT flag missing remote/hybrid information as a gap for clearly location-specific roles — the absence of remote language is itself a signal, not a deficiency. Only flag work arrangement as missing if the JD is ambiguous about whether the role is remote, hybrid, or in-person. If salary, location, work arrangement, or employment type are missing from the JD, flag each as a critical gap.\n\nJOB DESCRIPTION:\n---\n" + jdText.substring(0,4000) + "\n---\n\nScore this JD across traditional job board SEO AND AI matching engines. Count the actual word count and score length: under 400 = short, 400-600 = ideal, over 700 = long.\n\nReturn ONLY valid JSON, no markdown, no backticks. ALL string values under 20 words.\n\n{\"overallScore\":0,\"grade\":\"B\",\"verdict\":\"Two sentence summary.\",\"seniorityAudit\":{\"signal\":\"clear\",\"note\":\"One sentence.\"},\"lengthAudit\":{\"wordCount\":0,\"status\":\"ideal\",\"note\":\"One sentence.\"},\"platformScores\":{\"indeed\":{\"score\":0,\"note\":\"note\"},\"linkedin\":{\"score\":0,\"note\":\"note\"},\"glassdoor\":{\"score\":0,\"note\":\"note\"},\"googleForJobs\":{\"score\":0,\"note\":\"note\"}},\"aiScores\":{\"linkedinAI\":{\"score\":0,\"note\":\"note\"},\"zipRecruiter\":{\"score\":0,\"note\":\"note\"},\"eightfold\":{\"score\":0,\"note\":\"note\"},\"chatgpt\":{\"score\":0,\"note\":\"note\"}},\"keywords\":[{\"term\":\"term\",\"count\":0,\"target\":\"3-4x\",\"status\":\"low\"},{\"term\":\"term\",\"count\":0,\"target\":\"2-3x\",\"status\":\"missing\"},{\"term\":\"term\",\"count\":0,\"target\":\"3-5x\",\"status\":\"strong\"},{\"term\":\"term\",\"count\":0,\"target\":\"2-3x\",\"status\":\"low\"},{\"term\":\"term\",\"count\":0,\"target\":\"1-2x\",\"status\":\"missing\"},{\"term\":\"term\",\"count\":0,\"target\":\"2-4x\",\"status\":\"strong\"},{\"term\":\"term\",\"count\":0,\"target\":\"1-2x\",\"status\":\"low\"},{\"term\":\"term\",\"count\":0,\"target\":\"1-2x\",\"status\":\"missing\"}],\"gaps\":[{\"severity\":\"critical\",\"text\":\"Gap.\"},{\"severity\":\"warning\",\"text\":\"Gap.\"},{\"severity\":\"minor\",\"text\":\"Gap.\"}],\"improvements\":[{\"title\":\"Title\",\"detail\":\"One sentence.\"},{\"title\":\"Title\",\"detail\":\"One sentence.\"},{\"title\":\"Title\",\"detail\":\"One sentence.\"},{\"title\":\"Title\",\"detail\":\"One sentence.\"},{\"title\":\"Title\",\"detail\":\"One sentence.\"}]}";
+ + "\n\nTITLE ANALYSIS — analyze the job title as a standalone scoring dimension before anything else. The title is the single highest-impact SEO element in any job posting. Evaluate on five criteria: SEARCH QUERY MATCH - Does this title match what candidates at this experience level actually search on job boards? Flag if it uses internal company language candidates don't search for. SENIORITY SIGNAL - Is the level immediately clear from title alone? LinkedIn AI classifies seniority from the title before reading requirements. Ambiguous titles cause wrong-level candidates to apply. CHARACTER LENGTH AND FRONT-LOADING - Job boards truncate titles at approximately 60 characters. Most searchable keywords must appear in first 40 characters. Flag titles where key terms get cut off. SPECIFICITY - Is the role specific enough to attract the right candidate pool? Generic titles like Recruiter or Manager attract broad mismatched pools. Specific titles like Clinical Recruiter rank for more targeted searches. INTERNAL VS EXTERNAL LANGUAGE - Flag titles using internal company terminology, culture language, or creative naming conventions not existing as candidate search terms. Examples: People Connector, Culture Champion, Talent Ninja, Growth Hacker. Return titleAudit in JSON: {\"titleAudit\":{\"title\":\"exact job title from JD\",\"searchMatchScore\":0,\"issues\":[],\"recommendation\":\"Specific alternative title with measurable impact\",\"characterCount\":0,\"isTruncated\":false}}.\n\nJOB DESCRIPTION:\n---\n" + jdText.substring(0,4000) + "\n---\n\nReturn ONLY valid JSON, no markdown, no backticks, no extra text. All string values under 25 words.\n\n{\"companyName\":\"\",\"overallScore\":0,\"grade\":\"B\",\"verdict\":\"Two sentence expert summary of SEO strength and AI matching readiness.\",\"seniorityAudit\":{\"signal\":\"clear\",\"note\":\"One sentence on seniority signal consistency across title, requirements, and responsibilities.\"},\"lengthAudit\":{\"wordCount\":0,\"status\":\"ideal\",\"note\":\"One sentence on length impact on platform ranking.\"},\"platformScores\":{\"indeed\":{\"score\":0,\"note\":\"Specific Indeed ranking factor note.\"},\"linkedin\":{\"score\":0,\"note\":\"Specific LinkedIn AI matching note.\"},\"glassdoor\":{\"score\":0,\"note\":\"Specific Glassdoor visibility note.\"},\"googleForJobs\":{\"score\":0,\"note\":\"Specific Google for Jobs indexing note.\"}},\"aiScores\":{\"linkedinAI\":{\"score\":0,\"note\":\"Specific LinkedIn AI match quality note.\"},\"zipRecruiter\":{\"score\":0,\"note\":\"Specific ZipRecruiter Phil AI note.\"},\"eightfold\":{\"score\":0,\"note\":\"Specific Eightfold skills matching note.\"},\"chatgpt\":{\"score\":0,\"note\":\"Specific ChatGPT/AI search visibility note.\"}},\"keywords\":[{\"term\":\"exact term\",\"count\":0,\"target\":\"2-4x\",\"status\":\"low\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"3-5x\",\"status\":\"missing\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"2-3x\",\"status\":\"strong\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"1-3x\",\"status\":\"low\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"2-4x\",\"status\":\"missing\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"2-3x\",\"status\":\"strong\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"1-2x\",\"status\":\"low\"},{\"term\":\"exact term\",\"count\":0,\"target\":\"1-3x\",\"status\":\"missing\"}],\"gaps\":[{\"severity\":\"critical\",\"text\":\"Specific research-backed gap with platform impact.\"},{\"severity\":\"critical\",\"text\":\"Specific research-backed gap with platform impact.\"},{\"severity\":\"warning\",\"text\":\"Specific research-backed gap with platform impact.\"},{\"severity\":\"warning\",\"text\":\"Specific research-backed gap with platform impact.\"},{\"severity\":\"ok\",\"text\":\"Genuine platform-specific strength in this posting.\"}],\"improvements\":[{\"title\":\"Specific fix title\",\"detail\":\"Platform(s) affected with measurable impact. Concrete actionable step.\"},{\"title\":\"Specific fix title\",\"detail\":\"Platform(s) affected with measurable impact. Concrete actionable step.\"},{\"title\":\"Specific fix title\",\"detail\":\"Platform(s) affected with measurable impact. Concrete actionable step.\"},{\"title\":\"Specific fix title\",\"detail\":\"Platform(s) affected with measurable impact. Concrete actionable step.\"},{\"title\":\"Specific fix title\",\"detail\":\"Platform(s) affected with measurable impact. Concrete actionable step.\"}]}";
+
+  try {
+    var resp = await fetch(API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 3500, messages: [{ role: "user", content: prompt }] })
+    });
+    clearInterval(stepTimer);
+    if (!resp.ok) throw new Error("API error " + resp.status);
+    var data = await resp.json();
+    var raw = (data.content || []).map(function(b){ return b.text || ""; }).join("");
+    var match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("Could not parse response — please try again");
+    var result = JSON.parse(match[0]);
+    pendingResult = result;
+
+    document.getElementById("loadingSection").style.display = "none";
+    document.getElementById("resultsSection").style.display = "block";
+    renderResults(result);
+    trackAttempt();
+    updateAttemptCounter();
+
+    var returnUser = null;
+    try { returnUser = JSON.parse(localStorage.getItem("hp_user") || "null"); } catch(e) {}
+    if (returnUser) { doUnlock(); } else { showGate(result); }
+    
+    document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth", block: "start" });
+
+  } catch(err) {
+    clearInterval(stepTimer);
+    document.getElementById("loadingSection").style.display = "none";
+    document.getElementById("formSection").style.display = "block";
+    document.getElementById("aboutStrip").style.display = "block";
+    var eb = document.getElementById("errBox");
+    var msg = (err.message || "").toLowerCase();
+    if (err.status === 429 || msg.includes("429") || msg.includes("too many") || msg.includes("rate limit")) {
+      eb.innerHTML = "<strong>You've hit the free tier limit.</strong><br>To keep this tool free for everyone, we limit usage to 5 scores per hour. Come back in a bit — or <a href='https://www.linkedin.com/in/stephaniemurray11/' target='_blank' style='color:var(--terra);text-decoration:underline'>connect with Stephanie</a> if you need more.";
+    } else if (msg.includes("network") || msg.includes("fetch") || msg.includes("failed")) {
+      eb.innerHTML = "<strong>Connection issue.</strong><br>Please check your internet connection and try again.";
+    } else {
+      eb.innerHTML = "<strong>Something didn't work.</strong><br>Our scoring engine hit a snag. Please try again in a moment.";
+    }
+    eb.style.display = "block";
+  }
+}
+
+// ── GATE ──
+function showGate(result) {
+  var sc = scoreColor(result.overallScore);
+  var gc = gradeColor(result.grade);
+  var gsEl = document.getElementById("gateScore");
+  gsEl.textContent = result.overallScore;
+  gsEl.style.color = sc;
+  var ggEl = document.getElementById("gateGrade");
+  ggEl.textContent = result.grade;
+  ggEl.style.background = gc.bg; ggEl.style.borderColor = gc.bd; ggEl.style.color = gc.tx;
+  document.getElementById("gateRole").textContent = level + " · " + role;
+  document.getElementById("resultsSection").style.display = "block";
+  setTimeout(function(){ document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth", block: "start" }); }, 100);
+}
+
+async function handleUnlock() {
+  var fullName = document.getElementById("gFullName").value.trim();
+  var email = document.getElementById("gEmail").value.trim();
+  var errEl = document.getElementById("gateErr");
+  if (!fullName) { errEl.textContent = "Full name is required."; errEl.style.display = "block"; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = "Please enter a valid email."; errEl.style.display = "block"; return; }
+  if (!persona) { errEl.textContent = "Please tell us who you are."; errEl.style.display = "block"; return; }
+  errEl.style.display = "none";
+  document.getElementById("gateBtn").disabled = true;
+  document.getElementById("gateBtn").textContent = "Saving…";
+
+  var payload = { fullName: fullName, email: email, persona: persona, role: role, level: level, score: pendingResult ? pendingResult.overallScore : "", grade: pendingResult ? pendingResult.grade : "", company: pendingResult?.companyName || "" };
+  try { localStorage.setItem("hp_user", JSON.stringify(payload)); } catch(e) {}
+  await saveToSheet(payload);
+  document.getElementById("gateSaved").style.display = "flex";
+  setTimeout(function(){ doUnlock(); }, 800);
+}
+
+
+
+function doUnlock() {
+  var overlay = document.getElementById("gateOverlay");
+  var blur = document.getElementById("gateBlur");
+  overlay.classList.add("hide");
+  blur.classList.add("clear");
+  setTimeout(function(){ overlay.style.display = "none"; }, 450);
+  setTimeout(function(){ window.scrollTo({ top: document.getElementById("resultsSection").offsetTop - 20, behavior: "smooth" }); }, 500);
+}
+
+// ── SHEET ──
+async function saveToSheet(payload) {
+  if (!GOOGLE_SHEET_URL) return;
+  try {
+    await fetch(GOOGLE_SHEET_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  } catch(e) { console.log("Sheet save:", e); }
+}
+
+// ── RENDER ──
+function scoreColor(s){ return s >= 75 ? "var(--green)" : s >= 50 ? "var(--amber)" : "var(--red)"; }
+function gradeColor(g){
+  if (!g) return { bg:"var(--amber-bg)", bd:"var(--amber)", tx:"var(--amber)" };
+  if (g[0]==="A") return { bg:"var(--green-bg)", bd:"var(--green)", tx:"var(--green)" };
+  if (g[0]==="B") return { bg:"var(--amber-bg)", bd:"var(--amber)", tx:"var(--amber)" };
+  return { bg:"var(--red-bg)", bd:"var(--red)", tx:"var(--red)" };
+}
+function bW(c,s){ if(!c||s==="missing")return 0; return s==="strong"?Math.min(95,55+c*7):Math.min(50,12+c*14); }
+function bColor(s){ return s==="strong"?"var(--green)":s==="low"?"var(--amber)":"var(--red)"; }
+function dColor(s){ return s==="critical"?"var(--red)":s==="warning"?"var(--amber)":"var(--green)"; }
+
+function platCard(name, ps) {
+  var c = scoreColor(ps.score);
+  var tip = (tooltipTexts[name] || "").replace(/"/g, '&quot;');
+  var nameHtml = tip
+    ? '<span style="border-bottom:1px dotted #A8A29E;cursor:help" onmouseenter="showTooltip(this,\''+tip.replace(/'/g,"&#39;")+'\')" onmouseleave="hideTooltip()">'+name+'</span>'
+    : name;
+  return '<div class="plat-card"><div class="plat-card-name">'+nameHtml+'</div><div class="plat-card-score" style="color:'+c+'">'+ps.score+'<small>/100</small></div><div class="plat-card-bar"><div class="plat-card-fill" style="width:'+ps.score+'%;background:'+c+'"></div></div><div class="plat-card-note">'+ps.note+'</div></div>';
+}
+
+function renderResults(r) {
+  var gc = gradeColor(r.grade);
+  var sa = r.seniorityAudit || { signal:"missing", note:"No seniority signal detected." };
+  var saC = sa.signal==="clear"?"var(--green)":sa.signal==="weak"?"var(--amber)":"var(--red)";
+  var saBg = sa.signal==="clear"?"var(--green-bg)":sa.signal==="weak"?"var(--amber-bg)":"var(--red-bg)";
+  var la = r.lengthAudit;
+  var laHTML = "";
+  if (la) {
+    var lC = la.status==="ideal"?"var(--green)":la.status==="short"?"var(--amber)":"var(--red)";
+    var lBg = la.status==="ideal"?"var(--green-bg)":la.status==="short"?"var(--amber-bg)":"var(--red-bg)";
+    var lLabel = la.status==="ideal"?"IDEAL · 400–600 words is the sweet spot":la.status==="short"?"SHORT · Under 400 words hurts indexing":"LONG · Over 700 words increases drop-off";
+    laHTML = '<div class="audit-box length-audit" style="background:'+lBg+';color:'+lC+'"><div class="length-count"><span class="length-num">'+la.wordCount+'</span><span class="length-unit">words</span></div><div><strong>Length: '+lLabel+'</strong>'+la.note+'</div></div>';
+  }
+
+  var tPlats = [["indeed","Indeed"],["linkedin","LinkedIn"],["glassdoor","Glassdoor"],["googleForJobs","Google for Jobs"]];
+  var aPlats = [["linkedinAI","LinkedIn AI"],["zipRecruiter","ZipRecruiter"],["eightfold","Eightfold AI"],["chatgpt","ChatGPT Visibility"]];
+
+  var kwHTML = (r.keywords||[]).map(function(kw,i){
+    var bc = kw.status==="strong"?"badge-ok":kw.status==="low"?"badge-warn":"badge-bad";
+    return '<div class="kw-row"><span class="kw-name">'+kw.term+'</span><div class="kw-bar-wrap"><div class="kw-bar" data-w="'+bW(kw.count,kw.status)+'" style="background:'+bColor(kw.status)+';width:0%"></div></div><span class="kw-count">'+kw.count+'×</span><span class="kw-target">'+kw.target+'</span><span class="badge '+bc+'">'+kw.status+'</span></div>';
+  }).join("");
+
+  var gapsHTML = (r.gaps||[]).map(function(g){
+    return '<div class="gap-item"><div class="gap-dot" style="background:'+dColor(g.severity)+'"></div><div>'+g.text+'</div></div>';
+  }).join("");
+
+  var imprHTML = (r.improvements||[]).map(function(imp,i){
+    return '<div class="impr-item" style="cursor:default"><div class="impr-num">' + (i+1) + '</div><div><strong>' + imp.title + '</strong>' + imp.detail + '</div></div>';
+  }).join("") + '<div style="text-align:right;margin-top:6px"><button class="btn-sm" onclick="copyAllImprovements()">Copy all improvements</button></div>';
+
+  var returnUser = null;
+  try { returnUser = JSON.parse(localStorage.getItem("hp_user")||"null"); } catch(e){}
+
+  document.getElementById("resultsInner").innerHTML =
+    (returnUser ? '<div class="wb-banner"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="#2D6A4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Welcome back, '+(returnUser.fullName || returnUser.firstName)+'. Here\'s your full report.</div>' : "") +
+    '<div class="results-hero"><div><div class="score-big" style="color:'+scoreColor(r.overallScore)+'">'+r.overallScore+'<small>/100</small></div><div style="font-size:11px;color:var(--ink3);margin-top:6px;font-family:\'DM Mono\',monospace">'+getPercentile(r.overallScore).msg+'<br>Better than '+getPercentile(r.overallScore).pct+'% of JDs</div></div><div class="score-meta"><div class="score-role-lbl">'+level+' · '+role+'</div><div class="score-grade" style="background:'+gc.bg+';border-color:'+gc.bd+';color:'+gc.tx+'">'+r.grade+'</div><p class="verdict">'+r.verdict+'</p><div style="font-size:12px;color:var(--ink2);margin-top:8px">'+getGradeMsg(r.grade)+'</div></div></div>' +
+    '<div class="audit-box" style="background:'+saBg+';color:'+saC+'"><strong>Seniority signal: '+sa.signal.toUpperCase()+'</strong>'+sa.note+'</div>' +
+    laHTML +
+    '<div class="sec-title">Traditional job board scores</div><div class="plats">'+tPlats.map(function(p){ return platCard(p[1], r.platformScores?.[p[0]]||{score:0,note:"—"}); }).join("")+'</div>' +
+    '<div class="sec-title">AI matching engine scores</div><div class="plats">'+aPlats.map(function(p){ return platCard(p[1], r.aiScores?.[p[0]]||{score:0,note:"—"}); }).join("")+'</div>' +
+    '<div class="sec-title">Keyword frequency — '+role+'</div><div class="kw-table">'+kwHTML+'</div>' +
+    '<div class="sec-title">Gap analysis</div>'+gapsHTML +
+    '<div class="sec-title">Top 5 improvements by impact</div>'+imprHTML+
+    '<div class="act-row"><button class="btn-sm" onclick="copyScore()">Copy score card</button><button class="btn-sm" onclick="resetAll()">← Score another JD</button></div>' +
+    '<div style="background:#fff;border:1px solid rgba(28,25,23,0.08);border-radius:12px;padding:28px 32px;margin-top:24px">' +
+      '<span style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:#A8A29E;display:block;margin-bottom:16px">WHAT\'S NEXT</span>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">' +
+        '<div style="background:#C84B2F;border-radius:10px;padding:20px;display:flex;flex-direction:column;justify-content:space-between">' +
+          '<div>' +
+            '<div style="font-family:Georgia,serif;font-size:16px;font-weight:normal;color:#ffffff;margin-bottom:6px">Score another posting</div>' +
+            '<div style="font-family:\'DM Mono\',monospace;font-size:12px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:16px">See how a different role or level scores across all 8 platforms.</div>' +
+          '</div>' +
+          '<button style="background:#ffffff;color:#C84B2F;border:none;border-radius:100px;padding:8px 18px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;align-self:flex-start" onclick="resetAll()">← Score another JD</button>' +
+        '</div>' +
+        '<div style="background:#F0ECE3;border:1px solid rgba(28,25,23,0.08);border-radius:10px;padding:20px;display:flex;flex-direction:column;justify-content:space-between">' +
+          '<div>' +
+            '<div style="font-family:Georgia,serif;font-size:16px;font-weight:normal;color:#1C1917;margin-bottom:6px">Get every tool we build</div>' +
+            '<div style="font-family:\'DM Mono\',monospace;font-size:12px;color:#57534E;line-height:1.6;margin-bottom:14px">Free tools for hiring teams and candidates — new tool drops every two weeks.</div>' +
+          '</div>' +
+          '<div>' +
+            '<input type="email" id="ctaEmail" placeholder="your@email.com" style="width:100%;background:#ffffff;border:1.5px solid rgba(28,25,23,0.1);border-radius:8px;padding:9px 12px;font-family:inherit;font-size:13px;color:#1C1917;outline:none;box-sizing:border-box;margin-bottom:8px" />' +
+            '<button style="width:100%;background:#C84B2F;color:#ffffff;border:none;border-radius:8px;padding:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer" onclick="saveCtaEmail()">Join free →</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="border-top:1px solid rgba(28,25,23,0.08);margin:20px 0;padding-top:20px">' +
+        '<div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:14px">' +
+          '<div style="font-family:Georgia,serif;font-style:italic;font-size:13px;color:#57534E">Hiring insights, tools, and thought leadership —</div>' +
+          '<button style="background:#0A66C2;color:#ffffff;border:none;border-radius:6px;padding:8px 18px;font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px" onclick="window.open(\'https://www.linkedin.com/in/stephaniemurray11/\',\'_blank\')">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>' +
+            'Follow Stephanie Murray' +
+          '</button>' +
+        '</div>' +
+        '<div style="font-family:\'DM Mono\',monospace;font-size:10px;color:#A8A29E;text-align:center;display:block">hiring.productions · free tools for both sides of the table</div>' +
+      '</div>' +
+    '</div>';
+
+  setTimeout(function(){
+    document.querySelectorAll(".kw-bar").forEach(function(b){ b.style.width = (b.getAttribute("data-w")||"0") + "%"; });
+  }, 200);
+}
+
+function copyScore() {
+  if (!pendingResult) return;
+  try { navigator.clipboard.writeText("JD Score: "+pendingResult.overallScore+"/100 ("+pendingResult.grade+") · "+level+" "+role+" · Hiring.Productions").then(function(){ alert("Copied!"); }); } catch(e){}
+}
+
+function resetAll() {
+  role=""; level=""; jdText=""; persona=""; pendingResult=null;
+  document.getElementById("jdText").value="";
+  document.getElementById("charCount").textContent="0 characters";
+  document.getElementById("charCount").className="char-count";
+  document.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("on"); });
+  document.getElementById("roleCustom").style.display="none";
+  document.getElementById("roleCustom").value="";
+  document.getElementById("scoreBtn").disabled=true;
+  document.getElementById("errBox").style.display="none";
+  document.getElementById("resultsSection").style.display="none";
+  document.getElementById("resultsInner").innerHTML="";
+  var ov=document.getElementById("gateOverlay"); ov.classList.remove("hide"); ov.style.display="";
+  document.getElementById("gateBlur").classList.remove("clear");
+  document.getElementById("gFullName").value="";
+  document.getElementById("gEmail").value="";
+  document.getElementById("gateErr").style.display="none";
+  document.getElementById("gateSaved").style.display="none";
+  document.getElementById("gateBtn").disabled=false;
+  document.getElementById("gateBtn").textContent="Unlock my full report →";
+  ["hiring","candidate"].forEach(function(x){ document.getElementById("pc-"+x).classList.remove("on"); });
+  persona="";
+  document.getElementById("formSection").style.display="block";
+  document.getElementById("aboutStrip").style.display="block";
+  checkReady();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// ── TOOLTIP SYSTEM ──
+var tooltipTexts = {
+  "Indeed": "The largest job board globally. Ranks postings by title relevance, salary transparency, word count, and location specificity. Salary disclosure alone increases apply rates by 30%+.",
+  "LinkedIn": "The dominant professional network. Algorithmic matching uses title, skills, seniority signals, and keyword density. Passive candidates are reached through LinkedIn's feed — compelling postings get shared organically.",
+  "Glassdoor": "Where candidates research companies before applying. Heavily weighted toward compensation transparency. Postings with salary ranges rank significantly higher and convert better.",
+  "Google for Jobs": "Google's job search aggregator — surfaces roles directly in Google search results. Requires structured data and explicit fields: title, location, employment type, and salary for full indexing eligibility.",
+  "LinkedIn AI": "LinkedIn's AI matching engine used in LinkedIn Recruiter. Classifies roles by seniority and skills before reading requirements. Inconsistent seniority signals cause wrong-level candidates to surface.",
+  "ZipRecruiter": "ZipRecruiter's matching AI called Phil. Uses title, required skills, experience level, and location to match and invite candidates. Vague or generic language degrades match quality significantly.",
+  "Eightfold AI": "An enterprise talent intelligence platform used by large organizations and Fortune 500 companies. Parses postings for explicit skill signals rather than keywords — vague postings surface weaker candidate matches.",
+  "ChatGPT Visibility": "AI search tools like ChatGPT are increasingly used by candidates to find and research roles. Postings with natural language, specific context about the team and mission, and explicit salary and location perform best in AI-generated responses."
+};
+
+function showTooltip(el, text) {
+  var t = document.getElementById('hp-tooltip');
+  t.textContent = text;
+  t.style.display = 'block';
+  var rect = el.getBoundingClientRect();
+  var left = Math.min(rect.left + window.scrollX, window.innerWidth - 250);
+  t.style.left = Math.max(8, left) + 'px';
+  t.style.top = (rect.top + window.scrollY - t.offsetHeight - 10) + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('hp-tooltip').style.display = 'none';
+}
+
+// ── TEST HELPER ── (uncomment to reset for testing)
+// localStorage.removeItem('hp_user'); localStorage.removeItem('hp_hero_email');
+</script>
+<div id="hp-tooltip" style="display:none;position:fixed;background:#1C1917;color:#fff;border-radius:6px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:11px;line-height:1.5;max-width:220px;z-index:1000;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.2)"></div>
+</body>
+</html>
