@@ -27,7 +27,6 @@ import {
   Send,
   GitCompare,
   Calendar,
-  Lock,
 } from 'lucide-react'
 
 // Candidate moments
@@ -36,7 +35,7 @@ const candidateMoments = [
     label: 'Before You Apply',
     tools: [
       { name: 'What This Job Actually Is', icon: FileText, free: false, link: '/tools/what-this-job-is', desc: 'See what\'s really between the lines of any job description — and whether it\'s worth your time.' },
-      { name: 'Where You Actually Have a Shot', icon: Target, free: false, link: '/tools/where-you-have-a-shot', desc: 'See which platforms actually respond to candidates like you — backed by real data.' },
+      { name: 'Where You Actually Have a Shot', icon: Target, free: false, link: '/tools/where-you-have-a-shot', desc: 'See which platforms actually respond to candidates like you — and where you’re wasting your time.' },
       { name: 'What This Company Feels Like to Work At', icon: Building2, free: false, link: '/tools/culture-decoder', desc: 'See what a company\'s values actually mean in practice before you invest in applying.' },
     ],
   },
@@ -118,7 +117,12 @@ function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
   const iconBgColor = isCandidate ? 'rgba(108,71,255,0.15)' : 'rgba(255,79,106,0.15)'
   const iconColor = isCandidate ? '#A78BFA' : '#FF4F6A'
   const ctaColor = tool.free ? '#6C47FF' : '#8B8AA0'
-  const ctaText = tool.name === 'RepVera' ? 'Start your RepVera — free →' : (tool.free ? 'Get the inside look →' : 'Unlock with Pro →')
+  const ctaText =
+    tool.name === 'RepVera'
+      ? 'Start your RepVera — free →'
+      : tool.free
+      ? 'Get the inside look →'
+      : 'Inside look — for members →'
 
   const cardStyle: React.CSSProperties = {
     background: '#1A1A22',
@@ -151,30 +155,30 @@ function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
         <Icon size={18} color={iconColor} />
       </div>
 
-      {/* Status badge */}
-      <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-        {tool.free ? (
-          <span
-            style={{
-              background: 'rgba(34,197,94,0.15)',
-              color: '#22C55E',
-              padding: '2px 8px',
-              borderRadius: '12px',
-              fontSize: '11px',
-              fontWeight: 700,
-              fontFamily: "'Figtree', sans-serif",
-            }}
-          >
-            Free — No account needed
-          </span>
-        ) : (
-          <>
-            <Lock size={12} color="#8B8AA0" />
-            <span style={{ fontSize: '12px', fontWeight: 600, fontFamily: "'Figtree', sans-serif", color: '#8B8AA0' }}>
-              Pro
-            </span>
-          </>
-        )}
+      {/* Status badge — matches featured-card eyebrow style for consistency */}
+      <div
+        style={{
+          marginTop: '14px',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: '10px',
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.14em',
+          color: tool.free ? '#34D399' : '#A78BFA',
+        }}
+      >
+        <span
+          style={{
+            width: '6px',
+            height: '6px',
+            borderRadius: '50%',
+            background: tool.free ? '#34D399' : '#A78BFA',
+          }}
+        />
+        {tool.free ? 'Free — No account needed' : 'For members'}
       </div>
 
       {/* Title */}
@@ -269,6 +273,10 @@ interface FeaturedTool {
   status: 'free' | 'member' | 'soon'
   badge: string
   title: string
+  /** Optional smaller subtitle below the title — useful when the brand-voice
+   *  name differs from the SEO-friendly product name (e.g. "Your LinkedIn
+   *  Audition Reel" with "LinkedIn Profile Rewriter" underneath). */
+  subtitle?: string
   desc: string
   ctaLabel: string
   href: string | null
@@ -294,8 +302,9 @@ const CORE_FOUR: FeaturedTool[] = [
   {
     status: 'member',
     badge: 'For members',
-    title: 'LinkedIn Profile Rewriter',
-    desc: 'Your audition reel — with the actual rewrites, not advice. Headline, About, recent role, all in one pass.',
+    title: 'Your LinkedIn Audition Reel',
+    subtitle: 'LinkedIn Profile Rewriter',
+    desc: 'The actual rewrites — not advice. Headline, About, recent role, all rewritten in your voice in one pass.',
     ctaLabel: 'Rewrite it',
     href: '/tools/linkedin-rewrite',
   },
@@ -425,20 +434,35 @@ function FeaturedCard({
       </div>
 
       {/* Title */}
-      <h3
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '22px',
-          fontWeight: 900,
-          letterSpacing: '-0.02em',
-          color: '#F2F0FF',
-          lineHeight: 1.15,
-          margin: 0,
-          position: 'relative',
-        }}
-      >
-        {tool.title}
-      </h3>
+      <div style={{ position: 'relative' }}>
+        <h3
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '22px',
+            fontWeight: 900,
+            letterSpacing: '-0.02em',
+            color: '#F2F0FF',
+            lineHeight: 1.15,
+            margin: 0,
+          }}
+        >
+          {tool.title}
+        </h3>
+        {tool.subtitle && (
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '12px',
+              fontWeight: 600,
+              color: '#8B8AA0',
+              marginTop: '6px',
+              letterSpacing: '0.02em',
+            }}
+          >
+            {tool.subtitle}
+          </div>
+        )}
+      </div>
 
       {/* Description */}
       <p
@@ -842,7 +866,7 @@ export default function ToolsPage() {
               marginBottom: '32px',
             }}
           >
-            Jobscan charges $49.95/month for one tool. We built 20 of them — for both sides.
+            Jobscan charges $49.95/month for one tool. We built four — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day.
           </p>
 
           <Link
