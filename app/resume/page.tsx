@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
-import { ToolResult } from '@/components/tool-result'
+import { ResumeReport } from '@/components/resume-report'
 import './resume.css'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -82,7 +82,8 @@ export default function ResumeCheckerPage() {
     }
   }
 
-  const reset = () => {
+  const editAndRecheck = () => {
+    // Keeps resumeText and roleInput so user can iterate on the same resume
     setState('input')
     setResult('')
     setErrorMessage('')
@@ -90,6 +91,12 @@ export default function ResumeCheckerPage() {
     if (progressBarRef.current) {
       progressBarRef.current.style.width = '0%'
     }
+  }
+
+  const startOver = () => {
+    setResumeText('')
+    setRoleInput('')
+    editAndRecheck()
   }
 
   return (
@@ -314,31 +321,87 @@ export default function ResumeCheckerPage() {
               </p>
             </div>
 
-            <ToolResult
-              result={result}
-              cta={{
-                subtext: 'Want to know what they actually think while they read it? Not the AI tells — the whole internal monologue.',
-                label: 'See your resume through a recruiter’s eyes →',
-                href: '/tools/resume-recruiter-eyes',
+            <ResumeReport result={result} />
+
+            {/* Soft CTA below the document — outside the 'paper' so the report feels complete */}
+            <div
+              style={{
+                maxWidth: '780px',
+                margin: '32px auto 0',
+                padding: '24px 28px',
+                background: 'rgba(108,71,255,0.08)',
+                border: '1px solid rgba(108,71,255,0.2)',
+                borderRadius: '12px',
+                textAlign: 'center',
               }}
-            />
+            >
+              <div
+                style={{
+                  fontSize: '13px',
+                  color: '#A78BFA',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  marginBottom: '8px',
+                }}
+              >
+                Want to go deeper?
+              </div>
+              <div style={{ fontSize: '16px', color: '#F2F0FF', marginBottom: '14px', lineHeight: 1.5 }}>
+                That was the AI tells. <strong style={{ fontWeight: 700 }}>Your resume through a recruiter&apos;s eyes</strong> shows you the whole internal monologue — what they skip, what makes them pause, and the call they make in 30 seconds.
+              </div>
+              <a
+                href="/tools/resume-recruiter-eyes"
+                style={{
+                  fontFamily: 'Figtree, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '14px',
+                  background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  textDecoration: 'none',
+                }}
+              >
+                See your resume through a recruiter&apos;s eyes →
+              </a>
+            </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <button
-                onClick={reset}
+                onClick={editAndRecheck}
                 style={{
-                  padding: '12px 24px',
-                  background: 'transparent',
-                  color: '#A78BFA',
-                  border: '1.5px solid rgba(108,71,255,0.4)',
+                  padding: '14px 28px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  color: '#ffffff',
+                  border: 'none',
                   borderRadius: '10px',
-                  fontWeight: 700,
-                  fontSize: '14px',
+                  fontWeight: 800,
+                  fontSize: '15px',
                   fontFamily: 'Figtree, sans-serif',
                   cursor: 'pointer',
+                  marginRight: '12px',
                 }}
               >
-                Check another resume
+                Edit and re-check
+              </button>
+              <button
+                onClick={startOver}
+                style={{
+                  padding: '12px 20px',
+                  background: 'transparent',
+                  color: '#8B8AA0',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(139,138,160,0.4)',
+                  textUnderlineOffset: '4px',
+                }}
+              >
+                Start over with a different resume
               </button>
             </div>
           </div>
@@ -361,7 +424,7 @@ export default function ResumeCheckerPage() {
               {errorMessage || 'The analyzer didn’t come back. Try once more.'}
             </p>
             <button
-              onClick={reset}
+              onClick={editAndRecheck}
               style={{
                 padding: '14px 28px',
                 background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',

@@ -27,7 +27,18 @@ function renderInline(text: string, keyPrefix: string) {
     }
     if (part && /(["'])(.+?)\1/.test(part)) {
       return (
-        <span key={`${keyPrefix}-${i}`} style={{ fontStyle: 'italic', color: '#D8D7F2' }}>
+        <span
+          key={`${keyPrefix}-${i}`}
+          style={{
+            background: 'rgba(108, 71, 255, 0.14)',
+            color: '#E8E6FF',
+            padding: '1px 6px',
+            borderRadius: '4px',
+            fontStyle: 'italic',
+            boxDecorationBreak: 'clone',
+            WebkitBoxDecorationBreak: 'clone',
+          }}
+        >
           {part}
         </span>
       )
