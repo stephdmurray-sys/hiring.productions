@@ -234,9 +234,10 @@ interface MoveBlock {
   num: number
   kind: 'rewrite' | 'add' | 'unknown'
   current?: string
-  rewrite?: string
+  direction?: string
   addTo?: string
-  addThis?: string
+  topic?: string
+  shape?: string
   why?: string
   rawFallback?: string
 }
@@ -248,7 +249,9 @@ function parseMoveBlocks(body: string): MoveBlock[] {
     const text = raw.trim()
     if (!text) continue
 
-    const headerMatch = text.match(/^\s*\*\*Move\s*(\d+):\s*(Rewrite|Add)\*\*/i)
+    // Tolerate both old "Rewrite"/"Add" headers and new "Rewrite this line"/
+    // "Add a new bullet" headers; classify by the first keyword.
+    const headerMatch = text.match(/^\s*\*\*Move\s*(\d+):\s*(.+?)\*\*/i)
     if (!headerMatch) {
       const numFallback = text.match(/^\s*(\d+)\./)
       if (numFallback) {
@@ -262,26 +265,45 @@ function parseMoveBlocks(body: string): MoveBlock[] {
     }
 
     const num = parseInt(headerMatch[1], 10)
-    const kind = headerMatch[2].toLowerCase() === 'add' ? 'add' : 'rewrite'
+    const headerLabel = headerMatch[2].toLowerCase()
+    const kind: 'rewrite' | 'add' = /^add/.test(headerLabel) ? 'add' : 'rewrite'
 
-    const grab = (label: string): string | undefined => {
-      const re = new RegExp(`^\\s*${label}\\s*:\\s*(.+?)\\s*$`, 'im')
-      const m = text.match(re)
-      if (!m) return undefined
-      return m[1].replace(/^"|"$/g, '').trim() || undefined
+    // Multi-line aware grab — captures everything from "Label:" up to the
+    // next labeled line or end-of-block. Keeps it on one line for rendering.
+    const grab = (labels: string[]): string | undefined => {
+      for (const label of labels) {
+        const re = new RegExp(
+          `(?:^|\\n)\\s*${label}\\s*:\\s*([\\s\\S]+?)(?=\\n\\s*(?:Current|Direction|Topic|Shape|Add to|Why|Rewrite|Add this)\\s*:|$)`,
+          'i',
+        )
+        const m = text.match(re)
+        if (!m) continue
+        const cleaned = m[1].trim().replace(/^"|"$/g, '').trim()
+        if (cleaned) return cleaned
+      }
+      return undefined
     }
 
     const block: MoveBlock = { num, kind }
     if (kind === 'rewrite') {
-      block.current = grab('Current')
-      block.rewrite = grab('Rewrite')
+      block.current = grab(['Current'])
+      // Accept either the new 'Direction' or legacy 'Rewrite' field
+      block.direction = grab(['Direction', 'Rewrite'])
     } else {
-      block.addTo = grab('Add to')
-      block.addThis = grab('Add this')
+      block.addTo = grab(['Add to'])
+      block.topic = grab(['Topic'])
+      block.shape = grab(['Shape', 'Add this'])
     }
-    block.why = grab('Why')
+    block.why = grab(['Why'])
 
-    if (!block.current && !block.rewrite && !block.addTo && !block.addThis && !block.why) {
+    if (
+      !block.current &&
+      !block.direction &&
+      !block.addTo &&
+      !block.topic &&
+      !block.shape &&
+      !block.why
+    ) {
       block.kind = 'unknown'
       block.rawFallback = text.replace(/^\s*\*\*Move[^*]+\*\*\s*/i, '').trim()
     }
@@ -324,14 +346,15 @@ function MoveCard({ move }: { move: MoveBlock }) {
     fontStyle: 'italic' as const,
     lineHeight: 1.5,
   }
-  const afterBox = {
+  // Direction box — indigo, NOT a finished rewrite. Plain (non-italic) text
+  // so it visually reads as guidance, not as a quoted line to copy.
+  const directionBox = {
     padding: '12px 14px',
-    background: '#DFF5E6',
+    background: '#E8E4FF',
     borderRadius: '8px',
     fontSize: '14px',
-    color: '#1F5436',
-    fontStyle: 'italic' as const,
-    lineHeight: 1.5,
+    color: '#2A1B6B',
+    lineHeight: 1.55,
   }
   const whyBox = {
     fontSize: '13px',
@@ -347,7 +370,7 @@ function MoveCard({ move }: { move: MoveBlock }) {
       <div style={{ display: 'flex', gap: '14px' }}>
         <div style={numStyle}>{move.num}</div>
         <div style={{ flex: 1, fontSize: '15px', color: '#1A1A22', lineHeight: 1.65 }}>
-          {renderInline(move.rawFallback, `mv-${move.num}`, 'green')}
+          {renderInline(move.rawFallback, `mv-${move.num}`, 'indigo')}
         </div>
       </div>
     )
@@ -359,13 +382,23 @@ function MoveCard({ move }: { move: MoveBlock }) {
         <div style={numStyle}>{move.num}</div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: '13px', fontWeight: 700, color: '#1A1A22', marginBottom: '12px' }}>
-            Add a new line to{' '}
+            Add a new bullet to{' '}
             <span style={{ color: '#7A6CFF' }}>{move.addTo || 'your resume'}</span>
           </div>
-          {move.addThis && (
-            <div style={{ ...afterBox, marginBottom: 0 }}>
-              <div style={{ ...labelStyle, color: '#1F8A55' }}>Add this</div>
-              {`"${move.addThis}"`}
+          {(move.topic || move.shape) && (
+            <div style={directionBox}>
+              {move.topic && (
+                <div style={{ marginBottom: move.shape ? '8px' : 0 }}>
+                  <div style={{ ...labelStyle, color: '#7A6CFF' }}>Topic</div>
+                  {move.topic}
+                </div>
+              )}
+              {move.shape && (
+                <div>
+                  <div style={{ ...labelStyle, color: '#7A6CFF' }}>How to shape it</div>
+                  {move.shape}
+                </div>
+              )}
             </div>
           )}
           {move.why && <div style={whyBox}>{move.why}</div>}
@@ -385,10 +418,10 @@ function MoveCard({ move }: { move: MoveBlock }) {
               {`"${move.current}"`}
             </div>
           )}
-          {move.rewrite && (
-            <div style={afterBox}>
-              <div style={{ ...labelStyle, color: '#1F8A55' }}>Rewrite to</div>
-              {`"${move.rewrite}"`}
+          {move.direction && (
+            <div style={directionBox}>
+              <div style={{ ...labelStyle, color: '#7A6CFF' }}>Direction</div>
+              {move.direction}
             </div>
           )}
         </div>
@@ -402,10 +435,10 @@ function NextMovesSection({ section, blurred }: { section: Section; blurred: boo
   const moves = parseMoveBlocks(section.body)
   return (
     <SectionShell
-      title="Three rewrites to send instead of what's there now"
+      title="Three moves to make in your voice"
       accentColor="#FF4F6A"
       eyebrow="What to fix"
-      description="Specific edits — not advice. Each one targets a line from your resume and gives you the exact replacement words."
+      description="Specific direction — not finished writing. We don't write the new lines for you on purpose, so your resume stays yours and doesn't get flagged as AI. Use the direction as a guide; you write the actual words."
     >
       <div
         style={{

@@ -269,9 +269,10 @@ function parseRewriteOrAdditionItems(body: string[], kind: 'rewrite' | 'addition
 
     let direction = ''
     if (kind === 'addition') {
-      // For additions we want both Topic AND Shape it.
-      const topicM = rest.match(/Topic\s*:\s*(.+)/i)
-      const shapeM = rest.match(/Shape\s*it\s*:\s*([\s\S]+?)(?=\n\s*Why\s*:|$)/i)
+      // For additions we want both Topic AND Shape (or 'Shape it').
+      const topicM = rest.match(/Topic\s*:\s*([\s\S]+?)(?=\n\s*(?:Shape|Why)\s*:|$)/i)
+      // Accept both 'Shape:' and 'Shape it:' for backward compat.
+      const shapeM = rest.match(/(?:Shape\s*it|Shape)\s*:\s*([\s\S]+?)(?=\n\s*Why\s*:|$)/i)
       const parts: string[] = []
       if (topicM) parts.push(`Topic: ${topicM[1].trim()}`)
       if (shapeM) parts.push(`Shape it: ${shapeM[1].trim()}`)
