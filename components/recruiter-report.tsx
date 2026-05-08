@@ -7,11 +7,6 @@ interface RecruiterReportProps {
   result: string
   /** When false, body content of non-decision sections is blurred and an upgrade card is shown inline. */
   isMember: boolean
-  /** When provided + isMember, shows an "Apply these changes" CTA below the moves
-   * that triggers the parent to run the rewrite-applied API call. */
-  onApplyChanges?: () => void
-  /** When true, the apply CTA shows as loading (the rewrite call is in flight). */
-  applying?: boolean
 }
 
 type SectionKind =
@@ -19,6 +14,7 @@ type SectionKind =
   | 'whatImSkipping'
   | 'whatMakesMePause'
   | 'whereYouFit'
+  | 'missingMetrics'
   | 'myConcern'
   | 'myDecision'
   | 'nextMoves'
@@ -35,6 +31,7 @@ const HEADING_RULES: Array<{ kind: SectionKind; test: (h: string) => boolean }> 
   { kind: 'whatImSkipping', test: (h) => /what\s*i'?m\s*skipping/i.test(h) },
   { kind: 'whatMakesMePause', test: (h) => /what\s*makes\s*me\s*pause/i.test(h) },
   { kind: 'whereYouFit', test: (h) => /where\s*you\s*fit/i.test(h) },
+  { kind: 'missingMetrics', test: (h) => /missing\s*for\s*the/i.test(h) },
   { kind: 'myConcern', test: (h) => /^my\s*concern/i.test(h) },
   { kind: 'myDecision', test: (h) => /^my\s*decision/i.test(h) },
   { kind: 'nextMoves', test: (h) => /next\s*three\s*moves|next\s*moves/i.test(h) },
@@ -431,6 +428,173 @@ function MoveCard({ move }: { move: MoveBlock }) {
   )
 }
 
+// === Missing-metrics section ============================================
+// Each metric line is "<Metric name>. Example: \"<template with [X] placeholders>\""
+// We split on ". Example:" and render the name as bold + the example as an
+// indigo-highlighted starter template the candidate can adapt with their
+// real numbers.
+
+interface MetricItem {
+  name: string
+  example?: string
+}
+
+function parseMetricItems(line: string): MetricItem | null {
+  const cleaned = line.trim().replace(/^[-*•]\s+/, '').trim()
+  if (!cleaned) return null
+  // Match "Name. Example: "..."" with flexible quote handling
+  const m = cleaned.match(/^(.+?)\.\s*Example\s*:\s*"?([^"]*?)"?\s*$/i)
+  if (m) {
+    return { name: m[1].trim(), example: m[2].trim() }
+  }
+  return { name: cleaned }
+}
+
+function MissingMetricsSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const blocks: Array<{ role: string; metrics: MetricItem[] }> = []
+  let current: { role: string; metrics: MetricItem[] } | null = null
+
+  for (const raw of section.body.split('\n')) {
+    const line = raw.trim()
+    if (!line) continue
+    // Sub-heading: **Title at Company:**
+    const sub = line.match(/^\*\*(.+?):?\*\*\s*$/)
+    if (sub) {
+      if (current) blocks.push(current)
+      current = { role: sub[1].replace(/:$/, '').trim(), metrics: [] }
+      continue
+    }
+    if (!current) continue
+    const item = parseMetricItems(line)
+    if (item) current.metrics.push(item)
+  }
+  if (current) blocks.push(current)
+
+  return (
+    <SectionShell
+      title="What's missing — and how to add it"
+      accentColor="#7A6CFF"
+      eyebrow="The numbers that should be there"
+      description="The structural tell of an AI-flavored resume is the absence of role-specific metrics. Below: what's missing for each of your last two roles, plus a short example bullet shape you can fill in with your actual numbers."
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          filter: blurred ? 'blur(7px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        {blocks.map((b, i) => (
+          <div
+            key={`role-${i}`}
+            style={{
+              padding: '20px 22px',
+              background: '#FAFAFB',
+              borderRadius: '10px',
+              border: '1px solid #ECECF2',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '10px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
+                color: '#7A6CFF',
+                marginBottom: '4px',
+              }}
+            >
+              Role {i + 1}
+            </div>
+            <div
+              style={{
+                fontSize: '16px',
+                fontWeight: 700,
+                color: '#1A1A22',
+                marginBottom: '16px',
+                fontFamily: 'Figtree, sans-serif',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {b.role}
+            </div>
+            {b.metrics.length === 0 ? (
+              <div style={{ fontSize: '14px', color: '#9494A5', fontStyle: 'italic' }}>
+                No metrics in this role yet — start here.
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {b.metrics.map((m, j) => (
+                  <div key={`m-${i}-${j}`}>
+                    <div
+                      style={{
+                        position: 'relative',
+                        paddingLeft: '20px',
+                        fontSize: '15px',
+                        fontWeight: 700,
+                        color: '#1A1A22',
+                        lineHeight: 1.45,
+                        marginBottom: m.example ? '6px' : 0,
+                      }}
+                    >
+                      <span
+                        style={{
+                          position: 'absolute',
+                          left: '4px',
+                          top: '8px',
+                          width: '7px',
+                          height: '7px',
+                          borderRadius: '50%',
+                          background: '#7A6CFF',
+                        }}
+                      />
+                      {m.name}
+                    </div>
+                    {m.example && (
+                      <div
+                        style={{
+                          marginLeft: '20px',
+                          padding: '10px 14px',
+                          background: '#E8E4FF',
+                          color: '#2A1B6B',
+                          borderRadius: '6px',
+                          fontSize: '14px',
+                          fontStyle: 'italic',
+                          lineHeight: 1.55,
+                        }}
+                      >
+                        <span
+                          style={{
+                            display: 'block',
+                            fontSize: '10px',
+                            fontWeight: 800,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            color: '#7A6CFF',
+                            marginBottom: '4px',
+                            fontStyle: 'normal',
+                          }}
+                        >
+                          Try a bullet shaped like
+                        </span>
+                        “{m.example}”
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </SectionShell>
+  )
+}
+
 function NextMovesSection({ section, blurred }: { section: Section; blurred: boolean }) {
   const moves = parseMoveBlocks(section.body)
   return (
@@ -637,7 +801,7 @@ function InlineUpgradeCard() {
 
 // === Main component =============================================
 
-export function RecruiterReport({ result, isMember, onApplyChanges, applying = false }: RecruiterReportProps) {
+export function RecruiterReport({ result, isMember }: RecruiterReportProps) {
   const sections = parseSections(result)
   const today = new Date().toLocaleDateString('en-US', {
     month: 'long',
@@ -760,6 +924,9 @@ export function RecruiterReport({ result, isMember, onApplyChanges, applying = f
               />
             )
             break
+          case 'missingMetrics':
+            element = <MissingMetricsSection key={key} section={s} blurred={blurred} />
+            break
           case 'myConcern':
             element = (
               <ProseSection
@@ -800,76 +967,6 @@ export function RecruiterReport({ result, isMember, onApplyChanges, applying = f
         }
         return element
       })}
-
-      {/* Apply-changes CTA — members only, lives at the end of the report */}
-      {isMember && onApplyChanges && (
-        <div
-          style={{
-            marginTop: '20px',
-            padding: '28px 32px',
-            background: 'linear-gradient(135deg, #FAF6FF 0%, #FFF4F1 100%)',
-            border: '1px solid rgba(108,71,255,0.2)',
-            borderRadius: '12px',
-            textAlign: 'center',
-          }}
-        >
-          <div
-            style={{
-              fontSize: '11px',
-              fontWeight: 800,
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              color: '#7A6CFF',
-              marginBottom: '8px',
-            }}
-          >
-            One more thing
-          </div>
-          <h3
-            style={{
-              fontSize: '20px',
-              fontWeight: 900,
-              color: '#1A1A22',
-              fontFamily: 'Figtree, sans-serif',
-              letterSpacing: '-0.02em',
-              margin: '0 0 8px 0',
-              lineHeight: 1.25,
-            }}
-          >
-            Want this as an edit memo?
-          </h3>
-          <p
-            style={{
-              fontSize: '14px',
-              color: '#5A5A6E',
-              lineHeight: 1.55,
-              margin: '0 0 18px 0',
-            }}
-          >
-            Get a structured action checklist — every line to rewrite, every metric to add, every keyword from the JD, every phrase to strike. You make the edits in your own voice, so your resume actually stays yours (and won&apos;t flag as AI).
-          </p>
-          <button
-            onClick={onApplyChanges}
-            disabled={applying}
-            style={{
-              padding: '14px 28px',
-              background: applying
-                ? '#A78BFA'
-                : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '10px',
-              fontWeight: 800,
-              fontSize: '15px',
-              fontFamily: 'Figtree, sans-serif',
-              cursor: applying ? 'wait' : 'pointer',
-              transition: 'background 0.2s ease',
-            }}
-          >
-            {applying ? 'Writing your edit memo...' : 'Get my edit memo'}
-          </button>
-        </div>
-      )}
 
       {/* Document footer */}
       <div
