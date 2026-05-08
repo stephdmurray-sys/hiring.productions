@@ -369,18 +369,19 @@ function MissingMetricsSection({ section }: { section: Section }) {
                       position: 'relative',
                       fontSize: '15px',
                       color: '#3A3A4A',
-                      lineHeight: 1.65,
-                      paddingLeft: '20px',
-                      marginBottom: '8px',
+                      lineHeight: 1.6,
+                      paddingLeft: '22px',
+                      marginBottom: '10px',
                     }}
                   >
                     <span
                       style={{
                         position: 'absolute',
-                        left: 0,
-                        top: '8px',
-                        width: '8px',
-                        height: '2px',
+                        left: '4px',
+                        top: '9px',
+                        width: '7px',
+                        height: '7px',
+                        borderRadius: '50%',
                         background: '#7A6CFF',
                       }}
                     />
