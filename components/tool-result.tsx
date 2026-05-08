@@ -2,9 +2,41 @@
 
 interface ToolResultProps {
   result: string
+  cta?: {
+    subtext: string
+    label: string
+    href: string
+  }
 }
 
-export function ToolResult({ result }: ToolResultProps) {
+const DEFAULT_CTA = {
+  subtext: 'Want to turn insights into proof? Get real recommendations from people who actually worked with you.',
+  label: 'Start your RepVera — free →',
+  href: 'https://www.repvera.com',
+}
+
+function renderInline(text: string, keyPrefix: string) {
+  const parts = text.split(/(["'][^"']*["']|\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) => {
+    if (part && part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <span key={`${keyPrefix}-${i}`} style={{ fontWeight: 600 }}>
+          {part.replace(/\*\*/g, '')}
+        </span>
+      )
+    }
+    if (part && /(["'])(.+?)\1/.test(part)) {
+      return (
+        <span key={`${keyPrefix}-${i}`} style={{ fontStyle: 'italic', color: '#D8D7F2' }}>
+          {part}
+        </span>
+      )
+    }
+    return part
+  })
+}
+
+export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
   return (
     <>
       {/* Results Card */}
@@ -98,14 +130,51 @@ export function ToolResult({ result }: ToolResultProps) {
                     lineHeight: 1.85,
                   }}
                 >
-                  {content}
+                  {renderInline(content, `n-${idx}`)}
+                </div>
+              </div>
+            )
+          }
+
+          // Bullet lines (e.g., "- foo" or "* foo")
+          const bulletMatch = line.match(/^[-*]\s+(.*)$/)
+          if (bulletMatch) {
+            return (
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  gap: '12px',
+                  marginBottom: '8px',
+                  paddingLeft: '4px',
+                }}
+              >
+                <div
+                  style={{
+                    color: '#A78BFA',
+                    fontWeight: 700,
+                    flexShrink: 0,
+                    lineHeight: 1.85,
+                  }}
+                >
+                  •
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 400,
+                    fontSize: '15px',
+                    color: '#F2F0FF',
+                    lineHeight: 1.85,
+                  }}
+                >
+                  {renderInline(bulletMatch[1], `b-${idx}`)}
                 </div>
               </div>
             )
           }
 
           // Regular lines with possible quotes and bold text
-          const parts = line.split(/(["'][^"']*["']|\*\*[^*]*\*\*)/g)
           return (
             <div
               key={idx}
@@ -118,25 +187,7 @@ export function ToolResult({ result }: ToolResultProps) {
                 marginBottom: '4px',
               }}
             >
-              {parts.map((part, i) => {
-                // Handle bold text
-                if (part && part.startsWith('**') && part.endsWith('**')) {
-                  return (
-                    <span key={i} style={{ fontWeight: 600 }}>
-                      {part.replace(/\*\*/g, '')}
-                    </span>
-                  )
-                }
-                // Handle quoted text
-                if (part && /(["'])(.+?)\1/.test(part)) {
-                  return (
-                    <span key={i} style={{ fontStyle: 'italic', color: '#D8D7F2' }}>
-                      {part}
-                    </span>
-                  )
-                }
-                return part
-              })}
+              {renderInline(line, `r-${idx}`)}
             </div>
           )
         })}
@@ -145,7 +196,7 @@ export function ToolResult({ result }: ToolResultProps) {
       {/* Divider */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '28px 0' }} />
 
-      {/* RepVera CTA */}
+      {/* CTA — overridable per tool, defaults to RepVera */}
       <div style={{ textAlign: 'center' }}>
         <div
           style={{
@@ -156,12 +207,12 @@ export function ToolResult({ result }: ToolResultProps) {
             marginBottom: '8px',
           }}
         >
-          Want to turn insights into proof? Get real recommendations from people who actually worked with you.
+          {cta.subtext}
         </div>
         <a
-          href="https://www.repvera.com"
-          target="_blank"
-          rel="noopener noreferrer"
+          href={cta.href}
+          target={cta.href.startsWith('http') ? '_blank' : undefined}
+          rel={cta.href.startsWith('http') ? 'noopener noreferrer' : undefined}
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 600,
@@ -173,7 +224,7 @@ export function ToolResult({ result }: ToolResultProps) {
             textDecoration: 'none',
           }}
         >
-          Start your RepVera — free →
+          {cta.label}
         </a>
       </div>
     </>
