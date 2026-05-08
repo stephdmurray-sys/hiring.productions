@@ -576,7 +576,7 @@ function InlineUpgradeCard() {
       </ul>
 
       <div style={{ fontSize: '13px', color: '#8B8AA0', marginBottom: '16px' }}>
-        $20/year. Unlimited runs. Cancel anytime.
+        $20/year. Use them on every resume tweak and every job description you’re weighing. Cancel anytime.
       </div>
       <StripeCheckoutButton
         style={{
