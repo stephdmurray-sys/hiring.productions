@@ -23,7 +23,7 @@ export async function POST() {
           currency: 'usd',
           product_data: {
             name: 'hiring.productions Pro',
-            description: 'All 20 inside looks. Both sides of hiring. Unlimited runs.',
+            description: 'Four polished inside looks built by a 20-year recruiter. Use them on every resume tweak and every job description.',
           },
           unit_amount: 2000,
           recurring: { interval: 'year' },

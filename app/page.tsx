@@ -185,7 +185,7 @@ export default function HomePage() {
             justifyContent: 'center',
             flexWrap: 'wrap',
           }}>
-            {['Both sides of hiring', '20 inside looks', 'Free to start'].map((text) => (
+            {['From a 20-year recruiter', 'Four polished inside looks', 'Free to start'].map((text) => (
               <div key={text} style={{
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -1203,7 +1203,7 @@ export default function HomePage() {
               textDecoration: 'none',
               transition: 'transform 0.2s',
             }}>
-              See all 20 inside looks →
+              See the four inside looks →
             </Link>
           </div>
         </div>
@@ -1425,7 +1425,7 @@ export default function HomePage() {
               letterSpacing: '-0.02em',
               color: '#F2F0FF',
             }}>
-              All 20 inside looks. $20/year.
+              Four inside looks. $20/year.
             </h2>
             <p style={{
               fontFamily: "'Figtree', sans-serif",
@@ -1435,7 +1435,7 @@ export default function HomePage() {
               marginTop: '10px',
               maxWidth: '440px',
             }}>
-              Jobscan charges $49.95/month for one tool. We built 20 inside looks — for both sides — for less than what they charge for a single day.
+              Jobscan charges $49.95/month for one tool. Four polished inside looks — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day.
             </p>
           </div>
 

@@ -171,7 +171,7 @@ export function ToolGate({
           }}
         >
           <Sparkles size={18} color="#A78BFA" />
-          Members get all 20 inside looks, unlimited.
+          Members get all four inside looks.
         </div>
 
         {/* Headline */}
@@ -191,8 +191,8 @@ export function ToolGate({
         {/* Features */}
         <div style={{ marginTop: '20px' }}>
           {[
-            'All 20 inside looks — both sides of hiring',
-            'Unlimited runs, no limits ever',
+            'All four inside looks built by a 20-year recruiter',
+            'Use them on every resume tweak and every job description',
             'Access delivered instantly to your email',
           ].map((feature, idx) => (
             <div
@@ -210,14 +210,14 @@ export function ToolGate({
             >
               <span
                 style={{
-                  color: '#6C47FF',
-                  fontSize: '16px',
-                  fontWeight: 700,
-                  marginTop: '-2px',
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  background: '#6C47FF',
+                  marginTop: '8px',
+                  flexShrink: 0,
                 }}
-              >
-                ✓
-              </span>
+              />
               {feature}
             </div>
           ))}

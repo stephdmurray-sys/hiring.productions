@@ -73,7 +73,7 @@ export default function MembershipPage() {
             color: 'white',
             margin: 0,
           }}>
-            You&apos;re in. All 20 inside looks are unlocked.
+            You&apos;re in. All four inside looks are yours.
           </h2>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
@@ -134,7 +134,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          All 20 inside looks. One price. No nonsense.
+          Four inside looks. One price. No nonsense.
         </h1>
         <p style={{
           fontSize: '18px',
