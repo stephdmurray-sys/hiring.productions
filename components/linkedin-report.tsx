@@ -1,0 +1,644 @@
+'use client'
+
+import { ReactNode, useState } from 'react'
+import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+
+interface LinkedinReportProps {
+  result: string
+  /** When false, the rewrite content is blurred and an upgrade card shows inline. */
+  isMember: boolean
+}
+
+type SectionKind =
+  | 'profileSignals'
+  | 'headlineOptions'
+  | 'aboutSection'
+  | 'recentRole'
+  | 'phraseToAvoid'
+  | 'unknown'
+
+interface Section {
+  kind: SectionKind
+  heading: string
+  body: string
+}
+
+const HEADING_RULES: Array<{ kind: SectionKind; test: (h: string) => boolean }> = [
+  { kind: 'profileSignals', test: (h) => /your\s*(reel|profile)\s*signals/i.test(h) },
+  { kind: 'headlineOptions', test: (h) => /headline\s*[—-]?\s*rewritten/i.test(h) },
+  { kind: 'aboutSection', test: (h) => /about\s*section/i.test(h) },
+  { kind: 'recentRole', test: (h) => /(most\s*recent|recent)\s*role/i.test(h) },
+  { kind: 'phraseToAvoid', test: (h) => /phrase\s*(to\s*(leave\s*behind|never\s*use))/i.test(h) },
+]
+
+function classifyHeading(h: string): SectionKind {
+  for (const rule of HEADING_RULES) if (rule.test(h)) return rule.kind
+  return 'unknown'
+}
+
+function parseSections(markdown: string): Section[] {
+  const lines = markdown.split('\n')
+  const sections: Section[] = []
+  let current: Section | null = null
+  for (const raw of lines) {
+    const line = raw.trimEnd()
+    const m = line.match(/^\s*\*\*(.+?):?\*\*\s*$/)
+    if (m) {
+      const heading = m[1].replace(/:$/, '').trim()
+      const kind = classifyHeading(heading)
+      if (kind !== 'unknown') {
+        if (current) sections.push(current)
+        current = { kind, heading, body: '' }
+        continue
+      }
+    }
+    if (current) current.body += (current.body ? '\n' : '') + line
+  }
+  if (current) sections.push(current)
+  return sections
+}
+
+// Inline render — bold (**) and quoted text get visual treatment.
+function renderInline(text: string, key: string): ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*|"[^"]+")/g)
+  return parts.map((part, i) => {
+    if (!part) return null
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={`${key}-${i}`} style={{ fontWeight: 700, color: '#1A1A22' }}>
+          {part.replace(/\*\*/g, '')}
+        </strong>
+      )
+    }
+    if (/^".+"$/.test(part)) {
+      return (
+        <span
+          key={`${key}-${i}`}
+          style={{
+            background: '#E8E4FF',
+            color: '#3D2A8C',
+            padding: '1px 6px',
+            borderRadius: '4px',
+            fontStyle: 'italic',
+            fontWeight: 500,
+            boxDecorationBreak: 'clone',
+            WebkitBoxDecorationBreak: 'clone',
+          }}
+        >
+          {part}
+        </span>
+      )
+    }
+    return part
+  })
+}
+
+// === Reusable copy button ===========================================
+function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
+  const [copied, setCopied] = useState(false)
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // ignore
+    }
+  }
+  return (
+    <button
+      onClick={handleCopy}
+      style={{
+        padding: '6px 12px',
+        background: copied ? '#1F8A55' : '#ffffff',
+        color: copied ? '#ffffff' : '#3D2A8C',
+        border: copied ? 'none' : '1px solid rgba(108,71,255,0.3)',
+        borderRadius: '6px',
+        fontFamily: 'Figtree, sans-serif',
+        fontSize: '11px',
+        fontWeight: 700,
+        textTransform: 'uppercase',
+        letterSpacing: '0.08em',
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+      }}
+    >
+      {copied ? 'Copied' : label}
+    </button>
+  )
+}
+
+// === Section shell ==================================================
+function SectionShell({
+  title,
+  accentColor,
+  eyebrow,
+  description,
+  children,
+}: {
+  title: string
+  accentColor: string
+  eyebrow: string
+  description?: string
+  children: ReactNode
+}) {
+  return (
+    <div style={{ marginBottom: '40px' }}>
+      <div style={{ marginBottom: '18px' }}>
+        <div
+          style={{
+            fontSize: '10px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.16em',
+            color: accentColor,
+            marginBottom: '8px',
+          }}
+        >
+          {eyebrow}
+        </div>
+        <h2
+          style={{
+            fontSize: '22px',
+            fontWeight: 900,
+            color: '#1A1A22',
+            fontFamily: 'Figtree, sans-serif',
+            letterSpacing: '-0.02em',
+            margin: 0,
+            paddingBottom: '12px',
+            borderBottom: `2px solid ${accentColor}33`,
+            lineHeight: 1.2,
+          }}
+        >
+          {title}
+        </h2>
+        {description && (
+          <p
+            style={{
+              fontSize: '14px',
+              color: '#5A5A6E',
+              fontStyle: 'italic',
+              lineHeight: 1.55,
+              marginTop: '12px',
+              marginBottom: 0,
+            }}
+          >
+            {description}
+          </p>
+        )}
+      </div>
+      {children}
+    </div>
+  )
+}
+
+// === Section renderers =============================================
+function ProfileSignalsSection({ section }: { section: Section }) {
+  return (
+    <SectionShell
+      title="What your reel signals right now"
+      accentColor="#7A6CFF"
+      eyebrow="The first impression"
+      description="What a recruiter takes away in the first scroll. The honest read before the rewrite."
+    >
+      <div
+        style={{
+          fontSize: '15px',
+          color: '#3A3A4A',
+          lineHeight: 1.7,
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {renderInline(section.body.trim(), 'profile-signals')}
+      </div>
+    </SectionShell>
+  )
+}
+
+function HeadlineOptionsSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  // Lines starting with "1." / "2." / "3."
+  const options: string[] = []
+  for (const raw of section.body.split('\n')) {
+    const m = raw.trim().match(/^\d+\.\s+(.+)$/)
+    if (m) options.push(m[1].trim())
+  }
+
+  return (
+    <SectionShell
+      title="Your headline — rewritten three ways"
+      accentColor="#FF4F6A"
+      eyebrow="Your opening line"
+      description="Pick the one that sounds most like you. Each option is under 220 characters and tuned to your background."
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        {options.map((opt, i) => (
+          <div
+            key={`opt-${i}`}
+            style={{
+              display: 'flex',
+              gap: '14px',
+              padding: '16px 18px',
+              background: '#FAFAFB',
+              border: '1px solid #ECECF2',
+              borderRadius: '10px',
+              alignItems: 'flex-start',
+            }}
+          >
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '50%',
+                background: '#FF4F6A',
+                color: '#ffffff',
+                fontWeight: 800,
+                fontSize: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                marginTop: '2px',
+              }}
+            >
+              {i + 1}
+            </div>
+            <div style={{ flex: 1, fontSize: '14.5px', color: '#1A1A22', lineHeight: 1.55, fontFamily: 'Figtree, sans-serif' }}>
+              {opt}
+              <div style={{ marginTop: '6px', fontSize: '11px', color: '#9494A5' }}>
+                {opt.length} characters
+              </div>
+            </div>
+            {!blurred && <CopyButton text={opt} />}
+          </div>
+        ))}
+      </div>
+    </SectionShell>
+  )
+}
+
+function AboutSectionRender({ section, blurred }: { section: Section; blurred: boolean }) {
+  const text = section.body.trim()
+  return (
+    <SectionShell
+      title="Your About section — rewritten"
+      accentColor="#7A6CFF"
+      eyebrow="Your sizzle reel"
+      description="Stops the scroll, tells your story in your voice, ends with a clear next step. Ready to paste — fill in any [your number] placeholders with your actual specifics."
+    >
+      <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            padding: '20px 22px',
+            background: '#FAFAFB',
+            border: '1px solid #ECECF2',
+            borderRadius: '10px',
+            fontSize: '14.5px',
+            color: '#1A1A22',
+            lineHeight: 1.7,
+            whiteSpace: 'pre-wrap',
+            fontFamily: 'Figtree, sans-serif',
+            filter: blurred ? 'blur(8px)' : undefined,
+            userSelect: blurred ? 'none' : undefined,
+            pointerEvents: blurred ? 'none' : undefined,
+          }}
+          aria-hidden={blurred}
+        >
+          {renderInline(text, 'about')}
+          {!blurred && (
+            <div
+              style={{
+                marginTop: '12px',
+                fontSize: '11px',
+                color: '#9494A5',
+                paddingTop: '12px',
+                borderTop: '1px solid #ECECF2',
+              }}
+            >
+              {text.length} / 2,000 characters
+            </div>
+          )}
+        </div>
+        {!blurred && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '12px',
+              right: '12px',
+            }}
+          >
+            <CopyButton text={text} label="Copy About" />
+          </div>
+        )}
+      </div>
+    </SectionShell>
+  )
+}
+
+function RecentRoleSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  // Bullet lines starting with "- "
+  const bullets: string[] = []
+  for (const raw of section.body.split('\n')) {
+    const m = raw.trim().match(/^[-*]\s+(.+)$/)
+    if (m) bullets.push(m[1].trim())
+  }
+  const fullText = bullets.map((b) => `- ${b}`).join('\n')
+
+  return (
+    <SectionShell
+      title="Your most recent role — rewritten"
+      accentColor="#7A6CFF"
+      eyebrow="Your highlight clips"
+      description="Impact-driven bullets in past tense, ready to paste. Fill in any [your number] placeholders with your actual specifics."
+    >
+      <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            padding: '20px 22px',
+            background: '#FAFAFB',
+            border: '1px solid #ECECF2',
+            borderRadius: '10px',
+            filter: blurred ? 'blur(8px)' : undefined,
+            userSelect: blurred ? 'none' : undefined,
+            pointerEvents: blurred ? 'none' : undefined,
+          }}
+          aria-hidden={blurred}
+        >
+          <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+            {bullets.map((b, i) => (
+              <li
+                key={`b-${i}`}
+                style={{
+                  position: 'relative',
+                  paddingLeft: '20px',
+                  fontSize: '14.5px',
+                  color: '#1A1A22',
+                  lineHeight: 1.6,
+                  marginBottom: '10px',
+                  fontFamily: 'Figtree, sans-serif',
+                }}
+              >
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: '4px',
+                    top: '8px',
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    background: '#7A6CFF',
+                  }}
+                />
+                {renderInline(b, `b-${i}`)}
+              </li>
+            ))}
+          </ul>
+        </div>
+        {!blurred && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '12px',
+              right: '12px',
+            }}
+          >
+            <CopyButton text={fullText} label="Copy bullets" />
+          </div>
+        )}
+      </div>
+    </SectionShell>
+  )
+}
+
+function PhraseToAvoidSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const text = section.body.trim()
+  // Pull first quoted phrase; the rest is the recruiter's reason.
+  const match = text.match(/^\s*"([^"]+)"\s*[—–-]?\s*(.*)$/s)
+  const phrase = match ? match[1] : text
+  const reason = match ? match[2].trim() : ''
+
+  return (
+    <SectionShell
+      title="The phrase to leave behind"
+      accentColor="#FF4F6A"
+      eyebrow="Cutting-room floor"
+      description="The single most damaging generic phrase in your current profile. Cut it and rewrite around it."
+    >
+      <div
+        style={{
+          padding: '18px 22px',
+          background: '#FFE4E0',
+          border: '1px solid rgba(199,62,90,0.25)',
+          borderRadius: '10px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        <div
+          style={{
+            fontSize: '15px',
+            color: '#7A1F2E',
+            fontStyle: 'italic',
+            textDecoration: 'line-through',
+            textDecorationColor: 'rgba(199,62,90,0.55)',
+            marginBottom: reason ? '10px' : 0,
+            fontFamily: 'Figtree, sans-serif',
+          }}
+        >
+          “{phrase}”
+        </div>
+        {reason && (
+          <div style={{ fontSize: '13.5px', color: '#3A3A4A', lineHeight: 1.55 }}>
+            {renderInline(reason, 'phrase-reason')}
+          </div>
+        )}
+      </div>
+    </SectionShell>
+  )
+}
+
+// Inline upgrade card for non-members
+function InlineUpgradeCard() {
+  return (
+    <div
+      style={{
+        margin: '12px 0 36px',
+        padding: '28px 32px',
+        background: 'linear-gradient(135deg, #1A1A22 0%, #2A1F3D 100%)',
+        borderRadius: '14px',
+        border: '1.5px solid rgba(108,71,255,0.4)',
+        color: '#F2F0FF',
+        fontFamily: 'Figtree, sans-serif',
+      }}
+    >
+      <div
+        style={{
+          fontSize: '11px',
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.14em',
+          color: '#A78BFA',
+          marginBottom: '10px',
+        }}
+      >
+        Want the rewrites?
+      </div>
+      <div style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.3, marginBottom: '20px' }}>
+        That was the recruiter&apos;s read of your reel. Members see the actual rewrites — three headline options, your About section rewritten end-to-end, and your most recent role in impact-driven bullets. All ready to paste.
+      </div>
+      <div style={{ fontSize: '14px', color: '#8B8AA0', marginBottom: '16px' }}>
+        $20/year. Use it on every revision. Cancel anytime.
+      </div>
+      <StripeCheckoutButton
+        style={{
+          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+          border: 'none',
+          borderRadius: '10px',
+          padding: '14px 24px',
+          fontFamily: 'Figtree, sans-serif',
+          fontSize: '15px',
+          fontWeight: 800,
+          color: 'white',
+          cursor: 'pointer',
+        }}
+      >
+        Get full access — $20/year
+      </StripeCheckoutButton>
+    </div>
+  )
+}
+
+// === Main component ================================================
+export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
+  const sections = parseSections(result)
+  const today = new Date().toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
+  // For non-members: show profileSignals fully, blur the rewrites, drop in
+  // the upgrade card right after profileSignals.
+  let upgradeRendered = false
+
+  return (
+    <div
+      style={{
+        background: '#ffffff',
+        color: '#1A1A22',
+        borderRadius: '16px',
+        padding: 'clamp(28px, 5vw, 56px)',
+        boxShadow: '0 24px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06)',
+        maxWidth: '780px',
+        margin: '0 auto',
+        fontFamily: 'Figtree, sans-serif',
+      }}
+    >
+      {/* Document header */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'baseline',
+          marginBottom: '28px',
+          paddingBottom: '18px',
+          borderBottom: '2px solid #1A1A22',
+        }}
+      >
+        <div>
+          <div
+            style={{
+              fontSize: '11px',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              color: '#7A6CFF',
+              marginBottom: '4px',
+            }}
+          >
+            Inside Look
+          </div>
+          <div style={{ fontSize: '22px', fontWeight: 900, color: '#1A1A22', letterSpacing: '-0.02em' }}>
+            Your LinkedIn audition reel
+          </div>
+        </div>
+        <div style={{ fontSize: '12px', color: '#6B6B7B', textAlign: 'right' }}>
+          Read on {today}
+          <div style={{ fontSize: '10px', color: '#9494A5', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            hiring.productions
+          </div>
+        </div>
+      </div>
+
+      {sections.map((s, i) => {
+        const key = `s-${i}`
+        let element: ReactNode
+
+        // The "What your reel signals" section is always fully visible —
+        // it's the read, the hook. Everything else gets blurred for
+        // non-members.
+        const isProfileSignals = s.kind === 'profileSignals'
+        const blurred = !isMember && !isProfileSignals
+
+        switch (s.kind) {
+          case 'profileSignals':
+            element = <ProfileSignalsSection key={key} section={s} />
+            break
+          case 'headlineOptions':
+            element = <HeadlineOptionsSection key={key} section={s} blurred={blurred} />
+            break
+          case 'aboutSection':
+            element = <AboutSectionRender key={key} section={s} blurred={blurred} />
+            break
+          case 'recentRole':
+            element = <RecentRoleSection key={key} section={s} blurred={blurred} />
+            break
+          case 'phraseToAvoid':
+            element = <PhraseToAvoidSection key={key} section={s} blurred={blurred} />
+            break
+          default:
+            element = null
+        }
+
+        // Insert upgrade card after the profile signals section for non-members
+        if (!isMember && isProfileSignals && !upgradeRendered) {
+          upgradeRendered = true
+          return (
+            <div key={key + '-wrap'}>
+              {element}
+              <InlineUpgradeCard />
+            </div>
+          )
+        }
+        return element
+      })}
+
+      {/* Document footer */}
+      <div
+        style={{
+          marginTop: '40px',
+          paddingTop: '20px',
+          borderTop: '1px solid #ECECF2',
+          fontSize: '11px',
+          color: '#9494A5',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          textAlign: 'center',
+        }}
+      >
+        End of report · Stephanie Murray, hiring.productions
+      </div>
+    </div>
+  )
+}

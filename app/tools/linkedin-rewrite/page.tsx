@@ -1,283 +1,424 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
-import { ToolResult } from '@/components/tool-result'
+import { LinkedinReport } from '@/components/linkedin-report'
+import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
-export default function LinkedInRewritePage() {
+type ViewState = 'input' | 'loading' | 'result' | 'error'
+
+export default function LinkedinRewritePage() {
   const [headline, setHeadline] = useState('')
   const [about, setAbout] = useState('')
   const [experience, setExperience] = useState('')
   const [targetRole, setTargetRole] = useState('')
+  const [state, setState] = useState<ViewState>('input')
   const [result, setResult] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [currentStep, setCurrentStep] = useState(0)
+  const [isMemberUser, setIsMemberUser] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+  const progressBarRef = useRef<HTMLDivElement>(null)
+  const resultRef = useRef<HTMLDivElement>(null)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    setIsClient(true)
+    setIsMemberUser(isMember())
+  }, [])
+
+  useEffect(() => {
+    if (state === 'result' && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [state])
+
+  const startLoadingSteps = () => {
+    const steps = [1, 2, 3]
+    let i = 0
+    const interval = setInterval(() => {
+      if (i < steps.length) {
+        setCurrentStep(i + 1)
+        i++
+      } else {
+        clearInterval(interval)
+        if (progressBarRef.current) {
+          progressBarRef.current.style.width = '100%'
+        }
+      }
+    }, 800)
+    return interval
+  }
+
+  const runRewrite = async () => {
     if (!headline.trim() || !about.trim() || !experience.trim()) {
-      setError('Please fill in your headline, About section, and most recent role.')
+      alert('Paste your headline, About section, and most recent role.')
       return
     }
-
-    setLoading(true)
-    setError('')
-    setResult('')
+    setState('loading')
+    setCurrentStep(0)
+    const interval = startLoadingSteps()
 
     try {
+      const inputs: Record<string, string> = { headline, about, experience }
+      if (targetRole.trim()) inputs.targetRole = targetRole.trim()
+
       const response = await fetch('/api/tool', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          toolId: 'linkedin-rewrite',
-          inputs: {
-            headline,
-            about,
-            experience,
-            ...(targetRole && { targetRole }),
-          },
-        }),
+        body: JSON.stringify({ toolId: 'linkedin-rewrite', inputs }),
       })
 
-      const data = await response.json()
+      clearInterval(interval)
 
       if (!response.ok) {
-        setError(data.error || 'Failed to rewrite your profile')
-      } else {
-        setResult(data.result)
+        const data = await response.json().catch(() => ({}))
+        throw new Error(data.error || 'Could not rewrite your profile — try again.')
       }
+      const data = await response.json()
+      setResult(data.result)
+      setState('result')
     } catch (err) {
-      setError('An error occurred. Please try again.')
-      console.error('[v0] Submit error:', err)
-    } finally {
-      setLoading(false)
+      clearInterval(interval)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
+      setErrorMessage(msg)
+      setState('error')
     }
   }
 
-  const canSubmit = headline.trim() && about.trim() && experience.trim()
+  const editAndRerun = () => {
+    setState('input')
+    setResult('')
+    setErrorMessage('')
+    setCurrentStep(0)
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = '0%'
+    }
+  }
+
+  const startOver = () => {
+    setHeadline('')
+    setAbout('')
+    setExperience('')
+    setTargetRole('')
+    editAndRerun()
+  }
+
+  const toggleMembership = () => {
+    if (isMemberUser) {
+      clearMembership()
+      setIsMemberUser(false)
+    } else {
+      activateMembership('dev@hiring.productions')
+      setIsMemberUser(true)
+    }
+  }
+
+  const fieldLabel: React.CSSProperties = {
+    display: 'block',
+    fontSize: '11px',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+    color: '#8B8AA0',
+    marginBottom: '10px',
+  }
+  const fieldInput: React.CSSProperties = {
+    width: '100%',
+    padding: '14px 16px',
+    background: '#0F0F12',
+    border: '1px solid rgba(255,255,255,0.12)',
+    borderRadius: '8px',
+    color: '#F2F0FF',
+    fontFamily: 'Figtree, sans-serif',
+    fontSize: '14px',
+    boxSizing: 'border-box',
+  }
+  const fieldTextarea: React.CSSProperties = {
+    ...fieldInput,
+    minHeight: '160px',
+    fontFamily: 'Figtree, monospace',
+    fontSize: '13px',
+    lineHeight: 1.7,
+    resize: 'vertical',
+  }
 
   return (
     <ToolPageShell
-      toolName="LinkedIn Profile Rewriter"
-      toolDescription="See how a recruiter reads your LinkedIn — and get your headline, About section, and experience rewritten in one pass."
+      toolName="Your LinkedIn Audition Reel"
+      toolDescription="Your headline rewritten three ways. Your About section rewritten completely. Your most recent role in impact-driven bullets. Actual rewrites — not advice."
       category="candidate"
       isFree={false}
+      gated={false}
     >
-      {/* Input Section */}
-      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
-        {/* Headline */}
-        <label
+      {/* Dev toggle — visible only in development */}
+      {isClient && process.env.NODE_ENV === 'development' && (
+        <div
           style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            background: '#1A1A22',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: '8px',
+            padding: '10px 14px',
+            zIndex: 50,
             fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-          }}
-        >
-          YOUR CURRENT HEADLINE
-        </label>
-        <input
-          type="text"
-          value={headline}
-          onChange={(e) => setHeadline(e.target.value)}
-          placeholder="Paste your current LinkedIn headline exactly as it reads"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
+            fontFamily: 'Figtree, sans-serif',
             color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
-        />
-
-        {/* About Section */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
           }}
         >
-          YOUR ABOUT SECTION
-        </label>
-        <textarea
-          value={about}
-          onChange={(e) => setAbout(e.target.value)}
-          placeholder="Paste your current LinkedIn About section. If it's blank, write a few sentences about what you do and what you're looking for."
-          rows={6}
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            resize: 'vertical',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.target.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.08)' }}
-        />
+          <div style={{ marginBottom: '6px', color: '#8B8AA0' }}>
+            Dev: {isMemberUser ? 'MEMBER' : 'NON-MEMBER'}
+          </div>
+          <button
+            onClick={toggleMembership}
+            style={{
+              padding: '4px 10px',
+              background: '#6C47FF',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 700,
+            }}
+          >
+            Toggle
+          </button>
+        </div>
+      )}
 
-        {/* Experience */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          YOUR MOST RECENT ROLE DESCRIPTION
-        </label>
-        <textarea
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-          placeholder="Paste your current job title and the bullets from your most recent LinkedIn experience section."
-          rows={6}
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            resize: 'vertical',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.target.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.08)' }}
-        />
-
-        {/* Target Role (Optional) */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          YOUR TARGET NEXT ROLE (OPTIONAL)
-        </label>
-        <input
-          type="text"
-          value={targetRole}
-          onChange={(e) => setTargetRole(e.target.value)}
-          placeholder="e.g. VP of People at a Series B company — helps tailor the rewrite"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
-        />
-
-        {/* Submit Button */}
-        <button
-          onClick={handleSubmit}
-          disabled={loading || !canSubmit}
-          style={{
-            width: '100%',
-            marginTop: '24px',
-            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-            border: 'none',
-            borderRadius: '10px',
-            padding: '15px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: '16px',
-            color: 'white',
-            cursor: loading || !canSubmit ? 'not-allowed' : 'pointer',
-            opacity: loading || !canSubmit ? 0.7 : 1,
-            transition: 'opacity 0.2s',
-          }}
-        >
-          {loading ? 'Rewriting your profile...' : result ? 'Rewrite again' : 'Rewrite my profile'}
-        </button>
-
-        {/* Error Messages */}
-        {error && (
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 24px 60px' }}>
+        {/* INPUT */}
+        {state === 'input' && (
           <div
             style={{
               background: '#1A1A22',
-              border: '1px solid rgba(255,79,106,0.3)',
-              borderRadius: '10px',
-              padding: '16px 20px',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 400,
-              fontSize: '14px',
-              color: '#FF4F6A',
-              marginTop: '12px',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: '12px',
+              padding: '32px',
+              marginBottom: '24px',
             }}
           >
-            {error}
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>Your current headline</label>
+              <input
+                type="text"
+                value={headline}
+                onChange={(e) => setHeadline(e.target.value)}
+                placeholder="Paste your current LinkedIn headline exactly as it reads."
+                style={fieldInput}
+              />
+            </div>
+
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>Your current About section</label>
+              <textarea
+                value={about}
+                onChange={(e) => setAbout(e.target.value.slice(0, 4000))}
+                placeholder="Paste your current LinkedIn About section. If it's blank, write a few sentences about what you do and what you're looking for."
+                style={fieldTextarea}
+              />
+            </div>
+
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>Your most recent role description</label>
+              <textarea
+                value={experience}
+                onChange={(e) => setExperience(e.target.value.slice(0, 4000))}
+                placeholder="Paste your current job title, company, dates, and the bullets from your most recent LinkedIn experience section."
+                style={fieldTextarea}
+              />
+            </div>
+
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>
+                Target next role{' '}
+                <span style={{ color: '#6B6B7B', fontWeight: 500, textTransform: 'none', letterSpacing: 0 }}>
+                  — optional, but helps tune the rewrite
+                </span>
+              </label>
+              <input
+                type="text"
+                value={targetRole}
+                onChange={(e) => setTargetRole(e.target.value)}
+                placeholder="e.g. VP of People at a Series C company"
+                style={fieldInput}
+              />
+            </div>
+
+            <button
+              onClick={runRewrite}
+              style={{
+                width: '100%',
+                padding: '14px 24px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: 800,
+                fontSize: '15px',
+                fontFamily: 'Figtree, sans-serif',
+                cursor: 'pointer',
+              }}
+            >
+              Rewrite my profile
+            </button>
+
+            <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
+              {isMemberUser
+                ? 'Members see the full rewrites.'
+                : 'See the recruiter’s read free. The rewrites are for members.'}
+            </p>
+          </div>
+        )}
+
+        {/* LOADING */}
+        {state === 'loading' && (
+          <div style={{ textAlign: 'center', padding: '80px 24px' }}>
+            <div
+              style={{
+                width: '100%',
+                height: '3px',
+                background: 'rgba(255,255,255,0.06)',
+                borderRadius: '2px',
+                overflow: 'hidden',
+                marginBottom: '32px',
+              }}
+            >
+              <div
+                ref={progressBarRef}
+                style={{
+                  height: '100%',
+                  background: 'linear-gradient(90deg, #6C47FF, #FF4F6A)',
+                  width: '0%',
+                  transition: 'width 0.8s ease',
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontSize: '16px',
+                color: '#F2F0FF',
+                fontWeight: 600,
+                fontFamily: 'Figtree, sans-serif',
+              }}
+            >
+              {currentStep <= 1 && 'Reading your reel...'}
+              {currentStep === 2 && 'Spotting the generic openers...'}
+              {currentStep === 3 && 'Rewriting it for you...'}
+            </div>
+          </div>
+        )}
+
+        {/* RESULT */}
+        {state === 'result' && result && (
+          <div ref={resultRef}>
+            <div style={{ marginBottom: '24px' }}>
+              <h2
+                style={{
+                  fontSize: 'clamp(28px, 4vw, 40px)',
+                  fontWeight: 900,
+                  lineHeight: 1.1,
+                  marginBottom: '8px',
+                  letterSpacing: '-0.02em',
+                  fontFamily: 'Figtree, sans-serif',
+                  color: '#F2F0FF',
+                }}
+              >
+                Your reel, rewritten.
+              </h2>
+              <p style={{ color: '#8B8AA0', fontSize: '15px', maxWidth: '620px' }}>
+                Three headline options, an end-to-end About section, and your most recent role in impact bullets. Copy-paste-ready. Fill in any [your number] placeholders with your actual specifics before you publish.
+              </p>
+            </div>
+
+            <LinkedinReport result={result} isMember={isMemberUser} />
+
+            <div style={{ marginTop: '32px', textAlign: 'center' }}>
+              <button
+                onClick={editAndRerun}
+                style={{
+                  padding: '14px 28px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontWeight: 800,
+                  fontSize: '15px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                  marginRight: '12px',
+                }}
+              >
+                Edit and re-run
+              </button>
+              <button
+                onClick={startOver}
+                style={{
+                  padding: '12px 20px',
+                  background: 'transparent',
+                  color: '#8B8AA0',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  fontFamily: 'Figtree, sans-serif',
+                  cursor: 'pointer',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(139,138,160,0.4)',
+                  textUnderlineOffset: '4px',
+                }}
+              >
+                Start over with a different profile
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ERROR */}
+        {state === 'error' && (
+          <div style={{ textAlign: 'center', padding: '60px 24px' }}>
+            <h2
+              style={{
+                fontSize: '28px',
+                fontWeight: 900,
+                marginBottom: '12px',
+                fontFamily: 'Figtree, sans-serif',
+                color: '#F2F0FF',
+              }}
+            >
+              Something broke on our end.
+            </h2>
+            <p
+              style={{
+                color: '#8B8AA0',
+                fontSize: '15px',
+                marginBottom: '32px',
+                maxWidth: '500px',
+                margin: '0 auto 32px',
+              }}
+            >
+              {errorMessage || 'The rewriter didn’t come back. Try once more.'}
+            </p>
+            <button
+              onClick={editAndRerun}
+              style={{
+                padding: '14px 28px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: 800,
+                fontSize: '15px',
+                fontFamily: 'Figtree, sans-serif',
+                cursor: 'pointer',
+              }}
+            >
+              Try again
+            </button>
           </div>
         )}
       </div>
-
-      {/* Results Section */}
-      {result && (
-        <div
-          style={{
-            marginTop: '40px',
-            maxWidth: '680px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            padding: '0 40px',
-          }}
-        >
-          <ToolResult result={result} />
-        </div>
-      )}
     </ToolPageShell>
   )
 }
