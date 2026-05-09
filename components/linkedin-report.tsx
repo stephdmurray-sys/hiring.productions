@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+import { RepveraBridge } from '@/components/repvera-bridge'
 
 interface LinkedinReportProps {
   result: string
@@ -1199,6 +1200,9 @@ export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
 
         return out
       })()}
+
+      {/* RepVera bridge — members see this; non-members see the upgrade card */}
+      {isMember && <RepveraBridge source="linkedin" variant="light" />}
 
       {/* Document footer */}
       <div

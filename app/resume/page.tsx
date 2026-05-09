@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { ResumeReport } from '@/components/resume-report'
+import { ShareResult } from '@/components/share-result'
 import './resume.css'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -323,6 +324,11 @@ export default function ResumeCheckerPage() {
             </div>
 
             <ResumeReport result={result} />
+
+            {/* Share */}
+            <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
+              <ShareResult source="resume-ai-checker" variant="dark" />
+            </div>
 
             {/* Soft CTA below the document — outside the 'paper' so the report feels complete */}
             <div

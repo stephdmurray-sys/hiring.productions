@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { LinkedinReport } from '@/components/linkedin-report'
+import { ShareResult } from '@/components/share-result'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -405,6 +406,10 @@ Talent Acquisition, Executive Search, Sourcing, ...`}
             </div>
 
             <LinkedinReport result={result} isMember={isMemberUser} />
+
+            <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
+              <ShareResult source="linkedin" variant="dark" />
+            </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <button

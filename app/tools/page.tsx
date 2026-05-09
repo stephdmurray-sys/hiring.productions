@@ -34,7 +34,7 @@ const candidateMoments = [
   {
     label: 'Before You Apply',
     tools: [
-      { name: 'What This Job Actually Is', icon: FileText, free: false, link: '/tools/what-this-job-is', desc: 'See what\'s really between the lines of any job description — and whether it\'s worth your time.' },
+      { name: 'What This Job Actually Is', icon: FileText, free: true, link: '/tools/what-this-job-is', desc: 'See what\'s really between the lines of any job description — and whether it\'s worth your time.' },
       { name: 'Where You Actually Have a Shot', icon: Target, free: false, link: '/tools/where-you-have-a-shot', desc: 'See which platforms actually respond to candidates like you — and where you’re wasting your time.' },
       { name: 'What This Company Feels Like to Work At', icon: Building2, free: false, link: '/tools/culture-decoder', desc: 'See what a company\'s values actually mean in practice before you invest in applying.' },
     ],
@@ -60,7 +60,7 @@ const candidateMoments = [
   {
     label: 'When You\'re Not Hearing Back',
     tools: [
-      { name: 'What\'s Breaking Your Search', icon: AlertTriangle, free: false, link: '/tools/whats-breaking-search', desc: 'See the real reason applications aren\'t converting — with a specific diagnosis for your situation.' },
+      { name: 'What\'s Breaking Your Search', icon: AlertTriangle, free: true, link: '/tools/whats-breaking-search', desc: 'See the real reason applications aren\'t converting — with a specific diagnosis for your situation.' },
     ],
   },
   {
@@ -267,7 +267,7 @@ function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
   )
 }
 
-// === The Core Four (featured at the top of the page) =====================
+// === Featured tools (free + paid, grouped) ==============================
 
 interface FeaturedTool {
   status: 'free' | 'member' | 'soon'
@@ -282,20 +282,39 @@ interface FeaturedTool {
   href: string | null
 }
 
-const CORE_FOUR: FeaturedTool[] = [
+const FREE_TOOLS: FeaturedTool[] = [
   {
     status: 'free',
-    badge: 'Free forever',
+    badge: 'Free — no account',
     title: 'Does My Resume Read as AI?',
-    desc: 'See exactly how AI-screening reads your resume before a human ever does. The whole report, no paywall.',
+    desc: '49% of hiring managers auto-reject resumes they suspect were AI-written. See exactly which lines on yours give it away — before a recruiter does.',
     ctaLabel: 'Run it free',
     href: '/resume',
   },
   {
+    status: 'free',
+    badge: 'Free — no account',
+    title: 'What This Job Actually Is',
+    desc: 'Paste any job description. Get the recruiter\'s read on what the role really means day-to-day, the unstated requirements, the red flags, and an honest salary read.',
+    ctaLabel: 'Decode a JD',
+    href: '/tools/what-this-job-is',
+  },
+  {
+    status: 'free',
+    badge: 'Free — no account',
+    title: 'What\'s Breaking Your Search',
+    desc: 'Tell us about your search. Get one specific diagnosis from a 20-year recruiter — not five maybes — and a single 48-hour fix to start with.',
+    ctaLabel: 'Diagnose it',
+    href: '/tools/whats-breaking-search',
+  },
+]
+
+const MEMBER_TOOLS: FeaturedTool[] = [
+  {
     status: 'member',
     badge: 'For members',
-    title: 'Your Resume, Through a Recruiter’s Eyes',
-    desc: 'The internal monologue of a recruiter reading your resume. What they skip, what makes them pause, the call they make in 30 seconds.',
+    title: 'Your Resume, Through a Recruiter\'s Eyes',
+    desc: 'The internal monologue of a recruiter reading your resume against a target job. What they skip, what makes them pause, the call they make in 30 seconds.',
     ctaLabel: 'See the verdict',
     href: '/tools/resume-recruiter-eyes',
   },
@@ -304,7 +323,7 @@ const CORE_FOUR: FeaturedTool[] = [
     badge: 'For members',
     title: 'Your LinkedIn Audition Reel',
     subtitle: 'LinkedIn Profile Rewriter',
-    desc: 'The actual rewrites — not advice. Headline, About, recent role, all rewritten in your voice in one pass.',
+    desc: 'The actual rewrites — not advice. Headline three ways, About end-to-end, and the exact terms recruiters search for to find someone like you.',
     ctaLabel: 'Rewrite it',
     href: '/tools/linkedin-rewrite',
   },
@@ -312,13 +331,13 @@ const CORE_FOUR: FeaturedTool[] = [
     status: 'member',
     badge: 'For members',
     title: 'The Rehearsal Room',
-    desc: 'Interview prep in a hiring manager’s voice. Ten questions calibrated to the job description, with the weak vs strong answer pattern and your opening line. (Answer evaluation and audio rehearsal coming next.)',
+    desc: 'Ten interview questions calibrated to the JD, with what they\'re really assessing, the weak vs strong answer, and your literal opening line. Like a hiring manager whispering in your ear.',
     ctaLabel: 'Generate my script',
     href: '/tools/rehearsal-room',
   },
 ]
 
-function CoreFourFeature() {
+function FeaturedToolsSection() {
   const [mounted, setMounted] = useState(false)
   React.useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60)
@@ -328,20 +347,96 @@ function CoreFourFeature() {
   return (
     <section
       style={{
-        padding: '20px 24px 80px',
+        padding: '20px 24px 60px',
         maxWidth: '900px',
         margin: '0 auto',
       }}
     >
+      {/* Free tier label */}
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '11px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.18em',
+            color: '#34D399',
+          }}
+        >
+          <span
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              background: '#34D399',
+            }}
+          />
+          Three free tools
+        </div>
+      </div>
+
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '20px',
+          marginBottom: '64px',
         }}
       >
-        {CORE_FOUR.map((tool, idx) => (
+        {FREE_TOOLS.map((tool, idx) => (
           <FeaturedCard key={tool.title} tool={tool} index={idx} mounted={mounted} />
+        ))}
+      </div>
+
+      {/* Member tier label */}
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '11px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.18em',
+            color: '#A78BFA',
+          }}
+        >
+          <span
+            style={{
+              width: '6px',
+              height: '6px',
+              borderRadius: '50%',
+              background: '#A78BFA',
+            }}
+          />
+          Three deep tools for members
+        </div>
+        <p
+          style={{
+            fontSize: '13px',
+            color: '#8B8AA0',
+            fontFamily: 'Figtree, sans-serif',
+            marginTop: '6px',
+            marginBottom: 0,
+          }}
+        >
+          Plus 5+ bonus inside looks. $20/year. Cancel anytime.
+        </p>
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '20px',
+        }}
+      >
+        {MEMBER_TOOLS.map((tool, idx) => (
+          <FeaturedCard key={tool.title} tool={tool} index={idx + FREE_TOOLS.length} mounted={mounted} />
         ))}
       </div>
     </section>
@@ -518,12 +613,15 @@ function FeaturedCard({
 
 // === Page ================================================================
 
-// Tools surfaced in the featured "Core Four" section above — exclude these
-// from the journey-organized list below so the same tool doesn't appear twice.
+// Tools surfaced in the featured section above — exclude these from the
+// journey-organized list below so the same tool doesn't appear twice.
 const FEATURED_LINKS = new Set<string>([
   '/resume',
+  '/tools/what-this-job-is',
+  '/tools/whats-breaking-search',
   '/tools/resume-recruiter-eyes',
   '/tools/linkedin-rewrite',
+  '/tools/rehearsal-room',
 ])
 
 function withoutFeatured(moments: typeof candidateMoments) {
@@ -662,12 +760,12 @@ export default function ToolsPage() {
             zIndex: 1,
           }}
         >
-          Four polished inside looks built by someone who has screened 10,000 resumes. One free forever, three for members. $20/year.
+          Three free tools and three for members. Built by someone who has screened 10,000 resumes and run thousands of interviews. $20/year for the deep ones.
         </p>
       </section>
 
       {/* Featured: The Four Inside Looks */}
-      <CoreFourFeature />
+      <FeaturedToolsSection />
 
       {/* Section break before the broader vision */}
       <section

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { RehearsalReport } from '@/components/rehearsal-report'
+import { ShareResult } from '@/components/share-result'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -331,6 +332,10 @@ export default function RehearsalRoomPage() {
             </div>
 
             <RehearsalReport result={result} isMember={isMemberUser} />
+
+            <div style={{ maxWidth: '820px', margin: '20px auto 0' }}>
+              <ShareResult source="rehearsal-room" variant="dark" />
+            </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <button

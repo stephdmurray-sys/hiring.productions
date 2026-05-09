@@ -185,7 +185,7 @@ export default function HomePage() {
             justifyContent: 'center',
             flexWrap: 'wrap',
           }}>
-            {['From a 20-year recruiter', 'Four polished inside looks', 'Free to start'].map((text) => (
+            {['From a 20-year recruiter', 'Three tools free, three for members', 'No fabricated specifics'].map((text) => (
               <div key={text} style={{
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -1435,7 +1435,7 @@ export default function HomePage() {
               marginTop: '10px',
               maxWidth: '440px',
             }}>
-              Jobscan charges $49.95/month for one tool. Four polished inside looks — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day.
+              Jobscan charges $49.95/month for one tool. Three deep inside looks — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day. Plus three free tools, no account required.
             </p>
           </div>
 

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { ShareResult } from '@/components/share-result'
 
 export default function WhatsBreakingSearchPage() {
   const [description, setDescription] = useState('')
@@ -50,9 +51,9 @@ export default function WhatsBreakingSearchPage() {
   return (
     <ToolPageShell
       toolName="What's Breaking Your Search"
-      toolDescription="See the real reason your applications aren't converting — with a specific diagnosis for your exact situation."
+      toolDescription="Describe your job search in your own words. Get one specific diagnosis from a 20-year recruiter — and a single 48-hour action that fixes it."
       category="candidate"
-      isFree={false}
+      isFree={true}
     >
       {/* Input Section */}
       <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
@@ -162,7 +163,15 @@ export default function WhatsBreakingSearchPage() {
             padding: '0 40px',
           }}
         >
-          <ToolResult result={result} />
+          <ToolResult
+            result={result}
+            cta={{
+              subtext: 'Now that you have the diagnosis, see what\'s actually on your resume that\'s causing it.',
+              label: 'Run my resume through a recruiter\'s eyes →',
+              href: '/tools/resume-recruiter-eyes',
+            }}
+          />
+          <ShareResult source="whats-breaking-search" variant="dark" />
         </div>
       )}
     </ToolPageShell>

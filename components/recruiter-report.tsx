@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+import { RepveraBridge } from '@/components/repvera-bridge'
 
 interface RecruiterReportProps {
   result: string
@@ -967,6 +968,9 @@ export function RecruiterReport({ result, isMember }: RecruiterReportProps) {
         }
         return element
       })}
+
+      {/* RepVera bridge — members see this; non-members see the upgrade card */}
+      {isMember && <RepveraBridge source="recruiter-eyes" variant="light" />}
 
       {/* Document footer */}
       <div

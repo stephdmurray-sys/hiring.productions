@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { RecruiterReport } from '@/components/recruiter-report'
+import { ShareResult } from '@/components/share-result'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -353,6 +354,11 @@ export default function ResumeRecruiterEyesPage() {
             </div>
 
             <RecruiterReport result={result} isMember={isMemberUser} />
+
+            {/* Share */}
+            <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
+              <ShareResult source="recruiter-eyes" variant="dark" />
+            </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <button

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FileText } from 'lucide-react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { ShareResult } from '@/components/share-result'
 
 export default function WhatThisJobIsPage() {
   const [jobDescription, setJobDescription] = useState('')
@@ -52,9 +53,9 @@ export default function WhatThisJobIsPage() {
   return (
     <ToolPageShell
       toolName="What This Job Actually Is"
-      toolDescription="See what's really between the lines of any job description — and whether it's worth your time."
+      toolDescription="Paste any job description. See what's really between the lines — the unstated requirements, the red flags, the salary read, and whether it's worth your time."
       category="candidate"
-      isFree={false}
+      isFree={true}
     >
       {/* Input Section */}
       <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
@@ -185,7 +186,15 @@ export default function WhatThisJobIsPage() {
             padding: '0 40px',
           }}
         >
-          <ToolResult result={result} />
+          <ToolResult
+            result={result}
+            cta={{
+              subtext: 'Want a recruiter\'s read on YOUR resume against this job? Members see exactly how their resume holds up.',
+              label: 'See your resume through a recruiter\'s eyes →',
+              href: '/tools/resume-recruiter-eyes',
+            }}
+          />
+          <ShareResult source="what-this-job-is" variant="dark" />
         </div>
       )}
     </ToolPageShell>
