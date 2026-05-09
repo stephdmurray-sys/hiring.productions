@@ -505,12 +505,25 @@ function SkillsToAddSection({ section, blurred }: { section: Section; blurred: b
 
 // === Settings to check ===============================================
 // Body lines are: - Setting name — what to set it to and why
+// Only split on em-dash / en-dash — plain hyphens appear naturally in
+// URLs, hyphenated words, and titles like "C-suite" or "full-cycle".
+function capFirst(s: string): string {
+  return s.length > 0 ? s.charAt(0).toUpperCase() + s.slice(1) : s
+}
+function stripQuotes(s: string): string {
+  return s.replace(/["“”]/g, '').trim()
+}
 function SettingsToCheckSection({ section, blurred }: { section: Section; blurred: boolean }) {
   const items: { name: string; advice: string }[] = []
   for (const raw of section.body.split('\n')) {
     const line = raw.trim()
-    const m = line.match(/^[-*]\s*([^—–-]+?)\s*[—–-]+\s*(.+)$/)
-    if (m) items.push({ name: m[1].trim().replace(/^"|"$/g, ''), advice: m[2].trim() })
+    const m = line.match(/^[-*]\s*(.+?)\s*[—–]+\s*(.+)$/)
+    if (m) {
+      items.push({
+        name: stripQuotes(m[1]),
+        advice: capFirst(m[2].trim()),
+      })
+    }
   }
 
   return (
@@ -585,12 +598,19 @@ function SettingsToCheckSection({ section, blurred }: { section: Section; blurre
 
 // === Recommendations strategy =======================================
 // Body lines are: - Who to ask — what to ask them to write about
+// Same rule as Settings: em-dash / en-dash only as separator. Capitalize
+// the body so it doesn't read as a sentence fragment after the heading.
 function RecommendationsStrategySection({ section, blurred }: { section: Section; blurred: boolean }) {
   const items: { who: string; ask: string }[] = []
   for (const raw of section.body.split('\n')) {
     const line = raw.trim()
-    const m = line.match(/^[-*]\s*(.+?)\s*[—–-]+\s*(.+)$/)
-    if (m) items.push({ who: m[1].trim(), ask: m[2].trim() })
+    const m = line.match(/^[-*]\s*(.+?)\s*[—–]+\s*(.+)$/)
+    if (m) {
+      items.push({
+        who: stripQuotes(m[1]),
+        ask: capFirst(m[2].trim()),
+      })
+    }
   }
 
   return (
