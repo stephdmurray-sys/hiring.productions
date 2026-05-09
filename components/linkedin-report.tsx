@@ -12,9 +12,12 @@ interface LinkedinReportProps {
 type SectionKind =
   | 'profileSignals'
   | 'searchKeywords'
+  | 'skillsToAdd'
   | 'headlineOptions'
+  | 'settingsToCheck'
   | 'aboutSection'
   | 'recentRole'
+  | 'recommendationsStrategy'
   | 'phraseToAvoid'
   | 'unknown'
 
@@ -24,12 +27,30 @@ interface Section {
   body: string
 }
 
+// Sections grouped by job. The render loop inserts a divider/title before
+// the first section in each job so the user knows what each suggestion is for.
+const JOB_1_KINDS: SectionKind[] = [
+  'searchKeywords',
+  'skillsToAdd',
+  'headlineOptions',
+  'settingsToCheck',
+]
+const JOB_2_KINDS: SectionKind[] = [
+  'aboutSection',
+  'recentRole',
+  'recommendationsStrategy',
+  'phraseToAvoid',
+]
+
 const HEADING_RULES: Array<{ kind: SectionKind; test: (h: string) => boolean }> = [
   { kind: 'profileSignals', test: (h) => /your\s*(reel|profile)\s*signals/i.test(h) },
   { kind: 'searchKeywords', test: (h) => /what\s*recruiters\s*search\s*for/i.test(h) },
+  { kind: 'skillsToAdd', test: (h) => /skills\s*you\s*should\s*add/i.test(h) },
   { kind: 'headlineOptions', test: (h) => /headline\s*[—-]?\s*rewritten/i.test(h) },
+  { kind: 'settingsToCheck', test: (h) => /^settings\s*to\s*check/i.test(h) },
   { kind: 'aboutSection', test: (h) => /about\s*section/i.test(h) },
   { kind: 'recentRole', test: (h) => /(most\s*recent|recent)\s*role/i.test(h) },
+  { kind: 'recommendationsStrategy', test: (h) => /recommendations?\s*strategy/i.test(h) },
   { kind: 'phraseToAvoid', test: (h) => /phrase\s*(to\s*(leave\s*behind|never\s*use))/i.test(h) },
 ]
 
@@ -413,6 +434,294 @@ function SearchKeywordsSection({ section, blurred }: { section: Section; blurred
   )
 }
 
+// === Skills to add section ============================================
+// Body lines are: - "Skill name" — reason
+function SkillsToAddSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const items: KeywordItem[] = []
+  for (const raw of section.body.split('\n')) {
+    const line = raw.trim()
+    const m = line.match(/^[-*]\s*"([^"]+)"\s*[—–-]+\s*(.+)$/)
+    if (m) items.push({ term: m[1].trim(), reason: m[2].trim() })
+  }
+
+  return (
+    <SectionShell
+      title="Skills to add to your Skills section"
+      accentColor="#7A6CFF"
+      eyebrow="The filter match"
+      description="LinkedIn matches recruiter skill filters literally. Add these so you appear in the right filtered searches — only ones that legitimately apply to your background."
+    >
+      <div
+        style={{
+          padding: '20px 22px',
+          background: '#FAFAFB',
+          border: '1px solid #ECECF2',
+          borderRadius: '10px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+          {items.map((item, i) => (
+            <li
+              key={`s-${i}`}
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'baseline',
+                gap: '10px',
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                borderTop: i === 0 ? 'none' : '1px solid #ECECF2',
+              }}
+            >
+              <span
+                style={{
+                  padding: '4px 10px',
+                  background: '#E8E4FF',
+                  color: '#3D2A8C',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  border: '1px solid rgba(108,71,255,0.2)',
+                  fontFamily: 'Figtree, sans-serif',
+                  flexShrink: 0,
+                }}
+              >
+                {item.term}
+              </span>
+              <span style={{ fontSize: '13.5px', color: '#3A3A4A', lineHeight: 1.55, flex: 1, minWidth: 0 }}>
+                {item.reason}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </SectionShell>
+  )
+}
+
+// === Settings to check ===============================================
+// Body lines are: - Setting name — what to set it to and why
+function SettingsToCheckSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const items: { name: string; advice: string }[] = []
+  for (const raw of section.body.split('\n')) {
+    const line = raw.trim()
+    const m = line.match(/^[-*]\s*([^—–-]+?)\s*[—–-]+\s*(.+)$/)
+    if (m) items.push({ name: m[1].trim().replace(/^"|"$/g, ''), advice: m[2].trim() })
+  }
+
+  return (
+    <SectionShell
+      title="Settings to check"
+      accentColor="#7A6CFF"
+      eyebrow="Outside the profile content"
+      description="Settings outside your profile copy that decide whether you appear in recruiter searches at all. Change these once and they keep working."
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        {items.map((item, i) => (
+          <div
+            key={`set-${i}`}
+            style={{
+              display: 'flex',
+              gap: '14px',
+              padding: '14px 18px',
+              background: '#FAFAFB',
+              border: '1px solid #ECECF2',
+              borderRadius: '10px',
+              alignItems: 'flex-start',
+            }}
+          >
+            <div
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '6px',
+                background: 'rgba(108,71,255,0.15)',
+                color: '#7A6CFF',
+                fontSize: '14px',
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+                marginTop: '1px',
+              }}
+            >
+              {i + 1}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                style={{
+                  fontSize: '14.5px',
+                  fontWeight: 700,
+                  color: '#1A1A22',
+                  marginBottom: '4px',
+                  fontFamily: 'Figtree, sans-serif',
+                }}
+              >
+                {item.name}
+              </div>
+              <div style={{ fontSize: '14px', color: '#3A3A4A', lineHeight: 1.6 }}>{item.advice}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </SectionShell>
+  )
+}
+
+// === Recommendations strategy =======================================
+// Body lines are: - Who to ask — what to ask them to write about
+function RecommendationsStrategySection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const items: { who: string; ask: string }[] = []
+  for (const raw of section.body.split('\n')) {
+    const line = raw.trim()
+    const m = line.match(/^[-*]\s*(.+?)\s*[—–-]+\s*(.+)$/)
+    if (m) items.push({ who: m[1].trim(), ask: m[2].trim() })
+  }
+
+  return (
+    <SectionShell
+      title="Recommendations strategy"
+      accentColor="#FF4F6A"
+      eyebrow="Your validation layer"
+      description="Recommendations from the right people are the social-proof recruiters actually weight. Specific, requested for a specific reason."
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        {items.map((item, i) => (
+          <div
+            key={`rec-${i}`}
+            style={{
+              padding: '16px 18px',
+              background: '#FAFAFB',
+              border: '1px solid #ECECF2',
+              borderRadius: '10px',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '10px',
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.12em',
+                color: '#FF4F6A',
+                marginBottom: '4px',
+              }}
+            >
+              Ask {i + 1}
+            </div>
+            <div
+              style={{
+                fontSize: '15px',
+                fontWeight: 700,
+                color: '#1A1A22',
+                marginBottom: '8px',
+                fontFamily: 'Figtree, sans-serif',
+              }}
+            >
+              {item.who}
+            </div>
+            <div style={{ fontSize: '14px', color: '#3A3A4A', lineHeight: 1.6 }}>{item.ask}</div>
+          </div>
+        ))}
+      </div>
+    </SectionShell>
+  )
+}
+
+// === Job-group divider (visible label between sections) ==============
+function JobGroupDivider({
+  jobNumber,
+  title,
+  why,
+  accent,
+}: {
+  jobNumber: 1 | 2
+  title: string
+  why: string
+  accent: string
+}) {
+  return (
+    <div
+      style={{
+        margin: '12px 0 36px',
+        padding: '24px 28px',
+        background: 'linear-gradient(135deg, #FAF6FF 0%, #FFF4F1 100%)',
+        borderRadius: '14px',
+        border: `1.5px solid ${accent}33`,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '14px',
+          marginBottom: '8px',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '11px',
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.18em',
+            color: accent,
+            flexShrink: 0,
+          }}
+        >
+          Job {jobNumber}
+        </div>
+        <div
+          style={{
+            height: '1px',
+            background: `${accent}33`,
+            flex: 1,
+          }}
+        />
+      </div>
+      <div
+        style={{
+          fontSize: '24px',
+          fontWeight: 900,
+          color: '#1A1A22',
+          letterSpacing: '-0.02em',
+          marginBottom: '8px',
+          fontFamily: 'Figtree, sans-serif',
+          lineHeight: 1.15,
+        }}
+      >
+        {title}
+      </div>
+      <div style={{ fontSize: '14px', color: '#5A5A6E', lineHeight: 1.55, fontStyle: 'italic' }}>
+        {why}
+      </div>
+    </div>
+  )
+}
+
 function HeadlineOptionsSection({ section, blurred }: { section: Section; blurred: boolean }) {
   // Lines starting with "1." / "2." / "3."
   const options: string[] = []
@@ -779,51 +1088,97 @@ export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
         </div>
       </div>
 
-      {sections.map((s, i) => {
-        const key = `s-${i}`
-        let element: ReactNode
+      {(() => {
+        // Render the sections in order, but inject "Job 1" / "Job 2" group
+        // dividers right before the first section that belongs to each job.
+        let job1HeaderDone = false
+        let job2HeaderDone = false
+        const out: ReactNode[] = []
 
-        // The "What your reel signals" section is always fully visible —
-        // it's the read, the hook. Everything else gets blurred for
-        // non-members.
-        const isProfileSignals = s.kind === 'profileSignals'
-        const blurred = !isMember && !isProfileSignals
+        sections.forEach((s, i) => {
+          const key = `s-${i}`
 
-        switch (s.kind) {
-          case 'profileSignals':
-            element = <ProfileSignalsSection key={key} section={s} />
-            break
-          case 'searchKeywords':
-            element = <SearchKeywordsSection key={key} section={s} blurred={blurred} />
-            break
-          case 'headlineOptions':
-            element = <HeadlineOptionsSection key={key} section={s} blurred={blurred} />
-            break
-          case 'aboutSection':
-            element = <AboutSectionRender key={key} section={s} blurred={blurred} />
-            break
-          case 'recentRole':
-            element = <RecentRoleSection key={key} section={s} blurred={blurred} />
-            break
-          case 'phraseToAvoid':
-            element = <PhraseToAvoidSection key={key} section={s} blurred={blurred} />
-            break
-          default:
-            element = null
-        }
+          // The "What your reel signals" section is always fully visible —
+          // it's the read, the hook. Everything else gets blurred for
+          // non-members.
+          const isProfileSignals = s.kind === 'profileSignals'
+          const blurred = !isMember && !isProfileSignals
 
-        // Insert upgrade card after the profile signals section for non-members
-        if (!isMember && isProfileSignals && !upgradeRendered) {
-          upgradeRendered = true
-          return (
-            <div key={key + '-wrap'}>
-              {element}
-              <InlineUpgradeCard />
-            </div>
-          )
-        }
-        return element
-      })}
+          // Render group dividers before the first section of each job
+          if (!job1HeaderDone && JOB_1_KINDS.includes(s.kind)) {
+            job1HeaderDone = true
+            out.push(
+              <JobGroupDivider
+                key={`job1-divider`}
+                jobNumber={1}
+                title="Get found in recruiter searches"
+                why="A recruiter for your target role uses LinkedIn Recruiter to filter from millions of profiles down to a few dozen. None of the rewrites below matter if you don't surface in their results. These are the moves that get you in the search."
+                accent="#7A6CFF"
+              />,
+            )
+          }
+          if (!job2HeaderDone && JOB_2_KINDS.includes(s.kind)) {
+            job2HeaderDone = true
+            out.push(
+              <JobGroupDivider
+                key={`job2-divider`}
+                jobNumber={2}
+                title="Be compelling once a recruiter clicks through"
+                why="A recruiter spends six to fifteen seconds on your profile before deciding whether to send InMail. These rewrites are what land that decision."
+                accent="#FF4F6A"
+              />,
+            )
+          }
+
+          let element: ReactNode = null
+          switch (s.kind) {
+            case 'profileSignals':
+              element = <ProfileSignalsSection key={key} section={s} />
+              break
+            case 'searchKeywords':
+              element = <SearchKeywordsSection key={key} section={s} blurred={blurred} />
+              break
+            case 'skillsToAdd':
+              element = <SkillsToAddSection key={key} section={s} blurred={blurred} />
+              break
+            case 'headlineOptions':
+              element = <HeadlineOptionsSection key={key} section={s} blurred={blurred} />
+              break
+            case 'settingsToCheck':
+              element = <SettingsToCheckSection key={key} section={s} blurred={blurred} />
+              break
+            case 'aboutSection':
+              element = <AboutSectionRender key={key} section={s} blurred={blurred} />
+              break
+            case 'recentRole':
+              element = <RecentRoleSection key={key} section={s} blurred={blurred} />
+              break
+            case 'recommendationsStrategy':
+              element = <RecommendationsStrategySection key={key} section={s} blurred={blurred} />
+              break
+            case 'phraseToAvoid':
+              element = <PhraseToAvoidSection key={key} section={s} blurred={blurred} />
+              break
+            default:
+              element = null
+          }
+
+          // Drop the upgrade card right after profileSignals for non-members
+          if (!isMember && isProfileSignals && !upgradeRendered) {
+            upgradeRendered = true
+            out.push(
+              <div key={`${key}-wrap`}>
+                {element}
+                <InlineUpgradeCard />
+              </div>,
+            )
+          } else {
+            out.push(element)
+          }
+        })
+
+        return out
+      })()}
 
       {/* Document footer */}
       <div

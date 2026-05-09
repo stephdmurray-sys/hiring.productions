@@ -8,10 +8,9 @@ import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 type ViewState = 'input' | 'loading' | 'result' | 'error'
 
 export default function LinkedinRewritePage() {
-  const [headline, setHeadline] = useState('')
-  const [about, setAbout] = useState('')
-  const [experience, setExperience] = useState('')
+  const [profile, setProfile] = useState('')
   const [targetRole, setTargetRole] = useState('')
+  const [jobDescription, setJobDescription] = useState('')
   const [state, setState] = useState<ViewState>('input')
   const [result, setResult] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -50,17 +49,25 @@ export default function LinkedinRewritePage() {
   }
 
   const runRewrite = async () => {
-    if (!headline.trim() || !about.trim() || !experience.trim()) {
-      alert('Paste your headline, About section, and most recent role.')
+    if (!profile.trim() || profile.trim().length < 200) {
+      alert('Paste more of your LinkedIn profile — at least your headline, About, and recent experience (200+ characters).')
       return
     }
+    if (!targetRole.trim()) {
+      alert('Add the role you\'re targeting. Every suggestion is tuned to it — without it the rewrites are generic.')
+      return
+    }
+
     setState('loading')
     setCurrentStep(0)
     const interval = startLoadingSteps()
 
     try {
-      const inputs: Record<string, string> = { headline, about, experience }
-      if (targetRole.trim()) inputs.targetRole = targetRole.trim()
+      const inputs: Record<string, string> = {
+        profile: profile.trim(),
+        targetRole: targetRole.trim(),
+      }
+      if (jobDescription.trim()) inputs.jobDescription = jobDescription.trim()
 
       const response = await fetch('/api/tool', {
         method: 'POST',
@@ -96,10 +103,9 @@ export default function LinkedinRewritePage() {
   }
 
   const startOver = () => {
-    setHeadline('')
-    setAbout('')
-    setExperience('')
+    setProfile('')
     setTargetRole('')
+    setJobDescription('')
     editAndRerun()
   }
 
@@ -200,50 +206,113 @@ export default function LinkedinRewritePage() {
               marginBottom: '24px',
             }}
           >
-            <div style={{ marginBottom: '24px' }}>
-              <label style={fieldLabel}>Your current headline</label>
-              <input
-                type="text"
-                value={headline}
-                onChange={(e) => setHeadline(e.target.value)}
-                placeholder="Paste your current LinkedIn headline exactly as it reads."
-                style={fieldInput}
-              />
-            </div>
-
-            <div style={{ marginBottom: '24px' }}>
-              <label style={fieldLabel}>Your current About section</label>
-              <textarea
-                value={about}
-                onChange={(e) => setAbout(e.target.value.slice(0, 4000))}
-                placeholder="Paste your current LinkedIn About section. If it's blank, write a few sentences about what you do and what you're looking for."
-                style={fieldTextarea}
-              />
-            </div>
-
-            <div style={{ marginBottom: '24px' }}>
-              <label style={fieldLabel}>Your most recent role description</label>
-              <textarea
-                value={experience}
-                onChange={(e) => setExperience(e.target.value.slice(0, 4000))}
-                placeholder="Paste your current job title, company, dates, and the bullets from your most recent LinkedIn experience section."
-                style={fieldTextarea}
-              />
-            </div>
-
+            {/* Required: target role first — every suggestion is tuned to it */}
             <div style={{ marginBottom: '24px' }}>
               <label style={fieldLabel}>
-                Target next role{' '}
-                <span style={{ color: '#6B6B7B', fontWeight: 500, textTransform: 'none', letterSpacing: 0 }}>
-                  — optional, but helps tune the rewrite
+                Role you&apos;re targeting{' '}
+                <span
+                  style={{
+                    color: '#FF4F6A',
+                    fontWeight: 800,
+                    textTransform: 'none',
+                    letterSpacing: 0,
+                    marginLeft: '4px',
+                  }}
+                >
+                  required
                 </span>
               </label>
               <input
                 type="text"
                 value={targetRole}
                 onChange={(e) => setTargetRole(e.target.value)}
-                placeholder="e.g. VP of People at a Series C company"
+                placeholder="e.g. VP of Talent at a Series C startup"
                 style={fieldInput}
+              />
+              <p
+                style={{
+                  marginTop: '8px',
+                  fontSize: '12px',
+                  color: '#8B8AA0',
+                  lineHeight: 1.5,
+                }}
+              >
+                Every keyword, headline option, and rewrite is tuned to this role. Without it, the suggestions can&apos;t be specific.
+              </p>
+            </div>
+
+            {/* Required: full LinkedIn profile, single paste box */}
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>
+                Your full LinkedIn profile{' '}
+                <span
+                  style={{
+                    color: '#FF4F6A',
+                    fontWeight: 800,
+                    textTransform: 'none',
+                    letterSpacing: 0,
+                    marginLeft: '4px',
+                  }}
+                >
+                  required
+                </span>
+              </label>
+              <textarea
+                value={profile}
+                onChange={(e) => setProfile(e.target.value.slice(0, 12000))}
+                placeholder={`On LinkedIn, go to your profile and copy: your headline, your About section, every recent role with its bullets, your skills section, and your education. Paste it all here in one go.
+
+Example structure:
+
+[Headline]
+Senior Director, Talent Acquisition | Building teams that scale
+
+[About]
+I'm a talent leader with 20 years...
+
+[Experience]
+Senior Director, Talent Acquisition — Brightside Health (2022–Present)
+- Built recruiting team from 2 to 8...
+- Reduced time-to-hire from 60 to 28 days...
+
+[Skills]
+Talent Acquisition, Executive Search, Sourcing, ...`}
+                style={{ ...fieldTextarea, minHeight: '320px' }}
+              />
+              <div
+                style={{
+                  marginTop: '8px',
+                  fontSize: '12px',
+                  color: '#8B8AA0',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span>One paste box; the model parses it into sections.</span>
+                <span>{profile.length.toLocaleString()} / 12,000</span>
+              </div>
+            </div>
+
+            {/* Optional: specific job description */}
+            <div style={{ marginBottom: '24px' }}>
+              <label style={fieldLabel}>
+                Specific job description{' '}
+                <span
+                  style={{
+                    color: '#6B6B7B',
+                    fontWeight: 500,
+                    textTransform: 'none',
+                    letterSpacing: 0,
+                  }}
+                >
+                  — optional, tightens the rewrite for this exact role
+                </span>
+              </label>
+              <textarea
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value.slice(0, 8000))}
+                placeholder="If you're targeting a specific posting, paste the full job description. The rewrites and keywords will tune to what THIS role asks for."
+                style={fieldTextarea}
               />
             </div>
 
@@ -267,8 +336,8 @@ export default function LinkedinRewritePage() {
 
             <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
               {isMemberUser
-                ? 'Members see the full rewrites.'
-                : 'See the recruiter’s read free. The rewrites are for members.'}
+                ? 'Members see everything: keywords, skills, settings, full rewrites, and recommendations strategy.'
+                : 'See the recruiter’s read free. The full report is for members.'}
             </p>
           </div>
         )}
