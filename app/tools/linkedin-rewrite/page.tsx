@@ -259,7 +259,8 @@ export default function LinkedinRewritePage() {
               </label>
               <textarea
                 value={profile}
-                onChange={(e) => setProfile(e.target.value.slice(0, 12000))}
+                onChange={(e) => setProfile(e.target.value)}
+                maxLength={12000}
                 placeholder={`On LinkedIn, go to your profile and copy: your headline, your About section, every recent role with its bullets, your skills section, and your education. Paste it all here in one go.
 
 Example structure:
@@ -310,7 +311,8 @@ Talent Acquisition, Executive Search, Sourcing, ...`}
               </label>
               <textarea
                 value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value.slice(0, 8000))}
+                onChange={(e) => setJobDescription(e.target.value)}
+                maxLength={8000}
                 placeholder="If you're targeting a specific posting, paste the full job description. The rewrites and keywords will tune to what THIS role asks for."
                 style={fieldTextarea}
               />

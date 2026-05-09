@@ -167,7 +167,8 @@ export default function ResumeCheckerPage() {
                 <div style={{ position: 'relative' }}>
                   <textarea
                     value={resumeText}
-                    onChange={(e) => setResumeText(e.target.value.slice(0, 6000))}
+                    onChange={(e) => setResumeText(e.target.value)}
+                    maxLength={6000}
                     placeholder="Paste your resume here — text only, no formatting needed."
                     style={{
                       width: '100%',

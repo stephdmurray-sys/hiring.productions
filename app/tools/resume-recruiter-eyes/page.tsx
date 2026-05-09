@@ -191,7 +191,8 @@ export default function ResumeRecruiterEyesPage() {
                 <div style={{ position: 'relative' }}>
                   <textarea
                     value={resumeText}
-                    onChange={(e) => setResumeText(e.target.value.slice(0, 8000))}
+                    onChange={(e) => setResumeText(e.target.value)}
+                    maxLength={8000}
                     placeholder="Paste your full resume here — text only. The more detail, the more accurate the read."
                     style={{
                       width: '100%',
@@ -242,7 +243,8 @@ export default function ResumeRecruiterEyesPage() {
                 </label>
                 <textarea
                   value={jdText}
-                  onChange={(e) => setJdText(e.target.value.slice(0, 8000))}
+                  onChange={(e) => setJdText(e.target.value)}
+                  maxLength={8000}
                   placeholder="Paste the full job description for the role you're targeting. Without this you'll get a general read; with it, you'll see exactly where you fit and where you don't."
                   style={{
                     width: '100%',
