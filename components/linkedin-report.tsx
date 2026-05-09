@@ -11,6 +11,7 @@ interface LinkedinReportProps {
 
 type SectionKind =
   | 'profileSignals'
+  | 'searchKeywords'
   | 'headlineOptions'
   | 'aboutSection'
   | 'recentRole'
@@ -25,6 +26,7 @@ interface Section {
 
 const HEADING_RULES: Array<{ kind: SectionKind; test: (h: string) => boolean }> = [
   { kind: 'profileSignals', test: (h) => /your\s*(reel|profile)\s*signals/i.test(h) },
+  { kind: 'searchKeywords', test: (h) => /what\s*recruiters\s*search\s*for/i.test(h) },
   { kind: 'headlineOptions', test: (h) => /headline\s*[—-]?\s*rewritten/i.test(h) },
   { kind: 'aboutSection', test: (h) => /about\s*section/i.test(h) },
   { kind: 'recentRole', test: (h) => /(most\s*recent|recent)\s*role/i.test(h) },
@@ -210,6 +212,202 @@ function ProfileSignalsSection({ section }: { section: Section }) {
         }}
       >
         {renderInline(section.body.trim(), 'profile-signals')}
+      </div>
+    </SectionShell>
+  )
+}
+
+// === Search keywords section ============================================
+// Body looks like:
+//   **Headline:**
+//   - "Term" — reason
+//   - "Term" — reason
+//   **Skills section:**
+//   - ...
+//   **About:**
+//   - ...
+//   **Experience bullets:**
+//   - ...
+
+interface KeywordItem {
+  term: string
+  reason: string
+}
+
+interface KeywordGroup {
+  location: string
+  iconLabel: string
+  description: string
+  items: KeywordItem[]
+}
+
+const LOCATION_META: Record<string, { iconLabel: string; description: string }> = {
+  Headline: {
+    iconLabel: 'Highest weight',
+    description: 'Search-weighted heaviest. Title variants here decide whether you appear at all.',
+  },
+  'Skills section': {
+    iconLabel: 'Direct match',
+    description: 'Where LinkedIn matches recruiter skill filters and rewards skill assessments.',
+  },
+  About: {
+    iconLabel: 'Keyword scan',
+    description: 'Searched in keyword scans. Phrasing matters; weave these in naturally.',
+  },
+  'Experience bullets': {
+    iconLabel: 'Evidence',
+    description: 'Becomes the proof a recruiter scans once they click through. Don\'t skip.',
+  },
+}
+
+function parseKeywordGroups(body: string): KeywordGroup[] {
+  const groups: KeywordGroup[] = []
+  let current: KeywordGroup | null = null
+  for (const raw of body.split('\n')) {
+    const line = raw.trim()
+    if (!line) continue
+    const sub = line.match(/^\*\*(.+?):?\*\*\s*$/)
+    if (sub) {
+      if (current) groups.push(current)
+      const location = sub[1].replace(/:$/, '').trim()
+      const meta = LOCATION_META[location] ?? {
+        iconLabel: 'Search-relevant',
+        description: 'Terms a recruiter would type when looking for this background.',
+      }
+      current = { location, iconLabel: meta.iconLabel, description: meta.description, items: [] }
+      continue
+    }
+    if (!current) continue
+    // Match -| "Term" — reason  OR  - "Term": reason
+    const m = line.match(/^[-*]\s*"([^"]+)"\s*[—–-]+\s*(.+)$/)
+    if (m) {
+      current.items.push({ term: m[1].trim(), reason: m[2].trim() })
+    }
+  }
+  if (current) groups.push(current)
+  return groups
+}
+
+function SearchKeywordsSection({ section, blurred }: { section: Section; blurred: boolean }) {
+  const groups = parseKeywordGroups(section.body)
+
+  return (
+    <SectionShell
+      title="What recruiters actually search for"
+      accentColor="#7A6CFF"
+      eyebrow="The search side of the audition"
+      description="LinkedIn Recruiter weights different sections of your profile differently. These are the exact terms recruiters type — grouped by where they need to live to surface you in their search."
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          filter: blurred ? 'blur(8px)' : undefined,
+          userSelect: blurred ? 'none' : undefined,
+          pointerEvents: blurred ? 'none' : undefined,
+        }}
+        aria-hidden={blurred}
+      >
+        {groups.map((g, i) => (
+          <div
+            key={`g-${i}`}
+            style={{
+              padding: '20px 22px',
+              background: '#FAFAFB',
+              borderRadius: '10px',
+              border: '1px solid #ECECF2',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'baseline',
+                marginBottom: '4px',
+                gap: '12px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '15px',
+                  fontWeight: 800,
+                  color: '#1A1A22',
+                  fontFamily: 'Figtree, sans-serif',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                {g.location}
+              </div>
+              <div
+                style={{
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.12em',
+                  color: '#7A6CFF',
+                  flexShrink: 0,
+                }}
+              >
+                {g.iconLabel}
+              </div>
+            </div>
+            <p
+              style={{
+                fontSize: '13px',
+                color: '#6B6B7B',
+                fontStyle: 'italic',
+                lineHeight: 1.5,
+                margin: '0 0 14px 0',
+              }}
+            >
+              {g.description}
+            </p>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+              {g.items.map((item, j) => (
+                <li
+                  key={`k-${i}-${j}`}
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'baseline',
+                    gap: '10px',
+                    paddingTop: '10px',
+                    paddingBottom: '10px',
+                    borderTop: j === 0 ? 'none' : '1px solid #ECECF2',
+                  }}
+                >
+                  <span
+                    style={{
+                      padding: '4px 10px',
+                      background: '#E8E4FF',
+                      color: '#3D2A8C',
+                      borderRadius: '6px',
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      border: '1px solid rgba(108,71,255,0.2)',
+                      fontFamily: 'Figtree, sans-serif',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {item.term}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '13.5px',
+                      color: '#3A3A4A',
+                      lineHeight: 1.55,
+                      flex: 1,
+                      minWidth: 0,
+                    }}
+                  >
+                    {item.reason}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </SectionShell>
   )
@@ -594,6 +792,9 @@ export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
         switch (s.kind) {
           case 'profileSignals':
             element = <ProfileSignalsSection key={key} section={s} />
+            break
+          case 'searchKeywords':
+            element = <SearchKeywordsSection key={key} section={s} blurred={blurred} />
             break
           case 'headlineOptions':
             element = <HeadlineOptionsSection key={key} section={s} blurred={blurred} />
