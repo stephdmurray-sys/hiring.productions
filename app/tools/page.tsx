@@ -309,12 +309,12 @@ const CORE_FOUR: FeaturedTool[] = [
     href: '/tools/linkedin-rewrite',
   },
   {
-    status: 'soon',
-    badge: 'Coming soon',
+    status: 'member',
+    badge: 'For members',
     title: 'The Rehearsal Room',
-    desc: 'Interview prep in a hiring manager’s voice. Generated questions, real-time answer evaluation, audio rehearsals.',
-    ctaLabel: 'Coming soon',
-    href: null,
+    desc: 'Interview prep in a hiring manager’s voice. Ten questions calibrated to the job description, with the weak vs strong answer pattern and your opening line. (Answer evaluation and audio rehearsal coming next.)',
+    ctaLabel: 'Generate my script',
+    href: '/tools/rehearsal-room',
   },
 ]
 
