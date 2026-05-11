@@ -19,11 +19,15 @@ const DEFAULT_CTA = {
   href: 'https://www.repvera.com',
 }
 
-// Match quoted phrases for highlight treatment.
+// Match inline spans we treat specially.
+//   **bold**          → bold weight
+//   `code`            → monospace pill (boolean strings, technical terms)
+//   "double quotes"   → lavender highlight pill (verbatim quoted phrases)
+//   “curly doubles”   → same
+//   ‘curly singles’   → same
 // Deliberately excludes straight single quotes (') because they appear inside
 // contractions (you're, that's, can't) and would wrap whole sentences.
-// Supports: **bold**, "double quotes", “curly doubles”, ‘curly singles’.
-const INLINE_PATTERN = /(\*\*[^*]+\*\*|"[^"]+"|“[^”]+”|‘[^’]+’)/g
+const INLINE_PATTERN = /(\*\*[^*]+\*\*|`[^`]+`|"[^"]+"|“[^”]+”|‘[^’]+’)/g
 
 function isQuoted(part: string) {
   if (!part) return false
@@ -45,6 +49,31 @@ function renderInline(text: string, keyPrefix: string) {
         <span key={`${keyPrefix}-${i}`} style={{ fontWeight: 600 }}>
           {part.replace(/\*\*/g, '')}
         </span>
+      )
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      // Monospace pill for boolean strings, code-like terms, technical syntax.
+      // wordBreak break-word so long boolean strings break gracefully on
+      // mobile instead of overflowing the card.
+      return (
+        <code
+          key={`${keyPrefix}-${i}`}
+          style={{
+            fontFamily:
+              '"SF Mono", "Roboto Mono", "Menlo", "Consolas", ui-monospace, monospace',
+            fontSize: '13.5px',
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.10)',
+            padding: '2px 7px',
+            borderRadius: '5px',
+            color: '#E8E6FF',
+            wordBreak: 'break-word',
+            boxDecorationBreak: 'clone',
+            WebkitBoxDecorationBreak: 'clone',
+          }}
+        >
+          {part.replace(/`/g, '')}
+        </code>
       )
     }
     if (isQuoted(part)) {
@@ -229,7 +258,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                 style={{
                   display: 'flex',
                   gap: '12px',
-                  marginBottom: '8px',
+                  marginBottom: '14px',
                   paddingLeft: '4px',
                 }}
               >
@@ -268,7 +297,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                 fontSize: '15px',
                 color: '#F2F0FF',
                 lineHeight: 1.85,
-                marginBottom: '4px',
+                marginBottom: '8px',
               }}
             >
               {renderInline(line, `r-${idx}`)}
