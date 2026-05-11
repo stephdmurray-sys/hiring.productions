@@ -164,7 +164,13 @@ export default function RootLayout({
           html, body { background-color: #0F0F12 !important; color: #F2F0FF; }
         `}} />
       </head>
-      <body style={{ backgroundColor: '#0F0F12', color: '#F2F0FF' }}>{children}</body>
+      <body style={{ backgroundColor: '#0F0F12', color: '#F2F0FF' }}>
+        {children}
+        {/* First-party pageview analytics — no cookies, GDPR-friendly.
+            Vercel auto-enables collection when this component is present;
+            data lives in Project → Analytics in the Vercel dashboard. */}
+        <Analytics />
+      </body>
     </html>
   )
 }
