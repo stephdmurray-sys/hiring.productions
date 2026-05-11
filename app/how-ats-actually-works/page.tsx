@@ -28,7 +28,7 @@ export default function HowATSActuallyWorksPage() {
         }
       ]}
       insideLook={{
-        name: "Would You Even Make It Through?",
+        name: "Would Your Resume Even Make It Through?",
         description: "Get your ATS score, missing keywords, and top 3 fixes before your next application.",
         href: "/tools/ats-reality",
         isFree: false

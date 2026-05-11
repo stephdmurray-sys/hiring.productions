@@ -30,14 +30,14 @@ const SHARE_COPY: Record<
     tweet:
       'Just ran my resume through hiring.productions to see if it reads as AI-written. The recruiter\'s verdict was harsh and specific — and free.',
     linkedin:
-      '49% of hiring managers auto-reject resumes they suspect were AI-written.\n\nI just ran mine through hiring.productions — a free tool that shows you exactly which lines on your resume give it away as AI, and what to rewrite (in your own voice).\n\nFounded by a 20-year recruiter who has read 10,000+ resumes. The output is direct, specific, and won\'t flatter you.\n\nRecommended.',
+      '49% of hiring managers auto-reject resumes they suspect were AI-written.\n\nI just ran mine through hiring.productions — a free tool that shows you exactly which lines on your resume give it away as AI, and what to rewrite (in your own voice).\n\nBuilt from real recruiting practice — by people who actually screen the resumes. The output is direct, specific, and won\'t flatter you.\n\nRecommended.',
   },
   'recruiter-eyes': {
     url: 'https://hiring.productions/tools/resume-recruiter-eyes',
     tweet:
       'hiring.productions just gave me the most honest read of my resume I\'ve ever gotten. They show you the recruiter\'s actual internal monologue — what they skip, what makes them pause, the call they make in 30 seconds.',
     linkedin:
-      'I\'ve gotten resume feedback dozens of times. None of it has been as direct as what hiring.productions just gave me.\n\nThe tool shows you the recruiter\'s actual internal monologue while reading your resume against a target job description. What they skip. What makes them pause. The call they make in 30 seconds.\n\nNo hedging, no encouragement, no fabricated metrics. Just specific.\n\nFounded by a 20-year recruiter. The framing — your resume as a script in a production — is doing real work.',
+      'I\'ve gotten resume feedback dozens of times. None of it has been as direct as what hiring.productions just gave me.\n\nThe tool shows you the recruiter\'s actual internal monologue while reading your resume against a target job description. What they skip. What makes them pause. The call they make in 30 seconds.\n\nNo hedging, no encouragement, no fabricated metrics. Just specific.\n\nBuilt from real recruiting practice. The framing — your resume as a script in a production — is doing real work.',
   },
   linkedin: {
     url: 'https://hiring.productions/tools/linkedin-rewrite',
@@ -63,9 +63,9 @@ const SHARE_COPY: Record<
   'whats-breaking-search': {
     url: 'https://hiring.productions/tools/whats-breaking-search',
     tweet:
-      'If your job search has stalled, hiring.productions has a free tool that gives you ONE specific diagnosis from a 20-year recruiter (not five maybes) and one 48-hour fix to start with. Worth running.',
+      'If your job search has stalled, hiring.productions has a free tool that gives you ONE specific diagnosis from real recruiting practice (not five maybes) and one 48-hour fix to start with. Worth running.',
     linkedin:
-      'If your job search has stalled — applications go out, nothing comes back — hiring.productions has a free diagnostic that gives you ONE specific reason and ONE 48-hour fix.\n\nWhat I appreciate: it commits to a diagnosis. No "could be many things." A 20-year recruiter telling you the actual mechanism that\'s breaking your conversion, and what to change today.\n\nIf you know someone who\'s stuck in a search, send them this.',
+      'If your job search has stalled — applications go out, nothing comes back — hiring.productions has a free diagnostic that gives you ONE specific reason and ONE 48-hour fix.\n\nWhat I appreciate: it commits to a diagnosis. No "could be many things." It tells you the actual mechanism that\'s breaking your conversion, and what to change today.\n\nIf you know someone who\'s stuck in a search, send them this.',
   },
 }
 

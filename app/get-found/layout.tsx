@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Get Found by Recruiters | LinkedIn Optimization Coaching',
-  description: 'LinkedIn profile optimization and recruiter search strategy for job seekers. Learn how recruiters actually search, what the LinkedIn algorithm ranks, and how to get surfaced before the job is even posted. 18+ years of recruiting expertise.',
+  description: 'LinkedIn profile optimization and recruiter search strategy for job seekers. Learn how recruiters actually search, what the LinkedIn algorithm ranks, and how to get surfaced before the job is even posted. 20 years of recruiting expertise.',
   keywords: [
     'LinkedIn optimization',
     'LinkedIn profile optimization',

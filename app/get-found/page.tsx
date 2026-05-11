@@ -46,7 +46,7 @@ export default function GetFoundPage() {
         <div className="award-dot"></div>
         <span className="award-text"><strong>Talent Strategy of the Year 2025</strong></span>
         <div className="award-dot"></div>
-        <span className="award-text">18+ Years Inside Recruiting</span>
+        <span className="award-text">20 Years Inside Recruiting</span>
       </div>
 
       {/* Problem Section */}
@@ -98,7 +98,7 @@ export default function GetFoundPage() {
         <div className="about-col">
           <p className="about-label">Background</p>
           <h2>Nearly two decades of <em>real results,</em> built inside recruiting.</h2>
-          <p>I&apos;ve spent 18+ years on the other side of the desk. Building sourcing engines, scaling hiring functions, coaching recruiters on how to find the right candidates fast. I know exactly what lights up in LinkedIn Recruiter and what gets scrolled past. I know the filters, the spotlights, the AI matching layer, and the 6-second scan. I&apos;ll teach you how to build a profile that wins that scan.</p>
+          <p>I&apos;ve spent nearly 20 years on the other side of the desk. Building sourcing engines, scaling hiring functions, coaching recruiters on how to find the right candidates fast. I know exactly what lights up in LinkedIn Recruiter and what gets scrolled past. I know the filters, the spotlights, the AI matching layer, and the 6-second scan. I&apos;ll teach you how to build a profile that wins that scan.</p>
         </div>
       </section>
 

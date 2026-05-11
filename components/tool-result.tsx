@@ -2,11 +2,15 @@
 
 interface ToolResultProps {
   result: string
+  /**
+   * In-card CTA. Pass `null` to suppress entirely — useful when a separate
+   * upsell panel is rendered below the result.
+   */
   cta?: {
     subtext: string
     label: string
     href: string
-  }
+  } | null
 }
 
 const DEFAULT_CTA = {
@@ -15,17 +19,35 @@ const DEFAULT_CTA = {
   href: 'https://www.repvera.com',
 }
 
+// Match quoted phrases for highlight treatment.
+// Deliberately excludes straight single quotes (') because they appear inside
+// contractions (you're, that's, can't) and would wrap whole sentences.
+// Supports: **bold**, "double quotes", “curly doubles”, ‘curly singles’.
+const INLINE_PATTERN = /(\*\*[^*]+\*\*|"[^"]+"|“[^”]+”|‘[^’]+’)/g
+
+function isQuoted(part: string) {
+  if (!part) return false
+  const first = part[0]
+  const last = part[part.length - 1]
+  return (
+    (first === '"' && last === '"') ||
+    (first === '“' && last === '”') ||
+    (first === '‘' && last === '’')
+  )
+}
+
 function renderInline(text: string, keyPrefix: string) {
-  const parts = text.split(/(["'][^"']*["']|\*\*[^*]+\*\*)/g)
+  const parts = text.split(INLINE_PATTERN)
   return parts.map((part, i) => {
-    if (part && part.startsWith('**') && part.endsWith('**')) {
+    if (!part) return part
+    if (part.startsWith('**') && part.endsWith('**')) {
       return (
         <span key={`${keyPrefix}-${i}`} style={{ fontWeight: 600 }}>
           {part.replace(/\*\*/g, '')}
         </span>
       )
     }
-    if (part && /(["'])(.+?)\1/.test(part)) {
+    if (isQuoted(part)) {
       return (
         <span
           key={`${keyPrefix}-${i}`}
@@ -204,10 +226,11 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
         })}
       </div>
 
-      {/* Divider */}
+      {/* CTA — overridable per tool. Pass cta={null} to hide entirely. */}
+      {cta !== null && (
+        <>
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '28px 0' }} />
 
-      {/* CTA — overridable per tool, defaults to RepVera */}
       <div style={{ textAlign: 'center' }}>
         <div
           style={{
@@ -238,6 +261,8 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
           {cta.label}
         </a>
       </div>
+        </>
+      )}
     </>
   )
 }

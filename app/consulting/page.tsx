@@ -5,15 +5,60 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import './consulting.css'
 
+// Submissions are routed through the same Google Apps Script endpoint used
+// for newsletter signups (see app/page.tsx). Inquiries land in the same
+// sheet tagged with tool='consulting-inquiry' — filter on that column.
+const CONSULTING_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbyUFzebPIPYH4nVKqOvbRDqtowfmIJzjFt-mB5kHPt9kxpE6e92pLupSUtXq-E8m7vk/exec'
+
 export default function ConsultingPage() {
   const [showModal, setShowModal] = useState(false)
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
-  const openModal = () => setShowModal(true)
+  const openModal = () => {
+    setShowModal(true)
+    setSubmitState('idle')
+  }
   const closeModal = () => setShowModal(false)
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       closeModal()
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSubmitState('submitting')
+
+    const formData = new FormData(e.currentTarget)
+    const payload = {
+      tool: 'consulting-inquiry',
+      audience: 'consulting',
+      fullName: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      role: formData.get('role'),
+      companyUrl: formData.get('company_url'),
+      hiringStage: formData.get('hiring_stage'),
+      goals: formData.get('goals'),
+      timeline: formData.get('timeline'),
+      source: formData.get('source'),
+      submittedAt: new Date().toISOString(),
+    }
+
+    try {
+      await fetch(CONSULTING_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+      })
+      setSubmitState('success')
+      ;(e.target as HTMLFormElement).reset()
+    } catch (err) {
+      console.error('Consulting form submission failed:', err)
+      setSubmitState('error')
     }
   }
 
@@ -47,7 +92,7 @@ export default function ConsultingPage() {
         <div className="hero-inner">
           <p className="hero-eyebrow">Talent Acquisition Consulting</p>
           <h1>Recruitment is <em>marketing.</em> Most organizations just haven&apos;t caught up yet.</h1>
-          <p className="hero-sub">18+ years building the strategies, systems, and stories that make organizations impossible to ignore — for the people they actually want to hire.</p>
+          <p className="hero-sub">Nearly 20 years building the strategies, systems, and stories that make organizations impossible to ignore — for the people they actually want to hire.</p>
           <div className="hero-ctas">
             <button onClick={openModal} className="btn-primary">Request Services</button>
             <a href="https://www.linkedin.com/in/stephaniemurray11/" target="_blank" rel="noopener noreferrer" className="btn-secondary">Follow on LinkedIn →</a>
@@ -198,7 +243,14 @@ export default function ConsultingPage() {
             <h2 className="modal-headline">Let&apos;s <em>talk strategy.</em></h2>
             <p className="modal-subhead">Tell me about your hiring goals and where things are stuck. I&apos;ll review and reach out within 48 hours if there&apos;s a fit.</p>
 
-            <form action="https://formspree.io/f/YOUR_CONSULTING_FORM_ID" method="POST" className="modal-form">
+            {submitState === 'success' ? (
+              <div className="form-success">
+                <h3>Got it.</h3>
+                <p>Your inquiry is in. I&apos;ll review and be in touch within 48 hours if there&apos;s a fit.</p>
+                <button type="button" className="btn-submit" onClick={closeModal}>Close</button>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} className="modal-form">
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" required />
@@ -281,11 +333,19 @@ export default function ConsultingPage() {
                 <input type="text" id="source" name="source" />
               </div>
 
-              <input type="hidden" name="_subject" value="New consulting inquiry" />
-              <input type="hidden" name="_replyto" value="" />
+              {submitState === 'error' && (
+                <p className="form-error">Something went wrong sending that. Please try again, or email directly via LinkedIn.</p>
+              )}
 
-              <button type="submit" className="btn-submit">Send Request</button>
+              <button
+                type="submit"
+                className="btn-submit"
+                disabled={submitState === 'submitting'}
+              >
+                {submitState === 'submitting' ? 'Sending...' : 'Send Request'}
+              </button>
             </form>
+            )}
           </div>
         </div>
       )}

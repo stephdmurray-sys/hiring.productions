@@ -516,16 +516,46 @@
   line-height: 1.6;
 }
 
+.get-found-page .modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.get-found-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.get-found-page .form-group label {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .get-found-page .form-group input,
 .get-found-page .form-group textarea {
   font-family: var(--font-sans);
   font-size: 0.95rem;
   padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
   color: var(--text);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.04);
+  width: 100%;
+  box-sizing: border-box;
   transition: all 0.2s;
+}
+
+.get-found-page .form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: var(--font-sans);
+  line-height: 1.5;
 }
 
 .get-found-page .form-group input:focus,
@@ -535,12 +565,59 @@
   box-shadow: 0 0 0 3px rgba(108,71,255,0.15);
 }
 
-.get-found-page .form-group label {
+.get-found-page .form-group input::placeholder,
+.get-found-page .form-group textarea::placeholder {
+  color: rgba(255,255,255,0.30);
+}
+
+.get-found-page .radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.get-found-page .radio-label {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--text);
-  letter-spacing: 0.02em;
+  cursor: pointer;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: all 0.15s ease;
+}
+
+.get-found-page .radio-label:hover {
+  background: rgba(108,71,255,0.08);
+  border-color: rgba(108,71,255,0.30);
+}
+
+.get-found-page .radio-label input[type="radio"] {
+  width: auto;
+  margin: 0;
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.get-found-page .radio-label span {
+  flex: 1;
+}
+
+.get-found-page .char-count {
+  margin: 4px 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.50);
+  text-align: right;
 }
 
 .get-found-page .btn-submit {

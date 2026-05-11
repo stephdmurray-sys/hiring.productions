@@ -32,14 +32,14 @@ export default function WhyAmINotGettingResponsesPage() {
         }
       ]}
       insideLook={{
-        name: "Where You Actually Have a Shot",
+        name: "Where You Actually Have a Shot at Interviews",
         description: "See which roles and companies are actually looking for your background — before you waste time applying.",
         href: "/tools/where-you-have-a-shot",
         isFree: false
       }}
       relatedLinks={[
-        { label: "Would You Even Make It Through?", href: "/tools/ats-reality" },
-        { label: "Where You Actually Have a Shot", href: "/tools/where-you-have-a-shot" }
+        { label: "Would Your Resume Even Make It Through?", href: "/tools/ats-reality" },
+        { label: "Where You Actually Have a Shot at Interviews", href: "/tools/where-you-have-a-shot" }
       ]}
     />
   )

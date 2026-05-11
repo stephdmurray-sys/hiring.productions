@@ -34,8 +34,8 @@ export default function WhatRecruitersReallyThinkPage() {
         isFree: false
       }}
       relatedLinks={[
-        { label: "Would You Even Make It Through?", href: "/tools/ats-reality" },
-        { label: "Where You Actually Have a Shot", href: "/tools/where-you-have-a-shot" }
+        { label: "Would Your Resume Even Make It Through?", href: "/tools/ats-reality" },
+        { label: "Where You Actually Have a Shot at Interviews", href: "/tools/where-you-have-a-shot" }
       ]}
     />
   )

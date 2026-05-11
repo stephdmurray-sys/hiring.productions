@@ -286,7 +286,24 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 whiteSpace: 'nowrap',
               }}
             >
-              Inside Looks
+              Tools
+            </Link>
+          </li>
+          <li style={{ listStyle: 'none' }}>
+            <Link
+              href="/sign-in"
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                color: pathname === '/sign-in' ? '#A78BFA' : '#F2F0FF',
+                textDecoration: 'none',
+                transition: 'color 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Sign in
             </Link>
           </li>
           <li style={{ listStyle: 'none' }}>
