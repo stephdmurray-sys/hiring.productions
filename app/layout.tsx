@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const figtree = Figtree({ 
@@ -170,6 +171,9 @@ export default function RootLayout({
             Vercel auto-enables collection when this component is present;
             data lives in Project → Analytics in the Vercel dashboard. */}
         <Analytics />
+        {/* Real-user Core Web Vitals (LCP, INP, CLS) — feeds the page-speed
+            ranking signals Google uses. Data in Project → Speed Insights. */}
+        <SpeedInsights />
       </body>
     </html>
   )
