@@ -1,0 +1,560 @@
+/**
+ * Single source of truth for the tools catalog.
+ *
+ * Every page that lists tools should pull from here so the brand-name,
+ * plain-English subtitle, free/Pro tier, and audience stay consistent
+ * across homepage, /tools, /membership, /pricing, and tool-gate.
+ */
+
+export type ToolTier = 'free' | 'pro' | 'soon'
+export type ToolAudience = 'candidate' | 'hiring'
+export type ToolStage =
+  | 'before-you-apply'
+  | 'when-you-apply'
+  | 'when-you-interview'
+  | 'when-you-get-an-offer'
+  | 'when-its-not-working'
+  | 'before-you-post'
+  | 'while-you-source'
+  | 'while-you-interview'
+  | 'when-you-extend'
+
+/** Color theme used to give visual variety to the catalog grid */
+export type ToolTheme =
+  | 'indigo' // resume / AI tools — brand home base
+  | 'blue' // LinkedIn tools — professional / familiar
+  | 'coral' // interview / heat
+  | 'emerald' // money / offer
+  | 'magenta' // diagnostic / strategy / pressure
+  | 'amber' // hiring team
+
+/** Icon names — must match a lucide-react icon */
+export type ToolIcon =
+  | 'Eye'
+  | 'Search'
+  | 'Edit3'
+  | 'MessageSquare'
+  | 'HelpCircle'
+  | 'Sparkles'
+  | 'FileText'
+  | 'Hash'
+  | 'DollarSign'
+  | 'AlertCircle'
+  | 'Filter'
+  | 'Target'
+  | 'Building2'
+  | 'MessageCircle'
+  | 'BarChart3'
+  | 'UserCheck'
+  | 'Send'
+  | 'CheckSquare'
+  | 'Mic'
+  | 'Mail'
+  | 'Map'
+  | 'Calendar'
+  | 'Star'
+
+export interface CatalogTool {
+  /** Brand-voice name (the question or hook) */
+  name: string
+  /** Plain-English label so a new visitor instantly knows what it does */
+  subtitle: string
+  /** One short, scannable description in brand voice */
+  desc: string
+  /** Tier */
+  tier: ToolTier
+  /** Audience */
+  audience: ToolAudience
+  /** Stage in the candidate / hiring journey */
+  stage: ToolStage
+  /** Internal route or external URL */
+  href: string
+  /** Outcome-oriented CTA verb for the card */
+  cta: string
+  /** Visual preview type — drives the card illustration (legacy, optional) */
+  preview: PreviewKind
+  /** Color theme — drives card background tint, glow, and accent */
+  theme: ToolTheme
+  /** Big "wow" line shown prominently on featured cards */
+  hook: string
+  /** Lucide icon name for the card header */
+  icon: ToolIcon
+}
+
+/**
+ * Preview shape names. Each one maps to a small CSS-rendered illustration
+ * that hints at what the tool's output looks like — much more useful than
+ * a generic icon, no image assets required.
+ */
+export type PreviewKind =
+  | 'recruiter-monologue'
+  | 'boolean-string'
+  | 'linkedin-rewrite'
+  | 'interview-question'
+  | 'question-decode'
+  | 'jd-decode'
+  | 'ai-score'
+  | 'keyword-gap'
+  | 'negotiation-script'
+  | 'search-diagnosis'
+  | 'culture-decode'
+  | 'pitch-rewrite'
+  | 'platform-rank'
+  | 'ats-score'
+  | 'jd-seo-score'
+  | 'jd-mirror'
+  | 'ai-candidate-flag'
+  | 'evaluation-rubric'
+  | 'interviewer-prep'
+  | 'sourcing-string'
+  | 'outreach-message'
+  | 'process-audit'
+  | 'day-one-plan'
+  | 'offer-read'
+  | 'gap-explainer'
+  | 'new-grad-resume'
+  | 'career-pivot'
+  | 'scam-flags'
+  | 'ghost-diagnosis'
+
+// =====================================================================
+// CANDIDATE TOOLS
+// =====================================================================
+
+export const CATALOG: CatalogTool[] = [
+  // --- FREE candidate tools (lead magnets / SEO entry points) -----------
+  {
+    name: 'Does My Resume Read as AI?',
+    subtitle: 'AI Resume Detector',
+    desc: 'See exactly which lines on your resume look AI-generated to a recruiter — and what to rewrite in your own voice.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/resume',
+    cta: 'Run my resume',
+    preview: 'ai-score',
+    theme: 'indigo',
+    hook: '49% of recruiters auto-reject AI resumes.',
+    icon: 'Sparkles',
+  },
+  {
+    name: 'What This Job Actually Is',
+    subtitle: 'Job Description Decoder',
+    desc: 'Paste any job description. Get the recruiter’s read on what the role really means, the unstated requirements, and an honest verdict on whether to apply.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/what-this-job-is',
+    cta: 'Decode the JD',
+    preview: 'jd-decode',
+    theme: 'magenta',
+    hook: '“fast-paced” → understaffed.',
+    icon: 'FileText',
+  },
+  {
+    name: 'What Words Are Recruiters Searching For?',
+    subtitle: 'Resume Keyword Scanner',
+    desc: 'Paste your resume + a job description. See the exact keywords recruiters are searching for that aren’t on your page — and where to add them.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/keyword-gap',
+    cta: 'Scan my resume',
+    preview: 'keyword-gap',
+    theme: 'indigo',
+    hook: 'The 6 words missing from your resume.',
+    icon: 'Hash',
+  },
+  {
+    name: 'How to Negotiate This Offer',
+    subtitle: 'Salary Negotiation Script Builder',
+    desc: 'Bring your offer + market data points. Get the exact script — opening line, response to “best offer,” the number to ask for.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-you-get-an-offer',
+    href: '/tools/what-youre-worth',
+    cta: 'Build my script',
+    preview: 'negotiation-script',
+    theme: 'emerald',
+    hook: 'The exact words to ask for more.',
+    icon: 'DollarSign',
+  },
+  {
+    name: 'What’s Breaking Your Job Search',
+    subtitle: 'Job Search Diagnostic',
+    desc: 'Tell us about your search. Get one specific diagnosis from real recruiting practice — not five maybes — and the single 48-hour fix to start with.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-its-not-working',
+    href: '/tools/whats-breaking-search',
+    cta: 'Diagnose my search',
+    preview: 'search-diagnosis',
+    theme: 'magenta',
+    hook: 'One diagnosis. One 48-hour fix.',
+    icon: 'AlertCircle',
+  },
+  {
+    name: 'How to Explain My Employment Gap',
+    subtitle: 'Employment Gap Explainer',
+    desc: 'Tell us when the gap happened and what you were actually doing. Get three honest scripts — resume one-liner, cover letter version, interview answer — written in your voice.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-its-not-working',
+    href: '/tools/explain-my-gap',
+    cta: 'Build my scripts',
+    preview: 'gap-explainer',
+    theme: 'magenta',
+    hook: 'Three ways to tell it true.',
+    icon: 'MessageCircle',
+  },
+  {
+    name: 'Your New Grad Resume',
+    subtitle: 'New Grad Resume Builder',
+    desc: 'For when you have no traditional experience. Section-by-section guidance plus real example bullets adapted to your degree, projects, and target role.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/new-grad-resume',
+    cta: 'Build my resume',
+    preview: 'new-grad-resume',
+    theme: 'emerald',
+    hook: 'What hiring managers want from new grads.',
+    icon: 'FileText',
+  },
+  {
+    name: 'Your Career Pivot, Translated',
+    subtitle: 'Career Change Resume Translator',
+    desc: 'Paste your bullets from your old field plus your target role. Get rewritten bullets that translate your transferable skills into the language of the new industry.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/career-pivot',
+    cta: 'Translate my experience',
+    preview: 'career-pivot',
+    theme: 'blue',
+    hook: 'Your past isn’t a liability. It’s positioning.',
+    icon: 'Edit3',
+  },
+  {
+    name: 'Is This Job Posting a Scam?',
+    subtitle: 'Scam Posting Detector',
+    desc: 'Paste any suspicious posting. Get a verdict, the specific red flags, the green flags that suggest it’s real, and exactly what to do next.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/scam-check',
+    cta: 'Check this posting',
+    preview: 'scam-flags',
+    theme: 'coral',
+    hook: 'Real jobs don’t text you on Telegram.',
+    icon: 'AlertCircle',
+  },
+  {
+    name: 'Have I Been Ghosted?',
+    subtitle: 'Recruiter Silence Decoder',
+    desc: 'Tell us where you are in their process and how long it’s been. Get an honest read on whether you’re ghosted, what’s actually happening on their side, and the follow-up to send.',
+    tier: 'free',
+    audience: 'candidate',
+    stage: 'when-its-not-working',
+    href: '/tools/ghosted',
+    cta: 'Decode the silence',
+    preview: 'ghost-diagnosis',
+    theme: 'magenta',
+    hook: 'Silence isn’t always rejection. Sometimes it’s bureaucracy.',
+    icon: 'Mail',
+  },
+
+  // --- PRO 5 (the flagship inside looks) --------------------------------
+  {
+    name: 'Through a Recruiter’s Eyes',
+    subtitle: 'Recruiter Resume Read',
+    desc: 'Hear what a recruiter actually thinks of your resume in the first six seconds. Line by line. The call they make at 0:06.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/resume-recruiter-eyes',
+    cta: 'Hear the read',
+    preview: 'recruiter-monologue',
+    theme: 'indigo',
+    hook: '6 seconds. Out loud.',
+    icon: 'Eye',
+  },
+  {
+    name: 'Would a Recruiter Even Find You?',
+    subtitle: 'LinkedIn Boolean Visibility Check',
+    desc: 'The exact boolean string a recruiter pastes into LinkedIn Recruiter to find candidates like you — and the precise reason your profile doesn’t surface.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/recruiter-find-you',
+    cta: 'Test my visibility',
+    preview: 'boolean-string',
+    theme: 'blue',
+    hook: 'The boolean string that finds — or hides — you.',
+    icon: 'Search',
+  },
+  {
+    name: 'Your LinkedIn — Rewritten',
+    subtitle: 'Full LinkedIn Profile Rewrite',
+    desc: 'Three headline options. A full About rewrite. Every recent role rewritten for impact. Tuned to the searches that matter.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/linkedin-rewrite',
+    cta: 'Rewrite mine',
+    preview: 'linkedin-rewrite',
+    theme: 'blue',
+    hook: 'Headline. About. Roles. Rewritten.',
+    icon: 'Edit3',
+  },
+  {
+    name: 'The Rehearsal Room',
+    subtitle: 'AI Interview Question Generator',
+    desc: 'Ten interview questions calibrated to your target role. What the interviewer is really assessing. The line that lands the answer.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-interview',
+    href: '/tools/rehearsal-room',
+    cta: 'Generate my prep',
+    preview: 'interview-question',
+    theme: 'coral',
+    hook: '10 questions. Calibrated to you.',
+    icon: 'Mic',
+  },
+  {
+    name: 'What They’re Really Asking',
+    subtitle: 'Interview Question Decoder',
+    desc: 'Decode any interview question. The competency the interviewer is actually assessing. The trap most candidates fall into. The opening line that signals you understood.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-interview',
+    href: '/tools/what-theyre-asking',
+    cta: 'Decode it',
+    preview: 'question-decode',
+    theme: 'coral',
+    hook: 'The real question underneath the question.',
+    icon: 'HelpCircle',
+  },
+
+  // --- PRO extras (also included with membership) ----------------------
+  {
+    name: 'Would Your Resume Even Make It Through?',
+    subtitle: 'ATS Screening Check',
+    desc: 'See if your resume passes the automated screen — what the ATS catches, what it misses, and three specific fixes to make it through.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/ats-reality',
+    cta: 'Run the check',
+    preview: 'ats-score',
+    theme: 'indigo',
+    hook: 'Pass the bots. Reach the human.',
+    icon: 'Filter',
+  },
+  {
+    name: 'Where You Actually Have a Shot at Interviews',
+    subtitle: 'Platform Response Rate Analyzer',
+    desc: 'Real data on which job platforms get responses for candidates like you. A platform strategy instead of spray-and-pray.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/where-you-have-a-shot',
+    cta: 'Show me where',
+    preview: 'platform-rank',
+    theme: 'magenta',
+    hook: 'Stop spraying. Start landing.',
+    icon: 'Target',
+  },
+  {
+    name: 'What This Company Feels Like to Work At',
+    subtitle: 'Culture Decoder',
+    desc: 'Paste any company’s About page or careers copy. Get a plain-English read on what their culture actually means in practice — who thrives, who leaves.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'before-you-apply',
+    href: '/tools/culture-decoder',
+    cta: 'Decode the culture',
+    preview: 'culture-decode',
+    theme: 'magenta',
+    hook: '“family” → late-night Slack.',
+    icon: 'Building2',
+  },
+  {
+    name: 'How You Actually Come Across',
+    subtitle: '“Tell Me About Yourself” Rewrite',
+    desc: 'Write how you’d describe yourself. Get an honest assessment of how it lands plus three rewrites — interview, networking, LinkedIn DM.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-interview',
+    href: '/tools/how-you-come-across',
+    cta: 'Rewrite my pitch',
+    preview: 'pitch-rewrite',
+    theme: 'coral',
+    hook: 'Three rewrites. Same you. Sharper.',
+    icon: 'MessageCircle',
+  },
+
+  // =====================================================================
+  // HIRING TEAM TOOLS
+  // =====================================================================
+
+  // --- FREE for hiring teams ------------------------------------------
+  {
+    name: 'Is Your Job Even Being Seen?',
+    subtitle: 'JD SEO Scorecard',
+    desc: 'Score your job description across every major platform candidates actually use. See exactly why your posting isn’t performing.',
+    tier: 'free',
+    audience: 'hiring',
+    stage: 'before-you-post',
+    href: '/jd-seo-score',
+    cta: 'Score my JD',
+    preview: 'jd-seo-score',
+    theme: 'amber',
+    hook: 'Score your JD across every platform.',
+    icon: 'BarChart3',
+  },
+
+  // --- PRO for hiring teams (placeholders; mark as "soon" if not built)
+  {
+    name: 'Your Job Post, Through Candidate Eyes',
+    subtitle: 'JD Reverse-Read',
+    desc: 'See your job description the way a strong candidate reads it — and exactly why they click away.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'before-you-post',
+    href: '/tools/jd-candidate-eyes',
+    cta: 'Coming soon',
+    preview: 'jd-mirror',
+    theme: 'amber',
+    hook: 'See why strong candidates click away.',
+    icon: 'Eye',
+  },
+  {
+    name: 'Is This Even a Real Candidate?',
+    subtitle: 'AI Application Detector',
+    desc: 'Paste any application. See whether it’s human-authored or AI-generated, and exactly what flagged it.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-source',
+    href: '/tools/real-candidate',
+    cta: 'Coming soon',
+    preview: 'ai-candidate-flag',
+    theme: 'coral',
+    hook: 'Human, or AI? Know in seconds.',
+    icon: 'UserCheck',
+  },
+  {
+    name: 'The Search String That Finds Your Candidate',
+    subtitle: 'Boolean Search Builder for Recruiters',
+    desc: 'Generate the exact boolean string to paste into LinkedIn Recruiter, Indeed, and Google to surface your ideal hire.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-source',
+    href: '/tools/boolean-builder',
+    cta: 'Coming soon',
+    preview: 'sourcing-string',
+    theme: 'amber',
+    hook: 'Boolean ready to paste.',
+    icon: 'Search',
+  },
+  {
+    name: 'How to Reach Out Without Being Ignored',
+    subtitle: 'Candidate Outreach Composer',
+    desc: 'Messages that actually get responses — not the templated openers everyone archives.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-source',
+    href: '/tools/candidate-outreach',
+    cta: 'Coming soon',
+    preview: 'outreach-message',
+    theme: 'amber',
+    hook: 'Messages they actually open.',
+    icon: 'Send',
+  },
+  {
+    name: 'What You’re Actually Evaluating',
+    subtitle: 'Structured Interview Scorecard',
+    desc: 'A structured scorecard that reduces gut-feel decisions and surfaces what actually matters for the role.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-interview',
+    href: '/tools/what-youre-evaluating',
+    cta: 'Coming soon',
+    preview: 'evaluation-rubric',
+    theme: 'amber',
+    hook: 'Replace gut-feel with signal.',
+    icon: 'CheckSquare',
+  },
+  {
+    name: 'Are Your Interviewers Even Ready?',
+    subtitle: 'Interviewer Prep Guide',
+    desc: 'A prep guide that stops you losing your best candidates to bad interviewers.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-interview',
+    href: '/tools/interviewers-ready',
+    cta: 'Coming soon',
+    preview: 'interviewer-prep',
+    theme: 'amber',
+    hook: 'Stop losing best candidates to bad interviews.',
+    icon: 'MessageSquare',
+  },
+  {
+    name: 'How Your Offer Actually Lands',
+    subtitle: 'Offer Letter Reverse-Read',
+    desc: 'See how your offer letter reads to a candidate with two competing offers on the table.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'when-you-extend',
+    href: '/tools/offer-lands',
+    cta: 'Coming soon',
+    preview: 'offer-read',
+    theme: 'emerald',
+    hook: 'How your offer reads against two others.',
+    icon: 'Mail',
+  },
+  {
+    name: 'Your Hiring Process, From the Outside',
+    subtitle: 'Candidate Experience Audit',
+    desc: 'Every step of your process through a candidate’s eyes — where strong ones drop out, and why.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'while-you-interview',
+    href: '/tools/hiring-process-outside',
+    cta: 'Coming soon',
+    preview: 'process-audit',
+    theme: 'amber',
+    hook: 'Where the strong ones drop out.',
+    icon: 'Map',
+  },
+  {
+    name: 'What Day One Actually Looks Like',
+    subtitle: 'Onboarding Plan Reverse-Read',
+    desc: 'See your onboarding the way a new hire experiences it — and where they form an early opinion that sticks.',
+    tier: 'soon',
+    audience: 'hiring',
+    stage: 'when-you-extend',
+    href: '/tools/day-one',
+    cta: 'Coming soon',
+    preview: 'day-one-plan',
+    theme: 'amber',
+    hook: 'The early read that sticks.',
+    icon: 'Calendar',
+  },
+]
+
+// Convenience filters
+export const FREE_TOOLS = CATALOG.filter((t) => t.tier === 'free')
+export const PRO_TOOLS = CATALOG.filter((t) => t.tier === 'pro')
+export const SOON_TOOLS = CATALOG.filter((t) => t.tier === 'soon')
+export const CANDIDATE_TOOLS = CATALOG.filter((t) => t.audience === 'candidate')
+export const HIRING_TOOLS = CATALOG.filter((t) => t.audience === 'hiring')
+
+/** The 5 flagship Pro tools (the ones featured in the upsell card) */
+export const FLAGSHIP_PRO = [
+  'Through a Recruiter’s Eyes',
+  'Would a Recruiter Even Find You?',
+  'Your LinkedIn — Rewritten',
+  'The Rehearsal Room',
+  'What They’re Really Asking',
+] as const

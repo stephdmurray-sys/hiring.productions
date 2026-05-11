@@ -18,6 +18,10 @@ const forCompanies = [
 
 const forCandidates = [
   { href: '/for-candidates', label: 'For Candidates' },
+  { href: '/for-new-grads', label: 'For New Grads' },
+  { href: '/after-layoff', label: 'After a Layoff' },
+  { href: '/career-changers', label: 'For Career Changers' },
+  { href: '/returning-to-work', label: 'Returning to Work' },
   { href: '/stand-out', label: 'Stand Out in the Crowd' },
   { href: '/resume', label: 'Does My Resume Read as AI?' },
   { href: '/linkedin-guide', label: 'LinkedIn Guide' },
