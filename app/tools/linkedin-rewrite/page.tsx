@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { LinkedinReport } from '@/components/linkedin-report'
 import { ShareResult } from '@/components/share-result'
+import { InputPromptCard } from '@/components/input-prompt-card'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -258,27 +259,21 @@ export default function LinkedinRewritePage() {
                   required
                 </span>
               </label>
+              <InputPromptCard
+                title="Open your LinkedIn profile and copy each of these into the box:"
+                prompts={[
+                  'Your headline',
+                  'Your About section',
+                  'Every recent role with its bullets',
+                  'Your skills section',
+                  'Your education',
+                ]}
+              />
               <textarea
                 value={profile}
                 onChange={(e) => setProfile(e.target.value)}
                 maxLength={12000}
-                placeholder={`On LinkedIn, go to your profile and copy: your headline, your About section, every recent role with its bullets, your skills section, and your education. Paste it all here in one go.
-
-Example structure:
-
-[Headline]
-Senior Director, Talent Acquisition | Building teams that scale
-
-[About]
-I'm a talent leader with 20 years...
-
-[Experience]
-Senior Director, Talent Acquisition — Brightside Health (2022–Present)
-- Built recruiting team from 2 to 8...
-- Reduced time-to-hire from 60 to 28 days...
-
-[Skills]
-Talent Acquisition, Executive Search, Sourcing, ...`}
+                placeholder="Paste it all here in one go. The model will parse it into sections."
                 style={{ ...fieldTextarea, minHeight: '320px' }}
               />
               <div

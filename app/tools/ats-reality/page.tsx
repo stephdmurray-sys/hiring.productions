@@ -53,7 +53,7 @@ export default function ATSRealityPage() {
 
   return (
     <ToolPageShell
-      toolName="Would You Even Make It Through?"
+      toolName="Would Your Resume Even Make It Through?"
       toolDescription="See exactly how automated screening scores your resume before a human ever sees it."
       category="candidate"
       isFree={false}

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Building2 } from 'lucide-react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { InputPromptCard } from '@/components/input-prompt-card'
 
 export default function CultureDecoderPage() {
   const [sourceType, setSourceType] = useState('About / Values page')
@@ -118,8 +119,17 @@ export default function CultureDecoderPage() {
         >
           PASTE THE COMPANY COPY
         </label>
+        <InputPromptCard
+          title="Paste any combination of these — the more you paste, the more accurate the read:"
+          prompts={[
+            'Their About page',
+            'Their values statement',
+            'A current job posting',
+            'Anything from their careers site',
+          ]}
+        />
         <textarea
-          placeholder="Paste their About page, values statement, job posting, or any combination. The more you paste the more accurate the read."
+          placeholder="Paste it all here."
           value={companyCopy}
           onChange={(e) => setCompanyCopy(e.target.value)}
           rows={12}

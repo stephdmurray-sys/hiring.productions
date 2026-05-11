@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { MessageSquare } from 'lucide-react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { InputPromptCard } from '@/components/input-prompt-card'
 
 export default function HowYouComeAcrossPage() {
   const [description, setDescription] = useState('')
@@ -74,11 +75,20 @@ export default function HowYouComeAcrossPage() {
           HOW WOULD YOU DESCRIBE YOURSELF PROFESSIONALLY?
         </label>
 
+        <InputPromptCard
+          title="Write it like you’d actually say it out loud. Try to cover:"
+          prompts={[
+            'What you do',
+            'What you’re known for',
+            'What you’re looking for next',
+          ]}
+        />
+
         {/* Description Textarea */}
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Write it like you'd actually say it out loud. Don't overthink it — just write what you'd say if someone asked 'so tell me about yourself.' Include what you do, what you're known for, and what you're looking for next."
+          placeholder="Don’t overthink it. Just say what you’d say if someone asked, “so tell me about yourself.”"
           rows={8}
           style={{
             width: '100%',

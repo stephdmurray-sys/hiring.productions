@@ -57,7 +57,7 @@ export default function WhereYouHaveAShotPage() {
 
   return (
     <ToolPageShell
-      toolName="Where You Actually Have a Shot"
+      toolName="Where You Actually Have a Shot at Interviews"
       toolDescription="See which platforms actually respond to candidates like you — backed by real data."
       category="candidate"
       isFree={false}

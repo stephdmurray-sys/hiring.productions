@@ -3,20 +3,24 @@
 import { useState } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { InputPromptCard } from '@/components/input-prompt-card'
+import { ProUpsellPanel } from '@/components/pro-upsell-panel'
+import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 
-export default function WhatYoureWorthPage() {
+export default function NegotiateThisOfferPage() {
   const [roleTitle, setRoleTitle] = useState('')
   const [location, setLocation] = useState('')
   const [experience, setExperience] = useState('')
   const [offer, setOffer] = useState('')
+  const [marketData, setMarketData] = useState('')
   const [companyType, setCompanyType] = useState('')
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const handleSubmit = async () => {
-    if (!roleTitle.trim() || !location.trim() || !experience.trim() || !offer.trim()) {
-      setError('Please fill in your role, location, experience, and current/pending offer.')
+    if (!roleTitle.trim() || !location.trim() || !experience.trim() || !offer.trim() || !marketData.trim()) {
+      setError('Fill in role, location, experience, your offer, and at least one market data point.')
       return
     }
 
@@ -35,6 +39,7 @@ export default function WhatYoureWorthPage() {
             location,
             experience,
             offer,
+            marketData,
             ...(companyType && { companyType }),
           },
         }),
@@ -43,7 +48,7 @@ export default function WhatYoureWorthPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error || 'Failed to read the market')
+        setError(data.error || 'Failed to build your script')
       } else {
         setResult(data.result)
       }
@@ -55,209 +60,136 @@ export default function WhatYoureWorthPage() {
     }
   }
 
-  const canSubmit = roleTitle.trim() && location.trim() && experience.trim() && offer.trim()
+  const filledCount = [roleTitle, location, experience, offer, marketData].filter((v) => v.trim()).length
+  const canSubmit = filledCount === 5
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    background: 'rgba(255,255,255,0.04)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: '10px',
+    padding: '14px 18px',
+    fontFamily: "'Figtree', sans-serif",
+    fontWeight: 400,
+    fontSize: '15px',
+    color: '#F2F0FF',
+    transition: 'border-color 0.2s',
+    outline: 'none',
+    boxSizing: 'border-box',
+  }
 
   return (
     <ToolPageShell
-      toolName="What You're Actually Worth"
-      toolDescription="See what the market actually says about your compensation — and get a word-for-word salary negotiation script."
+      toolName="How to Negotiate This Offer"
+      toolDescription="Bring your offer + a few market data points. Get the exact script — opening line, response to “this is our best offer,” and the specific number to ask for."
       category="candidate"
-      isFree={false}
+      isFree={true}
     >
-      {/* Input Section */}
       <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
-        {/* Role Title */}
-        <label
+        {/* Where to get market data — sourced */}
+        <InputPromptCard
+          title="Step 1 — Get your market data points (we don't make these up):"
+          prompts={[
+            'Tech roles: levels.fyi (most accurate for engineering, PM, design)',
+            'General: payscale.com or glassdoor.com (search your title + city)',
+            'Government data: bls.gov/oes (Bureau of Labor Statistics)',
+            'Senior + executive: robert half salary guide (free PDF)',
+            'Bring 2–3 numbers you find. We use yours, not ours.',
+          ]}
+        />
+
+        <div
           style={{
-            display: 'block',
+            background: 'rgba(108,71,255,0.06)',
+            border: '1px solid rgba(108,71,255,0.18)',
+            borderRadius: '10px',
+            padding: '16px 20px',
+            marginTop: '12px',
+            marginBottom: '24px',
             fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
+            fontSize: '13px',
+            fontWeight: 500,
+            color: '#C9C7DA',
+            lineHeight: 1.6,
           }}
         >
-          YOUR ROLE TITLE
-        </label>
+          <strong style={{ color: '#F2F0FF' }}>Why we ask:</strong> AI compensation estimates go
+          stale fast. The script we build is only as accurate as the market data you bring in. Spend
+          5 minutes on the sites above first — then come back.
+        </div>
+
+        <RequiredFormHeader filledCount={filledCount} totalRequired={5} />
+
+        {/* Role Title */}
+        <RequiredLabel label="Your role title" filled={!!roleTitle.trim()} first />
         <input
           type="text"
           value={roleTitle}
           onChange={(e) => setRoleTitle(e.target.value)}
           placeholder="e.g. Senior Director of Talent Acquisition"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+          style={inputStyle}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
         {/* Location */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          YOUR LOCATION
-        </label>
+        <RequiredLabel label="Your location" filled={!!location.trim()} />
         <input
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           placeholder="e.g. Seattle WA, Remote (US), New York City"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+          style={inputStyle}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
         {/* Experience */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          YEARS OF EXPERIENCE
-        </label>
+        <RequiredLabel label="Years of experience" filled={!!experience.trim()} />
         <input
           type="text"
           value={experience}
           onChange={(e) => setExperience(e.target.value)}
           placeholder="e.g. 12 years in TA, 4 years at director level"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+          style={inputStyle}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
         {/* Current or Pending Offer */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          CURRENT OR PENDING OFFER
-        </label>
+        <RequiredLabel label="Current or pending offer" filled={!!offer.trim()} />
         <input
           type="text"
           value={offer}
           onChange={(e) => setOffer(e.target.value)}
-          placeholder="e.g. $115,000 base + 10% bonus, or 'no offer yet — researching market rate'"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+          placeholder="e.g. $115,000 base + 10% bonus, or 'no offer yet — preparing for the call'"
+          style={inputStyle}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+        />
+
+        {/* Market Data — REQUIRED, user-supplied */}
+        <RequiredLabel label="Market data you found" filled={!!marketData.trim()} />
+        <textarea
+          value={marketData}
+          onChange={(e) => setMarketData(e.target.value)}
+          placeholder="Paste the numbers you found and where they came from. Example: 'Levels.fyi median for Sr. Director TA, Seattle: $185K base. Payscale: $145–195K range. Glassdoor (3 listings): $160K–210K total comp.'"
+          rows={5}
+          style={{ ...inputStyle, resize: 'vertical', minHeight: '110px' }}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
         {/* Company Type (Optional) */}
-        <label
-          style={{
-            display: 'block',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            color: '#8B8AA0',
-            marginBottom: '8px',
-            marginTop: '20px',
-          }}
-        >
-          COMPANY TYPE (OPTIONAL)
-        </label>
+        <RequiredLabel label="Company type" filled={!!companyType.trim()} required={false} />
         <input
           type="text"
           value={companyType}
           onChange={(e) => setCompanyType(e.target.value)}
           placeholder="e.g. Series B startup, Fortune 500, healthcare nonprofit"
-          style={{
-            width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '10px',
-            padding: '14px 18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '15px',
-            color: '#F2F0FF',
-            transition: 'border-color 0.2s',
-            outline: 'none',
-            boxSizing: 'border-box',
-          }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = '#6C47FF' }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)' }}
+          style={inputStyle}
+          onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
         {/* Submit Button */}
@@ -267,20 +199,27 @@ export default function WhatYoureWorthPage() {
           style={{
             width: '100%',
             marginTop: '24px',
-            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-            border: 'none',
+            background: !canSubmit
+              ? 'rgba(255,255,255,0.05)'
+              : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+            border: !canSubmit ? '1px solid rgba(255,255,255,0.10)' : 'none',
             borderRadius: '10px',
             padding: '15px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 800,
             fontSize: '16px',
-            color: 'white',
+            color: !canSubmit ? '#6B6A82' : 'white',
             cursor: loading || !canSubmit ? 'not-allowed' : 'pointer',
-            opacity: loading || !canSubmit ? 0.7 : 1,
-            transition: 'opacity 0.2s',
+            transition: 'all 0.2s',
           }}
         >
-          {loading ? 'Reading the market...' : result ? 'Read again' : 'Read the market'}
+          {loading
+            ? 'Building your script...'
+            : !canSubmit
+            ? `Fill ${5 - filledCount} more required field${5 - filledCount === 1 ? '' : 's'}`
+            : result
+            ? 'Build it again'
+            : 'Build my script'}
         </button>
 
         {/* Error Messages */}
@@ -314,7 +253,11 @@ export default function WhatYoureWorthPage() {
             padding: '0 40px',
           }}
         >
-          <ToolResult result={result} />
+          <ToolResult result={result} cta={null} />
+          <ProUpsellPanel
+            recommend={['The Rehearsal Room', 'What They’re Really Asking']}
+            heading="Rehearse the interview before you negotiate the offer."
+          />
         </div>
       )}
     </ToolPageShell>

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FileText } from 'lucide-react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
-import { ShareResult } from '@/components/share-result'
+import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 
 export default function WhatThisJobIsPage() {
   const [jobDescription, setJobDescription] = useState('')
@@ -186,15 +186,11 @@ export default function WhatThisJobIsPage() {
             padding: '0 40px',
           }}
         >
-          <ToolResult
-            result={result}
-            cta={{
-              subtext: 'Want a recruiter\'s read on YOUR resume against this job? Members see exactly how their resume holds up.',
-              label: 'See your resume through a recruiter\'s eyes →',
-              href: '/tools/resume-recruiter-eyes',
-            }}
+          <ToolResult result={result} cta={null} />
+          <ProUpsellPanel
+            recommend={['Through a Recruiter’s Eyes', 'Would Your Resume Even Make It Through?']}
+            heading="Now see how your resume stacks up against this job."
           />
-          <ShareResult source="what-this-job-is" variant="dark" />
         </div>
       )}
     </ToolPageShell>

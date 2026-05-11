@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { ResumeReport } from '@/components/resume-report'
-import { ShareResult } from '@/components/share-result'
+import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import './resume.css'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -325,53 +325,11 @@ export default function ResumeCheckerPage() {
 
             <ResumeReport result={result} />
 
-            {/* Share */}
-            <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
-              <ShareResult source="resume-ai-checker" variant="dark" />
-            </div>
-
-            {/* Soft CTA below the document — outside the 'paper' so the report feels complete */}
-            <div
-              style={{
-                maxWidth: '780px',
-                margin: '32px auto 0',
-                padding: '24px 28px',
-                background: 'rgba(108,71,255,0.08)',
-                border: '1px solid rgba(108,71,255,0.2)',
-                borderRadius: '12px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  fontSize: '13px',
-                  color: '#A78BFA',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  marginBottom: '8px',
-                }}
-              >
-                Want to go deeper?
-              </div>
-              <div style={{ fontSize: '16px', color: '#F2F0FF', marginBottom: '14px', lineHeight: 1.5 }}>
-                That was the AI tells. <strong style={{ fontWeight: 700 }}>Your resume through a recruiter&apos;s eyes</strong> shows you the whole internal monologue — what they skip, what makes them pause, and the call they make in 30 seconds.
-              </div>
-              <a
-                href="/tools/resume-recruiter-eyes"
-                style={{
-                  fontFamily: 'Figtree, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '14px',
-                  background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  textDecoration: 'none',
-                }}
-              >
-                See your resume through a recruiter&apos;s eyes →
-              </a>
+            <div style={{ maxWidth: '780px', margin: '32px auto 0' }}>
+              <ProUpsellPanel
+                recommend={['Through a Recruiter’s Eyes', 'Would Your Resume Even Make It Through?']}
+                heading="That was the AI tells. Now hear what a recruiter actually thinks."
+              />
             </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
