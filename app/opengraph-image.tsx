@@ -119,7 +119,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          Free tools and the five inside looks every recruiter wishes you knew.
+          Free tools and the inside looks every recruiter wishes you knew.
         </div>
       </div>
     ),

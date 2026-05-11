@@ -219,7 +219,7 @@ export function ProUpsellPanel({
               color: '#9D9CB3',
             }}
           >
-            All five inside looks for{' '}
+            The whole production for{' '}
             <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$20/year</span>. Cancel anytime.
           </div>
           <Link

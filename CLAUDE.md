@@ -19,6 +19,7 @@ The product is the moment of recognition: *"Wait. Is this what's been happening 
 - **Specificity over encouragement.** Don't soften the truth to make people feel better. The directness is the value.
 - **Both sides over either side.** Every candidate-facing piece should imply the hiring side exists, and vice versa. That bilateral perspective is what nobody else has.
 - **Tool names are questions the user is already asking.** "Would a recruiter even find you?" not "LinkedIn Visibility Optimizer."
+- **Never hardcode tool counts in marketing copy.** "Five inside looks" goes out of date the moment we ship a sixth. Use "the whole production" / "every inside look" / "all your inside looks" instead. The only place a count is allowed is a list/grid where the number is derived from the catalog at render time.
 - **The voice is Stephanie talking to a colleague over coffee.** Direct. Specific. Occasionally dry-funny. Never performing expertise — just having it.
 
 ## Phrases that define the voice (use these patterns, not the ones on the right)

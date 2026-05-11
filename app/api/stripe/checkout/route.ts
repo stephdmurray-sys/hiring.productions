@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
             product_data: {
               name: 'hiring.productions Pro',
               description:
-                'Five polished inside looks built from real recruiting practice. Use them on every resume tweak and every job description.',
+                'The whole production — every polished inside look, built from real recruiting practice. Use them on every resume tweak and every job description.',
             },
             unit_amount: 2000,
             recurring: { interval: 'year' },

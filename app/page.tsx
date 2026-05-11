@@ -187,7 +187,7 @@ export default function HomePage() {
             justifyContent: 'center',
             flexWrap: 'wrap',
           }}>
-            {['Built from real recruiting practice', 'Ten tools free, five inside looks for $20/year', 'No fabricated specifics'].map((text) => (
+            {['Built from real recruiting practice', 'Free tools to start. Members get the whole production for $20/year.', 'No fabricated specifics'].map((text) => (
               <div key={text} style={{
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -1392,7 +1392,7 @@ export default function HomePage() {
               letterSpacing: '-0.02em',
               color: '#F2F0FF',
             }}>
-              Five inside looks. $20/year.
+              The whole production. $20/year.
             </h2>
             <p style={{
               fontFamily: "'Figtree', sans-serif",
@@ -1402,7 +1402,7 @@ export default function HomePage() {
               marginTop: '10px',
               maxWidth: '440px',
             }}>
-              Jobscan charges $49.95/month for one tool. Five deep inside looks — built from the recruiting playbook insiders use — for less than what they charge for a single day. Plus ten free tools, no account required.
+              Jobscan charges $49.95/month for one tool. Every inside look — built from the recruiting playbook insiders use — for less than what they charge for a single day. Plus the free tools, no account required.
             </p>
           </div>
 

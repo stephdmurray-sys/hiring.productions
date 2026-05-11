@@ -14,7 +14,7 @@ const FREE_CANDIDATE_TOOLS = CATALOG.filter(
 export const metadata: Metadata = {
   title: 'Pricing — $20/year vs. $600+/year',
   description:
-    'Free forever for every candidate-side tool. $20/year for the five flagship inside looks. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
+    'Free forever for every candidate-side tool. $20/year for the whole production — every flagship inside look. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
   alternates: { canonical: 'https://hiring.productions/pricing' },
 }
 
@@ -308,7 +308,7 @@ export default function PricingPage() {
                 marginTop: '8px',
               }}
             >
-              Pro · 5 Inside Looks
+              Pro · The Whole Production
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px' }}>
               <div
@@ -573,7 +573,7 @@ export default function PricingPage() {
                     row.group === 'free'
                       ? 'Free tools'
                       : row.group === 'pro'
-                      ? 'The five inside looks'
+                      ? 'The whole production — every inside look'
                       : 'The fundamentals'
                   return (
                     <Fragment key={idx}>

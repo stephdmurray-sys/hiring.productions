@@ -140,7 +140,7 @@ export default function RecruiterSearchRankPage() {
           prompts={[
             'The 5 boolean searches a recruiter for your target role would actually run',
             'Your estimated rank in each — calibrated to how LinkedIn’s algorithm weights signals',
-            'The 3 highest-leverage moves to climb, ranked by total impact across all five',
+            'The 3 highest-leverage moves to climb, ranked by total impact across every search',
             'Exact text replacements — current line vs. recommended rewrite',
           ]}
         />

@@ -65,7 +65,7 @@ export default function MembershipPage() {
             color: 'white',
             margin: 0,
           }}>
-            You&apos;re in. All five inside looks are yours.
+            You&apos;re in. The whole production is yours.
           </h2>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
@@ -126,7 +126,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          Five inside looks. One price. No nonsense.
+          The whole production. One price. No nonsense.
         </h1>
         <p style={{
           fontSize: '18px',

@@ -359,7 +359,7 @@ export default function ToolsPage() {
               position: 'relative',
             }}
           >
-            Five flagship tools. $20 a year.
+            Every inside look. $20 a year.
           </h2>
           <p
             style={{

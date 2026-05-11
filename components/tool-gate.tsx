@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Lock } from 'lucide-react'
 import { isMember, activateMembership } from '@/lib/membership'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+import { CATALOG, FLAGSHIP_PRO } from '@/lib/tools-catalog'
 
 interface ToolGateProps {
   toolName: string
@@ -12,33 +13,16 @@ interface ToolGateProps {
   isFree?: boolean
 }
 
-const PRO_TOOLS = [
-  {
-    name: 'Through a Recruiter’s Eyes',
-    sub: 'Recruiter Resume Read',
-    desc: 'Hear what a recruiter actually thinks of your resume. First six seconds. Line by line. The call they make at 0:06.',
-  },
-  {
-    name: 'Would a Recruiter Even Find You?',
-    sub: 'LinkedIn Boolean Visibility Check',
-    desc: 'The exact boolean string a recruiter uses to find candidates like you — and the precise reason your profile doesn’t surface in it.',
-  },
-  {
-    name: 'Your LinkedIn — Rewritten',
-    sub: 'Full LinkedIn Profile Rewrite',
-    desc: 'Three headline options. A full About rewrite. Every recent role rewritten for impact. Tuned to the searches that matter.',
-  },
-  {
-    name: 'The Rehearsal Room',
-    sub: 'AI Interview Question Generator',
-    desc: 'Ten interview questions calibrated to your target role. What the interviewer is really assessing. The line that lands the answer.',
-  },
-  {
-    name: 'What They’re Really Asking',
-    sub: 'Interview Question Decoder',
-    desc: 'Decode any interview question. The signal underneath the wrapper. The trap most candidates fall into. The opening line that signals you understood.',
-  },
-]
+// Sourced from the catalog so the paywall stays in sync as flagship Pro tools
+// are added or rearranged — no hardcoded list to maintain in two places.
+const PRO_TOOLS = FLAGSHIP_PRO.map((name) => {
+  const tool = CATALOG.find((t) => t.name === name)
+  return {
+    name,
+    sub: tool?.subtitle ?? '',
+    desc: tool?.desc ?? '',
+  }
+})
 
 export function ToolGate({ toolName, toolDescription, children, isFree = false }: ToolGateProps) {
   const [isClient, setIsClient] = useState(false)
@@ -151,7 +135,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             margin: 0,
           }}
         >
-          The five reads that change how you apply.
+          The reads that change how you apply.
         </h2>
 
         {/* Price callout — OUR price is the hero */}
@@ -186,7 +170,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               color: '#C9C7DA',
             }}
           >
-            / year. All five.
+            / year. The whole production.
           </span>
         </div>
 
