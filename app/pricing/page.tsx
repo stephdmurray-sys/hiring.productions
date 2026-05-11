@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Fragment } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
@@ -575,9 +576,9 @@ export default function PricingPage() {
                       ? 'The five inside looks'
                       : 'The fundamentals'
                   return (
-                    <>
+                    <Fragment key={idx}>
                       {showGroupLabel && (
-                        <tr key={`group-${idx}`}>
+                        <tr>
                           <td
                             colSpan={6}
                             style={{
@@ -595,7 +596,7 @@ export default function PricingPage() {
                           </td>
                         </tr>
                       )}
-                      <tr key={idx} style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+                      <tr style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                         <td
                           style={{
                             padding: '14px 20px',
@@ -629,7 +630,7 @@ export default function PricingPage() {
                           <CellContent value={row.cultivated} />
                         </td>
                       </tr>
-                    </>
+                    </Fragment>
                   )
                 })}
               </tbody>
