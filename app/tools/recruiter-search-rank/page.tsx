@@ -254,7 +254,7 @@ export default function RecruiterSearchRankPage() {
                   fontWeight: 700,
                   fontSize: '15px',
                   color: '#F2F0FF',
-                  marginBottom: '6px',
+                  marginBottom: '14px',
                 }}
               >
                 Drop your LinkedIn PDF here, or click to upload
@@ -262,13 +262,62 @@ export default function RecruiterSearchRankPage() {
               <div
                 style={{
                   fontFamily: "'Figtree', sans-serif",
-                  fontSize: '13px',
-                  color: '#8B8AA0',
-                  lineHeight: 1.5,
+                  fontSize: '12.5px',
+                  color: '#9D9CB3',
+                  lineHeight: 1.7,
+                  textAlign: 'left',
+                  maxWidth: '440px',
+                  margin: '0 auto',
                 }}
+                onClick={(e) => e.stopPropagation()}
               >
-                On LinkedIn, open your profile → click <strong>More</strong> →{' '}
-                <strong>Save to PDF</strong>. Drop it here. Takes 10 seconds.
+                <div style={{ fontWeight: 700, color: '#C9C7DA', marginBottom: '6px', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  How to export your profile (10 seconds)
+                </div>
+                <div>
+                  <strong style={{ color: '#F2F0FF' }}>1.</strong> Open{' '}
+                  <a
+                    href="https://www.linkedin.com/in/me"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#A78BFA', textDecoration: 'underline' }}
+                  >
+                    your LinkedIn profile
+                  </a>{' '}
+                  in a new tab.
+                </div>
+                <div>
+                  <strong style={{ color: '#F2F0FF' }}>2.</strong> Click the{' '}
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 22,
+                      height: 22,
+                      borderRadius: '50%',
+                      border: '1px solid rgba(255,255,255,0.4)',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      verticalAlign: 'middle',
+                      margin: '0 2px',
+                      color: '#F2F0FF',
+                      letterSpacing: '1px',
+                    }}
+                  >
+                    ⋯
+                  </span>{' '}
+                  button (next to <em>Open to</em> / <em>Add section</em>).
+                </div>
+                <div>
+                  <strong style={{ color: '#F2F0FF' }}>3.</strong> Pick{' '}
+                  <strong style={{ color: '#F2F0FF' }}>Save to PDF</strong>. It
+                  downloads to your computer automatically.
+                </div>
+                <div>
+                  <strong style={{ color: '#F2F0FF' }}>4.</strong> Drag the file
+                  here, or click to choose it.
+                </div>
               </div>
             </div>
           )}

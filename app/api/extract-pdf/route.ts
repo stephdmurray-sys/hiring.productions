@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// pdf-parse is a CommonJS module; dynamic import keeps Next's bundler happy.
+// Force Node.js runtime — pdf-parse uses pdfjs-dist which needs Node APIs
+// (Buffer, fs-equivalent streaming). Will not work on Edge.
+export const runtime = 'nodejs'
+
 // Returns the raw extracted text from a PDF upload — Claude does the
 // structural parsing downstream, so we don't need to be clever here.
 export async function POST(request: NextRequest) {
@@ -24,8 +27,11 @@ export async function POST(request: NextRequest) {
 
     const buffer = Buffer.from(await file.arrayBuffer())
 
-    const pdfParse = (await import('pdf-parse')).default
-    const parsed = await pdfParse(buffer)
+    // pdf-parse v2 exposes a class, not a default function. Dynamic import so
+    // Next's bundler treats it as a server-only dependency.
+    const { PDFParse } = await import('pdf-parse')
+    const parser = new PDFParse({ data: buffer })
+    const parsed = await parser.getText()
 
     const text = (parsed.text || '').trim()
     if (!text || text.length < 100) {
@@ -38,7 +44,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    return NextResponse.json({ text, pageCount: parsed.numpages })
+    return NextResponse.json({ text, pageCount: parsed.total })
   } catch (error) {
     console.error('extract-pdf error:', error)
     return NextResponse.json(
