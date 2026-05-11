@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { isMember } from '@/lib/membership'
 
 interface NavigationProps {
   variant?: 'light' | 'dark'
@@ -195,12 +196,20 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [mobileCompaniesOpen, setMobileCompaniesOpen] = useState(false)
   const [mobileCandidatesOpen, setMobileCandidatesOpen] = useState(false)
+  // memberActive starts false on SSR so the markup matches; we flip it on the
+  // client after mount. This prevents a hydration mismatch between server and
+  // client output for a localStorage-backed flag.
+  const [memberActive, setMemberActive] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
     setIsOpen(false)
     setMobileCompaniesOpen(false)
     setMobileCandidatesOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    setMemberActive(isMember())
   }, [pathname])
 
   useEffect(() => {
@@ -289,26 +298,28 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
               Tools
             </Link>
           </li>
+          {!memberActive && (
+            <li style={{ listStyle: 'none' }}>
+              <Link
+                href="/sign-in"
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  color: pathname === '/sign-in' ? '#A78BFA' : '#F2F0FF',
+                  textDecoration: 'none',
+                  transition: 'color 0.15s ease',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Sign in
+              </Link>
+            </li>
+          )}
           <li style={{ listStyle: 'none' }}>
             <Link
-              href="/sign-in"
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: '14px',
-                fontWeight: 600,
-                letterSpacing: '0.02em',
-                color: pathname === '/sign-in' ? '#A78BFA' : '#F2F0FF',
-                textDecoration: 'none',
-                transition: 'color 0.15s ease',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Sign in
-            </Link>
-          </li>
-          <li style={{ listStyle: 'none' }}>
-            <Link
-              href="/membership"
+              href={memberActive ? '/tools' : '/membership'}
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '14px',
@@ -322,7 +333,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 whiteSpace: 'nowrap',
               }}
             >
-              Go Pro
+              {memberActive ? 'My tools' : 'Go Pro'}
             </Link>
           </li>
         </ul>
@@ -553,28 +564,30 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
             </Link>
           </li>
 
-          {/* Sign in */}
-          <li style={{ marginBottom: '32px' }}>
-            <Link
-              href="/sign-in"
-              onClick={() => setIsOpen(false)}
-              style={{
-                display: 'block',
-                fontFamily: "Georgia, 'Playfair Display', serif",
-                fontSize: '26px',
-                color: pathname === '/sign-in' ? '#7B5EA7' : '#F5F0EA',
-                textDecoration: 'none',
-                textAlign: 'center',
-              }}
-            >
-              Sign in
-            </Link>
-          </li>
+          {/* Sign in — hidden when already a member */}
+          {!memberActive && (
+            <li style={{ marginBottom: '32px' }}>
+              <Link
+                href="/sign-in"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  display: 'block',
+                  fontFamily: "Georgia, 'Playfair Display', serif",
+                  fontSize: '26px',
+                  color: pathname === '/sign-in' ? '#7B5EA7' : '#F5F0EA',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                }}
+              >
+                Sign in
+              </Link>
+            </li>
+          )}
 
-          {/* Go Pro CTA */}
+          {/* Primary CTA — Go Pro for guests, My tools for members */}
           <li style={{ marginBottom: '32px' }}>
             <Link
-              href="/membership"
+              href={memberActive ? '/tools' : '/membership'}
               onClick={() => setIsOpen(false)}
               style={{
                 display: 'inline-block',
@@ -590,7 +603,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
               }}
             >
-              Go Pro
+              {memberActive ? 'My tools' : 'Go Pro'}
             </Link>
           </li>
         </ul>
