@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading your gap…',
+  'Drafting the resume one-liner…',
+  'Writing the cover-letter version…',
+  'Writing the 30-second interview answer…',
+  'Stripping out the apology…',
+] as const
 
 const REASON_OPTIONS = [
   { value: 'layoff', label: 'Layoff / company downsizing' },
@@ -29,6 +38,7 @@ export default function ExplainMyGapPage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const stage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired =
     [whenGap, length, reason, whatYouDid, targetRole].filter((v) => v.trim()).length
@@ -215,7 +225,7 @@ export default function ExplainMyGapPage() {
           }}
         >
           {loading
-            ? 'Writing your scripts...'
+            ? stage
             : !canSubmit
             ? `Fill ${5 - filledRequired} more required field${5 - filledRequired === 1 ? '' : 's'}`
             : result

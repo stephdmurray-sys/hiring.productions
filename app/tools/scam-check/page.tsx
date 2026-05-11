@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading the posting…',
+  'Cross-checking the red flags…',
+  'Looking for the green flags…',
+  'Drafting the verdict…',
+  'Writing your next move…',
+] as const
 
 const PLATFORM_OPTIONS = [
   { value: 'linkedin', label: 'LinkedIn' },
@@ -25,6 +34,7 @@ export default function ScamCheckPage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const stage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired = [posting, platform].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 2
@@ -182,7 +192,7 @@ export default function ScamCheckPage() {
           }}
         >
           {loading
-            ? 'Running the check...'
+            ? stage
             : !canSubmit
             ? `Fill ${2 - filledRequired} more required field${2 - filledRequired === 1 ? '' : 's'}`
             : result

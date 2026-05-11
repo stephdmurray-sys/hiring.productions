@@ -6,7 +6,21 @@ import { ToolResult } from '@/components/tool-result'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
 import { FileText, Upload } from 'lucide-react'
+
+// Theatrical stages cycled through while the simulator is running. Roughly
+// matches the real beats happening server-side (read PDF → generate queries
+// → score → rank moves) so the storytelling doesn't feel decorative.
+const RUNNING_STAGES = [
+  'Lights up. Reading your profile…',
+  'Casting the searches a recruiter would run…',
+  'Recruiter takes the seat…',
+  'Running the boolean strings…',
+  'Scoring your rank in each search…',
+  'Ranking the highest-leverage moves…',
+  'Putting the call sheet together…',
+] as const
 
 export default function RecruiterSearchRankPage() {
   const [profileText, setProfileText] = useState('')
@@ -21,6 +35,8 @@ export default function RecruiterSearchRankPage() {
   const [error, setError] = useState('')
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const runningStage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired = [profileText, targetRole].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 2
@@ -409,7 +425,7 @@ export default function RecruiterSearchRankPage() {
           }}
         >
           {loading
-            ? 'Running the searches a recruiter would run…'
+            ? runningStage
             : !canSubmit
             ? `Fill ${2 - filledRequired} more required field${
                 2 - filledRequired === 1 ? '' : 's'

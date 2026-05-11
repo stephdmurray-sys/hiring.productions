@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading your old-field bullets…',
+  'Looking for the through-line…',
+  'Translating into the new field’s language…',
+  'Rewriting each bullet…',
+  'Composing the summary paragraph…',
+] as const
 
 export default function CareerPivotPage() {
   const [currentRole, setCurrentRole] = useState('')
@@ -15,6 +24,7 @@ export default function CareerPivotPage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const stage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired = [currentRole, currentBullets, targetRole].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 3
@@ -177,7 +187,7 @@ export default function CareerPivotPage() {
           }}
         >
           {loading
-            ? 'Translating your experience...'
+            ? stage
             : !canSubmit
             ? `Fill ${3 - filledRequired} more required field${3 - filledRequired === 1 ? '' : 's'}`
             : result

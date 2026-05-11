@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading their last message…',
+  'Pulling the recruiter playbook for this stage…',
+  'Decoding the silence…',
+  'Drafting your follow-up…',
+  'The verdict is coming…',
+] as const
 
 const STAGE_OPTIONS = [
   { value: 'applied', label: 'I applied through their site / a job board' },
@@ -25,6 +34,7 @@ export default function GhostedPage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const runningStage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired = [stage, howLong, lastContact, roleType].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 4
@@ -220,7 +230,7 @@ export default function GhostedPage() {
           }}
         >
           {loading
-            ? 'Decoding the silence...'
+            ? runningStage
             : !canSubmit
             ? `Fill ${4 - filledRequired} more required field${4 - filledRequired === 1 ? '' : 's'}`
             : result

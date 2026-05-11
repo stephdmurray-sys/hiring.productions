@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading what you’ve actually done…',
+  'Pulling what hiring managers want for this role…',
+  'Building the section structure…',
+  'Drafting example bullets in your voice…',
+  'Calling out what to leave out…',
+] as const
 
 export default function NewGradResumePage() {
   const [degree, setDegree] = useState('')
@@ -19,6 +28,7 @@ export default function NewGradResumePage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const stage = useStageRotation(RUNNING_STAGES, loading)
 
   const filledRequired = [degree, gradDate, targetRole].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 3
@@ -231,7 +241,7 @@ export default function NewGradResumePage() {
           }}
         >
           {loading
-            ? 'Building your resume guide...'
+            ? stage
             : !canSubmit
             ? `Fill ${3 - filledRequired} more required field${3 - filledRequired === 1 ? '' : 's'}`
             : result

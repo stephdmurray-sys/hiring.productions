@@ -6,6 +6,15 @@ import { ToolResult } from '@/components/tool-result'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { useStageRotation } from '@/lib/use-stage-rotation'
+
+const RUNNING_STAGES = [
+  'Lights up. Reading your resume…',
+  'Pulling the recruiter’s search terms from the JD…',
+  'Scanning your resume…',
+  'Flagging the keywords you’re missing…',
+  'Ranking each gap by impact…',
+] as const
 
 export default function KeywordGapPage() {
   const [resume, setResume] = useState('')
@@ -13,6 +22,7 @@ export default function KeywordGapPage() {
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const stage = useStageRotation(RUNNING_STAGES, loading)
 
   const handleSubmit = async () => {
     if (!resume.trim() || !jobDescription.trim()) {
@@ -133,7 +143,7 @@ export default function KeywordGapPage() {
           }}
         >
           {loading
-            ? 'Scanning...'
+            ? stage
             : !canSubmit
             ? `Fill ${2 - filledCount} more required field${2 - filledCount === 1 ? '' : 's'}`
             : result
