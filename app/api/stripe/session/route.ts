@@ -33,21 +33,15 @@ export async function GET(request: Request) {
     const getDropdown = (k: string) =>
       customFields.find((f) => f.key === k)?.dropdown?.value || ''
 
-    // Stripe Checkout caps custom_fields at 3, so we collect "full_name" as
-    // a single string and split it server-side. Naive whitespace split:
-    // first token → firstName, remainder → lastName. Handles single names
-    // ("Madonna") by leaving lastName empty.
-    const fullName = getText('full_name').trim()
-    const parts = fullName.split(/\s+/)
-    const firstName = parts[0] || ''
-    const lastName = parts.slice(1).join(' ')
-
     return NextResponse.json({
       email: session.customer_details?.email,
-      firstName,
-      lastName,
+      firstName: getText('first_name'),
+      lastName: getText('last_name'),
       role: getDropdown('role'),
-      jobTitle: getText('job_title'),
+      // jobTitle isn't collected at checkout anymore — captured later via the
+      // in-product lead-capture flow. Returned as empty string for shape
+      // compatibility with the client.
+      jobTitle: '',
     })
   } catch (error) {
     console.error('Stripe error:', error)

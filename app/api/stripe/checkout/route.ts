@@ -64,15 +64,21 @@ export async function POST(request: NextRequest) {
       allow_promotion_codes: true,
       // Collected so we can greet the member by name and tailor copy / tools
       // to whether they're job-seeking, hiring, or doing both. Stripe Checkout
-      // accepts a maximum of three custom_fields, so we combine first + last
-      // into one and parse it server-side on session retrieve. All three are
-      // required so the membership record is clean from day one.
+      // caps custom_fields at three — we use all three on first name, last
+      // name, and role. Job title is collected later via the in-product
+      // lead-capture flow (after free tool use) rather than at checkout.
       custom_fields: [
         {
-          key: 'full_name',
-          label: { type: 'custom', custom: 'Your name (first and last)' },
+          key: 'first_name',
+          label: { type: 'custom', custom: 'First name' },
           type: 'text',
-          text: { minimum_length: 2, maximum_length: 120 },
+          text: { minimum_length: 1, maximum_length: 60 },
+        },
+        {
+          key: 'last_name',
+          label: { type: 'custom', custom: 'Last name' },
+          type: 'text',
+          text: { minimum_length: 1, maximum_length: 60 },
         },
         {
           key: 'role',
@@ -85,12 +91,6 @@ export async function POST(request: NextRequest) {
               { label: 'Both — I do both sides', value: 'both' },
             ],
           },
-        },
-        {
-          key: 'job_title',
-          label: { type: 'custom', custom: 'Your job title (e.g. Senior PM, Director of TA)' },
-          type: 'text',
-          text: { minimum_length: 1, maximum_length: 120 },
         },
       ],
     })
