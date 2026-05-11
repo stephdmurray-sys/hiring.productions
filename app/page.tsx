@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { RecruiterReadingPreview } from '@/components/recruiter-reading-preview'
+import { AudienceHubsRow } from '@/components/audience-hubs-row'
 import { Building2, User, Eye, Filter, MessageSquare, FileSearch, FileText, HelpCircle, UserCheck, Star, Search, Edit3, AlertCircle, DollarSign } from 'lucide-react'
 
 export default function HomePage() {
@@ -185,7 +187,7 @@ export default function HomePage() {
             justifyContent: 'center',
             flexWrap: 'wrap',
           }}>
-            {['From a 20-year recruiter', 'Three tools free, three for members', 'No fabricated specifics'].map((text) => (
+            {['Built from real recruiting practice', 'Three tools free, three for members', 'No fabricated specifics'].map((text) => (
               <div key={text} style={{
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.07)',
@@ -203,145 +205,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 3 — THE STRANGE THING ABOUT HIRING */}
-      <section style={{
-        background: '#0F0F12',
-        borderBottom: '1px solid rgba(108,71,255,0.12)',
-        padding: '140px 40px',
-        position: 'relative',
-      }}>
-        {/* Subtle radial glow */}
-        <div style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          top: 0,
-          left: 0,
-          background: 'radial-gradient(ellipse 600px 450px at 50% 40%, rgba(108,71,255,0.06) 0%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }} />
-
-        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-          {/* Section label */}
-          <div style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.15em',
-            color: '#6C47FF',
-            marginBottom: '28px',
-          }}>
-            THE PROBLEM
-          </div>
-
-          {/* Headline */}
-          <h2 style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 900,
-            fontSize: 'clamp(40px, 5vw, 56px)',
-            letterSpacing: '-0.025em',
-            lineHeight: 1.15,
-            color: '#F2F0FF',
-            marginBottom: '36px',
-          }}>
-            The strange thing about hiring
-          </h2>
-
-          {/* Opening line */}
-          <p style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: '20px',
-            color: '#A78BFA',
-            lineHeight: 1.75,
-            marginBottom: '56px',
-          }}>
-            Think about what&apos;s actually happening right now.
-          </p>
-
-          {/* Three accent lines */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '56px' }}>
-            {[
-              'Candidates are trying to guess what hiring teams want.',
-              'Hiring teams are trying to guess who someone really is.',
-              'Resumes. Interviews. Job descriptions. It\'s all part of the same production.',
-            ].map((text, idx) => (
-              <div key={idx} style={{
-                background: 'rgba(108,71,255,0.1)',
-                borderLeft: '4px solid #6C47FF',
-                borderRadius: '0 14px 14px 0',
-                padding: '22px 32px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 500,
-                fontSize: '17px',
-                color: '#F2F0FF',
-                lineHeight: 1.65,
-                textAlign: 'left',
-              }}>
-                {text}
-              </div>
-            ))}
-          </div>
-
-          {/* Bridge line */}
-          <p style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 600,
-            fontSize: '21px',
-            color: '#F2F0FF',
-            marginBottom: '48px',
-          }}>
-            But nobody sees the full picture.
-          </p>
-
-          {/* Three consequence lines */}
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            gap: '16px',
-            maxWidth: '600px',
-            margin: '0 auto',
-          }}>
-            {[
-              'That\'s why good people get overlooked.',
-              'That\'s why great candidates end up in the wrong roles.',
-              'That\'s why hiring still feels like guessing.',
-            ].map((text, idx) => (
-              <div key={idx} style={{
-                background: 'rgba(255,79,106,0.08)',
-                borderLeft: '4px solid #FF4F6A',
-                borderRadius: '0 14px 14px 0',
-                padding: '20px 30px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 600,
-                fontSize: '17px',
-                color: '#F2F0FF',
-                lineHeight: 1.6,
-                textAlign: 'left',
-              }}>
-                {text}
-              </div>
-            ))}
-          </div>
-
-          {/* Closing line */}
-          <p style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 900,
-            fontSize: '36px',
-            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            marginTop: '72px',
-            letterSpacing: '-0.02em',
-          }}>
-            Until now.
-          </p>
-        </div>
-      </section>
+      {/* SECTION 2 — LIVE INSIDE LOOK PREVIEW */}
+      <RecruiterReadingPreview />
 
       {/* SECTION 4 — WHAT YOU'LL FIND HERE */}
       <section style={{
@@ -571,7 +436,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 5 — FOUR FEATURED INSIDE LOOKS */}
+      {/* SECTION 5 — THE TOOLS GRID */}
       <section style={{
         background: '#0F0F12',
         padding: '100px 40px',
@@ -588,36 +453,51 @@ export default function HomePage() {
             textAlign: 'center',
             marginBottom: '24px',
           }}>
-            INSIDE LOOKS
+            WHAT&apos;S ACTUALLY DECIDING IT
           </div>
 
           {/* Headline */}
           <h2 style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(28px, 3.5vw, 42px)',
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(32px, 4.2vw, 52px)',
+            letterSpacing: '-0.025em',
             textAlign: 'center',
             color: '#F2F0FF',
-            marginBottom: '14px',
+            lineHeight: 1.08,
+            marginBottom: '20px',
           }}>
-            The inside looks aren&apos;t shortcuts.
+            Wait. Is this what&apos;s been happening the whole time?
           </h2>
 
-          {/* Subhead with gradient */}
+          {/* Subhead */}
           <p style={{
             fontFamily: "'Figtree', sans-serif",
-            fontWeight: 500,
-            fontSize: '22px',
+            fontWeight: 400,
+            fontSize: '18px',
+            lineHeight: 1.65,
+            color: '#8B8AA0',
+            textAlign: 'center',
+            maxWidth: '680px',
+            margin: '0 auto 14px',
+          }}>
+            Each tool puts you on the other side of the table. The recruiter&apos;s actual read. The hiring manager&apos;s actual notes. The keyword that hides you. The mechanism deciding the call you don&apos;t get.
+          </p>
+
+          {/* Stakes line with gradient */}
+          <p style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 700,
+            fontSize: '17px',
             background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             textAlign: 'center',
             marginBottom: '56px',
-            backgroundColor: 'transparent',
+            letterSpacing: '0.01em',
           }}>
-            They&apos;re windows.
+            None of it lives anywhere else.
           </p>
 
           {/* 3-column Grid */}
@@ -672,6 +552,15 @@ export default function HomePage() {
               }}>
                 Your Resume, Through a Recruiter&apos;s Eyes
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                Recruiter Resume Read
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -688,7 +577,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Hear the read →
               </div>
             </Link>
 
@@ -738,6 +627,15 @@ export default function HomePage() {
               }}>
                 Is This Even a Real Candidate?
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#FF4F6A',
+                marginBottom: '8px',
+              }}>
+                AI Application Detector
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -754,7 +652,7 @@ export default function HomePage() {
                 color: '#FF4F6A',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Run the check →
               </div>
             </Link>
 
@@ -804,6 +702,15 @@ export default function HomePage() {
               }}>
                 What This Job Actually Is
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                Job Description Decoder
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -820,7 +727,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Decode the posting →
               </div>
             </Link>
 
@@ -870,6 +777,15 @@ export default function HomePage() {
               }}>
                 Would a Recruiter Even Find You?
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                LinkedIn Boolean Visibility Check
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -886,7 +802,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Test my visibility →
               </div>
             </Link>
 
@@ -936,6 +852,15 @@ export default function HomePage() {
               }}>
                 Your LinkedIn Profile — Rewritten
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                Full LinkedIn Profile Rewrite
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -952,7 +877,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Rewrite mine →
               </div>
             </Link>
 
@@ -1000,8 +925,17 @@ export default function HomePage() {
                 marginTop: '12px',
                 marginBottom: '8px',
               }}>
-                What&apos;s Breaking Your Search
+                What&apos;s Breaking Your Job Search
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#FF4F6A',
+                marginBottom: '8px',
+              }}>
+                Job Search Diagnostic
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -1018,11 +952,11 @@ export default function HomePage() {
                 color: '#FF4F6A',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Diagnose mine →
               </div>
             </Link>
 
-            {/* Card 7 — What You're Worth */}
+            {/* Card 7 — How to Negotiate This Offer (FREE) */}
             <Link href="/tools/what-youre-worth" className="inside-look-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
@@ -1044,19 +978,31 @@ export default function HomePage() {
               }}>
                 <DollarSign size={20} color="#A78BFA" />
               </div>
-              <div style={{
-                background: 'rgba(108,71,255,0.15)',
-                color: '#A78BFA',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 700,
-                fontSize: '10px',
-                display: 'inline-block',
-                marginTop: '12px',
-                marginBottom: '8px',
-              }}>
-                CANDIDATE
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '12px', marginBottom: '8px' }}>
+                <div style={{
+                  background: 'rgba(108,71,255,0.15)',
+                  color: '#A78BFA',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: '10px',
+                  display: 'inline-block',
+                }}>
+                  CANDIDATE
+                </div>
+                <div style={{
+                  background: 'rgba(34, 197, 94, 0.15)',
+                  color: '#22C55E',
+                  padding: '4px 8px',
+                  borderRadius: '4px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: '10px',
+                  display: 'inline-block',
+                }}>
+                  Free
+                </div>
               </div>
               <h3 style={{
                 fontFamily: "'Figtree', sans-serif",
@@ -1066,8 +1012,17 @@ export default function HomePage() {
                 marginTop: '12px',
                 marginBottom: '8px',
               }}>
-                What You&apos;re Worth
+                How to Negotiate This Offer
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                Salary Negotiation Script Builder
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -1075,7 +1030,7 @@ export default function HomePage() {
                 color: '#8B8AA0',
                 lineHeight: 1.6,
               }}>
-                Market rate analysis for your role, level, and location — plus the negotiation script you need.
+                Bring your offer + your market data. Get the exact script — opening line, response to “best offer,” and the number to ask for.
               </p>
               <div style={{
                 fontFamily: "'Figtree', sans-serif",
@@ -1084,7 +1039,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Get the inside look →
+                Build my script →
               </div>
             </Link>
 
@@ -1153,6 +1108,15 @@ export default function HomePage() {
               }}>
                 RepVera
               </h3>
+              <div style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: '11px',
+                color: '#A78BFA',
+                marginBottom: '8px',
+              }}>
+                Verified Reference Profile
+              </div>
               <p style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
@@ -1169,7 +1133,7 @@ export default function HomePage() {
                 color: '#6C47FF',
                 marginTop: '20px',
               }}>
-                Start your RepVera — free →
+                Start your reel →
               </div>
             </Link>
           </div>
@@ -1183,7 +1147,7 @@ export default function HomePage() {
             textAlign: 'center',
             marginTop: '40px',
           }}>
-            Every inside look works in both directions. Because hiring only makes sense when both sides can see it.
+            Each one works in both directions. The only way to win the production is to read the whole script.
           </p>
 
           {/* See all button */}
@@ -1203,11 +1167,14 @@ export default function HomePage() {
               textDecoration: 'none',
               transition: 'transform 0.2s',
             }}>
-              See the four inside looks →
+              See every tool →
             </Link>
           </div>
         </div>
       </section>
+
+      {/* SECTION 5.5 — AUDIENCE HUBS */}
+      <AudienceHubsRow padding="60px 24px 80px" />
 
       {/* SECTION 6 — REPVERA */}
       <section style={{
@@ -1435,7 +1402,7 @@ export default function HomePage() {
               marginTop: '10px',
               maxWidth: '440px',
             }}>
-              Jobscan charges $49.95/month for one tool. Three deep inside looks — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day. Plus three free tools, no account required.
+              Jobscan charges $49.95/month for one tool. Three deep inside looks — built from the recruiting playbook insiders use — for less than what they charge for a single day. Plus three free tools, no account required.
             </p>
           </div>
 
