@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Force Node.js runtime — pdf-parse uses pdfjs-dist which needs Node APIs
-// (Buffer, fs-equivalent streaming). Will not work on Edge.
+// Force Node.js runtime — unpdf works on Edge too but we don't need it and
+// the Node runtime gives us the full Buffer API.
 export const runtime = 'nodejs'
 
 // Returns the raw extracted text from a PDF upload — Claude does the
 // structural parsing downstream, so we don't need to be clever here.
+// Uses unpdf (a serverless-optimized pdfjs wrapper) instead of pdf-parse
+// because pdf-parse depends on the pdfjs worker file, which Vercel can't
+// reliably bundle.
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
@@ -19,22 +22,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'File must be a PDF' }, { status: 400 })
     }
 
-    // Reasonable cap — LinkedIn profile exports run 50-300 KB. Anything over
-    // 5 MB is either a different document type or an abuse attempt.
     if (file.size > 5 * 1024 * 1024) {
       return NextResponse.json({ error: 'PDF too large (max 5 MB)' }, { status: 400 })
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer())
+    const buffer = new Uint8Array(await file.arrayBuffer())
 
-    // pdf-parse v2 exposes a class, not a default function. Dynamic import so
-    // Next's bundler treats it as a server-only dependency.
-    const { PDFParse } = await import('pdf-parse')
-    const parser = new PDFParse({ data: buffer })
-    const parsed = await parser.getText()
+    const { extractText } = await import('unpdf')
+    const { text, totalPages } = await extractText(buffer, { mergePages: true })
 
-    const text = (parsed.text || '').trim()
-    if (!text || text.length < 100) {
+    const fullText = (typeof text === 'string' ? text : text.join('\n\n')).trim()
+    if (!fullText || fullText.length < 100) {
       return NextResponse.json(
         {
           error:
@@ -44,7 +42,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    return NextResponse.json({ text, pageCount: parsed.total })
+    return NextResponse.json({ text: fullText, pageCount: totalPages })
   } catch (error) {
     console.error('extract-pdf error:', error)
     return NextResponse.json(
