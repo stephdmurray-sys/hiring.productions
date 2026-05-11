@@ -62,6 +62,37 @@ export async function POST(request: NextRequest) {
       success_url: `${origin}/membership?success=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/membership`,
       allow_promotion_codes: true,
+      // Collected so we can greet the member by name and tailor copy / tools
+      // to whether they're job-seeking, hiring, or doing both. Stripe Checkout
+      // accepts a maximum of three custom_fields, so we combine first + last
+      // into one and parse it server-side on session retrieve. All three are
+      // required so the membership record is clean from day one.
+      custom_fields: [
+        {
+          key: 'full_name',
+          label: { type: 'custom', custom: 'Your name (first and last)' },
+          type: 'text',
+          text: { minimum_length: 2, maximum_length: 120 },
+        },
+        {
+          key: 'role',
+          label: { type: 'custom', custom: 'I’m using this as a…' },
+          type: 'dropdown',
+          dropdown: {
+            options: [
+              { label: 'Job seeker / candidate', value: 'candidate' },
+              { label: 'Recruiter / hiring team', value: 'hiring' },
+              { label: 'Both — I do both sides', value: 'both' },
+            ],
+          },
+        },
+        {
+          key: 'job_title',
+          label: { type: 'custom', custom: 'Your job title (e.g. Senior PM, Director of TA)' },
+          type: 'text',
+          text: { minimum_length: 1, maximum_length: 120 },
+        },
+      ],
     })
     return NextResponse.json({ url: session.url })
   } catch (error) {

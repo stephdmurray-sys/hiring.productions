@@ -25,16 +25,21 @@ export default function MembershipPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    
+
     const params = new URLSearchParams(window.location.search)
     if (params.get('success') === 'true') {
       const sessionId = params.get('session_id')
       if (sessionId) {
         fetch(`/api/stripe/session?session_id=${sessionId}`)
-          .then(r => r.json())
-          .then(data => {
+          .then((r) => r.json())
+          .then((data) => {
             if (data.email) {
-              activateMembership(data.email)
+              activateMembership(data.email, {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                role: data.role,
+                jobTitle: data.jobTitle,
+              })
               setShowSuccess(true)
             }
           })

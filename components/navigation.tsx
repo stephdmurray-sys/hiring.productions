@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { isMember, getMemberEmail } from '@/lib/membership'
+import { isMember, getMemberEmail, getMemberProfile } from '@/lib/membership'
 
 interface NavigationProps {
   variant?: 'light' | 'dark'
@@ -229,7 +229,16 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
   useEffect(() => {
     const active = isMember()
     setMemberActive(active)
-    setMemberFirstName(active ? firstNameFromEmail(getMemberEmail()) : '')
+    if (active) {
+      // Prefer the real first name captured at checkout. Fall back to a
+      // best-effort guess from the email's local-part for members who
+      // restored from another device (no profile data on hand) or who
+      // signed up before custom_fields were collected.
+      const profile = getMemberProfile()
+      setMemberFirstName(profile?.firstName?.trim() || firstNameFromEmail(getMemberEmail()))
+    } else {
+      setMemberFirstName('')
+    }
   }, [pathname])
 
   const greeting = memberFirstName ? `Hi, ${memberFirstName}` : 'Hi there'
