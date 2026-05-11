@@ -153,6 +153,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={figtree.className} style={{ backgroundColor: '#0F0F12' }}>
       <head>
+        {/* Structured data for search engines — Organization + WebSite schema
+            so Google/Bing can pull a knowledge panel and sitelinks search box. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <style dangerouslySetInnerHTML={{ __html: `
           *, *::before, *::after { font-family: 'Figtree', sans-serif !important; }
           html, body { background-color: #0F0F12 !important; color: #F2F0FF; }
