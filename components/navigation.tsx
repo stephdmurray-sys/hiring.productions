@@ -517,6 +517,65 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
               </ul>
             )}
           </li>
+
+          {/* Tools */}
+          <li style={{ marginBottom: '32px' }}>
+            <Link
+              href="/tools"
+              onClick={() => setIsOpen(false)}
+              style={{
+                display: 'block',
+                fontFamily: "Georgia, 'Playfair Display', serif",
+                fontSize: '26px',
+                color: pathname === '/tools' ? '#7B5EA7' : '#F5F0EA',
+                textDecoration: 'none',
+                textAlign: 'center',
+              }}
+            >
+              Tools
+            </Link>
+          </li>
+
+          {/* Sign in */}
+          <li style={{ marginBottom: '32px' }}>
+            <Link
+              href="/sign-in"
+              onClick={() => setIsOpen(false)}
+              style={{
+                display: 'block',
+                fontFamily: "Georgia, 'Playfair Display', serif",
+                fontSize: '26px',
+                color: pathname === '/sign-in' ? '#7B5EA7' : '#F5F0EA',
+                textDecoration: 'none',
+                textAlign: 'center',
+              }}
+            >
+              Sign in
+            </Link>
+          </li>
+
+          {/* Go Pro CTA */}
+          <li style={{ marginBottom: '32px' }}>
+            <Link
+              href="/membership"
+              onClick={() => setIsOpen(false)}
+              style={{
+                display: 'inline-block',
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '18px',
+                fontWeight: 800,
+                letterSpacing: '0.02em',
+                padding: '14px 32px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: '#FFFFFF',
+                textDecoration: 'none',
+                boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
+              }}
+            >
+              Go Pro
+            </Link>
+          </li>
         </ul>
       </div>
 
