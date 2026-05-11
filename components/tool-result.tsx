@@ -84,16 +84,18 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
       >
         {/* Parse and Render Markdown Result */}
         {result.split('\n').map((line, idx) => {
-          // Check if this is a section header (starts and ends with **)
-          const isHeader = /^\*\*.*:\*\*$/.test(line)
+          // SECTION-EYEBROW pattern: line is exactly **text:**
+          // — rendered as small uppercase lavender label with left bar.
+          const isEyebrow = /^\*\*[^*]+:\*\*$/.test(line)
 
-          if (isHeader) {
+          if (isEyebrow) {
             const headerText = line.replace(/\*\*/g, '')
-            
-            // Special styling for specific metrics
+
+            // Special styling for specific metrics that show up as eyebrows
+            // in some tools (resume-ai-check, scam-check, ats-reality).
             const isAtsScore = headerText.includes('ATS Score:')
             const isRedFlagCount = headerText.includes('Red flag count:')
-            
+
             return (
               <div
                 key={idx}
@@ -104,14 +106,63 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                   color: isRedFlagCount ? '#FF4F6A' : isAtsScore ? '#6C47FF' : '#A78BFA',
                   textTransform: isAtsScore || isRedFlagCount ? 'none' : 'uppercase',
                   letterSpacing: isAtsScore || isRedFlagCount ? 'normal' : '0.08em',
-                  marginTop: idx === 0 ? 0 : '28px',
-                  marginBottom: '10px',
+                  marginTop: idx === 0 ? 0 : '32px',
+                  marginBottom: '12px',
                   display: 'block',
-                  paddingLeft: isHeader ? '12px' : 0,
-                  borderLeft: isHeader ? '3px solid rgba(108,71,255,0.5)' : 'none',
+                  paddingLeft: '12px',
+                  borderLeft: '3px solid rgba(108,71,255,0.5)',
                 }}
               >
                 {headerText}
+              </div>
+            )
+          }
+
+          // SUB-SECTION HEADER pattern: line starts with **text** and either
+          // ends there or is followed by an em-dash tail (e.g. "— improves
+          // 4 of 5 searches"). Used for things like "Search 1: name", "Move
+          // 1: label", "[Title at Company]:". Rendered prominently so a long
+          // structured output is actually navigable.
+          const subHeaderMatch = line.match(/^\*\*([^*]+)\*\*\s*(?:—\s*(.+))?$/)
+          if (subHeaderMatch) {
+            const heading = subHeaderMatch[1].trim()
+            const tail = subHeaderMatch[2]?.trim()
+            return (
+              <div
+                key={idx}
+                style={{
+                  marginTop: '32px',
+                  marginBottom: '10px',
+                  paddingBottom: '8px',
+                  borderBottom: '1px solid rgba(108,71,255,0.18)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '19px',
+                    letterSpacing: '-0.005em',
+                    color: '#F2F0FF',
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {heading}
+                </span>
+                {tail && (
+                  <span
+                    style={{
+                      fontFamily: "'Figtree', sans-serif",
+                      fontWeight: 600,
+                      fontSize: '13px',
+                      color: '#A78BFA',
+                      marginLeft: '10px',
+                      letterSpacing: '0.005em',
+                    }}
+                  >
+                    — {tail}
+                  </span>
+                )}
               </div>
             )
           }
