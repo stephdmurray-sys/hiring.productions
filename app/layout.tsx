@@ -47,20 +47,14 @@ export const metadata: Metadata = {
     siteName: 'hiring.productions',
     title: 'hiring.productions',
     description: 'Both sides of hiring. Finally in the open.',
-    images: [
-      {
-        url: '/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'hiring.productions - Both sides of hiring',
-      },
-    ],
+    // OG image is generated dynamically from app/opengraph-image.tsx —
+    // Next.js auto-includes it, no manual `images` reference needed.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'hiring.productions',
     description: 'Both sides of hiring. Finally in the open.',
-    images: ['/images/og-image.jpg'],
+    // twitter-image inherits from opengraph-image when not specified.
     creator: '@stephaniemurray',
   },
   robots: {
