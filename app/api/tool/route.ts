@@ -1125,7 +1125,7 @@ export async function POST(request: NextRequest) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         // Most tools produce ~400-700 word reports. Some tools need more
         // headroom: linkedin-rewrite (two-jobs framework, ~6500 chars) and
         // rehearsal-questions (10 questions × 4 fields each, ~7500 chars).
