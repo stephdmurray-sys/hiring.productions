@@ -232,7 +232,7 @@ export default function ConsultingPage() {
         </div>
       </section>
 
-      <Footer variant="dark" />
+      <Footer />
 
       {/* Modal */}
       {showModal && (

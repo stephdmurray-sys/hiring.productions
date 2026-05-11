@@ -295,7 +295,7 @@ export default function StandOutPage() {
                   </a>
                 ) : (
                   <Link
-                    href={item.href}
+                    href={item.href ?? '/tools'}
                     className="btn-ghost"
                     style={{
                       display: 'inline-flex',
