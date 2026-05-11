@@ -7,31 +7,18 @@ import { Footer } from '@/components/footer'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 import { activateMembership } from '@/lib/membership'
 import { User, Building2, Lock } from 'lucide-react'
+import { CATALOG } from '@/lib/tools-catalog'
 
-const tools = [
-  { name: 'Resume AI Checker', desc: 'See if your resume reads as AI-written', type: 'candidate', free: true },
-  { name: 'Your Resume, Through a Recruiter\'s Eyes', desc: 'The internal monologue of a recruiter in 6 seconds', type: 'candidate', free: false },
-  { name: 'What This Job Actually Is', desc: 'What\'s really between the lines of any JD', type: 'candidate', free: false },
-  { name: 'Would You Even Make It Through?', desc: 'Your ATS score and top 3 fixes', type: 'candidate', free: false },
-  { name: 'Where You Actually Have a Shot', desc: 'Platform rankings by real response rate data', type: 'candidate', free: false },
-  { name: 'What This Company Feels Like to Work At', desc: 'What their culture copy actually signals', type: 'candidate', free: false },
-  { name: 'Would a Recruiter Even Find You?', desc: 'The boolean string that finds — or misses — you', type: 'candidate', free: false },
-  { name: 'LinkedIn Profile Rewriter', desc: 'Headline, About, and experience rewritten in one pass', type: 'candidate', free: false },
-  { name: 'What They\'re Really Asking', desc: 'The competency underneath any interview question', type: 'candidate', free: false },
-  { name: 'How You Actually Come Across', desc: 'Three rewritten versions of your professional pitch', type: 'candidate', free: false },
-  { name: 'What\'s Breaking Your Search', desc: 'Specific diagnosis for your exact situation', type: 'candidate', free: false },
-  { name: 'What You\'re Actually Worth', desc: 'Market rate plus a word-for-word negotiation script', type: 'candidate', free: false },
-  { name: 'Is Your Job Even Being Seen?', desc: 'JD SEO score across 8 major platforms', type: 'hiring', free: true },
-  { name: 'Your Job Post, Through Candidate Eyes', desc: 'Why strong candidates click away from your posting', type: 'hiring', free: false },
-  { name: 'Is This Even a Real Candidate?', desc: 'Human-authored or AI-generated — what flagged it', type: 'hiring', free: false },
-  { name: 'What You\'re Actually Evaluating', desc: 'Structured scorecard that reduces gut-feel decisions', type: 'hiring', free: false },
-  { name: 'Are Your Interviewers Even Ready?', desc: 'Prep guide that stops you losing your best candidates', type: 'hiring', free: false },
-  { name: 'The Search String That Finds Your Candidate', desc: 'Boolean search ready to paste into LinkedIn', type: 'hiring', free: false },
-  { name: 'How Your Offer Actually Lands', desc: 'How it reads to someone with options', type: 'hiring', free: false },
-  { name: 'How to Reach Out Without Being Ignored', desc: 'Messages that actually get responses', type: 'hiring', free: false },
-  { name: 'Your Hiring Process, From the Outside', desc: 'Every step through a candidate\'s eyes', type: 'hiring', free: false },
-  { name: 'What Day One Actually Looks Like', desc: 'Onboarding through a new hire\'s eyes', type: 'hiring', free: false },
-]
+// Tools shown on the membership page — sourced from the catalog so they stay
+// in sync as we add tools. We exclude `soon`-tier tools because the page is
+// "what you actually get when you become a member," and showing tools that
+// don't exist yet would overstate the offer.
+const tools = CATALOG.filter((t) => t.tier !== 'soon').map((t) => ({
+  name: t.name,
+  desc: t.desc,
+  type: t.audience,
+  free: t.tier === 'free',
+}))
 
 export default function MembershipPage() {
   const [showSuccess, setShowSuccess] = useState(false)
@@ -73,7 +60,7 @@ export default function MembershipPage() {
             color: 'white',
             margin: 0,
           }}>
-            You&apos;re in. All four inside looks are yours.
+            You&apos;re in. All five inside looks are yours.
           </h2>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
@@ -134,7 +121,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          Four inside looks. One price. No nonsense.
+          Five inside looks. One price. No nonsense.
         </h1>
         <p style={{
           fontSize: '18px',
@@ -157,7 +144,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          {['20 Inside Looks', 'Both Sides of Hiring', '$20/year — not per month'].map((stat, idx) => (
+          {[`${tools.length} Inside Looks`, 'Both Sides of Hiring', '$20/year — not per month'].map((stat, idx) => (
             <div
               key={idx}
               style={{
@@ -194,6 +181,30 @@ export default function MembershipPage() {
         }}>
           Get Full Access — $20/year
         </StripeCheckoutButton>
+
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            marginTop: '14px',
+            textAlign: 'center',
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '13px',
+            color: '#9D9CB3',
+          }}
+        >
+          Already a member?{' '}
+          <Link
+            href="/sign-in"
+            style={{
+              color: '#A78BFA',
+              fontWeight: 700,
+              textDecoration: 'none',
+            }}
+          >
+            Sign in →
+          </Link>
+        </div>
       </section>
 
       {/* Comparison Table */}
@@ -296,12 +307,12 @@ export default function MembershipPage() {
                   },
                   {
                     label: 'Candidate inside looks',
-                    ours: '✓ 12',
+                    ours: `✓ ${tools.filter((t) => t.type === 'candidate').length}`,
                     competitors: ['Resume only', 'Resume only', 'Resume only', 'Resume only', 'Varies'],
                   },
                   {
                     label: 'Hiring team inside looks',
-                    ours: '✓ 8',
+                    ours: `✓ ${tools.filter((t) => t.type === 'hiring').length}`,
                     competitors: ['✗', '✗', '✗', '✗', '✗'],
                   },
                   {
@@ -341,7 +352,7 @@ export default function MembershipPage() {
                   },
                   {
                     label: 'Built by TA experts',
-                    ours: '✓ 20 years',
+                    ours: '✓ Real practice',
                     competitors: ['✗', '✗', '✗', '✗', 'Varies'],
                   },
                 ].map((row, idx) => (
@@ -437,7 +448,7 @@ export default function MembershipPage() {
           textAlign: 'center',
           letterSpacing: '-0.02em',
         }}>
-          All 20 Inside Looks
+          All {tools.length} Inside Looks
         </h2>
 
         <div style={{
