@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Lock, Sparkles, ArrowRight, Mail } from 'lucide-react'
+import { Lock } from 'lucide-react'
 import { isMember, activateMembership } from '@/lib/membership'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 
@@ -12,274 +12,341 @@ interface ToolGateProps {
   isFree?: boolean
 }
 
-export function ToolGate({
-  toolName,
-  toolDescription,
-  children,
-  isFree = false,
-}: ToolGateProps) {
+const PRO_TOOLS = [
+  {
+    name: 'Through a Recruiter’s Eyes',
+    sub: 'Recruiter Resume Read',
+    desc: 'Hear what a recruiter actually thinks of your resume. First six seconds. Line by line. The call they make at 0:06.',
+  },
+  {
+    name: 'Would a Recruiter Even Find You?',
+    sub: 'LinkedIn Boolean Visibility Check',
+    desc: 'The exact boolean string a recruiter uses to find candidates like you — and the precise reason your profile doesn’t surface in it.',
+  },
+  {
+    name: 'Your LinkedIn — Rewritten',
+    sub: 'Full LinkedIn Profile Rewrite',
+    desc: 'Three headline options. A full About rewrite. Every recent role rewritten for impact. Tuned to the searches that matter.',
+  },
+  {
+    name: 'The Rehearsal Room',
+    sub: 'AI Interview Question Generator',
+    desc: 'Ten interview questions calibrated to your target role. What the interviewer is really assessing. The line that lands the answer.',
+  },
+  {
+    name: 'What They’re Really Asking',
+    sub: 'Interview Question Decoder',
+    desc: 'Decode any interview question. The signal underneath the wrapper. The trap most candidates fall into. The opening line that signals you understood.',
+  },
+]
+
+export function ToolGate({ toolName, toolDescription, children, isFree = false }: ToolGateProps) {
   const [isClient, setIsClient] = useState(false)
   const [isMemberUser, setIsMemberUser] = useState(false)
   const [restoreEmail, setRestoreEmail] = useState('')
+  const [restoreLoading, setRestoreLoading] = useState(false)
+  const [restoreError, setRestoreError] = useState('')
 
   useEffect(() => {
     setIsClient(true)
     setIsMemberUser(isMember())
   }, [])
 
-  if (!isClient) {
-    return <>{children}</>
-  }
+  if (!isClient) return <>{children}</>
+  if (isMemberUser || isFree) return <>{children}</>
 
-  // Show content if member or free tool
-  if (isMemberUser || isFree) {
-    return <>{children}</>
-  }
+  const handleRestore = async () => {
+    const email = restoreEmail.trim()
+    if (!email) return
 
-  const handleRestore = () => {
-    if (restoreEmail.trim()) {
-      activateMembership(restoreEmail)
-      window.location.reload()
+    setRestoreLoading(true)
+    setRestoreError('')
+
+    try {
+      const r = await fetch(
+        `/api/stripe/verify-customer?email=${encodeURIComponent(email)}`,
+      )
+      const data = await r.json()
+
+      if (data.active === true) {
+        activateMembership(email)
+        window.location.reload()
+      } else {
+        setRestoreError(
+          'No active membership found for this email. Use the same email you paid with at checkout.',
+        )
+      }
+    } catch {
+      setRestoreError('Couldn’t verify right now. Please try again in a moment.')
+    } finally {
+      setRestoreLoading(false)
     }
   }
 
   return (
-    <div style={{ background: '#0F0F12', minHeight: '100vh', paddingBottom: '60px' }}>
-      {/* Top Section */}
+    <div
+      style={{
+        background: '#0F0F12',
+        padding: '24px 24px 80px',
+        position: 'relative',
+      }}
+    >
+      {/* Soft top glow */}
       <div
         style={{
-          textAlign: 'center',
-          padding: '80px 40px 40px',
+          position: 'absolute',
+          inset: 0,
+          background:
+            'radial-gradient(ellipse 600px 400px at 50% 0%, rgba(108,71,255,0.10) 0%, transparent 60%)',
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}
+      />
+
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '560px',
+          margin: '0 auto',
+          background: '#14141B',
+          border: '1px solid rgba(108,71,255,0.30)',
+          borderRadius: '20px',
+          padding: '40px 36px',
+          boxShadow: '0 30px 100px rgba(108,71,255,0.18)',
         }}
       >
-        {/* Lock Icon Circle */}
-        <div
-          style={{
-            width: '64px',
-            height: '64px',
-            margin: '0 auto 20px',
-            borderRadius: '50%',
-            background: 'rgba(108,71,255,0.15)',
-            border: '1px solid rgba(108,71,255,0.3)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Lock size={32} color="#6C47FF" />
-        </div>
-
-        {/* Pro Tool Pill */}
+        {/* Eyebrow */}
         <div
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            padding: '4px 12px',
-            borderRadius: '20px',
-            fontSize: '11px',
+            gap: '6px',
+            background: 'rgba(167,139,250,0.10)',
+            border: '1px solid rgba(167,139,250,0.25)',
+            color: '#A78BFA',
+            padding: '5px 12px',
+            borderRadius: '100px',
+            fontFamily: "'Figtree', sans-serif",
             fontWeight: 700,
+            fontSize: '10.5px',
+            letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            background: 'rgba(255,79,106,0.15)',
-            color: '#FF4F6A',
             marginBottom: '20px',
           }}
         >
-          PRO TOOL
-        </div>
-
-        {/* Tool Name */}
-        <h1
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(28px, 4vw, 44px)',
-            fontWeight: 900,
-            letterSpacing: '-0.02em',
-            color: '#F2F0FF',
-            margin: 0,
-            marginTop: '20px',
-            marginBottom: '16px',
-          }}
-        >
-          {toolName}
-        </h1>
-
-        {/* Tool Description */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '17px',
-            fontWeight: 400,
-            color: '#8B8AA0',
-            maxWidth: '500px',
-            margin: '0 auto',
-            lineHeight: 1.7,
-          }}
-        >
-          {toolDescription}
-        </p>
-      </div>
-
-      {/* Blurred Preview */}
-      <div
-        style={{
-          maxWidth: '1000px',
-          margin: '40px auto',
-          paddingX: '40px',
-        }}
-      >
-        <div
-          style={{
-            filter: 'blur(8px)',
-            pointerEvents: 'none',
-            userSelect: 'none',
-            opacity: 0.4,
-            maxHeight: '300px',
-            overflow: 'hidden',
-          }}
-        >
-          {children}
-        </div>
-      </div>
-
-      {/* Paywall Card */}
-      <div
-        style={{
-          position: 'relative',
-          margin: '-60px auto 0',
-          maxWidth: '480px',
-          background: '#1A1A22',
-          border: '1.5px solid rgba(108,71,255,0.4)',
-          borderRadius: '20px',
-          padding: '40px',
-          boxShadow: '0 24px 80px rgba(108,71,255,0.2)',
-          zIndex: 10,
-          paddingLeft: '40px',
-          paddingRight: '40px',
-        }}
-      >
-        {/* Member Benefit */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '13px',
-            color: '#A78BFA',
-          }}
-        >
-          <Sparkles size={18} color="#A78BFA" />
-          Members get all four inside looks.
+          <Lock size={11} strokeWidth={2.5} />
+          Members only · $20 / year
         </div>
 
         {/* Headline */}
         <h2
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: '24px',
             fontWeight: 900,
+            fontSize: 'clamp(26px, 3vw, 32px)',
+            letterSpacing: '-0.02em',
             color: '#F2F0FF',
-            margin: '16px 0 0 0',
-            letterSpacing: '-0.01em',
+            lineHeight: 1.12,
+            margin: 0,
           }}
         >
-          Unlock this inside look for $20/year.
+          The five reads that change how you apply.
         </h2>
 
-        {/* Features */}
-        <div style={{ marginTop: '20px' }}>
-          {[
-            'All four inside looks built by a 20-year recruiter',
-            'Use them on every resume tweak and every job description',
-            'Access delivered instantly to your email',
-          ].map((feature, idx) => (
+        {/* Price callout — OUR price is the hero */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: '10px',
+            margin: '18px 0 8px',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(40px, 5vw, 56px)',
+              letterSpacing: '-0.03em',
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              lineHeight: 1,
+            }}
+          >
+            $20
+          </span>
+          <span
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: '17px',
+              color: '#C9C7DA',
+            }}
+          >
+            / year. All five.
+          </span>
+        </div>
+
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 500,
+            fontSize: '14px',
+            color: '#9D9CB3',
+            lineHeight: 1.55,
+            margin: '0 0 28px',
+          }}
+        >
+          For comparison, Jobscan charges $49.95 per month — for one tool.
+        </p>
+
+        {/* What you get */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {PRO_TOOLS.map((tool, idx) => (
             <div
               key={idx}
               style={{
                 display: 'flex',
+                gap: '14px',
                 alignItems: 'flex-start',
-                gap: '10px',
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: '14px',
-                fontWeight: 500,
-                color: '#F2F0FF',
-                marginTop: idx === 0 ? 0 : '12px',
+                padding: '14px 16px',
+                background: 'rgba(108,71,255,0.06)',
+                border: '1px solid rgba(108,71,255,0.14)',
+                borderRadius: '12px',
               }}
             >
-              <span
+              <div
                 style={{
-                  width: '7px',
-                  height: '7px',
+                  width: '24px',
+                  height: '24px',
                   borderRadius: '50%',
-                  background: '#6C47FF',
-                  marginTop: '8px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   flexShrink: 0,
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: '11px',
+                  marginTop: '2px',
                 }}
-              />
-              {feature}
+              >
+                {idx + 1}
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '15px',
+                    color: '#F2F0FF',
+                    marginBottom: '2px',
+                    letterSpacing: '-0.005em',
+                  }}
+                >
+                  {tool.name}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 600,
+                    fontSize: '11px',
+                    color: '#A78BFA',
+                    letterSpacing: '0.005em',
+                    marginBottom: '6px',
+                  }}
+                >
+                  {tool.sub}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 400,
+                    fontSize: '13.5px',
+                    color: '#8B8AA0',
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {tool.desc}
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Primary Button */}
+        {/* Primary CTA */}
         <StripeCheckoutButton
           style={{
             width: '100%',
-            marginTop: '12px',
+            marginTop: '28px',
             background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
             border: 'none',
-            borderRadius: '10px',
-            padding: '15px',
+            borderRadius: '12px',
+            padding: '17px',
             fontFamily: "'Figtree', sans-serif",
             fontSize: '16px',
             fontWeight: 800,
+            letterSpacing: '0.005em',
             color: 'white',
             cursor: 'pointer',
             transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
           }}
         >
-          Get Full Access — $20/year
+          Get Full Access — $20 / year
         </StripeCheckoutButton>
+
+        {/* Reassurance line */}
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 500,
+            fontSize: '12.5px',
+            color: '#8B8AA0',
+            textAlign: 'center',
+            marginTop: '12px',
+            marginBottom: 0,
+          }}
+        >
+          $1.67 / month, billed annually. Cancel anytime. Free tools stay free forever.
+        </p>
 
         {/* Divider */}
         <div
           style={{
-            margin: '20px 0',
+            margin: '26px 0 18px',
             borderTop: '1px solid rgba(255,255,255,0.06)',
           }}
         />
 
-        {/* Restore Access */}
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '13px',
-            fontWeight: 400,
-            color: '#8B8AA0',
-            textAlign: 'center',
-          }}
-        >
-          Already a member?
+        {/* Restore */}
+        <div style={{ textAlign: 'center' }}>
           <div
             style={{
-              display: 'flex',
-              gap: '8px',
-              alignItems: 'center',
-              marginTop: '12px',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 600,
+              fontSize: '13px',
+              color: '#A78BFA',
+              marginBottom: '10px',
             }}
           >
+            Already a member?
+          </div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <input
               type="email"
               value={restoreEmail}
               onChange={(e) => setRestoreEmail(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleRestore()}
+              onKeyDown={(e) => e.key === 'Enter' && handleRestore()}
               placeholder="your@email.com"
               style={{
                 flex: 1,
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.10)',
                 borderRadius: '8px',
                 padding: '10px 12px',
                 fontFamily: "'Figtree', sans-serif",
@@ -287,51 +354,56 @@ export function ToolGate({
                 color: '#F2F0FF',
                 boxSizing: 'border-box',
                 outline: 'none',
-                transition: 'border-color 0.2s',
+                transition: 'border-color 0.15s',
               }}
               onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)')}
             />
             <button
               onClick={handleRestore}
+              disabled={restoreLoading || !restoreEmail.trim()}
               style={{
                 background: 'transparent',
-                border: '1.5px solid rgba(108,71,255,0.5)',
+                border: '1px solid rgba(167,139,250,0.40)',
                 borderRadius: '8px',
-                padding: '8px 12px',
+                padding: '9px 16px',
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: '12px',
+                fontSize: '13px',
                 fontWeight: 700,
                 color: '#A78BFA',
-                cursor: 'pointer',
+                cursor: restoreLoading || !restoreEmail.trim() ? 'not-allowed' : 'pointer',
+                opacity: restoreLoading || !restoreEmail.trim() ? 0.6 : 1,
                 whiteSpace: 'nowrap',
-                transition: 'all 0.2s',
+                transition: 'background 0.15s, opacity 0.15s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(108,71,255,0.1)'
+                if (!restoreLoading) e.currentTarget.style.background = 'rgba(108,71,255,0.10)'
               }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent'
-              }}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
             >
-              Restore
+              {restoreLoading ? 'Checking...' : 'Restore'}
             </button>
           </div>
+          {restoreError && (
+            <div
+              style={{
+                marginTop: 10,
+                padding: '8px 12px',
+                background: 'rgba(255,79,106,0.08)',
+                border: '1px solid rgba(255,79,106,0.25)',
+                borderRadius: 8,
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 500,
+                fontSize: '12px',
+                color: '#FF8FA3',
+                lineHeight: 1.5,
+                textAlign: 'left',
+              }}
+            >
+              {restoreError}
+            </div>
+          )}
         </div>
-
-        {/* Fine Print */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '12px',
-            fontWeight: 400,
-            color: '#8B8AA0',
-            textAlign: 'center',
-            margin: '16px 0 0 0',
-          }}
-        >
-          Billed annually. Cancel anytime. Free inside looks stay free forever.
-        </p>
       </div>
     </div>
   )
