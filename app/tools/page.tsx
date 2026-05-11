@@ -1,1001 +1,511 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import {
-  FileSearch,
-  FileText,
-  Shield,
-  Target,
-  Building2,
-  Eye,
-  Search,
-  Pencil,
-  MessageSquare,
-  User,
-  AlertTriangle,
-  DollarSign,
-  BarChart2,
-  Share2,
-  Star,
-  UserCheck,
-  ClipboardList,
-  Users,
-  Mail,
-  Send,
-  GitCompare,
-  Calendar,
-} from 'lucide-react'
+import { ToolCard } from '@/components/tool-card'
+import { Marquee } from '@/components/marquee'
+import { AudienceHubsRow } from '@/components/audience-hubs-row'
+import { CATALOG, FLAGSHIP_PRO, type CatalogTool, type ToolAudience } from '@/lib/tools-catalog'
+import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 
-// Candidate moments
-const candidateMoments = [
-  {
-    label: 'Before You Apply',
-    tools: [
-      { name: 'What This Job Actually Is', icon: FileText, free: true, link: '/tools/what-this-job-is', desc: 'See what\'s really between the lines of any job description — and whether it\'s worth your time.' },
-      { name: 'Where You Actually Have a Shot', icon: Target, free: false, link: '/tools/where-you-have-a-shot', desc: 'See which platforms actually respond to candidates like you — and where you’re wasting your time.' },
-      { name: 'What This Company Feels Like to Work At', icon: Building2, free: false, link: '/tools/culture-decoder', desc: 'See what a company\'s values actually mean in practice before you invest in applying.' },
-    ],
-  },
-  {
-    label: 'When You Apply',
-    tools: [
-      { name: 'Does My Resume Read as AI?', icon: FileSearch, free: true, link: '/resume', desc: 'See exactly how AI screening reads your resume before a human ever does.' },
-      { name: 'Would You Even Make It Through?', icon: Shield, free: false, link: '/tools/ats-reality', desc: 'See exactly how automated screening scores your resume before a human sees it.' },
-      { name: 'Your Resume, Through a Recruiter\'s Eyes', icon: Eye, free: false, link: '/tools/resume-recruiter-eyes', desc: 'See the internal monologue of a recruiter reading your resume in the first 6 seconds.' },
-      { name: 'Would a Recruiter Even Find You?', icon: Search, free: false, link: '/tools/recruiter-find-you', desc: 'See the exact boolean search string used to find candidates like you — and whether your profile shows up.' },
-      { name: 'LinkedIn Profile Rewriter', icon: Pencil, free: false, link: '/tools/linkedin-rewrite', desc: 'See how a recruiter reads your LinkedIn — and get every section rewritten in one pass.' },
-      { name: 'RepVera', icon: Star, free: true, link: 'https://www.repvera.com', external: true, desc: 'The part of your application that no resume can show — what the people who\'ve actually worked with you say. Start your proof layer free.' },
-    ],
-  },
-  {
-    label: 'When You Interview',
-    tools: [
-      { name: 'What They\'re Really Asking', icon: MessageSquare, free: false, link: '/tools/what-theyre-asking', desc: 'See the competency underneath any interview question — and what a strong answer actually looks like.' },
-      { name: 'How You Actually Come Across', icon: User, free: false, link: '/tools/how-you-come-across', desc: 'See how you sound when someone asks "tell me about yourself" — and make it land.' },
-    ],
-  },
-  {
-    label: 'When You\'re Not Hearing Back',
-    tools: [
-      { name: 'What\'s Breaking Your Search', icon: AlertTriangle, free: true, link: '/tools/whats-breaking-search', desc: 'See the real reason applications aren\'t converting — with a specific diagnosis for your situation.' },
-    ],
-  },
-  {
-    label: 'When You Get an Offer',
-    tools: [
-      { name: 'What You\'re Actually Worth', icon: DollarSign, free: false, link: '/tools/what-youre-worth', desc: 'See what the market actually says — and get a word-for-word negotiation script ready to use.' },
-    ],
-  },
-]
+type AudienceFilter = 'all' | ToolAudience
 
-// Hiring team moments
-const hiringMoments = [
-  {
-    label: 'Before You Post',
-    tools: [
-      { name: 'Is Your Job Even Being Seen?', icon: BarChart2, free: true, link: '/jd-seo-score', desc: 'See how your job description scores across every major platform candidates are actually using.' },
-      { name: 'Your Job Post, Through Candidate Eyes', icon: Eye, free: false, link: '/tools/jd-candidate-eyes', desc: 'See your job description the way a strong candidate reads it — and why they click away.' },
-      { name: 'How This Sounds in the Wild', icon: Share2, free: false, link: '/tools/job-post-social', desc: 'See how your job post reads on every platform candidates are actually using.' },
-      { name: 'What Your Brand Actually Says', icon: Star, free: false, link: '/tools/employer-brand', desc: 'See if your careers page actually convinces anyone — or sounds like every other company.' },
-    ],
-  },
-  {
-    label: 'While You Source',
-    tools: [
-      { name: 'The Search String That Finds Your Candidate', icon: Search, free: false, link: '/tools/boolean-builder', desc: 'See the exact boolean search to run on LinkedIn, Indeed, and Google to find your ideal hire.' },
-      { name: 'How to Reach Out Without Being Ignored', icon: Send, free: false, link: '/tools/candidate-outreach', desc: 'See what actually gets a response — and what gets archived without being read.' },
-    ],
-  },
-  {
-    label: 'While You Evaluate',
-    tools: [
-      { name: 'Is This Even a Real Candidate?', icon: UserCheck, free: false, link: '/tools/real-candidate', desc: 'See whether this application is human-authored or AI-generated — and what flagged it.' },
-      { name: 'What You\'re Actually Evaluating', icon: ClipboardList, free: false, link: '/tools/what-youre-evaluating', desc: 'See the structured scorecard that reduces gut-feel and creates consistent signal across interviewers.' },
-      { name: 'Are Your Interviewers Even Ready?', icon: Users, free: false, link: '/tools/interviewers-ready', desc: 'See the prep guide that stops underprepared hiring managers from killing your best candidates.' },
-    ],
-  },
-  {
-    label: 'When You Decide',
-    tools: [
-      { name: 'How Your Offer Actually Lands', icon: Mail, free: false, link: '/tools/offer-lands', desc: 'See how your offer reads to a candidate who has options — and rewrite it to make them want to sign.' },
-    ],
-  },
-  {
-    label: 'After You Hire',
-    tools: [
-      { name: 'Your Hiring Process, From the Outside', icon: GitCompare, free: false, link: '/tools/hiring-process-outside', desc: 'See every step of your process through a candidate\'s eyes — including where you\'re losing the ones you wanted.' },
-      { name: 'What Day One Actually Looks Like', icon: Calendar, free: false, link: '/tools/day-one', desc: 'See your onboarding through a new hire\'s eyes before they walk in — and make it worth staying for.' },
-    ],
-  },
-]
+export default function ToolsPage() {
+  const [audienceFilter, setAudienceFilter] = useState<AudienceFilter>('all')
 
-function ToolCard({ tool, isCandidate }: { tool: any; isCandidate: boolean }) {
-  const Icon = tool.icon
-  const iconBgColor = isCandidate ? 'rgba(108,71,255,0.15)' : 'rgba(255,79,106,0.15)'
-  const iconColor = isCandidate ? '#A78BFA' : '#FF4F6A'
-  const ctaColor = tool.free ? '#6C47FF' : '#8B8AA0'
-  const ctaText =
-    tool.name === 'RepVera'
-      ? 'Start your RepVera — free →'
-      : tool.free
-      ? 'Get the inside look →'
-      : 'Inside look — for members →'
+  const filtered = useMemo(() => {
+    if (audienceFilter === 'all') return CATALOG
+    return CATALOG.filter((t) => t.audience === audienceFilter)
+  }, [audienceFilter])
 
-  const cardStyle: React.CSSProperties = {
-    background: '#1A1A22',
-    border: '1px solid rgba(255,255,255,0.06)',
-    borderRadius: '14px',
-    padding: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    minHeight: '220px',
-    transition: 'all 0.2s ease',
-    cursor: 'pointer',
-    textDecoration: 'none',
-  }
-
-  const cardInner = (
-    <>
-      {/* Icon circle */}
-      <div
-        style={{
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          background: iconBgColor,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Icon size={18} color={iconColor} />
-      </div>
-
-      {/* Status badge — matches featured-card eyebrow style for consistency */}
-      <div
-        style={{
-          marginTop: '14px',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '10px',
-          fontWeight: 800,
-          textTransform: 'uppercase',
-          letterSpacing: '0.14em',
-          color: tool.free ? '#34D399' : '#A78BFA',
-        }}
-      >
-        <span
-          style={{
-            width: '6px',
-            height: '6px',
-            borderRadius: '50%',
-            background: tool.free ? '#34D399' : '#A78BFA',
-          }}
-        />
-        {tool.free ? 'Free — No account needed' : 'For members'}
-      </div>
-
-      {/* Title */}
-      <h3
-        style={{
-          fontSize: '17px',
-          fontWeight: 800,
-          fontFamily: "'Figtree', sans-serif",
-          color: '#F2F0FF',
-          marginTop: '14px',
-          marginBottom: '0',
-          letterSpacing: '-0.01em',
-          lineHeight: 1.25,
-        }}
-      >
-        {tool.name}
-      </h3>
-
-      {/* Description */}
-      <p
-        style={{
-          fontSize: '14px',
-          fontWeight: 400,
-          fontFamily: "'Figtree', sans-serif",
-          color: '#B8B6CF',
-          lineHeight: 1.6,
-          marginTop: '8px',
-          marginBottom: '16px',
-          flex: 1,
-        }}
-      >
-        {tool.desc}
-      </p>
-
-      {/* CTA */}
-      <span
-        style={{
-          fontSize: '13px',
-          fontWeight: 700,
-          fontFamily: "'Figtree', sans-serif",
-          color: ctaColor,
-          marginTop: 'auto',
-        }}
-      >
-        {ctaText}
-      </span>
-    </>
+  // The 5 flagship Pro tools (in catalog order if listed in FLAGSHIP_PRO)
+  const flagshipPro: CatalogTool[] = useMemo(
+    () =>
+      FLAGSHIP_PRO.map((name) => filtered.find((t) => t.name === name)).filter(
+        (t): t is CatalogTool => Boolean(t),
+      ),
+    [filtered],
   )
 
-  if (tool.external) {
-    return (
-      <a
-        href={tool.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={cardStyle}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(108,71,255,0.4)'
-          e.currentTarget.style.transform = 'translateY(-3px)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
-          e.currentTarget.style.transform = 'translateY(0)'
-        }}
-      >
-        {cardInner}
-      </a>
-    )
-  }
+  // Free tools (visible)
+  const freeTools = useMemo(() => filtered.filter((t) => t.tier === 'free'), [filtered])
+
+  // Pro extras — Pro tools not in the flagship 5
+  const proExtras = useMemo(
+    () => filtered.filter((t) => t.tier === 'pro' && !FLAGSHIP_PRO.includes(t.name as never)),
+    [filtered],
+  )
+
+  // Coming soon
+  const comingSoon = useMemo(() => filtered.filter((t) => t.tier === 'soon'), [filtered])
 
   return (
-    <Link
-      href={tool.link}
-      style={cardStyle}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(108,71,255,0.4)'
-        e.currentTarget.style.transform = 'translateY(-3px)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
-        e.currentTarget.style.transform = 'translateY(0)'
-      }}
-    >
-      {cardInner}
-    </Link>
-  )
-}
+    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+      <Navigation variant="dark" />
 
-// === Featured tools (free + paid, grouped) ==============================
-
-interface FeaturedTool {
-  status: 'free' | 'member' | 'soon'
-  badge: string
-  title: string
-  /** Optional smaller subtitle below the title — useful when the brand-voice
-   *  name differs from the SEO-friendly product name (e.g. "Your LinkedIn
-   *  Audition Reel" with "LinkedIn Profile Rewriter" underneath). */
-  subtitle?: string
-  desc: string
-  ctaLabel: string
-  href: string | null
-}
-
-const FREE_TOOLS: FeaturedTool[] = [
-  {
-    status: 'free',
-    badge: 'Free — no account',
-    title: 'Does My Resume Read as AI?',
-    desc: '49% of hiring managers auto-reject resumes they suspect were AI-written. See exactly which lines on yours give it away — before a recruiter does.',
-    ctaLabel: 'Run it free',
-    href: '/resume',
-  },
-  {
-    status: 'free',
-    badge: 'Free — no account',
-    title: 'What This Job Actually Is',
-    desc: 'Paste any job description. Get the recruiter\'s read on what the role really means day-to-day, the unstated requirements, the red flags, and an honest salary read.',
-    ctaLabel: 'Decode a JD',
-    href: '/tools/what-this-job-is',
-  },
-  {
-    status: 'free',
-    badge: 'Free — no account',
-    title: 'What\'s Breaking Your Search',
-    desc: 'Tell us about your search. Get one specific diagnosis from a 20-year recruiter — not five maybes — and a single 48-hour fix to start with.',
-    ctaLabel: 'Diagnose it',
-    href: '/tools/whats-breaking-search',
-  },
-]
-
-const MEMBER_TOOLS: FeaturedTool[] = [
-  {
-    status: 'member',
-    badge: 'For members',
-    title: 'Your Resume, Through a Recruiter\'s Eyes',
-    desc: 'The internal monologue of a recruiter reading your resume against a target job. What they skip, what makes them pause, the call they make in 30 seconds.',
-    ctaLabel: 'See the verdict',
-    href: '/tools/resume-recruiter-eyes',
-  },
-  {
-    status: 'member',
-    badge: 'For members',
-    title: 'Your LinkedIn Audition Reel',
-    subtitle: 'LinkedIn Profile Rewriter',
-    desc: 'The actual rewrites — not advice. Headline three ways, About end-to-end, and the exact terms recruiters search for to find someone like you.',
-    ctaLabel: 'Rewrite it',
-    href: '/tools/linkedin-rewrite',
-  },
-  {
-    status: 'member',
-    badge: 'For members',
-    title: 'The Rehearsal Room',
-    desc: 'Ten interview questions calibrated to the JD, with what they\'re really assessing, the weak vs strong answer, and your literal opening line. Like a hiring manager whispering in your ear.',
-    ctaLabel: 'Generate my script',
-    href: '/tools/rehearsal-room',
-  },
-]
-
-function FeaturedToolsSection() {
-  const [mounted, setMounted] = useState(false)
-  React.useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 60)
-    return () => clearTimeout(t)
-  }, [])
-
-  return (
-    <section
-      style={{
-        padding: '20px 24px 60px',
-        maxWidth: '900px',
-        margin: '0 auto',
-      }}
-    >
-      {/* Free tier label */}
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontSize: '11px',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.18em',
-            color: '#34D399',
-          }}
-        >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: '#34D399',
-            }}
-          />
-          Three free tools
-        </div>
-      </div>
-
-      <div
+      {/* THEATRICAL HERO */}
+      <section
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '20px',
-          marginBottom: '64px',
+          padding: '90px 24px 56px',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        {FREE_TOOLS.map((tool, idx) => (
-          <FeaturedCard key={tool.title} tool={tool} index={idx} mounted={mounted} />
-        ))}
-      </div>
-
-      {/* Member tier label */}
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontSize: '11px',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.18em',
-            color: '#A78BFA',
-          }}
-        >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: '#A78BFA',
-            }}
-          />
-          Three deep tools for members
-        </div>
-        <p
-          style={{
-            fontSize: '13px',
-            color: '#8B8AA0',
-            fontFamily: 'Figtree, sans-serif',
-            marginTop: '6px',
-            marginBottom: 0,
-          }}
-        >
-          Plus 5+ bonus inside looks. $20/year. Cancel anytime.
-        </p>
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '20px',
-        }}
-      >
-        {MEMBER_TOOLS.map((tool, idx) => (
-          <FeaturedCard key={tool.title} tool={tool} index={idx + FREE_TOOLS.length} mounted={mounted} />
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function FeaturedCard({
-  tool,
-  index,
-  mounted,
-}: {
-  tool: FeaturedTool
-  index: number
-  mounted: boolean
-}) {
-  const [hover, setHover] = useState(false)
-
-  const accent =
-    tool.status === 'free'
-      ? { color: '#34D399', bg: 'rgba(52,211,153,0.10)', border: 'rgba(52,211,153,0.35)' }
-      : tool.status === 'member'
-      ? { color: '#A78BFA', bg: 'rgba(108,71,255,0.10)', border: 'rgba(108,71,255,0.35)' }
-      : { color: '#FF4F6A', bg: 'rgba(255,79,106,0.08)', border: 'rgba(255,79,106,0.25)' }
-
-  const isClickable = tool.href !== null
-
-  const cardInner = (
-    <article
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      style={{
-        background: '#14141C',
-        border: `1px solid ${hover && isClickable ? accent.border : 'rgba(255,255,255,0.06)'}`,
-        borderRadius: '16px',
-        padding: '28px',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '16px',
-        cursor: isClickable ? 'pointer' : 'default',
-        transition: 'transform 0.35s cubic-bezier(0.2,0.8,0.2,1), border-color 0.35s, box-shadow 0.35s, opacity 0.6s ease, translate 0.6s cubic-bezier(0.2,0.8,0.2,1)',
-        transform: hover && isClickable ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hover && isClickable ? `0 24px 60px ${accent.bg}, 0 0 0 1px ${accent.border}` : 'none',
-        opacity: mounted ? 1 : 0,
-        translate: mounted ? '0 0' : '0 12px',
-        transitionDelay: `${index * 80}ms`,
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Subtle stage-light gradient that reveals on hover, like a spotlight catching the card */}
-      {isClickable && (
+        {/* Stage spotlight */}
         <div
           aria-hidden
           style={{
             position: 'absolute',
             inset: 0,
-            background: `radial-gradient(circle at 0% 0%, ${accent.bg} 0%, transparent 60%)`,
-            opacity: hover ? 1 : 0,
-            transition: 'opacity 0.35s ease',
+            background:
+              'radial-gradient(ellipse 1100px 700px at 50% -150px, rgba(108,71,255,0.25) 0%, rgba(255,79,106,0.10) 35%, transparent 70%)',
             pointerEvents: 'none',
+            zIndex: 0,
           }}
         />
-      )}
 
-      {/* Eyebrow / status badge */}
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontSize: '10px',
-          fontWeight: 800,
-          textTransform: 'uppercase',
-          letterSpacing: '0.14em',
-          color: accent.color,
-          position: 'relative',
-        }}
-      >
-        <span
-          style={{
-            width: '6px',
-            height: '6px',
-            borderRadius: '50%',
-            background: accent.color,
-            opacity: tool.status === 'soon' ? 0.6 : 1,
-          }}
-        />
-        {tool.badge}
-      </div>
-
-      {/* Title */}
-      <div style={{ position: 'relative' }}>
-        <h3
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '22px',
-            fontWeight: 900,
-            letterSpacing: '-0.02em',
-            color: '#F2F0FF',
-            lineHeight: 1.15,
-            margin: 0,
-          }}
-        >
-          {tool.title}
-        </h3>
-        {tool.subtitle && (
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '900px', margin: '0 auto' }}>
           <div
             style={{
               fontFamily: "'Figtree', sans-serif",
-              fontSize: '12px',
-              fontWeight: 600,
-              color: '#8B8AA0',
-              marginTop: '6px',
-              letterSpacing: '0.02em',
-            }}
-          >
-            {tool.subtitle}
-          </div>
-        )}
-      </div>
-
-      {/* Description */}
-      <p
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '15px',
-          fontWeight: 400,
-          color: '#C4C2D8',
-          lineHeight: 1.6,
-          margin: 0,
-          flex: 1,
-          position: 'relative',
-        }}
-      >
-        {tool.desc}
-      </p>
-
-      {/* CTA */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          fontSize: '13px',
-          fontWeight: 700,
-          color: tool.status === 'soon' ? '#6B6B7B' : accent.color,
-          position: 'relative',
-          marginTop: '4px',
-        }}
-      >
-        {tool.ctaLabel}
-        {isClickable && (
-          <span
-            style={{
-              transition: 'transform 0.25s ease',
-              transform: hover ? 'translateX(4px)' : 'translateX(0)',
-            }}
-          >
-            →
-          </span>
-        )}
-      </div>
-    </article>
-  )
-
-  if (!isClickable) return cardInner
-  return (
-    <Link href={tool.href!} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
-      {cardInner}
-    </Link>
-  )
-}
-
-// === Page ================================================================
-
-// Tools surfaced in the featured section above — exclude these from the
-// journey-organized list below so the same tool doesn't appear twice.
-const FEATURED_LINKS = new Set<string>([
-  '/resume',
-  '/tools/what-this-job-is',
-  '/tools/whats-breaking-search',
-  '/tools/resume-recruiter-eyes',
-  '/tools/linkedin-rewrite',
-  '/tools/rehearsal-room',
-])
-
-function withoutFeatured(moments: typeof candidateMoments) {
-  return moments
-    .map((moment) => ({
-      ...moment,
-      tools: moment.tools.filter((t: any) => !FEATURED_LINKS.has(t.link)),
-    }))
-    .filter((moment) => moment.tools.length > 0)
-}
-
-export default function ToolsPage() {
-  const [section, setSection] = useState<'candidates' | 'hiring'>('candidates')
-
-  const activeTools =
-    section === 'candidates' ? withoutFeatured(candidateMoments) : hiringMoments
-
-  return (
-    <div style={{ background: '#0F0F12', minHeight: '100vh' }}>
-      <Navigation />
-
-      {/* Sticky Banner */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-          padding: '12px 40px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <span
-          style={{
-            color: 'white',
-            fontSize: '14px',
-            fontWeight: 600,
-            fontFamily: "'Figtree', sans-serif",
-          }}
-        >
-          The full production kit. $20/year. Less than Jobscan charges for one day.
-        </span>
-        <Link
-          href="/membership"
-          style={{
-            background: 'white',
-            color: '#6C47FF',
-            padding: '8px 20px',
-            borderRadius: '20px',
-            fontSize: '13px',
-            fontWeight: 800,
-            fontFamily: "'Figtree', sans-serif",
-            textDecoration: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Go Pro
-        </Link>
-      </div>
-
-      {/* Hero Section */}
-      <section
-        style={{
-          padding: '100px 40px',
-          textAlign: 'center',
-          maxWidth: '800px',
-          margin: '0 auto',
-          position: 'relative',
-        }}
-      >
-        {/* Radial glows */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '-5%',
-            right: '-10%',
-            width: '500px',
-            height: '500px',
-            background: 'radial-gradient(circle, rgba(108,71,255,0.2) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '-10%',
-            left: '-10%',
-            width: '500px',
-            height: '500px',
-            background: 'radial-gradient(circle, rgba(255,79,106,0.15) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-
-        <div
-          style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: '#8B8AA0',
-            marginBottom: '20px',
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
-          BACKSTAGE PASS
-        </div>
-        <h1
-          style={{
-            fontSize: 'clamp(36px, 5vw, 60px)',
-            fontWeight: 900,
-            fontFamily: "'Figtree', sans-serif",
-            lineHeight: 1.1,
-            marginBottom: '20px',
-            letterSpacing: '-0.02em',
-            position: 'relative',
-            zIndex: 1,
-            color: '#F2F0FF',
-          }}
-        >
-          Every inside look you need before the curtain goes up.
-        </h1>
-        <p
-          style={{
-            fontSize: '17px',
-            fontWeight: 400,
-            fontFamily: "'Figtree', sans-serif",
-            color: '#8B8AA0',
-            lineHeight: 1.6,
-            maxWidth: '580px',
-            margin: '0 auto',
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
-          Three free tools and three for members. Built by someone who has screened 10,000 resumes and run thousands of interviews. $20/year for the deep ones.
-        </p>
-      </section>
-
-      {/* Featured: The Four Inside Looks */}
-      <FeaturedToolsSection />
-
-      {/* Section break before the broader vision */}
-      <section
-        style={{
-          padding: '40px 24px 0',
-          maxWidth: '720px',
-          margin: '0 auto',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            height: '1px',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%)',
-            marginBottom: '40px',
-          }}
-        />
-        <div
-          style={{
-            fontSize: '10px',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.16em',
-            color: '#A78BFA',
-            marginBottom: '12px',
-          }}
-        >
-          The full production
-        </div>
-        <h2
-          style={{
-            fontSize: 'clamp(24px, 3vw, 32px)',
-            fontWeight: 900,
-            fontFamily: "'Figtree', sans-serif",
-            lineHeight: 1.2,
-            margin: 0,
-            marginBottom: '14px',
-            letterSpacing: '-0.02em',
-            color: '#F2F0FF',
-          }}
-        >
-          The full vision, mapped to the candidate journey.
-        </h2>
-        <p
-          style={{
-            fontSize: '15px',
-            color: '#8B8AA0',
-            margin: 0,
-            lineHeight: 1.6,
-          }}
-        >
-          The four above are polished and live. The rest are sketches of what comes next — every moment of hiring, on both sides, in development.
-        </p>
-      </section>
-
-      {/* Toggle Section */}
-      <section
-        style={{
-          padding: '40px 40px',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            display: 'inline-flex',
-            gap: '12px',
-            background: '#1A1A22',
-            padding: '8px',
-            borderRadius: '16px',
-          }}
-        >
-          {(['candidates', 'hiring'] as const).map((sectionKey) => {
-            const isActive = section === sectionKey
-            const label = sectionKey === 'candidates' ? 'For Candidates' : 'For Hiring Teams'
-
-            return (
-              <button
-                key={sectionKey}
-                onClick={() => setSection(sectionKey)}
-                style={{
-                  padding: '12px 28px',
-                  borderRadius: '12px',
-                  border: 'none',
-                  background: isActive ? '#6C47FF' : '#1A1A22',
-                  color: isActive ? 'white' : '#8B8AA0',
-                  fontSize: '14px',
-                  fontWeight: isActive ? 800 : 600,
-                  fontFamily: "'Figtree', sans-serif",
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  border: !isActive ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                }}
-              >
-                {label}
-              </button>
-            )
-          })}
-        </div>
-      </section>
-
-      {/* Tools Sections */}
-      <section
-        style={{
-          padding: '0 40px 80px',
-          maxWidth: '1400px',
-          margin: '0 auto',
-        }}
-      >
-        {activeTools.map((moment, idx) => (
-          <div key={idx} style={{ marginBottom: '80px' }}>
-            {/* Moment Label */}
-            <div
-              style={{
-                fontSize: '11px',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                color: section === 'candidates' ? '#FF4F6A' : '#FF4F6A',
-                marginBottom: '12px',
-                fontFamily: "'Figtree', sans-serif",
-              }}
-            >
-              {moment.label}
-            </div>
-
-            {/* Tools Grid */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '24px',
-              }}
-            >
-              {moment.tools.map((tool, toolIdx) => (
-                <ToolCard key={toolIdx} tool={tool} isCandidate={section === 'candidates'} />
-              ))}
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* Bottom CTA Section */}
-      <section
-        style={{
-          padding: '80px 40px',
-          textAlign: 'center',
-        }}
-      >
-        <div
-          style={{
-            background: '#1A1A22',
-            border: '1px solid rgba(108,71,255,0.25)',
-            borderRadius: '20px',
-            padding: '60px 40px',
-            maxWidth: '800px',
-            margin: '0 auto',
-          }}
-        >
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '6px 14px',
-              borderRadius: '20px',
-              fontSize: '10px',
-              fontWeight: 700,
+              fontWeight: 800,
+              fontSize: '11px',
+              letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-              background: 'rgba(255,79,106,0.15)',
-              color: '#FF4F6A',
-              fontFamily: "'Figtree', sans-serif",
+              color: '#A78BFA',
               marginBottom: '24px',
             }}
           >
-            UNLOCK EVERYTHING
-          </span>
+            ◆ TONIGHT&apos;S PROGRAM
+          </div>
 
+          <h1
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(48px, 7vw, 88px)',
+              letterSpacing: '-0.03em',
+              lineHeight: 0.98,
+              color: '#F2F0FF',
+              margin: '0 0 24px',
+            }}
+          >
+            Both sides of hiring.
+            <br />
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              On the same stage.
+            </span>
+          </h1>
+
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '18px',
+              fontWeight: 400,
+              color: '#9D9CB3',
+              lineHeight: 1.55,
+              maxWidth: '620px',
+              margin: '0 auto 32px',
+            }}
+          >
+            {freeTools.length} free tools, {flagshipPro.length} flagship Inside Looks for $20/year, and a hiring-team set built from the same recruiting practice.
+          </p>
+
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link
+              href="/pricing"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '14px 28px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: 'white',
+                borderRadius: '12px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '14px',
+                textDecoration: 'none',
+                boxShadow: '0 18px 40px rgba(108,71,255,0.32)',
+                letterSpacing: '0.01em',
+              }}
+            >
+              See pricing & comparison →
+            </Link>
+            <Link
+              href="#flagship"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '14px 28px',
+                background: 'transparent',
+                color: '#A78BFA',
+                border: '1.5px solid rgba(167,139,250,0.4)',
+                borderRadius: '12px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '14px',
+                textDecoration: 'none',
+              }}
+            >
+              Browse the program ↓
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE — theatrical "now showing" */}
+      <Marquee
+        items={[
+          'NOW SHOWING — 6 SECONDS WITH YOUR RESUME',
+          'BOOLEAN STRINGS THAT FIND YOU',
+          'INTERVIEW QUESTIONS DECODED',
+          'NEGOTIATION SCRIPTS',
+          'KEYWORD GAPS REVEALED',
+          'BOTH SIDES OF HIRING',
+        ]}
+      />
+
+      {/* AUDIENCE FILTER */}
+      <section style={{ padding: '40px 24px 0', textAlign: 'center' }}>
+        <div style={{ display: 'inline-flex', gap: 6, padding: 4, background: '#14141B', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 100 }}>
+          <FilterPill active={audienceFilter === 'all'} onClick={() => setAudienceFilter('all')} label="Both sides" />
+          <FilterPill
+            active={audienceFilter === 'candidate'}
+            onClick={() => setAudienceFilter('candidate')}
+            label="For candidates"
+          />
+          <FilterPill
+            active={audienceFilter === 'hiring'}
+            onClick={() => setAudienceFilter('hiring')}
+            label="For hiring teams"
+          />
+        </div>
+      </section>
+
+      {/* AUDIENCE HUBS — curated entry points by candidate moment */}
+      <AudienceHubsRow padding="48px 24px 0" />
+
+      {/* FLAGSHIP PRO — featured row */}
+      {flagshipPro.length > 0 && (
+        <section id="flagship" style={{ padding: '40px 24px 20px' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            <SectionHeader
+              eyebrow="THE FIVE INSIDE LOOKS"
+              eyebrowColor="#A78BFA"
+              title="The whole production. $20 a year."
+              sub="Each one replaces a $30–80/month tool. Five together for less than Jobscan charges for one day."
+            />
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                gap: '20px',
+                marginTop: '32px',
+              }}
+            >
+              {flagshipPro.map((tool) => (
+                <ToolCard key={tool.href} tool={tool} variant="featured" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FREE TOOLS — standard grid */}
+      {freeTools.length > 0 && (
+        <section style={{ padding: '48px 24px 20px' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            <SectionHeader
+              eyebrow="FREE — START HERE"
+              eyebrowColor="#5EE6A8"
+              title="Five free tools. No account. No card."
+              sub="Built to help — and to give you a sense of what the Pro inside looks deliver."
+            />
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                gap: '20px',
+                marginTop: '32px',
+              }}
+            >
+              {freeTools.map((tool) => (
+                <ToolCard key={tool.href} tool={tool} variant="standard" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* PRO EXTRAS */}
+      {proExtras.length > 0 && (
+        <section style={{ padding: '48px 24px 20px' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            <SectionHeader
+              eyebrow="ALSO INCLUDED IN PRO"
+              eyebrowColor="#A78BFA"
+              title="More inside looks, same membership."
+              sub="The full library — included in the $20/year all the same."
+            />
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                gap: '20px',
+                marginTop: '32px',
+              }}
+            >
+              {proExtras.map((tool) => (
+                <ToolCard key={tool.href} tool={tool} variant="standard" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* COMING SOON */}
+      {comingSoon.length > 0 && (
+        <section style={{ padding: '48px 24px 20px' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            <SectionHeader
+              eyebrow="ON THE WAY"
+              eyebrowColor="#8B8AA0"
+              title="Coming to the catalog."
+              sub="In production right now. The whole hiring-team set lands first."
+            />
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                gap: '20px',
+                marginTop: '32px',
+              }}
+            >
+              {comingSoon.map((tool) => (
+                <ToolCard key={tool.href} tool={tool} variant="standard" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* CLOSING CTA */}
+      <section style={{ padding: '80px 24px 100px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div
+          style={{
+            maxWidth: '780px',
+            margin: '0 auto',
+            textAlign: 'center',
+            background: '#14141B',
+            border: '1px solid rgba(108,71,255,0.30)',
+            borderRadius: '24px',
+            padding: '56px 36px',
+            boxShadow: '0 30px 100px rgba(108,71,255,0.18)',
+            position: 'relative',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: -100,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: 500,
+              height: 500,
+              background:
+                'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
+              pointerEvents: 'none',
+            }}
+          />
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: '11px',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: '#A78BFA',
+              marginBottom: '16px',
+              position: 'relative',
+            }}
+          >
+            ◆ THE WHOLE PRODUCTION
+          </div>
           <h2
             style={{
-              fontSize: '40px',
+              fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(32px, 4vw, 48px)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.05,
               color: '#F2F0FF',
-              marginBottom: '12px',
-              marginTop: '0',
+              margin: '0 0 16px',
+              position: 'relative',
             }}
           >
-            Four inside looks. One price. No nonsense.
+            Five flagship tools. $20 a year.
           </h2>
-
           <p
             style={{
-              fontSize: '16px',
               fontFamily: "'Figtree', sans-serif",
-              color: '#8B8AA0',
-              marginBottom: '32px',
+              fontSize: '16px',
+              color: '#9D9CB3',
+              lineHeight: 1.6,
+              margin: '0 0 28px',
+              position: 'relative',
             }}
           >
-            Jobscan charges $49.95/month for one tool. We built four — designed by someone who has screened 10,000 resumes — for less than what they charge for a single day.
+            Less than Jobscan charges for one day. Less than Teal+ charges for a week and a half.
           </p>
-
-          <Link
-            href="/membership"
-            className="btn-primary"
+          <StripeCheckoutButton
             style={{
-              display: 'inline-block',
-              padding: '14px 32px',
-              fontSize: '16px',
+              padding: '15px 36px',
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              border: 'none',
+              borderRadius: '12px',
+              fontFamily: "'Figtree', sans-serif",
               fontWeight: 800,
-              textDecoration: 'none',
+              fontSize: '15px',
+              color: 'white',
+              cursor: 'pointer',
+              boxShadow: '0 18px 40px rgba(108,71,255,0.32)',
+              position: 'relative',
             }}
           >
-            Go Pro — $20/year
-          </Link>
-
-          <p
-            style={{
-              fontSize: '13px',
-              fontFamily: "'Figtree', sans-serif",
-              color: '#8B8AA0',
-              marginTop: '16px',
-              marginBottom: '0',
-            }}
-          >
-            Billed annually. Free looks stay free forever. No account needed for free tools.
-          </p>
+            Get Full Access — $20/year
+          </StripeCheckoutButton>
+          <div style={{ marginTop: 14, position: 'relative' }}>
+            <Link
+              href="/pricing"
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '13px',
+                fontWeight: 700,
+                color: '#A78BFA',
+                textDecoration: 'none',
+              }}
+            >
+              See full pricing comparison →
+            </Link>
+          </div>
         </div>
       </section>
 
       <Footer />
+    </main>
+  )
+}
+
+// =====================================================================
+// Section header
+// =====================================================================
+
+function SectionHeader({
+  eyebrow,
+  eyebrowColor,
+  title,
+  sub,
+}: {
+  eyebrow: string
+  eyebrowColor: string
+  title: string
+  sub: string
+}) {
+  return (
+    <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 800,
+          fontSize: '11px',
+          letterSpacing: '0.20em',
+          textTransform: 'uppercase',
+          color: eyebrowColor,
+          marginBottom: '14px',
+        }}
+      >
+        <span style={{ width: 24, height: 1, background: eyebrowColor, opacity: 0.6 }} />
+        {eyebrow}
+        <span style={{ width: 24, height: 1, background: eyebrowColor, opacity: 0.6 }} />
+      </div>
+      <h2
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 900,
+          fontSize: 'clamp(28px, 3.5vw, 42px)',
+          letterSpacing: '-0.025em',
+          lineHeight: 1.1,
+          color: '#F2F0FF',
+          margin: '0 0 12px',
+        }}
+      >
+        {title}
+      </h2>
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: '15px',
+          color: '#9D9CB3',
+          lineHeight: 1.6,
+          margin: 0,
+        }}
+      >
+        {sub}
+      </p>
     </div>
+  )
+}
+
+// =====================================================================
+// Filter pill
+// =====================================================================
+
+function FilterPill({
+  label,
+  active,
+  onClick,
+}: {
+  label: string
+  active: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: active ? 'linear-gradient(135deg, #6C47FF, #FF4F6A)' : 'transparent',
+        color: active ? '#FFFFFF' : '#C9C7DA',
+        border: 'none',
+        borderRadius: 100,
+        padding: '10px 20px',
+        fontFamily: "'Figtree', sans-serif",
+        fontWeight: 800,
+        fontSize: '12.5px',
+        letterSpacing: '0.02em',
+        cursor: 'pointer',
+        transition: 'all 0.15s ease',
+      }}
+    >
+      {label}
+    </button>
   )
 }
