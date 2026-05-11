@@ -520,16 +520,6 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
         </ul>
       </div>
 
-      <style jsx global>{`
-        @media (max-width: 768px) {
-          .nav-links-desktop {
-            display: none !important;
-          }
-          .nav-mobile-toggle {
-            display: block !important;
-          }
-        }
-      `}</style>
     </>
   )
 }

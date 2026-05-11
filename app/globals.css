@@ -250,3 +250,18 @@
   opacity: 0.15;
   pointer-events: none;
 }
+
+/* Navigation responsive breakpoint — kept in global CSS (not styled-jsx) so it
+   applies at first paint and avoids a flash of the desktop nav on mobile. */
+.nav-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links-desktop {
+    display: none !important;
+  }
+  .nav-mobile-toggle {
+    display: block !important;
+  }
+}
