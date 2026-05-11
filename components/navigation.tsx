@@ -3,10 +3,27 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { isMember } from '@/lib/membership'
+import { isMember, getMemberEmail } from '@/lib/membership'
 
 interface NavigationProps {
   variant?: 'light' | 'dark'
+}
+
+/**
+ * Pull a friendly first name out of an email address. Handles common patterns:
+ *   stephanie@x.com          → "Stephanie"
+ *   stephanie.murray@x.com   → "Stephanie"
+ *   stephanie_murray@x.com   → "Stephanie"
+ *   stephanie123@x.com       → "Stephanie"
+ *   123@x.com                → ""  (caller falls back to "Hi there")
+ */
+function firstNameFromEmail(email: string | null): string {
+  if (!email) return ''
+  const local = email.split('@')[0] ?? ''
+  const firstPart = local.split(/[._-]/)[0] ?? ''
+  const cleaned = firstPart.replace(/\d+$/, '')
+  if (!cleaned) return ''
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase()
 }
 
 const forCompanies = [
@@ -200,6 +217,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
   // client after mount. This prevents a hydration mismatch between server and
   // client output for a localStorage-backed flag.
   const [memberActive, setMemberActive] = useState(false)
+  const [memberFirstName, setMemberFirstName] = useState('')
   const pathname = usePathname()
 
   useEffect(() => {
@@ -209,8 +227,12 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
   }, [pathname])
 
   useEffect(() => {
-    setMemberActive(isMember())
+    const active = isMember()
+    setMemberActive(active)
+    setMemberFirstName(active ? firstNameFromEmail(getMemberEmail()) : '')
   }, [pathname])
+
+  const greeting = memberFirstName ? `Hi, ${memberFirstName}` : 'Hi there'
 
   useEffect(() => {
     if (isOpen) {
@@ -319,7 +341,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
           )}
           <li style={{ listStyle: 'none' }}>
             <Link
-              href={memberActive ? '/tools' : '/membership'}
+              href={memberActive ? '/sign-in' : '/membership'}
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '14px',
@@ -333,7 +355,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 whiteSpace: 'nowrap',
               }}
             >
-              {memberActive ? 'My tools' : 'Go Pro'}
+              {memberActive ? greeting : 'Go Pro'}
             </Link>
           </li>
         </ul>
@@ -584,10 +606,10 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
             </li>
           )}
 
-          {/* Primary CTA — Go Pro for guests, My tools for members */}
+          {/* Primary CTA — Go Pro for guests, personal greeting for members */}
           <li style={{ marginBottom: '32px' }}>
             <Link
-              href={memberActive ? '/tools' : '/membership'}
+              href={memberActive ? '/sign-in' : '/membership'}
               onClick={() => setIsOpen(false)}
               style={{
                 display: 'inline-block',
@@ -603,7 +625,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
               }}
             >
-              {memberActive ? 'My tools' : 'Go Pro'}
+              {memberActive ? greeting : 'Go Pro'}
             </Link>
           </li>
         </ul>
