@@ -213,7 +213,10 @@ export default function HomePage() {
         background: '#1A1A22',
         borderTop: '1px solid rgba(108,71,255,0.2)',
         borderBottom: '1px solid rgba(108,71,255,0.2)',
-        padding: '100px 40px',
+        // Responsive padding — scales from 56px/20px on mobile to
+        // 100px/40px on desktop. Prevents the cards inside from being
+        // wider than the viewport on small screens.
+        padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
         position: 'relative',
       }}>
         {/* Radial glows */}
@@ -282,7 +285,9 @@ export default function HomePage() {
           {/* Two-column grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            // `min(280px, 100%)` is the modern responsive pattern — column
+            // never overflows the parent on narrow viewports.
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
             gap: '28px',
           }}>
             {/* Left card - For Hiring Teams */}
@@ -290,7 +295,7 @@ export default function HomePage() {
               background: '#0F0F12',
               border: '1px solid rgba(255,79,106,0.2)',
               borderRadius: '18px',
-              padding: '40px',
+              padding: 'clamp(24px, 5vw, 40px)',
               position: 'relative',
             }}>
               <div style={{
@@ -364,7 +369,7 @@ export default function HomePage() {
               background: '#0F0F12',
               border: '1px solid rgba(108,71,255,0.2)',
               borderRadius: '18px',
-              padding: '40px',
+              padding: 'clamp(24px, 5vw, 40px)',
               position: 'relative',
             }}>
               <div style={{
@@ -439,7 +444,7 @@ export default function HomePage() {
       {/* SECTION 5 — THE TOOLS GRID */}
       <section style={{
         background: '#0F0F12',
-        padding: '100px 40px',
+        padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {/* Section label */}
@@ -503,7 +508,7 @@ export default function HomePage() {
           {/* 3-column Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
             gap: '20px',
           }} className="grid-responsive">
             {/* Card 1 */}
@@ -1181,7 +1186,7 @@ export default function HomePage() {
         background: 'linear-gradient(160deg, #0F0F12 0%, #120e1f 60%, #0F0F12 100%)',
         borderTop: '1px solid rgba(108,71,255,0.08)',
         borderBottom: '1px solid rgba(108,71,255,0.08)',
-        padding: '100px 40px',
+        padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
         position: 'relative',
         zIndex: 0,
       }}>
@@ -1359,7 +1364,7 @@ export default function HomePage() {
         background: '#1A1A22',
         borderTop: '1px solid rgba(255,255,255,0.05)',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
-        padding: '72px 40px',
+        padding: 'clamp(48px, 7vw, 72px) clamp(20px, 5vw, 40px)',
       }}>
         <div style={{
           maxWidth: '1000px',
@@ -1429,7 +1434,7 @@ export default function HomePage() {
       {/* SECTION 8 — EMAIL CAPTURE */}
       <section style={{
         background: '#0F0F12',
-        padding: '80px 40px',
+        padding: 'clamp(56px, 7vw, 80px) clamp(20px, 5vw, 40px)',
       }}>
         <div style={{ maxWidth: '480px', margin: '0 auto' }}>
           {/* Label */}
@@ -1583,7 +1588,7 @@ export default function HomePage() {
       {/* SECTION 9 — CLOSING */}
       <section style={{
         background: '#0F0F12',
-        padding: '100px 40px',
+        padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
       }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
           {/* Headline */}
