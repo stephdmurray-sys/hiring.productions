@@ -144,7 +144,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 10px',
           }}
         >
-          You&apos;ve used your 3 free insights today.
+          You&apos;ve used your 2 free insights today.
         </h2>
         <p
           style={{
@@ -155,7 +155,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Drop your email and I&apos;ll unlock <span style={{ color: '#F2F0FF', fontWeight: 800 }}>10 more insights</span> across every free tool. No card. No password. The 6-second resume-read guide goes to your inbox right after.
+          Drop your email and I&apos;ll unlock <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more insights</span> — 10 total before you decide on Pro. No card. No password. The 6-second resume-read guide goes to your inbox right after.
         </p>
 
         <form onSubmit={submit}>
@@ -216,7 +216,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
               boxShadow: submitting ? 'none' : '0 18px 40px rgba(108,71,255,0.30)',
             }}
           >
-            {submitting ? 'Unlocking…' : 'Unlock 10 more insights →'}
+            {submitting ? 'Unlocking…' : 'Unlock 8 more insights →'}
           </button>
         </form>
 

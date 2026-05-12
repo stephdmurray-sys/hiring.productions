@@ -1356,7 +1356,7 @@ export async function POST(request: NextRequest) {
 function gateMessage(reason: string): string {
   switch (reason) {
     case 'anon-limit':
-      return "You've used your 3 free insights today. Drop an email to unlock 10 more — no card."
+      return "You've used your 2 free insights today. Drop an email to unlock 8 more — no card."
     case 'email-limit':
       return "You've used every free insight. The whole production — every Recruiter Insight, unlimited — is $20 for the year."
     case 'pro-limit':

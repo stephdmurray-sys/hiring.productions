@@ -127,8 +127,9 @@ through). Track that work in a separate task before paid ads launch.
 All limits live in `lib/usage.ts`:
 
 ```ts
-ANON_DAILY_LIMIT = 3        // free runs/day for anon visitors
-EMAIL_LIFETIME_LIMIT = 10   // total free runs after email capture
+ANON_DAILY_LIMIT = 2        // free insights/day for anon visitors
+EMAIL_LIFETIME_LIMIT = 8    // free insights granted after email capture
+                            // (2 + 8 = 10 total before the paywall)
 PRO_DAILY_LIMIT = 15        // safety cap for Pro members
 DAILY_BUDGET_CENTS = 500    // $5.00 global ceiling per day
 ANON_CUTOFF_CENTS = 450     // anon traffic cut off at $4.50 so Pro has $0.50 of headroom

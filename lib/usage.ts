@@ -3,8 +3,9 @@
  *
  * Three tiers stacked on top of a single per-day spend ceiling:
  *
- *   1. Anonymous       — 3 free runs/day, identified by IP + cookie
- *   2. Email captured  — 10 lifetime runs after dropping an email
+ *   1. Anonymous       — 2 free insights/day, identified by cookie
+ *   2. Email captured  — 8 lifetime insights after dropping an email
+ *                        (so a visitor who captures on call #3 gets 10 total)
  *   3. Pro member      — 15 runs/day (the cost-protection cap; not a UX cap)
  *
  * On top of that, the daily site-wide cost ceiling is $5/day. Anonymous
@@ -17,8 +18,11 @@ import { Redis } from '@upstash/redis'
 
 // -------- Tunables ---------------------------------------------------------
 
-export const ANON_DAILY_LIMIT = 3
-export const EMAIL_LIFETIME_LIMIT = 10
+// 2 anon + 8 after email = 10 total free insights before the paywall.
+// Anon resets daily so returning visitors keep some access; the email
+// bump is a one-time 8-run grant on top of any anon usage so far.
+export const ANON_DAILY_LIMIT = 2
+export const EMAIL_LIFETIME_LIMIT = 8
 export const PRO_DAILY_LIMIT = 15
 
 /** Site-wide ceilings in cents (avoids float math in Redis). */
