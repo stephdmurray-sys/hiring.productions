@@ -6,7 +6,6 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { ToolCard } from '@/components/tool-card'
 import { Marquee } from '@/components/marquee'
-import { AudienceHubsRow } from '@/components/audience-hubs-row'
 import { CATALOG, FLAGSHIP_PRO, type CatalogTool, type ToolAudience } from '@/lib/tools-catalog'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 
@@ -118,12 +117,12 @@ export default function ToolsPage() {
               margin: '0 auto 32px',
             }}
           >
-            Free tools you can run today. The whole production members live on for $20/year. A hiring-team set built from the same recruiting practice.
+            Start free — run a tool right now, no account, no card. Then upgrade to every inside look for $20 a year.
           </p>
 
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link
-              href="/pricing"
+              href="#free"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -139,10 +138,10 @@ export default function ToolsPage() {
                 letterSpacing: '0.01em',
               }}
             >
-              See pricing & comparison →
+              Start with a free tool ↓
             </Link>
             <Link
-              href="#flagship"
+              href="#inside-looks"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -157,7 +156,7 @@ export default function ToolsPage() {
                 textDecoration: 'none',
               }}
             >
-              Browse the program ↓
+              See what Pro unlocks
             </Link>
           </div>
         </div>
@@ -175,7 +174,7 @@ export default function ToolsPage() {
         ]}
       />
 
-      {/* AUDIENCE FILTER */}
+      {/* AUDIENCE FILTER + RESULT COUNT */}
       <section style={{ padding: '40px 24px 0', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', gap: 6, padding: 4, background: '#14141B', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 100 }}>
           <FilterPill active={audienceFilter === 'all'} onClick={() => setAudienceFilter('all')} label="Both sides" />
@@ -190,47 +189,50 @@ export default function ToolsPage() {
             label="For hiring teams"
           />
         </div>
+        <div
+          style={{
+            marginTop: 14,
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '12.5px',
+            color: '#8B8AA0',
+            letterSpacing: '0.02em',
+          }}
+        >
+          {filtered.length} {filtered.length === 1 ? 'tool' : 'tools'}
+          {audienceFilter !== 'all' && (
+            <>
+              {' '}·{' '}
+              <button
+                onClick={() => setAudienceFilter('all')}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: '#A78BFA',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: '12.5px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  padding: 0,
+                  textDecoration: 'underline',
+                  textUnderlineOffset: 3,
+                }}
+              >
+                show both sides
+              </button>
+            </>
+          )}
+        </div>
       </section>
 
-      {/* AUDIENCE HUBS — curated entry points by candidate moment */}
-      <AudienceHubsRow padding="48px 24px 0" />
-
-      {/* FLAGSHIP PRO — featured row */}
-      {flagshipPro.length > 0 && (
-        <section id="flagship" style={{ padding: '40px 24px 20px' }}>
+      {/* FREE TOOLS — start here */}
+      {freeTools.length > 0 ? (
+        <section id="free" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
-              eyebrow="THE INSIDE LOOKS"
+              eyebrow="ACT ONE — FREE"
               eyebrowColor="#A78BFA"
-              title="The whole production. $20 a year."
-              sub="Each one replaces a $30–80/month tool. Together for less than Jobscan charges for one day."
-            />
-
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                gap: '20px',
-                marginTop: '32px',
-              }}
-            >
-              {flagshipPro.map((tool) => (
-                <ToolCard key={tool.href} tool={tool} variant="featured" />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FREE TOOLS — standard grid */}
-      {freeTools.length > 0 && (
-        <section style={{ padding: '48px 24px 20px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <SectionHeader
-              eyebrow="FREE — START HERE"
-              eyebrowColor="#A78BFA"
-              title="Free tools. No account. No card."
-              sub="Built to help — and to give you a sense of what the Pro inside looks deliver."
+              title="Run one right now. No card. No account."
+              sub="Free tools you can use today. Each one shows you a slice of how the other side actually operates."
             />
 
             <div
@@ -247,44 +249,87 @@ export default function ToolsPage() {
             </div>
           </div>
         </section>
+      ) : (
+        <EmptyState
+          eyebrow="ACT ONE — FREE"
+          message={
+            audienceFilter === 'hiring'
+              ? "The free tools today are candidate-side. Hiring-team tools land in the Pro library below — and the rest are on the way."
+              : "Nothing free in this filter yet."
+          }
+          onShowAll={() => setAudienceFilter('all')}
+        />
       )}
 
-      {/* PRO EXTRAS */}
-      {proExtras.length > 0 && (
-        <section style={{ padding: '48px 24px 20px' }}>
+      {/* INSIDE LOOKS — flagship featured + extras combined */}
+      {(flagshipPro.length > 0 || proExtras.length > 0) && (
+        <section id="inside-looks" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
-              eyebrow="ALSO INCLUDED IN PRO"
+              eyebrow="ACT TWO — THE INSIDE LOOKS"
               eyebrowColor="#A78BFA"
-              title="More inside looks, same membership."
-              sub="The full library — included in the $20/year all the same."
+              title="Every inside look. $20 a year."
+              sub="Each one replaces a $30–80/month tool. Together for less than Jobscan charges for one day."
             />
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-                gap: '20px',
-                marginTop: '32px',
-              }}
-            >
-              {proExtras.map((tool) => (
-                <ToolCard key={tool.href} tool={tool} variant="standard" />
-              ))}
-            </div>
+            {flagshipPro.length > 0 && (
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gap: '20px',
+                  marginTop: '32px',
+                }}
+              >
+                {flagshipPro.map((tool) => (
+                  <ToolCard key={tool.href} tool={tool} variant="featured" />
+                ))}
+              </div>
+            )}
+
+            {proExtras.length > 0 && (
+              <>
+                <div
+                  style={{
+                    marginTop: flagshipPro.length > 0 ? 40 : 32,
+                    marginBottom: 16,
+                    textAlign: 'center',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: '#8B8AA0',
+                  }}
+                >
+                  {flagshipPro.length > 0 ? 'Also included in Pro' : 'Included in Pro'}
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
+                    gap: '20px',
+                  }}
+                >
+                  {proExtras.map((tool) => (
+                    <ToolCard key={tool.href} tool={tool} variant="standard" />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </section>
       )}
 
       {/* COMING SOON */}
       {comingSoon.length > 0 && (
-        <section style={{ padding: '48px 24px 20px' }}>
+        <section style={{ padding: '56px 24px 20px' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
-              eyebrow="ON THE WAY"
+              eyebrow="ACT THREE — IN PRODUCTION"
               eyebrowColor="#8B8AA0"
-              title="Coming to the catalog."
-              sub="In production right now. The whole hiring-team set lands first."
+              title="On the way to the catalog."
+              sub="Being built right now. Members get them the day they ship — at the same $20/year."
             />
 
             <div
@@ -359,7 +404,7 @@ export default function ToolsPage() {
               position: 'relative',
             }}
           >
-            Every inside look. $20 a year.
+            Ready for the whole production?
           </h2>
           <p
             style={{
@@ -472,6 +517,67 @@ function SectionHeader({
         {sub}
       </p>
     </div>
+  )
+}
+
+// =====================================================================
+// Empty state — when a filter narrows a section to zero
+// =====================================================================
+
+function EmptyState({
+  eyebrow,
+  message,
+  onShowAll,
+}: {
+  eyebrow: string
+  message: string
+  onShowAll: () => void
+}) {
+  return (
+    <section style={{ padding: '56px 24px 20px' }}>
+      <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: '11px',
+            letterSpacing: '0.20em',
+            textTransform: 'uppercase',
+            color: '#8B8AA0',
+            marginBottom: '14px',
+          }}
+        >
+          {eyebrow}
+        </div>
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '15px',
+            color: '#9D9CB3',
+            lineHeight: 1.6,
+            margin: '0 0 16px',
+          }}
+        >
+          {message}
+        </p>
+        <button
+          onClick={onShowAll}
+          style={{
+            background: 'transparent',
+            border: '1.5px solid rgba(167,139,250,0.4)',
+            color: '#A78BFA',
+            padding: '10px 20px',
+            borderRadius: 100,
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: '12.5px',
+            cursor: 'pointer',
+          }}
+        >
+          Show both sides
+        </button>
+      </div>
+    </section>
   )
 }
 
