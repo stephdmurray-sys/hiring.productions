@@ -232,11 +232,16 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
           </button>
         </form>
 
+        {/* Three paths — two free, one not. The sign-in form above is the
+            primary. Pro and RepVera are alternatives positioned as small
+            text links so the modal still has one clear primary action. */}
         <div
           style={{
             marginTop: 14,
             display: 'flex',
             justifyContent: 'center',
+            gap: 18,
+            flexWrap: 'wrap',
           }}
         >
           <Link
@@ -253,11 +258,31 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
           >
             See Pro — $20/year →
           </Link>
+          <span style={{ color: '#3F3E50', fontSize: '13px' }}>·</span>
+          <a
+            href="https://www.repvera.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 800,
+              background: 'linear-gradient(135deg, #FF4F6A 0%, #6C47FF 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textDecoration: 'none',
+              letterSpacing: '0.01em',
+            }}
+          >
+            Start your RepVera — free →
+          </a>
         </div>
 
         <p
           style={{
-            marginTop: 16,
+            marginTop: 14,
             fontFamily: "'Figtree', sans-serif",
             fontSize: '12px',
             color: '#6B6A82',

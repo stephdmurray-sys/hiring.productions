@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
+import { RepVeraMoment } from '@/components/repvera-moment'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -387,6 +388,11 @@ export default function AfterLayoffPage() {
           { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
           { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
         ]}
+      />
+
+      <RepVeraMoment
+        title="The layoff isn't your story. RepVera makes the next chapter visible."
+        body="A resume forces you to explain a gap the recruiter already noticed. RepVera is a personal page that leads with what you've built and what you're heading toward — not where you got cut. Free to start, takes 10 minutes."
       />
 
       <Footer />

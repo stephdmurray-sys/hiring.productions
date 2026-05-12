@@ -236,6 +236,87 @@ export function ProUpsellPanel({
             See pricing &amp; comparison →
           </Link>
         </div>
+
+        {/* RepVera moment — the alternative path. Pro tools deepen the
+            diagnosis; RepVera changes the medium entirely. Visually
+            distinct (coral accent, separated by stronger divider) so it
+            reads as "or" not "also." */}
+        <div
+          style={{
+            marginTop: '20px',
+            padding: '18px 20px',
+            background: 'linear-gradient(135deg, rgba(255,79,106,0.08) 0%, rgba(167,139,250,0.06) 100%)',
+            border: '1px solid rgba(255,79,106,0.22)',
+            borderRadius: '12px',
+            position: 'relative',
+          }}
+        >
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '3px 10px',
+              background: 'rgba(255,79,106,0.14)',
+              border: '1px solid rgba(255,79,106,0.35)',
+              borderRadius: 100,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: '10px',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#FF4F6A',
+              marginBottom: '10px',
+            }}
+          >
+            Or — change the medium
+          </div>
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: '16px',
+              color: '#F2F0FF',
+              letterSpacing: '-0.005em',
+              lineHeight: 1.35,
+              marginBottom: '6px',
+            }}
+          >
+            Your resume is one of 200. RepVera is the page that&apos;s not.
+          </div>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13.5px',
+              color: '#9D9CB3',
+              lineHeight: 1.55,
+              margin: '0 0 12px',
+            }}
+          >
+            A personal page recruiters actually read instead of skimming. Built around what you&apos;ve actually done. Free to start.
+          </p>
+          <a
+            href="https://www.repvera.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: '13px',
+              color: '#FFFFFF',
+              background: 'linear-gradient(135deg, #FF4F6A 0%, #6C47FF 100%)',
+              padding: '9px 16px',
+              borderRadius: 8,
+              textDecoration: 'none',
+              letterSpacing: '0.01em',
+            }}
+          >
+            Start your RepVera — free →
+          </a>
+        </div>
       </div>
 
       <style>{`

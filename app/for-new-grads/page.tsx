@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
+import { RepVeraMoment } from '@/components/repvera-moment'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -379,6 +380,11 @@ export default function ForNewGradsPage() {
           { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
           { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
         ]}
+      />
+
+      <RepVeraMoment
+        title="Your resume can't show what you've built. RepVera can."
+        body="No traditional experience yet doesn't mean no proof of work. RepVera is a personal page recruiters actually read — projects, side work, the stuff that doesn't fit on a one-pager. Built for the moment your resume is the shortest thing about you."
       />
 
       <Footer />

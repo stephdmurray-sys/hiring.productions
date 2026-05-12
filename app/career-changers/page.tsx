@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
+import { RepVeraMoment } from '@/components/repvera-moment'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -387,6 +388,11 @@ export default function CareerChangersPage() {
           { question: "What is the 70/30 rule in hiring?", href: '/q/70-30-rule' },
           { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
         ]}
+      />
+
+      <RepVeraMoment
+        title="Your old industry's resume can't tell your new story. RepVera can."
+        body="A career pivot lives in the bullets your old resume can't carry. RepVera is a personal page recruiters read instead of skimming — built around the work you're heading toward, not the work you're leaving. Free to start."
       />
 
       <Footer />

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
+import { RepVeraMoment } from '@/components/repvera-moment'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -384,6 +385,11 @@ export default function ReturningToWorkPage() {
           { question: 'What are red flags on a resume?', href: '/q/resume-red-flags' },
           { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
         ]}
+      />
+
+      <RepVeraMoment
+        title="Time away doesn't show on a resume. RepVera shows what does."
+        body="The skills, judgment, and adaptability you built during the break don't fit a chronological resume. RepVera is a personal page recruiters read in full — built around what you can do now, not what's missing from your timeline. Free to start."
       />
 
       <Footer />

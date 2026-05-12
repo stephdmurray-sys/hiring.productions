@@ -49,10 +49,13 @@ export function UsagePill() {
   if (state.tier === 'pro') return null
 
   const tone = state.blocked ? 'blocked' : state.remaining <= 1 ? 'warn' : 'ambient'
+  // Solid dark bg + colored border/text gives the pill enough depth to
+  // read cleanly over ANY content behind it. The previous low-alpha tints
+  // blended with form text on the iPhone screenshots Stephanie shared.
   const colorMap = {
-    ambient: { fg: '#A78BFA', bg: 'rgba(167,139,250,0.10)', border: 'rgba(167,139,250,0.30)' },
-    warn: { fg: '#FF4F6A', bg: 'rgba(255,79,106,0.10)', border: 'rgba(255,79,106,0.30)' },
-    blocked: { fg: '#FF4F6A', bg: 'rgba(255,79,106,0.18)', border: 'rgba(255,79,106,0.45)' },
+    ambient: { fg: '#A78BFA', bg: '#14141B', border: 'rgba(167,139,250,0.55)', hoverBg: '#1A1A26' },
+    warn: { fg: '#FF4F6A', bg: '#14141B', border: 'rgba(255,79,106,0.55)', hoverBg: '#1A1A26' },
+    blocked: { fg: '#FF4F6A', bg: '#1A0E12', border: 'rgba(255,79,106,0.75)', hoverBg: '#22121A' },
   } as const
   const c = colorMap[tone]
 
@@ -83,12 +86,13 @@ export function UsagePill() {
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
-        padding: '7px 14px',
-        background: hover
-          ? tone === 'blocked' || tone === 'warn'
-            ? 'rgba(255,79,106,0.22)'
-            : 'rgba(167,139,250,0.18)'
-          : c.bg,
+        padding: '8px 14px',
+        background: hover ? c.hoverBg : c.bg,
+        // Backdrop-filter is a defensive belt — if any browser/runtime
+        // ever renders the bg with reduced opacity, the blur still keeps
+        // the pill legible over busy content behind it.
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         border: `1px solid ${c.border}`,
         color: c.fg,
         borderRadius: 100,
@@ -100,7 +104,11 @@ export function UsagePill() {
         cursor: 'pointer',
         transition: 'background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease',
         transform: hover ? 'translateY(-1px)' : 'translateY(0)',
-        boxShadow: hover ? `0 6px 18px ${c.bg}` : 'none',
+        // Always-on shadow gives the pill elevation off any background.
+        // Tightens up further on hover for the lifted feel.
+        boxShadow: hover
+          ? '0 10px 28px rgba(0,0,0,0.55), 0 2px 6px rgba(0,0,0,0.35)'
+          : '0 6px 18px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.3)',
         outline: 'none',
         appearance: 'none',
         WebkitAppearance: 'none',
