@@ -305,7 +305,7 @@ export default function StandOutPage() {
                       textDecoration: 'none',
                     }}
                   >
-                    Get the inside look →
+                    Get the Recruiter Insight →
                   </Link>
                 )}
               </div>

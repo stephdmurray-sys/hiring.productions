@@ -48,7 +48,7 @@ export default function HomePage() {
     <main style={{ background: '#0F0F12', color: '#F2F0FF' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap');
-        .inside-look-card:hover {
+        .recruiter-insight-card:hover {
           border-color: rgba(108,71,255,0.4) !important;
           transform: translateY(-4px);
           box-shadow: 0 20px 60px rgba(108,71,255,0.12);
@@ -205,7 +205,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 2 — LIVE INSIDE LOOK PREVIEW */}
+      {/* SECTION 2 — LIVE RECRUITER INSIGHT PREVIEW */}
       <RecruiterReadingPreview />
 
       {/* SECTION 4 — WHAT YOU'LL FIND HERE */}
@@ -507,7 +507,7 @@ export default function HomePage() {
             gap: '20px',
           }} className="grid-responsive">
             {/* Card 1 */}
-            <Link href="/tools/resume-recruiter-eyes" className="inside-look-card" style={{
+            <Link href="/tools/resume-recruiter-eyes" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -582,7 +582,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 2 */}
-            <Link href="/tools/real-candidate" className="inside-look-card" style={{
+            <Link href="/tools/real-candidate" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -657,7 +657,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 3 */}
-            <Link href="/tools/what-this-job-is" className="inside-look-card" style={{
+            <Link href="/tools/what-this-job-is" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -732,7 +732,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 4 — Recruiter Find You */}
-            <Link href="/tools/recruiter-find-you" className="inside-look-card" style={{
+            <Link href="/tools/recruiter-find-you" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -807,7 +807,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 5 — LinkedIn Rewrite */}
-            <Link href="/tools/linkedin-rewrite" className="inside-look-card" style={{
+            <Link href="/tools/linkedin-rewrite" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -882,7 +882,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 6 — What's Breaking Your Search */}
-            <Link href="/tools/whats-breaking-search" className="inside-look-card" style={{
+            <Link href="/tools/whats-breaking-search" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -957,7 +957,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 7 — How to Negotiate This Offer (FREE) */}
-            <Link href="/tools/what-youre-worth" className="inside-look-card" style={{
+            <Link href="/tools/what-youre-worth" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -1044,7 +1044,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 8 — RepVera */}
-            <Link href="https://www.repvera.com" target="_blank" rel="noopener noreferrer" className="inside-look-card" style={{
+            <Link href="https://www.repvera.com" target="_blank" rel="noopener noreferrer" className="recruiter-insight-card" style={{
               background: '#1A1A22',
               border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
@@ -1402,7 +1402,7 @@ export default function HomePage() {
               marginTop: '10px',
               maxWidth: '440px',
             }}>
-              Jobscan charges $49.95/month for one tool. Every inside look — built from the recruiting playbook insiders use — for less than what they charge for a single day. Plus the free tools, no account required.
+              Jobscan charges $49.95/month for one tool. Every Recruiter Insight — built from the recruiting playbook insiders use — for less than what they charge for a single day. Plus the free tools, no account required.
             </p>
           </div>
 
@@ -1456,7 +1456,7 @@ export default function HomePage() {
             textAlign: 'center',
             marginTop: '12px',
           }}>
-            Get the inside look first.
+            Get the Recruiter Insight first.
           </h2>
 
           {/* Subhead */}
@@ -1469,7 +1469,7 @@ export default function HomePage() {
             marginTop: '10px',
             lineHeight: 1.6,
           }}>
-            New inside looks, hiring insights, and what both sides are doing — delivered before anyone else.
+            New Recruiter Insights, what both sides are doing, and what's working right now — delivered before anyone else.
           </p>
 
           {/* Form */}
@@ -1560,7 +1560,7 @@ export default function HomePage() {
                 opacity: formState === 'submitting' ? 0.7 : 1,
               }}
             >
-              {formState === 'idle' && 'Get the inside look →'}
+              {formState === 'idle' && 'Get the Recruiter Insight →'}
               {formState === 'submitting' && 'Sending...'}
               {formState === 'success' && 'You\'re in. ✓'}
             </button>

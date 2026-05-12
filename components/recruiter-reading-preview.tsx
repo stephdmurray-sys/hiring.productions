@@ -122,7 +122,7 @@ export function RecruiterReadingPreview() {
             marginBottom: '24px',
           }}
         >
-          INSIDE LOOK — LIVE
+          RECRUITER INSIGHT — LIVE
         </div>
 
         <h2
@@ -150,7 +150,7 @@ export function RecruiterReadingPreview() {
             margin: '0 auto 56px',
           }}
         >
-          The internal monologue of a recruiter reading a resume — start to verdict, with nothing softened. This is what every inside look does. From both sides.
+          The internal monologue of a recruiter reading a resume — start to verdict, with nothing softened. This is what every Recruiter Insight does. From both sides.
         </p>
       </div>
 

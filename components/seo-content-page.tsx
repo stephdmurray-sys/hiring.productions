@@ -143,7 +143,7 @@ export function SeoContentPage({
           ))}
         </section>
 
-        {/* Inside Look CTA Block */}
+        {/* Recruiter Insight CTA Block */}
         <section
           style={{
             marginTop: '64px',
@@ -172,7 +172,7 @@ export function SeoContentPage({
                 letterSpacing: '0.08em',
               }}
             >
-              The Inside Look
+              The Recruiter Insight
             </div>
 
             {/* Title */}
@@ -253,7 +253,7 @@ export function SeoContentPage({
                 transition: 'all 0.3s ease',
               }}
             >
-              Get the Inside Look →
+              Get the Recruiter Insight →
             </Link>
 
             {/* RepVera CTA */}
@@ -308,7 +308,7 @@ export function SeoContentPage({
                 marginBottom: '16px',
               }}
             >
-              Related Inside Looks
+              Related Recruiter Insights
             </div>
             <div
               style={{

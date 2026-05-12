@@ -1095,7 +1095,7 @@ export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
               marginBottom: '4px',
             }}
           >
-            Inside Look
+            Recruiter Insight
           </div>
           <div style={{ fontSize: '22px', fontWeight: 900, color: '#1A1A22', letterSpacing: '-0.02em' }}>
             Your LinkedIn audition reel

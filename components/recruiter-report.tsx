@@ -853,7 +853,7 @@ export function RecruiterReport({ result, isMember }: RecruiterReportProps) {
               marginBottom: '4px',
             }}
           >
-            Inside Look
+            Recruiter Insight
           </div>
           <div style={{ fontSize: '22px', fontWeight: 900, color: '#1A1A22', letterSpacing: '-0.02em' }}>
             Through a recruiter's eyes

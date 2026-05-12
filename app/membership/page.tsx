@@ -149,7 +149,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          {[`${tools.length} Inside Looks`, 'Both Sides of Hiring', '$20/year — not per month'].map((stat, idx) => (
+          {[`${tools.length} Recruiter Insights`, 'Both Sides of Hiring', '$20/year — not per month'].map((stat, idx) => (
             <div
               key={idx}
               style={{
@@ -311,12 +311,12 @@ export default function MembershipPage() {
                     isPrice: true,
                   },
                   {
-                    label: 'Candidate inside looks',
+                    label: 'Candidate Recruiter Insights',
                     ours: `✓ ${tools.filter((t) => t.type === 'candidate').length}`,
                     competitors: ['Resume only', 'Resume only', 'Resume only', 'Resume only', 'Varies'],
                   },
                   {
-                    label: 'Hiring team inside looks',
+                    label: 'Hiring team Recruiter Insights',
                     ours: `✓ ${tools.filter((t) => t.type === 'hiring').length}`,
                     competitors: ['✗', '✗', '✗', '✗', '✗'],
                   },
@@ -444,7 +444,7 @@ export default function MembershipPage() {
           marginBottom: '20px',
           textAlign: 'center',
         }}>
-          Your Inside Looks
+          Your Recruiter Insights
         </div>
         <h2 style={{
           fontSize: '32px',
@@ -453,7 +453,7 @@ export default function MembershipPage() {
           textAlign: 'center',
           letterSpacing: '-0.02em',
         }}>
-          All {tools.length} Inside Looks
+          All {tools.length} Recruiter Insights
         </h2>
 
         <div style={{
@@ -569,7 +569,7 @@ export default function MembershipPage() {
           textAlign: 'center',
           marginTop: '32px',
         }}>
-          Free inside looks — JD SEO Scorecard and Resume AI Checker — stay free forever. No account needed.
+          Free tools — JD SEO Scorecard and Resume AI Checker — stay free forever. No account needed.
         </p>
       </section>
 
@@ -612,7 +612,7 @@ export default function MembershipPage() {
           color: '#8B8AA0',
           marginTop: '16px',
         }}>
-          Billed annually. Free inside looks stay free forever. Access delivered instantly to your email. No account needed for free looks.
+          Billed annually. Free tools stay free forever. Access delivered instantly to your email. No account needed for free tools.
         </p>
       </section>
 

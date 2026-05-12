@@ -117,7 +117,7 @@ export default function ToolsPage() {
               margin: '0 auto 32px',
             }}
           >
-            Start free — run a tool right now, no account, no card. Then upgrade to every inside look for $20 a year.
+            Start free — run a tool right now, no account, no card. Then upgrade to every Recruiter Insight for $20 a year.
           </p>
 
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -141,7 +141,7 @@ export default function ToolsPage() {
               Start with a free tool ↓
             </Link>
             <Link
-              href="#inside-looks"
+              href="#recruiter-insights"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -261,14 +261,14 @@ export default function ToolsPage() {
         />
       )}
 
-      {/* INSIDE LOOKS — flagship featured + extras combined */}
+      {/* RECRUITER INSIGHTS — flagship featured + extras combined */}
       {(flagshipPro.length > 0 || proExtras.length > 0) && (
-        <section id="inside-looks" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
+        <section id="recruiter-insights" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
-              eyebrow="ACT TWO — THE INSIDE LOOKS"
+              eyebrow="ACT TWO — RECRUITER INSIGHTS"
               eyebrowColor="#A78BFA"
-              title="Every inside look. $20 a year."
+              title="Every Recruiter Insight. $20 a year."
               sub="Each one replaces a $30–80/month tool. Together for less than Jobscan charges for one day."
             />
 

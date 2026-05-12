@@ -34,7 +34,7 @@ The metaphor extends naturally:
 
 - The interview is your **audition**
 - The **Rehearsal Room** is where you practice before you go on
-- The **inside looks** are your backstage pass
+- The **Recruiter Insights** are your backstage pass
 - **RepVera** is your reel — proof of your past performances
 - The job description is a **casting call** that nobody knows how to read
 
@@ -50,7 +50,7 @@ Every piece of language on the site comes back to this. It never feels forced be
 
 **Both sides over either side.** This is the thing no other platform does. Every career tool is built for candidates. Every recruiting tool is built for hiring teams. hiring.productions is built on the premise that understanding the other side is what makes you better at your side. A candidate who understands how hiring teams build interview questions becomes a dramatically better interviewee. A hiring manager who understands how candidates read job postings writes dramatically better ones.
 
-**Real expertise over algorithmic output.** Behind every inside look is 20 years of recruiting experience. Stephanie Murray — Transform Talent Strategy of the Year winner, Senior Director of TA at Brightside Health, the person who built recruiting functions from scratch and scaled them to national footprints — is the voice behind every system prompt. The AI delivers it at scale. The expertise makes it true.
+**Real expertise over algorithmic output.** Behind every Recruiter Insight is 20 years of recruiting experience. Stephanie Murray — Transform Talent Strategy of the Year winner, Senior Director of TA at Brightside Health, the person who built recruiting functions from scratch and scaled them to national footprints — is the voice behind every system prompt. The AI delivers it at scale. The expertise makes it true.
 
 ## What it feels like
 
@@ -88,9 +88,9 @@ The specific phrases that define the voice:
 
 Every tool name is a question the user is already asking internally. The naming does the selling.
 
-## The inside looks — what they actually do and why they matter
+## The Recruiter Insights — what they actually do and why they matter
 
-Each inside look is built around one idea: the most valuable thing you can give someone is the perspective they don't have access to.
+Each Recruiter Insight is built around one idea: the most valuable thing you can give someone is the perspective they don't have access to.
 
 ### Does My Resume Read as AI? — Free
 The anxiety is real and documented. 40% of resumes never reach a human because automated systems flag them. This tool addresses that fear directly and honestly, before anyone pays anything. It proves the site delivers real value. It earns the right to ask for $20.
@@ -150,7 +150,7 @@ The searches that route to hiring.productions:
 - **"What hiring managers actually look for in interviews"** — the bilateral angle makes hiring.productions the only site that can answer this from genuine insider perspective.
 - **"Interview question decoder" / "what is [interview question] really asking"** — each of these routes to the What They're Really Asking tool.
 
-The SEO architecture is already built — 85+ pages planned, 5 live, the technical foundation (sitemap, robots, metadata) in place. The content just needs to be written and deployed. Each page answers one specific question the target audience is asking right now, shows them the insight, and routes them to the inside look that goes deeper.
+The SEO architecture is already built — 85+ pages planned, 5 live, the technical foundation (sitemap, robots, metadata) in place. The content just needs to be written and deployed. Each page answers one specific question the target audience is asking right now, shows them the answer, and routes them to the Recruiter Insight that goes deeper.
 
 ## The one sentence
 
@@ -160,7 +160,7 @@ If someone asks what hiring.productions is and you have five seconds:
 
 If you have thirty seconds:
 
-> "Candidates spend hours preparing for a process they can't see. Hiring teams make decisions based on 45-minute conversations. Nobody shows either side what the other is actually doing. hiring.productions does. Inside looks for candidates and hiring teams — both sides, same production, in the open for the first time."
+> "Candidates spend hours preparing for a process they can't see. Hiring teams make decisions based on 45-minute conversations. Nobody shows either side what the other is actually doing. hiring.productions does. Recruiter Insights for candidates and hiring teams — both sides, same production, in the open for the first time."
 
 If you have two minutes, show them the resume tool.
 

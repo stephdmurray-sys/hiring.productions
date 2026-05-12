@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: 'hiring.productions',
     template: '%s | hiring.productions',
   },
-  description: 'The only place where candidates see how they\'re actually evaluated. Inside looks built from real recruiting practice. Free to start.',
+  description: 'The only place where candidates see how they\'re actually evaluated. Recruiter Insights built from real recruiting practice. Free to start.',
   keywords: ['hiring', 'job search', 'recruiting', 'ATS screening', 'resume tips', 'interview prep', 'talent acquisition', 'candidate experience', 'job description SEO', 'employer branding'],
   authors: [{ name: 'Stephanie Murray', url: 'https://www.linkedin.com/in/stephaniemurray11/' }],
   creator: 'Stephanie Murray',

@@ -63,9 +63,9 @@ async function addToResendAudience(email: string, source: string): Promise<void>
         body: JSON.stringify({
           from,
           to: email,
-          subject: 'Your 10 free runs are unlocked.',
+          subject: 'Your 10 free insights are unlocked.',
           text: [
-            "Thanks for dropping your email — you've unlocked 10 free tool runs across hiring.productions.",
+            "Thanks for dropping your email — you've unlocked 10 free insights across hiring.productions.",
             '',
             "Here's where I'd start:",
             '',
@@ -73,7 +73,7 @@ async function addToResendAudience(email: string, source: string): Promise<void>
             '2. What This Job Actually Is — https://hiring.productions/tools/what-this-job-is',
             "3. What's Breaking Your Job Search — https://hiring.productions/tools/whats-breaking-search",
             '',
-            'When the 10 free runs run out, the whole production (every inside look, unlimited) is $20 for the year:',
+            'When the 10 free insights run out, the whole production — every Recruiter Insight, unlimited — is $20 for the year:',
             'https://hiring.productions/pricing',
             '',
             '— Stephanie',

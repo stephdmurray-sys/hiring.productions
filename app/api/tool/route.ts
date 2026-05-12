@@ -1254,7 +1254,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'pro-required',
-          message: 'This inside look is part of Pro. $20 a year unlocks the whole production.',
+          message: 'This Recruiter Insight is part of Pro. $20 a year unlocks the whole production.',
         },
         { status: 402 },
       )
@@ -1356,11 +1356,11 @@ export async function POST(request: NextRequest) {
 function gateMessage(reason: string): string {
   switch (reason) {
     case 'anon-limit':
-      return "You've used your 3 free runs today. Drop an email to unlock 10 more — no card."
+      return "You've used your 3 free insights today. Drop an email to unlock 10 more — no card."
     case 'email-limit':
-      return "You've used every free run. The whole production — every inside look unlimited — is $20 for the year."
+      return "You've used every free insight. The whole production — every Recruiter Insight, unlimited — is $20 for the year."
     case 'pro-limit':
-      return 'Daily run cap hit. This resets at midnight UTC. Reach out if this looks wrong.'
+      return 'Daily cap hit. This resets at midnight UTC. Reach out if this looks wrong.'
     case 'budget-anon':
       return "We're at today's capacity. Try again tomorrow, or grab Pro to keep going right now."
     case 'budget-global':

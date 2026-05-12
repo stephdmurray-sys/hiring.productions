@@ -53,8 +53,8 @@ export function UsagePill() {
 
   const label =
     state.tier === 'anon'
-      ? `${state.remaining} of ${state.limit} free runs left today`
-      : `${state.remaining} of ${state.limit} unlocked runs left`
+      ? `${state.remaining} of ${state.limit} free insights left today`
+      : `${state.remaining} of ${state.limit} unlocked insights left`
 
   return (
     <div

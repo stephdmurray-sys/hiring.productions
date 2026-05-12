@@ -24,7 +24,7 @@ interface ProUpsellPanelProps {
  */
 export function ProUpsellPanel({
   recommend,
-  eyebrow = 'YOUR NEXT INSIDE LOOK',
+  eyebrow = 'YOUR NEXT RECRUITER INSIGHT',
   heading,
 }: ProUpsellPanelProps) {
   const tools = recommend
@@ -111,7 +111,7 @@ export function ProUpsellPanel({
             lineHeight: 1.55,
           }}
         >
-          Members get the next inside look on the same diagnosis.{' '}
+          Members get the next Recruiter Insight on the same diagnosis.{' '}
           <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$20/year</span> — less than Jobscan
           charges for one day.
         </p>

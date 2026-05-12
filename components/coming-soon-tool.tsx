@@ -180,7 +180,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
               color: '#8B8AA0',
               margin: '8px 0 20px 0',
             }}>
-              Drop your email and we&apos;ll let you know the moment this inside look goes live.
+              Drop your email and we&apos;ll let you know the moment this Recruiter Insight goes live.
             </p>
 
             <input
@@ -250,7 +250,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
             textAlign: 'center',
             marginTop: '20px',
           }}>
-            Already a member? All current inside looks are unlocked in your account.
+            Already a member? All current Recruiter Insights are unlocked in your account.
           </p>
 
           {/* RepVera CTA */}

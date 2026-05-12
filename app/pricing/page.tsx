@@ -14,7 +14,7 @@ const FREE_CANDIDATE_TOOLS = CATALOG.filter(
 export const metadata: Metadata = {
   title: 'Pricing — $20/year vs. $600+/year',
   description:
-    'Free forever for every candidate-side tool. $20/year for the whole production — every flagship inside look. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
+    'Free forever for every candidate-side tool. $20/year for the whole production — every Recruiter Insight. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
   alternates: { canonical: 'https://hiring.productions/pricing' },
 }
 
@@ -37,7 +37,7 @@ const ROWS: Row[] = [
   { label: 'Salary negotiation script (using your data)', group: 'free', hp: true, teal: false, jobscan: false, resumeWorded: false, cultivated: 'Course only' },
   { label: 'Stuck-search diagnostic', group: 'free', hp: true, teal: false, jobscan: false, resumeWorded: false, cultivated: false },
 
-  // PRO TOOLS — the 5 flagship inside looks
+  // PRO TOOLS — the flagship Recruiter Insights
   { label: 'Recruiter\'s actual internal monologue on your resume', group: 'pro', hp: true, teal: 'Score only', jobscan: 'Score only', resumeWorded: 'Score only', cultivated: 'Coaching $$$' },
   { label: 'Boolean string a recruiter uses to find you', group: 'pro', hp: true, teal: false, jobscan: false, resumeWorded: false, cultivated: false },
   { label: 'Full LinkedIn rewrite (headline, About, every role)', group: 'pro', hp: true, teal: 'Builder only', jobscan: 'LinkedIn Score', resumeWorded: 'LinkedIn Review', cultivated: 'Course only' },
@@ -573,7 +573,7 @@ export default function PricingPage() {
                     row.group === 'free'
                       ? 'Free tools'
                       : row.group === 'pro'
-                      ? 'The whole production — every inside look'
+                      ? 'The whole production — every Recruiter Insight'
                       : 'The fundamentals'
                   return (
                     <Fragment key={idx}>

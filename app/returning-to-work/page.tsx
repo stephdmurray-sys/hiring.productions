@@ -269,7 +269,7 @@ export default function ReturningToWorkPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Make sure your resume and LinkedIn surface in 2026 searches."
-            sub="The framing is yours. Here are the inside looks that align your resume and LinkedIn to current recruiter behavior — $20/year."
+            sub="The framing is yours. Here are the Recruiter Insights that align your resume and LinkedIn to current recruiter behavior — $20/year."
           />
 
           <div

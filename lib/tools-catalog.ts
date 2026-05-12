@@ -264,7 +264,7 @@ export const CATALOG: CatalogTool[] = [
     icon: 'Mail',
   },
 
-  // --- PRO 5 (the flagship inside looks) --------------------------------
+  // --- PRO 5 (the flagship Recruiter Insights) --------------------------
   {
     name: 'Through a Recruiter’s Eyes',
     subtitle: 'Recruiter Resume Read',

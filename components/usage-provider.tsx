@@ -127,17 +127,17 @@ export function UsageProvider({ children }: UsageProviderProps) {
       <SimpleModal
         open={modal === 'paywall'}
         onClose={() => setModal(null)}
-        eyebrow="ACT TWO — INSIDE LOOKS"
-        title="You've used every free run."
-        body="The whole production — every free tool unlimited, plus 14 Pro inside looks — is $20 for the year. Less than Jobscan charges for one day."
+        eyebrow="ACT TWO — RECRUITER INSIGHTS"
+        title="You've used every free insight."
+        body="The whole production — every Recruiter Insight, unlimited — is $20 for the year. Less than Jobscan charges for one day."
         primary={{ label: 'Get Full Access — $20/year', href: '/pricing' }}
       />
       <SimpleModal
         open={modal === 'capacity'}
         onClose={() => setModal(null)}
         eyebrow="AT CAPACITY"
-        title="We're at today's run capacity."
-        body="The free tier is capped so it stays free. It resets at midnight UTC. Members keep running without the cap."
+        title="We're at today's capacity."
+        body="The free tier is capped so it stays free. It resets at midnight UTC. Members keep going without the cap."
         primary={{ label: 'See membership', href: '/pricing' }}
       />
     </>

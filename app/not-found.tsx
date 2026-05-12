@@ -182,7 +182,7 @@ export default function NotFound() {
             marginBottom: '48px',
           }}
         >
-          We&apos;re still building this inside look. Sign up to be first through the curtain when it goes live.
+          We&apos;re still building this Recruiter Insight. Sign up to be first through the curtain when it goes live.
         </p>
 
         {/* CTA buttons */}
@@ -238,7 +238,7 @@ export default function NotFound() {
               transition: 'border-color 0.2s, color 0.2s',
             }}
           >
-            See all inside looks
+            See all Recruiter Insights
           </Link>
         </div>
 
