@@ -10,7 +10,7 @@
  * an already-hashed value (we never write raw email into a cookie).
  */
 import type { NextRequest } from 'next/server'
-import { hash, type UsageIdentity } from './usage'
+import { type UsageIdentity } from './usage'
 
 const PRO_COOKIE = 'hp_pro'
 const EMAIL_COOKIE = 'hp_email'
@@ -55,17 +55,15 @@ export async function signProCookie(customerId: string): Promise<string | null> 
   return `${customerId}.${sig}`
 }
 
-/** Extract the visitor's IP from request headers, with Vercel-style fallbacks. */
-function getClientIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0]!.trim()
-  const real = req.headers.get('x-real-ip')
-  if (real) return real
-  return '0.0.0.0'
-}
+/**
+ * Identity result. If `newAnonToken` is set, the caller MUST plant that
+ * value as the `hp_anon` cookie on the response — the gate already
+ * keyed off it, so it has to be the cookie value going forward.
+ */
+export type ResolvedIdentity = UsageIdentity & { newAnonToken?: string }
 
 /** Resolve identity from the request. Async because of hashing. */
-export async function resolveIdentity(req: NextRequest): Promise<UsageIdentity> {
+export async function resolveIdentity(req: NextRequest): Promise<ResolvedIdentity> {
   // 1. Pro cookie (signed) wins.
   const pro = req.cookies.get(PRO_COOKIE)?.value
   if (pro) {
@@ -79,16 +77,18 @@ export async function resolveIdentity(req: NextRequest): Promise<UsageIdentity> 
     return { tier: 'email', key: emailHash }
   }
 
-  // 3. Anon — stable per device via cookie, plus IP+ua as a fallback.
+  // 3. Anon — stable per device via cookie. If no cookie yet, mint one
+  // RIGHT NOW so the gate keys against the same value the cookie will
+  // hold on the response. Without this, the first call would be keyed
+  // off IP+ua and the second off a freshly-minted random token — the
+  // user would effectively get a quota reset on call #2.
   const anon = req.cookies.get(ANON_COOKIE)?.value
   if (anon && /^[a-f0-9]{12,64}$/.test(anon)) {
     return { tier: 'anon', key: anon }
   }
 
-  const ip = getClientIp(req)
-  const ua = req.headers.get('user-agent') ?? ''
-  const fallback = await hash(`${ip}|${ua}`)
-  return { tier: 'anon', key: fallback }
+  const fresh = await newAnonToken()
+  return { tier: 'anon', key: fresh, newAnonToken: fresh }
 }
 
 /**

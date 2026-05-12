@@ -6,7 +6,7 @@ import {
   type ModelId,
   type AnthropicUsage,
 } from '@/lib/usage'
-import { resolveIdentity, newAnonToken, COOKIE_NAMES } from '@/lib/identity'
+import { resolveIdentity, COOKIE_NAMES } from '@/lib/identity'
 
 /**
  * Per-tool tier. Used by the gate to know whether to enforce free-tier
@@ -1328,12 +1328,11 @@ export async function POST(request: NextRequest) {
       limit: after.limit,
     })
 
-    // Plant a stable anon cookie so the same browser shares its quota
-    // across page reloads. One year is fine — the day-bucketed counter
-    // resets at midnight UTC anyway.
-    if (identity.tier === 'anon' && !request.cookies.get(COOKIE_NAMES.ANON)) {
-      const token = await newAnonToken()
-      res.cookies.set(COOKIE_NAMES.ANON, token, {
+    // Plant the anon cookie if identity just minted one. The cookie
+    // value MATCHES the key we just keyed the gate against, so quota
+    // tracking stays consistent from call #1 onward.
+    if (identity.newAnonToken) {
+      res.cookies.set(COOKIE_NAMES.ANON, identity.newAnonToken, {
         httpOnly: true,
         secure: true,
         sameSite: 'lax',
