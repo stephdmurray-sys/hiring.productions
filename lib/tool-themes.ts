@@ -1,103 +1,98 @@
-import type { ToolTheme } from '@/lib/tools-catalog'
+import type { CatalogTool, ToolTheme as LegacyToolTheme } from '@/lib/tools-catalog'
 
 /**
- * Six color themes mapped to tool function. Used to give the catalog
- * grid visual variety so the eye has somewhere to land — instead of
- * 24 monochrome cards.
+ * The site has TWO visual themes — not six. The brand thesis is bilateral
+ * (candidate ↔ hiring team), so the visual system mirrors it: indigo for the
+ * candidate side, coral for the hiring side. Lavender is the ambient accent
+ * across both. The indigo→coral gradient is reserved for flagship Pro tools
+ * (and the global primary CTAs / closing-section moments documented in BRAND.md).
+ *
+ * The old six-theme palette (indigo / blue / coral / emerald / magenta / amber)
+ * has been retired. Decorative color drifts the brand; semantic color carries it.
  */
 
+export type ThemeKey = 'candidate' | 'hiring'
+
 export interface Theme {
-  /** Most-saturated brand color for accents, glows, gradients */
+  /** Brand color for this audience (indigo or coral) */
   primary: string
-  /** Slightly lighter / softer version for body text accents */
+  /** Softer same-family accent — readable on dark surfaces */
   accent: string
-  /** Very subtle background tint for the card */
-  tintBg: string
-  /** Card border in default state */
-  border: string
-  /** Card border on hover */
-  borderHover: string
-  /** Soft outer glow for hover and featured */
-  glow: string
-  /** Eyebrow color for section labels using this theme */
-  eyebrow: string
-  /** Background for the preview area at top of card */
+  /** Card top-band background — a radial of the primary at low opacity */
   previewBg: string
-  /** Human-readable label for the theme (debug) */
+  /** Default border color */
+  border: string
+  /** Hover border color */
+  borderHover: string
+  /** Hover shadow */
+  glow: string
+  /** Subtitle / eyebrow text color */
+  eyebrow: string
+  /** Side label that prints above each card */
   label: string
 }
 
-export const THEMES: Record<ToolTheme, Theme> = {
-  indigo: {
+export const THEMES: Record<ThemeKey, Theme> = {
+  candidate: {
     primary: '#6C47FF',
     accent: '#A78BFA',
-    tintBg: 'linear-gradient(160deg, #16131F 0%, #1A1626 100%)',
+    previewBg:
+      'radial-gradient(ellipse at top, rgba(108,71,255,0.18) 0%, rgba(108,71,255,0.04) 60%, transparent 100%), #0F0E18',
     border: 'rgba(108,71,255,0.22)',
     borderHover: 'rgba(108,71,255,0.55)',
     glow: '0 24px 60px rgba(108,71,255,0.30)',
     eyebrow: '#A78BFA',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(108,71,255,0.18) 0%, rgba(108,71,255,0.04) 60%, transparent 100%), #0F0E18',
-    label: 'Indigo · Resume / AI',
+    label: 'Candidate',
   },
-  blue: {
-    primary: '#4F8EFF',
-    accent: '#7BA8FF',
-    tintBg: 'linear-gradient(160deg, #0F1424 0%, #131A2D 100%)',
-    border: 'rgba(79,142,255,0.22)',
-    borderHover: 'rgba(79,142,255,0.55)',
-    glow: '0 24px 60px rgba(79,142,255,0.28)',
-    eyebrow: '#7BA8FF',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(79,142,255,0.20) 0%, rgba(79,142,255,0.04) 60%, transparent 100%), #0B1124',
-    label: 'Blue · LinkedIn',
-  },
-  coral: {
+  hiring: {
     primary: '#FF4F6A',
     accent: '#FF8FA3',
-    tintBg: 'linear-gradient(160deg, #1F1218 0%, #25151D 100%)',
+    previewBg:
+      'radial-gradient(ellipse at top, rgba(255,79,106,0.20) 0%, rgba(255,79,106,0.04) 60%, transparent 100%), #1A0E15',
     border: 'rgba(255,79,106,0.22)',
     borderHover: 'rgba(255,79,106,0.55)',
     glow: '0 24px 60px rgba(255,79,106,0.28)',
     eyebrow: '#FF8FA3',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(255,79,106,0.20) 0%, rgba(255,79,106,0.04) 60%, transparent 100%), #1A0E15',
-    label: 'Coral · Interview / Heat',
+    label: 'Hiring Team',
   },
-  emerald: {
-    primary: '#5EE6A8',
-    accent: '#A3F0CD',
-    tintBg: 'linear-gradient(160deg, #0E1F1A 0%, #102521 100%)',
-    border: 'rgba(94,230,168,0.22)',
-    borderHover: 'rgba(94,230,168,0.55)',
-    glow: '0 24px 60px rgba(94,230,168,0.25)',
-    eyebrow: '#5EE6A8',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(94,230,168,0.18) 0%, rgba(94,230,168,0.04) 60%, transparent 100%), #0A1A16',
-    label: 'Emerald · Money / Offer',
-  },
-  magenta: {
-    primary: '#FF77B0',
-    accent: '#FFA0CB',
-    tintBg: 'linear-gradient(160deg, #1F1320 0%, #261627 100%)',
-    border: 'rgba(255,119,176,0.22)',
-    borderHover: 'rgba(255,119,176,0.55)',
-    glow: '0 24px 60px rgba(255,119,176,0.28)',
-    eyebrow: '#FFA0CB',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(255,119,176,0.20) 0%, rgba(255,119,176,0.04) 60%, transparent 100%), #1B0F1B',
-    label: 'Magenta · Diagnostic / Strategy',
-  },
-  amber: {
-    primary: '#FFB347',
-    accent: '#FFC97A',
-    tintBg: 'linear-gradient(160deg, #1F1810 0%, #251D14 100%)',
-    border: 'rgba(255,179,71,0.22)',
-    borderHover: 'rgba(255,179,71,0.55)',
-    glow: '0 24px 60px rgba(255,179,71,0.25)',
-    eyebrow: '#FFC97A',
-    previewBg:
-      'radial-gradient(ellipse at top, rgba(255,179,71,0.18) 0%, rgba(255,179,71,0.04) 60%, transparent 100%), #1A140C',
-    label: 'Amber · Hiring Team',
-  },
+}
+
+/**
+ * Brand "moment" gradient — indigo → coral. Used on:
+ *  - Primary CTAs (Get Full Access, Run yours, etc.)
+ *  - Flagship Pro tool flourishes (top-bar accent + icon background)
+ *  - Hero headline color spans
+ *  - The closing CTA section
+ *
+ * Reserve for moments. Restraint makes them feel like something.
+ */
+export const BRAND_GRADIENT = 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)'
+
+/**
+ * Derive a tool's visual theme from its audience. The legacy `theme` field on
+ * each catalog entry is retained for backwards compatibility but ignored —
+ * audience is the single source of truth.
+ */
+export function getTheme(tool: Pick<CatalogTool, 'audience'>): Theme {
+  return tool.audience === 'hiring' ? THEMES.hiring : THEMES.candidate
+}
+
+// ---------------------------------------------------------------------------
+// Backwards-compat: old code still imports legacy theme keys ('indigo', etc.)
+// via the catalog entries. Map each legacy theme to the closest new theme so
+// nothing breaks while the catalog cleans itself up over time.
+// ---------------------------------------------------------------------------
+
+const LEGACY_TO_NEW: Record<LegacyToolTheme, ThemeKey> = {
+  indigo: 'candidate',
+  blue: 'candidate',
+  coral: 'candidate',
+  emerald: 'candidate',
+  magenta: 'candidate',
+  amber: 'hiring',
+}
+
+/** @deprecated Use `getTheme(tool)` instead — relies on the legacy theme key. */
+export function legacyThemeToTheme(legacy: LegacyToolTheme): Theme {
+  return THEMES[LEGACY_TO_NEW[legacy] ?? 'candidate']
 }

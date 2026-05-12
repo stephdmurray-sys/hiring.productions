@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Lock } from 'lucide-react'
 import { CATALOG } from '@/lib/tools-catalog'
-import { THEMES } from '@/lib/tool-themes'
+import { getTheme } from '@/lib/tool-themes'
 
 interface ProUpsellPanelProps {
   /**
@@ -126,7 +126,7 @@ export function ProUpsellPanel({
           }}
         >
           {tools.map((tool) => {
-            const theme = THEMES[tool.theme]
+            const theme = getTheme(tool)
             return (
               <Link
                 key={tool.href}

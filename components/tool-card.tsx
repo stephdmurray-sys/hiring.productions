@@ -28,8 +28,8 @@ import {
   Star,
   type LucideIcon,
 } from 'lucide-react'
-import { THEMES } from '@/lib/tool-themes'
-import type { CatalogTool, ToolIcon } from '@/lib/tools-catalog'
+import { getTheme, BRAND_GRADIENT } from '@/lib/tool-themes'
+import { FLAGSHIP_PRO, type CatalogTool, type ToolIcon } from '@/lib/tools-catalog'
 
 interface ToolCardProps {
   tool: CatalogTool
@@ -63,10 +63,28 @@ const ICON_MAP: Record<ToolIcon, LucideIcon> = {
   Star,
 }
 
+// Tier badges read like quiet metadata, not decoration. All on-palette: lavender
+// outlined for Free (no-cost, open), lavender filled for Pro (members get it),
+// muted gray for Soon (not built yet).
 const TIER_BADGE = {
-  free: { label: 'Free', bg: 'rgba(94,230,168,0.15)', color: '#5EE6A8' },
-  pro: { label: 'Included in Pro', bg: 'rgba(108,71,255,0.18)', color: '#A78BFA' },
-  soon: { label: 'On the way', bg: 'rgba(139,138,160,0.12)', color: '#8B8AA0' },
+  free: {
+    label: 'Free',
+    bg: 'rgba(167,139,250,0.10)',
+    color: '#A78BFA',
+    border: '1px solid rgba(167,139,250,0.35)',
+  },
+  pro: {
+    label: 'Included in Pro',
+    bg: 'rgba(167,139,250,0.20)',
+    color: '#F2F0FF',
+    border: '1px solid rgba(167,139,250,0.40)',
+  },
+  soon: {
+    label: 'On the way',
+    bg: 'rgba(139,138,160,0.12)',
+    color: '#8B8AA0',
+    border: '1px solid rgba(139,138,160,0.25)',
+  },
 } as const
 
 const AUDIENCE_LABEL = {
@@ -76,10 +94,11 @@ const AUDIENCE_LABEL = {
 
 export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
   const [hover, setHover] = useState(false)
-  const theme = THEMES[tool.theme]
+  const theme = getTheme(tool)
   const tier = TIER_BADGE[tool.tier]
   const isClickable = tool.tier !== 'soon'
   const isFeatured = variant === 'featured'
+  const isFlagship = FLAGSHIP_PRO.includes(tool.name as never)
   const Icon = ICON_MAP[tool.icon] ?? Sparkles
 
   const card = (
@@ -103,6 +122,23 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         overflow: 'hidden',
       }}
     >
+      {/* Flagship flourish — 2px brand-gradient bar at the very top of the card.
+          Reserved for FLAGSHIP_PRO tools so it stays a moment, not decoration. */}
+      {isFlagship && (
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 2,
+            background: BRAND_GRADIENT,
+            zIndex: 1,
+          }}
+        />
+      )}
+
       {/* Themed top band — subtle gradient + icon */}
       <div
         style={{
@@ -112,7 +148,8 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
           borderBottom: `1px solid ${theme.border}`,
         }}
       >
-        {/* Icon */}
+        {/* Icon — flagship tools use the brand gradient + white icon as the
+            second flourish. Non-flagship use a soft same-family disc. */}
         <div
           style={{
             display: 'inline-flex',
@@ -121,12 +158,17 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
             width: isFeatured ? 44 : 38,
             height: isFeatured ? 44 : 38,
             borderRadius: '50%',
-            background: `${theme.primary}20`,
-            border: `1px solid ${theme.primary}40`,
+            background: isFlagship ? BRAND_GRADIENT : `${theme.primary}20`,
+            border: isFlagship ? 'none' : `1px solid ${theme.primary}40`,
             marginBottom: isFeatured ? 16 : 0,
+            boxShadow: isFlagship ? '0 6px 18px rgba(108,71,255,0.35)' : 'none',
           }}
         >
-          <Icon size={isFeatured ? 20 : 18} color={theme.accent} strokeWidth={2} />
+          <Icon
+            size={isFeatured ? 20 : 18}
+            color={isFlagship ? '#FFFFFF' : theme.accent}
+            strokeWidth={2}
+          />
         </div>
 
         {/* Featured-only hook line */}
@@ -156,10 +198,17 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
           flex: 1,
         }}
       >
-        {/* Badges */}
+        {/* Badges — audience on left (carries the side color), tier on right
+            (lavender, ambient — tells you what it costs without competing
+            for attention with the audience signal). */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
-          <Badge label={AUDIENCE_LABEL[tool.audience]} bg={`${theme.primary}1A`} color={theme.accent} />
-          <Badge label={tier.label} bg={tier.bg} color={tier.color} />
+          <Badge
+            label={AUDIENCE_LABEL[tool.audience]}
+            bg={`${theme.primary}1A`}
+            color={theme.accent}
+            border={`1px solid ${theme.primary}33`}
+          />
+          <Badge label={tier.label} bg={tier.bg} color={tier.color} border={tier.border} />
         </div>
 
         {/* Brand name */}
@@ -254,7 +303,17 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
   )
 }
 
-function Badge({ label, bg, color }: { label: string; bg: string; color: string }) {
+function Badge({
+  label,
+  bg,
+  color,
+  border,
+}: {
+  label: string
+  bg: string
+  color: string
+  border?: string
+}) {
   return (
     <span
       style={{
@@ -262,6 +321,7 @@ function Badge({ label, bg, color }: { label: string; bg: string; color: string 
         alignItems: 'center',
         background: bg,
         color,
+        border,
         padding: '4px 9px',
         borderRadius: 5,
         fontFamily: "'Figtree', sans-serif",

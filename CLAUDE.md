@@ -46,7 +46,13 @@ If it doesn't fit naturally, drop it. Forcing the metaphor breaks the brand.
 
 - **Dark backgrounds** — backstage feeling. Not because dark is trendy.
 - **Figtree** — chunky, rounded, 900 weight at large sizes for headers.
-- **Electric indigo + hot coral** — used separately almost everywhere. The gradient of the two appears ONLY on primary CTAs and the closing section. Restraint makes the moments where they combine feel like something.
+- **The palette is small and load-bearing:**
+  - **Electric indigo `#6C47FF`** — candidate-side primary, the user's own work
+  - **Hot coral `#FF4F6A`** — hiring-team-side primary, the other side of the table, also the "required field empty" warning
+  - **Lavender `#A78BFA`** — ambient accent, eyebrows, tier badges, quoted-phrase highlights, secondary text
+  - **The indigo→coral gradient** appears only on primary CTAs, flagship Pro flourishes, hero headline color spans, and the closing-section moment. Restraint makes the moments where they combine feel like something.
+  - **Success green `#5EE6A8`** is allowed ONLY for semantic success states — form-field filled, PDF parsed, signed-in confirmation, ✓ rubric marks. Never as decoration, never as a theme on a card, never in marketing copy.
+- **No per-category theme colors** on tool cards. Audience drives the theme: indigo for candidate, coral for hiring. The data model is in `lib/tool-themes.ts` and is derived from `tool.audience`, not from a separate `theme` field.
 - No stock illustrations of people in suits shaking hands. No abstract gradients of generic cool tones. The visual identity is its own category.
 
 ## When generating new content

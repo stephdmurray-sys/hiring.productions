@@ -228,8 +228,8 @@ export default function ToolsPage() {
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
               eyebrow="FREE — START HERE"
-              eyebrowColor="#5EE6A8"
-              title="Five free tools. No account. No card."
+              eyebrowColor="#A78BFA"
+              title="Free tools. No account. No card."
               sub="Built to help — and to give you a sense of what the Pro inside looks deliver."
             />
 
