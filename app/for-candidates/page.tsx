@@ -292,42 +292,10 @@ export default function ForCandidatesPage() {
             You can optimize your resume. You can rehearse your answers. But no one can fake what your manager, your teammates, and your clients say about you. That&apos;s what RepVera captures.
           </p>
 
-          {/* Quote Block */}
-          <div style={{
-            background: '#1A1A22',
-            border: '1px solid rgba(108,71,255,0.25)',
-            borderRadius: '14px',
-            padding: '32px',
-            maxWidth: '560px',
-            margin: '0 auto 48px',
-            textAlign: 'center',
-          }}>
-            <div style={{
-              fontSize: '48px',
-              color: '#6C47FF',
-              marginBottom: '16px',
-              lineHeight: 1,
-            }}>
-              "
-            </div>
-            <p style={{
-              fontSize: '18px',
-              color: '#F2F0FF',
-              fontStyle: 'italic',
-              fontWeight: 500,
-              lineHeight: 1.6,
-              marginBottom: '24px',
-            }}>
-              I got three interviews in the first week I shared my RepVera profile. Hiring managers actually commented on it.
-            </p>
-            <p style={{
-              fontSize: '14px',
-              color: '#8B8AA0',
-              fontWeight: 600,
-            }}>
-              — Beta user, Product Manager
-            </p>
-          </div>
+          {/* Fabricated "Beta user, Product Manager" testimonial removed — it
+              violated BRAND.md's "no fake testimonials" rule. Replace with a
+              real attributed quote when one's available; until then, the
+              page stands on the strength of the actual recruiter expertise. */}
 
           <div style={{ textAlign: 'center' }}>
             <a
