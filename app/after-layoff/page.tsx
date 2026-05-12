@@ -111,7 +111,7 @@ export default function AfterLayoffPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(255,79,106,0.18) 0%, rgba(108,71,255,0.10) 35%, transparent 70%)',
+              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(108,71,255,0.18) 0%, rgba(108,71,255,0.10) 35%, transparent 70%)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -125,7 +125,7 @@ export default function AfterLayoffPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#FF4F6A',
+              color: '#A78BFA',
               marginBottom: '22px',
             }}
           >
@@ -147,7 +147,7 @@ export default function AfterLayoffPage() {
             <br />
             <span
               style={{
-                background: 'linear-gradient(135deg, #FF4F6A 0%, #6C47FF 100%)',
+                background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -191,7 +191,7 @@ export default function AfterLayoffPage() {
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <SectionHeader
             eyebrow="START HERE — FREE"
-            eyebrowColor="#FF4F6A"
+            eyebrowColor="#A78BFA"
             title="Four free tools for the search after a layoff."
             sub="Frame the gap. Diagnose why applications aren’t converting. Decode the silence when it comes."
           />
@@ -296,7 +296,7 @@ export default function AfterLayoffPage() {
             margin: '0 auto',
             textAlign: 'center',
             background: '#14141B',
-            border: '1px solid rgba(255,79,106,0.30)',
+            border: '1px solid rgba(108,71,255,0.30)',
             borderRadius: '22px',
             padding: '48px 32px',
             position: 'relative',
@@ -312,7 +312,7 @@ export default function AfterLayoffPage() {
               transform: 'translateX(-50%)',
               width: 460,
               height: 460,
-              background: 'radial-gradient(circle, rgba(255,79,106,0.18) 0%, transparent 60%)',
+              background: 'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
               pointerEvents: 'none',
             }}
           />
@@ -323,7 +323,7 @@ export default function AfterLayoffPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#FF4F6A',
+              color: '#A78BFA',
               marginBottom: '16px',
               position: 'relative',
             }}
@@ -369,7 +369,7 @@ export default function AfterLayoffPage() {
               fontWeight: 800,
               fontSize: '15px',
               textDecoration: 'none',
-              boxShadow: '0 18px 40px rgba(255,79,106,0.30)',
+              boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
               position: 'relative',
             }}
           >

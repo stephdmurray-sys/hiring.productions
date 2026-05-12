@@ -10,34 +10,38 @@ interface Hub {
   accent: string
 }
 
+// All four hubs share the lavender accent. The copy differentiates the hubs;
+// the color does not. Disciplined palette per BRAND.md.
+const HUB_ACCENT = '#A78BFA'
+
 const HUBS: Hub[] = [
   {
     href: '/for-new-grads',
     eyebrow: 'NEW GRADS',
     title: 'No experience yet?',
     tagline: 'Resume, GPA, school, keywords — what hiring managers really weigh in the first six seconds.',
-    accent: '#5EE6A8',
+    accent: HUB_ACCENT,
   },
   {
     href: '/after-layoff',
     eyebrow: 'AFTER A LAYOFF',
     title: 'Just laid off?',
     tagline: 'Frame the gap, decode the silence, run a search that lands in months not quarters.',
-    accent: '#FF4F6A',
+    accent: HUB_ACCENT,
   },
   {
     href: '/career-changers',
     eyebrow: 'CAREER CHANGERS',
     title: 'Switching fields?',
     tagline: 'Translate your past into the language of the new field — without losing the credibility you’ve built.',
-    accent: '#7BA8FF',
+    accent: HUB_ACCENT,
   },
   {
     href: '/returning-to-work',
     eyebrow: 'RETURNING TO WORK',
     title: 'Coming back after a break?',
     tagline: 'Re-enter at level. The framing that works, the network moves that actually land roles.',
-    accent: '#FFA0CB',
+    accent: HUB_ACCENT,
   },
 ]
 

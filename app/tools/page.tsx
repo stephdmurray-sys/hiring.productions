@@ -200,10 +200,10 @@ export default function ToolsPage() {
         <section id="flagship" style={{ padding: '40px 24px 20px' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
             <SectionHeader
-              eyebrow="THE FIVE INSIDE LOOKS"
+              eyebrow="THE INSIDE LOOKS"
               eyebrowColor="#A78BFA"
               title="The whole production. $20 a year."
-              sub="Each one replaces a $30–80/month tool. Five together for less than Jobscan charges for one day."
+              sub="Each one replaces a $30–80/month tool. Together for less than Jobscan charges for one day."
             />
 
             <div

@@ -109,7 +109,7 @@ export default function ReturningToWorkPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(255,119,176,0.18) 0%, rgba(108,71,255,0.10) 35%, transparent 70%)',
+              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(108,71,255,0.18) 0%, rgba(108,71,255,0.10) 35%, transparent 70%)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -123,7 +123,7 @@ export default function ReturningToWorkPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#FFA0CB',
+              color: '#A78BFA',
               marginBottom: '22px',
             }}
           >
@@ -145,7 +145,7 @@ export default function ReturningToWorkPage() {
             <br />
             <span
               style={{
-                background: 'linear-gradient(135deg, #FF77B0 0%, #6C47FF 100%)',
+                background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -189,7 +189,7 @@ export default function ReturningToWorkPage() {
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <SectionHeader
             eyebrow="START HERE — FREE"
-            eyebrowColor="#FFA0CB"
+            eyebrowColor="#A78BFA"
             title="Four free tools for the return."
             sub="Frame the break. Find the keywords recruiters search for. Refresh the resume that hasn’t been touched in years."
           />
@@ -294,7 +294,7 @@ export default function ReturningToWorkPage() {
             margin: '0 auto',
             textAlign: 'center',
             background: '#14141B',
-            border: '1px solid rgba(255,119,176,0.30)',
+            border: '1px solid rgba(108,71,255,0.30)',
             borderRadius: '22px',
             padding: '48px 32px',
             position: 'relative',
@@ -310,7 +310,7 @@ export default function ReturningToWorkPage() {
               transform: 'translateX(-50%)',
               width: 460,
               height: 460,
-              background: 'radial-gradient(circle, rgba(255,119,176,0.18) 0%, transparent 60%)',
+              background: 'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
               pointerEvents: 'none',
             }}
           />
@@ -321,7 +321,7 @@ export default function ReturningToWorkPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#FFA0CB',
+              color: '#A78BFA',
               marginBottom: '16px',
               position: 'relative',
             }}
@@ -366,7 +366,7 @@ export default function ReturningToWorkPage() {
               fontWeight: 800,
               fontSize: '15px',
               textDecoration: 'none',
-              boxShadow: '0 18px 40px rgba(255,119,176,0.30)',
+              boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
               position: 'relative',
             }}
           >

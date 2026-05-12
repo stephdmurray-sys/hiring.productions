@@ -111,7 +111,7 @@ export default function ForNewGradsPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(94,230,168,0.16) 0%, rgba(108,71,255,0.08) 35%, transparent 70%)',
+              'radial-gradient(ellipse 900px 600px at 50% -100px, rgba(108,71,255,0.16) 0%, rgba(108,71,255,0.08) 35%, transparent 70%)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -125,7 +125,7 @@ export default function ForNewGradsPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#5EE6A8',
+              color: '#A78BFA',
               marginBottom: '22px',
             }}
           >
@@ -147,7 +147,7 @@ export default function ForNewGradsPage() {
             <br />
             <span
               style={{
-                background: 'linear-gradient(135deg, #5EE6A8 0%, #6C47FF 100%)',
+                background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -180,7 +180,7 @@ export default function ForNewGradsPage() {
         <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
           <SectionHeader
             eyebrow="START HERE — FREE"
-            eyebrowColor="#5EE6A8"
+            eyebrowColor="#A78BFA"
             title="Four free tools built for the no-experience start."
             sub="Use these in order — resume first, scan postings before you waste a Saturday applying to scams."
           />
@@ -288,7 +288,7 @@ export default function ForNewGradsPage() {
             margin: '0 auto',
             textAlign: 'center',
             background: '#14141B',
-            border: '1px solid rgba(94,230,168,0.30)',
+            border: '1px solid rgba(108,71,255,0.30)',
             borderRadius: '22px',
             padding: '48px 32px',
             position: 'relative',
@@ -305,7 +305,7 @@ export default function ForNewGradsPage() {
               width: 460,
               height: 460,
               background:
-                'radial-gradient(circle, rgba(94,230,168,0.18) 0%, transparent 60%)',
+                'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
               pointerEvents: 'none',
             }}
           />
@@ -316,7 +316,7 @@ export default function ForNewGradsPage() {
               fontSize: '11px',
               letterSpacing: '0.22em',
               textTransform: 'uppercase',
-              color: '#5EE6A8',
+              color: '#A78BFA',
               marginBottom: '16px',
               position: 'relative',
             }}

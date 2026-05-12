@@ -16,6 +16,11 @@ interface NavigationProps {
  *   stephanie_murray@x.com   → "Stephanie"
  *   stephanie123@x.com       → "Stephanie"
  *   123@x.com                → ""  (caller falls back to "Hi there")
+ *   stephdmurray@x.com       → ""  (no separator, looks like initials+lastname)
+ *
+ * The last case is the tricky one: an unbroken local-part longer than ~10 chars
+ * is almost always initials+lastname or a username, never a clean first name.
+ * Rather than greet the user with "Hi, Stephdmurray" we fall back to "Hi there."
  */
 function firstNameFromEmail(email: string | null): string {
   if (!email) return ''
@@ -23,6 +28,12 @@ function firstNameFromEmail(email: string | null): string {
   const firstPart = local.split(/[._-]/)[0] ?? ''
   const cleaned = firstPart.replace(/\d+$/, '')
   if (!cleaned) return ''
+  // If the local-part had no separator AND the cleaned token is longer than a
+  // typical first name (>10 chars), assume it's a concatenated handle and
+  // give up gracefully. Real first names this long are rare; mangled handles
+  // this long are common.
+  const hasSeparator = /[._-]/.test(local)
+  if (!hasSeparator && cleaned.length > 10) return ''
   return cleaned.charAt(0).toUpperCase() + cleaned.slice(1).toLowerCase()
 }
 
