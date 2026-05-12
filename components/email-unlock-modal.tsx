@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { X, Mail } from 'lucide-react'
 
 interface EmailUnlockModalProps {
@@ -152,10 +153,21 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             fontSize: '15px',
             color: '#9D9CB3',
             lineHeight: 1.55,
+            margin: '0 0 8px',
+          }}
+        >
+          Sign in for the upgraded experience — <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more free insights</span>, no card, no password.
+        </p>
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '15px',
+            color: '#9D9CB3',
+            lineHeight: 1.55,
             margin: '0 0 22px',
           }}
         >
-          Drop your email and I&apos;ll unlock <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more insights</span> — 10 total before you decide on Pro. No card. No password. Plus the recruiter-side reads I send by email only — what hiring teams are actually saying, with nothing softened.
+          Or go Pro for unlimited — and the <span style={{ color: '#F2F0FF', fontWeight: 800 }}>advanced Recruiter Insights</span> that set you apart in the audition. $20/year.
         </p>
 
         <form onSubmit={submit}>
@@ -216,9 +228,32 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
               boxShadow: submitting ? 'none' : '0 18px 40px rgba(108,71,255,0.30)',
             }}
           >
-            {submitting ? 'Unlocking…' : 'Unlock 8 more insights →'}
+            {submitting ? 'Signing you in…' : 'Sign in for 8 more →'}
           </button>
         </form>
+
+        <div
+          style={{
+            marginTop: 14,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Link
+            href="/pricing"
+            onClick={onClose}
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 800,
+              color: '#A78BFA',
+              textDecoration: 'none',
+              letterSpacing: '0.01em',
+            }}
+          >
+            See Pro — $20/year →
+          </Link>
+        </div>
 
         <p
           style={{
@@ -230,7 +265,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             textAlign: 'center',
           }}
         >
-          One email a week, max. Unsubscribe anytime. We never sell your data.
+          Your account, your insights. Unsubscribe anytime.
         </p>
       </div>
     </div>
