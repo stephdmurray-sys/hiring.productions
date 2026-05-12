@@ -118,7 +118,7 @@ export default function ToolsPage() {
               margin: '0 auto 32px',
             }}
           >
-            {freeTools.length} free tools, {flagshipPro.length} flagship Inside Looks for $20/year, and a hiring-team set built from the same recruiting practice.
+            Free tools you can run today. The whole production members live on for $20/year. A hiring-team set built from the same recruiting practice.
           </p>
 
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
