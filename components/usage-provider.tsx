@@ -97,8 +97,22 @@ export function UsageProvider({ children }: UsageProviderProps) {
     }
 
     window.fetch = patched
+
+    // Listen for the pill's click → open the matching modal proactively.
+    // Lets users re-summon the upgrade flow without burning another tool call.
+    const onRequestModal = (e: Event) => {
+      const detail = (e as CustomEvent).detail as
+        | { kind?: ModalKind; source?: string }
+        | undefined
+      if (!detail?.kind) return
+      if (detail.source) setSource(detail.source)
+      setModal(detail.kind)
+    }
+    window.addEventListener('hp:request-modal', onRequestModal)
+
     return () => {
       window.fetch = original
+      window.removeEventListener('hp:request-modal', onRequestModal)
     }
   }, [])
 

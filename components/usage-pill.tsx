@@ -14,10 +14,15 @@ interface UsageState {
  * quota. Reads /api/usage on mount and after every successful tool run
  * (callers can fire the `hp:usage-changed` window event).
  *
+ * Clickable so users can re-open the upgrade modal without having to
+ * burn another tool call. Anon → email modal. Email → Pro paywall.
+ * UsageProvider listens for the `hp:request-modal` custom event.
+ *
  * Hidden for Pro members — they don't need to think about it.
  */
 export function UsagePill() {
   const [state, setState] = useState<UsageState | null>(null)
+  const [hover, setHover] = useState(false)
 
   useEffect(() => {
     let cancelled = false
@@ -56,14 +61,34 @@ export function UsagePill() {
       ? `${state.remaining} of ${state.limit} free insights left today`
       : `${state.remaining} of ${state.limit} unlocked insights left`
 
+  // Affordance text — appears on hover so the pill reveals what
+  // clicking it does. Anon pill nudges to email; email pill nudges to Pro.
+  const hoverLabel =
+    state.tier === 'anon' ? 'Sign in for 8 more →' : 'Go Pro for unlimited →'
+
+  const handleClick = () => {
+    const kind = state.tier === 'anon' ? 'email' : 'paywall'
+    window.dispatchEvent(
+      new CustomEvent('hp:request-modal', { detail: { kind, source: `pill:${state.tier}` } }),
+    )
+  }
+
   return (
-    <div
+    <button
+      type="button"
+      onClick={handleClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
         gap: 8,
-        padding: '6px 12px',
-        background: c.bg,
+        padding: '7px 14px',
+        background: hover
+          ? tone === 'blocked' || tone === 'warn'
+            ? 'rgba(255,79,106,0.22)'
+            : 'rgba(167,139,250,0.18)'
+          : c.bg,
         border: `1px solid ${c.border}`,
         color: c.fg,
         borderRadius: 100,
@@ -72,7 +97,15 @@ export function UsagePill() {
         fontSize: '11px',
         letterSpacing: '0.10em',
         textTransform: 'uppercase',
+        cursor: 'pointer',
+        transition: 'background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease',
+        transform: hover ? 'translateY(-1px)' : 'translateY(0)',
+        boxShadow: hover ? `0 6px 18px ${c.bg}` : 'none',
+        outline: 'none',
+        appearance: 'none',
+        WebkitAppearance: 'none',
       }}
+      aria-label={`${label}. ${hoverLabel}`}
     >
       <span
         aria-hidden
@@ -84,7 +117,7 @@ export function UsagePill() {
           opacity: 0.9,
         }}
       />
-      {label}
-    </div>
+      {hover ? hoverLabel : label}
+    </button>
   )
 }
