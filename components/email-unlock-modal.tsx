@@ -155,7 +155,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Drop your email and I&apos;ll unlock <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more insights</span> — 10 total before you decide on Pro. No card. No password. The 6-second resume-read guide goes to your inbox right after.
+          Drop your email and I&apos;ll unlock <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more insights</span> — 10 total before you decide on Pro. No card. No password. Plus the recruiter-side reads I send by email only — what hiring teams are actually saying, with nothing softened.
         </p>
 
         <form onSubmit={submit}>
