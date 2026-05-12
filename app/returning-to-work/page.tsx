@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { HubQuestionsBlock } from '@/components/hub-questions-block'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -374,6 +375,16 @@ export default function ReturningToWorkPage() {
           </Link>
         </div>
       </section>
+
+      <HubQuestionsBlock
+        title="Questions returning-to-work candidates ask"
+        items={[
+          { question: 'How to explain a gap on my resume', href: '/q/explain-resume-gap' },
+          { question: 'Is my resume good after time away?', href: '/q/is-my-resume-good' },
+          { question: 'What are red flags on a resume?', href: '/q/resume-red-flags' },
+          { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
+        ]}
+      />
 
       <Footer />
     </main>

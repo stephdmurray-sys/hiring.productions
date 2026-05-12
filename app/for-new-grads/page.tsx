@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { HubQuestionsBlock } from '@/components/hub-questions-block'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -369,6 +370,16 @@ export default function ForNewGradsPage() {
           </Link>
         </div>
       </section>
+
+      <HubQuestionsBlock
+        title="Questions new grads keep asking"
+        items={[
+          { question: 'How to get hired as a new grad in 2026', href: '/q/how-to-get-hired-as-new-grad' },
+          { question: 'Is my resume good?', href: '/q/is-my-resume-good' },
+          { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
+          { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
+        ]}
+      />
 
       <Footer />
     </main>

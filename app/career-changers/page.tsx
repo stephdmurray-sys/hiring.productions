@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { HubQuestionsBlock } from '@/components/hub-questions-block'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -377,6 +378,16 @@ export default function CareerChangersPage() {
           </Link>
         </div>
       </section>
+
+      <HubQuestionsBlock
+        title="Questions career changers keep asking"
+        items={[
+          { question: 'Is my resume good for a different field?', href: '/q/is-my-resume-good' },
+          { question: 'How to beat an ATS in a new industry', href: '/q/how-to-beat-ats' },
+          { question: "What is the 70/30 rule in hiring?", href: '/q/70-30-rule' },
+          { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
+        ]}
+      />
 
       <Footer />
     </main>

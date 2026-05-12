@@ -140,6 +140,72 @@ export function Footer() {
           </nav>
         </div>
 
+        {/* Answers — /q/ pages targeting high-volume search queries.
+            Lives in the footer so every page on the site internal-links to
+            them (link equity flows to the question content) and so visitors
+            who'd benefit can actually discover them. */}
+        <div>
+          <div style={columnHeading}>Answers</div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Link
+              href="/q/is-my-resume-good"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Is my resume good?
+            </Link>
+            <Link
+              href="/q/7-second-rule-resume"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              What is the 7-second rule?
+            </Link>
+            <Link
+              href="/q/how-to-beat-ats"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              How to beat an ATS
+            </Link>
+            <Link
+              href="/q/resume-red-flags"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              What are resume red flags?
+            </Link>
+            <Link
+              href="/q/explain-resume-gap"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              How to explain a resume gap
+            </Link>
+            <Link
+              href="/q/why-am-i-not-getting-responses"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Why am I not getting responses?
+            </Link>
+            <Link
+              href="/answers"
+              style={{ ...linkStyle, color: '#A78BFA', fontWeight: 600 }}
+              onMouseEnter={onHover}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#A78BFA')}
+            >
+              See every answer →
+            </Link>
+          </nav>
+        </div>
+
         {/* For your moment — audience hubs */}
         <div>
           <div style={columnHeading}>For Your Moment</div>

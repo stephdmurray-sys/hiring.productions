@@ -30,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // SEO content pages — topic-level pillars
     { path: '/how-ats-actually-works', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/what-recruiters-really-think', priority: 0.85, changeFrequency: 'monthly' },
+    // /answers hub page — links to every /q/ page
+    { path: '/answers', priority: 0.9, changeFrequency: 'weekly' },
     // /q/ question-targeted pages (AlsoAsked-driven, FAQ schema'd)
     { path: '/q/why-am-i-not-getting-responses', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/what-does-competitive-salary-mean', priority: 0.85, changeFrequency: 'monthly' },
