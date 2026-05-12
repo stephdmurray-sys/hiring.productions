@@ -22,14 +22,15 @@ function isToolPath(pathname: string): boolean {
  *
  * What it does:
  *   - Patches window.fetch to watch for /api/tool responses.
- *   - On 429 with reason=anon-limit  → opens the EmailUnlockModal.
- *   - On 429 with reason=email-limit → opens the Pro paywall modal.
- *   - On 429 with reason=budget-*    → opens the "we're at capacity" modal.
- *   - On 200                         → fires hp:usage-changed for the pill.
+ *   - On 429 with reason=anon-limit   → opens the EmailUnlockModal.
+ *   - On 429 with reason=email-limit  → opens the Pro paywall modal.
+ *   - On 429 with reason=budget-*     → opens the "we're at capacity" modal.
+ *   - On 402 with reason=pro-required → opens the "this is a Pro tool" modal.
+ *   - On 200                          → fires hp:usage-changed for the pill.
  *
  * Page code keeps doing `fetch('/api/tool', ...)` exactly as before.
  */
-type ModalKind = null | 'email' | 'paywall' | 'capacity'
+type ModalKind = null | 'email' | 'paywall' | 'capacity' | 'pro-tool'
 
 interface UsageProviderProps {
   children?: React.ReactNode
@@ -62,7 +63,11 @@ export function UsageProvider({ children }: UsageProviderProps) {
       // Clone so we can read the body without consuming it for the caller.
       try {
         const clone = res.clone()
-        if (res.status === 429) {
+        // 402 = Pro-only tool hit by an anon/email user.
+        // 429 = rate-limited (anon out, email out, or budget cap).
+        // Both surface a modal so the tool page never has to render
+        // the raw error.
+        if (res.status === 429 || res.status === 402) {
           const data = await clone.json().catch(() => ({}))
           const reason = (data as { error?: string })?.error ?? ''
           const toolId = (() => {
@@ -80,7 +85,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
           if (reason === 'anon-limit') setModal('email')
           else if (reason === 'email-limit') setModal('paywall')
           else if (reason === 'budget-anon' || reason === 'budget-global') setModal('capacity')
-          else if (reason === 'pro-required') setModal('paywall')
+          else if (reason === 'pro-required') setModal('pro-tool')
         } else if (res.status === 200) {
           window.dispatchEvent(new CustomEvent('hp:usage-changed'))
         }
@@ -139,6 +144,14 @@ export function UsageProvider({ children }: UsageProviderProps) {
         title="We're at today's capacity."
         body="The free tier is capped so it stays free. It resets at midnight UTC. Members keep going without the cap."
         primary={{ label: 'See membership', href: '/pricing' }}
+      />
+      <SimpleModal
+        open={modal === 'pro-tool'}
+        onClose={() => setModal(null)}
+        eyebrow="ACT TWO — RECRUITER INSIGHTS"
+        title="This one's a Recruiter Insight."
+        body="The advanced reads — what hiring teams are actually thinking — are unlocked with Pro. Unlimited, $20/year. Less than Jobscan charges for one day."
+        primary={{ label: 'Get Full Access — $20/year', href: '/pricing' }}
       />
     </>
   )
