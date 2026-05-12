@@ -34,6 +34,7 @@ export function Footer() {
 
   return (
     <footer
+      className="hp-footer"
       style={{
         background: '#0F0F12',
         borderTop: '1px solid rgba(255, 255, 255, 0.06)',
@@ -45,17 +46,15 @@ export function Footer() {
       }}
     >
       <div
+        className="hp-footer-grid"
         style={{
           maxWidth: '1180px',
           margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '48px',
           marginBottom: '48px',
         }}
       >
         {/* Brand */}
-        <div>
+        <div className="hp-footer-brand">
           <Link
             href="/"
             style={{
@@ -290,6 +289,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div
+        className="hp-footer-bottom"
         style={{
           maxWidth: '1180px',
           margin: '0 auto',
@@ -341,6 +341,45 @@ export function Footer() {
           </Link>
         </div>
       </div>
+
+      {/* Responsive layout. The footer carries 5 link columns + a brand
+          block — too many for the old auto-fit grid to handle cleanly on
+          desktop (it wrapped the 5th column to a new row, which looked
+          unintentional). Below: fixed 5-column on desktop with the brand
+          column wider, collapsing to 2 columns on tablet (brand spans the
+          row) and 1 column on phones. */}
+      <style>{`
+        .hp-footer-grid {
+          display: grid;
+          grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+          gap: 36px;
+        }
+        @media (max-width: 1024px) {
+          .hp-footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+          }
+          .hp-footer-brand {
+            grid-column: 1 / -1;
+          }
+        }
+        @media (max-width: 600px) {
+          .hp-footer {
+            padding: 48px 24px 32px !important;
+            margin-top: 56px !important;
+          }
+          .hp-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 36px;
+            margin-bottom: 36px !important;
+          }
+          .hp-footer-bottom {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 14px !important;
+          }
+        }
+      `}</style>
     </footer>
   )
 }
