@@ -2,216 +2,278 @@
 
 import Link from 'next/link'
 
+// Link style is the same across every footer link — extracted as a constant
+// instead of repeated inline 8 times.
+const linkStyle: React.CSSProperties = {
+  fontFamily: "'Figtree', sans-serif",
+  fontSize: '14px',
+  fontWeight: 500,
+  color: '#8B8AA0',
+  textDecoration: 'none',
+  transition: 'color 0.2s',
+}
+const onHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.currentTarget.style.color = '#F2F0FF'
+}
+const onLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  e.currentTarget.style.color = '#8B8AA0'
+}
+
+const columnHeading: React.CSSProperties = {
+  fontSize: '11px',
+  fontWeight: 700,
+  textTransform: 'uppercase',
+  letterSpacing: '1px',
+  color: '#8B8AA0',
+  marginBottom: '16px',
+  fontFamily: "'Figtree', sans-serif",
+}
+
 export function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer style={{
-      background: '#0F0F12',
-      borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-      padding: '60px 40px',
-    }}>
-      <div style={{
-        maxWidth: '1100px',
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '48px',
-        marginBottom: '48px',
-      }}>
-        {/* Left Column */}
+    <footer
+      style={{
+        background: '#0F0F12',
+        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        padding: '64px 40px 48px',
+        // Breathing room from whatever page content sits above. Guarantees a
+        // visible gap even when a tool's result card or upsell panel runs
+        // right up to the bottom of the page.
+        marginTop: '80px',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '1180px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '48px',
+          marginBottom: '48px',
+        }}
+      >
+        {/* Brand */}
         <div>
-          <Link href="/" style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '18px',
-            fontWeight: 800,
-            color: '#F2F0FF',
-            textDecoration: 'none',
-            display: 'block',
-            marginBottom: '16px',
-          }}>
+          <Link
+            href="/"
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '18px',
+              fontWeight: 800,
+              color: '#F2F0FF',
+              textDecoration: 'none',
+              display: 'block',
+              marginBottom: '12px',
+            }}
+          >
             hiring.productions
           </Link>
-          <p style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '14px',
-            fontWeight: 400,
-            color: '#8B8AA0',
-            lineHeight: 1.6,
-            marginBottom: '20px',
-          }}>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '14px',
+              fontWeight: 400,
+              color: '#8B8AA0',
+              lineHeight: 1.6,
+              marginBottom: '20px',
+            }}
+          >
             The only place where both sides of hiring finally see the whole thing.
           </p>
-          <Link href="/membership" className="btn-primary" style={{
-            padding: '10px 20px',
-            fontSize: '13px',
-            fontWeight: 800,
-          }}>
+          <Link
+            href="/membership"
+            className="btn-primary"
+            style={{
+              padding: '10px 20px',
+              fontSize: '13px',
+              fontWeight: 800,
+            }}
+          >
             Go Pro — $20/yr
           </Link>
         </div>
 
-        {/* Center Column */}
+        {/* Tools */}
         <div>
-          <div style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: '#8B8AA0',
-            marginBottom: '16px',
-            fontFamily: "'Figtree', sans-serif",
-          }}>
-            TOOLS
-          </div>
-          <nav style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-          }}>
-            <Link href="/jd-seo-score" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
+          <div style={columnHeading}>Tools</div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Link href="/resume" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
+              Does My Resume Read as AI?
+            </Link>
+            <Link
+              href="/tools/whats-breaking-search"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              What’s Breaking Your Search
+            </Link>
+            <Link
+              href="/tools/ghosted"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Have I Been Ghosted?
+            </Link>
+            <Link
+              href="/tools/recruiter-search-rank"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Where Do You Rank in a Recruiter Search?
+            </Link>
+            <Link href="/jd-seo-score" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
               JD SEO Scorecard
             </Link>
-            <Link href="/resume" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
-              Resume AI Checker
-            </Link>
-            <Link href="/linkedin-guide" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
-              LinkedIn Guide
-            </Link>
-            <Link href="/get-found" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
-              Get Found Coaching
-            </Link>
-            <Link href="/tools" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
-              Inside Looks
+            <Link
+              href="/tools"
+              style={{ ...linkStyle, color: '#A78BFA', fontWeight: 600 }}
+              onMouseEnter={onHover}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#A78BFA')}
+            >
+              See every tool →
             </Link>
           </nav>
         </div>
 
-        {/* Right Column */}
+        {/* For your moment — audience hubs */}
         <div>
-          <div style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: '#8B8AA0',
-            marginBottom: '16px',
-            fontFamily: "'Figtree', sans-serif",
-          }}>
-            COMPANY
-          </div>
-          <nav style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-          }}>
-            <Link href="/for-companies" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
+          <div style={columnHeading}>For Your Moment</div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Link
+              href="/after-layoff"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              After a Layoff
+            </Link>
+            <Link
+              href="/for-new-grads"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              For New Grads
+            </Link>
+            <Link
+              href="/career-changers"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Career Changers
+            </Link>
+            <Link
+              href="/returning-to-work"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
+              Returning to Work
+            </Link>
+          </nav>
+        </div>
+
+        {/* Company */}
+        <div>
+          <div style={columnHeading}>Company</div>
+          <nav style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Link href="/pricing" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
+              Pricing
+            </Link>
+            <Link href="/sign-in" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
+              Sign in
+            </Link>
+            <Link
+              href="/for-companies"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               For Companies
             </Link>
-            <Link href="/for-candidates" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
+            <Link
+              href="/for-candidates"
+              style={linkStyle}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               For Candidates
             </Link>
-            <Link href="/consulting" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
+            <Link href="/consulting" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
               Consulting
             </Link>
-            <a href="https://www.repvera.com" target="_blank" rel="noopener noreferrer" style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#8B8AA0',
-              textDecoration: 'none',
-              transition: 'color 0.2s',
-              cursor: 'pointer',
-            }} onMouseEnter={(e) => e.currentTarget.style.color = '#F2F0FF'} onMouseLeave={(e) => e.currentTarget.style.color = '#8B8AA0'}>
+            <a
+              href="https://www.repvera.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ ...linkStyle, cursor: 'pointer' }}
+              onMouseEnter={onHover}
+              onMouseLeave={onLeave}
+            >
               RepVera
             </a>
           </nav>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div style={{
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-        paddingTop: '24px',
-        marginTop: '48px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: '24px',
-        flexWrap: 'wrap',
-      }}>
-        <p style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '13px',
-          fontWeight: 400,
-          color: '#8B8AA0',
-          margin: 0,
-        }}>
-          © 2025 Hiring.Productions. All rights reserved.
-        </p>
-        <p style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '13px',
-          fontWeight: 400,
-          color: '#8B8AA0',
-          margin: 0,
-        }}>
-          Built by Stephanie Murray
-        </p>
+      {/* Bottom bar */}
+      <div
+        style={{
+          maxWidth: '1180px',
+          margin: '0 auto',
+          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+          paddingTop: '24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '20px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: '13px',
+            color: '#8B8AA0',
+          }}
+        >
+          © {year} Hiring.Productions. All rights reserved.
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '20px',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            fontSize: '13px',
+            fontFamily: "'Figtree', sans-serif",
+          }}
+        >
+          <span style={{ color: '#8B8AA0' }}>Built by Stephanie Murray</span>
+          <a
+            href="https://www.linkedin.com/in/stephaniemurray11/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ ...linkStyle, fontSize: '13px' }}
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+          >
+            LinkedIn
+          </a>
+          <Link href="/privacy" style={{ ...linkStyle, fontSize: '13px' }} onMouseEnter={onHover} onMouseLeave={onLeave}>
+            Privacy
+          </Link>
+          <Link href="/terms" style={{ ...linkStyle, fontSize: '13px' }} onMouseEnter={onHover} onMouseLeave={onLeave}>
+            Terms
+          </Link>
+        </div>
       </div>
     </footer>
   )
