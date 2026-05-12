@@ -22,14 +22,42 @@ interface RelatedLink {
   href: string
 }
 
+/**
+ * Question-answer pair surfaced both visually (an FAQ block at the bottom)
+ * and as FAQPage JSON-LD schema. The schema is what triggers Google's
+ * rich-snippet "People also ask" treatment — the single biggest SEO lever
+ * for question-targeted content.
+ */
+export interface FaqItem {
+  q: string
+  a: string
+}
+
 interface SeoContentPageProps {
   badge: string
   badgeColor: 'indigo' | 'coral'
+  /** The H1 — should literally match the search query users will type. */
   headline: string
+  /**
+   * Short direct-answer paragraph. Google often pulls this as the Featured
+   * Snippet — keep it 40–60 words, no hedging, lead with the answer.
+   */
   intro: string
   sections: Section[]
   insideLook: InsideLook
   relatedLinks?: RelatedLink[]
+  /**
+   * Question-answer pairs. When provided, renders a visible FAQ block AND
+   * emits FAQPage JSON-LD for rich snippets. Aim for 5–8 high-quality Q&A
+   * pairs per page; the answers can repeat / restate content from the
+   * sections above (Google rewards consistency between visible and
+   * structured content).
+   */
+  faqs?: FaqItem[]
+  /**
+   * Absolute URL for canonical + Article schema. e.g. "https://hiring.productions/q/7-second-rule"
+   */
+  canonicalUrl?: string
 }
 
 export function SeoContentPage({
@@ -40,11 +68,49 @@ export function SeoContentPage({
   sections,
   insideLook,
   relatedLinks,
+  faqs,
+  canonicalUrl,
 }: SeoContentPageProps) {
   const badgeBgColor = badgeColor === 'indigo' ? '#6C47FF' : '#FF4F6A'
 
+  // JSON-LD bundles: FAQPage (for rich snippets) + Article (E-E-A-T
+  // signal, attaches Stephanie's authority to every question page).
+  const ldGraph: Record<string, unknown>[] = []
+  if (faqs && faqs.length > 0) {
+    ldGraph.push({
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.a,
+        },
+      })),
+    })
+  }
+  if (canonicalUrl) {
+    ldGraph.push({
+      '@type': 'Article',
+      headline,
+      description: intro,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+      author: { '@id': 'https://hiring.productions/#person' },
+      publisher: { '@id': 'https://hiring.productions/#organization' },
+    })
+  }
+  const ld = ldGraph.length
+    ? { '@context': 'https://schema.org', '@graph': ldGraph }
+    : null
+
   return (
     <div style={{ background: '#0F0F12', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {ld && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+        />
+      )}
       <Navigation />
 
       <main style={{ flex: 1 }}>
@@ -287,6 +353,72 @@ export function SeoContentPage({
             </div>
           </div>
         </section>
+
+        {/* Visible FAQ block — matches the JSON-LD schema so Google sees the
+            same Q&A pairs in two places. Standard rich-snippet pattern. */}
+        {faqs && faqs.length > 0 && (
+          <section
+            style={{
+              maxWidth: '760px',
+              margin: '0 auto',
+              padding: '0 40px 64px',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 700,
+                fontSize: '11px',
+                color: '#A78BFA',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                marginBottom: '20px',
+              }}
+            >
+              People Also Ask
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {faqs.map((f, idx) => (
+                <details
+                  key={idx}
+                  style={{
+                    background: '#14141B',
+                    border: '1px solid rgba(167,139,250,0.18)',
+                    borderRadius: '12px',
+                    padding: '18px 22px',
+                  }}
+                >
+                  <summary
+                    style={{
+                      fontFamily: "'Figtree', sans-serif",
+                      fontWeight: 800,
+                      fontSize: '16px',
+                      color: '#F2F0FF',
+                      cursor: 'pointer',
+                      listStyle: 'none',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    {f.q}
+                  </summary>
+                  <p
+                    style={{
+                      fontFamily: "'Figtree', sans-serif",
+                      fontWeight: 400,
+                      fontSize: '15px',
+                      color: '#9D9CB3',
+                      lineHeight: 1.75,
+                      marginTop: '12px',
+                      marginBottom: 0,
+                    }}
+                  >
+                    {f.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Related Links */}
         {relatedLinks && relatedLinks.length > 0 && (

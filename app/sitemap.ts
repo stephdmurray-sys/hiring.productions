@@ -27,12 +27,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/after-layoff', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/career-changers', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/returning-to-work', priority: 0.85, changeFrequency: 'monthly' },
-    // SEO content pages
+    // SEO content pages — topic-level pillars
     { path: '/how-ats-actually-works', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/what-recruiters-really-think', priority: 0.85, changeFrequency: 'monthly' },
+    // /q/ question-targeted pages (AlsoAsked-driven, FAQ schema'd)
     { path: '/q/why-am-i-not-getting-responses', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/what-does-competitive-salary-mean', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/how-to-tell-if-resume-is-ai', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/7-second-rule-resume', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/70-30-rule', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/how-to-beat-ats', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/resume-red-flags', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/explain-resume-gap', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/how-to-get-hired-as-new-grad', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/is-my-resume-good', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
   // Every shipped tool page (free + pro), sourced from the catalog so the
