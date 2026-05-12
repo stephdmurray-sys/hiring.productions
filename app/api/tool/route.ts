@@ -1,4 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server'
+import {
+  checkGate,
+  recordRun,
+  priceUsageCents,
+  type ModelId,
+  type AnthropicUsage,
+} from '@/lib/usage'
+import { resolveIdentity, newAnonToken, COOKIE_NAMES } from '@/lib/identity'
+
+/**
+ * Per-tool tier. Used by the gate to know whether to enforce free-tier
+ * limits or require Pro. Anything not listed defaults to 'pro' — fail-safe.
+ */
+const FREE_TOOL_IDS = new Set([
+  'resume-ai-check',
+  'what-this-job-is',
+  'keyword-gap',
+  'what-youre-worth',
+  'whats-breaking-search',
+  'explain-my-gap',
+  'new-grad-resume',
+  'career-pivot',
+  'scam-check',
+  'ghosted',
+])
+
+/**
+ * Which tools can run on Haiku without losing quality. The rest stay on
+ * Sonnet. Haiku is ~5× cheaper and stretches the daily budget further.
+ */
+const HAIKU_TOOL_IDS = new Set([
+  'explain-my-gap',
+  'new-grad-resume',
+  'scam-check',
+  'what-youre-worth',
+])
+
+function modelFor(toolId: string): ModelId {
+  return HAIKU_TOOL_IDS.has(toolId) ? 'claude-haiku-4-5' : 'claude-sonnet-4-5'
+}
+
+function maxTokensFor(toolId: string): number {
+  // Long-output tools that need extra headroom.
+  if (
+    toolId === 'linkedin-rewrite' ||
+    toolId === 'rehearsal-questions' ||
+    toolId === 'recruiter-search-rank'
+  ) {
+    return 2500
+  }
+  return 1500
+}
+
 
 const SYSTEM_PROMPTS: Record<string, string> = {
   'resume-ai-check': `Today's date is ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.
@@ -1192,14 +1245,43 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unknown toolId' }, { status: 400 })
     }
 
-    // Build the user message from inputs
+    // ----- Gate: who's calling, and may they? --------------------------
+    const identity = await resolveIdentity(request)
+
+    // Pro-only tools require a Pro cookie. Free tools are open to all tiers.
+    const isFreeTool = FREE_TOOL_IDS.has(toolId)
+    if (!isFreeTool && identity.tier !== 'pro') {
+      return NextResponse.json(
+        {
+          error: 'pro-required',
+          message: 'This inside look is part of Pro. $20 a year unlocks the whole production.',
+        },
+        { status: 402 },
+      )
+    }
+
+    const gate = await checkGate(identity)
+    if (!gate.ok) {
+      return NextResponse.json(
+        {
+          error: gate.reason,
+          message: gateMessage(gate.reason),
+          tier: gate.tier,
+          remaining: 0,
+          limit: gate.limit,
+        },
+        { status: 429 },
+      )
+    }
+
+    // ----- Anthropic call with prompt caching --------------------------
     const inputsText = Object.entries(inputs)
       .map(([key, value]) => `${key}:\n${value}`)
       .join('\n\n')
 
-    const userMessage = inputsText
+    const model = modelFor(toolId)
+    const max_tokens = maxTokensFor(toolId)
 
-    // Call Anthropic Claude API
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -1208,38 +1290,83 @@ export async function POST(request: NextRequest) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
-        // Most tools produce ~400-700 word reports. Some tools need more
-        // headroom: linkedin-rewrite (two-jobs framework, ~6500 chars) and
-        // rehearsal-questions (10 questions × 4 fields each, ~7500 chars).
-        max_tokens:
-          toolId === 'linkedin-rewrite' ||
-          toolId === 'rehearsal-questions' ||
-          toolId === 'recruiter-search-rank'
-            ? 2500
-            : 1500,
-        system: systemPrompt,
-        messages: [
+        model,
+        max_tokens,
+        // System prompt is identical per-tool across all calls, so caching
+        // it saves ~90% on input tokens after the first hit. The 5-min TTL
+        // is fine — most tool sessions happen in bursts.
+        system: [
           {
-            role: 'user',
-            content: userMessage,
+            type: 'text',
+            text: systemPrompt,
+            cache_control: { type: 'ephemeral' },
           },
         ],
+        messages: [{ role: 'user', content: inputsText }],
       }),
     })
 
     if (!response.ok) {
-      const error = await response.text()
-      console.error('[v0] Anthropic API error:', error)
-      return NextResponse.json({ error: 'Failed to call Anthropic API' }, { status: 500 })
+      const errorText = await response.text()
+      console.error('[api/tool] Anthropic error:', errorText)
+      return NextResponse.json({ error: 'upstream' }, { status: 502 })
     }
 
     const data = await response.json()
     const result = data.content[0].text
+    const usage = (data.usage ?? {}) as AnthropicUsage
+    const costCents = priceUsageCents(model, usage)
 
-    return NextResponse.json({ result })
+    // ----- Record usage + spend ----------------------------------------
+    const after = await recordRun(identity, costCents)
+
+    // ----- Build response with cookie planting if anon was just minted -
+    const res = NextResponse.json({
+      result,
+      tier: identity.tier,
+      remaining: after.remaining,
+      limit: after.limit,
+    })
+
+    // Plant a stable anon cookie so the same browser shares its quota
+    // across page reloads. One year is fine — the day-bucketed counter
+    // resets at midnight UTC anyway.
+    if (identity.tier === 'anon' && !request.cookies.get(COOKIE_NAMES.ANON)) {
+      const token = await newAnonToken()
+      res.cookies.set(COOKIE_NAMES.ANON, token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365,
+      })
+    }
+
+    // Telemetry — useful when watching the budget tick up in logs.
+    console.log(
+      `[api/tool] ${toolId} tier=${identity.tier} cost=${costCents}c spend=${after.spendCents}c remaining=${after.remaining}/${after.limit}`,
+    )
+
+    return res
   } catch (error) {
-    console.error('[v0] API route error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('[api/tool] error:', error)
+    return NextResponse.json({ error: 'internal' }, { status: 500 })
+  }
+}
+
+function gateMessage(reason: string): string {
+  switch (reason) {
+    case 'anon-limit':
+      return "You've used your 3 free runs today. Drop an email to unlock 10 more — no card."
+    case 'email-limit':
+      return "You've used every free run. The whole production — every inside look unlimited — is $20 for the year."
+    case 'pro-limit':
+      return 'Daily run cap hit. This resets at midnight UTC. Reach out if this looks wrong.'
+    case 'budget-anon':
+      return "We're at today's capacity. Try again tomorrow, or grab Pro to keep going right now."
+    case 'budget-global':
+      return "We're at today's capacity. Try again tomorrow."
+    default:
+      return 'Rate limited.'
   }
 }

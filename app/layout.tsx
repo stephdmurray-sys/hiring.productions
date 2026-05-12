@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { UsageProvider } from '@/components/usage-provider'
 import './globals.css'
 
 const figtree = Figtree({ 
@@ -166,7 +167,7 @@ export default function RootLayout({
         `}} />
       </head>
       <body style={{ backgroundColor: '#0F0F12', color: '#F2F0FF' }}>
-        {children}
+        <UsageProvider>{children}</UsageProvider>
         {/* First-party pageview analytics — no cookies, GDPR-friendly.
             Vercel auto-enables collection when this component is present;
             data lives in Project → Analytics in the Vercel dashboard. */}
