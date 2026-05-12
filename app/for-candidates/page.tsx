@@ -3,7 +3,84 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { FileSearch, Linkedin, Search, Star, Eye, Filter } from 'lucide-react'
+import {
+  AlertCircle,
+  Building2,
+  DollarSign,
+  Edit3,
+  Eye,
+  FileSearch,
+  FileText,
+  Filter,
+  Hash,
+  HelpCircle,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Mic,
+  Search,
+  Sparkles,
+  Star,
+  Target,
+} from 'lucide-react'
+import { CATALOG, type ToolIcon } from '@/lib/tools-catalog'
+
+// Map the catalog's icon-name strings to lucide components. Centralized so
+// new tools added to the catalog with a known icon name just work here.
+const ICON_MAP: Record<ToolIcon, React.ComponentType<{ size?: number; color?: string }>> = {
+  AlertCircle,
+  BarChart3: Filter, // fallback — page doesn't import the full set
+  Building2,
+  Calendar: FileText,
+  CheckSquare: Filter,
+  DollarSign,
+  Edit3,
+  Eye,
+  FileText,
+  Filter,
+  Hash,
+  HelpCircle,
+  Mail,
+  Map: Target,
+  MessageCircle,
+  MessageSquare: MessageCircle,
+  Mic,
+  Search,
+  Send: Mail,
+  Sparkles,
+  Star,
+  Target,
+  UserCheck: Filter,
+}
+
+// Source candidate-facing tools from the single catalog so this page stays in
+// sync as tools ship or get rearranged. Excludes `soon` tier so we never
+// surface vapor.
+const CANDIDATE_TOOLS = CATALOG.filter(
+  (t) => t.audience === 'candidate' && t.tier !== 'soon',
+).map((t) => ({
+  name: t.name,
+  desc: t.desc,
+  icon: ICON_MAP[t.icon] ?? Filter,
+  href: t.href,
+  external: t.href.startsWith('http'),
+  featured: false,
+  free: t.tier === 'free',
+}))
+
+// RepVera lives outside the catalog (external product) but we still want it
+// in the grid as the credibility/proof anchor.
+const REPVERA_TOOL = {
+  name: 'RepVera Profile',
+  desc: 'Let your actual work speak. Verified proof of how you show up at work.',
+  icon: Star,
+  href: 'https://www.repvera.com',
+  external: true,
+  featured: true,
+  free: false,
+}
+
+const TOOLS_FOR_PAGE = [...CANDIDATE_TOOLS, REPVERA_TOOL]
 
 export default function ForCandidatesPage() {
   return (
@@ -195,12 +272,7 @@ export default function ForCandidatesPage() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
           gap: '24px',
         }}>
-          {[
-            { name: 'Resume AI Checker', desc: 'Analyze your resume for AI signals. See exactly what hiring teams see in seconds.', icon: FileSearch, href: '/resume', external: false, featured: false, free: true },
-            { name: 'LinkedIn Guide', desc: 'Optimize your LinkedIn profile to get found by hiring teams actively recruiting.', icon: Linkedin, href: '/linkedin-guide', external: false, featured: false, free: false },
-            { name: 'Get Found Coaching', desc: 'Learn the exact strategies recruiters use to source top candidates.', icon: Search, href: '/get-found', external: false, featured: false, free: false },
-            { name: 'RepVera Profile', desc: 'Let your actual work speak. Verified proof of how you show up at work.', icon: Star, href: 'https://www.repvera.com', external: true, featured: true, free: false },
-          ].map((tool, idx) => (
+          {TOOLS_FOR_PAGE.map((tool, idx) => (
             <div
               key={idx}
               style={{

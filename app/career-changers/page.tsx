@@ -172,6 +172,18 @@ export default function CareerChangersPage() {
             you hireable, the translation that makes you legible, the certifications that actually
             matter (and the ones that don’t).
           </p>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 600,
+              color: '#A78BFA',
+              letterSpacing: '0.03em',
+              marginTop: '20px',
+            }}
+          >
+            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
+          </p>
         </div>
       </section>
 
@@ -259,7 +271,7 @@ export default function CareerChangersPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Align your LinkedIn and resume to the new field."
-            sub="The two Pro inside looks pivoters use most. $20/year."
+            sub="That's the translation work. Here are the inside looks that make sure recruiters in the new field can actually find you — $20/year."
           />
 
           <div

@@ -170,6 +170,18 @@ export default function ReturningToWorkPage() {
             caregiving, or any extended break. The framing that works, the network moves that
             actually land roles, and the level question — answered honestly.
           </p>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 600,
+              color: '#A78BFA',
+              letterSpacing: '0.03em',
+              marginTop: '20px',
+            }}
+          >
+            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
+          </p>
         </div>
       </section>
 
@@ -257,7 +269,7 @@ export default function ReturningToWorkPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Make sure your resume and LinkedIn surface in 2026 searches."
-            sub="The two Pro inside looks that align your materials to current recruiter behavior. $20/year."
+            sub="The framing is yours. Here are the inside looks that align your resume and LinkedIn to current recruiter behavior — $20/year."
           />
 
           <div

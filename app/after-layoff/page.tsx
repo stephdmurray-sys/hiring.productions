@@ -172,6 +172,18 @@ export default function AfterLayoffPage() {
             to follow up, what to put on the resume, and how long this realistically takes — no
             sanitizing.
           </p>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 600,
+              color: '#A78BFA',
+              letterSpacing: '0.03em',
+              marginTop: '20px',
+            }}
+          >
+            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
+          </p>
         </div>
       </section>
 
@@ -259,7 +271,7 @@ export default function AfterLayoffPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Make sure your resume and LinkedIn carry the new positioning."
-            sub="The two Pro inside looks every laid-off candidate uses before they send the first application. $20/year."
+            sub="That's the honest read. Here are the inside looks every laid-off candidate uses before they send the first application — $20/year."
           />
 
           <div

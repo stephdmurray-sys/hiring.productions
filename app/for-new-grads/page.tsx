@@ -262,7 +262,7 @@ export default function ForNewGradsPage() {
             eyebrow="WHEN YOU HAVE INTERVIEWS LINED UP"
             eyebrowColor="#A78BFA"
             title="The inside looks that get new grads to “yes.”"
-            sub="Two of our Pro tools every new grad uses before their first round of real interviews. $20/year."
+            sub="You know what they look for. Here are the inside looks every new grad uses before their first round of real interviews — $20/year."
           />
 
           <div
