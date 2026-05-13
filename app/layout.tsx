@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -175,6 +176,17 @@ export default function RootLayout({
         {/* Real-user Core Web Vitals (LCP, INP, CLS) — feeds the page-speed
             ranking signals Google uses. Data in Project → Speed Insights. */}
         <SpeedInsights />
+        {/* Microsoft Clarity — session recordings + heatmaps + scroll-depth.
+            Answers "what did visitors actually do before leaving / where did
+            they click / what did they look at." Privacy-friendly: anonymized
+            by default, form inputs masked. Data lives at clarity.microsoft.com. */}
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "wqmovtuagm");`}
+        </Script>
       </body>
     </html>
   )
