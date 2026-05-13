@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { submitLead } from '@/lib/submit-lead'
 import './linkedin-guide.css'
 
 export default function LinkedInGuidePage() {
@@ -18,32 +19,19 @@ export default function LinkedInGuidePage() {
     e.preventDefault()
     setFormState('submitting')
 
-    try {
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbyUFzebPIPYH4nVKqOvbRDqtowfmIJzjFt-mB5kHPt9kxpE6e92pLupSUtXq-E8m7vk/exec',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({
-            fullName: formData.fullName,
-            email: formData.email,
-            tool: 'linkedin_guide',
-            audience: 'candidate',
-            role: formData.role,
-            level: '',
-            company: '',
-            score: '',
-            grade: '',
-          }),
-        }
-      )
+    const [firstName, ...rest] = formData.fullName.trim().split(/\s+/)
+    const lastName = rest.join(' ')
 
-      setFormState('success')
-    } catch (error) {
-      console.error('Form submission error:', error)
-      setFormState('error')
-    }
+    const result = await submitLead({
+      email: formData.email,
+      source: 'linkedin_guide',
+      firstName,
+      lastName,
+      audience: 'candidate',
+      role: formData.role,
+    })
+
+    setFormState(result.resendOk ? 'success' : 'error')
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

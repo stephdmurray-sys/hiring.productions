@@ -3,13 +3,8 @@
 import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { submitLead } from '@/lib/submit-lead'
 import './consulting.css'
-
-// Submissions are routed through the same Google Apps Script endpoint used
-// for newsletter signups (see app/page.tsx). Inquiries land in the same
-// sheet tagged with tool='consulting-inquiry' — filter on that column.
-const CONSULTING_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbyUFzebPIPYH4nVKqOvbRDqtowfmIJzjFt-mB5kHPt9kxpE6e92pLupSUtXq-E8m7vk/exec'
 
 export default function ConsultingPage() {
   const [showModal, setShowModal] = useState(false)
@@ -32,32 +27,36 @@ export default function ConsultingPage() {
     setSubmitState('submitting')
 
     const formData = new FormData(e.currentTarget)
-    const payload = {
-      tool: 'consulting-inquiry',
-      audience: 'consulting',
-      fullName: formData.get('name'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      role: formData.get('role'),
-      companyUrl: formData.get('company_url'),
-      hiringStage: formData.get('hiring_stage'),
-      goals: formData.get('goals'),
-      timeline: formData.get('timeline'),
-      source: formData.get('source'),
-      submittedAt: new Date().toISOString(),
-    }
+    const fullName = (formData.get('name') ?? '').toString().trim()
+    const [firstName, ...rest] = fullName.split(/\s+/)
+    const lastName = rest.join(' ')
 
-    try {
-      await fetch(CONSULTING_ENDPOINT, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload),
-      })
+    // Consulting inquiries carry richer fields (company, goals, timeline,
+    // etc.) that don't fit Resend's contact schema. Those still land in
+    // the legacy Google Sheet via submitLead's `legacyExtras` so Stephanie
+    // can read the full inquiry there. Resend just gets the contact + a
+    // "got it, will reply personally" welcome.
+    const result = await submitLead({
+      email: (formData.get('email') ?? '').toString(),
+      source: 'consulting',
+      firstName,
+      lastName,
+      audience: 'hiring',
+      role: (formData.get('role') ?? '').toString(),
+      legacyExtras: {
+        company: (formData.get('company') ?? '').toString(),
+        company_url: (formData.get('company_url') ?? '').toString(),
+        hiring_stage: (formData.get('hiring_stage') ?? '').toString(),
+        goals: (formData.get('goals') ?? '').toString(),
+        timeline: (formData.get('timeline') ?? '').toString(),
+        referral_source: (formData.get('source') ?? '').toString(),
+      },
+    })
+
+    if (result.resendOk) {
       setSubmitState('success')
       ;(e.target as HTMLFormElement).reset()
-    } catch (err) {
-      console.error('Consulting form submission failed:', err)
+    } else {
       setSubmitState('error')
     }
   }

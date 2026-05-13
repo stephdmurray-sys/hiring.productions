@@ -1,12 +1,19 @@
 /**
- * Email capture endpoint. Plants a hashed-email cookie that unlocks
- * 10 lifetime free-tool runs (the email tier in lib/usage.ts).
+ * Email capture endpoint — the SINGLE entry point for every lead on the
+ * site. Plants a hashed-email cookie that unlocks the 8-run email tier
+ * AND adds the visitor to the Resend audience for follow-up.
+ *
+ * Sources (used to tailor the welcome email):
+ *   - 'modal'              email-unlock modal after anon hits 2 free runs
+ *   - 'newsletter'         homepage newsletter signup
+ *   - 'linkedin_guide'     LinkedIn PDF download form
+ *   - 'consulting'         consulting inquiry form
+ *   - 'coming_soon:<tool>' waitlist for a not-yet-shipped tool
  *
  * Why hash the email into the cookie:
  *   - The cookie key MUST be stable so quota tracking survives reloads.
  *   - We don't want raw emails sitting in a browser cookie.
- *   - The raw email goes to our list provider (Resend audience) for
- *     follow-up; the server-side rate limit only needs the hash.
+ *   - The raw email goes to Resend; the server gate only needs the hash.
  */
 import { NextRequest, NextResponse } from 'next/server'
 import { Redis } from '@upstash/redis'
@@ -28,11 +35,116 @@ function getRedis(): Redis | null {
   return new Redis({ url, token })
 }
 
+interface LeadInput {
+  email: string
+  source: string
+  firstName?: string
+  lastName?: string
+  role?: string
+}
+
 /**
- * Push the email to Resend if a key is configured. Silent no-op
- * otherwise so the unlock still happens even before Resend is wired up.
+ * Build the welcome email text for a given source. Each source gets
+ * copy that matches what the user JUST did, not a generic "8 more
+ * insights" message that doesn't fit (e.g., PDF downloaders aren't
+ * here for the tool gate).
  */
-async function addToResendAudience(email: string, source: string): Promise<void> {
+function welcomeForSource(source: string): { subject: string; text: string } | null {
+  if (source.startsWith('coming_soon:')) {
+    const toolId = source.slice('coming_soon:'.length) || 'this tool'
+    return {
+      subject: "You're on the waitlist.",
+      text: [
+        "You're on the waitlist for " + toolId + ".",
+        '',
+        "I'll email you the moment it goes live — no spam in between.",
+        '',
+        "While you wait, here's where I'd start:",
+        '',
+        '1. Does My Resume Read as AI? — https://hiring.productions/resume',
+        "2. What's Breaking Your Job Search — https://hiring.productions/tools/whats-breaking-search",
+        '3. Every Recruiter Insight for $20/year — https://hiring.productions/pricing',
+        '',
+        '— Stephanie',
+        'hiring.productions',
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'linkedin_guide') {
+    return {
+      subject: 'Your LinkedIn guide is in your hands.',
+      text: [
+        "Thanks for grabbing the LinkedIn guide. You should already have the PDF — the download started from the page.",
+        '',
+        "If you want to go deeper, the matching tool runs your profile through what a recruiter would actually paste into LinkedIn Recruiter:",
+        '',
+        'Would a Recruiter Even Find You? — https://hiring.productions/tools/recruiter-find-you',
+        '',
+        "And if your resume needs the same treatment:",
+        '',
+        'Does My Resume Read as AI? — https://hiring.productions/resume',
+        '',
+        '— Stephanie',
+        'hiring.productions',
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'consulting') {
+    return {
+      subject: 'Got it — I will reply personally.',
+      text: [
+        "Got your message — I'll reply personally within one business day.",
+        '',
+        "In the meantime, if it's useful, the public side of how I work shows up across the site — tools, answers, and the Recruiter Insights membership.",
+        '',
+        '— Stephanie',
+        'hiring.productions',
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'newsletter') {
+    return {
+      subject: "You're in. First read coming soon.",
+      text: [
+        "Thanks for subscribing. The first read drops soon — direct, specific, recruiter-side.",
+        '',
+        "While you wait, here are the three tools I'd run first if I were back in the search:",
+        '',
+        '1. Does My Resume Read as AI? — https://hiring.productions/resume',
+        "2. What's Breaking Your Job Search — https://hiring.productions/tools/whats-breaking-search",
+        '3. What This Job Actually Is — https://hiring.productions/tools/what-this-job-is',
+        '',
+        '— Stephanie',
+        'hiring.productions',
+      ].join('\n'),
+    }
+  }
+
+  // Default — modal/email-unlock context. Same copy as before.
+  return {
+    subject: "You're in — 8 more free insights unlocked.",
+    text: [
+      "Thanks for dropping your email — you've just unlocked 8 more free insights across hiring.productions.",
+      '',
+      "Here's where I'd start:",
+      '',
+      '1. Does My Resume Read as AI? — https://hiring.productions/resume',
+      '2. What This Job Actually Is — https://hiring.productions/tools/what-this-job-is',
+      "3. What's Breaking Your Job Search — https://hiring.productions/tools/whats-breaking-search",
+      '',
+      'When your free insights run out, the whole production — every Recruiter Insight, unlimited — is $20 for the year:',
+      'https://hiring.productions/pricing',
+      '',
+      '— Stephanie',
+      'hiring.productions',
+    ].join('\n'),
+  }
+}
+
+async function addToResendAudience(input: LeadInput): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY
   const audienceId = process.env.RESEND_AUDIENCE_ID
   if (!apiKey || !audienceId) return
@@ -45,15 +157,16 @@ async function addToResendAudience(email: string, source: string): Promise<void>
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        email: input.email,
         unsubscribed: false,
-        first_name: '',
-        last_name: '',
+        first_name: input.firstName ?? '',
+        last_name: input.lastName ?? '',
       }),
     })
-    // Welcome email — only fires if a from address is set.
+
     const from = process.env.RESEND_FROM_EMAIL
-    if (from) {
+    const welcome = welcomeForSource(input.source)
+    if (from && welcome) {
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -62,23 +175,9 @@ async function addToResendAudience(email: string, source: string): Promise<void>
         },
         body: JSON.stringify({
           from,
-          to: email,
-          subject: "You're in — 8 more free insights unlocked.",
-          text: [
-            "Thanks for dropping your email — you've just unlocked 8 more free insights across hiring.productions.",
-            '',
-            "Here's where I'd start:",
-            '',
-            '1. Does My Resume Read as AI? — https://hiring.productions/resume',
-            '2. What This Job Actually Is — https://hiring.productions/tools/what-this-job-is',
-            "3. What's Breaking Your Job Search — https://hiring.productions/tools/whats-breaking-search",
-            '',
-            'When your free insights run out, the whole production — every Recruiter Insight, unlimited — is $20 for the year:',
-            'https://hiring.productions/pricing',
-            '',
-            '— Stephanie',
-            'hiring.productions',
-          ].join('\n'),
+          to: input.email,
+          subject: welcome.subject,
+          text: welcome.text,
         }),
       })
     }
@@ -92,6 +191,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const rawEmail: string = (body?.email ?? '').toString().trim().toLowerCase()
     const source: string = (body?.source ?? 'unknown').toString().slice(0, 64)
+    const firstName: string = (body?.firstName ?? '').toString().slice(0, 80)
+    const lastName: string = (body?.lastName ?? '').toString().slice(0, 80)
+    const role: string = (body?.role ?? '').toString().slice(0, 120)
 
     if (!EMAIL_RE.test(rawEmail) || rawEmail.length > 200) {
       return NextResponse.json({ error: 'invalid-email' }, { status: 400 })
@@ -100,21 +202,30 @@ export async function POST(request: NextRequest) {
     const emailHash = await hash(rawEmail)
 
     // Record the capture in Redis for our own records. Idempotent —
-    // re-submissions just refresh the timestamp.
+    // re-submissions overwrite with the latest metadata.
     const r = getRedis()
     if (r) {
       await r.set(
         `lead:${emailHash}`,
-        JSON.stringify({ email: rawEmail, source, ts: Date.now() }),
+        JSON.stringify({
+          email: rawEmail,
+          source,
+          firstName,
+          lastName,
+          role,
+          ts: Date.now(),
+        }),
       )
     }
 
-    await addToResendAudience(rawEmail, source)
+    await addToResendAudience({ email: rawEmail, source, firstName, lastName, role })
 
     const res = NextResponse.json({ ok: true })
 
     // Plant the email-tier cookie. One year — gives the user plenty
-    // of time to use their 10 lifetime runs.
+    // of time to use their 8 lifetime tool runs. Also benefits PDF
+    // downloaders and newsletter subscribers since they've earned
+    // engagement reward.
     res.cookies.set(COOKIE_NAMES.EMAIL, emailHash, {
       httpOnly: true,
       secure: true,

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Hammer } from 'lucide-react'
 import { Navigation } from './navigation'
 import { Footer } from './footer'
+import { submitLead } from '@/lib/submit-lead'
 
 interface ComingSoonToolProps {
   toolName: string
@@ -21,29 +22,20 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
     if (!email.trim()) return
 
     setIsSubmitting(true)
-    try {
-      const response = await fetch(
-        'https://script.google.com/macros/s/AKfycbyUFzebPIPYH4nVKqOvbRDqtowfmIJzjFt-mB5kHPt9kxpE6e92pLupSUtXq-E8m7vk/exec',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          body: JSON.stringify({
-            email,
-            toolName,
-            category,
-            type: 'coming-soon-notification',
-          }),
-        }
-      )
+    const result = await submitLead({
+      email,
+      source: `coming_soon:${toolName}`,
+      audience: category,
+    })
+
+    if (result.resendOk) {
       setSubmitStatus('success')
       setEmail('')
-      setTimeout(() => setSubmitStatus('idle'), 3000)
-    } catch (error) {
+    } else {
       setSubmitStatus('error')
-      setTimeout(() => setSubmitStatus('idle'), 3000)
-    } finally {
-      setIsSubmitting(false)
     }
+    setTimeout(() => setSubmitStatus('idle'), 3000)
+    setIsSubmitting(false)
   }
 
   const categoryColor = category === 'candidate' ? '#A78BFA' : '#FF4F6A'

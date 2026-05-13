@@ -6,6 +6,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { RecruiterReadingPreview } from '@/components/recruiter-reading-preview'
 import { AudienceHubsRow } from '@/components/audience-hubs-row'
+import { submitLead } from '@/lib/submit-lead'
 import { Building2, User, Eye, Filter, MessageSquare, FileSearch, FileText, HelpCircle, UserCheck, Star, Search, Edit3, AlertCircle, DollarSign } from 'lucide-react'
 
 export default function HomePage() {
@@ -17,31 +18,19 @@ export default function HomePage() {
     setFormState('submitting')
 
     const formData = new FormData(e.currentTarget)
-    try {
-      await fetch(
-        'https://script.google.com/macros/s/AKfycbyUFzebPIPYH4nVKqOvbRDqtowfmIJzjFt-mB5kHPt9kxpE6e92pLupSUtXq-E8m7vk/exec',
-        {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify({
-            fullName: formData.get('fullName'),
-            email: formData.get('email'),
-            tool: 'newsletter',
-            audience: userType === 'hiring' ? 'company' : 'candidate',
-            role: '',
-            level: '',
-            company: '',
-            score: '',
-            grade: '',
-          }),
-        }
-      )
-      setFormState('success')
-      ;(e.target as HTMLFormElement).reset()
-    } catch (err) {
-      console.error('Form submission failed:', err)
-    }
+    const fullName = (formData.get('fullName') ?? '').toString().trim()
+    const [firstName, ...rest] = fullName.split(/\s+/)
+    const lastName = rest.join(' ')
+
+    await submitLead({
+      email: (formData.get('email') ?? '').toString(),
+      source: 'newsletter',
+      firstName,
+      lastName,
+      audience: userType === 'hiring' ? 'hiring' : 'candidate',
+    })
+    setFormState('success')
+    ;(e.target as HTMLFormElement).reset()
   }
 
   return (
