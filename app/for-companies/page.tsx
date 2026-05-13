@@ -39,87 +39,103 @@ export default function ForCompaniesPage() {
 
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
             fontSize: '11px',
-            fontWeight: 700,
             textTransform: 'uppercase',
-            letterSpacing: '1px',
-            color: '#8B8AA0',
-            marginBottom: '20px',
+            letterSpacing: '0.22em',
+            color: '#FF4F6A',
+            marginBottom: '22px',
           }}>
-            FOR HIRING TEAMS
+            ◆ FOR HIRING TEAMS
           </div>
           <h1 style={{
-            fontSize: 'clamp(38px, 5vw, 64px)',
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 'clamp(40px, 6vw, 72px)',
             fontWeight: 900,
-            lineHeight: 1.1,
-            marginBottom: '24px',
-            letterSpacing: '-0.02em',
+            lineHeight: 1.04,
+            marginBottom: '22px',
+            letterSpacing: '-0.03em',
           }}>
-            Every production needs the right cast. See how they actually perform.
+            Hiring well isn&apos;t more recruiting.
+            <br />
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #FF4F6A 0%, #6C47FF 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              It&apos;s smarter recruitment marketing.
+            </span>
           </h1>
           <p style={{
+            fontFamily: "'Figtree', sans-serif",
             fontSize: '18px',
-            color: '#8B8AA0',
+            color: '#9D9CB3',
             lineHeight: 1.6,
-            marginBottom: '40px',
-            maxWidth: '580px',
+            marginBottom: '20px',
+            maxWidth: '620px',
           }}>
-            Anyone can rehearse an interview. Most hiring teams never see what happens when the cameras aren&apos;t rolling. We built the tools that show you.
+            Most companies that hire well aren&apos;t doing more recruiting. They&apos;re writing job descriptions
+            candidates actually read, showing up where talent already is, and competing on something
+            other than brand name. Free tools and recruiter-grade answers, built from 20 years of TA practice.
+          </p>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              fontWeight: 600,
+              color: '#FF4F6A',
+              letterSpacing: '0.03em',
+              marginBottom: '32px',
+            }}
+          >
+            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
           </p>
 
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <Link href="/tools" className="btn-primary">
-              Explore the tools →
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+            <Link href="/for-small-teams" className="btn-primary">
+              I&apos;m a small team →
+            </Link>
+            <Link href="/tools" className="btn-ghost">
+              Explore the tools
             </Link>
             <Link href="/consulting" className="btn-ghost">
-              Book a consultation →
+              Book a consultation
             </Link>
-          </div>
-
-          {/* Stat chips */}
-          <div style={{
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'flex-start',
-            marginTop: '32px',
-            flexWrap: 'wrap',
-          }}>
-            {['Beyond the audition', 'See the real performance', 'Build the right cast'].map((text, idx) => (
-              <div
-                key={idx}
-                style={{
-                  background: '#1A1A22',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  borderRadius: '12px',
-                  padding: '12px 20px',
-                  fontFamily: "'Figtree', sans-serif",
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: '#8B8AA0',
-                }}
-              >
-                {text}
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Row */}
+      {/* Observations Row — replaced the old "46% / 89% / $17K" stats
+          because the underlying studies are 2005/2012 and the brand rule
+          forbids unsourced numbers. These are recruiter observations
+          drawn from Stephanie's practice instead. */}
       <section style={{
-        padding: '80px 40px',
+        padding: 'clamp(56px, 7vw, 80px) clamp(20px, 5vw, 40px)',
         maxWidth: '1200px',
         margin: '0 auto',
       }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '24px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
+          gap: '20px',
         }}>
           {[
-            { stat: '46%', label: 'of new hires fail within the first 18 months' },
-            { stat: '89%', label: 'of those failures are due to soft skills not technical ability' },
-            { stat: '$17K+', label: 'average direct cost of a bad hire — indirect costs reach $170K+' },
+            {
+              kicker: 'The asymmetry',
+              label: 'One strong hire is worth several okay ones. Smaller teams can’t absorb the cost of either kind of mis-hire.',
+            },
+            {
+              kicker: 'The leverage point',
+              label: 'The job description does more selling than the recruiter does — especially at companies candidates haven’t heard of.',
+            },
+            {
+              kicker: 'The wrong fight',
+              label: 'Most small teams compete on comp. The actual fight is clarity — about the role, the work, and what the next 12 months look like.',
+            },
           ].map((item, idx) => (
             <div
               key={idx}
@@ -127,25 +143,29 @@ export default function ForCompaniesPage() {
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '14px',
-                padding: '28px',
-                textAlign: 'center',
+                padding: 'clamp(22px, 4vw, 28px)',
+                textAlign: 'left',
               }}
             >
               <div style={{
-                fontSize: '40px',
-                fontWeight: 900,
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '11px',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
                 background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 marginBottom: '12px',
               }}>
-                {item.stat}
+                {item.kicker}
               </div>
               <div style={{
-                fontSize: '14px',
-                color: '#8B8AA0',
-                lineHeight: 1.5,
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '15px',
+                color: '#C9C7DA',
+                lineHeight: 1.6,
               }}>
                 {item.label}
               </div>

@@ -27,6 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/after-layoff', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/career-changers', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/returning-to-work', priority: 0.85, changeFrequency: 'monthly' },
+    // Hiring-side audience hub — small teams hiring without a TA function
+    { path: '/for-small-teams', priority: 0.85, changeFrequency: 'monthly' },
     // SEO content pages — topic-level pillars
     { path: '/how-ats-actually-works', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/what-recruiters-really-think', priority: 0.85, changeFrequency: 'monthly' },

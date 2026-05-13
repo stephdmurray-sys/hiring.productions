@@ -39,8 +39,8 @@ function firstNameFromEmail(email: string | null): string {
 
 const forCompanies = [
   { href: '/for-companies', label: 'For Companies' },
+  { href: '/for-small-teams', label: 'For Small Teams' },
   { href: '/jd-seo-score', label: 'Is Your Job Even Being Seen?' },
-  { href: '/for-companies#social', label: 'Social Recruitment Guide' },
   { href: '/consulting', label: 'Consulting' },
   { href: 'https://www.repvera.com', label: 'RepVera for Teams', external: true },
 ]
