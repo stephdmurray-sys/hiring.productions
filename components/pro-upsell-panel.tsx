@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Lock } from 'lucide-react'
 import { CATALOG } from '@/lib/tools-catalog'
 import { getTheme } from '@/lib/tool-themes'
+import { analytics } from '@/lib/analytics'
 
 interface ProUpsellPanelProps {
   /**
@@ -300,6 +301,7 @@ export function ProUpsellPanel({
             href="https://www.repvera.com"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => analytics.repveraClick('pro-upsell-panel')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',

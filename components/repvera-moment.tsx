@@ -1,3 +1,7 @@
+'use client'
+
+import { analytics } from '@/lib/analytics'
+
 interface RepVeraMomentProps {
   /** The contextual hook — what's true about THIS audience that makes RepVera fit. */
   title: string
@@ -98,6 +102,7 @@ export function RepVeraMoment({ title, body, ctaLabel = 'Start your RepVera — 
           href="https://www.repvera.com"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => analytics.repveraClick('repvera-moment')}
           style={{
             position: 'relative',
             display: 'inline-flex',

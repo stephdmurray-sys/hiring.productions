@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { isMember } from '@/lib/membership'
+import { analytics } from '@/lib/analytics'
 
 interface StripeCheckoutButtonProps {
   children: React.ReactNode
@@ -39,6 +40,11 @@ export function StripeCheckoutButton({
     try {
       setLoading(true)
       setError(null)
+      // Fire the analytics event BEFORE redirecting — the user will be
+      // gone to Stripe's domain after this and we won't get another shot.
+      analytics.checkoutStart(
+        typeof window !== 'undefined' ? window.location.pathname : 'unknown',
+      )
       const response = await fetch('/api/stripe/checkout', { method: 'POST' })
       if (!response.ok) throw new Error('Checkout unavailable')
       const data = await response.json()

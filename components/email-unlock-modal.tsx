@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { X, Mail } from 'lucide-react'
+import { analytics } from '@/lib/analytics'
 
 interface EmailUnlockModalProps {
   open: boolean
@@ -63,6 +64,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
         setSubmitting(false)
         return
       }
+      analytics.emailCaptureSubmit(source)
       onUnlocked()
     } catch {
       setError('Network blip. Try again?')
@@ -246,7 +248,10 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
         >
           <Link
             href="/pricing"
-            onClick={onClose}
+            onClick={() => {
+              analytics.paywallPricingClick('email-modal')
+              onClose()
+            }}
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',
@@ -263,7 +268,10 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             href="https://www.repvera.com"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onClose}
+            onClick={() => {
+              analytics.repveraClick('email-modal')
+              onClose()
+            }}
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',

@@ -7,6 +7,7 @@ import { X, Lock } from 'lucide-react'
 import { EmailUnlockModal } from './email-unlock-modal'
 import { UsagePill } from './usage-pill'
 import { isMember, getMemberEmail } from '@/lib/membership'
+import { analytics } from '@/lib/analytics'
 
 /** Paths where the usage pill should show. */
 function isToolPath(pathname: string): boolean {
@@ -63,6 +64,19 @@ export function UsageProvider({ children }: UsageProviderProps) {
               ? input.url
               : ''
       const isToolCall = url.includes('/api/tool') && !url.includes('/api/tools-pdf')
+
+      // Fire tool_run_attempt BEFORE the fetch resolves — that's the
+      // moment of intent. Whether it succeeds or hits a gate is captured
+      // by separate events on the response.
+      if (isToolCall && typeof init?.body === 'string') {
+        try {
+          const parsed = JSON.parse(init.body) as { toolId?: string }
+          if (parsed.toolId) analytics.toolRunAttempt(parsed.toolId)
+        } catch {
+          // ignore
+        }
+      }
+
       let res = await original(input, init)
 
       if (!isToolCall) return res
@@ -133,12 +147,50 @@ export function UsageProvider({ children }: UsageProviderProps) {
             return ''
           })()
           setSource(`${reason}:${toolId || 'unknown'}`)
-          if (reason === 'anon-limit') setModal('email')
-          else if (reason === 'email-limit') setModal('paywall')
-          else if (reason === 'budget-anon' || reason === 'budget-global') setModal('capacity')
-          else if (reason === 'pro-required') setModal('pro-tool')
+
+          // Analytics: every gate firing is a funnel event.
+          if (toolId && (reason === 'anon-limit' || reason === 'email-limit' || reason === 'pro-required' || reason === 'budget-anon' || reason === 'budget-global' || reason === 'pro-limit')) {
+            analytics.toolRunBlocked(toolId, reason)
+          }
+
+          if (reason === 'anon-limit') {
+            setModal('email')
+            analytics.emailModalOpen(`${reason}:${toolId || 'unknown'}`)
+          } else if (reason === 'email-limit') {
+            setModal('paywall')
+            analytics.paywallModalOpen('email-limit')
+          } else if (reason === 'budget-anon' || reason === 'budget-global') {
+            setModal('capacity')
+          } else if (reason === 'pro-required') {
+            setModal('pro-tool')
+            analytics.paywallModalOpen('pro-required')
+          }
         } else if (res.status === 200) {
           window.dispatchEvent(new CustomEvent('hp:usage-changed'))
+          // Analytics: successful tool run. Best-effort toolId parse + tier
+          // is read off the response so we know whether it was anon / email
+          // / pro who ran it.
+          try {
+            const successClone = res.clone()
+            const data = (await successClone.json().catch(() => ({}))) as {
+              tier?: 'anon' | 'email' | 'pro'
+            }
+            const toolId = (() => {
+              if (typeof init?.body === 'string') {
+                try {
+                  return (JSON.parse(init.body) as { toolId?: string })?.toolId ?? ''
+                } catch {
+                  return ''
+                }
+              }
+              return ''
+            })()
+            if (toolId) {
+              analytics.toolRunSuccess(toolId, data.tier ?? 'anon')
+            }
+          } catch {
+            // Silent — analytics shouldn't break the success path.
+          }
         }
       } catch {
         // Don't let our shim ever break a real call.
@@ -352,7 +404,10 @@ function SimpleModal({
 
         <Link
           href={primary.href}
-          onClick={onClose}
+          onClick={() => {
+            analytics.paywallPricingClick(eyebrow || 'modal')
+            onClose()
+          }}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
