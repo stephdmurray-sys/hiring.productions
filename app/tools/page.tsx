@@ -268,8 +268,8 @@ export default function ToolsPage() {
             <SectionHeader
               eyebrow="ACT TWO — RECRUITER INSIGHTS"
               eyebrowColor="#A78BFA"
-              title="Every Recruiter Insight. $20 a year."
-              sub="Each one replaces a $30–80/month tool. Together for less than Jobscan charges for one day."
+              title="Every Recruiter Insight — both sides of the table. $20 a year."
+              sub="One membership unlocks the candidate-side tools AND the hiring-team tools. Understanding the other side is what makes you better at your own."
             />
 
             {flagshipPro.length > 0 && (

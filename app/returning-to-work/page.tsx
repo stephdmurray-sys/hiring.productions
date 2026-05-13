@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
 import { RepVeraMoment } from '@/components/repvera-moment'
+import { BilateralCallout } from '@/components/bilateral-callout'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -386,6 +387,8 @@ export default function ReturningToWorkPage() {
           { question: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
         ]}
       />
+
+      <BilateralCallout audience="candidate" />
 
       <RepVeraMoment
         title="Time away doesn't show on a resume. RepVera shows what does."

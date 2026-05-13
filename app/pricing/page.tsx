@@ -14,7 +14,7 @@ const FREE_CANDIDATE_TOOLS = CATALOG.filter(
 export const metadata: Metadata = {
   title: 'Pricing — $20/year vs. $600+/year',
   description:
-    'Free forever for every candidate-side tool. $20/year for the whole production — every Recruiter Insight. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
+    'Free forever for every candidate-side tool. $20/year unlocks both sides — every candidate Recruiter Insight AND every hiring-team tool, because understanding the other side is what makes you better at your own. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
   alternates: { canonical: 'https://hiring.productions/pricing' },
 }
 
@@ -137,8 +137,8 @@ export default function PricingPage() {
             }}
           >
             Jobscan tells you if your resume passes the ATS. We tell you what the recruiter thinks
-            when it does — and the four other reads that decide whether you get the call, ace the
-            interview, and land the offer.
+            when it does — and the hiring-team tools that show you how candidates get screened, sourced,
+            and decided on. Both sides of the table, one $20 membership.
           </p>
 
           <p
@@ -361,6 +361,7 @@ export default function PricingPage() {
                 'Your LinkedIn — Rewritten',
                 'The Rehearsal Room',
                 'What They\'re Really Asking',
+                'Every hiring-team tool too — see how recruiters actually screen, source, and decide',
                 'Plus every free tool, unlimited',
               ].map((t) => (
                 <li

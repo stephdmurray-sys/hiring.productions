@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { BilateralCallout } from '@/components/bilateral-callout'
 import { BarChart2, Share2, Users, CheckSquare, Clock, Star } from 'lucide-react'
 
 export default function ForCompaniesPage() {
@@ -411,6 +412,8 @@ export default function ForCompaniesPage() {
           </Link>
         </div>
       </section>
+
+      <BilateralCallout audience="hiring" />
 
       <Footer />
     </div>

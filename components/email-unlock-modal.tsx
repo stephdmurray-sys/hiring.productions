@@ -167,7 +167,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Or go Pro for unlimited — and the <span style={{ color: '#F2F0FF', fontWeight: 800 }}>advanced Recruiter Insights</span> that set you apart in the audition. $20/year.
+          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#F2F0FF', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $20/year.
         </p>
 
         <form onSubmit={submit}>

@@ -199,7 +199,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
         onClose={() => setModal(null)}
         eyebrow="ACT TWO — RECRUITER INSIGHTS"
         title="You've used every free insight."
-        body="The whole production — every Recruiter Insight, unlimited — is $20 for the year. Less than Jobscan charges for one day."
+        body="Unlocks both sides — every candidate Recruiter Insight AND every hiring-team tool, unlimited, $20 a year. Less than Jobscan charges for one day."
         primary={{ label: 'Get Full Access — $20/year', href: '/pricing' }}
       />
       <SimpleModal
@@ -215,7 +215,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
         onClose={() => setModal(null)}
         eyebrow="ACT TWO — RECRUITER INSIGHTS"
         title="This one's a Recruiter Insight."
-        body="The advanced reads — what hiring teams are actually thinking — are unlocked with Pro. Unlimited, $20/year. Less than Jobscan charges for one day."
+        body="Unlocks both sides of the table — every candidate Recruiter Insight AND every hiring-team tool, for $20/year. Less than Jobscan charges for one day."
         primary={{ label: 'Get Full Access — $20/year', href: '/pricing' }}
       />
     </>

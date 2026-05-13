@@ -449,12 +449,26 @@ export default function MembershipPage() {
         <h2 style={{
           fontSize: '32px',
           fontWeight: 900,
-          marginBottom: '48px',
+          marginBottom: '14px',
           textAlign: 'center',
           letterSpacing: '-0.02em',
         }}>
-          All {tools.length} Recruiter Insights
+          All {tools.length} Recruiter Insights — both sides of the table
         </h2>
+        <p style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: '15px',
+          color: '#9D9CB3',
+          textAlign: 'center',
+          maxWidth: '620px',
+          margin: '0 auto 48px',
+          lineHeight: 1.6,
+        }}>
+          One $20 membership unlocks every candidate-side tool AND every hiring-team tool.
+          Understanding the other side is what makes you better at your own — a candidate
+          who sees how recruiters screen becomes a better applicant; a hiring team that
+          sees what candidates worry about writes better job posts.
+        </p>
 
         <div style={{
           display: 'grid',

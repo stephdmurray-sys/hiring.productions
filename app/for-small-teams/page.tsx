@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { BilateralCallout } from '@/components/bilateral-callout'
 
 interface QA {
   question: string
@@ -458,6 +459,8 @@ export default function ForSmallTeamsPage() {
           </Link>
         </div>
       </section>
+
+      <BilateralCallout audience="hiring" />
 
       <Footer />
 

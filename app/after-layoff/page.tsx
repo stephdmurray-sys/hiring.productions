@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HubQuestionsBlock } from '@/components/hub-questions-block'
 import { RepVeraMoment } from '@/components/repvera-moment'
+import { BilateralCallout } from '@/components/bilateral-callout'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 
@@ -389,6 +390,8 @@ export default function AfterLayoffPage() {
           { question: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
         ]}
       />
+
+      <BilateralCallout audience="candidate" />
 
       <RepVeraMoment
         title="The layoff isn't your story. RepVera makes the next chapter visible."
