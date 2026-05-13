@@ -151,7 +151,7 @@ export default function ForSmallTeamsPage() {
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',
               fontWeight: 600,
-              color: '#FF4F6A',
+              color: '#A78BFA',
               letterSpacing: '0.03em',
               marginTop: '20px',
             }}
