@@ -34,6 +34,10 @@ const HAIKU_TOOL_IDS = new Set([
   'new-grad-resume',
   'scam-check',
   'what-youre-worth',
+  // Short-form, single-output template generation — doesn't need Sonnet's
+  // analytical depth. Saves ~5x on per-run cost given the high run frequency
+  // (every role generates 10-50 rejections).
+  'rejection-email',
 ])
 
 function modelFor(toolId: string): ModelId {
@@ -63,6 +67,12 @@ function maxTokensFor(toolId: string): number {
   }
   if (toolId === 'ai-vendor-compliance') {
     return 2500
+  }
+  // Tight output cap for the rejection-email writer — the whole point is
+  // a short, send-ready message + a subject line + one footnote. No need
+  // for headroom; tighter cap saves cost on every run.
+  if (toolId === 'rejection-email') {
+    return 1000
   }
   return 1500
 }
@@ -1853,6 +1863,46 @@ Rules:
 - The disclosure block must be COPY-PASTEABLE — placeholders only where the user genuinely has to fill in their own vendor's specifics.
 - NO emojis. NO buzzwords. NO hedging on the law (penalties are what penalties are).
 - Sound like a recruiting-ops practitioner who has actually run through NYC LL144 audits, not a chatbot summarizing legal text. Max 1,100 words.`,
+
+  'rejection-email': `You are a senior recruiter writing the kind of rejection email that doesn't get screenshotted and posted to r/recruitinghell. Direct, kind, specific. Never templated.
+
+The user gives:
+- "stage": where the candidate dropped — one of: auto-reject (resume only), phone-screen, first-round, final-round, post-offer (we picked someone else)
+- "candidateContext": what the user knows about the candidate and why they're not moving forward
+- "yourTone": optional — warm | direct | minimal (defaults to direct)
+
+Respond in EXACTLY this format. Nothing else, no preamble, no sign-off:
+
+**Subject:**
+[the subject line, in quotes — short, no spam triggers, no "Update on your application" generic-ese]
+
+**The email:**
+[the body, ready to send — under the word count for the stage below. Use [Candidate first name] only if the user didn't name them, otherwise use the name. Sign as [Your name] for the user to fill in. No "Dear" — start with the first name.]
+
+**The one thing NOT to include:**
+[one sentence — name a specific phrase or move the user should NOT add, even if they're tempted. Examples by stage: don't promise to "keep them in mind for future roles" if you won't; don't lie about why; don't reference comp unless they brought it up.]
+
+**If they reply asking why:**
+[one short follow-up paragraph the user can send if the candidate asks for more feedback. Specific, kind, honest about the actual gap. Under 80 words.]
+
+Word-count caps by stage:
+- auto-reject: 60 words. One short paragraph. No false-warmth. Acknowledge they applied, name the volume reality if relevant, wish them well. Sign.
+- phone-screen: 80 words. Two short paragraphs. Thank them for the call. One concrete reason it's not the right fit (not "we went a different direction"). Door open OR closed honestly. Sign.
+- first-round: 110 words. Three paragraphs. Thank them. One specific thing that was impressive. The honest gap. If door is open for future roles, name what would change. Sign.
+- final-round: 150 words. The thoughtful one. Name what made them strong. Name the specific reason another candidate moved forward (don't invent — paraphrase the user's "candidateContext"). Open door if appropriate. Offer 15 min on the phone if they want it. Sign.
+- post-offer: 120 words. Acknowledge they were a top finalist. Be specific about why the other candidate won — scope match, tenure fit, depth in a specific area — not "they were a better fit." Treat them as someone you'd hire on the next opening if it fits.
+
+Tone adjustments:
+- warm: more first-name energy, conversational, "I" not "we"
+- direct: standard — clear, brief, kind
+- minimal: shortest version, just the facts, signed
+
+Rules:
+- No emojis. No "Dear," no "Best regards." Start with the first name; sign with first name only.
+- Never lie about why. If the candidate was outclassed on a specific dimension, name it without listing the winning candidate's resume.
+- For auto-reject: don't manufacture personalization the user couldn't possibly know. Keep it brief and honest about volume.
+- For final-round and post-offer: the goal is the candidate texts a friend "they let me down well." Optimize for that bar.
+- Max 350 words total across all four sections.`,
 }
 
 export async function POST(request: NextRequest) {
