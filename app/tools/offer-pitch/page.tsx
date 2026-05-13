@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the competing offer…',
@@ -17,12 +18,15 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function OfferPitchPage() {
-  const [role, setRole] = useState('')
-  const [ourCompany, setOurCompany] = useState('')
-  const [ourOffer, setOurOffer] = useState('')
-  const [candidate, setCandidate] = useState('')
-  const [competingOffer, setCompetingOffer] = useState('')
-  const [comfortableLeverage, setComfortableLeverage] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('offer-pitch', {
+    role: '',
+    ourCompany: '',
+    ourOffer: '',
+    candidate: '',
+    competingOffer: '',
+    comfortableLeverage: '',
+  })
+  const { role, ourCompany, ourOffer, candidate, competingOffer, comfortableLeverage } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -63,6 +67,7 @@ export default function OfferPitchPage() {
         setError(data.message || data.error || 'Failed to build the pitch')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -120,7 +125,7 @@ export default function OfferPitchPage() {
         <RequiredLabel label="1. The role you're offering" filled={!!role.trim()} first />
         <textarea
           value={role}
-          onChange={(e) => setRole(e.target.value)}
+          onChange={(e) => setField('role', e.target.value)}
           placeholder="e.g. Senior PM, founding product team at our Series A B2B SaaS. They'd own discovery + shipping for 2-3 of our biggest bets, reporting to CEO. First 90 days: rebuild the onboarding funnel; first 6 months: ship the API product."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -133,7 +138,7 @@ export default function OfferPitchPage() {
         />
         <textarea
           value={ourCompany}
-          onChange={(e) => setOurCompany(e.target.value)}
+          onChange={(e) => setField('ourCompany', e.target.value)}
           placeholder="e.g. Series A, 18 people, $4M ARR growing 3x YoY. Just closed our biggest customer (Notion). Eng team is ex-Stripe and ex-Linear. We're profitable on a unit basis. CEO is technical and ships code."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -146,7 +151,7 @@ export default function OfferPitchPage() {
         />
         <textarea
           value={ourOffer}
-          onChange={(e) => setOurOffer(e.target.value)}
+          onChange={(e) => setField('ourOffer', e.target.value)}
           placeholder="e.g. $185K base + 0.4% equity (4-year vest, 1-year cliff) + standard benefits. No bonus. 4 weeks PTO. Remote OK."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -159,7 +164,7 @@ export default function OfferPitchPage() {
         />
         <textarea
           value={candidate}
-          onChange={(e) => setCandidate(e.target.value)}
+          onChange={(e) => setField('candidate', e.target.value)}
           placeholder="e.g. Jordan Lee, 7 years at Stripe, last 2 leading the payouts product. Said in screen: tired of committee decisions, wants to ship faster. Spouse is also tech, two-income household. Lives in SF."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -172,7 +177,7 @@ export default function OfferPitchPage() {
         />
         <textarea
           value={competingOffer}
-          onChange={(e) => setCompetingOffer(e.target.value)}
+          onChange={(e) => setField('competingOffer', e.target.value)}
           placeholder="e.g. Anthropic, Senior PM on the API team. $245K base + ~$200K RSUs/yr (~$445K total). They told us they like our scope better but the comp gap is real. Decision by Friday."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -196,7 +201,7 @@ export default function OfferPitchPage() {
           </label>
           <textarea
             value={comfortableLeverage}
-            onChange={(e) => setComfortableLeverage(e.target.value)}
+            onChange={(e) => setField('comfortableLeverage', e.target.value)}
             placeholder="e.g. Can go to $200K base · sign-on up to $25K · accelerated review at 6 months · founder access (CEO 1:1 weekly) · scope expansion (add the partnerships function)"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Looking up the vendor and the use case…',
@@ -17,11 +18,14 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function AiVendorCompliancePage() {
-  const [vendorName, setVendorName] = useState('')
-  const [useCase, setUseCase] = useState('')
-  const [states, setStates] = useState('')
-  const [rolesUsed, setRolesUsed] = useState('')
-  const [auditSummary, setAuditSummary] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('ai-vendor-compliance', {
+    vendorName: '',
+    useCase: '',
+    states: '',
+    rolesUsed: '',
+    auditSummary: '',
+  })
+  const { vendorName, useCase, states, rolesUsed, auditSummary } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -53,6 +57,7 @@ export default function AiVendorCompliancePage() {
         setError(data.message || data.error || 'Failed to scan the vendor')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -115,7 +120,7 @@ export default function AiVendorCompliancePage() {
         <input
           type="text"
           value={vendorName}
-          onChange={(e) => setVendorName(e.target.value)}
+          onChange={(e) => setField('vendorName', e.target.value)}
           placeholder="e.g. HireVue · Pymetrics · Greenhouse Predict · iCIMS Talent Cloud · Workday Talent Optimization · custom in-house tool"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -128,7 +133,7 @@ export default function AiVendorCompliancePage() {
         />
         <textarea
           value={useCase}
-          onChange={(e) => setUseCase(e.target.value)}
+          onChange={(e) => setField('useCase', e.target.value)}
           placeholder="e.g. Ranking inbound resumes for SWE roles · scoring 1-way video interviews on behavioral signals · chatbot screening for retail roles · keyword-matching resumes to JDs"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -141,7 +146,7 @@ export default function AiVendorCompliancePage() {
         />
         <textarea
           value={states}
-          onChange={(e) => setStates(e.target.value)}
+          onChange={(e) => setField('states', e.target.value)}
           placeholder="e.g. NYC · CA · IL · Remote within US · NY state + NJ + CT"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -176,7 +181,7 @@ export default function AiVendorCompliancePage() {
           <input
             type="text"
             value={rolesUsed}
-            onChange={(e) => setRolesUsed(e.target.value)}
+            onChange={(e) => setField('rolesUsed', e.target.value)}
             placeholder="e.g. Entry-level retail · Senior engineering · Sales · All exempt roles · All hourly roles"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -211,7 +216,7 @@ export default function AiVendorCompliancePage() {
           </label>
           <textarea
             value={auditSummary}
-            onChange={(e) => setAuditSummary(e.target.value)}
+            onChange={(e) => setField('auditSummary', e.target.value)}
             placeholder="If you have it, paste the audit summary or the published selection-rate ratios. The tool will run the four-fifths math against it."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

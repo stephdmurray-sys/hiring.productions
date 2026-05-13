@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the JD for what the role actually needs…',
@@ -17,9 +18,12 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function WhatYoureEvaluatingPage() {
-  const [jobDescription, setJobDescription] = useState('')
-  const [teamContext, setTeamContext] = useState('')
-  const [redFlagsToCatch, setRedFlagsToCatch] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('what-youre-evaluating', {
+    jobDescription: '',
+    teamContext: '',
+    redFlagsToCatch: '',
+  })
+  const { jobDescription, teamContext, redFlagsToCatch } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -51,6 +55,7 @@ export default function WhatYoureEvaluatingPage() {
         setError(data.message || data.error || 'Failed to build the scorecard')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -116,7 +121,7 @@ export default function WhatYoureEvaluatingPage() {
         />
         <textarea
           value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
+          onChange={(e) => setField('jobDescription', e.target.value)}
           placeholder="Paste the complete JD — title, description, responsibilities, requirements, comp. The more detail you give, the more specific the competencies."
           style={jdTextareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -129,7 +134,7 @@ export default function WhatYoureEvaluatingPage() {
         />
         <textarea
           value={teamContext}
-          onChange={(e) => setTeamContext(e.target.value)}
+          onChange={(e) => setField('teamContext', e.target.value)}
           placeholder="e.g. Recruiter screen (30 min) — me, focused on level/comp fit. Hiring manager (60 min) — VP of Eng, focused on system design and previous shipping. IC peer (45 min) — Senior IC, focused on collaboration and code quality. Skip-level (30 min) — CEO, focused on growth potential and fit."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -152,7 +157,7 @@ export default function WhatYoureEvaluatingPage() {
           </label>
           <textarea
             value={redFlagsToCatch}
-            onChange={(e) => setRedFlagsToCatch(e.target.value)}
+            onChange={(e) => setField('redFlagsToCatch', e.target.value)}
             placeholder="e.g. Title inflation from past role · candidates who only describe team accomplishments not personal · gaps the candidate is dodging · level-down concern"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the JD…',
@@ -27,9 +28,12 @@ function countCandidates(applications: string): number {
 }
 
 export default function ApplicantTriagePage() {
-  const [jobDescription, setJobDescription] = useState('')
-  const [applications, setApplications] = useState('')
-  const [mustHaves, setMustHaves] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('applicant-triage', {
+    jobDescription: '',
+    applications: '',
+    mustHaves: '',
+  })
+  const { jobDescription, applications, mustHaves } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -66,6 +70,7 @@ export default function ApplicantTriagePage() {
         setError(data.message || data.error || 'Failed to triage the queue')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -133,7 +138,7 @@ export default function ApplicantTriagePage() {
         />
         <textarea
           value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
+          onChange={(e) => setField('jobDescription', e.target.value)}
           placeholder="Paste the complete JD — title, description, requirements, comp. The triage calls are calibrated against what THIS role actually needs."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -162,7 +167,7 @@ export default function ApplicantTriagePage() {
         </div>
         <textarea
           value={applications}
-          onChange={(e) => setApplications(e.target.value)}
+          onChange={(e) => setField('applications', e.target.value)}
           placeholder={`--- CANDIDATE 1 ---
 Jordan Lee
 jordan.lee@example.com · linkedin.com/in/jordanlee
@@ -214,7 +219,7 @@ Sam Chen
           </label>
           <textarea
             value={mustHaves}
-            onChange={(e) => setMustHaves(e.target.value)}
+            onChange={(e) => setField('mustHaves', e.target.value)}
             placeholder="e.g. Must have 5+ years of Python · Must be authorized to work in US · No more than two roles under 18 months in the past 5 years"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

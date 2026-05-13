@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Scanning for AI tells…',
@@ -17,8 +18,11 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function RealCandidatePage() {
-  const [application, setApplication] = useState('')
-  const [targetRole, setTargetRole] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('real-candidate', {
+    application: '',
+    targetRole: '',
+  })
+  const { application, targetRole } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -50,6 +54,7 @@ export default function RealCandidatePage() {
         setError(data.message || data.error || 'Failed to run the check')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -110,7 +115,7 @@ export default function RealCandidatePage() {
         />
         <textarea
           value={application}
-          onChange={(e) => setApplication(e.target.value)}
+          onChange={(e) => setField('application', e.target.value)}
           placeholder="Paste the candidate's resume and cover letter as plain text. The whole thing, not just the summary. The more you paste, the more accurate the read."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -134,7 +139,7 @@ export default function RealCandidatePage() {
           <input
             type="text"
             value={targetRole}
-            onChange={(e) => setTargetRole(e.target.value)}
+            onChange={(e) => setField('targetRole', e.target.value)}
             placeholder="e.g. Senior Software Engineer (Backend, Python) at a Series B fintech"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

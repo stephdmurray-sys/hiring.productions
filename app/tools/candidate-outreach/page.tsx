@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the candidate profile…',
@@ -32,11 +33,14 @@ const SENDER_OPTIONS = [
 ]
 
 export default function CandidateOutreachPage() {
-  const [candidateProfile, setCandidateProfile] = useState('')
-  const [role, setRole] = useState('')
-  const [channel, setChannel] = useState('')
-  const [senderRole, setSenderRole] = useState('')
-  const [companyContext, setCompanyContext] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('candidate-outreach', {
+    candidateProfile: '',
+    role: '',
+    channel: '',
+    senderRole: '',
+    companyContext: '',
+  })
+  const { candidateProfile, role, channel, senderRole, companyContext } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -68,6 +72,7 @@ export default function CandidateOutreachPage() {
         setError(data.message || data.error || 'Failed to write the message')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -143,7 +148,7 @@ export default function CandidateOutreachPage() {
         />
         <textarea
           value={candidateProfile}
-          onChange={(e) => setCandidateProfile(e.target.value)}
+          onChange={(e) => setField('candidateProfile', e.target.value)}
           placeholder="e.g. Jordan Lee, Senior PM at Notion for 3 years, was at Asana before. Recently posted on LinkedIn about building from 0 to 1 inside an established company. Open to startups."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -153,7 +158,7 @@ export default function CandidateOutreachPage() {
         <RequiredLabel label="2. Role you want them to consider" filled={!!role.trim()} />
         <textarea
           value={role}
-          onChange={(e) => setRole(e.target.value)}
+          onChange={(e) => setField('role', e.target.value)}
           placeholder="e.g. Senior PM, founding product team at a Series A B2B SaaS in fintech. They'd own discovery, ship 2-3 features in their first 90 days, report directly to founder."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -169,7 +174,7 @@ export default function CandidateOutreachPage() {
                 name="channel"
                 value={opt.value}
                 checked={channel === opt.value}
-                onChange={(e) => setChannel(e.target.value)}
+                onChange={(e) => setField('channel', e.target.value)}
                 style={{ accentColor: '#FF4F6A', width: 16, height: 16, cursor: 'pointer' }}
               />
               {opt.label}
@@ -186,7 +191,7 @@ export default function CandidateOutreachPage() {
                 name="senderRole"
                 value={opt.value}
                 checked={senderRole === opt.value}
-                onChange={(e) => setSenderRole(e.target.value)}
+                onChange={(e) => setField('senderRole', e.target.value)}
                 style={{ accentColor: '#FF4F6A', width: 16, height: 16, cursor: 'pointer' }}
               />
               {opt.label}
@@ -211,7 +216,7 @@ export default function CandidateOutreachPage() {
           </label>
           <textarea
             value={companyContext}
-            onChange={(e) => setCompanyContext(e.target.value)}
+            onChange={(e) => setField('companyContext', e.target.value)}
             placeholder="e.g. Just closed Series A from Index Ventures. 14 people. Building API-first fraud detection for fintechs. Eng team is 4 ex-Stripe."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

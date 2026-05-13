@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Mapping the role to keywords…',
@@ -17,11 +18,14 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function BooleanBuilderPage() {
-  const [roleTitle, setRoleTitle] = useState('')
-  const [mustHaves, setMustHaves] = useState('')
-  const [niceToHaves, setNiceToHaves] = useState('')
-  const [location, setLocation] = useState('')
-  const [exclude, setExclude] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('boolean-builder', {
+    roleTitle: '',
+    mustHaves: '',
+    niceToHaves: '',
+    location: '',
+    exclude: '',
+  })
+  const { roleTitle, mustHaves, niceToHaves, location, exclude } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -53,6 +57,7 @@ export default function BooleanBuilderPage() {
         setError(data.message || data.error || 'Failed to build the strings')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -109,7 +114,7 @@ export default function BooleanBuilderPage() {
         <input
           type="text"
           value={roleTitle}
-          onChange={(e) => setRoleTitle(e.target.value)}
+          onChange={(e) => setField('roleTitle', e.target.value)}
           placeholder="e.g. Senior Software Engineer · Director of Marketing · Head of People"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -122,7 +127,7 @@ export default function BooleanBuilderPage() {
         />
         <textarea
           value={mustHaves}
-          onChange={(e) => setMustHaves(e.target.value)}
+          onChange={(e) => setField('mustHaves', e.target.value)}
           placeholder="e.g. Python and Django · 5+ years backend · worked at a Series A–C SaaS · shipped a payment integration"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -133,7 +138,7 @@ export default function BooleanBuilderPage() {
         <input
           type="text"
           value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) => setField('location', e.target.value)}
           placeholder="e.g. NYC + remote within US · San Francisco Bay Area · fully remote · Austin TX"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -156,7 +161,7 @@ export default function BooleanBuilderPage() {
           </label>
           <textarea
             value={niceToHaves}
-            onChange={(e) => setNiceToHaves(e.target.value)}
+            onChange={(e) => setField('niceToHaves', e.target.value)}
             placeholder="e.g. healthcare or fintech background · Kubernetes · led a small team · open-source contributor"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -181,7 +186,7 @@ export default function BooleanBuilderPage() {
           <input
             type="text"
             value={exclude}
-            onChange={(e) => setExclude(e.target.value)}
+            onChange={(e) => setField('exclude', e.target.value)}
             placeholder="e.g. no agency recruiters · no FAANG · no current bootcamp grads"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the role + the panel…',
@@ -17,10 +18,13 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function InterviewersReadyPage() {
-  const [role, setRole] = useState('')
-  const [panel, setPanel] = useState('')
-  const [candidateProfile, setCandidateProfile] = useState('')
-  const [competitiveContext, setCompetitiveContext] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('interviewers-ready', {
+    role: '',
+    panel: '',
+    candidateProfile: '',
+    competitiveContext: '',
+  })
+  const { role, panel, candidateProfile, competitiveContext } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -52,6 +56,7 @@ export default function InterviewersReadyPage() {
         setError(data.message || data.error || 'Failed to build the prep guide')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -113,7 +118,7 @@ export default function InterviewersReadyPage() {
         />
         <textarea
           value={role}
-          onChange={(e) => setRole(e.target.value)}
+          onChange={(e) => setField('role', e.target.value)}
           placeholder="e.g. Senior Software Engineer, founding eng team at Series A B2B SaaS, ~6-10 yrs of experience, full-stack TypeScript + Python, reports to CTO, will be one of first 5 engineers."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -126,7 +131,7 @@ export default function InterviewersReadyPage() {
         />
         <textarea
           value={panel}
-          onChange={(e) => setPanel(e.target.value)}
+          onChange={(e) => setField('panel', e.target.value)}
           placeholder="e.g. 1) Recruiter screen 30 min — me. 2) Hiring manager (VP Eng) 60 min — system design + previous shipping. 3) IC peer 45 min — coding pair + collaboration. 4) CEO 30 min — strategy + culture fit."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -149,7 +154,7 @@ export default function InterviewersReadyPage() {
           </label>
           <textarea
             value={candidateProfile}
-            onChange={(e) => setCandidateProfile(e.target.value)}
+            onChange={(e) => setField('candidateProfile', e.target.value)}
             placeholder="e.g. Sam Chen, 8 yrs at Stripe, led the payouts platform rewrite. Active on LinkedIn about devex. Wants to join a smaller team where they can ship faster."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -174,7 +179,7 @@ export default function InterviewersReadyPage() {
           </label>
           <textarea
             value={competitiveContext}
-            onChange={(e) => setCompetitiveContext(e.target.value)}
+            onChange={(e) => setField('competitiveContext', e.target.value)}
             placeholder="e.g. Also interviewing at Stripe (staying) and at a Series B company. Comp is comparable. We win on scope and ownership; we lose on brand and security."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

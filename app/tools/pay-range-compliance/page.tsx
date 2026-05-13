@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Mapping the jurisdictions that apply…',
@@ -27,12 +28,15 @@ const LEVEL_OPTIONS = [
 ]
 
 export default function PayRangeCompliancePage() {
-  const [roleTitle, setRoleTitle] = useState('')
-  const [level, setLevel] = useState('')
-  const [func, setFunc] = useState('')
-  const [workLocations, setWorkLocations] = useState('')
-  const [userProposedRange, setUserProposedRange] = useState('')
-  const [comp, setComp] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('pay-range-compliance', {
+    roleTitle: '',
+    level: '',
+    func: '',
+    workLocations: '',
+    userProposedRange: '',
+    comp: '',
+  })
+  const { roleTitle, level, func, workLocations, userProposedRange, comp } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -64,6 +68,7 @@ export default function PayRangeCompliancePage() {
         setError(data.message || data.error || 'Failed to build the disclosure')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -135,7 +140,7 @@ export default function PayRangeCompliancePage() {
         <input
           type="text"
           value={roleTitle}
-          onChange={(e) => setRoleTitle(e.target.value)}
+          onChange={(e) => setField('roleTitle', e.target.value)}
           placeholder="e.g. Senior Software Engineer · Director of Marketing · Recruiting Coordinator"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -151,7 +156,7 @@ export default function PayRangeCompliancePage() {
                 name="level"
                 value={opt.value}
                 checked={level === opt.value}
-                onChange={(e) => setLevel(e.target.value)}
+                onChange={(e) => setField('level', e.target.value)}
                 style={{ accentColor: '#FF4F6A', width: 16, height: 16, cursor: 'pointer' }}
               />
               {opt.label}
@@ -163,7 +168,7 @@ export default function PayRangeCompliancePage() {
         <input
           type="text"
           value={func}
-          onChange={(e) => setFunc(e.target.value)}
+          onChange={(e) => setField('func', e.target.value)}
           placeholder="e.g. Engineering · Product Management · People / HR · Sales · Customer Success"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -176,7 +181,7 @@ export default function PayRangeCompliancePage() {
         />
         <textarea
           value={workLocations}
-          onChange={(e) => setWorkLocations(e.target.value)}
+          onChange={(e) => setField('workLocations', e.target.value)}
           placeholder="e.g. NY, CA, TX · or 'Remote within US' · or 'In-office Austin TX only' · or 'Remote within CA, WA, CO, NY'"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -211,7 +216,7 @@ export default function PayRangeCompliancePage() {
           <input
             type="text"
             value={userProposedRange}
-            onChange={(e) => setUserProposedRange(e.target.value)}
+            onChange={(e) => setField('userProposedRange', e.target.value)}
             placeholder="e.g. $140K-$180K · $48-$58/hr · skip if you want a recommendation instead"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -246,7 +251,7 @@ export default function PayRangeCompliancePage() {
           </label>
           <textarea
             value={comp}
-            onChange={(e) => setComp(e.target.value)}
+            onChange={(e) => setField('comp', e.target.value)}
             placeholder="e.g. Base + 0.1-0.4% equity (early-stage) + 4-week PTO + medical/dental/vision + remote stipend. CO/WA/IL/MN/NJ/MA/HI require benefits in the disclosure."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}

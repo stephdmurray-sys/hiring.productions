@@ -38,6 +38,11 @@ const HAIKU_TOOL_IDS = new Set([
   // analytical depth. Saves ~5x on per-run cost given the high run frequency
   // (every role generates 10-50 rejections).
   'rejection-email',
+  // Diagnostic tools with structured output formats — the reasoning is
+  // pattern-matching rather than deep synthesis. Haiku produces the same
+  // quality of output at ~5× lower cost per run.
+  'ghosted',
+  'whats-breaking-search',
 ])
 
 function modelFor(toolId: string): ModelId {
@@ -72,6 +77,12 @@ function maxTokensFor(toolId: string): number {
   // a short, send-ready message + a subject line + one footnote. No need
   // for headroom; tighter cap saves cost on every run.
   if (toolId === 'rejection-email') {
+    return 1000
+  }
+  // Diagnostic tools — structured output that almost never breaks 800
+  // tokens in practice. Capping at 1000 saves cost without risking
+  // truncation on the rare long output.
+  if (toolId === 'ghosted' || toolId === 'scam-check') {
     return 1000
   }
   return 1500

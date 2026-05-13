@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading your JD as a strong candidate would…',
@@ -17,8 +18,11 @@ const RUNNING_STAGES = [
 ] as const
 
 export default function JdCandidateEyesPage() {
-  const [jobDescription, setJobDescription] = useState('')
-  const [targetCandidate, setTargetCandidate] = useState('')
+  const [fields, setField, clearDraft] = useToolDraft('jd-candidate-eyes', {
+    jobDescription: '',
+    targetCandidate: '',
+  })
+  const { jobDescription, targetCandidate } = fields
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -50,6 +54,7 @@ export default function JdCandidateEyesPage() {
         setError(data.message || data.error || 'Failed to read the JD')
       } else {
         setResult(data.result)
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -110,7 +115,7 @@ export default function JdCandidateEyesPage() {
         />
         <textarea
           value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
+          onChange={(e) => setField('jobDescription', e.target.value)}
           placeholder="Paste the complete posting — title, description, requirements, benefits, comp, the whole thing. The more you give, the more specific the read."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -134,7 +139,7 @@ export default function JdCandidateEyesPage() {
           <input
             type="text"
             value={targetCandidate}
-            onChange={(e) => setTargetCandidate(e.target.value)}
+            onChange={(e) => setField('targetCandidate', e.target.value)}
             placeholder="e.g. Senior PM at B2B SaaS · Director of Talent at healthcare startup · Mid-level engineer with 4–7 yrs"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
