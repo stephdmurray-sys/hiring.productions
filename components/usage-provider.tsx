@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { X, Lock } from 'lucide-react'
 import { EmailUnlockModal } from './email-unlock-modal'
 import { UsagePill } from './usage-pill'
+import { isMember, getMemberEmail } from '@/lib/membership'
 
 /** Paths where the usage pill should show. */
 function isToolPath(pathname: string): boolean {
@@ -46,6 +47,12 @@ export function UsageProvider({ children }: UsageProviderProps) {
     if (typeof window === 'undefined') return
     const original = window.fetch.bind(window)
 
+    // Tracks whether we've already attempted a Pro-cookie auto-heal in
+    // this page session. Prevents an infinite retry loop if the heal
+    // legitimately fails (e.g. localStorage says "member" but Stripe
+    // returns active: false).
+    let healAttempted = false
+
     const patched: typeof window.fetch = async (input, init) => {
       const url =
         typeof input === 'string'
@@ -56,9 +63,53 @@ export function UsageProvider({ children }: UsageProviderProps) {
               ? input.url
               : ''
       const isToolCall = url.includes('/api/tool') && !url.includes('/api/tools-pdf')
-      const res = await original(input, init)
+      let res = await original(input, init)
 
       if (!isToolCall) return res
+
+      // ----- Auto-heal Pro cookie ------------------------------------
+      // A user can be Pro on the client (localStorage flag set by
+      // activateMembership) but anon on the server (no hp_pro cookie).
+      // This happens when:
+      //   1. They paid before the cookie-planting code shipped
+      //   2. They're on a different browser than the one Stripe
+      //      redirected back to
+      //   3. The cookie expired or was cleared
+      //
+      // The auto-heal: when a Pro-required 402 fires AND localStorage
+      // says they're a member, silently call verify-customer to
+      // re-plant the cookie, then retry the original tool call. User
+      // never sees the paywall — the tool just takes 1-2 extra seconds
+      // the first time.
+      if (
+        res.status === 402 &&
+        !healAttempted &&
+        typeof window !== 'undefined' &&
+        isMember()
+      ) {
+        healAttempted = true
+        const email = getMemberEmail()
+        if (email) {
+          try {
+            const verifyRes = await original(
+              `/api/stripe/verify-customer?email=${encodeURIComponent(email)}`,
+              { method: 'GET' },
+            )
+            const verifyData = (await verifyRes.json().catch(() => ({}))) as {
+              active?: boolean
+            }
+            if (verifyData.active) {
+              // Cookie should now be planted — retry the original
+              // request. The original caller is still awaiting, so we
+              // swap in the retry response and they get a clean 200.
+              res = await original(input, init)
+            }
+          } catch {
+            // Verify failed — fall through to standard 402 handling.
+          }
+        }
+      }
+      // ---------------------------------------------------------------
 
       // Clone so we can read the body without consuming it for the caller.
       try {

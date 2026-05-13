@@ -7,6 +7,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { useStageRotation } from '@/lib/use-stage-rotation'
+import { useToolDraft } from '@/lib/use-tool-draft'
 
 const RUNNING_STAGES = [
   'Lights up. Reading the candidate notes…',
@@ -30,9 +31,15 @@ const TONE_OPTIONS = [
 ]
 
 export default function RejectionEmailPage() {
-  const [stage, setStage] = useState('')
-  const [candidateContext, setCandidateContext] = useState('')
-  const [yourTone, setYourTone] = useState('direct')
+  // Form state persists to localStorage so the user doesn't lose work
+  // when they hit a paywall, navigate away, or accidentally close the tab.
+  const [fields, setField, clearDraft] = useToolDraft('rejection-email', {
+    stage: '',
+    candidateContext: '',
+    yourTone: 'direct',
+  })
+  const { stage, candidateContext, yourTone } = fields
+
   const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -64,6 +71,10 @@ export default function RejectionEmailPage() {
         setError(data.message || data.error || 'Failed to write the email')
       } else {
         setResult(data.result)
+        // Successful run — clear the draft so the form is fresh for the
+        // next candidate. The result is rendered separately, so the user
+        // still sees their output.
+        clearDraft()
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -140,7 +151,7 @@ export default function RejectionEmailPage() {
                 name="stage"
                 value={opt.value}
                 checked={stage === opt.value}
-                onChange={(e) => setStage(e.target.value)}
+                onChange={(e) => setField('stage', e.target.value)}
                 style={{ accentColor: '#FF4F6A', width: 16, height: 16, cursor: 'pointer' }}
               />
               {opt.label}
@@ -154,7 +165,7 @@ export default function RejectionEmailPage() {
         />
         <textarea
           value={candidateContext}
-          onChange={(e) => setCandidateContext(e.target.value)}
+          onChange={(e) => setField('candidateContext', e.target.value)}
           placeholder="e.g. Jordan Lee. Strong panel performance. Went with another finalist who had deeper experience scaling B2B sales teams from $10M to $50M ARR. Would absolutely consider for a less-senior role if one opens up."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
@@ -193,7 +204,7 @@ export default function RejectionEmailPage() {
                   name="yourTone"
                   value={opt.value}
                   checked={yourTone === opt.value}
-                  onChange={(e) => setYourTone(e.target.value)}
+                  onChange={(e) => setField('yourTone', e.target.value)}
                   style={{ accentColor: '#FF4F6A', width: 16, height: 16, cursor: 'pointer' }}
                 />
                 {opt.label}
