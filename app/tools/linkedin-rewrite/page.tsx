@@ -4,13 +4,17 @@ import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { LinkedinReport } from '@/components/linkedin-report'
 import { ShareResult } from '@/components/share-result'
-import { InputPromptCard } from '@/components/input-prompt-card'
+import { LinkedInPdfUpload } from '@/components/linkedin-pdf-upload'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
 
 export default function LinkedinRewritePage() {
   const [profile, setProfile] = useState('')
+  // Tracks the uploaded PDF's filename for the parsed-success display.
+  // The text payload itself lives in `profile` to keep the API contract
+  // unchanged (the prompt still receives a single profile string).
+  const [profileFileName, setProfileFileName] = useState('')
   const [targetRole, setTargetRole] = useState('')
   const [jobDescription, setJobDescription] = useState('')
   const [state, setState] = useState<ViewState>('input')
@@ -52,7 +56,7 @@ export default function LinkedinRewritePage() {
 
   const runRewrite = async () => {
     if (!profile.trim() || profile.trim().length < 200) {
-      alert('Paste more of your LinkedIn profile — at least your headline, About, and recent experience (200+ characters).')
+      alert('Upload your LinkedIn profile PDF first — we need your headline, About, and recent experience to rewrite them.')
       return
     }
     if (!targetRole.trim()) {
@@ -106,6 +110,7 @@ export default function LinkedinRewritePage() {
 
   const startOver = () => {
     setProfile('')
+    setProfileFileName('')
     setTargetRole('')
     setJobDescription('')
     editAndRerun()
@@ -243,10 +248,14 @@ export default function LinkedinRewritePage() {
               </p>
             </div>
 
-            {/* Required: full LinkedIn profile, single paste box */}
+            {/* Required: LinkedIn profile PDF upload.
+                Was a paste-five-sections textarea — now a single PDF
+                upload with an inline visual guide showing exactly where
+                to find the Save to PDF option on LinkedIn. Same input
+                UX as the wedge tool (Recruiter Search Rank). */}
             <div style={{ marginBottom: '24px' }}>
               <label style={fieldLabel}>
-                Your full LinkedIn profile{' '}
+                Your LinkedIn profile{' '}
                 <span
                   style={{
                     color: '#FF4F6A',
@@ -259,35 +268,18 @@ export default function LinkedinRewritePage() {
                   required
                 </span>
               </label>
-              <InputPromptCard
-                title="Open your LinkedIn profile and copy each of these into the box:"
-                prompts={[
-                  'Your headline',
-                  'Your About section',
-                  'Every recent role with its bullets',
-                  'Your skills section',
-                  'Your education',
-                ]}
-              />
-              <textarea
+              <LinkedInPdfUpload
                 value={profile}
-                onChange={(e) => setProfile(e.target.value)}
-                maxLength={12000}
-                placeholder="Paste it all here in one go. The model will parse it into sections."
-                style={{ ...fieldTextarea, minHeight: '320px' }}
-              />
-              <div
-                style={{
-                  marginTop: '8px',
-                  fontSize: '12px',
-                  color: '#8B8AA0',
-                  display: 'flex',
-                  justifyContent: 'space-between',
+                fileName={profileFileName}
+                onParsed={(text, name) => {
+                  setProfile(text)
+                  setProfileFileName(name)
                 }}
-              >
-                <span>One paste box; the model parses it into sections.</span>
-                <span>{profile.length.toLocaleString()} / 12,000</span>
-              </div>
+                onClear={() => {
+                  setProfile('')
+                  setProfileFileName('')
+                }}
+              />
             </div>
 
             {/* Optional: specific job description */}
