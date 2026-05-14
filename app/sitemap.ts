@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { CATALOG } from '@/lib/tools-catalog'
+import { RANK_ROLES } from '@/lib/rank-roles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://hiring.productions'
@@ -47,6 +48,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/q/is-my-resume-good', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
+  // /rank/[role] SEO landing pages — one per RoleConfig in lib/rank-roles.
+  // High priority because these are the dedicated SEO front doors to the
+  // wedge tool; each one targets a distinct long-tail query.
+  const rankPages: Entry[] = RANK_ROLES.map((r) => ({
+    path: `/rank/${r.slug}`,
+    priority: 0.9,
+    changeFrequency: 'monthly' as const,
+  }))
+
   // Every shipped tool page (free + pro), sourced from the catalog so the
   // sitemap can't drift behind the catalog as tools are added or renamed.
   // External hrefs and soon-tier tools are excluded.
@@ -66,7 +76,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // De-dupe: a few catalog hrefs (/resume, /jd-seo-score) collide with
   // staticPages entries, and the homepage already covers root.
   const seen = new Set(staticPages.map((p) => p.path))
-  const merged = [...staticPages, ...toolPages.filter((p) => !seen.has(p.path))]
+  const merged = [
+    ...staticPages,
+    ...rankPages,
+    ...toolPages.filter((p) => !seen.has(p.path)),
+  ]
 
   return merged.map((page) => ({
     url: `${base}${page.path}`,
