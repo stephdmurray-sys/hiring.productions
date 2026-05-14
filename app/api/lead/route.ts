@@ -19,6 +19,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Redis } from '@upstash/redis'
 import { hash } from '@/lib/usage'
 import { COOKIE_NAMES } from '@/lib/identity'
+import { logEvent } from '@/lib/event-log'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -219,6 +220,9 @@ export async function POST(request: NextRequest) {
     }
 
     await addToResendAudience({ email: rawEmail, source, firstName, lastName, role })
+
+    // Feed the admin event log so /api/admin/stats can count captures.
+    void logEvent('email_capture', { source })
 
     const res = NextResponse.json({ ok: true })
 

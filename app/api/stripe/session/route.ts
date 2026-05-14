@@ -1,6 +1,7 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { signProCookie, COOKIE_NAMES } from '@/lib/identity'
+import { logEvent } from '@/lib/event-log'
 
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -64,6 +65,17 @@ export async function GET(request: Request) {
     // matches the annual subscription cycle — on renewal the user will hit
     // this endpoint again and refresh the cookie.
     if (isPaid && customerId) {
+      // Server-side event log — captures actual paid conversions
+      // (independent of any client-side tracking). The /api/admin/stats
+      // funnel uses this as the bottom of the conversion funnel.
+      void logEvent('payment_success', {
+        meta: {
+          sessionId,
+          customerId,
+          amountTotal: session.amount_total ?? 0,
+        },
+      })
+
       const signed = await signProCookie(customerId)
       if (signed) {
         res.cookies.set(COOKIE_NAMES.PRO, signed, {

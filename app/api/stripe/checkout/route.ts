@@ -1,5 +1,6 @@
 import Stripe from 'stripe'
 import { NextRequest, NextResponse } from 'next/server'
+import { logEvent } from '@/lib/event-log'
 
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -94,6 +95,14 @@ export async function POST(request: NextRequest) {
         },
       ],
     })
+
+    // Server-side event log — captures every checkout that LEAVES our
+    // origin for Stripe. Pair with payment_success in /api/stripe/session
+    // to compute the live checkout → payment conversion rate.
+    void logEvent('checkout_start', {
+      meta: { sessionId: session.id ?? '' },
+    })
+
     return NextResponse.json({ url: session.url })
   } catch (error) {
     console.error('Stripe error:', error)

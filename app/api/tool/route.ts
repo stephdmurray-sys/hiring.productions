@@ -7,6 +7,7 @@ import {
   type AnthropicUsage,
 } from '@/lib/usage'
 import { resolveIdentity, COOKIE_NAMES } from '@/lib/identity'
+import { logEvent } from '@/lib/event-log'
 
 /**
  * Per-tool tier. Used by the gate to know whether to enforce free-tier
@@ -1992,6 +1993,11 @@ export async function POST(request: NextRequest) {
     // Pro-only tools require a Pro cookie. Free tools are open to all tiers.
     const isFreeTool = FREE_TOOL_IDS.has(toolId)
     if (!isFreeTool && identity.tier !== 'pro') {
+      void logEvent('tool_run_blocked', {
+        toolId,
+        tier: identity.tier,
+        reason: 'pro-required',
+      })
       return NextResponse.json(
         {
           error: 'pro-required',
@@ -2003,6 +2009,11 @@ export async function POST(request: NextRequest) {
 
     const gate = await checkGate(identity)
     if (!gate.ok) {
+      void logEvent('tool_run_blocked', {
+        toolId,
+        tier: identity.tier,
+        reason: gate.reason,
+      })
       return NextResponse.json(
         {
           error: gate.reason,
@@ -2102,6 +2113,14 @@ export async function POST(request: NextRequest) {
     console.log(
       `[api/tool] ${toolId} tier=${identity.tier} cost=${costCents}c spend=${after.spendCents}c remaining=${after.remaining}/${after.limit}`,
     )
+
+    // Server-side event log — feeds /api/admin/stats so we can see
+    // funnel state without depending on client-side analytics.
+    void logEvent('tool_run_success', {
+      toolId,
+      tier: identity.tier,
+      costCents,
+    })
 
     return res
   } catch (error) {
