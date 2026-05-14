@@ -33,6 +33,13 @@ export default function RecruiterSearchRankPage() {
   const [targetRole, setTargetRole] = useState('')
   const [targetGeo, setTargetGeo] = useState('')
   const [jobDescription, setJobDescription] = useState('')
+  // Open-to-Work and Activity level aren't in the LinkedIn PDF export
+  // (the PDF is a static content snapshot — these are dynamic profile
+  // state). Without them the ranking model has to guess on signals that
+  // recruiters explicitly filter on. Both default to 'unknown' so an
+  // honest user who isn't sure still gets a calibrated result.
+  const [openToWork, setOpenToWork] = useState<'unknown' | 'recruiters-only' | 'public-frame' | 'no'>('unknown')
+  const [activityLevel, setActivityLevel] = useState<'unknown' | 'weekly' | 'monthly' | 'passive' | 'inactive'>('unknown')
   const [result, setResult] = useState('')
   // Tracks whether the just-returned result was server-redacted for a
   // non-Pro tier — drives the UnlockPrescriptionCard at the bottom of
@@ -147,6 +154,14 @@ export default function RecruiterSearchRankPage() {
             targetRole,
             ...(targetGeo.trim() && { targetGeo }),
             ...(jobDescription.trim() && { jobDescription }),
+            // These two come from the form pills below the PDF upload —
+            // they capture profile state the LinkedIn PDF export
+            // doesn't include but recruiters explicitly filter on.
+            // Pass through whenever the user actually picked a value
+            // (skip the default 'unknown' so the prompt knows when to
+            // gracefully omit the signal).
+            ...(openToWork !== 'unknown' && { openToWork }),
+            ...(activityLevel !== 'unknown' && { activityLevel }),
           },
         }),
       })
@@ -448,6 +463,49 @@ export default function RecruiterSearchRankPage() {
           onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
         />
 
+        {/* OPEN-TO-WORK — OPTIONAL
+            Profile-state signal LinkedIn weighs at ~5% and not in the
+            PDF. "Recruiters Only" mode boosts active-candidate
+            searches; the public green frame helps active-candidate
+            search but quietly hurts passive-candidate search at some
+            firms. */}
+        <RequiredLabel
+          label="Your Open to Work status"
+          filled={openToWork !== 'unknown'}
+          required={false}
+        />
+        <PillToggle
+          value={openToWork}
+          onChange={setOpenToWork}
+          options={[
+            { value: 'unknown', label: 'Skip' },
+            { value: 'recruiters-only', label: 'Yes — recruiters only' },
+            { value: 'public-frame', label: 'Yes — green frame' },
+            { value: 'no', label: 'Not set' },
+          ]}
+        />
+
+        {/* ACTIVITY LEVEL — OPTIONAL
+            Powers LinkedIn's "More Likely to Respond" recruiter filter.
+            Active profiles get a small but real ranking boost in
+            passive-candidate searches as of 2025-2026. */}
+        <RequiredLabel
+          label="How active are you on LinkedIn?"
+          filled={activityLevel !== 'unknown'}
+          required={false}
+        />
+        <PillToggle
+          value={activityLevel}
+          onChange={setActivityLevel}
+          options={[
+            { value: 'unknown', label: 'Skip' },
+            { value: 'weekly', label: 'Posting weekly' },
+            { value: 'monthly', label: 'Posting monthly' },
+            { value: 'passive', label: 'Read-only' },
+            { value: 'inactive', label: 'Mostly inactive' },
+          ]}
+        />
+
         <button
           onClick={handleSubmit}
           disabled={loading || !canSubmit}
@@ -560,4 +618,57 @@ function buildShareSummary(result: string, targetRole: string): string {
   const avg = Math.round(midpoints.reduce((a, b) => a + b, 0) / midpoints.length)
   const role = targetRole.trim() || 'my target role'
   return `Just ran the recruiter-search simulator on my LinkedIn profile — average rank #${avg} across ${midpoints.length} searches a recruiter for ${role} would actually run. Built by a senior TA director. Free.`
+}
+
+/**
+ * Small pill-toggle for optional categorical inputs (Open-to-Work,
+ * Activity Level). Kept inline rather than promoted to a shared
+ * component because the two uses here are the only ones today and
+ * the component is short enough that the indirection would cost more
+ * than it saves.
+ */
+type PillToggleProps<T extends string> = {
+  value: T
+  onChange: (next: T) => void
+  options: ReadonlyArray<{ value: T; label: string }>
+}
+
+function PillToggle<T extends string>({ value, onChange, options }: PillToggleProps<T>) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 8,
+        marginBottom: 4,
+      }}
+    >
+      {options.map((option) => {
+        const selected = value === option.value
+        return (
+          <button
+            key={option.value}
+            type="button"
+            onClick={() => onChange(option.value)}
+            style={{
+              padding: '9px 14px',
+              borderRadius: 100,
+              border: selected
+                ? '1.5px solid rgba(167,139,250,0.55)'
+                : '1px solid rgba(255,255,255,0.10)',
+              background: selected ? 'rgba(108,71,255,0.18)' : 'rgba(255,255,255,0.03)',
+              color: selected ? '#F2F0FF' : '#9D9CB3',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: '13px',
+              cursor: 'pointer',
+              transition: 'all 0.18s ease',
+            }}
+          >
+            {option.label}
+          </button>
+        )
+      })}
+    </div>
+  )
 }

@@ -1196,6 +1196,8 @@ The user provides:
 - targetRole (required): the role they want to be findable for, e.g. "Senior Product Manager at a B2B SaaS"
 - targetGeo (optional): city or region they want recruiters in
 - jobDescription (optional): a specific JD they're targeting
+- openToWork (optional): the candidate's Open to Work state — values: "recruiters-only" (visible to recruiters only, no public frame), "public-frame" (the green frame public to all), "no" (not enabled). NOT in the LinkedIn PDF — comes from the user directly. When provided, factor into the Open-to-Work weight: "recruiters-only" boosts active-candidate (Recruiter Lite) searches without the public-frame downside; "public-frame" helps active-candidate search but quietly DOWNRANKS the candidate in passive-candidate searches at some firms because passive search ignores anyone signaling job-seeking. When NOT provided, omit the OTW weight from the analysis entirely — don't speculate.
+- activityLevel (optional): how active the user is on LinkedIn — values: "weekly" (posts weekly), "monthly" (posts monthly), "passive" (read-only, no posting), "inactive" (mostly inactive). NOT in the PDF. When provided, factor into Activity recency weight: "weekly" earns the full ~2% boost in passive-candidate searches via the "More Likely to Respond" filter; "monthly" earns most of it; "passive" earns none; "inactive" can hurt slightly because some recruiter filters explicitly down-rank dormant profiles. When NOT provided, omit Activity weight from the analysis entirely.
 
 CRITICAL UNDERSTANDING — how LinkedIn Recruiter search ranking actually works in 2026:
 
