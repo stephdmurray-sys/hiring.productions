@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
 import { InputPromptCard } from '@/components/input-prompt-card'
@@ -39,7 +38,6 @@ export default function RecruiterSearchRankPage() {
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formTopRef = useRef<HTMLDivElement>(null)
-  const searchParams = useSearchParams()
 
   // Pre-fill the targetRole field from the ?role= query param. This is
   // how the /rank/[role] SEO landing pages route into the simulator —
@@ -47,15 +45,19 @@ export default function RecruiterSearchRankPage() {
   // where I rank", and arrives here with "Senior Product Manager at a
   // B2B SaaS" already in the input. One less step before they upload
   // their PDF.
+  //
+  // Reading from window.location.search directly (rather than via
+  // useSearchParams) sidesteps Next.js 16's Suspense-boundary
+  // requirement during static prerender — the effect only runs after
+  // hydration, where `window` is defined.
   useEffect(() => {
-    const roleParam = searchParams?.get('role')
-    if (roleParam && !targetRole) {
-      setTargetRole(roleParam)
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const roleParam = params.get('role')
+    if (roleParam) {
+      setTargetRole((current) => (current ? current : roleParam))
     }
-    // Intentionally not including targetRole in deps — we only want to
-    // pre-fill on first mount, never overwrite a user's edit.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
+  }, [])
 
   // Reset for "Run for a different role" — keeps the uploaded profile so
   // the user doesn't have to re-upload, clears the result, and scrolls
