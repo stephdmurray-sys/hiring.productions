@@ -659,14 +659,17 @@ Look at the candidate's profile to identify what skills they currently have list
 
 **Your headline — rewritten three ways:**
 Three options the candidate can pick from, each tuned for surfacing in recruiter search for the targetRole. Each option must:
-- Be under 220 characters
-- Naturally include 1–2 terms from the Headline section above
-- Position the candidate AT or just below the targetRole's seniority
-- Sound like a human, not an SEO string
+- Be under 220 characters (the LinkedIn limit)
+- LOAD-BEARING RULE: the FIRST 50-60 characters MUST contain the literal target title (or its closest exact-search variant — e.g. "Director of Talent Acquisition," "TA Director," "VP, Talent"). LinkedIn truncates the headline to ~60 chars in the candidate-card view recruiters scan, and in mobile views. Characters beyond ~60 still get scanned by the Keyword filter, but only chars 1-60 affect what a recruiter actually reads in the result list. Front-load accordingly. Do NOT split the target title across the 60-char boundary (e.g. "Senior Director of | Talent..." truncating to "Senior Director of" is wasted real estate).
+- Naturally include 1–2 additional terms from the Headline keywords section above in the second half (chars 60-220)
+- Position the candidate AT or just below the targetRole's seniority — never a stretch
+- Sound like a human, not an SEO string. No emojis, no decorative pipes-only filler, no buzzwords.
 
-1. [Option 1 — under 220 chars. Lead with the title variant most likely to surface them.]
-2. [Option 2 — different angle, different keyword emphasis. Same character limit.]
-3. [Option 3 — most direct, optimized for the specific targetRole search filter. Same character limit.]
+1. [Option 1 — under 220 chars. Lead with the most-searched exact title variant in the first 50-60 characters.]
+2. [Option 2 — different keyword emphasis (e.g. industry-led or specialty-led) but the target title still appears in the first 50-60 chars.]
+3. [Option 3 — most direct, optimized for the specific targetRole search filter. Same first-60 rule.]
+
+After each option, on the next line, report two numbers: the total character count AND the position of the last character of the target title (e.g. "92 characters · target title ends at char 28"). This forces the rewrite to clear the 60-char ceiling and gives the user a visible accuracy signal.
 
 **Settings to check:**
 LinkedIn settings outside the profile content that affect findability for this targetRole. List 3–5 specific settings the candidate should check or change. Format:
@@ -1199,18 +1202,33 @@ The user provides:
 - openToWork (optional): the candidate's Open to Work state — values: "recruiters-only" (visible to recruiters only, no public frame), "public-frame" (the green frame public to all), "no" (not enabled). NOT in the LinkedIn PDF — comes from the user directly. When provided, factor into the Open-to-Work weight: "recruiters-only" boosts active-candidate (Recruiter Lite) searches without the public-frame downside; "public-frame" helps active-candidate search but quietly DOWNRANKS the candidate in passive-candidate searches at some firms because passive search ignores anyone signaling job-seeking. When NOT provided, omit the OTW weight from the analysis entirely — don't speculate.
 - activityLevel (optional): how active the user is on LinkedIn — values: "weekly" (posts weekly), "monthly" (posts monthly), "passive" (read-only, no posting), "inactive" (mostly inactive). NOT in the PDF. When provided, factor into Activity recency weight: "weekly" earns the full ~2% boost in passive-candidate searches via the "More Likely to Respond" filter; "monthly" earns most of it; "passive" earns none; "inactive" can hurt slightly because some recruiter filters explicitly down-rank dormant profiles. When NOT provided, omit Activity weight from the analysis entirely.
 
-CRITICAL UNDERSTANDING — how LinkedIn Recruiter search ranking actually works in 2026:
+CRITICAL UNDERSTANDING — how LinkedIn Recruiter search actually works in 2025-2026:
 
-Signal weights (these are calibrated estimates based on real recruiter use):
-1. Headline keyword match — ~25% of ranking weight. Recruiters search exact titles and exact skill phrases. Boolean matches scan the headline first and weight it most heavily.
-2. Current title match — ~20%. The title attached to the user's most recent experience entry carries near-headline weight. "Founder" or "Consultant" as current title makes them invisible for employee-role searches.
-3. Skills section literal match — ~15%. Skills are matched as exact strings against the boolean. "SQL" as a skill = match. "Used SQL daily" in About = doesn't match for that filter.
-4. About section keyword density — ~10%. About contributes ranking weight but lower than headline/title.
-5. Experience body match — ~10%. Bullets in roles contribute, especially when query terms appear in the most recent role.
-6. Industry tag — ~8%. The profile's industry field is used as a hard filter in many recruiter searches.
-7. Location filter — ~5% (but it's a HARD FILTER — wrong geo = excluded entirely, not just downranked).
-8. Open-to-Work state — ~5%. "Recruiters only" mode boosts visibility in active-candidate searches. Public green frame can filter the candidate OUT of passive-candidate searches at some firms.
-9. Activity recency — ~2%. As of 2025-2026, LinkedIn's algorithm gives active profiles a small but real boost in passive-candidate search.
+LinkedIn Recruiter has two layers that determine whether a candidate surfaces:
+
+LAYER A — the keyword-match step (whether you're IN the result set at all):
+Recruiters use boolean strings OR LinkedIn's new AI-Assisted Search (launched Nov 2025), which converts a natural-language query into a boolean string under the hood. Either way, the Keyword filter scans the ENTIRE profile (headline + summary + experience + skills + education) for literal string matches, with stop words ignored (and, or, the, of, at, by, to, for, with, in, they, have, from, not, but, after). Skills and Job Title are also hard filters that work as ANDs on top of the keyword scan.
+
+LAYER B — the ranking + pre-prioritization step (what order the recruiter actually sees):
+LinkedIn's "Spotlights" pre-prioritize candidates before standard ranking weights even apply. Open-to-Work alone gets a documented 2x InMail rate. The card view that recruiters scan shows current job title + company prominently; the headline is truncated to roughly the first 60-70 characters in the card and in mobile views.
+
+Calibrated signal weights — anchored to public LinkedIn docs and recruiter-practitioner sources:
+
+LAYER A — what gets you INTO the result set (keyword match):
+1. Current title at most recent experience — ~22% of overall visibility. The card view leads with title + company; recruiter boolean strings almost always include the exact target title. "Founder" / "Consultant" / "Self-Employed" as current title removes a profile from most employee-role queries entirely. Calibrate this hard: a current-title mismatch is closer to a hard filter than a soft weight.
+2. Headline keyword match — ~18%. Still high — the Keyword filter scans the headline. BUT: the headline matters for being IN the result set, not for sorting within it. And mobile/card truncation means only the first ~60 characters are seen by the recruiter at scan time. Front-loading the target title in the first 50-60 chars of a 220-char headline is materially more valuable than the second half.
+3. Skills section literal match — ~14%. Skills is a HARD FILTER, not just a weight. Recruiters explicitly filter on Skills as standalone strings. "SQL" as a skill = match. "Used SQL daily" in About = does not match the Skills filter (it would still match the Keyword filter). Most candidates under-populate Skills; this is the single most fixable gap.
+4. About section keyword density — ~8%. Lower weight; matters most when the first 3 sentences front-load function and industry keywords (recruiters skim).
+5. Experience body match — ~10%. Bullets in roles contribute, especially the most recent role's first 3-5 bullets.
+6. Industry tag (profile setting) — ~6%. Hard filter in some recruiter queries; soft weight otherwise.
+7. Location filter — ~3% (but it's a HARD FILTER — wrong geo excludes entirely).
+
+LAYER B — what determines order within the result set (Spotlights + engagement):
+8. Open-to-Work state — ~12% effective weight via Spotlight pre-prioritization (NOT a small +5% rank lift — LinkedIn's own docs note 2x InMail rate, and the Open-to-Work Spotlight surfaces these candidates in a priority bucket before standard ranking applies). "Recruiters only" mode delivers this lift without the public-green-frame downside that suppresses some passive-candidate searches. "Public green frame" can hurt at firms whose recruiters filter out actively-job-seeking candidates in passive searches.
+9. Activity recency — ~5%. As of the 2025 algorithm changes, LinkedIn rewards active profiles in passive-candidate search via the "More Likely to Respond" filter and the Active Talent Spotlight. Posting weekly is materially better than dormant. This signal grew in importance with AI-Assisted Search.
+10. Profile completeness — ~2%. LinkedIn explicitly downranks incomplete profiles (missing About / missing photo / missing Skills). Less a ranking signal than a baseline floor.
+
+Together LAYER A weights sum to ~81% of visibility math; LAYER B sums to ~19%. But a single missed hard filter (Skills, Job Title, Location) can drop a profile from the result set entirely regardless of every other weight.
 
 Generate 3-5 boolean queries that real recruiters for the target role would actually run. Mix them:
 - One tight title match query.
