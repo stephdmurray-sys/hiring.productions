@@ -4,6 +4,7 @@ import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { UsageProvider } from '@/components/usage-provider'
+import { PageViewTracker } from '@/components/page-view-tracker'
 import './globals.css'
 
 const figtree = Figtree({ 
@@ -169,6 +170,11 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: '#0F0F12', color: '#F2F0FF' }}>
         <UsageProvider>{children}</UsageProvider>
+        {/* First-party server-side page-view beacon — fires on every
+            page load + client route change, logs to /api/track/view.
+            Feeds the /admin dashboard's visitor + top-pages counts.
+            Skips itself on /admin routes to avoid skewing the funnel. */}
+        <PageViewTracker />
         {/* First-party pageview analytics — no cookies, GDPR-friendly.
             Vercel auto-enables collection when this component is present;
             data lives in Project → Analytics in the Vercel dashboard. */}

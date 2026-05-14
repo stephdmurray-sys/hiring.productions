@@ -69,6 +69,11 @@ export async function GET(request: NextRequest) {
   const byDay: Record<string, Record<string, number>> = {}
   const byTool: Record<string, number> = {}
   const byBlockReason: Record<string, number> = {}
+  const pageViewsByPath: Record<string, number> = {}
+  // anonId set per day so we can compute distinct uniques per day.
+  const uniquesByDay: Record<string, Set<string>> = {}
+  // Distinct anonIds across the whole window for the headline visitor count.
+  const uniqueVisitors = new Set<string>()
   let costCents = 0
 
   for (const e of events) {
@@ -89,7 +94,37 @@ export async function GET(request: NextRequest) {
     if (typeof e.costCents === 'number') {
       costCents += e.costCents
     }
+
+    // Page-view aggregation. The meta dict on the event carries path +
+    // anonId for page_view events specifically (see /api/track/view).
+    if (e.type === 'page_view' && e.meta) {
+      const path = (e.meta.path as string) ?? '(unknown)'
+      pageViewsByPath[path] = (pageViewsByPath[path] ?? 0) + 1
+
+      const anonId = (e.meta.anonId as string) ?? ''
+      if (anonId) {
+        uniqueVisitors.add(anonId)
+        uniquesByDay[dayKey] = uniquesByDay[dayKey] ?? new Set<string>()
+        uniquesByDay[dayKey].add(anonId)
+      }
+    }
   }
+
+  // Daily unique visitor counts — Set → number for JSON-safe output.
+  const uniquesByDayCounts: Record<string, number> = {}
+  for (const [day, set] of Object.entries(uniquesByDay)) {
+    uniquesByDayCounts[day] = set.size
+  }
+
+  // Today / yesterday cuts for the headline cards.
+  const today = new Date(now).toISOString().slice(0, 10)
+  const yesterday = new Date(now - 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+
+  // Top 15 pages by view count — caps the table so high-traffic sites
+  // don't blow up the JSON response.
+  const topPages = Object.entries(pageViewsByPath)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 15)
 
   // ----- Funnel -------------------------------------------------------------
   const toolAttempts = (byType.tool_run_success ?? 0) + (byType.tool_run_blocked ?? 0)
@@ -106,10 +141,28 @@ export async function GET(request: NextRequest) {
   // makes it easy to verify wiring without having to inspect Vercel logs.
   const recentEvents = events.slice(-20).reverse()
 
+  const pageViewCount = byType.page_view ?? 0
+
   return NextResponse.json({
     periodDays,
     generatedAt: new Date(now).toISOString(),
     eventCount: events.length,
+    // Visitor summary — the headline metric. uniqueVisitors is the
+    // distinct anon-cookie count across the whole window; today/yesterday
+    // are the deltas the user actually wants to see at a glance.
+    visitors: {
+      uniqueInWindow: uniqueVisitors.size,
+      today: uniquesByDayCounts[today] ?? 0,
+      yesterday: uniquesByDayCounts[yesterday] ?? 0,
+      pageViews: pageViewCount,
+      // Pages-per-visitor: floor-divide signal of engagement depth.
+      pagesPerVisitor:
+        uniqueVisitors.size > 0
+          ? Math.round((pageViewCount / uniqueVisitors.size) * 10) / 10
+          : null,
+    },
+    uniquesByDay: uniquesByDayCounts,
+    topPages,
     byType,
     byDay,
     byTool,

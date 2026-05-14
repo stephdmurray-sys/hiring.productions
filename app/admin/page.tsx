@@ -260,6 +260,15 @@ interface Stats {
   periodDays: number
   generatedAt: string
   eventCount: number
+  visitors: {
+    uniqueInWindow: number
+    today: number
+    yesterday: number
+    pageViews: number
+    pagesPerVisitor: number | null
+  }
+  uniquesByDay: Record<string, number>
+  topPages: [string, number][]
   byType: Record<string, number>
   byDay: Record<string, Record<string, number>>
   byTool: Record<string, number>
@@ -295,6 +304,29 @@ interface Stats {
 function StatsView({ data }: { data: Stats }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      {/* Visitors — the headline metric */}
+      <Section title="Visitors">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
+          <FunnelCard label="Today" value={data.visitors.today} accent="#5EE6A8" />
+          <FunnelCard label="Yesterday" value={data.visitors.yesterday} />
+          <FunnelCard label={`Last ${data.periodDays}d unique`} value={data.visitors.uniqueInWindow} />
+          <FunnelCard label="Total page views" value={data.visitors.pageViews} />
+          <FunnelCard
+            label="Pages / visitor"
+            value={data.visitors.pagesPerVisitor ?? 0}
+            accent="#A78BFA"
+          />
+        </div>
+      </Section>
+
+      {/* Top pages */}
+      <Section title="Most-visited pages">
+        <SimpleTable
+          rows={data.topPages.map(([path, count]) => [path, count.toString()])}
+          headers={['Path', 'Views']}
+        />
+      </Section>
+
       {/* Funnel */}
       <Section title="Funnel">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
@@ -364,12 +396,14 @@ function StatsView({ data }: { data: Stats }) {
             .sort(([a], [b]) => a.localeCompare(b))
             .map(([day, types]) => [
               day,
+              (data.uniquesByDay[day] ?? 0).toString(),
+              (types.page_view ?? 0).toString(),
               (types.tool_run_success ?? 0).toString(),
               (types.email_capture ?? 0).toString(),
               (types.checkout_start ?? 0).toString(),
               (types.payment_success ?? 0).toString(),
             ])}
-          headers={['Day', 'Tool ✓', 'Email', 'Checkout', 'Pay']}
+          headers={['Day', 'Visitors', 'Pageviews', 'Tool ✓', 'Email', 'Checkout', 'Pay']}
         />
       </Section>
 

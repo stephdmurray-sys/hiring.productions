@@ -27,6 +27,7 @@
 import { Redis } from '@upstash/redis'
 
 export type EventType =
+  | 'page_view'
   | 'tool_run_attempt'
   | 'tool_run_success'
   | 'tool_run_blocked'
