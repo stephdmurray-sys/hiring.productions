@@ -6,6 +6,8 @@ import { ToolResult } from '@/components/tool-result'
 import { InputPromptCard } from '@/components/input-prompt-card'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
+import { RankRevealCard } from '@/components/rank-reveal-card'
+import { ResultNextSteps } from '@/components/result-next-steps'
 import { useStageRotation } from '@/lib/use-stage-rotation'
 import { FileText, Upload } from 'lucide-react'
 
@@ -35,6 +37,21 @@ export default function RecruiterSearchRankPage() {
   const [error, setError] = useState('')
   const [isDragging, setIsDragging] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const formTopRef = useRef<HTMLDivElement>(null)
+
+  // Reset for "Run for a different role" — keeps the uploaded profile so
+  // the user doesn't have to re-upload, clears the result, and scrolls
+  // them back to the form. This is the primary dwell-time lever; every
+  // second run is another minute on site.
+  const handleRunAgain = () => {
+    setResult('')
+    setError('')
+    setTargetRole('')
+    setJobDescription('')
+    setTimeout(() => {
+      formTopRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 60)
+  }
 
   const runningStage = useStageRotation(RUNNING_STAGES, loading)
 
@@ -150,7 +167,7 @@ export default function RecruiterSearchRankPage() {
       category="candidate"
       isFree={true}
     >
-      <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
+      <div ref={formTopRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
         <InputPromptCard
           title="What you’ll get back:"
           prompts={[
@@ -464,13 +481,50 @@ export default function RecruiterSearchRankPage() {
             padding: '0 40px',
           }}
         >
+          {/* The recognition moment — visual rank reveal above the full
+              markdown. Built to be screenshot-worthy on its own. */}
+          <RankRevealCard result={result} targetRole={targetRole || 'your target role'} />
+
           <ToolResult result={result} cta={null} />
+
           <ProUpsellPanel
             recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}
             heading="Now ship the moves. Rewrite your headline, About, and recent roles to climb every search at once."
+          />
+
+          {/* What-now navigation — drives second tool runs + LinkedIn/X
+              share. Designed to turn a single result page into 5+ minutes
+              on the site by giving every visitor an obvious next click. */}
+          <ResultNextSteps
+            shareSummary={buildShareSummary(result, targetRole)}
+            onRunAgain={handleRunAgain}
           />
         </div>
       )}
     </ToolPageShell>
   )
+}
+
+/**
+ * Parses the result for the rank number + search count and builds a
+ * short, shareable sentence for the LinkedIn / X / copy buttons. Falls
+ * back to a generic line if parsing fails (model drift, etc.).
+ */
+function buildShareSummary(result: string, targetRole: string): string {
+  const bandPattern = /Estimated rank:\s*(\d+)\s*[-–—]\s*(\d+)/gi
+  const midpoints: number[] = []
+  let m: RegExpExecArray | null
+  while ((m = bandPattern.exec(result)) !== null) {
+    const low = parseInt(m[1], 10)
+    const high = parseInt(m[2], 10)
+    if (!Number.isNaN(low) && !Number.isNaN(high)) {
+      midpoints.push((low + high) / 2)
+    }
+  }
+  if (midpoints.length === 0) {
+    return 'I just saw exactly where I rank when recruiters search LinkedIn for my role. The simulator is built by a senior TA director — free to try.'
+  }
+  const avg = Math.round(midpoints.reduce((a, b) => a + b, 0) / midpoints.length)
+  const role = targetRole.trim() || 'my target role'
+  return `Just ran the recruiter-search simulator on my LinkedIn profile — average rank #${avg} across ${midpoints.length} searches a recruiter for ${role} would actually run. Built by a senior TA director. Free.`
 }
