@@ -8,6 +8,7 @@ import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { RankRevealCard } from '@/components/rank-reveal-card'
 import { ResultNextSteps } from '@/components/result-next-steps'
+import { UnlockPrescriptionCard } from '@/components/unlock-prescription-card'
 import { useStageRotation } from '@/lib/use-stage-rotation'
 import { FileText, Upload } from 'lucide-react'
 
@@ -33,6 +34,10 @@ export default function RecruiterSearchRankPage() {
   const [targetGeo, setTargetGeo] = useState('')
   const [jobDescription, setJobDescription] = useState('')
   const [result, setResult] = useState('')
+  // Tracks whether the just-returned result was server-redacted for a
+  // non-Pro tier — drives the UnlockPrescriptionCard at the bottom of
+  // the result. Pro users get the full text and never see the card.
+  const [redacted, setRedacted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [isDragging, setIsDragging] = useState(false)
@@ -65,6 +70,7 @@ export default function RecruiterSearchRankPage() {
   // second run is another minute on site.
   const handleRunAgain = () => {
     setResult('')
+    setRedacted(false)
     setError('')
     setTargetRole('')
     setJobDescription('')
@@ -149,6 +155,7 @@ export default function RecruiterSearchRankPage() {
         setError(data.error || 'Failed to run the visibility check')
       } else {
         setResult(data.result)
+        setRedacted(Boolean(data.redacted))
       }
     } catch (err) {
       setError('An error occurred. Please try again.')
@@ -506,6 +513,12 @@ export default function RecruiterSearchRankPage() {
           <RankRevealCard result={result} targetRole={targetRole || 'your target role'} />
 
           <ToolResult result={result} cta={null} />
+
+          {/* If this was a free-tier (redacted) run, the unlock card is
+              the conversion moment — it names exactly what's behind the
+              paywall and triggers Stripe checkout. Pro members get the
+              full text inline and never see this card. */}
+          {redacted && <UnlockPrescriptionCard />}
 
           <ProUpsellPanel
             recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}

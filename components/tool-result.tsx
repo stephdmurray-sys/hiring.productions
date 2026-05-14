@@ -1,5 +1,7 @@
 'use client'
 
+import { Lock } from 'lucide-react'
+
 interface ToolResultProps {
   result: string
   /**
@@ -25,9 +27,17 @@ const DEFAULT_CTA = {
 //   "double quotes"   → lavender highlight pill (verbatim quoted phrases)
 //   “curly doubles”   → same
 //   ‘curly singles’   → same
+//   [LOCKED:tag]      → gradient Pro-unlock pill (server-redacted content
+//                       for non-Pro users on the wedge tool)
 // Deliberately excludes straight single quotes (') because they appear inside
 // contractions (you're, that's, can't) and would wrap whole sentences.
-const INLINE_PATTERN = /(\*\*[^*]+\*\*|`[^`]+`|"[^"]+"|“[^”]+”|‘[^’]+’)/g
+const INLINE_PATTERN = /(\*\*[^*]+\*\*|`[^`]+`|"[^"]+"|“[^”]+”|‘[^’]+’|\[LOCKED:[a-z]+\])/g
+
+const LOCKED_LABEL: Record<string, string> = {
+  boolean: 'Unlock the boolean — Pro',
+  rewrite: 'Unlock the exact rewrite — Pro',
+  why: 'Unlock the ranking math — Pro',
+}
 
 function isQuoted(part: string) {
   if (!part) return false
@@ -92,6 +102,41 @@ function renderInline(text: string, keyPrefix: string) {
         >
           {part}
         </span>
+      )
+    }
+    // Pro-locked content. Server replaces sensitive spans with
+    // [LOCKED:tag] sentinels for non-Pro users on the wedge tool; we
+    // render each as an inline gradient pill that links to pricing.
+    const lockedMatch = part.match(/^\[LOCKED:([a-z]+)\]$/)
+    if (lockedMatch) {
+      const tag = lockedMatch[1]
+      const label = LOCKED_LABEL[tag] ?? 'Unlock with Pro'
+      return (
+        <a
+          key={`${keyPrefix}-${i}`}
+          href="/pricing"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '3px 10px',
+            background:
+              'linear-gradient(135deg, rgba(108,71,255,0.18), rgba(255,79,106,0.18))',
+            border: '1px solid rgba(167,139,250,0.5)',
+            borderRadius: 6,
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: '12.5px',
+            color: '#F2F0FF',
+            textDecoration: 'none',
+            letterSpacing: '0.01em',
+            boxDecorationBreak: 'clone',
+            WebkitBoxDecorationBreak: 'clone',
+          }}
+        >
+          <Lock size={11} strokeWidth={2.5} aria-hidden />
+          {label}
+        </a>
       )
     }
     return part

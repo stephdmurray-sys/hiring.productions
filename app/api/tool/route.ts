@@ -2002,9 +2002,24 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await response.json()
-    const result = data.content[0].text
+    const rawResult = data.content[0].text
     const usage = (data.usage ?? {}) as AnthropicUsage
     const costCents = priceUsageCents(model, usage)
+
+    // ----- Apply free-tier redaction for the wedge tool ----------------
+    // The wedge (recruiter-search-rank) is free to TRY, but the
+    // prescription — the exact boolean strings for queries 2-5 and the
+    // word-for-word headline/title rewrites in each Move — is the
+    // conversion moment. Free runs show the diagnosis. Pro runs show
+    // the fixes. The redactor leaves Search 1's boolean intact (proof
+    // the tool runs real recruiter queries) and replaces sensitive
+    // lines with [LOCKED:...] sentinels that the client renders as
+    // styled "Unlock with Pro" pills.
+    const shouldRedact =
+      toolId === 'recruiter-search-rank' && identity.tier !== 'pro'
+    const result = shouldRedact
+      ? redactRecruiterSearchRankForFreeTier(rawResult)
+      : rawResult
 
     // ----- Record usage + spend ----------------------------------------
     const after = await recordRun(identity, costCents)
@@ -2015,6 +2030,7 @@ export async function POST(request: NextRequest) {
       tier: identity.tier,
       remaining: after.remaining,
       limit: after.limit,
+      redacted: shouldRedact,
     })
 
     // Plant the anon cookie if identity just minted one. The cookie
@@ -2040,6 +2056,60 @@ export async function POST(request: NextRequest) {
     console.error('[api/tool] error:', error)
     return NextResponse.json({ error: 'internal' }, { status: 500 })
   }
+}
+
+/**
+ * Free-tier redaction for the recruiter-search-rank wedge tool.
+ *
+ * Leaves the diagnosis fully visible:
+ *  - Average rank + verdict
+ *  - "Your visibility, in 30 seconds" intro
+ *  - Search 1's full boolean string (so the user sees the simulator
+ *    runs a REAL recruiter query, not a fabricated example)
+ *  - All 5 searches' names, rank bands, and "why this rank" reasoning
+ *  - All 3 Move LABELS and "improves N of N searches" lines
+ *  - "The honest read" closing verdict
+ *
+ * Replaces with [LOCKED:...] sentinels — rendered as Pro-unlock pills
+ * client-side:
+ *  - Booleans in Searches 2-5 (Search 1 stays visible as proof)
+ *  - Current: "..." lines in all Moves (the exact text on their profile)
+ *  - Change to: "..." lines in all Moves (the word-for-word rewrite)
+ *
+ * The result: free users learn WHAT'S broken (the value the homepage
+ * promised). They pay to learn HOW to rewrite each line specifically.
+ */
+function redactRecruiterSearchRankForFreeTier(result: string): string {
+  // Pass 1 — booleans in Search 2 onward.
+  // Split on the Search section headers so we know which search we're in.
+  // The split includes the headers as their own array entries so we can
+  // rejoin without losing structure.
+  const parts = result.split(/(\*\*Search \d+:[^\n]*\*\*)/g)
+  let searchIdx = 0
+  const redacted = parts
+    .map((part) => {
+      if (/^\*\*Search \d+:/.test(part)) {
+        searchIdx++
+        return part
+      }
+      // Only redact the boolean inside Search 2 and beyond.
+      if (searchIdx >= 2) {
+        return part.replace(
+          /Boolean:\s*`[^`]+`/g,
+          'Boolean: [LOCKED:boolean]',
+        )
+      }
+      return part
+    })
+    .join('')
+
+  // Pass 2 — Current: and Change to: rewrite lines across all Moves.
+  // The model emits these in the standard ``Current: "..."`` and
+  // ``Change to: "..."`` forms with either straight or curly quotes.
+  // Single-line regex over the joined output keeps things simple.
+  return redacted
+    .replace(/^Current:\s*["“][^"”]+["”]\s*$/gm, 'Current: [LOCKED:rewrite]')
+    .replace(/^Change to:\s*["“][^"”]+["”]\s*$/gm, 'Change to: [LOCKED:rewrite]')
 }
 
 function gateMessage(reason: string): string {
