@@ -23,6 +23,10 @@ const FREE_TOOL_IDS = new Set([
   'career-pivot',
   'scam-check',
   'ghosted',
+  // The wedge. Free to try (first 2 runs/day for anon, 10 lifetime with
+  // email) so the homepage can route every visitor straight into the
+  // recognition moment. Repeated use upsells to Pro.
+  'recruiter-search-rank',
 ])
 
 /**

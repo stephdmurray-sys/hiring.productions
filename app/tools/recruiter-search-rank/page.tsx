@@ -148,7 +148,7 @@ export default function RecruiterSearchRankPage() {
       toolName="Where Do You Rank in a Recruiter Search?"
       toolDescription="Drop your LinkedIn profile PDF. See the 5 boolean searches a recruiter for your target role would actually run — and your estimated rank in each."
       category="candidate"
-      isFree={false}
+      isFree={true}
     >
       <div style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
         <InputPromptCard
