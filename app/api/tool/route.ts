@@ -2105,13 +2105,24 @@ function redactRecruiterSearchRankForFreeTier(result: string): string {
     })
     .join('')
 
-  // Pass 2 — Current: and Change to: rewrite lines across all Moves.
-  // The model emits these in the standard ``Current: "..."`` and
-  // ``Change to: "..."`` forms with either straight or curly quotes.
-  // Single-line regex over the joined output keeps things simple.
+  // Pass 2 — Current: / Change to: / Change: lines and the Impact line
+  // in every Move. The original regex required quote-wrapping which
+  // missed model outputs that listed multiple comma-separated items
+  // without an outer quote (e.g. Move 3's "Change to: Add these
+  // strings as Skills: 'A,' 'B,' 'C'..." — the inner quotes broke the
+  // outer match). Broadening to "anything after the label, to end of
+  // line" catches every shape the model has emitted.
+  //
+  // The Impact line is also redacted because it carries the ranking
+  // mechanic ("moving X into Y makes it an exact-match token") which
+  // is the prescription in different clothing — without locking it,
+  // a careful free user can reconstruct the rewrite from the Impact
+  // text alone.
   return redacted
-    .replace(/^Current:\s*["“][^"”]+["”]\s*$/gm, 'Current: [LOCKED:rewrite]')
-    .replace(/^Change to:\s*["“][^"”]+["”]\s*$/gm, 'Change to: [LOCKED:rewrite]')
+    .replace(/^Current:\s*.+$/gm, 'Current: [LOCKED:rewrite]')
+    .replace(/^Change to:\s*.+$/gm, 'Change to: [LOCKED:rewrite]')
+    .replace(/^Change:\s*.+$/gm, 'Change: [LOCKED:rewrite]')
+    .replace(/^Impact:\s*.+$/gm, 'Impact: [LOCKED:impact]')
 }
 
 function gateMessage(reason: string): string {

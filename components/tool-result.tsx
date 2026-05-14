@@ -37,6 +37,7 @@ const LOCKED_LABEL: Record<string, string> = {
   boolean: 'Unlock the boolean — Pro',
   rewrite: 'Unlock the exact rewrite — Pro',
   why: 'Unlock the ranking math — Pro',
+  impact: 'Unlock the ranking math — Pro',
 }
 
 function isQuoted(part: string) {

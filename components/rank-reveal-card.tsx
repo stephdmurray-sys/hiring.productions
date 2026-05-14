@@ -1,6 +1,6 @@
 'use client'
 
-import { TrendingUp, Wrench } from 'lucide-react'
+import { TrendingUp, Wrench, Lock } from 'lucide-react'
 
 /**
  * The "rank reveal" card. Lives at the top of a recruiter-search-rank
@@ -201,7 +201,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
         </div>
 
         {/* Top fix card */}
-        {topFixLabel && topFixImpact && (
+        {topFixLabel && (
           <div
             style={{
               borderTop: '1px solid rgba(255,255,255,0.06)',
@@ -243,16 +243,46 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
               >
                 {topFixLabel}
               </div>
-              <div
-                style={{
-                  fontFamily: "'Figtree', sans-serif",
-                  fontSize: '14px',
-                  color: '#9D9CB3',
-                  lineHeight: 1.55,
-                }}
-              >
-                {topFixImpact}
-              </div>
+              {/* For free users, the parsed Impact line will contain the
+                  [LOCKED:impact] sentinel because the API redacts it
+                  server-side. Show a friendly members-only callout
+                  rather than rendering the raw sentinel. Pro users get
+                  the full impact text inline. */}
+              {topFixImpact && topFixImpact.includes('[LOCKED:') ? (
+                <a
+                  href="/pricing"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    padding: '4px 10px',
+                    background:
+                      'linear-gradient(135deg, rgba(108,71,255,0.16), rgba(255,79,106,0.16))',
+                    border: '1px solid rgba(167,139,250,0.45)',
+                    borderRadius: 6,
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '12.5px',
+                    color: '#F2F0FF',
+                    textDecoration: 'none',
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  <Lock size={11} strokeWidth={2.5} />
+                  Members unlock the exact rewrite + ranking math
+                </a>
+              ) : topFixImpact ? (
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: '14px',
+                    color: '#9D9CB3',
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {topFixImpact}
+                </div>
+              ) : null}
             </div>
           </div>
         )}
