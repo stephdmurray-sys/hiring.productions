@@ -152,7 +152,10 @@ export default function HomePage() {
             FROM A SENIOR RECRUITER · FREE TO TRY
           </div>
 
-          {/* H1 — the question they're already asking */}
+          {/* H1 — the question they're already asking.
+              "the job you want" is deliberate over "your job" — a strong
+              candidate isn't wondering if they're findable for the role
+              they have, they're wondering about the next one. */}
           <h1
             style={{
               fontFamily: "'Figtree', sans-serif",
@@ -164,7 +167,7 @@ export default function HomePage() {
               marginBottom: '22px',
             }}
           >
-            Where do you actually rank when a recruiter searches{' '}
+            Where do you actually rank when a recruiter searches LinkedIn for{' '}
             <span
               style={{
                 background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
@@ -173,7 +176,7 @@ export default function HomePage() {
                 backgroundClip: 'text',
               }}
             >
-              LinkedIn for your job?
+              the job you want?
             </span>
           </h1>
 
