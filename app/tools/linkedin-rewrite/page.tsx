@@ -5,6 +5,7 @@ import { ToolPageShell } from '@/components/tool-page-shell'
 import { LinkedinReport } from '@/components/linkedin-report'
 import { ShareResult } from '@/components/share-result'
 import { LinkedInPdfUpload } from '@/components/linkedin-pdf-upload'
+import { FounderByline } from '@/components/founder-byline'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
 
 type ViewState = 'input' | 'loading' | 'result' | 'error'
@@ -396,6 +397,14 @@ export default function LinkedinRewritePage() {
 
             <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
               <ShareResult source="linkedin" variant="dark" />
+            </div>
+
+            {/* Founder byline below the result — same play as the wedge
+                tool: the user just got value, this is the moment they're
+                most receptive to a LinkedIn follow. Captures the segment
+                that's interested but not paying today. */}
+            <div style={{ maxWidth: '780px', margin: '32px auto 0' }}>
+              <FounderByline />
             </div>
 
             <div style={{ marginTop: '32px', textAlign: 'center' }}>
