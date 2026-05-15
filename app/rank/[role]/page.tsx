@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { RANK_ROLES, roleBySlug } from '@/lib/rank-roles'
+import { RANK_ROLES, roleBySlug, defaultFaqsForRole } from '@/lib/rank-roles'
 import { Search, ListOrdered, TrendingUp, Wrench } from 'lucide-react'
 
 /**
@@ -65,8 +65,31 @@ export default async function RoleRankPage({
     config.defaultTargetRole,
   )}`
 
+  // FAQ schema (JSON-LD) — Google sometimes pulls this into rich-snippet
+  // "People also ask" result cards. Each Q&A is a real long-tail query
+  // candidates in this role search for; the answer is calibrated to what
+  // the wedge tool actually delivers, so the schema doubles as a preview
+  // of the value behind the click.
+  const faqs = defaultFaqsForRole(config)
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  }
+
   return (
     <main style={{ background: '#0F0F12', color: '#F2F0FF' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navigation variant="dark" />
 
       {/* ───────────────────── HERO ───────────────────── */}
@@ -540,6 +563,91 @@ export default async function RoleRankPage({
             >
               See the whole production — $20/year →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── FAQ ─────────────
+         Rendered visibly because Google rewards content+schema
+         alignment. Each question is a long-tail query candidates
+         in this role search for. The same Q&A is also in the
+         FAQPage JSON-LD at the top of the document for rich-snippet
+         eligibility in search results.
+      */}
+      <section
+        style={{
+          background: '#0F0F12',
+          borderTop: '1px solid rgba(255,255,255,0.06)',
+          padding: 'clamp(56px, 8vw, 90px) clamp(20px, 5vw, 40px)',
+        }}
+      >
+        <div style={{ maxWidth: 820, margin: '0 auto' }}>
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: '11px',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#A78BFA',
+              textAlign: 'center',
+              marginBottom: 18,
+            }}
+          >
+            Questions {config.displayName.toLowerCase()}s ask
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(26px, 3.6vw, 36px)',
+              letterSpacing: '-0.02em',
+              color: '#F2F0FF',
+              textAlign: 'center',
+              lineHeight: 1.15,
+              marginBottom: 32,
+            }}
+          >
+            How LinkedIn Recruiter actually finds {config.displayName.toLowerCase()}s.
+          </h2>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {faqs.map((f, idx) => (
+              <details
+                key={idx}
+                style={{
+                  background: '#14141B',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  borderRadius: 12,
+                  padding: '16px 20px',
+                }}
+              >
+                <summary
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: 15.5,
+                    color: '#F2F0FF',
+                    cursor: 'pointer',
+                    listStyle: 'none',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {f.q}
+                </summary>
+                <div
+                  style={{
+                    marginTop: 12,
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 14.5,
+                    color: '#9D9CB3',
+                    lineHeight: 1.65,
+                  }}
+                >
+                  {f.a}
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>

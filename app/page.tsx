@@ -6,6 +6,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { AudienceHubsRow } from '@/components/audience-hubs-row'
 import { submitLead } from '@/lib/submit-lead'
+import Image from 'next/image'
 import {
   Search,
   ListOrdered,
@@ -20,6 +21,7 @@ import {
   Star,
   Building2,
   User,
+  Linkedin,
 } from 'lucide-react'
 
 /**
@@ -642,11 +644,33 @@ export default function HomePage() {
               textTransform: 'uppercase',
               letterSpacing: '0.14em',
               color: '#A78BFA',
-              marginBottom: 18,
+              marginBottom: 22,
             }}
           >
             WHO BUILT THIS
           </div>
+
+          {/* Headshot — anchored to /public/stephanie.jpg. The image is
+              the credibility moment; for a solo expert-founder where the
+              moat IS the founder, a face in the credibility section is
+              the difference between "yet another resume tool" and "this
+              specific recruiter built this." */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 22 }}>
+            <Image
+              src="/stephanie.jpg"
+              alt="Stephanie Murray"
+              width={104}
+              height={104}
+              priority
+              style={{
+                borderRadius: '50%',
+                objectFit: 'cover',
+                border: '3px solid rgba(167,139,250,0.45)',
+                boxShadow: '0 18px 50px rgba(108,71,255,0.22)',
+              }}
+            />
+          </div>
+
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
@@ -655,11 +679,29 @@ export default function HomePage() {
               letterSpacing: '-0.02em',
               color: '#F2F0FF',
               lineHeight: 1.15,
-              marginBottom: 24,
+              marginBottom: 14,
             }}
           >
             Built by a recruiter, not a resume tool company.
           </h2>
+
+          {/* Name + role byline, sits under the H2 like a magazine credit
+              line. Small, restrained, but unambiguous about who is behind
+              the tool. */}
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: 14,
+              color: '#A78BFA',
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
+              marginBottom: 22,
+            }}
+          >
+            Stephanie Murray · Senior TA Director · 20 years in talent
+          </div>
+
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
@@ -669,11 +711,11 @@ export default function HomePage() {
               marginBottom: 18,
             }}
           >
-            Stephanie Murray spent 20 years in talent acquisition — most recently as Senior
-            Director of TA at Brightside Health. The searches you&apos;ll see are the same ones
-            she ran on LinkedIn Recruiter every day to fill senior roles. The ranking model is
-            calibrated to how the algorithm actually weights signals, not what a content marketing
-            team guessed.
+            Most recently Senior Director of TA at Brightside Health, where I won Transform&apos;s
+            Talent Strategy of the Year in 2025 building a clinical hiring function across all 50
+            states. The searches you&apos;ll see are the same ones I ran on LinkedIn Recruiter
+            every day to fill senior roles. The ranking model is calibrated to how the algorithm
+            actually weights signals — not what a content marketing team guessed.
           </p>
           <p
             style={{
@@ -682,11 +724,39 @@ export default function HomePage() {
               color: '#8B8AA0',
               lineHeight: 1.65,
               fontStyle: 'italic',
+              marginBottom: 28,
             }}
           >
             Every Recruiter Insight on this site is built from real recruiting practice. No
             fabricated specifics. No invented stats.
           </p>
+
+          {/* LinkedIn follow CTA — captures the "interested but not paying
+              today" segment. Every follow is a future buyer + amplifier.
+              Styled subtly so it doesn't compete with the wedge CTA above
+              or the membership CTA below. */}
+          <a
+            href="https://www.linkedin.com/in/stephaniemurray11/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '11px 20px',
+              background: 'rgba(10,102,194,0.12)',
+              border: '1px solid rgba(10,102,194,0.42)',
+              borderRadius: 10,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: 14,
+              color: '#7BB7E8',
+              textDecoration: 'none',
+            }}
+          >
+            <Linkedin size={15} strokeWidth={2.2} />
+            Follow Stephanie on LinkedIn for unfiltered recruiter takes
+          </a>
         </div>
       </section>
 
