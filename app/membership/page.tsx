@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
-import { activateMembership } from '@/lib/membership'
+import { activateMembership, isMember } from '@/lib/membership'
 import { User, Building2, Lock } from 'lucide-react'
 import { CATALOG } from '@/lib/tools-catalog'
 
@@ -22,9 +22,20 @@ const tools = CATALOG.filter((t) => t.tier !== 'soon').map((t) => ({
 
 export default function MembershipPage() {
   const [showSuccess, setShowSuccess] = useState(false)
+  // Tracks whether the visitor already has a member signal (localStorage
+  // flag set by Stripe success flow). Used to gate the "Already a member?
+  // Sign in" link so it doesn't intercept first-time buyers at the moment
+  // of intent. Real session data (Clarity recording 05-14) showed a user
+  // click Get Full Access then immediately click the Sign in link below
+  // it, get bounced to /sign-in with no account, and abandon the buy.
+  const [hasMemberSignal, setHasMemberSignal] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+
+    // Check for existing-member signal. Drives whether to show the
+    // "Already a member?" recovery link (see comment on the state above).
+    setHasMemberSignal(isMember())
 
     const params = new URLSearchParams(window.location.search)
     if (params.get('success') === 'true') {
@@ -187,29 +198,41 @@ export default function MembershipPage() {
           Get Full Access — $20/year
         </StripeCheckoutButton>
 
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            marginTop: '14px',
-            textAlign: 'center',
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '13px',
-            color: '#9D9CB3',
-          }}
-        >
-          Already a member?{' '}
-          <Link
-            href="/sign-in"
+        {/* "Already a member?" recovery link — gated behind an existing
+            localStorage member signal so it doesn't intercept first-time
+            buyers at the moment of intent. The Clarity recording for
+            b90nty showed exactly this failure mode: visitor clicks Get
+            Full Access, sees this Sign-in link directly below, doubts
+            whether they already paid, clicks Sign-in, lands on /sign-in
+            with no account to recover, and abandons the buy without
+            completing checkout. For users without a member signal the
+            link is now hidden; if they paid on another device they can
+            still reach /sign-in via the top navigation. */}
+        {hasMemberSignal && (
+          <div
             style={{
-              color: '#A78BFA',
-              fontWeight: 700,
-              textDecoration: 'none',
+              position: 'relative',
+              zIndex: 1,
+              marginTop: '14px',
+              textAlign: 'center',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '13px',
+              color: '#9D9CB3',
             }}
           >
-            Sign in →
-          </Link>
-        </div>
+            Already a member?{' '}
+            <Link
+              href="/sign-in"
+              style={{
+                color: '#A78BFA',
+                fontWeight: 700,
+                textDecoration: 'none',
+              }}
+            >
+              Sign in →
+            </Link>
+          </div>
+        )}
       </section>
 
       {/* Comparison Table */}

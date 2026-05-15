@@ -172,6 +172,52 @@ export default function SignInPage() {
             </div>
           ) : (
             <>
+              {/* Prominent "haven't paid yet?" callout — pulled UP above
+                  the sign-in form because the dominant /sign-in visitor
+                  is someone who arrived here by mistake (clicked the
+                  former "Already a member?" link while trying to buy).
+                  This callout gives them an obvious one-click route
+                  back to checkout instead of leaving them stuck staring
+                  at a sign-in form they can't satisfy. */}
+              <Link
+                href="/membership"
+                style={{
+                  display: 'block',
+                  marginBottom: 24,
+                  padding: '16px 18px',
+                  background: 'linear-gradient(135deg, rgba(108,71,255,0.14), rgba(255,79,106,0.10))',
+                  border: '1px solid rgba(167,139,250,0.32)',
+                  borderRadius: 12,
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 12,
+                    fontWeight: 800,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: '#A78BFA',
+                    marginBottom: 6,
+                  }}
+                >
+                  Never paid before?
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 14.5,
+                    color: '#F2F0FF',
+                    fontWeight: 700,
+                    lineHeight: 1.45,
+                  }}
+                >
+                  Get full access — $20/year →
+                </div>
+              </Link>
+
               <div style={{ textAlign: 'center', marginBottom: 28 }}>
                 <div
                   style={{
@@ -199,7 +245,7 @@ export default function SignInPage() {
                     lineHeight: 1.1,
                   }}
                 >
-                  Sign in to your tools.
+                  Already a member? Sign in.
                 </h1>
                 <p
                   style={{
