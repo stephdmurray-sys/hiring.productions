@@ -121,15 +121,29 @@ export function isRedisAvailable(): boolean {
  */
 export async function readEvents(sinceMs: number, untilMs: number = Date.now()): Promise<LoggedEvent[]> {
   const r = getRedis()
-  if (!r) return []
+  if (!r) {
+    console.warn('[event-log] read skipped — Redis client unavailable')
+    return []
+  }
   try {
+    // Diagnostic: count total entries in the set regardless of score.
+    // If this is > 0 but our zrange returns 0, the byScore range query
+    // is the problem (probably score type coercion).
+    const total = await r.zcard(EVENTS_KEY)
     // zrange with byScore returns strings; parse each one back.
     const raw = await r.zrange<string[]>(EVENTS_KEY, sinceMs, untilMs, { byScore: true })
+    console.log(
+      `[event-log] read sinceMs=${sinceMs} untilMs=${untilMs} → ${raw.length} matches (zcard total=${total})`,
+    )
     return raw
       .map((s) => {
         try {
-          return JSON.parse(s) as LoggedEvent
-        } catch {
+          // Upstash with REST API sometimes auto-parses JSON; member could
+          // come back as either a string or an already-parsed object.
+          if (typeof s === 'object' && s !== null) return s as LoggedEvent
+          return JSON.parse(s as string) as LoggedEvent
+        } catch (parseErr) {
+          console.warn('[event-log] parse failed for member:', s, parseErr)
           return null
         }
       })
