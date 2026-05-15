@@ -97,10 +97,9 @@ export async function logEvent(type: EventType, payload: EventPayload = {}): Pro
     // Sorted set, ZADD with timestamp as score. The member string contains
     // the full JSON of the event including the timestamp; deduping isn't a
     // concern at this volume so we don't need an event ID.
-    const added = await r.zadd(EVENTS_KEY, { score: event.ts, member: JSON.stringify(event) })
+    await r.zadd(EVENTS_KEY, { score: event.ts, member: JSON.stringify(event) })
     // Trim anything older than the retention window. Cheap and self-healing.
     await r.zremrangebyscore(EVENTS_KEY, 0, Date.now() - RETENTION_MS)
-    console.log(`[event-log] wrote ${type} (zadd returned ${added}) key=${EVENTS_KEY}`)
   } catch (err) {
     console.warn(`[event-log] write failed for ${type}:`, err)
   }
@@ -126,24 +125,19 @@ export async function readEvents(sinceMs: number, untilMs: number = Date.now()):
     return []
   }
   try {
-    // Diagnostic: count total entries in the set regardless of score.
-    // If this is > 0 but our zrange returns 0, the byScore range query
-    // is the problem (probably score type coercion).
-    const total = await r.zcard(EVENTS_KEY)
-    // zrange with byScore returns strings; parse each one back.
+    // zrange with byScore returns sorted-set members.
     const raw = await r.zrange<string[]>(EVENTS_KEY, sinceMs, untilMs, { byScore: true })
-    console.log(
-      `[event-log] read sinceMs=${sinceMs} untilMs=${untilMs} → ${raw.length} matches (zcard total=${total})`,
-    )
     return raw
       .map((s) => {
+        // Upstash Redis (REST API) auto-parses JSON-shaped members back into
+        // objects rather than returning them as strings. So a member may
+        // come back either way — handle both. The original implementation
+        // assumed strings and silently dropped every event via JSON.parse
+        // throwing on an already-parsed object.
         try {
-          // Upstash with REST API sometimes auto-parses JSON; member could
-          // come back as either a string or an already-parsed object.
           if (typeof s === 'object' && s !== null) return s as LoggedEvent
           return JSON.parse(s as string) as LoggedEvent
-        } catch (parseErr) {
-          console.warn('[event-log] parse failed for member:', s, parseErr)
+        } catch {
           return null
         }
       })
