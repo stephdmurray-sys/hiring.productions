@@ -88,18 +88,31 @@ function getRedis(): Redis | null {
  */
 export async function logEvent(type: EventType, payload: EventPayload = {}): Promise<void> {
   const r = getRedis()
-  if (!r) return
+  if (!r) {
+    console.warn(`[event-log] skipping ${type} — Redis client unavailable`)
+    return
+  }
   const event: LoggedEvent = { type, ts: Date.now(), ...payload }
   try {
     // Sorted set, ZADD with timestamp as score. The member string contains
     // the full JSON of the event including the timestamp; deduping isn't a
     // concern at this volume so we don't need an event ID.
-    await r.zadd(EVENTS_KEY, { score: event.ts, member: JSON.stringify(event) })
+    const added = await r.zadd(EVENTS_KEY, { score: event.ts, member: JSON.stringify(event) })
     // Trim anything older than the retention window. Cheap and self-healing.
     await r.zremrangebyscore(EVENTS_KEY, 0, Date.now() - RETENTION_MS)
+    console.log(`[event-log] wrote ${type} (zadd returned ${added}) key=${EVENTS_KEY}`)
   } catch (err) {
-    console.warn('[event-log] write failed:', err)
+    console.warn(`[event-log] write failed for ${type}:`, err)
   }
+}
+
+/**
+ * Diagnostic: return whether the Redis client could be initialized at all.
+ * Used by /api/admin/stats so the dashboard can report "Redis disconnected"
+ * instead of silently showing zeros when env vars are misconfigured.
+ */
+export function isRedisAvailable(): boolean {
+  return getRedis() !== null
 }
 
 /**
