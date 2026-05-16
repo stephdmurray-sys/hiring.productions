@@ -54,6 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/q/how-to-stand-out-as-a-new-grad', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/references-for-new-grad-jobs', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/what-recruiters-look-for-in-new-grads', priority: 0.85, changeFrequency: 'monthly' },
+    // Underserved high-intent cluster (May 2026) — three low-competition
+    // queries the brand has direct authority to own. /are-references
+    // doubles as the highest-leverage RepVera lead-in on the site.
+    { path: '/q/are-references-on-a-resume-still-relevant', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/q/open-to-work-without-looking-desperate', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/how-recruiters-spot-ai-cover-letters', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
   // /rank/[role] SEO landing pages — one per RoleConfig in lib/rank-roles.
