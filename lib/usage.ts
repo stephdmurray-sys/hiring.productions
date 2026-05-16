@@ -103,6 +103,36 @@ export async function getDailySpendCents(): Promise<number> {
 }
 
 /**
+ * Read spend for the past N days, keyed by ISO date. Useful for the
+ * /admin spend telemetry. Note: `spend:` keys carry a 48-hour TTL so
+ * older days return 0 even if they had spend at the time — this is
+ * authoritative ONLY for today and yesterday.
+ */
+export async function getRecentDailySpend(
+  daysBack: number,
+): Promise<Record<string, number>> {
+  const r = getRedis()
+  const out: Record<string, number> = {}
+  if (!r) return out
+
+  const now = new Date()
+  const promises: Array<Promise<[string, number]>> = []
+  for (let i = 0; i < daysBack; i++) {
+    const d = new Date(now)
+    d.setUTCDate(d.getUTCDate() - i)
+    const key = dayKey(d)
+    promises.push(
+      r.get<number>(`spend:${key}`).then((v) => [key, v ?? 0] as [string, number]),
+    )
+  }
+  const pairs = await Promise.all(promises)
+  for (const [k, v] of pairs) {
+    out[k] = v
+  }
+  return out
+}
+
+/**
  * Record cost for one call. Atomically increments today's spend counter
  * and sets a 48h TTL so old days expire on their own.
  */

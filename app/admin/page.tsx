@@ -273,6 +273,16 @@ interface Stats {
   byDay: Record<string, Record<string, number>>
   byTool: Record<string, number>
   byBlockReason: Record<string, number>
+  spend?: {
+    today: { cents: number; dollars: string }
+    yesterday: { cents: number; dollars: string }
+    dailyBudgetCents: number
+    dailyBudgetDollars: string
+    anonCutoffCents: number
+    anonCutoffDollars: string
+    pctOfBudget: number
+    byDay: Record<string, number>
+  }
   funnel: {
     toolAttempts: number
     toolSuccesses: number
@@ -345,12 +355,23 @@ function StatsView({ data }: { data: Stats }) {
         </div>
       </Section>
 
-      {/* Spend */}
-      <Section title={`Anthropic spend (${data.periodDays}d window)`}>
+      {/* Spend — today vs $5 daily cap (the number that actually trips
+          the budget guardrail). Pulled from the authoritative Redis
+          spend keys in lib/usage.ts. The event-log-derived `costCents`
+          below shows period-total from event entries, which may be
+          lower if any tool runs predated the event-log shipping. */}
+      {data.spend && (
+        <Section title="Anthropic spend — today vs daily cap">
+          <SpendMeter spend={data.spend} />
+        </Section>
+      )}
+
+      {/* Event-log spend (period total, derived from logged events) */}
+      <Section title={`Event-log spend (${data.periodDays}d window)`}>
         <div
           style={{
             fontWeight: 900,
-            fontSize: 'clamp(32px, 5vw, 44px)',
+            fontSize: 'clamp(28px, 4vw, 38px)',
             background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -365,7 +386,7 @@ function StatsView({ data }: { data: Stats }) {
           {data.funnel.toolSuccesses > 0
             ? `$${(data.costCents / data.funnel.toolSuccesses / 100).toFixed(4)}`
             : '—'}{' '}
-          per run
+          per run · derived from event-log entries
         </div>
       </Section>
 
@@ -541,6 +562,122 @@ function SimpleTable({ rows, headers }: { rows: string[][]; headers: string[] })
           ))}
         </tbody>
       </table>
+    </div>
+  )
+}
+
+/**
+ * Today's authoritative Anthropic spend, rendered with a progress bar
+ * against the $5/day budget cap. Colors shift coral as we approach
+ * the cap so the threat is visible at a glance. The bar's underlying
+ * number is what trips the kill switch in lib/usage.ts — so this is
+ * the truth source, not the event-log-derived costCents above.
+ */
+function SpendMeter({ spend }: { spend: NonNullable<Stats['spend']> }) {
+  const pct = Math.min(spend.pctOfBudget, 100)
+  const anonPct = Math.round((spend.anonCutoffCents / spend.dailyBudgetCents) * 100)
+
+  // Color shifts as spend approaches cap. 0-50% green (safe), 50-80%
+  // lavender (watch), 80-95% coral (warn), 95%+ deep coral (cap imminent).
+  const barColor =
+    pct >= 95
+      ? '#FF4F6A'
+      : pct >= 80
+      ? '#FF7A8A'
+      : pct >= 50
+      ? '#A78BFA'
+      : '#5EE6A8'
+
+  const warning =
+    pct >= 95
+      ? 'AT CAP — anon traffic blocked; only Pro runs proceeding.'
+      : pct >= 80
+      ? 'Approaching cap. Free tool throttling soon.'
+      : pct >= Math.round((spend.anonCutoffCents / spend.dailyBudgetCents) * 100)
+      ? `Past anon cutoff ($${spend.anonCutoffDollars}). Anon traffic now blocked; Pro reserve protected.`
+      : null
+
+  return (
+    <div>
+      {/* Big number + budget context */}
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 6, flexWrap: 'wrap' }}>
+        <div
+          style={{
+            fontWeight: 900,
+            fontSize: 'clamp(38px, 5vw, 48px)',
+            color: barColor,
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+          }}
+        >
+          ${spend.today.dollars}
+        </div>
+        <div style={{ fontWeight: 600, fontSize: 14, color: '#9D9CB3' }}>
+          of ${spend.dailyBudgetDollars} daily cap · {pct}%
+        </div>
+      </div>
+
+      {/* Progress bar with anon-cutoff tick */}
+      <div
+        style={{
+          position: 'relative',
+          height: 12,
+          background: 'rgba(255,255,255,0.06)',
+          borderRadius: 100,
+          overflow: 'hidden',
+          marginBottom: 12,
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: `${pct}%`,
+            background: barColor,
+            transition: 'width 0.3s ease',
+            borderRadius: 100,
+          }}
+        />
+        {/* Anon-cutoff marker — small tick at the 90% mark ($4.50) */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -2,
+            bottom: -2,
+            left: `${anonPct}%`,
+            width: 2,
+            background: 'rgba(255,255,255,0.4)',
+          }}
+          title="Anon cutoff"
+        />
+      </div>
+
+      {/* Cap warning, only visible when relevant */}
+      {warning && (
+        <div
+          style={{
+            marginBottom: 12,
+            padding: '8px 12px',
+            background: 'rgba(255,79,106,0.10)',
+            border: '1px solid rgba(255,79,106,0.32)',
+            borderRadius: 8,
+            fontSize: 13,
+            color: '#FF8FA3',
+            fontWeight: 700,
+          }}
+        >
+          {warning}
+        </div>
+      )}
+
+      {/* Context line */}
+      <div style={{ color: '#9D9CB3', fontSize: 13, lineHeight: 1.55 }}>
+        Yesterday: <strong style={{ color: '#F2F0FF' }}>${spend.yesterday.dollars}</strong> · Anon
+        cutoff at <strong style={{ color: '#F2F0FF' }}>${spend.anonCutoffDollars}</strong>{' '}
+        (white tick) · Hard cap at{' '}
+        <strong style={{ color: '#F2F0FF' }}>${spend.dailyBudgetDollars}</strong>. This is the
+        number that actually trips the budget guardrail.
+      </div>
     </div>
   )
 }

@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readEvents, type LoggedEvent } from '@/lib/event-log'
+import {
+  getRecentDailySpend,
+  DAILY_BUDGET_CENTS,
+  ANON_CUTOFF_CENTS,
+  dayKey,
+} from '@/lib/usage'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -143,6 +149,19 @@ export async function GET(request: NextRequest) {
 
   const pageViewCount = byType.page_view ?? 0
 
+  // Authoritative daily spend pulled from lib/usage.ts's Redis counters.
+  // This is the SAME number the $5/day budget guardrail reads — it's the
+  // truth source for "did we hit the cap." `spend:` keys carry a 48-hour
+  // TTL so historical days zero out; we only get today + yesterday
+  // reliably. The event-log-derived costCents earlier in the response
+  // may diverge from this if any tool runs happened before the event
+  // log was wired correctly (early days of /admin shipping).
+  const recentSpend = await getRecentDailySpend(Math.max(2, periodDays))
+  const todayKey = dayKey()
+  const yesterdayKey = dayKey(new Date(now - 24 * 60 * 60 * 1000))
+  const todaySpendCents = recentSpend[todayKey] ?? 0
+  const yesterdaySpendCents = recentSpend[yesterdayKey] ?? 0
+
   return NextResponse.json({
     periodDays,
     generatedAt: new Date(now).toISOString(),
@@ -184,6 +203,26 @@ export async function GET(request: NextRequest) {
     },
     costCents,
     costDollars: (costCents / 100).toFixed(2),
+    // Authoritative daily spend telemetry — this is what the budget
+    // guardrail reads, so it's the number to watch for cap warnings.
+    spend: {
+      today: {
+        cents: todaySpendCents,
+        dollars: (todaySpendCents / 100).toFixed(2),
+      },
+      yesterday: {
+        cents: yesterdaySpendCents,
+        dollars: (yesterdaySpendCents / 100).toFixed(2),
+      },
+      dailyBudgetCents: DAILY_BUDGET_CENTS,
+      dailyBudgetDollars: (DAILY_BUDGET_CENTS / 100).toFixed(2),
+      anonCutoffCents: ANON_CUTOFF_CENTS,
+      anonCutoffDollars: (ANON_CUTOFF_CENTS / 100).toFixed(2),
+      // 0-100 — UI uses this to render a progress bar / warning.
+      pctOfBudget: Math.round((todaySpendCents / DAILY_BUDGET_CENTS) * 100),
+      // Reading recent N days for spend trend (most will be 0 due to TTL).
+      byDay: recentSpend,
+    },
     recentEvents: recentEvents.map((e: LoggedEvent) => ({
       type: e.type,
       ts: new Date(e.ts).toISOString(),
