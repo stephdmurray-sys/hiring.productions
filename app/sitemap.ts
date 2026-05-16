@@ -60,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/q/are-references-on-a-resume-still-relevant', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/q/open-to-work-without-looking-desperate', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/how-recruiters-spot-ai-cover-letters', priority: 0.85, changeFrequency: 'monthly' },
+    // Round 3 of the SEO cluster (May 2026) — RepVera comparison page,
+    // a high-volume recruiter-authority answer, and a tactical alumni-
+    // tool walkthrough that pairs with the wedge tool naturally.
+    { path: '/q/references-vs-linkedin-recommendations', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/q/what-does-culture-fit-actually-mean', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/how-to-use-linkedin-alumni-tool', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
   // /rank/[role] SEO landing pages — one per RoleConfig in lib/rank-roles.
