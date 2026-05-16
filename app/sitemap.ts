@@ -46,6 +46,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/q/explain-resume-gap', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/how-to-get-hired-as-new-grad', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/is-my-resume-good', priority: 0.85, changeFrequency: 'monthly' },
+    // New-grad expansion cluster (May 2026) — three pages targeting
+    // high-intent, lower-competition queries with RepVera positioned
+    // as the modern answer for new grads who have references-worthy
+    // people in their lives but no formal employment history to
+    // surface them through.
+    { path: '/q/how-to-stand-out-as-a-new-grad', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/references-for-new-grad-jobs', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/q/what-recruiters-look-for-in-new-grads', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
   // /rank/[role] SEO landing pages — one per RoleConfig in lib/rank-roles.
