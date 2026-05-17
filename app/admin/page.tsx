@@ -43,7 +43,16 @@ export default function AdminPage() {
     const params = new URLSearchParams(window.location.search)
     const urlTok = params.get('token') ?? ''
     const stored = window.localStorage.getItem('hp_admin_token') ?? ''
-    const initial = urlTok || stored
+    // Read from middleware-planted cookie as a third source. Lets a
+    // visitor who hit the page once via ?token=... bookmark just /admin
+    // (no token in URL, no localStorage on a fresh device) and still
+    // pick up the token from the cookie the middleware set.
+    const cookieTok =
+      document.cookie
+        .split('; ')
+        .find((c) => c.startsWith('hp_admin_token='))
+        ?.split('=')[1] ?? ''
+    const initial = urlTok || stored || cookieTok
     if (initial) {
       window.localStorage.setItem('hp_admin_token', initial)
       setToken(initial)
