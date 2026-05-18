@@ -13,6 +13,10 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const file = formData.get('file')
+    // 'linkedin' (default — strict LinkedIn-export check) or 'resume'
+    // (any PDF with enough text). Resume mode is for tools that accept
+    // a generic resume rather than a LinkedIn profile export.
+    const kind = (formData.get('kind') ?? 'linkedin').toString()
 
     if (!file || !(file instanceof File)) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
@@ -33,23 +37,21 @@ export async function POST(request: NextRequest) {
 
     const fullText = (typeof text === 'string' ? text : text.join('\n\n')).trim()
     if (!fullText || fullText.length < 100) {
+      const reExportTip =
+        kind === 'resume'
+          ? 'Try re-saving your resume as a standard PDF and uploading again.'
+          : 'Make sure you saved your full LinkedIn profile (More → Save to PDF) and try again.'
       return NextResponse.json(
-        {
-          error:
-            'Could not read enough text from this PDF. Make sure you saved your full LinkedIn profile (More → Save to PDF) and try again.',
-        },
+        { error: `Could not read enough text from this PDF. ${reExportTip}` },
         { status: 422 },
       )
     }
 
-    // ----- LinkedIn export sanity check --------------------------------
-    // The simulator's accuracy depends on the input being a real LinkedIn
-    // PDF export — a resume PDF or random document has no LinkedIn
-    // structural data and will produce garbage rank estimates. We look
-    // for several reliable LinkedIn-export signatures; needing at least
-    // two avoids false positives from resumes that happen to mention
-    // LinkedIn in a contact line.
-    if (!looksLikeLinkedInExport(fullText)) {
+    // The LinkedIn-export sanity check only applies to LinkedIn-mode
+    // uploads. Resume-mode uploads are any PDF with enough text — a
+    // generic resume has no LinkedIn structural markers and would
+    // always fail the heuristic.
+    if (kind === 'linkedin' && !looksLikeLinkedInExport(fullText)) {
       return NextResponse.json(
         {
           error:

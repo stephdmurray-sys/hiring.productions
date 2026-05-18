@@ -22,6 +22,7 @@ import {
   Building2,
   User,
   Linkedin,
+  BarChart3,
 } from 'lucide-react'
 
 /**
@@ -840,7 +841,7 @@ export default function HomePage() {
             Less than Jobscan charges for a single day.
           </p>
 
-          {/* Tools grid — the existing 7 cards, kept intact */}
+          {/* Tools grid */}
           <div
             style={{
               display: 'grid',
@@ -848,6 +849,23 @@ export default function HomePage() {
               gap: '20px',
             }}
           >
+            {/* Card — What Are My Chances? */}
+            <Link
+              href="/tools/what-are-my-chances"
+              className="recruiter-insight-card"
+              style={cardStyle}
+            >
+              <IconCircle Icon={BarChart3} accent="#A78BFA" tintRgba="108,71,255" />
+              <Pill text="CANDIDATE" accent="#A78BFA" tintRgba="108,71,255" />
+              <h3 style={cardTitle}>What Are My Chances?</h3>
+              <SubLabel text="Application Odds Calculator" color="#A78BFA" />
+              <p style={cardBody}>
+                Drop your resume, paste the job. See the honest percentage chance — and the 3
+                lifts that would move it.
+              </p>
+              <CardCTA text="See my chances →" color="#6C47FF" />
+            </Link>
+
             {/* Card — Resume Recruiter Eyes */}
             <Link
               href="/tools/resume-recruiter-eyes"

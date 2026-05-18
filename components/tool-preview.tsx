@@ -540,6 +540,25 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
         </div>
       )
 
+    case 'chance-meter':
+      return (
+        <div style={{ ...wrapper, justifyContent: 'center', alignItems: 'center' }}>
+          <div style={eyebrowStyle}>YOUR HONEST CHANCE</div>
+          <div
+            style={{
+              ...bigStat,
+              color: t.primary,
+              fontSize: featured ? 'clamp(64px, 6vw, 92px)' : 'clamp(54px, 5vw, 72px)',
+            }}
+          >
+            23<span style={{ fontSize: '0.45em', opacity: 0.7, marginLeft: 4 }}>%</span>
+          </div>
+          <div style={{ ...microNote(featured), color: t.primary, marginTop: 8, textTransform: 'uppercase', letterSpacing: '0.12em' }}>
+            LONG SHOT · 3 LIFTS TO MOVE IT
+          </div>
+        </div>
+      )
+
     default:
       return <div style={wrapper} />
   }

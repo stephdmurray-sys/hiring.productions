@@ -116,6 +116,7 @@ export type PreviewKind =
   | 'career-pivot'
   | 'scam-flags'
   | 'ghost-diagnosis'
+  | 'chance-meter'
 
 // =====================================================================
 // CANDIDATE TOOLS
@@ -306,6 +307,20 @@ export const CATALOG: CatalogTool[] = [
     theme: 'blue',
     hook: '5 recruiter searches. Your rank in each one.',
     icon: 'Search',
+  },
+  {
+    name: 'What Are My Chances?',
+    subtitle: 'Application Odds Calculator',
+    desc: 'Drop your resume. Paste the job. See the honest percentage chance you’d get an interview — calibrated against how recruiters actually screen this exact stack — and the 3 highest-impact lifts that would move it.',
+    tier: 'pro',
+    audience: 'candidate',
+    stage: 'when-you-apply',
+    href: '/tools/what-are-my-chances',
+    cta: 'See my chances',
+    preview: 'chance-meter',
+    theme: 'indigo',
+    hook: 'The honest percentage. Before you apply.',
+    icon: 'BarChart3',
   },
   {
     name: 'Your LinkedIn — Rewritten',
