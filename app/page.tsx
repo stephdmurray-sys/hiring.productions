@@ -25,6 +25,7 @@ import {
   BarChart3,
 } from 'lucide-react'
 import { StartHereBoard } from '@/components/start-here-board'
+import { WhatRecruitersSay } from '@/components/what-recruiters-say'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -82,559 +83,18 @@ export default function HomePage() {
 
       {/* ──────────────── START HERE — QUESTION BOARD ─────────────────
          Question-led entry. Five candidate-pain prompts that route
-         visitors to 2-3 specific catalog tools each. Replaces "everyone
-         lands on the wedge" with "find the door that fits your moment."
-         Wedge hero stays below for visitors who already know what they
-         want.
+         visitors to 2-3 specific catalog tools each. The primary
+         homepage funnel — no longer the wedge tool directly.
       */}
       <StartHereBoard />
 
-      {/* ───────────────────────── HERO ─────────────────────────
-         The single wedge. One question, one CTA, one tool.
+      {/* ──────────── WHAT RECRUITERS SAY — ROTATING MONOLOGUE ────────────
+         Auto-rotating quote section showing dramatic-but-real recruiter
+         voice lines candidates never hear. Demonstrates the brand voice
+         in 4 seconds without requiring a tool upload, and clicks
+         through to the tool that addresses each moment.
       */}
-      <section
-        style={{
-          minHeight: '100vh',
-          position: 'relative',
-          overflow: 'hidden',
-          background: '#0F0F12',
-        }}
-      >
-        {/* Radial glows */}
-        <div
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            background:
-              'radial-gradient(ellipse 700px 520px at 80% 8%, rgba(108,71,255,0.24) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            background:
-              'radial-gradient(ellipse 500px 400px at 12% 92%, rgba(255,79,106,0.14) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            maxWidth: '900px',
-            margin: '0 auto',
-            padding: 'clamp(96px, 14vh, 130px) clamp(20px, 5vw, 40px) clamp(60px, 10vh, 100px)',
-            textAlign: 'center',
-          }}
-        >
-          {/* Eyebrow — credibility before claim */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '6px 14px',
-              background: 'rgba(167,139,250,0.10)',
-              border: '1px solid rgba(167,139,250,0.28)',
-              borderRadius: 100,
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '11px',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: '#A78BFA',
-              marginBottom: '28px',
-            }}
-          >
-            <span
-              style={{
-                display: 'inline-block',
-                width: 6,
-                height: 6,
-                borderRadius: '50%',
-                background: '#5EE6A8',
-              }}
-            />
-            FROM A SENIOR RECRUITER · FREE TO TRY
-          </div>
-
-          {/* H1 — the question they're already asking.
-              "the job you want" is deliberate over "your job" — a strong
-              candidate isn't wondering if they're findable for the role
-              they have, they're wondering about the next one. */}
-          <h1
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(42px, 6.5vw, 78px)',
-              lineHeight: 1.04,
-              letterSpacing: '-0.025em',
-              color: '#F2F0FF',
-              marginBottom: '22px',
-            }}
-          >
-            Where do you actually rank when a recruiter searches LinkedIn for{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              the job you want?
-            </span>
-          </h1>
-
-          {/* Sub — the proof of value */}
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 400,
-              fontSize: '19px',
-              lineHeight: 1.6,
-              color: '#9D9CB3',
-              maxWidth: '620px',
-              margin: '0 auto 44px',
-            }}
-          >
-            Upload your LinkedIn profile. See the 5 boolean searches a recruiter for your target
-            role actually runs — and your rank in each. Plus the 3 moves to climb fastest. Built by
-            a senior TA director who runs these searches for a living.
-          </p>
-
-          {/* CTAs */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '14px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            <Link
-              href="/tools/recruiter-search-rank"
-              className="hero-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 10,
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: 'white',
-                padding: '17px 38px',
-                borderRadius: 12,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '16px',
-                textDecoration: 'none',
-                transition: 'transform 0.2s',
-                boxShadow: '0 18px 50px rgba(108,71,255,0.32)',
-              }}
-            >
-              <Search size={18} />
-              Show me where I rank
-            </Link>
-
-            <a
-              href="#what-you-get"
-              className="hero-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                border: '1.5px solid rgba(167,139,250,0.4)',
-                background: 'transparent',
-                color: '#A78BFA',
-                padding: '17px 30px',
-                borderRadius: 12,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 700,
-                fontSize: '15px',
-                textDecoration: 'none',
-                transition: 'transform 0.2s',
-              }}
-            >
-              See what you get back ↓
-            </a>
-          </div>
-
-          {/* Trust microcopy */}
-          <div
-            style={{
-              marginTop: '40px',
-              display: 'flex',
-              gap: 12,
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            {[
-              '20 years in talent · ex-Senior Director of TA',
-              'No account to start',
-              '2 free runs a day',
-            ].map((text) => (
-              <div
-                key={text}
-                style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  borderRadius: 100,
-                  padding: '8px 16px',
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 600,
-                  fontSize: '12.5px',
-                  color: '#9D9CB3',
-                }}
-              >
-                {text}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────── WHAT YOU GET BACK ──────────────
-         Show the actual result the tool delivers. Four cards
-         that mirror the tool's real output, plus a visual
-         "rank reveal" mock so the recognition moment is on
-         the homepage even before they run it.
-      */}
-      <section
-        id="what-you-get"
-        style={{
-          background: '#1A1A22',
-          borderTop: '1px solid rgba(108,71,255,0.18)',
-          borderBottom: '1px solid rgba(108,71,255,0.18)',
-          padding: 'clamp(64px, 9vw, 110px) clamp(20px, 5vw, 40px)',
-          position: 'relative',
-        }}
-      >
-        <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative' }}>
-          {/* Section label */}
-          <div
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              color: '#A78BFA',
-              textAlign: 'center',
-              marginBottom: '20px',
-            }}
-          >
-            WHAT YOU GET BACK
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(30px, 4vw, 46px)',
-              letterSpacing: '-0.02em',
-              textAlign: 'center',
-              color: '#F2F0FF',
-              lineHeight: 1.1,
-              marginBottom: '16px',
-            }}
-          >
-            Not advice. Your actual ranking.
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '17px',
-              color: '#9D9CB3',
-              textAlign: 'center',
-              maxWidth: '560px',
-              margin: '0 auto 56px',
-              lineHeight: 1.6,
-            }}
-          >
-            Calibrated to how LinkedIn&apos;s algorithm actually weights signals — and to how
-            real recruiters phrase the search.
-          </p>
-
-          {/* Result mock — the visual hit */}
-          <div
-            style={{
-              maxWidth: '720px',
-              margin: '0 auto 56px',
-              background: '#0F0F12',
-              border: '1px solid rgba(108,71,255,0.3)',
-              borderRadius: 20,
-              padding: 'clamp(28px, 5vw, 44px)',
-              position: 'relative',
-              overflow: 'hidden',
-              boxShadow: '0 24px 80px rgba(108,71,255,0.15)',
-            }}
-          >
-            <div
-              aria-hidden
-              style={{
-                position: 'absolute',
-                top: -80,
-                right: -60,
-                width: 280,
-                height: 280,
-                background:
-                  'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
-                pointerEvents: 'none',
-              }}
-            />
-            <div style={{ position: 'relative' }}>
-              <div
-                style={{
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 700,
-                  fontSize: '11px',
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase',
-                  color: '#8B8AA0',
-                  marginBottom: 14,
-                }}
-              >
-                Sample result · Senior Product Manager
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: 16,
-                  flexWrap: 'wrap',
-                  marginBottom: 28,
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontWeight: 900,
-                    fontSize: 'clamp(56px, 9vw, 96px)',
-                    lineHeight: 1,
-                    background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    letterSpacing: '-0.03em',
-                  }}
-                >
-                  #47
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontWeight: 600,
-                    fontSize: '18px',
-                    color: '#9D9CB3',
-                  }}
-                >
-                  average rank across 5 recruiter searches
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
-                  gap: 12,
-                  marginBottom: 24,
-                }}
-              >
-                {[
-                  { q: '"Senior PM" AND SaaS', rank: '#31' },
-                  { q: '"Product Manager" AND B2B AND growth', rank: '#52' },
-                  { q: '"Senior Product Manager" AND analytics', rank: '#68' },
-                ].map((row) => (
-                  <div
-                    key={row.q}
-                    style={{
-                      background: 'rgba(167,139,250,0.06)',
-                      border: '1px solid rgba(167,139,250,0.18)',
-                      borderRadius: 10,
-                      padding: '12px 14px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontFamily: "'Figtree', monospace",
-                        fontSize: '11.5px',
-                        color: '#A78BFA',
-                        marginBottom: 6,
-                        wordBreak: 'break-word',
-                      }}
-                    >
-                      {row.q}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: "'Figtree', sans-serif",
-                        fontWeight: 800,
-                        fontSize: '20px',
-                        color: '#F2F0FF',
-                      }}
-                    >
-                      {row.rank}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div
-                style={{
-                  borderTop: '1px solid rgba(255,255,255,0.06)',
-                  paddingTop: 18,
-                  display: 'flex',
-                  gap: 12,
-                  alignItems: 'flex-start',
-                }}
-              >
-                <div
-                  style={{
-                    background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                    color: 'white',
-                    borderRadius: 8,
-                    padding: '4px 10px',
-                    fontFamily: "'Figtree', sans-serif",
-                    fontWeight: 800,
-                    fontSize: '11px',
-                    letterSpacing: '0.05em',
-                    flexShrink: 0,
-                  }}
-                >
-                  TOP FIX
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: '14.5px',
-                    color: '#F2F0FF',
-                    lineHeight: 1.55,
-                  }}
-                >
-                  Move <em>&ldquo;Senior Product Manager&rdquo;</em> from your About section into
-                  your headline. Adds the exact phrase recruiters search on 4 of the 5 queries.{' '}
-                  <span style={{ color: '#5EE6A8', fontWeight: 700 }}>Avg rank: #47 → #29.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* What you actually receive — 4 cards */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
-              gap: 20,
-            }}
-          >
-            {[
-              {
-                icon: Search,
-                title: 'The 5 actual searches',
-                body: 'Boolean strings a recruiter for your target role would type into LinkedIn Recruiter. Not generic. Role-specific.',
-              },
-              {
-                icon: ListOrdered,
-                title: 'Your rank in each',
-                body: 'Estimated position out of the ~200 candidates LinkedIn surfaces. Calibrated to how the algorithm weights headline, About, skills, and recency.',
-              },
-              {
-                icon: TrendingUp,
-                title: '3 moves to climb',
-                body: 'Ranked by total impact across every search. The single change that lifts you the most appears first.',
-              },
-              {
-                icon: Wrench,
-                title: 'Exact text replacements',
-                body: 'Current line vs. recommended rewrite. Copy-paste ready. No "consider adding keywords" hand-waving.',
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="result-mock-card"
-                style={{
-                  background: '#0F0F12',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  borderRadius: 14,
-                  padding: '24px',
-                  transition: 'border-color 0.2s',
-                }}
-              >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 10,
-                    background: 'rgba(108,71,255,0.12)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 14,
-                  }}
-                >
-                  <card.icon size={18} color="#A78BFA" strokeWidth={2} />
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontWeight: 800,
-                    fontSize: '15.5px',
-                    color: '#F2F0FF',
-                    marginBottom: 8,
-                  }}
-                >
-                  {card.title}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: '13.5px',
-                    color: '#9D9CB3',
-                    lineHeight: 1.55,
-                  }}
-                >
-                  {card.body}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA repeat */}
-          <div style={{ textAlign: 'center', marginTop: 48 }}>
-            <Link
-              href="/tools/recruiter-search-rank"
-              className="hero-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 10,
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: 'white',
-                padding: '16px 36px',
-                borderRadius: 12,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '16px',
-                textDecoration: 'none',
-                transition: 'transform 0.2s',
-                boxShadow: '0 16px 40px rgba(108,71,255,0.28)',
-              }}
-            >
-              <Search size={17} />
-              Run mine — free
-            </Link>
-          </div>
-        </div>
-      </section>
+      <WhatRecruitersSay />
 
       {/* ───────────────── CREDIBILITY ─────────────────
          Why this tool, why this person. Anchors the
@@ -797,7 +257,7 @@ export default function HomePage() {
               marginBottom: 20,
             }}
           >
-            AFTER YOU FIX YOUR RANK
+            THE REST OF THE PRODUCTION
           </div>
 
           <h2
@@ -851,49 +311,35 @@ export default function HomePage() {
             Less than Jobscan charges for a single day.
           </p>
 
-          {/* Tools grid */}
+          {/* Tools grid — compact 4-card row.
+              Start Here above surfaces ~14 tools across 5 questions; this
+              row exists to show breadth + bilateral + the sister product
+              that Start Here doesn't cover, and to seed the "see every
+              tool" CTA below it. */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
               gap: '20px',
             }}
           >
-            {/* Card — What Are My Chances? */}
+            {/* Card — LinkedIn Rewrite (Pro candidate flagship) */}
             <Link
-              href="/tools/what-are-my-chances"
+              href="/tools/linkedin-rewrite"
               className="recruiter-insight-card"
               style={cardStyle}
             >
-              <IconCircle Icon={BarChart3} accent="#A78BFA" tintRgba="108,71,255" />
-              <Pill text="CANDIDATE" accent="#A78BFA" tintRgba="108,71,255" />
-              <h3 style={cardTitle}>What Are My Chances?</h3>
-              <SubLabel text="Application Odds Calculator" color="#A78BFA" />
+              <IconCircle Icon={Edit3} accent="#A78BFA" tintRgba="108,71,255" />
+              <Pill text="CANDIDATE · PRO" accent="#A78BFA" tintRgba="108,71,255" />
+              <h3 style={cardTitle}>Your LinkedIn — Rewritten</h3>
+              <SubLabel text="Full Profile Rewrite" color="#A78BFA" />
               <p style={cardBody}>
-                Drop your resume, paste the job. See the honest percentage chance — and the 3
-                lifts that would move it.
+                Headline, About, and recent roles — rewritten for the searches that matter.
               </p>
-              <CardCTA text="See my chances →" color="#6C47FF" />
+              <CardCTA text="Rewrite mine →" color="#6C47FF" />
             </Link>
 
-            {/* Card — Resume Recruiter Eyes */}
-            <Link
-              href="/tools/resume-recruiter-eyes"
-              className="recruiter-insight-card"
-              style={cardStyle}
-            >
-              <IconCircle Icon={Eye} accent="#A78BFA" tintRgba="108,71,255" />
-              <Pill text="CANDIDATE" accent="#A78BFA" tintRgba="108,71,255" />
-              <h3 style={cardTitle}>Your Resume, Through a Recruiter&apos;s Eyes</h3>
-              <SubLabel text="Recruiter Resume Read" color="#A78BFA" />
-              <p style={cardBody}>
-                See the internal monologue of a recruiter reading your resume in the first 6
-                seconds.
-              </p>
-              <CardCTA text="Hear the read →" color="#6C47FF" />
-            </Link>
-
-            {/* Card — Is This Even a Real Candidate */}
+            {/* Card — Is This Even a Real Candidate (bilateral signal) */}
             <Link
               href="/tools/real-candidate"
               className="recruiter-insight-card"
@@ -904,81 +350,28 @@ export default function HomePage() {
               <h3 style={cardTitle}>Is This Even a Real Candidate?</h3>
               <SubLabel text="AI Application Detector" color="#FF4F6A" />
               <p style={cardBody}>
-                See whether this application is human-authored or AI-generated — and exactly what
-                flagged it.
+                Tell whether an application is human-authored or AI-generated — and what flagged it.
               </p>
               <CardCTA text="Run the check →" color="#FF4F6A" />
             </Link>
 
-            {/* Card — What This Job Actually Is */}
+            {/* Card — Resume AI Check (free, top of funnel) */}
             <Link
-              href="/tools/what-this-job-is"
+              href="/resume"
               className="recruiter-insight-card"
               style={cardStyle}
             >
               <IconCircle Icon={FileText} accent="#A78BFA" tintRgba="108,71,255" />
-              <Pill text="CANDIDATE" accent="#A78BFA" tintRgba="108,71,255" />
-              <h3 style={cardTitle}>What This Job Actually Is</h3>
-              <SubLabel text="Job Description Decoder" color="#A78BFA" />
-              <p style={cardBody}>
-                See what&apos;s really between the lines of any job description — and whether
-                it&apos;s actually worth applying.
-              </p>
-              <CardCTA text="Decode the posting →" color="#6C47FF" />
-            </Link>
-
-            {/* Card — LinkedIn Rewrite */}
-            <Link
-              href="/tools/linkedin-rewrite"
-              className="recruiter-insight-card"
-              style={cardStyle}
-            >
-              <IconCircle Icon={Edit3} accent="#A78BFA" tintRgba="108,71,255" />
-              <Pill text="CANDIDATE" accent="#A78BFA" tintRgba="108,71,255" />
-              <h3 style={cardTitle}>Your LinkedIn Profile — Rewritten</h3>
-              <SubLabel text="Full LinkedIn Profile Rewrite" color="#A78BFA" />
-              <p style={cardBody}>
-                Complete rewrite of your headline, About section, and role descriptions —
-                optimized for recruiter visibility.
-              </p>
-              <CardCTA text="Rewrite mine →" color="#6C47FF" />
-            </Link>
-
-            {/* Card — What's Breaking Your Search */}
-            <Link
-              href="/tools/whats-breaking-search"
-              className="recruiter-insight-card"
-              style={cardStyle}
-            >
-              <IconCircle Icon={AlertCircle} accent="#FF4F6A" tintRgba="255,79,106" />
-              <Pill text="CANDIDATE · FREE" accent="#FF4F6A" tintRgba="255,79,106" />
-              <h3 style={cardTitle}>What&apos;s Breaking Your Job Search</h3>
-              <SubLabel text="Job Search Diagnostic" color="#FF4F6A" />
-              <p style={cardBody}>
-                Diagnosis of why your job search is stalled — and the one thing that will
-                actually fix it.
-              </p>
-              <CardCTA text="Diagnose mine →" color="#FF4F6A" />
-            </Link>
-
-            {/* Card — Negotiate This Offer */}
-            <Link
-              href="/tools/what-youre-worth"
-              className="recruiter-insight-card"
-              style={cardStyle}
-            >
-              <IconCircle Icon={DollarSign} accent="#A78BFA" tintRgba="108,71,255" />
               <Pill text="CANDIDATE · FREE" accent="#A78BFA" tintRgba="108,71,255" />
-              <h3 style={cardTitle}>How to Negotiate This Offer</h3>
-              <SubLabel text="Salary Negotiation Script Builder" color="#A78BFA" />
+              <h3 style={cardTitle}>Does My Resume Read as AI?</h3>
+              <SubLabel text="AI Resume Detector" color="#A78BFA" />
               <p style={cardBody}>
-                Bring your offer + your market data. Get the exact script — opening line,
-                response to &ldquo;best offer,&rdquo; and the number to ask for.
+                The exact lines that read AI-generated to a recruiter — and what to rewrite.
               </p>
-              <CardCTA text="Build my script →" color="#6C47FF" />
+              <CardCTA text="Run mine →" color="#6C47FF" />
             </Link>
 
-            {/* Card — RepVera */}
+            {/* Card — RepVera (sister product) */}
             <Link
               href="https://www.repvera.com"
               target="_blank"
@@ -1040,92 +433,6 @@ export default function HomePage() {
               See every Recruiter Insight →
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* ─────────────── MEMBERSHIP BANNER ─────────────── */}
-      <section
-        style={{
-          background: '#0F0F12',
-          borderTop: '1px solid rgba(255,255,255,0.05)',
-          borderBottom: '1px solid rgba(255,255,255,0.05)',
-          padding: 'clamp(48px, 7vw, 72px) clamp(20px, 5vw, 40px)',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1000px',
-            margin: '0 auto',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '40px',
-            flexWrap: 'wrap',
-          }}
-        >
-          <div>
-            <div
-              style={{
-                background: 'rgba(255,79,106,0.15)',
-                color: '#FF4F6A',
-                padding: '6px 12px',
-                borderRadius: 6,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '10px',
-                letterSpacing: '0.1em',
-                display: 'inline-block',
-                marginBottom: 16,
-              }}
-            >
-              BEST VALUE
-            </div>
-            <h2
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 900,
-                fontSize: 'clamp(28px, 4vw, 38px)',
-                letterSpacing: '-0.02em',
-                color: '#F2F0FF',
-              }}
-            >
-              The whole production. $20/year.
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: '15px',
-                color: '#9D9CB3',
-                marginTop: 10,
-                maxWidth: 460,
-                lineHeight: 1.6,
-              }}
-            >
-              Every Recruiter Insight — candidate-side and hiring-side, built from real recruiting
-              practice — for less than Jobscan charges for a single day. Free tools stay free.
-            </p>
-          </div>
-
-          <Link
-            href="/membership"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              color: 'white',
-              padding: '16px 40px',
-              borderRadius: 10,
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '16px',
-              textDecoration: 'none',
-              transition: 'transform 0.2s',
-              boxShadow: '0 16px 40px rgba(108,71,255,0.28)',
-            }}
-          >
-            Get Full Access →
-          </Link>
         </div>
       </section>
 
@@ -1328,7 +635,7 @@ export default function HomePage() {
             }}
           >
             <Link
-              href="/tools/recruiter-search-rank"
+              href="/membership"
               className="hero-btn"
               style={{
                 display: 'inline-flex',
@@ -1345,11 +652,10 @@ export default function HomePage() {
                 transition: 'transform 0.2s',
               }}
             >
-              <Search size={17} />
-              Show me where I rank
+              The whole production — $20/year
             </Link>
             <Link
-              href="/membership"
+              href="/tools"
               className="hero-btn"
               style={{
                 display: 'inline-flex',
@@ -1367,7 +673,7 @@ export default function HomePage() {
                 transition: 'transform 0.2s',
               }}
             >
-              See the whole production →
+              See every tool →
             </Link>
           </div>
         </div>
