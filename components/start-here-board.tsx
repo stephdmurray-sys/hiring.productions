@@ -131,9 +131,8 @@ export function StartHereBoard() {
           in your job search?
         </Heading>
         <SubHeading>
-          Pick the moment you&rsquo;re actually in. The read built for it is
-          one click away — from someone who&rsquo;s been on the other side of
-          the table for 20 years.
+          Every silence has a reason. Every rejection has a debrief. Pick
+          where you are — see what the other side is actually saying.
         </SubHeading>
 
         {/* The board */}
