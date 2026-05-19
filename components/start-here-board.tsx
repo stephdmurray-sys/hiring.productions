@@ -131,8 +131,9 @@ export function StartHereBoard() {
           in your job search?
         </Heading>
         <SubHeading>
-          Skip the menu of tools. Tell us where you are — we&rsquo;ll point you
-          straight at what&rsquo;s built for it.
+          Pick the moment you&rsquo;re actually in. The read built for it is
+          one click away — from someone who&rsquo;s been on the other side of
+          the table for 20 years.
         </SubHeading>
 
         {/* The board */}
