@@ -24,6 +24,7 @@ import {
   Linkedin,
   BarChart3,
 } from 'lucide-react'
+import { StartHereBoard } from '@/components/start-here-board'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -78,6 +79,15 @@ export default function HomePage() {
         }
       `}</style>
       <Navigation variant="dark" />
+
+      {/* ──────────────── START HERE — QUESTION BOARD ─────────────────
+         Question-led entry. Five candidate-pain prompts that route
+         visitors to 2-3 specific catalog tools each. Replaces "everyone
+         lands on the wedge" with "find the door that fits your moment."
+         Wedge hero stays below for visitors who already know what they
+         want.
+      */}
+      <StartHereBoard />
 
       {/* ───────────────────────── HERO ─────────────────────────
          The single wedge. One question, one CTA, one tool.
