@@ -5,23 +5,23 @@ import Link from 'next/link'
 import { Pause, Play, ArrowRight } from 'lucide-react'
 
 /**
- * What Recruiters Say — rotating monologue section.
+ * What Recruiters Say — typewriter monologue rotator.
  *
- * Five dramatic, specific recruiter voice lines candidates never get
- * to hear. Auto-rotates every 7.5 seconds with a subtle cross-fade
- * (the production-curtain metaphor — one scene closes, the next opens).
- * Click anywhere on the card to jump to the tool that addresses that
- * specific moment.
+ * Five short, dramatic recruiter voice lines candidates never hear.
+ * Each line types out character-by-character (theatrical curtain
+ * reveal — fits the production metaphor) with a pulsing "REC"
+ * indicator while typing and a blinking cursor when complete.
  *
  * Behavioral hooks:
- *  - Voyeurism: visitors hear the room they're never in
- *  - Specificity: each quote is a concrete moment, not a generic gripe
- *  - Brand voice in 4 seconds: visitors who haven't tried any tool yet
- *    GET the product before they scroll
- *  - Sticky: each line is screenshot-worthy for LinkedIn shares
+ *  - The typing creates obvious, continuous motion the eye can't miss
+ *  - Each line is one sentence — readable in a single beat
+ *  - Voyeuristic framing ("the room you're never in") plus the
+ *    recording-style treatment makes it feel like surveillance
+ *  - Click anywhere on the card to jump to the tool that addresses
+ *    that exact moment
  *
- * Auto-rotation pauses on hover or after manual interaction; resumes
- * after 12s of idle.
+ * Rotation: ~2s type-in + 3.5s read time + 0.4s fade-out = 5.9s/quote.
+ * Clicking a dot or play/pause overrides; auto-resumes after 15s idle.
  */
 
 interface Monologue {
@@ -32,12 +32,14 @@ interface Monologue {
   toolCta: string
 }
 
+// Use unicode quotes/apostrophes directly — these strings flow through
+// React state, not JSX, so HTML entities (&rsquo;) render as literal text.
 const LINES: Monologue[] = [
   {
     id: 'sourcing',
     room: 'The sourcing room',
     quote:
-      'I&rsquo;m searching &ldquo;Senior Director, TA&rdquo; AND healthcare. She&rsquo;s perfect — 12 years, ran a national hiring function. Her headline says &ldquo;People Leader.&rdquo; She doesn&rsquo;t surface. I never message her. She has no idea why.',
+      'Her headline says “People Leader.” I’m searching “Senior Director, TA.” I never see her resume.',
     toolHref: '/tools/recruiter-search-rank',
     toolCta: 'See where you rank in real recruiter searches',
   },
@@ -45,7 +47,7 @@ const LINES: Monologue[] = [
     id: 'six-seconds',
     room: 'The six-second resume scan',
     quote:
-      'This resume says &ldquo;driving growth&rdquo; four times across three jobs. I have no idea what this person actually did. Six seconds, I&rsquo;m out.',
+      '“Driving growth” four times across three jobs. Six seconds, I’m out.',
     toolHref: '/tools/resume-recruiter-eyes',
     toolCta: 'Hear the recruiter monologue on your resume',
   },
@@ -53,15 +55,15 @@ const LINES: Monologue[] = [
     id: 'debrief',
     room: 'The interview debrief',
     quote:
-      'He answered every question. I couldn&rsquo;t tell you one specific thing he actually did. The hiring manager liked him. I&rsquo;m voting no — and I&rsquo;m going to win the debrief.',
+      'He answered every question. I can’t tell you one thing he actually did. Pass.',
     toolHref: '/tools/rehearsal-room',
-    toolCta: 'Rehearse against the rubric they&rsquo;ll actually use',
+    toolCta: 'Rehearse against the rubric they’ll actually use',
   },
   {
     id: 'comp-committee',
     room: 'The offer committee',
     quote:
-      'Her ask is $180. The range goes to $195. We&rsquo;ll hit $175 without anyone blinking. She&rsquo;ll probably take $165 because she didn&rsquo;t ask twice.',
+      'Her ask is $180. The range goes to $195. She’ll take $165 because she didn’t ask twice.',
     toolHref: '/tools/what-youre-worth',
     toolCta: 'Get the exact words to ask for more',
   },
@@ -69,42 +71,58 @@ const LINES: Monologue[] = [
     id: 'silent-gap',
     room: 'The unspoken gap',
     quote:
-      'Her resume has a 14-month gap. She doesn&rsquo;t address it anywhere. Three of my interviewers will assume she got fired. Two will assume health. None will ask. Most won&rsquo;t advance her.',
+      'Fourteen-month gap. She doesn’t address it. Three interviewers will assume the worst. None will ask.',
     toolHref: '/tools/explain-my-gap',
     toolCta: 'Three honest scripts for the gap',
   },
 ]
 
-const ROTATION_MS = 7500
-const IDLE_RESUME_MS = 12000
+const TYPE_SPEED_MS = 28 // per character
+const READ_HOLD_MS = 3400 // pause after typing completes
+const FADE_OUT_MS = 360
+const IDLE_RESUME_MS = 15000
 
 export function WhatRecruitersSay() {
   const [idx, setIdx] = useState(0)
-  const [fading, setFading] = useState(false)
+  const [typed, setTyped] = useState('')
+  const [phase, setPhase] = useState<'typing' | 'holding' | 'fading'>('typing')
   const [paused, setPaused] = useState(false)
   const idleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const current = LINES[idx]
 
-  // Auto-rotation with cross-fade
+  // Type the current quote, character by character.
   useEffect(() => {
     if (paused) return
-    const t = setTimeout(() => {
-      setFading(true)
-      // Fade-out completes at 280ms; swap content, fade in.
-      setTimeout(() => {
-        setIdx((i) => (i + 1) % LINES.length)
-        setFading(false)
-      }, 280)
-    }, ROTATION_MS)
-    return () => clearTimeout(t)
-  }, [idx, paused])
+    setTyped('')
+    setPhase('typing')
+    let i = 0
+    const interval = setInterval(() => {
+      if (i < current.quote.length) {
+        i++
+        setTyped(current.quote.slice(0, i))
+      } else {
+        clearInterval(interval)
+        setPhase('holding')
+      }
+    }, TYPE_SPEED_MS)
+    return () => clearInterval(interval)
+  }, [idx, paused, current.quote])
 
-  // Manual nav: pause briefly, then resume after idle window
+  // After typing finishes, hold for a beat, then fade out and advance.
+  useEffect(() => {
+    if (phase !== 'holding' || paused) return
+    const hold = setTimeout(() => {
+      setPhase('fading')
+      const fade = setTimeout(() => {
+        setIdx((i) => (i + 1) % LINES.length)
+      }, FADE_OUT_MS)
+      return () => clearTimeout(fade)
+    }, READ_HOLD_MS)
+    return () => clearTimeout(hold)
+  }, [phase, paused])
+
   const handleManualNav = (newIdx: number) => {
-    setFading(true)
-    setTimeout(() => {
-      setIdx(newIdx)
-      setFading(false)
-    }, 200)
+    setIdx(newIdx)
     setPaused(true)
     if (idleTimer.current) clearTimeout(idleTimer.current)
     idleTimer.current = setTimeout(() => setPaused(false), IDLE_RESUME_MS)
@@ -115,7 +133,7 @@ export function WhatRecruitersSay() {
     if (idleTimer.current) clearTimeout(idleTimer.current)
   }
 
-  const current = LINES[idx]
+  const isTyping = phase === 'typing'
 
   return (
     <section
@@ -129,13 +147,8 @@ export function WhatRecruitersSay() {
         borderBottom: '1px solid rgba(255,255,255,0.04)',
       }}
       aria-label="What recruiters actually say"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => {
-        if (idleTimer.current) clearTimeout(idleTimer.current)
-        setPaused(false)
-      }}
     >
-      {/* Ambient spotlight backdrop — single soft glow, production metaphor */}
+      {/* Coral spotlight backdrop — production metaphor */}
       <div
         aria-hidden
         style={{
@@ -186,7 +199,8 @@ export function WhatRecruitersSay() {
           The room you&rsquo;re never in.
         </h2>
 
-        {/* The rotating quote card */}
+        {/* The card — internal-note treatment with REC indicator,
+            typewriter quote, and blinking cursor */}
         <Link
           href={current.toolHref}
           style={{
@@ -194,12 +208,13 @@ export function WhatRecruitersSay() {
             background: '#14141B',
             border: '1px solid rgba(255,143,163,0.22)',
             borderRadius: 24,
-            padding: 'clamp(32px, 5vw, 56px) clamp(28px, 5vw, 56px) clamp(28px, 4vw, 40px)',
+            padding: 'clamp(28px, 4.5vw, 48px) clamp(24px, 5vw, 56px) clamp(24px, 4vw, 36px)',
             textDecoration: 'none',
             position: 'relative',
-            transition: 'border-color 0.2s ease, transform 0.2s ease',
-            minHeight: 280,
+            transition: 'border-color 0.2s ease, transform 0.2s ease, opacity 0.36s ease',
             textAlign: 'left',
+            opacity: phase === 'fading' ? 0 : 1,
+            minHeight: 240,
           }}
           className="what-recruiters-card"
         >
@@ -208,60 +223,102 @@ export function WhatRecruitersSay() {
               border-color: rgba(255,143,163,0.55) !important;
               transform: translateY(-2px);
             }
-            .what-recruiters-fade {
-              transition: opacity 0.28s ease;
+            @keyframes wr-rec-pulse {
+              0%, 100% { opacity: 1; transform: scale(1); }
+              50% { opacity: 0.35; transform: scale(0.85); }
+            }
+            @keyframes wr-cursor-blink {
+              0%, 49% { opacity: 1; }
+              50%, 100% { opacity: 0; }
+            }
+            .wr-rec-dot {
+              animation: wr-rec-pulse 1.1s ease-in-out infinite;
+            }
+            .wr-cursor {
+              display: inline-block;
+              width: 2px;
+              height: 0.95em;
+              vertical-align: text-bottom;
+              background: #FF4F6A;
+              margin-left: 4px;
+              animation: wr-cursor-blink 0.95s steps(1) infinite;
             }
           `}</style>
 
+          {/* Top row — REC indicator + room label */}
           <div
-            className="what-recruiters-fade"
             style={{
-              opacity: fading ? 0 : 1,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              marginBottom: 22,
             }}
           >
-            <div
+            <span
+              className={isTyping ? 'wr-rec-dot' : ''}
               style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: 11,
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase',
-                color: '#FF8FA3',
-                marginBottom: 18,
+                display: 'inline-block',
+                width: 9,
+                height: 9,
+                borderRadius: '50%',
+                background: '#FF4F6A',
+                boxShadow: '0 0 0 4px rgba(255,79,106,0.18)',
+                opacity: isTyping ? 1 : 0.5,
+                transition: 'opacity 0.2s ease',
               }}
-            >
-              {current.room}
-            </div>
-            <blockquote
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 500,
-                fontStyle: 'italic',
-                fontSize: 'clamp(20px, 2.4vw, 26px)',
-                lineHeight: 1.45,
-                color: '#F2F0FF',
-                margin: 0,
-                marginBottom: 28,
-                paddingLeft: 18,
-                borderLeft: '3px solid #FF4F6A',
-              }}
-              dangerouslySetInnerHTML={{ __html: current.quote }}
             />
             <div
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                color: '#FF8FA3',
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 800,
-                fontSize: 14,
-                letterSpacing: '0.01em',
+                fontSize: 10.5,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#FF8FA3',
               }}
             >
-              {current.toolCta}
-              <ArrowRight size={15} strokeWidth={2.5} />
+              {isTyping ? 'RECORDING' : 'INTERNAL NOTE'} &middot; {current.room}
             </div>
+          </div>
+
+          {/* The typewriter quote */}
+          <blockquote
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 500,
+              fontStyle: 'italic',
+              fontSize: 'clamp(22px, 2.8vw, 30px)',
+              lineHeight: 1.4,
+              color: '#F2F0FF',
+              margin: 0,
+              marginBottom: 28,
+              paddingLeft: 18,
+              borderLeft: '3px solid #FF4F6A',
+              minHeight: '2.8em',
+            }}
+          >
+            {typed}
+            {phase !== 'fading' && <span className="wr-cursor" aria-hidden />}
+          </blockquote>
+
+          {/* CTA — appears only after typing is done so the eye focuses
+              on the quote first, then the action */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              color: '#FF8FA3',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 14,
+              letterSpacing: '0.01em',
+              opacity: phase === 'typing' ? 0 : 1,
+              transition: 'opacity 0.35s ease',
+            }}
+          >
+            {current.toolCta}
+            <ArrowRight size={15} strokeWidth={2.5} />
           </div>
         </Link>
 
@@ -280,7 +337,7 @@ export function WhatRecruitersSay() {
               <button
                 key={line.id}
                 onClick={() => handleManualNav(i)}
-                aria-label={`Show line ${i + 1}: ${line.room}`}
+                aria-label={`Jump to: ${line.room}`}
                 style={{
                   width: i === idx ? 22 : 8,
                   height: 8,
