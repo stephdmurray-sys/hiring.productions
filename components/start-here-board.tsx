@@ -32,37 +32,32 @@ interface Question {
   toolNames: string[]
 }
 
+// Three moments + one for unusual situations. Each moment routes to a
+// specific ordered sequence of tools, with the FIRST tool being the
+// "start here" entry point (free + low-friction by design). Order is
+// deliberate — the entry tool is the cheapest path to a result; the
+// deeper tools follow once a visitor has experienced what the product
+// actually does.
 const QUESTIONS: Question[] = [
   {
     id: 'no-responses',
     eyebrow: 'The silence',
     label: 'No one is responding to me.',
-    sub: 'You’ve applied and the silence is the worst part. The actual problem is almost never what you think it is. Three places to look first.',
+    sub: 'You’ve applied and the silence is the worst part. The actual problem is almost never what you think it is. Start with the keyword scan — that’s where the screen breaks first.',
     toolNames: [
-      'Where Do You Rank in a Recruiter Search?',
-      'Through a Recruiter’s Eyes',
-      'What’s Breaking Your Job Search',
-    ],
-  },
-  {
-    id: 'specific-job',
-    eyebrow: 'Before you spend an hour on it',
-    label: 'There’s a specific job I’m considering.',
-    sub: 'Decode the JD, run your honest odds, and find the keywords you’re missing — before you waste an evening tailoring for a job that was never going to happen.',
-    toolNames: [
-      'What This Job Actually Is',
-      'What Are My Chances?',
       'What Words Are Recruiters Searching For?',
+      'Where Do You Rank in a Recruiter Search?',
+      'Your LinkedIn — Rewritten',
     ],
   },
   {
     id: 'interview-prep',
-    eyebrow: 'The prep',
-    label: 'I’m prepping for an interview.',
-    sub: 'See the questions they’re really asking, run a rehearsal that matches their actual rubric, and check how you’re coming across before you go in.',
+    eyebrow: 'The interview',
+    label: 'I have an interview coming up.',
+    sub: 'See the questions they’re really asking before you walk in. Then run a rehearsal that matches their actual rubric. Then nail the opening line — most candidates lose the interview in the first 90 seconds.',
     toolNames: [
-      'The Rehearsal Room',
       'What They’re Really Asking',
+      'The Rehearsal Room',
       'How You Actually Come Across',
     ],
   },
@@ -84,7 +79,7 @@ const QUESTIONS: Question[] = [
     toolNames: [
       'How to Explain My Employment Gap',
       'Your Career Pivot, Translated',
-      'Your New Grad Resume',
+      'What’s Breaking Your Job Search',
     ],
   },
 ]
@@ -124,15 +119,16 @@ export function StartHereBoard() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Eyebrow>Start here</Eyebrow>
+        <Eyebrow>Built by the recruiter who ran these searches</Eyebrow>
         <Heading>
-          What&rsquo;s actually happening
+          See what actually happens
           <br />
-          in your job search?
+          on the other side of your application.
         </Heading>
         <SubHeading>
-          Every silence has a reason. Every rejection has a debrief. Pick
-          where you are — see what the other side is actually saying.
+          Stephanie Murray spent 20 years inside talent acquisition — running the boolean
+          searches, screening the resumes, sitting through the debriefs. Every tool here is built
+          from what actually happens behind the closed door. Pick the moment you&rsquo;re in.
         </SubHeading>
 
         {/* The board */}
@@ -361,8 +357,8 @@ function DetailView({
             gap: 16,
           }}
         >
-          {tools.map((tool) => (
-            <ToolCard key={tool.name} tool={tool} />
+          {tools.map((tool, i) => (
+            <ToolCard key={tool.name} tool={tool} startHere={i === 0} />
           ))}
         </div>
 
@@ -387,7 +383,7 @@ function DetailView({
   )
 }
 
-function ToolCard({ tool }: { tool: CatalogTool }) {
+function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean }) {
   const accent = tool.audience === 'hiring' ? '#FF4F6A' : '#A78BFA'
   const tintRgba = tool.audience === 'hiring' ? '255,79,106' : '108,71,255'
   const isComingSoon = tool.tier === 'soon'
@@ -402,15 +398,39 @@ function ToolCard({ tool }: { tool: CatalogTool }) {
         gap: 8,
         textDecoration: 'none',
         background: '#0F0F12',
-        border: `1px solid rgba(${tintRgba}, 0.25)`,
+        border: startHere
+          ? `1.5px solid rgba(${tintRgba}, 0.6)`
+          : `1px solid rgba(${tintRgba}, 0.25)`,
         borderRadius: 14,
         padding: '20px 20px 18px',
         transition: 'all 0.18s ease',
         minHeight: 168,
         cursor: isComingSoon ? 'default' : 'pointer',
         opacity: isComingSoon ? 0.7 : 1,
+        boxShadow: startHere ? `0 14px 36px rgba(${tintRgba}, 0.18)` : undefined,
+        position: 'relative',
       }}
     >
+      {startHere && (
+        <div
+          style={{
+            position: 'absolute',
+            top: -10,
+            left: 16,
+            background: `rgba(${tintRgba}, 0.95)`,
+            color: '#FFFFFF',
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 10,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            padding: '3px 10px',
+            borderRadius: 100,
+          }}
+        >
+          Start here
+        </div>
+      )}
       <style>{`
         .start-here-tool-card:hover {
           border-color: rgba(${tintRgba}, 0.55) !important;

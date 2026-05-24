@@ -20,7 +20,7 @@ interface ProUpsellPanelProps {
 /**
  * Reusable "next step" panel that appears at the bottom of a FREE tool
  * result. Lists 1–3 Pro tools that would deepen the user's fix and
- * routes them toward the $20/year membership. The lead-magnet → Pro
+ * routes them toward the $14.99/mo or $99/yr membership. The lead-magnet → Pro
  * funnel lives here.
  */
 export function ProUpsellPanel({
@@ -114,7 +114,7 @@ export function ProUpsellPanel({
         >
           Members get the next Recruiter Insight on the same diagnosis — plus every tool from the
           other side of the table.{' '}
-          <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$20/year</span> — less than Jobscan
+          <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$14.99/mo or $99/yr</span> — less than Jobscan
           charges for one day.
         </p>
 
@@ -222,7 +222,7 @@ export function ProUpsellPanel({
             }}
           >
             The whole production for{' '}
-            <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$20/year</span>. Cancel anytime.
+            <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$14.99/mo or $99/yr</span>. Cancel anytime.
           </div>
           <Link
             href="/pricing"

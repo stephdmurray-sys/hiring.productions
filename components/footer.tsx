@@ -90,7 +90,7 @@ export function Footer() {
               fontWeight: 800,
             }}
           >
-            Go Pro — $20/yr
+            Go Pro — $14.99/mo or $99/yr
           </Link>
         </div>
 

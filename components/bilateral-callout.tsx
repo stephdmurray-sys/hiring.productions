@@ -10,10 +10,10 @@ interface BilateralCalloutProps {
  * (after-layoff, for-small-teams, etc.) to make the bilateral access
  * benefit of Pro visible.
  *
- * A candidate-side visitor sees: "Your $20 also unlocks the hiring-team
+ * A candidate-side visitor sees: "Your Pro membership also unlocks the hiring-team
  * tools — see exactly how recruiters source, screen, and decide."
  *
- * A hiring-side visitor sees: "Your $20 also unlocks the candidate tools
+ * A hiring-side visitor sees: "Your Pro membership also unlocks the candidate tools
  * — see exactly what applicants run their resume through before it hits
  * your inbox."
  *
@@ -26,8 +26,8 @@ export function BilateralCallout({ audience }: BilateralCalloutProps) {
     ? 'Your Pro membership unlocks the other side of the table.'
     : 'Your Pro membership unlocks the candidate side of the table.'
   const body = isForCandidate
-    ? "Every hiring-team tool — JD-through-candidate-eyes, the boolean string a recruiter actually pastes, the AI-application detector, the interview scorecard, the offer pitch — is included in your $20/year. The candidates who close offers fastest are the ones who can see how the other side actually thinks."
-    : "Every candidate-side tool — the AI resume check, the recruiter's actual read on a resume, the keyword gap analysis, the LinkedIn rewrite — is included in your $20/year. The hiring teams that hire well are the ones who can see what their applicants are running their resumes through before they hit the inbox."
+    ? "Every hiring-team tool — JD-through-candidate-eyes, the boolean string a recruiter actually pastes, the AI-application detector, the interview scorecard, the offer pitch — is included in your $14.99/mo or $99/yr. The candidates who close offers fastest are the ones who can see how the other side actually thinks."
+    : "Every candidate-side tool — the AI resume check, the recruiter's actual read on a resume, the keyword gap analysis, the LinkedIn rewrite — is included in your $14.99/mo or $99/yr. The hiring teams that hire well are the ones who can see what their applicants are running their resumes through before they hit the inbox."
   const cta = isForCandidate
     ? 'See the hiring-team tools →'
     : 'See the candidate-side tools →'

@@ -779,7 +779,7 @@ function InlineUpgradeCard() {
       </ul>
 
       <div style={{ fontSize: '13px', color: '#8B8AA0', marginBottom: '16px' }}>
-        $20/year. Use them on every resume tweak and every job description you’re weighing. Cancel anytime.
+        $14.99/mo or $99/yr. Use them on every resume tweak and every job description you’re weighing. Cancel anytime.
       </div>
       <StripeCheckoutButton
         style={{
@@ -794,7 +794,7 @@ function InlineUpgradeCard() {
           cursor: 'pointer',
         }}
       >
-        Get full access — $20/year
+        Get full access — $14.99/mo or $99/yr
       </StripeCheckoutButton>
     </div>
   )

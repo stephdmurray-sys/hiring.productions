@@ -274,7 +274,7 @@ export default function AfterLayoffPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Make sure your resume and LinkedIn carry the new positioning."
-            sub="That's the honest read. Here are the Recruiter Insights every laid-off candidate uses before they send the first application — $20/year."
+            sub="That's the honest read. Here are the Recruiter Insights every laid-off candidate uses before they send the first application — $14.99/mo or $99/yr."
           />
 
           <div

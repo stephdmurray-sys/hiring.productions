@@ -12,6 +12,12 @@ interface StripeCheckoutButtonProps {
   memberLabel?: string
   /** Where to send members. Default: /tools */
   memberHref?: string
+  /**
+   * Which subscription plan to start. Defaults to 'monthly'. Pass
+   * 'annual' on buttons that should kick off the discounted annual
+   * checkout instead of the monthly one.
+   */
+  plan?: 'monthly' | 'annual'
 }
 
 /**
@@ -25,6 +31,7 @@ export function StripeCheckoutButton({
   style,
   memberLabel = 'Open your tools →',
   memberHref = '/tools',
+  plan = 'monthly',
 }: StripeCheckoutButtonProps) {
   const [mounted, setMounted] = useState(false)
   const [memberActive, setMemberActive] = useState(false)
@@ -45,7 +52,11 @@ export function StripeCheckoutButton({
       analytics.checkoutStart(
         typeof window !== 'undefined' ? window.location.pathname : 'unknown',
       )
-      const response = await fetch('/api/stripe/checkout', { method: 'POST' })
+      const response = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan }),
+      })
       if (!response.ok) throw new Error('Checkout unavailable')
       const data = await response.json()
       if (data?.url) {

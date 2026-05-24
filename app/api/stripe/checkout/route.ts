@@ -43,6 +43,21 @@ export async function POST(request: NextRequest) {
 
     const origin = getOrigin(request)
 
+    // Parse the requested plan from the POST body. Defaults to monthly
+    // because that's now the primary tier — annual is the save-money
+    // option for committed buyers. Body shape: { plan?: 'monthly' | 'annual' }.
+    // Unknown values fall back to monthly defensively.
+    let plan: 'monthly' | 'annual' = 'monthly'
+    try {
+      const body = await request.json()
+      if (body?.plan === 'annual') plan = 'annual'
+    } catch {
+      // No body or non-JSON — fine, use the monthly default.
+    }
+
+    const unit_amount = plan === 'annual' ? 9900 : 1499
+    const interval: 'year' | 'month' = plan === 'annual' ? 'year' : 'month'
+
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [
@@ -54,8 +69,8 @@ export async function POST(request: NextRequest) {
               description:
                 'The whole production — every Recruiter Insight, built from real recruiting practice. Use them on every resume tweak and every job description.',
             },
-            unit_amount: 2000,
-            recurring: { interval: 'year' },
+            unit_amount,
+            recurring: { interval },
           },
           quantity: 1,
         },
@@ -98,9 +113,10 @@ export async function POST(request: NextRequest) {
 
     // Server-side event log — captures every checkout that LEAVES our
     // origin for Stripe. Pair with payment_success in /api/stripe/session
-    // to compute the live checkout → payment conversion rate.
+    // to compute the live checkout → payment conversion rate. The plan
+    // tag lets us see monthly vs annual split in the dashboard.
     void logEvent('checkout_start', {
-      meta: { sessionId: session.id ?? '' },
+      meta: { sessionId: session.id ?? '', plan },
     })
 
     return NextResponse.json({ url: session.url })

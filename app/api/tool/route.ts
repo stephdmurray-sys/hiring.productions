@@ -1381,7 +1381,7 @@ If you find yourself typing the words "lacks X" or "missing X" or "doesn't conta
 
 All specific replacement strings — every named skill, every headline phrasing, every About-section keyword — live EXCLUSIVELY in the Moves section ("Current:" / "Change to:" / "Impact:" lines). That section is gated server-side. Free users see Move LABELS only.
 
-This rule is load-bearing. The wedge tool's $20/year economics depend on it.
+This rule is load-bearing. The wedge tool's $14.99/mo or $99/yr economics depend on it.
 
 - No emojis. No hedging. Sound like Stephanie walking the candidate through the search results on a Zoom call.
 - Max 900 words total.`,
@@ -2064,7 +2064,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'pro-required',
-          message: 'This Recruiter Insight is part of Pro. $20 a year unlocks the whole production.',
+          message: 'This Recruiter Insight is part of Pro. $14.99/month or $99/year unlocks the whole production.',
         },
         { status: 402 },
       )
@@ -2294,7 +2294,7 @@ function gateMessage(reason: string): string {
     case 'anon-limit':
       return "You've used your 2 free insights today. Drop an email to unlock 8 more — no card."
     case 'email-limit':
-      return "You've used every free insight. The whole production — every Recruiter Insight, unlimited — is $20 for the year."
+      return "You've used every free insight. The whole production — every Recruiter Insight, unlimited — is $14.99/month or $99/year."
     case 'pro-limit':
       return 'Daily cap hit. This resets at midnight UTC. Reach out if this looks wrong.'
     case 'budget-anon':

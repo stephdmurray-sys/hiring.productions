@@ -489,7 +489,7 @@ function InlineUpgradeCard() {
         That was one. Members see all ten — every category, every question with what they're really assessing, the weak vs strong answer, and the literal opening line to start with.
       </div>
       <div style={{ fontSize: '14px', color: '#8B8AA0', marginBottom: '16px' }}>
-        $20/year. Use it on every interview prep. Cancel anytime.
+        $14.99/mo or $99/yr. Use it on every interview prep. Cancel anytime.
       </div>
       <StripeCheckoutButton
         style={{
@@ -504,7 +504,7 @@ function InlineUpgradeCard() {
           cursor: 'pointer',
         }}
       >
-        Get full access — $20/year
+        Get full access — $14.99/mo or $99/yr
       </StripeCheckoutButton>
     </div>
   )

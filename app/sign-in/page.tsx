@@ -39,7 +39,7 @@ export default function SignInPage() {
         router.push('/tools')
       } else {
         setError(
-          "No active membership found for this email. Use the email you paid with at checkout — or get full access for $20/year below.",
+          "No active membership found for this email. Use the email you paid with at checkout — or get full access for $14.99/mo or $99/yr below.",
         )
       }
     } catch {
@@ -214,7 +214,7 @@ export default function SignInPage() {
                     lineHeight: 1.45,
                   }}
                 >
-                  Get full access — $20/year →
+                  Get full access — $14.99/mo or $99/yr →
                 </div>
               </Link>
 
@@ -371,7 +371,7 @@ export default function SignInPage() {
                     textDecoration: 'none',
                   }}
                 >
-                  Get full access for $20/year →
+                  Get full access for $14.99/mo or $99/yr →
                 </Link>
               </div>
             </>

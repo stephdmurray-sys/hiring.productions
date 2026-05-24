@@ -169,7 +169,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#F2F0FF', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $20/year.
+          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#F2F0FF', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $14.99/mo or $99/yr.
         </p>
 
         <form onSubmit={submit}>
@@ -261,7 +261,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
               letterSpacing: '0.01em',
             }}
           >
-            See Pro — $20/year →
+            See Pro — $14.99/mo or $99/yr →
           </Link>
           <span style={{ color: '#3F3E50', fontSize: '13px' }}>·</span>
           <a

@@ -117,7 +117,7 @@ export default function ToolsPage() {
               margin: '0 auto 32px',
             }}
           >
-            Start free — run a tool right now, no account, no card. Then upgrade to every Recruiter Insight for $20 a year.
+            Start free — run a tool right now, no account, no card. Then upgrade to every Recruiter Insight for $14.99/month or $99/year.
           </p>
 
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -268,7 +268,7 @@ export default function ToolsPage() {
             <SectionHeader
               eyebrow="ACT TWO — RECRUITER INSIGHTS"
               eyebrowColor="#A78BFA"
-              title="Every Recruiter Insight — both sides of the table. $20 a year."
+              title="Every Recruiter Insight — both sides of the table. $14.99/month or $99/year."
               sub="One membership unlocks the candidate-side tools AND the hiring-team tools. Understanding the other side is what makes you better at your own."
             />
 
@@ -329,7 +329,7 @@ export default function ToolsPage() {
               eyebrow="ACT THREE — IN PRODUCTION"
               eyebrowColor="#8B8AA0"
               title="On the way to the catalog."
-              sub="Being built right now. Members get them the day they ship — at the same $20/year."
+              sub="Being built right now. Members get them the day they ship — at the same $14.99/mo or $99/yr."
             />
 
             <div
@@ -433,7 +433,7 @@ export default function ToolsPage() {
               position: 'relative',
             }}
           >
-            Get Full Access — $20/year
+            Get Full Access — $14.99/mo or $99/yr
           </StripeCheckoutButton>
           <div style={{ marginTop: 14, position: 'relative' }}>
             <Link

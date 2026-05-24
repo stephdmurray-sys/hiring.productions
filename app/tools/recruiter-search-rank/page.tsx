@@ -595,7 +595,7 @@ export default function RecruiterSearchRankPage() {
           {/* Founder byline below the result — captures the user at the
               moment they've just received value and are most receptive to
               wanting "more from her." LinkedIn follow CTA inside builds
-              audience for the segment that won't pay $20 today but
+              audience for the segment that won't pay today but
               will engage with weekly recruiter content. */}
           <div style={{ marginTop: 32 }}>
             <FounderByline />

@@ -160,7 +160,7 @@ export default function MembershipPage() {
           position: 'relative',
           zIndex: 1,
         }}>
-          {[`${tools.length} Recruiter Insights`, 'Both Sides of Hiring', '$20/year — not per month'].map((stat, idx) => (
+          {[`${tools.length} Recruiter Insights`, 'Both Sides of Hiring', 'Cancel anytime'].map((stat, idx) => (
             <div
               key={idx}
               style={{
@@ -180,23 +180,55 @@ export default function MembershipPage() {
           ))}
         </div>
 
-        <StripeCheckoutButton style={{
-          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-          border: 'none',
-          color: '#fff',
-          padding: '15px 32px',
-          borderRadius: '10px',
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '16px',
-          fontWeight: 800,
-          cursor: 'pointer',
-          width: '100%',
-          display: 'block',
-          position: 'relative',
-          zIndex: 1,
-        }}>
-          Get Full Access — $20/year
-        </StripeCheckoutButton>
+        {/* Dual-tier CTA. Monthly is the primary path (active search
+            lifecycle pays while you need it). Annual is the savings
+            play — 45% off ($93/yr saved vs paying monthly all year). */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
+            gap: '12px',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <StripeCheckoutButton
+            plan="monthly"
+            style={{
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              border: 'none',
+              color: '#fff',
+              padding: '15px 24px',
+              borderRadius: '10px',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '16px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              width: '100%',
+              display: 'block',
+            }}
+          >
+            Start monthly — $14.99/mo
+          </StripeCheckoutButton>
+          <StripeCheckoutButton
+            plan="annual"
+            style={{
+              background: 'transparent',
+              border: '1.5px solid rgba(167,139,250,0.45)',
+              color: '#F2F0FF',
+              padding: '13.5px 24px',
+              borderRadius: '10px',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '16px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              width: '100%',
+              display: 'block',
+            }}
+          >
+            Save 45% — $99/year
+          </StripeCheckoutButton>
+        </div>
 
         {/* "Already a member?" recovery link — gated behind an existing
             localStorage member signal so it doesn't intercept first-time
@@ -329,7 +361,7 @@ export default function MembershipPage() {
                 {[
                   {
                     label: 'Price',
-                    ours: '$20/year',
+                    ours: '$14.99/mo or $99/yr',
                     competitors: ['$49.95/mo', '$9/week', '$24.95/mo', 'Enterprise', '$200+/hr'],
                     isPrice: true,
                   },
@@ -487,7 +519,7 @@ export default function MembershipPage() {
           margin: '0 auto 48px',
           lineHeight: 1.6,
         }}>
-          One $20 membership unlocks every candidate-side tool AND every hiring-team tool.
+          One membership unlocks every candidate-side tool AND every hiring-team tool.
           Understanding the other side is what makes you better at your own — a candidate
           who sees how recruiters screen becomes a better applicant; a hiring team that
           sees what candidates worry about writes better job posts.
@@ -628,28 +660,57 @@ export default function MembershipPage() {
         }}>
           Ready to Get Started?
         </div>
-        <StripeCheckoutButton style={{
-          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-          border: 'none',
-          color: '#fff',
-          padding: '15px 32px',
-          borderRadius: '10px',
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '16px',
-          fontWeight: 800,
-          cursor: 'pointer',
-          width: '100%',
-          display: 'block',
-          marginBottom: '16px',
-        }}>
-          Get Full Access — $20/year
-        </StripeCheckoutButton>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
+            gap: '12px',
+            marginBottom: '16px',
+          }}
+        >
+          <StripeCheckoutButton
+            plan="monthly"
+            style={{
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              border: 'none',
+              color: '#fff',
+              padding: '15px 24px',
+              borderRadius: '10px',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '16px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              width: '100%',
+              display: 'block',
+            }}
+          >
+            Start monthly — $14.99/mo
+          </StripeCheckoutButton>
+          <StripeCheckoutButton
+            plan="annual"
+            style={{
+              background: 'transparent',
+              border: '1.5px solid rgba(167,139,250,0.45)',
+              color: '#F2F0FF',
+              padding: '13.5px 24px',
+              borderRadius: '10px',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '16px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              width: '100%',
+              display: 'block',
+            }}
+          >
+            Save 45% — $99/year
+          </StripeCheckoutButton>
+        </div>
         <p style={{
           fontSize: '13px',
           color: '#8B8AA0',
           marginTop: '16px',
         }}>
-          Billed annually. Free tools stay free forever. Access delivered instantly to your email. No account needed for free tools.
+          Cancel anytime. Free tools stay free forever. Access delivered instantly to your email. No account needed for free tools.
         </p>
       </section>
 

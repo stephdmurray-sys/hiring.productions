@@ -65,7 +65,7 @@ export default function TermsPage() {
 
         <Section title="What we promise">
           <p>
-            The free tools stay free. The Pro tools cost $20 per year — billed
+            The free tools stay free. The Pro tools cost $14.99/month or $99/year — billed
             once, cancel anytime through the Stripe portal, and the access
             stops at the end of your current term. We will not raise the price
             on existing members without 60 days&apos; notice.

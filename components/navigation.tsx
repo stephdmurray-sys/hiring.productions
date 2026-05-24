@@ -311,18 +311,45 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
             alignItems: 'center',
           }}
         >
-          <DropdownMenu
-            label="For Companies"
-            items={forCompanies}
-            isLight={isLight}
-            pathname={pathname}
-          />
-          <DropdownMenu
-            label="For Candidates"
-            items={forCandidates}
-            isLight={isLight}
-            pathname={pathname}
-          />
+          {/* Two distinct top-level paths — not dropdowns. Each goes to a
+              dedicated homepage. The deeper sub-pages (for-new-grads,
+              after-layoff, etc.) are still crawlable via the footer and
+              internal links on the landing pages, but they no longer clutter
+              the main nav. */}
+          <li style={{ listStyle: 'none' }}>
+            <Link
+              href="/"
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                color: pathname === '/' ? '#A78BFA' : '#F2F0FF',
+                textDecoration: 'none',
+                transition: 'color 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              For Candidates
+            </Link>
+          </li>
+          <li style={{ listStyle: 'none' }}>
+            <Link
+              href="/for-companies"
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '14px',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                color: pathname === '/for-companies' ? '#FF8FA3' : '#F2F0FF',
+                textDecoration: 'none',
+                transition: 'color 0.15s ease',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              For Hiring Teams
+            </Link>
+          </li>
           <li style={{ listStyle: 'none' }}>
             <Link
               href="/tools"

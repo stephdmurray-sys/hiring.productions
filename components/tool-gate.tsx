@@ -120,7 +120,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
           }}
         >
           <Lock size={11} strokeWidth={2.5} />
-          Members only · $20 / year
+          Members only · $14.99/mo or $99/yr
         </div>
 
         {/* Headline */}
@@ -281,7 +281,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
           }}
         >
-          Get Full Access — $20 / year
+          Get Full Access — $14.99/mo or $99/yr
         </StripeCheckoutButton>
 
         {/* Reassurance line */}

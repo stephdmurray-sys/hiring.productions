@@ -12,9 +12,9 @@ const FREE_CANDIDATE_TOOLS = CATALOG.filter(
 ).map((t) => t.name)
 
 export const metadata: Metadata = {
-  title: 'Pricing — $20/year vs. $600+/year',
+  title: 'Pricing — $14.99/month or $99/year',
   description:
-    'Free forever for every candidate-side tool. $20/year unlocks both sides — every candidate Recruiter Insight AND every hiring-team tool, because understanding the other side is what makes you better at your own. Compare to Jobscan ($599.40/year), Resume Worded ($408/year), Cultivated Culture ($297 one-time + ongoing).',
+    'Free forever for every candidate-side tool. $14.99/month or $99/year (save 45%) unlocks both sides — every candidate Recruiter Insight AND every hiring-team tool. Less than one hour with a career coach. Less than Jobscan charges for one day.',
   alternates: { canonical: 'https://hiring.productions/pricing' },
 }
 
@@ -47,7 +47,7 @@ const ROWS: Row[] = [
   // ADDITIONAL THINGS THEY CHARGE FOR
   { label: 'Both sides — bilateral hiring tools', group: 'addon', hp: true, teal: false, jobscan: false, resumeWorded: false, cultivated: false },
   { label: 'Designed by recruiters who actually do the work', group: 'addon', hp: true, teal: 'Algorithmic', jobscan: 'Algorithmic', resumeWorded: 'Algorithmic', cultivated: true },
-  { label: 'Real annual price (no weekly/monthly trap)', group: 'addon', hp: '$20/year', teal: '$676/yr ($13/wk)', jobscan: '$599.40/yr', resumeWorded: '$408/yr', cultivated: '$297 + courses' },
+  { label: 'Honest price (monthly or save with annual)', group: 'addon', hp: '$14.99/mo or $99/yr', teal: '$676/yr ($13/wk)', jobscan: '$599.40/yr', resumeWorded: '$408/yr', cultivated: '$297 + courses' },
 ]
 
 function CellContent({ value }: { value: Cell }) {
@@ -122,7 +122,7 @@ export default function PricingPage() {
               margin: '0 0 20px',
             }}
           >
-            $20 a year. The whole production.
+            One price. The whole production.
           </h1>
 
           <p
@@ -138,7 +138,7 @@ export default function PricingPage() {
           >
             Jobscan tells you if your resume passes the ATS. We tell you what the recruiter thinks
             when it does — and the hiring-team tools that show you how candidates get screened, sourced,
-            and decided on. Both sides of the table, one $20 membership.
+            and decided on. Both sides of the table, one membership.
           </p>
 
           <p
@@ -153,7 +153,7 @@ export default function PricingPage() {
               margin: '8px 0 0',
             }}
           >
-            $1.67 a month. Less than Jobscan charges for one day.
+            Less than one hour with a career coach. Less than Jobscan charges for one day.
           </p>
         </div>
       </section>
@@ -321,7 +321,7 @@ export default function PricingPage() {
                   lineHeight: 1,
                 }}
               >
-                $20
+                $14.99
               </div>
               <div
                 style={{
@@ -331,8 +331,19 @@ export default function PricingPage() {
                   color: '#8B8AA0',
                 }}
               >
-                / year
+                / month
               </div>
+            </div>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '13px',
+                color: '#F2F0FF',
+                fontWeight: 700,
+                marginBottom: '6px',
+              }}
+            >
+              or <span style={{ color: '#A78BFA' }}>$99/year — save 45%</span>
             </div>
             <div
               style={{
@@ -342,7 +353,7 @@ export default function PricingPage() {
                 marginBottom: '24px',
               }}
             >
-              $1.67/month, billed annually. Cancel anytime.
+              Cancel anytime. Pick monthly while you&rsquo;re searching, switch to annual when you know you&rsquo;re in.
             </div>
 
             <ul
@@ -382,26 +393,47 @@ export default function PricingPage() {
               ))}
             </ul>
 
-            <StripeCheckoutButton
-              style={{
-                display: 'block',
-                width: '100%',
-                marginTop: '28px',
-                padding: '15px',
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                border: 'none',
-                borderRadius: '10px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '15px',
-                color: 'white',
-                cursor: 'pointer',
-                textAlign: 'center',
-                boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
-              }}
-            >
-              Get Full Access — $20/year
-            </StripeCheckoutButton>
+            <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <StripeCheckoutButton
+                plan="monthly"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '15px',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  border: 'none',
+                  borderRadius: '10px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: '15px',
+                  color: 'white',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
+                }}
+              >
+                Start monthly — $14.99/mo
+              </StripeCheckoutButton>
+              <StripeCheckoutButton
+                plan="annual"
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '13.5px',
+                  background: 'transparent',
+                  border: '1.5px solid rgba(167,139,250,0.45)',
+                  borderRadius: '10px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: '15px',
+                  color: '#F2F0FF',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                }}
+              >
+                Save 45% — $99/year
+              </StripeCheckoutButton>
+            </div>
           </div>
         </div>
       </section>
@@ -446,8 +478,8 @@ export default function PricingPage() {
                 lineHeight: 1.6,
               }}
             >
-              Most career tools charge monthly for one mechanical thing. We charge $20 a year for
-              the whole arc — resume to offer.
+              Most career tools charge monthly for one mechanical thing. We give you the whole arc —
+              resume to offer — for less than one hour with a career coach.
             </p>
           </div>
 
@@ -505,7 +537,7 @@ export default function PricingPage() {
                       hiring.productions
                     </div>
                     <div style={{ fontSize: '11px', color: '#A78BFA', fontWeight: 600 }}>
-                      $20 / year
+                      $14.99/mo · $99/yr
                     </div>
                   </th>
                   <th
@@ -667,7 +699,7 @@ export default function PricingPage() {
               margin: '0 0 16px',
             }}
           >
-            Spend $20 once. Stop guessing for a year.
+            Stop guessing what&rsquo;s actually happening on the other side.
           </h2>
           <p
             style={{
@@ -683,23 +715,50 @@ export default function PricingPage() {
             decoder that closes.
           </p>
 
-          <StripeCheckoutButton
+          <div
             style={{
-              display: 'inline-block',
-              padding: '16px 36px',
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              border: 'none',
-              borderRadius: '12px',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '16px',
-              color: 'white',
-              cursor: 'pointer',
-              boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
+              display: 'inline-flex',
+              gap: '12px',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
           >
-            Get Full Access — $20/year
-          </StripeCheckoutButton>
+            <StripeCheckoutButton
+              plan="monthly"
+              style={{
+                display: 'inline-block',
+                padding: '16px 28px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                border: 'none',
+                borderRadius: '12px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '16px',
+                color: 'white',
+                cursor: 'pointer',
+                boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
+              }}
+            >
+              Start monthly — $14.99/mo
+            </StripeCheckoutButton>
+            <StripeCheckoutButton
+              plan="annual"
+              style={{
+                display: 'inline-block',
+                padding: '14.5px 28px',
+                background: 'transparent',
+                border: '1.5px solid rgba(167,139,250,0.45)',
+                borderRadius: '12px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '16px',
+                color: '#F2F0FF',
+                cursor: 'pointer',
+              }}
+            >
+              Save 45% — $99/year
+            </StripeCheckoutButton>
+          </div>
 
           <div style={{ marginTop: '14px' }}>
             <Link

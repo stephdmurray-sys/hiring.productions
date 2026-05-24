@@ -232,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────── THE REST OF THE PRODUCTION ───────────────
-         The $20 upsell. Bilateral access is the membership benefit
+         The Pro upsell. Bilateral access is the membership benefit
          here, not the homepage tagline. After they care about
          their rank, this becomes "and here's everything else."
       */}
@@ -286,12 +286,12 @@ export default function HomePage() {
               lineHeight: 1.6,
             }}
           >
-            $20/year unlocks the whole production —{' '}
+            $14.99/mo or $99/yr unlocks the whole production —{' '}
             <span style={{ color: '#F2F0FF', fontWeight: 700 }}>
               both sides of the table
             </span>
             . Candidates see how recruiters actually screen. Hiring teams see what their
-            applicants run their resume through. Same $20. No separate tiers.
+            applicants run their resume through. One membership. No separate tiers.
           </p>
 
           <p
@@ -406,7 +406,7 @@ export default function HomePage() {
             }}
           >
             Each Recruiter Insight works in both directions — candidates see how hiring teams
-            decide, and hiring teams see what candidates run their materials through. One $20.
+            decide, and hiring teams see what candidates run their materials through. One membership.
             The whole production.
           </p>
 
@@ -652,7 +652,7 @@ export default function HomePage() {
                 transition: 'transform 0.2s',
               }}
             >
-              The whole production — $20/year
+              The whole production — $14.99/mo or $99/yr
             </Link>
             <Link
               href="/tools"
