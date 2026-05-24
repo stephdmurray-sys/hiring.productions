@@ -222,8 +222,6 @@ function DropdownMenu({
 
 export function Navigation({ variant = 'light' }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [mobileCompaniesOpen, setMobileCompaniesOpen] = useState(false)
-  const [mobileCandidatesOpen, setMobileCandidatesOpen] = useState(false)
   // memberActive starts false on SSR so the markup matches; we flip it on the
   // client after mount. This prevents a hydration mismatch between server and
   // client output for a localStorage-backed flag.
@@ -233,8 +231,6 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
 
   useEffect(() => {
     setIsOpen(false)
-    setMobileCompaniesOpen(false)
-    setMobileCandidatesOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -499,120 +495,40 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
             maxWidth: '360px',
           }}
         >
-          {/* For Companies group */}
-          <li style={{ marginBottom: '32px' }}>
-            <button
-              onClick={() => setMobileCompaniesOpen((v) => !v)}
-              aria-expanded={mobileCompaniesOpen}
+          {/* Two direct top-level paths — no dropdowns. Matches the desktop
+              nav so mobile and desktop show the same lane choices. */}
+          <li style={{ marginBottom: '28px', listStyle: 'none' }}>
+            <Link
+              href="/"
+              onClick={() => setIsOpen(false)}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
                 fontFamily: "Georgia, 'Playfair Display', serif",
                 fontSize: '26px',
-                color: '#F5F0EA',
+                color: pathname === '/' ? '#A78BFA' : '#F5F0EA',
                 textDecoration: 'none',
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              For Companies
-              <span
-                style={{
-                  fontSize: '14px',
-                  display: 'inline-block',
-                  transition: 'transform 0.2s ease',
-                  transform: mobileCompaniesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}
-                aria-hidden="true"
-              >
-                ▾
-              </span>
-            </button>
-            {mobileCompaniesOpen && (
-              <ul style={{ listStyle: 'none', margin: '16px 0 0', padding: 0 }}>
-                {forCompanies.map((item) => (
-                  <li key={item.href} style={{ marginBottom: '12px' }}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      style={{
-                        fontFamily: 'monospace',
-                        fontSize: '16px',
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                        color: pathname === item.href ? '#7B5EA7' : 'rgba(245, 240, 232, 0.6)',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-
-          {/* For Candidates group */}
-          <li style={{ marginBottom: '32px' }}>
-            <button
-              onClick={() => setMobileCandidatesOpen((v) => !v)}
-              aria-expanded={mobileCandidatesOpen}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: "Georgia, 'Playfair Display', serif",
-                fontSize: '26px',
-                color: '#F5F0EA',
-                textDecoration: 'none',
-                width: '100%',
+                display: 'block',
                 textAlign: 'center',
               }}
             >
               For Candidates
-              <span
-                style={{
-                  fontSize: '14px',
-                  display: 'inline-block',
-                  transition: 'transform 0.2s ease',
-                  transform: mobileCandidatesOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}
-                aria-hidden="true"
-              >
-                ▾
-              </span>
-            </button>
-            {mobileCandidatesOpen && (
-              <ul style={{ listStyle: 'none', margin: '16px 0 0', padding: 0 }}>
-                {forCandidates.map((item) => (
-                  <li key={item.href} style={{ marginBottom: '12px' }}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      style={{
-                        fontFamily: 'monospace',
-                        fontSize: '16px',
-                        letterSpacing: '0.06em',
-                        textTransform: 'uppercase',
-                        color: pathname === item.href ? '#7B5EA7' : 'rgba(245, 240, 232, 0.6)',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
+            </Link>
+          </li>
+
+          <li style={{ marginBottom: '28px', listStyle: 'none' }}>
+            <Link
+              href="/for-companies"
+              onClick={() => setIsOpen(false)}
+              style={{
+                fontFamily: "Georgia, 'Playfair Display', serif",
+                fontSize: '26px',
+                color: pathname === '/for-companies' ? '#FF8FA3' : '#F5F0EA',
+                textDecoration: 'none',
+                display: 'block',
+                textAlign: 'center',
+              }}
+            >
+              For Hiring Teams
+            </Link>
           </li>
 
           {/* Tools */}

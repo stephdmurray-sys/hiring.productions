@@ -81,10 +81,44 @@ export default function HomePage() {
       `}</style>
       <Navigation variant="dark" />
 
+      {/* ──────────────── AUDIENCE PRE-ROUTER ─────────────────
+         Thin strip above the candidate hero so hiring leaders landing
+         cold don't have to scroll past four candidate question cards
+         to find the "different door." The candidate experience is
+         the homepage default; this strip is a passive signpost for
+         visitors in the wrong room.
+      */}
+      <Link
+        href="/for-companies"
+        style={{
+          display: 'block',
+          background: '#14141B',
+          borderBottom: '1px solid rgba(255,79,106,0.18)',
+          padding: '12px 24px',
+          textAlign: 'center',
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: 13.5,
+          fontWeight: 600,
+          color: '#C9C7DA',
+          textDecoration: 'none',
+          letterSpacing: '0.005em',
+        }}
+      >
+        Hiring a role, not searching for one?{' '}
+        <span
+          style={{
+            color: '#FF8FA3',
+            fontWeight: 800,
+            borderBottom: '1px solid rgba(255,143,163,0.45)',
+            paddingBottom: 1,
+          }}
+        >
+          The hiring-team page is here &rarr;
+        </span>
+      </Link>
+
       {/* ──────────────── START HERE — QUESTION BOARD ─────────────────
-         Question-led entry. Five candidate-pain prompts that route
-         visitors to 2-3 specific catalog tools each. The primary
-         homepage funnel — no longer the wedge tool directly.
+         Question-led entry. The primary homepage funnel for candidates.
       */}
       <StartHereBoard />
 
