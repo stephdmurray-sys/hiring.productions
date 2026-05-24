@@ -216,11 +216,9 @@ export default function HomePage() {
               marginBottom: 18,
             }}
           >
-            Most recently Senior Director of TA at Brightside Health, where I won Transform&apos;s
-            Talent Strategy of the Year in 2025 building a clinical hiring function across all 50
-            states. The searches you&apos;ll see are the same ones I ran on LinkedIn Recruiter
-            every day to fill senior roles. The ranking model is calibrated to how the algorithm
-            actually weights signals — not what a content marketing team guessed.
+            Senior Director of TA at Brightside Health. Transform&apos;s Talent Strategy of the Year,
+            2025. Every search, every read, every debrief on this site is the one I&rsquo;ve actually
+            been running for 20 years.
           </p>
           <p
             style={{
@@ -232,8 +230,7 @@ export default function HomePage() {
               marginBottom: 28,
             }}
           >
-            Every Recruiter Insight on this site is built from real recruiting practice. No
-            fabricated specifics. No invented stats.
+            No fabricated specifics. No invented stats.
           </p>
 
           {/* LinkedIn follow CTA — captures the "interested but not paying
@@ -315,17 +312,13 @@ export default function HomePage() {
               fontSize: '17px',
               color: '#9D9CB3',
               textAlign: 'center',
-              maxWidth: '640px',
-              margin: '0 auto 18px',
-              lineHeight: 1.6,
+              maxWidth: '620px',
+              margin: '0 auto 14px',
+              lineHeight: 1.55,
             }}
           >
-            $14.99/mo or $99/yr unlocks the whole production —{' '}
-            <span style={{ color: '#F2F0FF', fontWeight: 700 }}>
-              both sides of the table
-            </span>
-            . Candidates see how recruiters actually screen. Hiring teams see what their
-            applicants run their resume through. One membership. No separate tiers.
+            <span style={{ color: '#F2F0FF', fontWeight: 700 }}>Both sides of the table.</span>{' '}
+            One membership. $14.99/mo or $99/yr.
           </p>
 
           <p
@@ -342,7 +335,7 @@ export default function HomePage() {
               letterSpacing: '0.01em',
             }}
           >
-            Less than Jobscan charges for a single day.
+            Less than one hour with a career coach.
           </p>
 
           {/* Tools grid — compact 4-card row.

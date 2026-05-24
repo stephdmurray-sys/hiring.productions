@@ -26,24 +26,24 @@ import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
  */
 interface Question {
   id: string
-  eyebrow: string
-  label: string
+  /** Big primary title — the scannable category name (e.g. "The Silence"). */
+  title: string
+  /** Small italic quote that subtitles the title (the visitor's voice). */
+  quote: string
+  /** One-sentence framing on the detail view. */
   sub: string
   toolNames: string[]
 }
 
 // Three moments + one for unusual situations. Each moment routes to a
 // specific ordered sequence of tools, with the FIRST tool being the
-// "start here" entry point (free + low-friction by design). Order is
-// deliberate — the entry tool is the cheapest path to a result; the
-// deeper tools follow once a visitor has experienced what the product
-// actually does.
+// "start here" entry point (free + low-friction by design).
 const QUESTIONS: Question[] = [
   {
     id: 'no-responses',
-    eyebrow: 'The silence',
-    label: 'No one is responding to me.',
-    sub: 'You’ve applied and the silence is the worst part. The actual problem is almost never what you think it is. Start with the keyword scan — that’s where the screen breaks first.',
+    title: 'The Silence',
+    quote: 'no one is responding to me',
+    sub: 'You’ve applied and the silence is the worst part. Start with the keyword scan — that’s where the screen breaks first.',
     toolNames: [
       'What Words Are Recruiters Searching For?',
       'Where Do You Rank in a Recruiter Search?',
@@ -52,9 +52,9 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 'interview-prep',
-    eyebrow: 'The interview',
-    label: 'I have an interview coming up.',
-    sub: 'See the questions they’re really asking before you walk in. Then run a rehearsal that matches their actual rubric. Then nail the opening line — most candidates lose the interview in the first 90 seconds.',
+    title: 'The Interview',
+    quote: 'I have an interview coming up',
+    sub: 'See the questions they’re really asking. Run a rehearsal that matches their actual rubric. Nail the opening line.',
     toolNames: [
       'What They’re Really Asking',
       'The Rehearsal Room',
@@ -63,9 +63,9 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 'got-offer',
-    eyebrow: 'The offer',
-    label: 'I just got an offer.',
-    sub: 'See what’s actually negotiable, get the exact script to ask for more, and read the company before you sign — not after.',
+    title: 'The Offer',
+    quote: 'I just got an offer',
+    sub: 'See what’s actually negotiable, get the exact script to ask for more, and read the company before you sign.',
     toolNames: [
       'How to Negotiate This Offer',
       'What This Company Feels Like to Work At',
@@ -73,9 +73,9 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 'unusual-situation',
-    eyebrow: 'Everyone’s different',
-    label: 'My situation is unusual — gap, pivot, layoff, or new grad.',
-    sub: 'Specific tools for specific situations. Tell it true, the way someone who reads resumes for a living would tell it.',
+    title: 'Everyone’s Different',
+    quote: 'gap, pivot, layoff, or new grad',
+    sub: 'Specific tools for specific situations. Tell it true, the way someone who reads resumes for a living would.',
     toolNames: [
       'How to Explain My Employment Gap',
       'Your Career Pivot, Translated',
@@ -119,16 +119,15 @@ export function StartHereBoard() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Eyebrow>Built by the recruiter who ran these searches</Eyebrow>
+        <Eyebrow>Both sides of hiring</Eyebrow>
         <Heading>
-          See what actually happens
+          Pull back the curtain
           <br />
-          on the other side of your application.
+          on hiring.
         </Heading>
         <SubHeading>
-          Stephanie Murray spent 20 years inside talent acquisition — running the boolean
-          searches, screening the resumes, sitting through the debriefs. Every tool here is built
-          from what actually happens behind the closed door. Pick the moment you&rsquo;re in.
+          What recruiters actually say. The boolean search that finds you — or doesn&rsquo;t. The
+          debrief that decides it. Every tool built from real recruiting practice.
         </SubHeading>
 
         {/* The board */}
@@ -223,28 +222,32 @@ function QuestionCard({
           box-shadow: 0 16px 40px rgba(108,71,255,0.12);
         }
       `}</style>
+      {/* TITLE — big, scannable. This is what visitors read at a glance to
+          spot their moment. Quote sits underneath as a smaller subtitle in
+          the visitor's own voice. */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
-          fontWeight: 800,
-          fontSize: 11,
-          letterSpacing: '0.14em',
-          textTransform: 'uppercase',
-          color: '#A78BFA',
+          fontWeight: 900,
+          fontSize: 'clamp(26px, 3.2vw, 34px)',
+          lineHeight: 1.1,
+          letterSpacing: '-0.015em',
+          color: '#F2F0FF',
         }}
       >
-        {question.eyebrow}
+        {question.title}
       </div>
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
-          fontWeight: 800,
-          fontSize: 'clamp(20px, 2.4vw, 24px)',
-          lineHeight: 1.2,
-          color: '#F2F0FF',
+          fontWeight: 400,
+          fontStyle: 'italic',
+          fontSize: 14,
+          lineHeight: 1.4,
+          color: '#9D9CB3',
         }}
       >
-        &ldquo;{question.label}&rdquo;
+        &ldquo;{question.quote}&rdquo;
       </div>
       <div
         style={{
@@ -310,30 +313,31 @@ function DetailView({
           padding: 'clamp(28px, 4vw, 40px)',
         }}
       >
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: 11,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: '#A78BFA',
-            marginBottom: 14,
-          }}
-        >
-          {question.eyebrow}
-        </div>
+        {/* Match the card hierarchy: big title, smaller italic quote. */}
         <div
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(26px, 3.2vw, 36px)',
-            lineHeight: 1.15,
+            fontSize: 'clamp(32px, 4.2vw, 48px)',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
             color: '#F2F0FF',
-            marginBottom: 14,
+            marginBottom: 8,
           }}
         >
-          &ldquo;{question.label}&rdquo;
+          {question.title}
+        </div>
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 400,
+            fontStyle: 'italic',
+            fontSize: 'clamp(15px, 1.6vw, 17px)',
+            color: '#A78BFA',
+            marginBottom: 20,
+          }}
+        >
+          &ldquo;{question.quote}&rdquo;
         </div>
         <div
           style={{
