@@ -173,12 +173,18 @@ export function StartHereBoard() {
 // =====================================================================
 
 function QuestionGrid({ onSelect }: { onSelect: (id: string) => void }) {
+  // 2x2 grid on desktop, 1 column on mobile. Four cards laid out as
+  // a clean square — no orphan card on a second row. Container width
+  // is constrained so auto-fit can never spawn a third column even on
+  // wide displays.
   return (
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
-        gap: 16,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
+        gap: 18,
+        maxWidth: 820,
+        margin: '0 auto',
       }}
     >
       {QUESTIONS.map((q) => (
