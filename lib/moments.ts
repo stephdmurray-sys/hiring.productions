@@ -16,6 +16,9 @@ export interface Moment {
   quote: string
   /** One-sentence framing on the detail view / tools page. */
   sub: string
+  /** Three short concept-bullets shown on the homepage card so visitors
+   *  see what's inside before clicking. Each ~3-6 words. */
+  bullets: string[]
   /** Catalog tool names in display order. First = "start here". */
   toolNames: string[]
 }
@@ -26,6 +29,11 @@ export const MOMENTS: Moment[] = [
     title: 'The Silence',
     quote: 'no one is responding to me',
     sub: 'You’ve applied and the silence is the worst part. Start with the keyword scan — that’s where the screen breaks first.',
+    bullets: [
+      'Where you rank in real recruiter searches',
+      'The keywords missing from your resume',
+      'Your full LinkedIn — rewritten',
+    ],
     toolNames: [
       'What Words Are Recruiters Searching For?',
       'Where Do You Rank in a Recruiter Search?',
@@ -37,6 +45,11 @@ export const MOMENTS: Moment[] = [
     title: 'The Interview',
     quote: 'I have an interview — or an offer — coming up',
     sub: 'Research the company before you go in. Decode the questions they’ll ask. Rehearse against their real rubric. Then negotiate when the offer lands.',
+    bullets: [
+      'Decode the questions they’ll ask',
+      'Rehearse against the real rubric',
+      'The script to negotiate the offer',
+    ],
     toolNames: [
       'What This Company Feels Like to Work At',
       'What They’re Really Asking',
@@ -50,6 +63,11 @@ export const MOMENTS: Moment[] = [
     title: 'The Story',
     quote: 'gap, pivot, layoff, or new grad',
     sub: 'The unusual story is the asset, not the liability — when you tell it the way someone who reads resumes for a living would.',
+    bullets: [
+      'Tell the gap honestly',
+      'Translate the pivot',
+      'Diagnose what’s breaking',
+    ],
     toolNames: [
       'How to Explain My Employment Gap',
       'Your Career Pivot, Translated',

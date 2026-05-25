@@ -84,31 +84,8 @@ export function StartHereBoard() {
             <QuestionGrid onSelect={setSelected} />
           )}
         </div>
-
-        {/* Hiring-team escape door — small, intentional */}
-        <div
-          style={{
-            marginTop: 'clamp(36px, 5vw, 56px)',
-            textAlign: 'center',
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 13,
-            color: '#8B8AA0',
-          }}
-        >
-          Hiring, not job-searching?{' '}
-          <Link
-            href="/for-companies"
-            style={{
-              color: '#FF8FA3',
-              textDecoration: 'none',
-              fontWeight: 700,
-              borderBottom: '1px solid rgba(255,143,163,0.4)',
-              paddingBottom: 1,
-            }}
-          >
-            Different door &rarr;
-          </Link>
-        </div>
+        {/* Redundant audience-escape link removed — the page-level strip
+            above the hero already routes hiring leaders to /for-companies. */}
       </div>
     </section>
   )
@@ -144,43 +121,45 @@ function QuestionGrid({ onSelect }: { onSelect: (id: string) => void }) {
         ))}
       </div>
 
-      {/* The "hired" payoff — destination at the end of the three steps */}
+      {/* The destination — a visual payoff, not a label. Wraps three
+          steps with a hero-scale outcome line so the journey resolves.
+          Generous whitespace above so it doesn't read as a card caption. */}
       <div
         style={{
-          marginTop: 28,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 14,
+          marginTop: 'clamp(56px, 7vw, 88px)',
+          textAlign: 'center',
         }}
-        aria-hidden
       >
-        <span
+        <div
+          aria-hidden
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 700,
-            fontSize: 13,
-            letterSpacing: '0.14em',
+            fontSize: 12,
+            letterSpacing: '0.22em',
             textTransform: 'uppercase',
-            color: '#8B8AA0',
+            color: '#6B6A82',
+            marginBottom: 14,
           }}
         >
           The destination
-        </span>
-        <span
+        </div>
+        <div
+          aria-hidden
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(20px, 2.4vw, 26px)',
-            letterSpacing: '-0.01em',
+            fontSize: 'clamp(44px, 7vw, 80px)',
+            letterSpacing: '-0.03em',
+            lineHeight: 1,
             background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
           }}
         >
-          → Hired.
-        </span>
+          Hired.
+        </div>
       </div>
     </>
   )
@@ -221,34 +200,68 @@ function QuestionCard({
           transform: translateY(-2px);
           box-shadow: 0 16px 40px rgba(108,71,255,0.12);
         }
+        .start-here-card:hover .start-here-cta {
+          color: #F2F0FF !important;
+        }
       `}</style>
-      {/* NUMBER — editorial chapter marker. Tells the visitor this is
-          step N of a journey, not a random card grid. */}
+
+      {/* TOP ROW — chapter number on the left, "Start here →" on the right.
+          The action sits where the eye expects it; the number anchors the
+          journey rhythm without competing for attention. */}
       <div
         style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontWeight: 900,
-          fontSize: 13,
-          letterSpacing: '0.14em',
-          color: '#A78BFA',
-          marginBottom: 4,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12,
+          marginBottom: 8,
         }}
       >
-        0{index}
+        <span
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 13,
+            letterSpacing: '0.14em',
+            color: '#A78BFA',
+          }}
+        >
+          0{index}
+        </span>
+        <span
+          className="start-here-cta"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            color: '#A78BFA',
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 12.5,
+            letterSpacing: '0.02em',
+            transition: 'color 0.18s ease',
+          }}
+        >
+          Start here <ArrowRight size={13} strokeWidth={2.5} />
+        </span>
       </div>
-      {/* TITLE — big, scannable. */}
+
+      {/* TITLE */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 900,
-          fontSize: 'clamp(26px, 3.2vw, 34px)',
+          fontSize: 'clamp(26px, 3.2vw, 32px)',
           lineHeight: 1.1,
           letterSpacing: '-0.015em',
           color: '#F2F0FF',
+          marginBottom: 4,
         }}
       >
         {question.title}
       </div>
+
+      {/* QUOTE — the visitor's voice */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
@@ -257,25 +270,55 @@ function QuestionCard({
           fontSize: 14,
           lineHeight: 1.4,
           color: '#9D9CB3',
+          marginBottom: 18,
         }}
       >
         &ldquo;{question.quote}&rdquo;
       </div>
-      <div
+
+      {/* BULLETS — concrete concepts the section covers. Lets the visitor
+          see WHAT they'll get, not just the feeling. */}
+      <ul
         style={{
-          marginTop: 'auto',
-          display: 'inline-flex',
-          alignItems: 'center',
+          listStyle: 'none',
+          padding: 0,
+          margin: 0,
+          display: 'flex',
+          flexDirection: 'column',
           gap: 6,
-          color: '#A78BFA',
-          fontFamily: "'Figtree', sans-serif",
-          fontWeight: 800,
-          fontSize: 13,
-          letterSpacing: '0.02em',
+          paddingTop: 14,
+          borderTop: '1px dashed rgba(167,139,250,0.18)',
         }}
       >
-        Start here <ArrowRight size={14} strokeWidth={2.5} />
-      </div>
+        {question.bullets.map((b, i) => (
+          <li
+            key={i}
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 13,
+              fontWeight: 500,
+              color: '#C9C7DA',
+              lineHeight: 1.45,
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: 8,
+            }}
+          >
+            <span
+              aria-hidden
+              style={{
+                color: '#FF8FA3',
+                fontWeight: 800,
+                lineHeight: 1.45,
+                flexShrink: 0,
+              }}
+            >
+              ·
+            </span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
     </button>
   )
 }
