@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Loader2, AlertCircle } from 'lucide-react'
@@ -23,7 +23,37 @@ import { createClient } from '@/lib/supabase/client'
  *   - /onboarding if they haven't onboarded yet
  *   - /dashboard if they have
  */
+
+// useSearchParams must live inside a Suspense boundary for Next.js's
+// static export checker. Wrap the working component in Suspense and
+// expose a thin outer component as the default export.
 export default function VerifyPage() {
+  return (
+    <Suspense fallback={<VerifyLoading />}>
+      <VerifyInner />
+    </Suspense>
+  )
+}
+
+function VerifyLoading() {
+  return (
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
+      <Navigation variant="light" />
+      <section style={{ padding: 'clamp(80px, 12vw, 140px) 24px', textAlign: 'center' }}>
+        <Loader2
+          size={32}
+          color="#6C47FF"
+          strokeWidth={2.5}
+          style={{ animation: 'spin 1s linear infinite' }}
+        />
+        <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+      </section>
+      <Footer />
+    </main>
+  )
+}
+
+function VerifyInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const supabase = createClient()
