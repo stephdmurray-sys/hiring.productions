@@ -282,7 +282,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
           }}
         >
-          Get Full Access — $14.99/mo or $99/yr
+          Get Full Access
         </StripeCheckoutButton>
 
         {/* Reassurance line */}
@@ -297,7 +297,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             marginBottom: 0,
           }}
         >
-          $1.67 / month, billed annually. Cancel anytime. Free tools stay free forever.
+          Cancel anytime. Free tools stay free forever.
         </p>
 
         {/* Divider */}
