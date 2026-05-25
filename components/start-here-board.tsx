@@ -73,34 +73,86 @@ export function StartHereBoard() {
           <br />
           on hiring.
         </Heading>
-        <SubHeading>Both sides of the table. In the open.</SubHeading>
+        <SubHeading>
+          A recruiter in the scene with you — networking, interviewing, negotiating.
+          Play by play.
+        </SubHeading>
 
-        {/* Journey framing — positions the three cards below as ACTS of a
-            single coached path, not three disconnected buckets. Per
-            PLATFORM-VISION.md, this is the positioning shift from
-            editorial ("read your situation") to operational ("we coach
-            you through every chapter"). Stays in production metaphor. */}
+        {/* Primary CTA — the visible "enter the platform" door.
+            Cold visitors who DON'T want to browse the cards still
+            have a clear next step. Routes to /sign-in which now
+            captures email → sends magic link → onboarding wizard →
+            dashboard. */}
         {!current && (
           <div
             style={{
               marginTop: 'clamp(28px, 3.5vw, 40px)',
               textAlign: 'center',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 600,
-              fontSize: 'clamp(14px, 1.4vw, 16px)',
-              color: '#5A4FE0',
-              letterSpacing: '0.01em',
-              lineHeight: 1.5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 14,
             }}
           >
-            Every job search has the same three acts.
-            <br />
-            We coach you through every one — from silence to signed.
+            <Link
+              href="/sign-in"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '17px 36px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: '#FFFFFF',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 17,
+                letterSpacing: '0.005em',
+                borderRadius: 12,
+                textDecoration: 'none',
+                boxShadow: '0 16px 40px rgba(108,71,255,0.22)',
+                transition: 'transform 0.2s ease',
+              }}
+              className="hp-start-cta"
+            >
+              Start your search — free →
+            </Link>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                fontWeight: 500,
+                color: '#5A5A6E',
+              }}
+            >
+              No credit card. Magic-link sign-in. ~30 seconds.
+            </div>
+            <style>{`
+              .hp-start-cta:hover { transform: translateY(-2px); }
+            `}</style>
+          </div>
+        )}
+
+        {/* Or — browse the three acts as anonymous diagnostic tools.
+            For visitors not yet ready to commit to an account. */}
+        {!current && (
+          <div
+            style={{
+              marginTop: 'clamp(40px, 5vw, 56px)',
+              textAlign: 'center',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: 12,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              color: '#8B8AA0',
+            }}
+          >
+            Or pick your act and try a free tool
           </div>
         )}
 
         {/* The board */}
-        <div style={{ marginTop: current ? 'clamp(40px, 6vw, 64px)' : 'clamp(32px, 5vw, 56px)' }}>
+        <div style={{ marginTop: current ? 'clamp(40px, 6vw, 64px)' : 'clamp(20px, 3vw, 28px)' }}>
           {current ? (
             <DetailView question={current} onBack={() => setSelected(null)} />
           ) : (

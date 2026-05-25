@@ -151,7 +151,7 @@ export default function SignInPage() {
                     lineHeight: 1.1,
                   }}
                 >
-                  Sign in to your search.
+                  Start your search.
                 </h1>
                 <p
                   style={{
@@ -162,7 +162,7 @@ export default function SignInPage() {
                     lineHeight: 1.55,
                   }}
                 >
-                  We&apos;ll send a magic link. No passwords, no resets, no friction.
+                  New here or returning — same magic link. No passwords, no resets, no friction.
                 </p>
               </div>
 
