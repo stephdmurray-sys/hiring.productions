@@ -13,3 +13,4 @@ node_modules
 # Editor / tooling local state
 .claude/
 tsconfig.tsbuildinfo
+.env.vercel
