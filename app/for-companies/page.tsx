@@ -1,12 +1,30 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { BilateralCallout } from '@/components/bilateral-callout'
+import { submitLead } from '@/lib/submit-lead'
 import { BarChart2, Share2, Users, CheckSquare, Clock, Star } from 'lucide-react'
 
 export default function ForCompaniesPage() {
+  const [waitlistState, setWaitlistState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+
+  const handleWaitlistSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const email = (formData.get('email') ?? '').toString().trim()
+    if (!email) return
+    setWaitlistState('submitting')
+    try {
+      await submitLead({ email, source: 'hiring-team-waitlist' })
+      setWaitlistState('success')
+    } catch {
+      setWaitlistState('error')
+    }
+  }
+
   return (
     <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
       <Navigation variant="dark" />
@@ -320,25 +338,89 @@ export default function ForCompaniesPage() {
             to signed offer. Small companies hire two to three times a year and need access when
             they need it — not a monthly bill that feels wasteful in quiet months.
           </p>
-          <Link
-            href="/api/lead?source=hiring-team-waitlist"
-            className="btn-primary"
-            style={{
-              display: 'inline-block',
-              padding: '15px 32px',
-              background: 'linear-gradient(135deg, #FF4F6A, #6C47FF)',
-              border: 'none',
-              borderRadius: 10,
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: 16,
-              color: 'white',
-              textDecoration: 'none',
-              boxShadow: '0 12px 30px rgba(255,79,106,0.30)',
-            }}
-          >
-            Join the waitlist — get notified when JD Builder ships
-          </Link>
+          {waitlistState === 'success' ? (
+            <div
+              style={{
+                background: 'rgba(94,230,168,0.10)',
+                border: '1px solid rgba(94,230,168,0.35)',
+                borderRadius: 12,
+                padding: '20px 24px',
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 15,
+                color: '#5EE6A8',
+                fontWeight: 600,
+                maxWidth: 520,
+                margin: '0 auto',
+              }}
+            >
+              You&rsquo;re on the list. One email when JD Builder ships — that&rsquo;s it.
+            </div>
+          ) : (
+            <form
+              onSubmit={handleWaitlistSubmit}
+              style={{
+                display: 'flex',
+                gap: 10,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                maxWidth: 540,
+                margin: '0 auto',
+              }}
+            >
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@yourcompany.com"
+                disabled={waitlistState === 'submitting'}
+                style={{
+                  flex: '1 1 240px',
+                  minWidth: 0,
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,79,106,0.30)',
+                  borderRadius: 10,
+                  padding: '14px 16px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 15,
+                  color: '#F2F0FF',
+                  outline: 'none',
+                }}
+              />
+              <button
+                type="submit"
+                disabled={waitlistState === 'submitting'}
+                style={{
+                  padding: '14px 24px',
+                  background: waitlistState === 'submitting'
+                    ? 'rgba(255,79,106,0.5)'
+                    : 'linear-gradient(135deg, #FF4F6A, #6C47FF)',
+                  border: 'none',
+                  borderRadius: 10,
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 15,
+                  color: 'white',
+                  cursor: waitlistState === 'submitting' ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 12px 30px rgba(255,79,106,0.30)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {waitlistState === 'submitting' ? 'Adding you…' : 'Join the waitlist'}
+              </button>
+            </form>
+          )}
+          {waitlistState === 'error' && (
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                color: '#FF8FA3',
+                marginTop: 14,
+              }}
+            >
+              Couldn&rsquo;t add you just now. Try again in a moment.
+            </p>
+          )}
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: 13,

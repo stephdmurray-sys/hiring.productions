@@ -18,6 +18,7 @@ const tools = CATALOG.filter((t) => t.tier !== 'soon').map((t) => ({
   desc: t.desc,
   type: t.audience,
   free: t.tier === 'free',
+  href: t.href,
 }))
 
 export default function MembershipPage() {
@@ -59,6 +60,12 @@ export default function MembershipPage() {
   }, [])
   return (
     <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+      <style>{`
+        .membership-tool-card:hover {
+          border-color: rgba(167,139,250,0.45) !important;
+          transform: translateY(-2px);
+        }
+      `}</style>
       <Navigation variant="dark" />
 
       {/* Success Banner */}
@@ -532,8 +539,10 @@ export default function MembershipPage() {
           marginBottom: '32px',
         }}>
           {tools.map((tool, idx) => (
-            <div
+            <Link
               key={idx}
+              href={tool.href}
+              className="membership-tool-card"
               style={{
                 background: '#1A1A22',
                 border: '1px solid rgba(255,255,255,0.06)',
@@ -543,6 +552,9 @@ export default function MembershipPage() {
                 flexDirection: 'column',
                 position: 'relative',
                 minHeight: '160px',
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'border-color 0.18s ease, transform 0.18s ease',
               }}
             >
               {/* Icon circle top-left */}
@@ -628,7 +640,7 @@ export default function MembershipPage() {
                   {tool.desc}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
