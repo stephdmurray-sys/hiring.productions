@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { FileText } from 'lucide-react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
+import { ShareResult } from '@/components/share-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 
 export default function WhatThisJobIsPage() {
@@ -187,6 +188,7 @@ export default function WhatThisJobIsPage() {
           }}
         >
           <ToolResult result={result} cta={null} />
+          <ShareResult source="what-this-job-is" variant="dark" />
           <ProUpsellPanel
             recommend={['Through a Recruiter’s Eyes', 'Would Your Resume Even Make It Through?']}
             heading="Now see how your resume stacks up against this job."

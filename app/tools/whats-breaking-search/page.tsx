@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
+import { ShareResult } from '@/components/share-result'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 
 const APPROACH_OPTIONS = [
@@ -315,6 +316,7 @@ e.g. Sr Director, TA · Brightside Health (2022–Present)
           }}
         >
           <ToolResult result={result} cta={null} />
+          <ShareResult source="whats-breaking-search" variant="dark" />
           <ProUpsellPanel
             recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}
             heading="Want the full LinkedIn analysis and resume read?"
