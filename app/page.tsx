@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { StartHereBoard } from '@/components/start-here-board'
-import { QuickHeadlineRead } from '@/components/quick-headline-read'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -75,19 +74,13 @@ export default function HomePage() {
 
       {/* ──────────────── START HERE — QUESTION BOARD ─────────────────
          Question-led entry. The primary homepage funnel for candidates.
+         The live Quick Read widget is now folded into card 01 (The Silence)
+         detail view so visitors interact with the product inside the moment
+         the widget actually answers — not as a separate homepage section.
       */}
       <StartHereBoard />
 
-      {/* ──────────────── LIVE QUICK READ ─────────────────
-         Paste-your-headline live widget. The visitor's first interaction
-         with the site is using the product itself, not reading about it.
-         Cal.com / Anthropic / Cursor-style engagement pattern. Uses
-         /api/quick-read (Haiku, ~$0.002 per run, capped by global $5/day
-         budget ceiling).
-      */}
-      <QuickHeadlineRead />
-
-      {/* ─────────────── CLOSING — the ask, with price visible ───────────────
+      {/* ─────────────── CLOSING ───────────────
          Rule 5: one CTA per moment. The page never names what Pro costs
          above the fold; the closing carries the price so visitors leave
          with the number, not just the metaphor. Secondary path is a

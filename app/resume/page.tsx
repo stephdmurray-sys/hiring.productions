@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
 import { ResumeReport } from '@/components/resume-report'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import './resume.css'
@@ -407,6 +408,8 @@ export default function ResumeCheckerPage() {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   )
 }

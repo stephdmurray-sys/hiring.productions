@@ -24,7 +24,13 @@ type State =
   | { status: 'success'; read: string; headline: string }
   | { status: 'error'; message: string }
 
-export function QuickHeadlineRead() {
+/**
+ * Pass `inline` to drop the outer <section> + vertical padding so the
+ * widget can be embedded inside another container (e.g. the StartHereBoard
+ * detail view for The Silence). The default is the standalone homepage
+ * section variant.
+ */
+export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {}) {
   const [state, setState] = useState<State>({ status: 'idle' })
   const [helpOpen, setHelpOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -66,15 +72,21 @@ export function QuickHeadlineRead() {
     }
   }
 
-  return (
-    <section
-      style={{
+  // Outer wrapper differs by mode: standalone <section> with vertical
+  // padding for the homepage variant, plain <div> when embedded inside
+  // another container (e.g. The Silence detail view).
+  const Wrapper = inline ? 'div' : 'section'
+  const wrapperStyle: React.CSSProperties = inline
+    ? { color: '#F2F0FF', position: 'relative' }
+    : {
         background: '#0F0F12',
         color: '#F2F0FF',
         padding: 'clamp(56px, 8vw, 96px) 24px clamp(40px, 6vw, 72px)',
         position: 'relative',
-      }}
-    >
+      }
+
+  return (
+    <Wrapper style={wrapperStyle}>
       <div style={{ maxWidth: 720, margin: '0 auto' }}>
         {/* Heading — no eyebrow, no sub-paragraph. The size of the
             headline tells you what to do; the placeholder tells you how. */}
@@ -82,12 +94,14 @@ export function QuickHeadlineRead() {
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(28px, 4.2vw, 44px)',
+            fontSize: inline
+              ? 'clamp(22px, 2.6vw, 28px)'
+              : 'clamp(28px, 4.2vw, 44px)',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
             color: '#F2F0FF',
             textAlign: 'center',
-            margin: '0 0 28px',
+            margin: inline ? '0 0 22px' : '0 0 28px',
           }}
         >
           Try it. Paste your headline.
@@ -327,7 +341,7 @@ export function QuickHeadlineRead() {
           </article>
         )}
       </div>
-    </section>
+    </Wrapper>
   )
 }
 

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 import { MOMENTS, type Moment } from '@/lib/moments'
+import { QuickHeadlineRead } from '@/components/quick-headline-read'
 
 /**
  * Question-led homepage entry. Replaces the old "everyone gets funneled
@@ -396,6 +397,24 @@ function DetailView({
         >
           {question.sub.replace(/\\u2014/g, '—')}
         </div>
+
+        {/* Live Quick Read — only on The Silence (the moment Quick Read
+            actually answers). Visitor sees the recruiter take in 3
+            seconds, then the deeper tools below earn the click for the
+            full run. */}
+        {question.id === 'no-responses' && (
+          <div
+            style={{
+              marginBottom: 32,
+              padding: 'clamp(20px, 3vw, 28px)',
+              background: '#0F0F12',
+              border: '1px solid rgba(167,139,250,0.18)',
+              borderRadius: 16,
+            }}
+          >
+            <QuickHeadlineRead inline />
+          </div>
+        )}
 
         <div
           style={{
