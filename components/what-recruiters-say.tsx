@@ -182,7 +182,7 @@ export function WhatRecruitersSay() {
             marginBottom: 16,
           }}
         >
-          What recruiters actually say
+          02 — What recruiters actually say
         </div>
         <h2
           style={{

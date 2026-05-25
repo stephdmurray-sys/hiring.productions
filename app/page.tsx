@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { AudienceHubsRow } from '@/components/audience-hubs-row'
 import { submitLead } from '@/lib/submit-lead'
 import Image from 'next/image'
 import {
@@ -152,7 +151,7 @@ export default function HomePage() {
               marginBottom: 22,
             }}
           >
-            WHO BUILT THIS
+            03 — WHO BUILT THIS
           </div>
 
           {/* Headshot — anchored to /public/stephanie.jpg. The image is
@@ -288,7 +287,7 @@ export default function HomePage() {
               marginBottom: 20,
             }}
           >
-            THE REST OF THE PRODUCTION
+            04 — MORE TOOLS
           </div>
 
           <h2
@@ -303,7 +302,7 @@ export default function HomePage() {
               marginBottom: 18,
             }}
           >
-            Every other Recruiter Insight is included.
+            Everything Pro unlocks.
           </h2>
 
           <p
@@ -596,14 +595,6 @@ export default function HomePage() {
           </form>
         </div>
       </section>
-
-      {/* ─────────────── AUDIENCE HUBS (moved to bottom-of-funnel) ───────────────
-         The "pick a side" choice is now a deliberate decision after
-         someone has seen the wedge and the membership offer — not the
-         first thing they're asked. This addresses Clarity Pattern 2
-         (users hopping between For Companies and For Candidates).
-      */}
-      <AudienceHubsRow padding="60px 24px 40px" />
 
       {/* ─────────────── CLOSING ─────────────── */}
       <section

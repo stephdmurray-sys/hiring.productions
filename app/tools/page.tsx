@@ -1,453 +1,259 @@
 'use client'
 
-import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { ToolCard } from '@/components/tool-card'
-import { Marquee } from '@/components/marquee'
-import { CATALOG, FLAGSHIP_PRO, type CatalogTool, type ToolAudience } from '@/lib/tools-catalog'
+import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
+import { MOMENTS } from '@/lib/moments'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+import { ArrowRight } from 'lucide-react'
 
-type AudienceFilter = 'all' | ToolAudience
-
+/**
+ * Tools page — moment-led, not catalog-led.
+ *
+ * Previously this page led with theatrical framing ("Tonight's Program",
+ * "Act One — Free", a scrolling marquee). The brief's audit flagged that
+ * job seekers in a panic don't want to decode a creative concept — they
+ * want to find what helps them right now. This rewrite organizes every
+ * tool by the moment a candidate is actually in:
+ *
+ *   - Free tools (top of funnel — no upload, no account)
+ *   - The Silence
+ *   - The Interview
+ *   - The Offer
+ *   - The Situation
+ *
+ * The four moments mirror the homepage Start Here board (same MOMENTS
+ * data) so a visitor who started there sees consistent structure here.
+ * Hiring-team tools live on /for-companies — surfaced as a sidebar
+ * callout rather than mixed in.
+ */
 export default function ToolsPage() {
-  const [audienceFilter, setAudienceFilter] = useState<AudienceFilter>('all')
-
-  const filtered = useMemo(() => {
-    if (audienceFilter === 'all') return CATALOG
-    return CATALOG.filter((t) => t.audience === audienceFilter)
-  }, [audienceFilter])
-
-  // The 5 flagship Pro tools (in catalog order if listed in FLAGSHIP_PRO)
-  const flagshipPro: CatalogTool[] = useMemo(
-    () =>
-      FLAGSHIP_PRO.map((name) => filtered.find((t) => t.name === name)).filter(
-        (t): t is CatalogTool => Boolean(t),
-      ),
-    [filtered],
+  // Free tools that aren't already routed by a moment — these are the
+  // top-of-funnel candidate entry points.
+  const momentToolNames = new Set(MOMENTS.flatMap((m) => m.toolNames))
+  const freeTopOfFunnel = CATALOG.filter(
+    (t) =>
+      t.audience === 'candidate' &&
+      t.tier === 'free' &&
+      !momentToolNames.has(t.name),
   )
-
-  // Free tools (visible)
-  const freeTools = useMemo(() => filtered.filter((t) => t.tier === 'free'), [filtered])
-
-  // Pro extras — Pro tools not in the flagship 5
-  const proExtras = useMemo(
-    () => filtered.filter((t) => t.tier === 'pro' && !FLAGSHIP_PRO.includes(t.name as never)),
-    [filtered],
-  )
-
-  // Coming soon
-  const comingSoon = useMemo(() => filtered.filter((t) => t.tier === 'soon'), [filtered])
 
   return (
     <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
-      {/* THEATRICAL HERO */}
+      {/* HERO — direct, no theater */}
+      <section style={heroSection}>
+        <div style={{ position: 'relative', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
+          <Eyebrow>00 — Every tool</Eyebrow>
+          <Heading>
+            Organized by the moment
+            <br />
+            you&rsquo;re actually in.
+          </Heading>
+          <SubHeading>
+            Free to start. Pro unlocks the deeper tools — both sides of the table,
+            $14.99/mo or $99/yr.
+          </SubHeading>
+        </div>
+      </section>
+
+      {/* FREE — TOP OF FUNNEL */}
+      {freeTopOfFunnel.length > 0 && (
+        <MomentSection
+          number="01"
+          eyebrow="Free, no account"
+          title="Start anywhere."
+          sub="No card. No email. Use them right now."
+        >
+          {freeTopOfFunnel.map((tool, i) => (
+            <ToolCard key={tool.name} tool={tool} variant={i === 0 ? 'featured' : 'standard'} />
+          ))}
+        </MomentSection>
+      )}
+
+      {/* THE FOUR MOMENTS */}
+      {MOMENTS.map((moment, idx) => {
+        const tools = moment.toolNames
+          .map((n) => CATALOG.find((t) => t.name === n))
+          .filter((t): t is CatalogTool => Boolean(t))
+        const sectionNumber = String(idx + 2).padStart(2, '0')
+        return (
+          <MomentSection
+            key={moment.id}
+            number={sectionNumber}
+            eyebrow={moment.title}
+            title={`“${moment.quote}”`}
+            sub={moment.sub}
+            startHere={tools[0]?.name}
+            altBackground={idx % 2 === 0}
+          >
+            {tools.map((tool) => (
+              <ToolCard key={tool.name} tool={tool} variant="standard" />
+            ))}
+          </MomentSection>
+        )
+      })}
+
+      {/* HIRING TEAM CALLOUT */}
       <section
         style={{
-          padding: '90px 24px 56px',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
+          padding: 'clamp(64px, 8vw, 96px) 24px',
+          background: '#0F0F12',
+          borderTop: '1px solid rgba(255,255,255,0.04)',
         }}
       >
-        {/* Stage spotlight */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'radial-gradient(ellipse 1100px 700px at 50% -150px, rgba(108,71,255,0.25) 0%, rgba(255,79,106,0.10) 35%, transparent 70%)',
-            pointerEvents: 'none',
-            zIndex: 0,
-          }}
-        />
-
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '900px', margin: '0 auto' }}>
-          <div
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '11px',
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: '#A78BFA',
-              marginBottom: '24px',
-            }}
-          >
-            ◆ TONIGHT&apos;S PROGRAM
-          </div>
-
-          <h1
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(48px, 7vw, 88px)',
-              letterSpacing: '-0.03em',
-              lineHeight: 0.98,
-              color: '#F2F0FF',
-              margin: '0 0 24px',
-            }}
-          >
-            Both sides of hiring.
-            <br />
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              On the same stage.
-            </span>
-          </h1>
-
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '18px',
-              fontWeight: 400,
-              color: '#9D9CB3',
-              lineHeight: 1.55,
-              maxWidth: '620px',
-              margin: '0 auto 32px',
-            }}
-          >
-            Start free — run a tool right now, no account, no card. Then upgrade to every Recruiter Insight for $14.99/month or $99/year.
-          </p>
-
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="#free"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '14px 28px',
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: 'white',
-                borderRadius: '12px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '14px',
-                textDecoration: 'none',
-                boxShadow: '0 18px 40px rgba(108,71,255,0.32)',
-                letterSpacing: '0.01em',
-              }}
-            >
-              Start with a free tool ↓
-            </Link>
-            <Link
-              href="#recruiter-insights"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                padding: '14px 28px',
-                background: 'transparent',
-                color: '#A78BFA',
-                border: '1.5px solid rgba(167,139,250,0.4)',
-                borderRadius: '12px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '14px',
-                textDecoration: 'none',
-              }}
-            >
-              See what Pro unlocks
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* MARQUEE — theatrical "now showing" */}
-      <Marquee
-        items={[
-          'NOW SHOWING — 6 SECONDS WITH YOUR RESUME',
-          'BOOLEAN STRINGS THAT FIND YOU',
-          'INTERVIEW QUESTIONS DECODED',
-          'NEGOTIATION SCRIPTS',
-          'KEYWORD GAPS REVEALED',
-          'BOTH SIDES OF HIRING',
-        ]}
-      />
-
-      {/* AUDIENCE FILTER + RESULT COUNT */}
-      <section style={{ padding: '40px 24px 0', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', gap: 6, padding: 4, background: '#14141B', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 100 }}>
-          <FilterPill active={audienceFilter === 'all'} onClick={() => setAudienceFilter('all')} label="Both sides" />
-          <FilterPill
-            active={audienceFilter === 'candidate'}
-            onClick={() => setAudienceFilter('candidate')}
-            label="For candidates"
-          />
-          <FilterPill
-            active={audienceFilter === 'hiring'}
-            onClick={() => setAudienceFilter('hiring')}
-            label="For hiring teams"
-          />
-        </div>
         <div
           style={{
-            marginTop: 14,
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '12.5px',
-            color: '#8B8AA0',
-            letterSpacing: '0.02em',
-          }}
-        >
-          {filtered.length} {filtered.length === 1 ? 'tool' : 'tools'}
-          {audienceFilter !== 'all' && (
-            <>
-              {' '}·{' '}
-              <button
-                onClick={() => setAudienceFilter('all')}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#A78BFA',
-                  fontFamily: "'Figtree', sans-serif",
-                  fontSize: '12.5px',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  padding: 0,
-                  textDecoration: 'underline',
-                  textUnderlineOffset: 3,
-                }}
-              >
-                show both sides
-              </button>
-            </>
-          )}
-        </div>
-      </section>
-
-      {/* FREE TOOLS — start here */}
-      {freeTools.length > 0 ? (
-        <section id="free" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <SectionHeader
-              eyebrow="ACT ONE — FREE"
-              eyebrowColor="#A78BFA"
-              title="Run one right now. No card. No account."
-              sub="Free tools you can use today. Each one shows you a slice of how the other side actually operates."
-            />
-
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-                gap: '20px',
-                marginTop: '32px',
-              }}
-            >
-              {freeTools.map((tool) => (
-                <ToolCard key={tool.href} tool={tool} variant="standard" />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : (
-        <EmptyState
-          eyebrow="ACT ONE — FREE"
-          message={
-            audienceFilter === 'hiring'
-              ? "The free tools today are candidate-side. Hiring-team tools land in the Pro library below — and the rest are on the way."
-              : "Nothing free in this filter yet."
-          }
-          onShowAll={() => setAudienceFilter('all')}
-        />
-      )}
-
-      {/* RECRUITER INSIGHTS — flagship featured + extras combined */}
-      {(flagshipPro.length > 0 || proExtras.length > 0) && (
-        <section id="recruiter-insights" style={{ padding: '56px 24px 20px', scrollMarginTop: 80 }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <SectionHeader
-              eyebrow="ACT TWO — RECRUITER INSIGHTS"
-              eyebrowColor="#A78BFA"
-              title="Every Recruiter Insight — both sides of the table. $14.99/month or $99/year."
-              sub="One membership unlocks the candidate-side tools AND the hiring-team tools. Understanding the other side is what makes you better at your own."
-            />
-
-            {flagshipPro.length > 0 && (
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  gap: '20px',
-                  marginTop: '32px',
-                }}
-              >
-                {flagshipPro.map((tool) => (
-                  <ToolCard key={tool.href} tool={tool} variant="featured" />
-                ))}
-              </div>
-            )}
-
-            {proExtras.length > 0 && (
-              <>
-                <div
-                  style={{
-                    marginTop: flagshipPro.length > 0 ? 40 : 32,
-                    marginBottom: 16,
-                    textAlign: 'center',
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    color: '#8B8AA0',
-                  }}
-                >
-                  {flagshipPro.length > 0 ? 'Also included in Pro' : 'Included in Pro'}
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-                    gap: '20px',
-                  }}
-                >
-                  {proExtras.map((tool) => (
-                    <ToolCard key={tool.href} tool={tool} variant="standard" />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* COMING SOON */}
-      {comingSoon.length > 0 && (
-        <section style={{ padding: '56px 24px 20px' }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-            <SectionHeader
-              eyebrow="ACT THREE — IN PRODUCTION"
-              eyebrowColor="#8B8AA0"
-              title="On the way to the catalog."
-              sub="Being built right now. Members get them the day they ship — at the same $14.99/mo or $99/yr."
-            />
-
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-                gap: '20px',
-                marginTop: '32px',
-              }}
-            >
-              {comingSoon.map((tool) => (
-                <ToolCard key={tool.href} tool={tool} variant="standard" />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CLOSING CTA */}
-      <section style={{ padding: '80px 24px 100px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div
-          style={{
-            maxWidth: '780px',
+            maxWidth: 880,
             margin: '0 auto',
+            background:
+              'linear-gradient(135deg, rgba(255,79,106,0.10), rgba(108,71,255,0.06))',
+            border: '1px solid rgba(255,79,106,0.25)',
+            borderRadius: 20,
+            padding: 'clamp(28px, 4vw, 44px)',
             textAlign: 'center',
-            background: '#14141B',
-            border: '1px solid rgba(108,71,255,0.30)',
-            borderRadius: '24px',
-            padding: '56px 36px',
-            boxShadow: '0 30px 100px rgba(108,71,255,0.18)',
-            position: 'relative',
-            overflow: 'hidden',
           }}
         >
-          <div
-            aria-hidden
-            style={{
-              position: 'absolute',
-              top: -100,
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: 500,
-              height: 500,
-              background:
-                'radial-gradient(circle, rgba(108,71,255,0.18) 0%, transparent 60%)',
-              pointerEvents: 'none',
-            }}
-          />
           <div
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 800,
-              fontSize: '11px',
-              letterSpacing: '0.22em',
+              fontSize: 11,
+              letterSpacing: '0.16em',
               textTransform: 'uppercase',
-              color: '#A78BFA',
-              marginBottom: '16px',
-              position: 'relative',
+              color: '#FF8FA3',
+              marginBottom: 16,
             }}
           >
-            ◆ THE WHOLE PRODUCTION
+            Hiring, not job-searching?
           </div>
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(32px, 4vw, 48px)',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.05,
+              fontSize: 'clamp(24px, 3vw, 32px)',
+              letterSpacing: '-0.015em',
               color: '#F2F0FF',
-              margin: '0 0 16px',
-              position: 'relative',
+              margin: '0 0 20px',
+              lineHeight: 1.15,
             }}
           >
-            Ready for the whole production?
+            The hiring-team toolkit lives on its own page.
+          </h2>
+          <Link
+            href="/for-companies"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              background: 'transparent',
+              border: '1.5px solid rgba(255,143,163,0.5)',
+              color: '#FF8FA3',
+              padding: '13px 26px',
+              borderRadius: 10,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 15,
+              textDecoration: 'none',
+            }}
+          >
+            See the hiring-team tools <ArrowRight size={15} strokeWidth={2.5} />
+          </Link>
+        </div>
+      </section>
+
+      {/* PRO CTA */}
+      <section
+        style={{
+          padding: 'clamp(72px, 9vw, 112px) 24px clamp(80px, 10vw, 128px)',
+          textAlign: 'center',
+          background: '#14141B',
+          borderTop: '1px solid rgba(108,71,255,0.18)',
+        }}
+      >
+        <div style={{ maxWidth: 720, margin: '0 auto' }}>
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 12,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: '#A78BFA',
+              marginBottom: 18,
+            }}
+          >
+            Go Pro
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(32px, 4.5vw, 52px)',
+              letterSpacing: '-0.02em',
+              color: '#F2F0FF',
+              margin: '0 0 14px',
+              lineHeight: 1.08,
+            }}
+          >
+            Unlimited runs. Both sides of the table.
           </h2>
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
-              fontSize: '16px',
+              fontSize: 17,
               color: '#9D9CB3',
-              lineHeight: 1.6,
-              margin: '0 0 28px',
-              position: 'relative',
+              lineHeight: 1.55,
+              maxWidth: 560,
+              margin: '0 auto 28px',
             }}
           >
-            Less than Jobscan charges for one day. Less than Teal+ charges for a week and a half.
+            $14.99/month or $99/year — save 45%. Less than one hour with a career coach.
           </p>
-          <StripeCheckoutButton
+          <div
             style={{
-              padding: '15px 36px',
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              border: 'none',
-              borderRadius: '12px',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '15px',
-              color: 'white',
-              cursor: 'pointer',
-              boxShadow: '0 18px 40px rgba(108,71,255,0.32)',
-              position: 'relative',
+              display: 'flex',
+              gap: 12,
+              flexWrap: 'wrap',
+              justifyContent: 'center',
             }}
           >
-            Get Full Access — $14.99/mo or $99/yr
-          </StripeCheckoutButton>
-          <div style={{ marginTop: 14, position: 'relative' }}>
-            <Link
-              href="/pricing"
+            <StripeCheckoutButton
+              plan="monthly"
               style={{
+                padding: '15px 28px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                border: 'none',
+                color: 'white',
+                borderRadius: 10,
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: '13px',
-                fontWeight: 700,
-                color: '#A78BFA',
-                textDecoration: 'none',
+                fontWeight: 800,
+                fontSize: 15,
+                cursor: 'pointer',
+                boxShadow: '0 14px 38px rgba(108,71,255,0.28)',
               }}
             >
-              See full pricing comparison →
-            </Link>
+              Start monthly — $14.99/mo
+            </StripeCheckoutButton>
+            <StripeCheckoutButton
+              plan="annual"
+              style={{
+                padding: '13.5px 28px',
+                background: 'transparent',
+                border: '1.5px solid rgba(167,139,250,0.45)',
+                color: '#F2F0FF',
+                borderRadius: 10,
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 15,
+                cursor: 'pointer',
+              }}
+            >
+              Save 45% — $99/year
+            </StripeCheckoutButton>
           </div>
         </div>
       </section>
@@ -458,160 +264,176 @@ export default function ToolsPage() {
 }
 
 // =====================================================================
-// Section header
+// Section primitives
 // =====================================================================
 
-function SectionHeader({
-  eyebrow,
-  eyebrowColor,
-  title,
-  sub,
-}: {
-  eyebrow: string
-  eyebrowColor: string
-  title: string
-  sub: string
-}) {
-  return (
-    <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          fontFamily: "'Figtree', sans-serif",
-          fontWeight: 800,
-          fontSize: '11px',
-          letterSpacing: '0.20em',
-          textTransform: 'uppercase',
-          color: eyebrowColor,
-          marginBottom: '14px',
-        }}
-      >
-        <span style={{ width: 24, height: 1, background: eyebrowColor, opacity: 0.6 }} />
-        {eyebrow}
-        <span style={{ width: 24, height: 1, background: eyebrowColor, opacity: 0.6 }} />
-      </div>
-      <h2
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontWeight: 900,
-          fontSize: 'clamp(28px, 3.5vw, 42px)',
-          letterSpacing: '-0.025em',
-          lineHeight: 1.1,
-          color: '#F2F0FF',
-          margin: '0 0 12px',
-        }}
-      >
-        {title}
-      </h2>
-      <p
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '15px',
-          color: '#9D9CB3',
-          lineHeight: 1.6,
-          margin: 0,
-        }}
-      >
-        {sub}
-      </p>
-    </div>
-  )
+const heroSection: React.CSSProperties = {
+  position: 'relative',
+  background: '#0F0F12',
+  padding: 'clamp(72px, 10vw, 132px) 24px clamp(40px, 6vw, 72px)',
+  overflow: 'hidden',
 }
 
-// =====================================================================
-// Empty state — when a filter narrows a section to zero
-// =====================================================================
-
-function EmptyState({
+function MomentSection({
+  number,
   eyebrow,
-  message,
-  onShowAll,
+  title,
+  sub,
+  startHere,
+  altBackground = false,
+  children,
 }: {
+  number: string
   eyebrow: string
-  message: string
-  onShowAll: () => void
+  title: string
+  sub: string
+  startHere?: string
+  altBackground?: boolean
+  children: React.ReactNode
 }) {
   return (
-    <section style={{ padding: '56px 24px 20px' }}>
-      <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+    <section
+      style={{
+        padding: 'clamp(56px, 8vw, 96px) 24px',
+        background: altBackground ? '#14141B' : '#0F0F12',
+        borderTop: '1px solid rgba(255,255,255,0.04)',
+        position: 'relative',
+      }}
+    >
+      <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+        {/* Section header */}
         <div
           style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: '11px',
-            letterSpacing: '0.20em',
-            textTransform: 'uppercase',
-            color: '#8B8AA0',
-            marginBottom: '14px',
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: 16,
+            flexWrap: 'wrap',
+            marginBottom: 12,
           }}
         >
-          {eyebrow}
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 12,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: '#A78BFA',
+            }}
+          >
+            {number} — {eyebrow}
+          </div>
+          {startHere && (
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 700,
+                fontSize: 11,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#F2F0FF',
+                background: 'rgba(108,71,255,0.18)',
+                border: '1px solid rgba(167,139,250,0.4)',
+                padding: '3px 10px',
+                borderRadius: 100,
+              }}
+            >
+              Start with {startHere}
+            </div>
+          )}
         </div>
+        <h2
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(28px, 3.8vw, 42px)',
+            letterSpacing: '-0.02em',
+            color: '#F2F0FF',
+            margin: '0 0 12px',
+            lineHeight: 1.08,
+          }}
+        >
+          {title}
+        </h2>
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: '15px',
+            fontSize: 16,
             color: '#9D9CB3',
-            lineHeight: 1.6,
-            margin: '0 0 16px',
+            lineHeight: 1.55,
+            maxWidth: 640,
+            margin: '0 0 32px',
           }}
         >
-          {message}
+          {sub}
         </p>
-        <button
-          onClick={onShowAll}
+
+        {/* Tool grid */}
+        <div
           style={{
-            background: 'transparent',
-            border: '1.5px solid rgba(167,139,250,0.4)',
-            color: '#A78BFA',
-            padding: '10px 20px',
-            borderRadius: 100,
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: '12.5px',
-            cursor: 'pointer',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+            gap: 18,
           }}
         >
-          Show both sides
-        </button>
+          {children}
+        </div>
       </div>
     </section>
   )
 }
 
-// =====================================================================
-// Filter pill
-// =====================================================================
-
-function FilterPill({
-  label,
-  active,
-  onClick,
-}: {
-  label: string
-  active: boolean
-  onClick: () => void
-}) {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <button
-      onClick={onClick}
+    <div
       style={{
-        background: active ? 'linear-gradient(135deg, #6C47FF, #FF4F6A)' : 'transparent',
-        color: active ? '#FFFFFF' : '#C9C7DA',
-        border: 'none',
-        borderRadius: 100,
-        padding: '10px 20px',
         fontFamily: "'Figtree', sans-serif",
         fontWeight: 800,
-        fontSize: '12.5px',
-        letterSpacing: '0.02em',
-        cursor: 'pointer',
-        transition: 'all 0.15s ease',
+        fontSize: 12,
+        letterSpacing: '0.18em',
+        textTransform: 'uppercase',
+        color: '#A78BFA',
+        marginBottom: 16,
       }}
     >
-      {label}
-    </button>
+      {children}
+    </div>
+  )
+}
+
+function Heading({ children }: { children: React.ReactNode }) {
+  return (
+    <h1
+      style={{
+        fontFamily: "'Figtree', sans-serif",
+        fontWeight: 900,
+        fontSize: 'clamp(36px, 5.5vw, 60px)',
+        lineHeight: 1.05,
+        letterSpacing: '-0.025em',
+        color: '#F2F0FF',
+        margin: 0,
+      }}
+    >
+      {children}
+    </h1>
+  )
+}
+
+function SubHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      style={{
+        fontFamily: "'Figtree', sans-serif",
+        fontWeight: 400,
+        fontSize: 'clamp(16px, 1.8vw, 18px)',
+        lineHeight: 1.55,
+        color: '#C9C7DA',
+        textAlign: 'center',
+        maxWidth: 600,
+        margin: '20px auto 0',
+      }}
+    >
+      {children}
+    </p>
   )
 }

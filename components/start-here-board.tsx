@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
+import { MOMENTS, type Moment } from '@/lib/moments'
 
 /**
  * Question-led homepage entry. Replaces the old "everyone gets funneled
@@ -24,65 +25,11 @@ import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
  * the existing catalog — no new tools, no new pages. The /tools
  * /q/ and /rank/ SEO landing surfaces stay intact.
  */
-interface Question {
-  id: string
-  /** Big primary title — the scannable category name (e.g. "The Silence"). */
-  title: string
-  /** Small italic quote that subtitles the title (the visitor's voice). */
-  quote: string
-  /** One-sentence framing on the detail view. */
-  sub: string
-  toolNames: string[]
-}
-
-// Three moments + one for unusual situations. Each moment routes to a
-// specific ordered sequence of tools, with the FIRST tool being the
-// "start here" entry point (free + low-friction by design).
-const QUESTIONS: Question[] = [
-  {
-    id: 'no-responses',
-    title: 'The Silence',
-    quote: 'no one is responding to me',
-    sub: 'You’ve applied and the silence is the worst part. Start with the keyword scan — that’s where the screen breaks first.',
-    toolNames: [
-      'What Words Are Recruiters Searching For?',
-      'Where Do You Rank in a Recruiter Search?',
-      'Your LinkedIn — Rewritten',
-    ],
-  },
-  {
-    id: 'interview-prep',
-    title: 'The Interview',
-    quote: 'I have an interview coming up',
-    sub: 'See the questions they’re really asking. Run a rehearsal that matches their actual rubric. Nail the opening line.',
-    toolNames: [
-      'What They’re Really Asking',
-      'The Rehearsal Room',
-      'How You Actually Come Across',
-    ],
-  },
-  {
-    id: 'got-offer',
-    title: 'The Offer',
-    quote: 'I just got an offer',
-    sub: 'See what’s actually negotiable, get the exact script to ask for more, and read the company before you sign.',
-    toolNames: [
-      'How to Negotiate This Offer',
-      'What This Company Feels Like to Work At',
-    ],
-  },
-  {
-    id: 'situation',
-    title: 'The Situation',
-    quote: 'gap, pivot, layoff, or new grad',
-    sub: 'Specific tools for specific situations. Tell it true, the way someone who reads resumes for a living would.',
-    toolNames: [
-      'How to Explain My Employment Gap',
-      'Your Career Pivot, Translated',
-      'What’s Breaking Your Job Search',
-    ],
-  },
-]
+// Alias so the local code reads naturally — these surface as "questions"
+// to the visitor but the underlying data shape is a Moment from the
+// shared lib.
+type Question = Moment
+const QUESTIONS = MOMENTS
 
 const FIGTREE_IMPORT =
   "@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap');"
@@ -119,7 +66,7 @@ export function StartHereBoard() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Eyebrow>Both sides of hiring</Eyebrow>
+        <Eyebrow>01 — Both sides of hiring</Eyebrow>
         <Heading>
           Pull back the curtain
           <br />
