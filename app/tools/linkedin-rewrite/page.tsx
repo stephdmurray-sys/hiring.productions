@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { LinkedinReport } from '@/components/linkedin-report'
-import { ShareResult } from '@/components/share-result'
 import { LinkedInPdfUpload } from '@/components/linkedin-pdf-upload'
 import { FounderByline } from '@/components/founder-byline'
 import { isMember, activateMembership, clearMembership } from '@/lib/membership'
@@ -395,9 +394,8 @@ export default function LinkedinRewritePage() {
 
             <LinkedinReport result={result} isMember={isMemberUser} />
 
-            <div style={{ maxWidth: '780px', margin: '20px auto 0' }}>
-              <ShareResult source="linkedin" variant="dark" />
-            </div>
+            {/* ShareResult is now embedded inside <LinkedinReport /> so
+                every consumer of the report gets share automatically. */}
 
             {/* Founder byline below the result — same play as the wedge
                 tool: the user just got value, this is the moment they're

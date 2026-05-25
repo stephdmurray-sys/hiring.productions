@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 import { RepveraBridge } from '@/components/repvera-bridge'
+import { ShareResult } from '@/components/share-result'
 
 interface LinkedinReportProps {
   result: string
@@ -1204,10 +1205,15 @@ export function LinkedinReport({ result, isMember }: LinkedinReportProps) {
       {/* RepVera bridge — members see this; non-members see the upgrade card */}
       {isMember && <RepveraBridge source="linkedin" variant="light" />}
 
+      {/* Share — sits at the end so visitors leave on the ask to spread
+          what they learned. Pre-written LinkedIn post they can edit
+          before sending. */}
+      <ShareResult source="linkedin" variant="light" />
+
       {/* Document footer */}
       <div
         style={{
-          marginTop: '40px',
+          marginTop: '32px',
           paddingTop: '20px',
           borderTop: '1px solid #ECECF2',
           fontSize: '11px',

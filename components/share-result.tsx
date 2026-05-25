@@ -28,9 +28,9 @@ const SHARE_COPY: Record<
   'resume-ai-checker': {
     url: 'https://hiring.productions/resume',
     tweet:
-      'Just ran my resume through hiring.productions to see if it reads as AI-written. The recruiter\'s verdict was harsh and specific — and free.',
+      'Just ran my resume through hiring.productions to see if it reads as AI-written. The recruiter\'s verdict was direct, specific — and free.',
     linkedin:
-      '49% of hiring managers auto-reject resumes they suspect were AI-written.\n\nI just ran mine through hiring.productions — a free tool that shows you exactly which lines on your resume give it away as AI, and what to rewrite (in your own voice).\n\nBuilt from real recruiting practice — by people who actually screen the resumes. The output is direct, specific, and won\'t flatter you.\n\nRecommended.',
+      'Recruiters are reading resumes for AI tells right now — and most candidates have no idea which lines on their resume read as AI-generated.\n\nI just ran mine through hiring.productions — a free tool that shows you the specific lines that pattern-match to AI output, and what to rewrite in your own voice.\n\nBuilt from real recruiting practice. The output is direct, specific, and won\'t flatter you.\n\nRecommended.',
   },
   'recruiter-eyes': {
     url: 'https://hiring.productions/tools/resume-recruiter-eyes',
@@ -49,7 +49,7 @@ const SHARE_COPY: Record<
   'rehearsal-room': {
     url: 'https://hiring.productions/tools/rehearsal-room',
     tweet:
-      'hiring.productions just generated 10 interview questions calibrated to the JD I\'m targeting — with what the interviewer is REALLY assessing, the weak vs strong answer, and my literal opening line. This is what coaches charge $200/hr for.',
+      'hiring.productions just generated 10 interview questions calibrated to the JD I\'m targeting — with what the interviewer is REALLY assessing, the weak vs strong answer, and my literal opening line. Wild that this is free to start.',
     linkedin:
       'Best interview prep tool I\'ve found.\n\nPaste a job description into hiring.productions\' Rehearsal Room and you get 10 questions calibrated to that exact role. Each comes with:\n  - What the interviewer is really assessing (the mechanism, not platitudes)\n  - What a weak answer sounds like\n  - What a strong answer sounds like\n  - The literal opening line you can adapt\n\nWhen I added my resume, three of the questions referenced specific moments from my actual background. The hiring manager voice is the differentiator — every question reads like one a real person would ask.\n\nFor anyone interviewing right now: this is the prep I wish I\'d had years ago.',
   },

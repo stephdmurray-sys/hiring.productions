@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
+import { ShareResult } from '@/components/share-result'
 
 interface ResumeReportProps {
   result: string
@@ -900,10 +901,15 @@ export function ResumeReport({ result }: ResumeReportProps) {
         }
       })}
 
+      {/* Share — virality lever. Sits above the document footer so the
+          last thing the visitor sees before the report ends is the ask
+          to spread what they learned. Pre-written, edit-before-posting. */}
+      <ShareResult source="resume-ai-checker" variant="light" />
+
       {/* Document footer */}
       <div
         style={{
-          marginTop: '40px',
+          marginTop: '32px',
           paddingTop: '20px',
           borderTop: '1px solid #ECECF2',
           fontSize: '11px',
