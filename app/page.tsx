@@ -1,28 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { submitLead } from '@/lib/submit-lead'
-import Image from 'next/image'
-import {
-  Search,
-  ListOrdered,
-  TrendingUp,
-  Wrench,
-  Eye,
-  UserCheck,
-  FileText,
-  Edit3,
-  AlertCircle,
-  DollarSign,
-  Star,
-  Building2,
-  User,
-  Linkedin,
-  BarChart3,
-} from 'lucide-react'
 import { StartHereBoard } from '@/components/start-here-board'
 import { QuickHeadlineRead } from '@/components/quick-headline-read'
 
@@ -39,29 +19,6 @@ import { QuickHeadlineRead } from '@/components/quick-headline-read'
  * benefit below the fold, not the homepage tagline above it.
  */
 export default function HomePage() {
-  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle')
-  const [userType, setUserType] = useState('hiring')
-
-  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setFormState('submitting')
-
-    const formData = new FormData(e.currentTarget)
-    const fullName = (formData.get('fullName') ?? '').toString().trim()
-    const [firstName, ...rest] = fullName.split(/\s+/)
-    const lastName = rest.join(' ')
-
-    await submitLead({
-      email: (formData.get('email') ?? '').toString(),
-      source: 'newsletter',
-      firstName,
-      lastName,
-      audience: userType === 'hiring' ? 'hiring' : 'candidate',
-    })
-    setFormState('success')
-    ;(e.target as HTMLFormElement).reset()
-  }
-
   return (
     <main style={{ background: '#0F0F12', color: '#F2F0FF' }}>
       <style>{`
@@ -130,11 +87,15 @@ export default function HomePage() {
       */}
       <QuickHeadlineRead />
 
-      {/* ─────────────── CLOSING ─────────────── */}
+      {/* ─────────────── CLOSING — the ask, with price visible ───────────────
+         Rule 5: one CTA per moment. The page never names what Pro costs
+         above the fold; the closing carries the price so visitors leave
+         with the number, not just the metaphor. Secondary path is a
+         text link so it doesn't compete as a button. */}
       <section
         style={{
           background: '#0F0F12',
-          padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
+          padding: 'clamp(72px, 10vw, 120px) clamp(20px, 5vw, 40px)',
         }}
       >
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
@@ -142,54 +103,74 @@ export default function HomePage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.08,
+              fontSize: 'clamp(36px, 5.5vw, 64px)',
+              letterSpacing: '-0.028em',
+              lineHeight: 1.04,
               color: '#F2F0FF',
+              margin: 0,
             }}
           >
-            Stop trying to beat hiring.
+            The room you were never in.
           </h2>
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.08,
+              fontSize: 'clamp(36px, 5.5vw, 64px)',
+              letterSpacing: '-0.028em',
+              lineHeight: 1.04,
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              marginTop: 0,
+              margin: 0,
             }}
           >
-            Start seeing it.
+            Open for the first time.
           </h2>
+
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '17px',
-              color: '#9D9CB3',
-              marginTop: 24,
-              maxWidth: 540,
+              color: '#C9C7DA',
+              marginTop: 28,
+              maxWidth: 560,
               marginLeft: 'auto',
               marginRight: 'auto',
-              lineHeight: 1.55,
+              lineHeight: 1.6,
             }}
           >
-            The room you were never in. Open for the first time. That&rsquo;s where the offer comes from.
+            Every Recruiter Insight. Both sides of the table. Less than one hour with a coach.
           </p>
 
           <div
             style={{
-              marginTop: '40px',
-              display: 'flex',
-              gap: '14px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
+              marginTop: 36,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(40px, 5vw, 56px)',
+              letterSpacing: '-0.03em',
+              lineHeight: 1,
+              color: '#F2F0FF',
             }}
           >
+            $14.99
+            <span
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 600,
+                fontSize: 'clamp(15px, 1.6vw, 18px)',
+                color: '#9D9CB3',
+                letterSpacing: '0',
+                marginLeft: 8,
+              }}
+            >
+              / month · or $99 / year
+            </span>
+          </div>
+
+          <div style={{ marginTop: 32 }}>
             <Link
               href="/membership"
               className="hero-btn"
@@ -199,295 +180,40 @@ export default function HomePage() {
                 gap: '8px',
                 background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
                 color: 'white',
-                padding: '15px 34px',
+                padding: '17px 40px',
                 borderRadius: '10px',
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 800,
-                fontSize: '16px',
+                fontSize: '17px',
                 textDecoration: 'none',
                 transition: 'transform 0.2s',
+                boxShadow: '0 16px 40px rgba(108,71,255,0.28)',
               }}
             >
               Go Pro
             </Link>
+          </div>
+
+          <div style={{ marginTop: 20 }}>
             <Link
               href="/tools"
-              className="hero-btn"
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                border: '1.5px solid rgba(167,139,250,0.4)',
-                background: 'transparent',
-                color: '#A78BFA',
-                padding: '15px 30px',
-                borderRadius: '10px',
                 fontFamily: "'Figtree', sans-serif",
-                fontWeight: 700,
-                fontSize: '15px',
+                fontWeight: 600,
+                fontSize: 13.5,
+                color: '#8B8AA0',
                 textDecoration: 'none',
-                transition: 'transform 0.2s',
+                borderBottom: '1px solid rgba(139,138,160,0.35)',
+                paddingBottom: 1,
               }}
             >
-              See every tool →
+              Or browse every tool first →
             </Link>
           </div>
-        </div>
-      </section>
-
-
-      {/* ─────────────── EMAIL CAPTURE ─────────────── */}
-      <section
-        style={{
-          background: '#0F0F12',
-          padding: 'clamp(56px, 7vw, 80px) clamp(20px, 5vw, 40px)',
-        }}
-      >
-        <div style={{ maxWidth: '480px', margin: '0 auto' }}>
-          <div
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              color: '#A78BFA',
-              textAlign: 'center',
-              marginBottom: 12,
-            }}
-          >
-            STAY AHEAD
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(26px, 3.5vw, 32px)',
-              letterSpacing: '-0.025em',
-              color: '#F2F0FF',
-              textAlign: 'center',
-              marginTop: 12,
-            }}
-          >
-            Get the Recruiter Insight first.
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '15px',
-              color: '#9D9CB3',
-              textAlign: 'center',
-              marginTop: 10,
-              lineHeight: 1.6,
-            }}
-          >
-            New Recruiter Insights, what both sides are doing, and what&apos;s working right now —
-            delivered before anyone else.
-          </p>
-
-          <form
-            onSubmit={handleSubscribe}
-            style={{
-              marginTop: '32px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '14px',
-            }}
-          >
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Your name"
-              required
-              style={inputStyle}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              required
-              style={inputStyle}
-            />
-            <div style={{ display: 'flex', gap: 8 }}>
-              {['hiring', 'candidate'].map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  onClick={() => setUserType(option)}
-                  style={{
-                    flex: 1,
-                    padding: '12px 16px',
-                    borderRadius: 8,
-                    fontFamily: "'Figtree', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '13px',
-                    border: userType === option ? 'none' : '1px solid rgba(255,255,255,0.1)',
-                    background: userType === option ? '#6C47FF' : 'transparent',
-                    color: userType === option ? 'white' : '#9D9CB3',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  {option === 'hiring' ? 'Hiring Professional' : 'Job Seeker'}
-                </button>
-              ))}
-            </div>
-            <button
-              type="submit"
-              disabled={formState === 'submitting'}
-              style={{
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: 'white',
-                padding: '15px',
-                borderRadius: 8,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '15px',
-                border: 'none',
-                cursor: formState === 'submitting' ? 'not-allowed' : 'pointer',
-                transition: 'opacity 0.2s',
-                opacity: formState === 'submitting' ? 0.7 : 1,
-              }}
-            >
-              {formState === 'idle' && 'Get the Recruiter Insight →'}
-              {formState === 'submitting' && 'Sending...'}
-              {formState === 'success' && "You're in. ✓"}
-            </button>
-            <p
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: '12px',
-                color: '#8B8AA0',
-                textAlign: 'center',
-                marginTop: 4,
-              }}
-            >
-              No spam. Unsubscribe anytime.
-            </p>
-          </form>
         </div>
       </section>
 
       <Footer />
     </main>
-  )
-}
-
-/* ─────────────── Small style primitives + components ─────────────── */
-const cardStyle: React.CSSProperties = {
-  background: '#0F0F12',
-  border: '1px solid rgba(255,255,255,0.06)',
-  borderRadius: 16,
-  padding: 24,
-  textDecoration: 'none',
-  color: 'inherit',
-  display: 'block',
-  transition: 'all 0.25s',
-}
-const cardTitle: React.CSSProperties = {
-  fontFamily: "'Figtree', sans-serif",
-  fontWeight: 800,
-  fontSize: '16px',
-  color: '#F2F0FF',
-  marginTop: 14,
-  marginBottom: 8,
-  lineHeight: 1.3,
-}
-const cardBody: React.CSSProperties = {
-  fontFamily: "'Figtree', sans-serif",
-  fontWeight: 400,
-  fontSize: '13px',
-  color: '#9D9CB3',
-  lineHeight: 1.6,
-}
-const inputStyle: React.CSSProperties = {
-  background: '#1A1A22',
-  border: '1px solid rgba(255,255,255,0.1)',
-  borderRadius: 8,
-  padding: '14px 16px',
-  fontFamily: "'Figtree', sans-serif",
-  color: '#F2F0FF',
-  fontSize: '14px',
-}
-
-function IconCircle({
-  Icon,
-  accent,
-  tintRgba,
-}: {
-  Icon: React.ComponentType<{ size?: number; color?: string; strokeWidth?: number }>
-  accent: string
-  tintRgba: string
-}) {
-  return (
-    <div
-      style={{
-        width: 42,
-        height: 42,
-        borderRadius: '50%',
-        background: `rgba(${tintRgba},0.12)`,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Icon size={19} color={accent} strokeWidth={2} />
-    </div>
-  )
-}
-
-function Pill({ text, accent, tintRgba }: { text: string; accent: string; tintRgba: string }) {
-  return (
-    <div
-      style={{
-        background: `rgba(${tintRgba},0.14)`,
-        color: accent,
-        padding: '4px 9px',
-        borderRadius: 4,
-        fontFamily: "'Figtree', sans-serif",
-        fontWeight: 800,
-        fontSize: '10px',
-        letterSpacing: '0.06em',
-        display: 'inline-block',
-        marginTop: 14,
-        marginBottom: 4,
-      }}
-    >
-      {text}
-    </div>
-  )
-}
-
-function SubLabel({ text, color }: { text: string; color: string }) {
-  return (
-    <div
-      style={{
-        fontFamily: "'Figtree', sans-serif",
-        fontWeight: 700,
-        fontSize: '11px',
-        color,
-        marginBottom: 8,
-      }}
-    >
-      {text}
-    </div>
-  )
-}
-
-function CardCTA({ text, color }: { text: string; color: string }) {
-  return (
-    <div
-      style={{
-        fontFamily: "'Figtree', sans-serif",
-        fontWeight: 800,
-        fontSize: '13px',
-        color,
-        marginTop: 18,
-      }}
-    >
-      {text}
-    </div>
   )
 }

@@ -66,14 +66,14 @@ export function StartHereBoard() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Eyebrow>Both sides of hiring</Eyebrow>
         <Heading>
           Pull back the curtain
           <br />
           on hiring.
         </Heading>
         <SubHeading>
-          What recruiters actually say &mdash; now in the open.
+          How recruiters actually read resumes. How strong candidates actually read job posts.
+          Both sides of the table, in the open for the first time.
         </SubHeading>
 
         {/* The board */}
@@ -191,7 +191,6 @@ function QuestionCard({
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
-        minHeight: 168,
       }}
     >
       <style>{`
@@ -202,6 +201,29 @@ function QuestionCard({
         }
         .start-here-card:hover .start-here-cta {
           color: #F2F0FF !important;
+        }
+        /* Bullets are hidden by default. On devices that support real
+           hover (desktop), hovering the card reveals the bullets as a
+           teaser of what's inside. Touch devices skip this — they get
+           the clean three-zone card and tap into the detail view to
+           see the full tool list. */
+        .start-here-bullets {
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          margin-top: 0;
+          transition: max-height 0.32s ease, opacity 0.22s ease, margin-top 0.32s ease, padding-top 0.32s ease, border-top-color 0.22s ease;
+          padding-top: 0;
+          border-top: 1px dashed rgba(167,139,250,0);
+        }
+        @media (hover: hover) {
+          .start-here-card:hover .start-here-bullets {
+            max-height: 240px;
+            opacity: 1;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top-color: rgba(167,139,250,0.18);
+          }
         }
       `}</style>
 
@@ -272,16 +294,17 @@ function QuestionCard({
           fontSize: 13,
           lineHeight: 1.4,
           color: '#9D9CB3',
-          marginBottom: 18,
           textWrap: 'balance',
         }}
       >
         &ldquo;{question.quote}&rdquo;
       </div>
 
-      {/* BULLETS — concrete concepts the section covers. Lets the visitor
-          see WHAT they'll get, not just the feeling. */}
+      {/* BULLETS — hidden by default; hover-revealed on desktop as a peek
+          of what's inside. The card stays calm in its default state (3
+          reading zones: number, title, quote) and rewards investigation. */}
       <ul
+        className="start-here-bullets"
         style={{
           listStyle: 'none',
           padding: 0,
@@ -289,8 +312,6 @@ function QuestionCard({
           display: 'flex',
           flexDirection: 'column',
           gap: 6,
-          paddingTop: 14,
-          borderTop: '1px dashed rgba(167,139,250,0.18)',
         }}
       >
         {question.bullets.map((b, i) => (
@@ -577,25 +598,6 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
 // =====================================================================
 // Small typographic primitives
 // =====================================================================
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        fontFamily: "'Figtree', sans-serif",
-        fontWeight: 800,
-        fontSize: 12,
-        letterSpacing: '0.18em',
-        textTransform: 'uppercase',
-        color: '#A78BFA',
-        marginBottom: 18,
-        textAlign: 'center',
-      }}
-    >
-      {children}
-    </div>
-  )
-}
 
 function Heading({ children }: { children: React.ReactNode }) {
   return (
