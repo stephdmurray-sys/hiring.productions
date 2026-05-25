@@ -1,57 +1,91 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Lock, CheckCircle2 } from 'lucide-react'
+import { Mail, CheckCircle2 } from 'lucide-react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { isMember, activateMembership, getMemberEmail, clearMembership } from '@/lib/membership'
+import { createClient } from '@/lib/supabase/client'
 
+/**
+ * Sign-in page — magic-link flow via Supabase Auth.
+ *
+ * The visitor enters their email, we send a magic link via Supabase (which
+ * delivers the email through whatever SMTP/Resend Supabase is configured
+ * with). They click the link in their email, land on /auth/callback, get a
+ * session, and route into /dashboard or /onboarding depending on profile
+ * state.
+ *
+ * No passwords. No "verify against Stripe" gating. Existing paying
+ * customers sign in the same way — the Stripe webhook syncs their tier on
+ * profiles.membership_tier when their payment events fire.
+ */
 export default function SignInPage() {
-  const router = useRouter()
+  const supabase = createClient()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
+  const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
-  const [memberState, setMemberState] = useState<{ active: boolean; email: string | null }>({
-    active: false,
-    email: null,
-  })
+  // Show a friendly check-your-email screen if the visitor returns to /sign-in
+  // shortly after submitting (e.g. they clicked back). LocalStorage retains
+  // the last-sent address for 30 minutes.
+  const [lastSentEmail, setLastSentEmail] = useState<string | null>(null)
 
   useEffect(() => {
-    setMemberState({ active: isMember(), email: getMemberEmail() })
+    try {
+      const stored = localStorage.getItem('hp_last_magic_link')
+      if (stored) {
+        const { email: storedEmail, ts } = JSON.parse(stored) as {
+          email: string
+          ts: number
+        }
+        if (Date.now() - ts < 30 * 60 * 1000) {
+          setLastSentEmail(storedEmail)
+        }
+      }
+    } catch {
+      // ignore
+    }
   }, [])
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
-    const trimmed = email.trim()
+    const trimmed = email.trim().toLowerCase()
     if (!trimmed) return
 
     setLoading(true)
     setError('')
 
-    try {
-      const r = await fetch(`/api/stripe/verify-customer?email=${encodeURIComponent(trimmed)}`)
-      const data = await r.json()
+    const { error: supaError } = await supabase.auth.signInWithOtp({
+      email: trimmed,
+      options: {
+        // Where the magic link sends the user after they click. The callback
+        // route exchanges the code for a session and routes them to either
+        // /onboarding (new user) or /dashboard (returning).
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        // Allow new sign-ups via this same flow. Existing users sign in;
+        // new users get an account created automatically.
+        shouldCreateUser: true,
+      },
+    })
 
-      if (data.active === true) {
-        activateMembership(trimmed)
-        router.push('/tools')
-      } else {
-        setError(
-          "No active membership found for this email. Use the email you paid with at checkout — or get full access below.",
-        )
-      }
-    } catch {
-      setError('Couldn’t verify right now. Please try again in a moment.')
-    } finally {
+    if (supaError) {
+      setError(supaError.message)
       setLoading(false)
+      return
     }
-  }
 
-  const handleSignOut = () => {
-    clearMembership()
-    setMemberState({ active: false, email: null })
+    try {
+      localStorage.setItem(
+        'hp_last_magic_link',
+        JSON.stringify({ email: trimmed, ts: Date.now() }),
+      )
+    } catch {
+      // ignore quota errors
+    }
+
+    setSent(true)
+    setLoading(false)
   }
 
   return (
@@ -72,7 +106,7 @@ export default function SignInPage() {
             position: 'absolute',
             inset: 0,
             background:
-              'radial-gradient(ellipse 700px 500px at 50% 0%, rgba(108,71,255,0.16) 0%, transparent 60%)',
+              'radial-gradient(ellipse 700px 500px at 50% 0%, rgba(108,71,255,0.10) 0%, transparent 60%)',
             pointerEvents: 'none',
             zIndex: 0,
           }}
@@ -86,138 +120,10 @@ export default function SignInPage() {
             margin: '0 auto',
           }}
         >
-          {/* Already signed in */}
-          {memberState.active ? (
-            <div
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid rgba(94,230,168,0.30)',
-                borderRadius: '20px',
-                padding: '36px',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 56,
-                  height: 56,
-                  borderRadius: '50%',
-                  background: 'rgba(94,230,168,0.15)',
-                  marginBottom: 20,
-                }}
-              >
-                <CheckCircle2 size={28} color="#5EE6A8" strokeWidth={2.2} />
-              </div>
-              <h1
-                style={{
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 900,
-                  fontSize: '28px',
-                  letterSpacing: '-0.02em',
-                  color: '#1A1A22',
-                  margin: '0 0 8px',
-                }}
-              >
-                You’re signed in.
-              </h1>
-              <p
-                style={{
-                  fontFamily: "'Figtree', sans-serif",
-                  fontSize: '14px',
-                  color: '#5A5A6E',
-                  margin: '0 0 24px',
-                }}
-              >
-                Signed in as <strong style={{ color: '#1A1A22' }}>{memberState.email}</strong>.
-              </p>
-              <Link
-                href="/tools"
-                style={{
-                  display: 'inline-block',
-                  padding: '14px 28px',
-                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                  color: 'white',
-                  borderRadius: '12px',
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 800,
-                  fontSize: '15px',
-                  textDecoration: 'none',
-                  boxShadow: '0 18px 40px rgba(108,71,255,0.30)',
-                }}
-              >
-                Open your tools →
-              </Link>
-              <div style={{ marginTop: 18 }}>
-                <button
-                  onClick={handleSignOut}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: '#8B8AA0',
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    padding: 0,
-                    textDecoration: 'underline',
-                    textUnderlineOffset: 3,
-                  }}
-                >
-                  Sign out
-                </button>
-              </div>
-            </div>
+          {sent ? (
+            <SuccessCard email={email.trim().toLowerCase()} />
           ) : (
             <>
-              {/* Prominent "haven't paid yet?" callout — pulled UP above
-                  the sign-in form because the dominant /sign-in visitor
-                  is someone who arrived here by mistake (clicked the
-                  former "Already a member?" link while trying to buy).
-                  This callout gives them an obvious one-click route
-                  back to checkout instead of leaving them stuck staring
-                  at a sign-in form they can't satisfy. */}
-              <Link
-                href="/membership"
-                style={{
-                  display: 'block',
-                  marginBottom: 24,
-                  padding: '16px 18px',
-                  background: 'linear-gradient(135deg, rgba(108,71,255,0.14), rgba(255,79,106,0.10))',
-                  border: '1px solid rgba(167,139,250,0.32)',
-                  borderRadius: 12,
-                  textDecoration: 'none',
-                  textAlign: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: 12,
-                    fontWeight: 800,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    color: '#A78BFA',
-                    marginBottom: 6,
-                  }}
-                >
-                  Never paid before?
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Figtree', sans-serif",
-                    fontSize: 14.5,
-                    color: '#1A1A22',
-                    fontWeight: 700,
-                    lineHeight: 1.45,
-                  }}
-                >
-                  Get full access →
-                </div>
-              </Link>
-
               <div style={{ textAlign: 'center', marginBottom: 28 }}>
                 <div
                   style={{
@@ -227,12 +133,12 @@ export default function SignInPage() {
                     width: 56,
                     height: 56,
                     borderRadius: '50%',
-                    background: 'rgba(108,71,255,0.15)',
-                    border: '1px solid rgba(108,71,255,0.30)',
+                    background: 'rgba(108,71,255,0.12)',
+                    border: '1px solid rgba(108,71,255,0.25)',
                     marginBottom: 20,
                   }}
                 >
-                  <Lock size={24} color="#A78BFA" strokeWidth={2} />
+                  <Mail size={24} color="#6C47FF" strokeWidth={2} />
                 </div>
                 <h1
                   style={{
@@ -245,7 +151,7 @@ export default function SignInPage() {
                     lineHeight: 1.1,
                   }}
                 >
-                  Already a member? Sign in.
+                  Sign in to your search.
                 </h1>
                 <p
                   style={{
@@ -256,7 +162,7 @@ export default function SignInPage() {
                     lineHeight: 1.55,
                   }}
                 >
-                  Enter the email you used at checkout. We verify against Stripe — no password.
+                  We&apos;ll send a magic link. No passwords, no resets, no friction.
                 </p>
               </div>
 
@@ -264,9 +170,10 @@ export default function SignInPage() {
                 onSubmit={handleSignIn}
                 style={{
                   background: '#FFFFFF',
-                  border: '1px solid rgba(108,71,255,0.25)',
+                  border: '1px solid #ECECF2',
                   borderRadius: '16px',
                   padding: '28px 24px',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
                 }}
               >
                 <label
@@ -278,7 +185,7 @@ export default function SignInPage() {
                     fontSize: '11px',
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
-                    color: '#8B8AA0',
+                    color: '#5A5A6E',
                     marginBottom: '10px',
                   }}
                 >
@@ -294,7 +201,7 @@ export default function SignInPage() {
                   autoFocus
                   style={{
                     width: '100%',
-                    background: '#FFFFFF',
+                    background: '#FAFAFB',
                     border: '1px solid #ECECF2',
                     borderRadius: '10px',
                     padding: '14px 16px',
@@ -317,20 +224,24 @@ export default function SignInPage() {
                     marginTop: 16,
                     background:
                       !email.trim() || loading
-                        ? 'rgba(255,255,255,0.05)'
+                        ? '#ECECF2'
                         : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                    border: !email.trim() || loading ? '1px solid rgba(255,255,255,0.10)' : 'none',
+                    border: 'none',
                     borderRadius: '10px',
                     padding: '15px',
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 800,
                     fontSize: '15px',
-                    color: !email.trim() || loading ? '#6B6A82' : 'white',
+                    color: !email.trim() || loading ? '#8B8AA0' : 'white',
                     cursor: !email.trim() || loading ? 'not-allowed' : 'pointer',
                     transition: 'all 0.2s',
+                    boxShadow:
+                      !email.trim() || loading
+                        ? 'none'
+                        : '0 12px 28px rgba(108,71,255,0.20)',
                   }}
                 >
-                  {loading ? 'Verifying…' : 'Sign in'}
+                  {loading ? 'Sending…' : 'Send magic link'}
                 </button>
 
                 {error && (
@@ -344,11 +255,31 @@ export default function SignInPage() {
                       fontFamily: "'Figtree', sans-serif",
                       fontSize: '12.5px',
                       fontWeight: 500,
-                      color: '#FF8FA3',
+                      color: '#C73E5A',
                       lineHeight: 1.5,
                     }}
                   >
                     {error}
+                  </div>
+                )}
+
+                {lastSentEmail && !error && (
+                  <div
+                    style={{
+                      marginTop: 12,
+                      padding: '10px 14px',
+                      background: 'rgba(108,71,255,0.06)',
+                      border: '1px solid rgba(108,71,255,0.18)',
+                      borderRadius: 8,
+                      fontFamily: "'Figtree', sans-serif",
+                      fontSize: '12.5px',
+                      fontWeight: 500,
+                      color: '#5A4FE0',
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    We sent a link to <strong>{lastSentEmail}</strong> recently. Check
+                    your inbox (and spam) before requesting another.
                   </div>
                 )}
               </form>
@@ -362,16 +293,16 @@ export default function SignInPage() {
                   color: '#5A5A6E',
                 }}
               >
-                Not a member yet?{' '}
+                Not signed up yet?{' '}
                 <Link
                   href="/membership"
                   style={{
-                    color: '#A78BFA',
+                    color: '#5A4FE0',
                     fontWeight: 700,
                     textDecoration: 'none',
                   }}
                 >
-                  Get full access →
+                  See what you get →
                 </Link>
               </div>
             </>
@@ -381,5 +312,69 @@ export default function SignInPage() {
 
       <Footer />
     </main>
+  )
+}
+
+function SuccessCard({ email }: { email: string }) {
+  return (
+    <div
+      style={{
+        background: '#FFFFFF',
+        border: '1px solid rgba(31,138,85,0.22)',
+        borderRadius: '20px',
+        padding: '36px',
+        textAlign: 'center',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
+      }}
+    >
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 56,
+          height: 56,
+          borderRadius: '50%',
+          background: 'rgba(31,138,85,0.10)',
+          marginBottom: 20,
+        }}
+      >
+        <CheckCircle2 size={28} color="#1F8A55" strokeWidth={2.2} />
+      </div>
+      <h1
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 900,
+          fontSize: '28px',
+          letterSpacing: '-0.02em',
+          color: '#1A1A22',
+          margin: '0 0 8px',
+        }}
+      >
+        Check your email.
+      </h1>
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: '15px',
+          color: '#5A5A6E',
+          margin: '0 0 8px',
+          lineHeight: 1.5,
+        }}
+      >
+        We sent a sign-in link to <strong style={{ color: '#1A1A22' }}>{email}</strong>.
+      </p>
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: '13.5px',
+          color: '#8B8AA0',
+          margin: 0,
+          lineHeight: 1.5,
+        }}
+      >
+        Click the link to finish signing in. Check spam if you don&apos;t see it within a minute.
+      </p>
+    </div>
   )
 }

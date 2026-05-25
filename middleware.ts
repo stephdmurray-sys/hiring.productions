@@ -1,67 +1,74 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { updateSession } from '@/lib/supabase/middleware'
 
 /**
- * Edge middleware that gates the /admin route.
+ * Edge middleware. Does TWO things:
  *
- * Before this middleware, /admin was a public client-side page that
- * rendered a "paste your token to unlock" form when no token was
- * present. That UX confirmed to any visitor that an admin dashboard
- * exists — useful as an explicit signal, but ALSO an invitation for
- * the curious to attempt to guess or brute-force the token.
+ * 1. Supabase session refresh — runs on every route. Reads the refresh
+ *    token from cookies, gets a new access token if needed, writes it
+ *    back. Without this, users would silently sign out after the access
+ *    token TTL (~1 hour).
  *
- * Now: any request to /admin without a valid token returns a Next.js
- * 404. A visitor sees the same "page not found" experience they'd
- * see typing any other random URL on the site. No indication an
- * admin area exists at all.
+ * 2. Admin gating — for /admin routes only. Requires the ADMIN_TOKEN to
+ *    arrive via ?token=XXX or the hp_admin_token cookie; otherwise 404
+ *    (not 401 — we hide that an admin area exists at all).
  *
- * Auth model: token can arrive two ways.
- *   1. URL query param: /admin?token=XXX (the one-tap bookmark flow)
- *   2. Cookie hp_admin_token, planted automatically the first time a
- *      visitor presents a valid token in the URL
- *
- * Either path lets the dashboard load. Wrong/missing both = 404.
- *
- * If ADMIN_TOKEN env is unset the middleware fails closed (404 for
- * everyone) so a forgotten env var doesn't accidentally make /admin
- * public.
+ * The two interact: the admin response carries the refreshed Supabase
+ * cookies so Stephanie's admin session stays live alongside her
+ * platform session.
  */
-export function middleware(request: NextRequest) {
-  const expected = process.env.ADMIN_TOKEN
-  if (!expected) {
-    return new NextResponse('Not found', { status: 404 })
+export async function middleware(request: NextRequest) {
+  // Always refresh the Supabase session first, regardless of route.
+  // The response carries the refreshed auth cookies, which we'll either
+  // return as-is or use as the base for the admin gate below.
+  const supabaseResponse = await updateSession(request)
+
+  // Only the admin gate layers extra logic on top of the Supabase response.
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    const expected = process.env.ADMIN_TOKEN
+    if (!expected) {
+      return new NextResponse('Not found', { status: 404 })
+    }
+
+    const urlToken = request.nextUrl.searchParams.get('token')
+    const cookieToken = request.cookies.get('hp_admin_token')?.value
+    const authed = urlToken === expected || cookieToken === expected
+
+    if (!authed) {
+      return new NextResponse('Not found', { status: 404 })
+    }
+
+    // First-time URL-based auth: plant a cookie so the visitor can
+    // bookmark just /admin (no token in the URL) and still get in.
+    // Copy the cookie onto the Supabase-refreshed response so we don't
+    // lose either the admin cookie or the refreshed auth cookies.
+    if (urlToken === expected && cookieToken !== expected) {
+      supabaseResponse.cookies.set('hp_admin_token', expected, {
+        httpOnly: false,
+        secure: true,
+        sameSite: 'lax',
+        path: '/admin',
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+      })
+    }
   }
 
-  const urlToken = request.nextUrl.searchParams.get('token')
-  const cookieToken = request.cookies.get('hp_admin_token')?.value
-
-  const authed = urlToken === expected || cookieToken === expected
-
-  if (!authed) {
-    return new NextResponse('Not found', { status: 404 })
-  }
-
-  // First-time URL-based auth: plant a cookie so the visitor can
-  // bookmark just /admin (no token in the URL) and still get in.
-  const res = NextResponse.next()
-  if (urlToken === expected && cookieToken !== expected) {
-    res.cookies.set('hp_admin_token', expected, {
-      // Readable from client JS so the /admin page can pick it up
-      // for its /api/admin/stats fetch without needing the URL param.
-      // Security trade-off: a malicious JS injection could read this,
-      // but the same threat model applies to the localStorage token
-      // the page also uses. The middleware is what actually gates
-      // access to the page render; the cookie is a UX convenience.
-      httpOnly: false,
-      secure: true,
-      sameSite: 'lax',
-      path: '/admin',
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-    })
-  }
-  return res
+  return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/admin', '/admin/:path*'],
+  // Match every route EXCEPT static assets, Next internals, and api/auth
+  // callback (which the auth callback route handler manages itself).
+  // Includes /admin for the gate above; the gate is applied conditionally.
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     * - api/track, api/stripe webhooks (no session needed)
+     */
+    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|api/track|api/stripe).*)',
+  ],
 }
