@@ -150,18 +150,36 @@ function ScoreSection({ section }: { section: Section }) {
     : { ring: '#C73E5A', bg: '#FFE4E0', label: 'Reads as AI' }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '24px',
-        alignItems: 'center',
-        padding: '24px 28px',
-        background: palette.bg,
-        borderRadius: '12px',
-        marginBottom: '32px',
-        border: `1px solid ${palette.ring}33`,
-      }}
-    >
+    <>
+      {/* Section annotation — same pattern as the SectionShell-wrapped
+          sections below. Recruiter-context explainer of what the score
+          actually means. Below 60 is the threshold where a real
+          recruiter starts asking probing questions in screen calls. */}
+      <div
+        style={{
+          marginBottom: '16px',
+          fontSize: '14px',
+          lineHeight: 1.6,
+          color: '#5A5A6E',
+          fontStyle: 'italic',
+        }}
+      >
+        How a recruiter scores your resume before the first read — pattern-matching
+        against the AI-generated resumes they reject every day. Above 80 reads as
+        a real person; below 60 triggers the probing questions in the screen call.
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          gap: '24px',
+          alignItems: 'center',
+          padding: '24px 28px',
+          background: palette.bg,
+          borderRadius: '12px',
+          marginBottom: '32px',
+          border: `1px solid ${palette.ring}33`,
+        }}
+      >
       {score !== null && (
         <div
           style={{
@@ -197,6 +215,7 @@ function ScoreSection({ section }: { section: Section }) {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
