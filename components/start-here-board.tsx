@@ -35,7 +35,17 @@ const QUESTIONS = MOMENTS
 const FIGTREE_IMPORT =
   "@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap');"
 
-export function StartHereBoard() {
+interface StartHereBoardProps {
+  /**
+   * When true, skip rendering the hero heading + subhead + primary CTA +
+   * "Or pick your act" eyebrow. Used on the homepage now that we render
+   * a dedicated HomepageHero component above this one — the cards become
+   * the secondary "or skip ahead, try a free tool" surface.
+   */
+  hideHero?: boolean
+}
+
+export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
   const [selected, setSelected] = useState<string | null>(null)
   const current = QUESTIONS.find((q) => q.id === selected) ?? null
 
@@ -45,109 +55,154 @@ export function StartHereBoard() {
         position: 'relative',
         background: '#FAF8F3',
         color: '#1A1A22',
-        padding: 'clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px)',
+        padding: hideHero
+          ? 'clamp(32px, 5vw, 64px) 24px clamp(48px, 7vw, 96px)'
+          : 'clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px)',
         overflow: 'hidden',
       }}
     >
       <style>{FIGTREE_IMPORT}</style>
-      {/* Ambient backdrop — restrained, single radial glow. Lighter
-          on cream than on dark, but still gives the hero some depth. */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: -200,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 760,
-          height: 760,
-          background:
-            'radial-gradient(circle, rgba(108,71,255,0.08) 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }}
-      />
+      {!hideHero && (
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: -200,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: 760,
+            height: 760,
+            background:
+              'radial-gradient(circle, rgba(108,71,255,0.08) 0%, transparent 60%)',
+            pointerEvents: 'none',
+          }}
+        />
+      )}
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Heading>
-          Pull back the curtain
-          <br />
-          on hiring.
-        </Heading>
-        <SubHeading>
-          A recruiter in the scene with you — networking, interviewing, negotiating.
-          Play by play.
-        </SubHeading>
+        {!hideHero && (
+          <>
+            <Heading>
+              Pull back the curtain
+              <br />
+              on hiring.
+            </Heading>
+            <SubHeading>
+              A recruiter in the scene with you — networking, interviewing, negotiating.
+              Play by play.
+            </SubHeading>
 
-        {/* Primary CTA — the visible "enter the platform" door.
-            Cold visitors who DON'T want to browse the cards still
-            have a clear next step. Routes to /sign-in which now
-            captures email → sends magic link → onboarding wizard →
-            dashboard. */}
-        {!current && (
-          <div
-            style={{
-              marginTop: 'clamp(28px, 3.5vw, 40px)',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 14,
-            }}
-          >
-            <Link
-              href="/sign-in"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '17px 36px',
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: '#FFFFFF',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: 17,
-                letterSpacing: '0.005em',
-                borderRadius: 12,
-                textDecoration: 'none',
-                boxShadow: '0 16px 40px rgba(108,71,255,0.22)',
-                transition: 'transform 0.2s ease',
-              }}
-              className="hp-start-cta"
-            >
-              Start your search — free →
-            </Link>
+            {!current && (
+              <div
+                style={{
+                  marginTop: 'clamp(28px, 3.5vw, 40px)',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 14,
+                }}
+              >
+                <Link
+                  href="/sign-in"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    padding: '17px 36px',
+                    background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                    color: '#FFFFFF',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: 17,
+                    letterSpacing: '0.005em',
+                    borderRadius: 12,
+                    textDecoration: 'none',
+                    boxShadow: '0 16px 40px rgba(108,71,255,0.22)',
+                    transition: 'transform 0.2s ease',
+                  }}
+                  className="hp-start-cta"
+                >
+                  Start your search — free →
+                </Link>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: '#5A5A6E',
+                  }}
+                >
+                  No credit card. Magic-link sign-in. ~30 seconds.
+                </div>
+                <style>{`.hp-start-cta:hover { transform: translateY(-2px); }`}</style>
+              </div>
+            )}
+
+            {!current && (
+              <div
+                style={{
+                  marginTop: 'clamp(40px, 5vw, 56px)',
+                  textAlign: 'center',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 12,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: '#8B8AA0',
+                }}
+              >
+                Or pick your act and try a free tool
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Secondary section header — only shown when hero is hidden
+            (i.e., this is the "or try a free tool" surface on the new
+            homepage layout). Lower-pressure framing: visitor isn't
+            forced to choose; they're given the option. */}
+        {hideHero && !current && (
+          <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 48px)' }}>
             <div
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 13,
-                fontWeight: 500,
-                color: '#5A5A6E',
+                fontWeight: 800,
+                fontSize: 12,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: '#5A4FE0',
+                marginBottom: 14,
               }}
             >
-              No credit card. Magic-link sign-in. ~30 seconds.
+              Or skip the system
             </div>
-            <style>{`
-              .hp-start-cta:hover { transform: translateY(-2px); }
-            `}</style>
-          </div>
-        )}
-
-        {/* Or — browse the three acts as anonymous diagnostic tools.
-            For visitors not yet ready to commit to an account. */}
-        {!current && (
-          <div
-            style={{
-              marginTop: 'clamp(40px, 5vw, 56px)',
-              textAlign: 'center',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 700,
-              fontSize: 12,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              color: '#8B8AA0',
-            }}
-          >
-            Or pick your act and try a free tool
+            <h2
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 900,
+                fontSize: 'clamp(28px, 4vw, 40px)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.08,
+                color: '#1A1A22',
+                margin: '0 0 14px',
+              }}
+            >
+              Try a free tool right now.
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 15.5,
+                color: '#5A5A6E',
+                maxWidth: 560,
+                margin: '0 auto',
+                lineHeight: 1.55,
+              }}
+            >
+              Pick the scene you&apos;re in. We&apos;ll route you to a free tool that
+              answers the exact pain — no account needed.
+            </p>
           </div>
         )}
 
@@ -159,8 +214,6 @@ export function StartHereBoard() {
             <QuestionGrid onSelect={setSelected} />
           )}
         </div>
-        {/* Redundant audience-escape link removed — the page-level strip
-            above the hero already routes hiring leaders to /for-companies. */}
       </div>
     </section>
   )

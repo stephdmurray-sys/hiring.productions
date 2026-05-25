@@ -3,8 +3,11 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { StartHereBoard } from '@/components/start-here-board'
+import { HomepageHero } from '@/components/homepage-hero'
 import { DashboardPreview } from '@/components/dashboard-preview'
+import { AuthorityStrip } from '@/components/authority-strip'
+import { StartHereBoard } from '@/components/start-here-board'
+import { PricingTransparency } from '@/components/pricing-transparency'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -73,23 +76,42 @@ export default function HomePage() {
         </span>
       </Link>
 
-      {/* ──────────────── START HERE — QUESTION BOARD ─────────────────
-         Question-led entry. The primary homepage funnel for candidates.
-         The live Quick Read widget is now folded into card 01 (The Silence)
-         detail view so visitors interact with the product inside the moment
-         the widget actually answers — not as a separate homepage section.
-      */}
-      <StartHereBoard />
+      {/* ──────────────── HERO ─────────────────
+         The hook + positioning + primary CTA. Extracted from
+         StartHereBoard so the homepage flow is now:
+           Hero → DashboardPreview → AuthorityStrip → ScenesBoard →
+           PricingTransparency → Closing.
+         This narrative order — established by user audit of the original
+         layout — matches how a skeptical job seeker actually decides:
+           hook → product proof → who built it → free entry → cost →
+           ask. */}
+      <HomepageHero />
 
       {/* ──────────────── DASHBOARD PREVIEW ─────────────────
-         Conversion lever — shows visitors WHAT they get when they sign in
-         (saved progress, step checklist, recent insights). Animates on
-         scroll-into-view: progress bar fills, steps check off, insights
-         fade in. Pattern from Linear/Cal.com/Stripe Atlas. Behavioral
-         basis: goal gradient (Hull 1932) + endowed progress (Nunes &
-         Drèze 2006). Per PLATFORM-VISION.md Stage 1.
-      */}
+         Conversion lever — shows visitors WHAT they get when they sign in.
+         Animates on scroll-into-view. Pattern from Linear/Cal.com/Stripe
+         Atlas. Behavioral basis: goal gradient (Hull 1932) + endowed
+         progress (Nunes & Drèze 2006). */}
       <DashboardPreview />
+
+      {/* ──────────────── AUTHORITY ─────────────────
+         Trust signal for skeptical job seekers. Source credibility
+         (Hovland & Weiss 1951). Real recruiter, real credentials, photo,
+         no fake metrics. */}
+      <AuthorityStrip />
+
+      {/* ──────────────── FREE TOOLS ENTRY ─────────────────
+         "Or skip the system, try a free tool right now." Demoted to
+         secondary surface because the dashboard preview above shows
+         visitors the full product first. Lower-pressure framing reduces
+         decision paralysis (Schwartz 2004). */}
+      <StartHereBoard hideHero />
+
+      {/* ──────────────── PRICING TRANSPARENCY ─────────────────
+         Kills the "wait, what's this cost" objection before the closing
+         forces it. Three tiers: free forever, $14.99/mo Pro tools,
+         coached platform coming soon. */}
+      <PricingTransparency />
 
       {/* ─────────────── CLOSING ───────────────
          Rule 5: one CTA per moment. Light-mode redesign: warm cream
