@@ -378,6 +378,44 @@ export function WhatRecruitersSay() {
             )}
           </button>
         </div>
+
+        {/* Persistent conversion ask — closes the brand moment with a
+            direct action. The rotator demonstrates the voice; this line
+            converts curiosity ("what's it like in that room?") into the
+            ask ("what would they say about ME?"). */}
+        <div style={{ marginTop: 36, textAlign: 'center' }}>
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 500,
+              fontSize: 15,
+              color: '#C9C7DA',
+              marginBottom: 14,
+              lineHeight: 1.55,
+            }}
+          >
+            Want to know what they&rsquo;d say about <em>your</em> resume?
+          </div>
+          <Link
+            href="/tools/resume-recruiter-eyes"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '13px 26px',
+              background: 'linear-gradient(135deg, #FF4F6A, #6C47FF)',
+              borderRadius: 10,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 14.5,
+              color: 'white',
+              textDecoration: 'none',
+              boxShadow: '0 12px 28px rgba(255,79,106,0.22)',
+            }}
+          >
+            Get the read on yours <ArrowRight size={15} strokeWidth={2.5} />
+          </Link>
+        </div>
       </div>
     </section>
   )

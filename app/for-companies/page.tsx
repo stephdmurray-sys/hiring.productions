@@ -66,7 +66,7 @@ export default function ForCompaniesPage() {
             color: '#FF4F6A',
             marginBottom: '22px',
           }}>
-            FOR HIRING TEAMS
+            FOR HIRING TEAMS · IN BETA
           </div>
           <h1 style={{
             fontFamily: "'Figtree', sans-serif",
@@ -131,10 +131,10 @@ export default function ForCompaniesPage() {
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
             <Link href="#waitlist" className="btn-primary">
-              Join the hiring-team waitlist — $199/yr →
+              Join the hiring-team waitlist →
             </Link>
             <Link href="/tools" className="btn-ghost">
-              Explore the tools that exist today
+              Use what&rsquo;s live today
             </Link>
           </div>
         </div>
@@ -322,7 +322,7 @@ export default function ForCompaniesPage() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>
-              $199 per year.
+              Coming this year.
             </span>
           </h2>
           <p style={{
@@ -334,9 +334,10 @@ export default function ForCompaniesPage() {
             maxWidth: 580,
             margin: '0 auto 28px',
           }}>
-            Costs less than one LinkedIn job post. Gets you through every stage from role definition
-            to signed offer. Small companies hire two to three times a year and need access when
-            they need it — not a monthly bill that feels wasteful in quiet months.
+            Role clarity through signed offer, end to end. Planned at $199/year — less than one
+            LinkedIn job post, and built for small teams who hire two to three times a year and
+            want the workflow when they need it. The full toolkit is in build; the waitlist
+            gets the launch email and founder pricing.
           </p>
           {waitlistState === 'success' ? (
             <div

@@ -26,6 +26,7 @@ import {
 import { StartHereBoard } from '@/components/start-here-board'
 import { WhatRecruitersSay } from '@/components/what-recruiters-say'
 import { SampleRead } from '@/components/sample-read'
+import { FromTheRoom } from '@/components/from-the-room'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -466,6 +467,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ───────────────── FROM THE ROOM ─────────────────
+         Links the orphan /q/ and /rank/ SEO pages into the homepage.
+         Drives internal link equity + gives cold visitors a no-friction
+         reading path before they commit to a tool run.
+      */}
+      <FromTheRoom />
+
       {/* ─────────────── EMAIL CAPTURE ─────────────── */}
       <section
         style={{
@@ -644,7 +652,7 @@ export default function HomePage() {
               marginTop: 24,
             }}
           >
-            Both sides. Same production. Open for the first time.
+            The room you were never in. Open for the first time.
           </p>
 
           <div
