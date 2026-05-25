@@ -66,15 +66,14 @@ export function StartHereBoard() {
       />
 
       <div style={{ position: 'relative', maxWidth: 1080, margin: '0 auto' }}>
-        <Eyebrow>01 — Both sides of hiring</Eyebrow>
+        <Eyebrow>Both sides of hiring</Eyebrow>
         <Heading>
           Pull back the curtain
           <br />
           on hiring.
         </Heading>
         <SubHeading>
-          What recruiters actually say. The boolean search that finds you — or doesn&rsquo;t. The
-          debrief that decides it. Every tool built from real recruiting practice.
+          What recruiters actually say &mdash; now in the open.
         </SubHeading>
 
         {/* The board */}

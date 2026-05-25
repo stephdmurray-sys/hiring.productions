@@ -148,7 +148,7 @@ export default function HomePage() {
               color: '#F2F0FF',
             }}
           >
-            The goal isn&apos;t to win hiring.
+            Stop trying to beat hiring.
           </h2>
           <h2
             style={{
@@ -164,7 +164,7 @@ export default function HomePage() {
               marginTop: 0,
             }}
           >
-            It&apos;s to finally understand it.
+            Start seeing it.
           </h2>
           <p
             style={{
@@ -172,9 +172,13 @@ export default function HomePage() {
               fontSize: '17px',
               color: '#9D9CB3',
               marginTop: 24,
+              maxWidth: 540,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              lineHeight: 1.55,
             }}
           >
-            The room you were never in. Open for the first time.
+            The room you were never in. Open for the first time. That&rsquo;s where the offer comes from.
           </p>
 
           <div
