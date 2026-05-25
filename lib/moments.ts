@@ -43,7 +43,7 @@ export const MOMENTS: Moment[] = [
   {
     id: 'interview-prep',
     title: 'The Interview',
-    quote: 'I have an interview — or an offer — coming up',
+    quote: 'I need to prepare for an interview or offer',
     sub: 'Research the company before you go in. Decode the questions they’ll ask. Rehearse against their real rubric. Then negotiate when the offer lands.',
     bullets: [
       'Decode the questions they’ll ask',

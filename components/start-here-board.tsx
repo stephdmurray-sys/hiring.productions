@@ -261,16 +261,19 @@ function QuestionCard({
         {question.title}
       </div>
 
-      {/* QUOTE — the visitor's voice */}
+      {/* QUOTE — the visitor's voice. Slightly smaller than body to keep
+          the title dominant; text-wrap: balance lets browsers distribute
+          line breaks more evenly when the quote does wrap at narrow widths. */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 400,
           fontStyle: 'italic',
-          fontSize: 14,
+          fontSize: 13,
           lineHeight: 1.4,
           color: '#9D9CB3',
           marginBottom: 18,
+          textWrap: 'balance',
         }}
       >
         &ldquo;{question.quote}&rdquo;
