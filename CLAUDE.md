@@ -44,6 +44,48 @@ Use it consistently, never force it:
 
 If it doesn't fit naturally, drop it. Forcing the metaphor breaks the brand.
 
+## The five design rules — applied to every section, every page
+
+These are load-bearing. Established May 2026 after the site felt busy
+and hard to read. Linear / Notion / Stripe / Anthropic / Apple all
+follow the same five rules. Before designing or editing anything,
+re-read these.
+
+1. **One focal point per section.** Write down, BEFORE designing,
+   what the one thing the eye should land on is. Everything else
+   supports. If two elements compete for that role, cut one or
+   shrink one. No section has two equal-weight visuals.
+
+2. **Whitespace is content.** Sections breathe with 96-160px of
+   vertical padding (`clamp(96px, 12vw, 160px)`). Cards have 32px+
+   interior padding. Adjacent elements have 24-48px between them.
+   Whitespace is what makes a site feel premium — not what makes it
+   feel empty. Generous whitespace > tight layout, always.
+
+3. **Restraint with color.** Three colors load-bearing: indigo
+   `#6C47FF`, coral `#FF4F6A`, the indigo→coral gradient, plus
+   lavender `#A78BFA` for ambient accents. Success green `#5EE6A8`
+   is allowed for semantic success states only. NO additional
+   accent colors. The whole page should be readable in greyscale —
+   color only marks the most important moments.
+
+4. **Type does the work; chrome doesn't.** Hierarchy is established
+   by SIZE alone. 56-72px for hero headings. 32-42px for section
+   titles. 17-19px for body. 12-14px for captions. No tinted
+   background cards, no bordered pills, no eyebrow labels everywhere.
+   If a border doesn't earn its place by separating distinct
+   entities, it doesn't get one. Decorative chrome is cut.
+
+5. **One CTA per moment.** Every section has zero or one buttons.
+   Two buttons compete for the visitor's attention — split it and
+   you lose both. The visitor's attention is the scarcest resource
+   on the page; spend it on a single ask.
+
+**Plus one content rule:** write the conclusion. Strip the
+explanation. Instead of "First six seconds: I notice X, Y, Z, then
+she stays..." just write what you'd say if someone asked for the
+one-line verdict. People who want depth will click in.
+
 ## Visual rules
 
 - **Dark backgrounds** — backstage feeling. Not because dark is trendy.
