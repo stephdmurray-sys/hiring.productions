@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 import Link from 'next/link'
-import { ArrowRight, RotateCcw } from 'lucide-react'
+import { ArrowRight, RotateCcw, HelpCircle, X } from 'lucide-react'
 
 /**
  * Quick Headline Read — the homepage live widget.
@@ -26,6 +26,7 @@ type State =
 
 export function QuickHeadlineRead() {
   const [state, setState] = useState<State>({ status: 'idle' })
+  const [helpOpen, setHelpOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -175,6 +176,39 @@ export function QuickHeadlineRead() {
             >
               {state.status === 'submitting' ? 'Reading…' : 'Get the read'}
             </button>
+
+            {/* Inline help — "where do I find my headline?" reveal.
+                Stylized LinkedIn profile mockup with the headline area
+                highlighted and Stephanie's actual headline as the
+                example. Lowers friction for visitors who don't know
+                where the headline lives, while demonstrating what a
+                strong headline looks like. */}
+            <div style={{ textAlign: 'center', marginTop: 4 }}>
+              <button
+                type="button"
+                onClick={() => setHelpOpen((v) => !v)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: '#A78BFA',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                <HelpCircle size={13} strokeWidth={2.5} />
+                Where do I find my headline?
+              </button>
+            </div>
+
+            {helpOpen && (
+              <HeadlineHelp onClose={() => setHelpOpen(false)} />
+            )}
           </form>
         )}
 
@@ -302,5 +336,190 @@ export function QuickHeadlineRead() {
         )}
       </div>
     </section>
+  )
+}
+
+/**
+ * Inline help panel — stylized LinkedIn profile mockup with the headline
+ * area highlighted. The headline shown is Stephanie's actual headline,
+ * which doubles as an example of a STRONG headline (role-led, named
+ * outcomes, specific) for visitors to model.
+ *
+ * Built as a styled HTML/CSS mockup rather than a screenshot to avoid
+ * any LinkedIn TOS friction and to stay consistent with the existing
+ * LinkedIn-export guide pattern in components/linkedin-pdf-upload.tsx.
+ */
+function HeadlineHelp({ onClose }: { onClose: () => void }) {
+  return (
+    <div
+      style={{
+        marginTop: 14,
+        background: '#14141B',
+        border: '1px solid rgba(167,139,250,0.30)',
+        borderRadius: 14,
+        padding: 'clamp(20px, 3vw, 26px)',
+        position: 'relative',
+      }}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close help"
+        style={{
+          position: 'absolute',
+          top: 12,
+          right: 12,
+          background: 'transparent',
+          border: 'none',
+          color: '#8B8AA0',
+          cursor: 'pointer',
+          padding: 4,
+          display: 'inline-flex',
+        }}
+      >
+        <X size={14} strokeWidth={2.5} />
+      </button>
+
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: 14,
+          color: '#C9C7DA',
+          lineHeight: 1.55,
+          margin: '0 0 16px',
+        }}
+      >
+        Open{' '}
+        <a
+          href="https://www.linkedin.com/in/me"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#A78BFA', textDecoration: 'underline' }}
+        >
+          linkedin.com/in/me
+        </a>
+        . The line under your name and photo is your headline. Copy it, paste it
+        above.
+      </p>
+
+      {/* Stylized LinkedIn profile card — mimics the actual LinkedIn UI.
+          Light card, dark text. The headline area is wrapped in a coral
+          highlight box with a small "← this is your headline" pointer. */}
+      <div
+        style={{
+          background: '#FFFFFF',
+          borderRadius: 10,
+          padding: '18px 18px 16px',
+          boxShadow: '0 12px 32px rgba(0,0,0,0.35)',
+        }}
+      >
+        {/* Cover strip */}
+        <div
+          aria-hidden
+          style={{
+            height: 36,
+            margin: '-18px -18px 0',
+            borderRadius: '10px 10px 0 0',
+            background: 'linear-gradient(135deg, #0A66C2, #4A90D9)',
+            opacity: 0.85,
+          }}
+        />
+
+        {/* Profile photo placeholder */}
+        <div
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+            border: '3px solid #FFFFFF',
+            marginTop: -28,
+            marginBottom: 8,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#FFFFFF',
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 18,
+          }}
+        >
+          SM
+        </div>
+
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 17,
+            color: '#1F2937',
+            lineHeight: 1.2,
+          }}
+        >
+          Stephanie Murray
+        </div>
+
+        {/* THE HEADLINE — highlighted with a coral box + pointer */}
+        <div
+          style={{
+            position: 'relative',
+            marginTop: 6,
+            padding: '6px 10px',
+            background: 'rgba(255,79,106,0.10)',
+            border: '1.5px solid #FF4F6A',
+            borderRadius: 6,
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 500,
+            fontSize: 13.5,
+            color: '#1F2937',
+            lineHeight: 1.4,
+          }}
+        >
+          Founder · hiring.productions &amp; RepVera · Senior TA Director ·
+          20 years building TA from zero
+          <span
+            style={{
+              display: 'inline-block',
+              marginLeft: 10,
+              color: '#FF4F6A',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 10,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+              verticalAlign: 'middle',
+            }}
+            aria-hidden
+          >
+            ← your headline
+          </span>
+        </div>
+
+        <div
+          style={{
+            marginTop: 8,
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 12,
+            color: '#6B7280',
+          }}
+        >
+          San Francisco Bay Area &middot; 14k followers
+        </div>
+      </div>
+
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: 12.5,
+          color: '#8B8AA0',
+          lineHeight: 1.55,
+          margin: '14px 0 0',
+        }}
+      >
+        That highlighted line is Stephanie&rsquo;s actual headline. Yours sits in
+        the same spot.
+      </p>
+    </div>
   )
 }
