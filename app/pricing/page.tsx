@@ -5,6 +5,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { Check, X } from 'lucide-react'
 import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
+import { PricingFAQ } from '@/components/pricing-faq'
 import { CATALOG } from '@/lib/tools-catalog'
 
 const FREE_CANDIDATE_TOOLS = CATALOG.filter(
@@ -776,6 +777,8 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      <PricingFAQ />
 
       <Footer />
     </main>

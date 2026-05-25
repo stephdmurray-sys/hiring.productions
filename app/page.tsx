@@ -25,6 +25,7 @@ import {
 } from 'lucide-react'
 import { StartHereBoard } from '@/components/start-here-board'
 import { WhatRecruitersSay } from '@/components/what-recruiters-say'
+import { SampleRead } from '@/components/sample-read'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -128,6 +129,13 @@ export default function HomePage() {
          through to the tool that addresses each moment.
       */}
       <WhatRecruitersSay />
+
+      {/* ──────────────── SAMPLE READ ────────────────
+         Anonymized example of a real tool output. Bridges the brand
+         moment (recruiter monologue) into the conversion ask (see what
+         this would say about YOUR resume). Visitors stop buying blind.
+      */}
+      <SampleRead />
 
       {/* ───────────────── CREDIBILITY ─────────────────
          Why this tool, why this person. Anchors the

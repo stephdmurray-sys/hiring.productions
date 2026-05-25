@@ -8,6 +8,7 @@ import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 import { activateMembership, isMember } from '@/lib/membership'
 import { User, Building2, Lock } from 'lucide-react'
 import { CATALOG } from '@/lib/tools-catalog'
+import { PricingFAQ } from '@/components/pricing-faq'
 
 // Tools shown on the membership page — sourced from the catalog so they stay
 // in sync as we add tools. We exclude `soon`-tier tools because the page is
@@ -725,6 +726,8 @@ export default function MembershipPage() {
           Cancel anytime. Free tools stay free forever. Access delivered instantly to your email. No account needed for free tools.
         </p>
       </section>
+
+      <PricingFAQ />
 
       <Footer />
     </div>
