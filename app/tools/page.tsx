@@ -40,7 +40,7 @@ export default function ToolsPage() {
   )
 
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* HERO — direct, no theater */}
@@ -99,8 +99,8 @@ export default function ToolsPage() {
       <section
         style={{
           padding: 'clamp(64px, 8vw, 96px) 24px',
-          background: '#0F0F12',
-          borderTop: '1px solid rgba(255,255,255,0.04)',
+          background: '#FAF8F3',
+          borderTop: '1px solid #ECECF2',
         }}
       >
         <div
@@ -134,7 +134,7 @@ export default function ToolsPage() {
               fontWeight: 900,
               fontSize: 'clamp(24px, 3vw, 32px)',
               letterSpacing: '-0.015em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 20px',
               lineHeight: 1.15,
             }}
@@ -168,7 +168,7 @@ export default function ToolsPage() {
         style={{
           padding: 'clamp(72px, 9vw, 112px) 24px clamp(80px, 10vw, 128px)',
           textAlign: 'center',
-          background: '#14141B',
+          background: '#FFFFFF',
           borderTop: '1px solid rgba(108,71,255,0.18)',
         }}
       >
@@ -192,7 +192,7 @@ export default function ToolsPage() {
               fontWeight: 900,
               fontSize: 'clamp(32px, 4.5vw, 52px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 14px',
               lineHeight: 1.08,
             }}
@@ -245,7 +245,7 @@ export default function ToolsPage() {
 
 const heroSection: React.CSSProperties = {
   position: 'relative',
-  background: '#0F0F12',
+  background: '#FAF8F3',
   padding: 'clamp(72px, 10vw, 132px) 24px clamp(40px, 6vw, 72px)',
   overflow: 'hidden',
 }
@@ -271,8 +271,8 @@ function MomentSection({
     <section
       style={{
         padding: 'clamp(56px, 8vw, 96px) 24px',
-        background: altBackground ? '#14141B' : '#0F0F12',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
+        background: altBackground ? '#FFFFFF' : '#FAF8F3',
+        borderTop: '1px solid #ECECF2',
         position: 'relative',
       }}
     >
@@ -307,7 +307,7 @@ function MomentSection({
                 fontSize: 11,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 background: 'rgba(108,71,255,0.18)',
                 border: '1px solid rgba(167,139,250,0.4)',
                 padding: '3px 10px',
@@ -324,7 +324,7 @@ function MomentSection({
             fontWeight: 900,
             fontSize: 'clamp(28px, 3.8vw, 42px)',
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '0 0 12px',
             lineHeight: 1.08,
           }}
@@ -386,7 +386,7 @@ function Heading({ children }: { children: React.ReactNode }) {
         fontSize: 'clamp(36px, 5.5vw, 60px)',
         lineHeight: 1.05,
         letterSpacing: '-0.025em',
-        color: '#F2F0FF',
+        color: '#1A1A22',
         margin: 0,
       }}
     >

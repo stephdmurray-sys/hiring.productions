@@ -347,7 +347,7 @@ function DetailView({
 
       <div
         style={{
-          background: '#14141B',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.35)',
           borderRadius: 20,
           padding: 'clamp(28px, 4vw, 40px)',
@@ -361,7 +361,7 @@ function DetailView({
             fontSize: 'clamp(32px, 4.2vw, 48px)',
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: 8,
           }}
         >
@@ -402,7 +402,7 @@ function DetailView({
             style={{
               marginBottom: 32,
               padding: 'clamp(20px, 3vw, 28px)',
-              background: '#0F0F12',
+              background: '#FAF8F3',
               border: '1px solid rgba(167,139,250,0.18)',
               borderRadius: 16,
             }}
@@ -462,7 +462,7 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
         flexDirection: 'column',
         gap: 10,
         textDecoration: 'none',
-        background: '#0F0F12',
+        background: '#FAF8F3',
         border: startHere
           ? `1.5px solid rgba(${tintRgba}, 0.6)`
           : `1px solid rgba(${tintRgba}, 0.25)`,
@@ -533,7 +533,7 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
           fontWeight: 800,
           fontSize: 17,
           lineHeight: 1.25,
-          color: '#F2F0FF',
+          color: '#1A1A22',
         }}
       >
         {tool.name}

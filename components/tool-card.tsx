@@ -76,7 +76,7 @@ const TIER_BADGE = {
   pro: {
     label: 'Included in Pro',
     bg: 'rgba(167,139,250,0.20)',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     border: '1px solid rgba(167,139,250,0.40)',
   },
   soon: {
@@ -120,7 +120,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        background: '#14141B',
+        background: '#FFFFFF',
         border: `1px solid ${hover && isClickable ? theme.borderHover : theme.border}`,
         borderRadius: 14,
         padding: '20px 22px 18px',
@@ -130,7 +130,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         opacity: tool.tier === 'soon' ? 0.85 : 1,
         transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
         transform: hover && isClickable ? 'translateY(-3px)' : 'translateY(0)',
-        boxShadow: hover && isClickable ? theme.glow : '0 4px 16px rgba(0,0,0,0.20)',
+        boxShadow: hover && isClickable ? theme.glow : '0 4px 14px rgba(0,0,0,0.06)',
         position: 'relative',
         overflow: 'hidden',
         // Equal height across the row. The grid stretches children to the
@@ -179,7 +179,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
           fontWeight: 800,
           fontSize: 18,
           letterSpacing: '-0.01em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           lineHeight: 1.22,
           margin: '0 0 10px',
         }}
@@ -196,7 +196,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 400,
           fontSize: 13.5,
-          color: '#C9C7DA',
+          color: '#5A5A6E',
           lineHeight: 1.5,
           margin: 0,
           display: '-webkit-box',
