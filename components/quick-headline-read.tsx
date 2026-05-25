@@ -76,23 +76,8 @@ export function QuickHeadlineRead() {
       }}
     >
       <div style={{ maxWidth: 720, margin: '0 auto' }}>
-        {/* Eyebrow */}
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: 12,
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: '#A78BFA',
-            marginBottom: 14,
-            textAlign: 'center',
-          }}
-        >
-          One of our tools &middot; Live
-        </div>
-
-        {/* Heading */}
+        {/* Heading — no eyebrow, no sub-paragraph. The size of the
+            headline tells you what to do; the placeholder tells you how. */}
         <h2
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -102,23 +87,11 @@ export function QuickHeadlineRead() {
             letterSpacing: '-0.02em',
             color: '#F2F0FF',
             textAlign: 'center',
-            margin: '0 0 14px',
+            margin: '0 0 28px',
           }}
         >
-          Paste your LinkedIn headline.
+          Try it. Paste your headline.
         </h2>
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 16,
-            color: '#9D9CB3',
-            lineHeight: 1.5,
-            textAlign: 'center',
-            margin: '0 0 32px',
-          }}
-        >
-          Get a recruiter&rsquo;s real take in five seconds. No account.
-        </p>
 
         {state.status !== 'success' && (
           <form

@@ -60,7 +60,7 @@ export default function HomePage() {
           letterSpacing: '0.005em',
         }}
       >
-        Hiring a role, not searching for one?{' '}
+        Hiring, not job-seeking?{' '}
         <span
           style={{
             color: '#FF8FA3',
@@ -69,7 +69,7 @@ export default function HomePage() {
             paddingBottom: 1,
           }}
         >
-          The hiring-team page is here &rarr;
+          Different door &rarr;
         </span>
       </Link>
 
@@ -129,24 +129,9 @@ export default function HomePage() {
             Open for the first time.
           </h2>
 
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '17px',
-              color: '#C9C7DA',
-              marginTop: 28,
-              maxWidth: 560,
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              lineHeight: 1.6,
-            }}
-          >
-            Every Recruiter Insight. Both sides of the table. Less than one hour with a coach.
-          </p>
-
           <div
             style={{
-              marginTop: 36,
+              marginTop: 40,
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
               fontSize: 'clamp(40px, 5vw, 56px)',
@@ -207,7 +192,7 @@ export default function HomePage() {
                 paddingBottom: 1,
               }}
             >
-              Or browse every tool first →
+              Browse tools →
             </Link>
           </div>
         </div>

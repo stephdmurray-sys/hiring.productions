@@ -71,10 +71,7 @@ export function StartHereBoard() {
           <br />
           on hiring.
         </Heading>
-        <SubHeading>
-          How recruiters actually read resumes. How strong candidates actually read job posts.
-          Both sides of the table, in the open for the first time.
-        </SubHeading>
+        <SubHeading>Both sides of the table. In the open.</SubHeading>
 
         {/* The board */}
         <div style={{ marginTop: 'clamp(40px, 6vw, 64px)' }}>
@@ -121,45 +118,26 @@ function QuestionGrid({ onSelect }: { onSelect: (id: string) => void }) {
         ))}
       </div>
 
-      {/* The destination — a visual payoff, not a label. Wraps three
-          steps with a hero-scale outcome line so the journey resolves.
-          Generous whitespace above so it doesn't read as a card caption. */}
+      {/* The destination — a visual payoff. No eyebrow label; the size
+          of the word IS the label. Generous whitespace above so it
+          reads as the resolution of the journey, not a card caption. */}
       <div
+        aria-hidden
         style={{
           marginTop: 'clamp(56px, 7vw, 88px)',
           textAlign: 'center',
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 900,
+          fontSize: 'clamp(56px, 9vw, 104px)',
+          letterSpacing: '-0.035em',
+          lineHeight: 1,
+          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
         }}
       >
-        <div
-          aria-hidden
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: '#6B6A82',
-            marginBottom: 14,
-          }}
-        >
-          The destination
-        </div>
-        <div
-          aria-hidden
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 900,
-            fontSize: 'clamp(44px, 7vw, 80px)',
-            letterSpacing: '-0.03em',
-            lineHeight: 1,
-            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}
-        >
-          Hired.
-        </div>
+        Hired.
       </div>
     </>
   )
