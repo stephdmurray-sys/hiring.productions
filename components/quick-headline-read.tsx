@@ -89,7 +89,7 @@ export function QuickHeadlineRead() {
             textAlign: 'center',
           }}
         >
-          Try it
+          One of our tools &middot; Live
         </div>
 
         {/* Heading */}
