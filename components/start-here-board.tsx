@@ -169,6 +169,11 @@ function QuestionCard({
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
+        // Lock to equal height across the row. Grid items stretch by
+        // default; height:100% lets each card claim that stretched
+        // height so The Silence + The Story match The Interview even
+        // though their bullet counts differ.
+        height: '100%',
       }}
     >
       <style>{`
@@ -179,29 +184,6 @@ function QuestionCard({
         }
         .start-here-card:hover .start-here-cta {
           color: #F2F0FF !important;
-        }
-        /* Bullets are hidden by default. On devices that support real
-           hover (desktop), hovering the card reveals the bullets as a
-           teaser of what's inside. Touch devices skip this — they get
-           the clean three-zone card and tap into the detail view to
-           see the full tool list. */
-        .start-here-bullets {
-          max-height: 0;
-          opacity: 0;
-          overflow: hidden;
-          margin-top: 0;
-          transition: max-height 0.32s ease, opacity 0.22s ease, margin-top 0.32s ease, padding-top 0.32s ease, border-top-color 0.22s ease;
-          padding-top: 0;
-          border-top: 1px dashed rgba(167,139,250,0);
-        }
-        @media (hover: hover) {
-          .start-here-card:hover .start-here-bullets {
-            max-height: 240px;
-            opacity: 1;
-            margin-top: 14px;
-            padding-top: 14px;
-            border-top-color: rgba(167,139,250,0.18);
-          }
         }
       `}</style>
 
@@ -278,15 +260,20 @@ function QuestionCard({
         &ldquo;{question.quote}&rdquo;
       </div>
 
-      {/* BULLETS — hidden by default; hover-revealed on desktop as a peek
-          of what's inside. The card stays calm in its default state (3
-          reading zones: number, title, quote) and rewards investigation. */}
+      {/* BULLETS — always visible. The value-tease lives on the card so
+          visitors see WHAT they get without having to click in. Pushed
+          to the bottom of the card with marginTop:auto so the CTA-row
+          alignment works regardless of how long the title or quote
+          wraps; all three cards lock to identical height via the grid +
+          height:100% on the card itself. */}
       <ul
-        className="start-here-bullets"
         style={{
           listStyle: 'none',
           padding: 0,
           margin: 0,
+          marginTop: 14,
+          paddingTop: 14,
+          borderTop: '1px dashed rgba(167,139,250,0.18)',
           display: 'flex',
           flexDirection: 'column',
           gap: 6,
