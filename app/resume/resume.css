@@ -1,12 +1,12 @@
-/* Resume Checker - Dark Theme (#0F0F12) */
+/* Resume Checker - Light Theme (cream) */
 
 :root {
-  --bg-dark: #0F0F12;
-  --bg-surface: #1A1A22;
+  --bg-page: #FAF8F3;
+  --bg-surface: #FFFFFF;
   --color-primary: #6C47FF;
   --color-secondary: #FF4F6A;
   --color-muted: #A78BFA;
-  --color-text-primary: #F2F0FF;
+  --color-text-primary: #1A1A22;
   --color-text-secondary: #8B8AA0;
   --radius: 8px;
   --radius-lg: 12px;
@@ -19,7 +19,7 @@
 }
 
 body {
-  background: var(--bg-dark);
+  background: var(--bg-page);
   color: var(--color-text-primary);
   font-family: 'Figtree', sans-serif;
   -webkit-font-smoothing: antialiased;

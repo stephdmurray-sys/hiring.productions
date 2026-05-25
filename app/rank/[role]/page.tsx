@@ -90,7 +90,7 @@ export default async function RoleRankPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* ───────────────────── HERO ───────────────────── */}
       <section

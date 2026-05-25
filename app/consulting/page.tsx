@@ -84,7 +84,7 @@ export default function ConsultingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(consultingSchema) }}
       />
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* Hero */}
       <section className="hero">

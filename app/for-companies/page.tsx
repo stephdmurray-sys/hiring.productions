@@ -27,7 +27,7 @@ export default function ForCompaniesPage() {
 
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* Hero Section */}
       <section style={{

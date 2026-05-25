@@ -103,7 +103,7 @@ export default function ResumeCheckerPage() {
 
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 24px' }}>
         {/* INPUT */}
@@ -145,11 +145,12 @@ export default function ResumeCheckerPage() {
 
             <div
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '32px',
                 marginBottom: '24px',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
               }}
             >
               <div style={{ marginBottom: '24px' }}>
@@ -160,7 +161,7 @@ export default function ResumeCheckerPage() {
                     fontWeight: 700,
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px',
-                    color: '#8B8AA0',
+                    color: '#5A5A6E',
                     marginBottom: '10px',
                   }}
                 >
@@ -176,7 +177,7 @@ export default function ResumeCheckerPage() {
                       width: '100%',
                       minHeight: '240px',
                       padding: '16px',
-                      background: '#FAF8F3',
+                      background: '#FAFAFB',
                       border: '1px solid #ECECF2',
                       borderRadius: '8px',
                       color: '#1A1A22',
@@ -223,7 +224,7 @@ export default function ResumeCheckerPage() {
                   style={{
                     width: '100%',
                     padding: '14px 16px',
-                    background: '#FAF8F3',
+                    background: '#FAFAFB',
                     border: '1px solid #ECECF2',
                     borderRadius: '8px',
                     color: '#1A1A22',

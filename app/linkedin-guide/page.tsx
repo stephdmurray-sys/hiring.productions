@@ -43,7 +43,7 @@ export default function LinkedInGuidePage() {
 
   return (
     <div className="lead-page">
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       <main className="lead-main">
         {formState === 'success' ? (

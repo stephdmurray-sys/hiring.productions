@@ -67,7 +67,7 @@ export default function MembershipPage() {
           transform: translateY(-2px);
         }
       `}</style>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* Success Banner */}
       {showSuccess && (

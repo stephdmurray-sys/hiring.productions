@@ -75,7 +75,7 @@ function CellContent({ value }: { value: Cell }) {
 export default function PricingPage() {
   return (
     <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* HERO */}
       <section

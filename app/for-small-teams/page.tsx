@@ -69,7 +69,7 @@ const QA_BLOCKS: QA[] = [
 export default function ForSmallTeamsPage() {
   return (
     <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* Hero */}
       <section
