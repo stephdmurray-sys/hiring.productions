@@ -145,6 +145,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             alignItems: 'baseline',
             gap: '10px',
             margin: '18px 0 8px',
+            flexWrap: 'wrap',
           }}
         >
           <span
@@ -160,7 +161,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               lineHeight: 1,
             }}
           >
-            $20
+            $14.99
           </span>
           <span
             style={{
@@ -170,7 +171,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               color: '#C9C7DA',
             }}
           >
-            / year. The whole production.
+            / month. Or $99/year.
           </span>
         </div>
 
@@ -184,7 +185,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             margin: '0 0 28px',
           }}
         >
-          For comparison, Jobscan charges $49.95 per month — for one tool.
+          Less than one hour with a career coach. Jobscan charges $49.95/month for one tool.
         </p>
 
         {/* What you get */}
