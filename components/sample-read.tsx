@@ -4,20 +4,44 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
 /**
- * Sample Read — anonymized example of a real tool output, embedded on
- * the homepage between the monologue rotator and the founder section.
+ * Sample Read — anonymized example of a real tool output, restructured
+ * as a dashboard.
  *
- * Cold visitors buy blind: they're told "the recruiter's monologue on
- * your resume" but never see what that monologue actually LOOKS like.
- * This panel shows a real-shape example — same format, same tone, same
- * depth — for a fictional-but-realistic senior PM resume. Identifying
- * details are scrubbed. The panel is explicitly labeled as a sample.
+ * v1 (prose-heavy magazine article format) was diagnostically right but
+ * overwhelming to a panicking job seeker at 2am. v2 keeps the same
+ * diagnostic depth — verdict + three actionable fixes + closing read —
+ * but presents it as a scannable dashboard: one big verdict, three
+ * issue cards in a row, one closing sentence, one CTA. ~60% less text.
  *
- * Voice rules respected: no fake testimonial, no invented person's
- * name, no fabricated company logo. The "candidate" is a generic
- * archetype, not a real or invented person; the recruiter voice is
- * Stephanie's own (calibrated to how she'd actually read this resume).
+ * Voice rules respected: no invented person's name, no fabricated
+ * company logo, no fake testimonial. The "candidate" is a generic
+ * archetype; the recruiter voice is Stephanie's calibrated read.
  */
+
+interface Fix {
+  label: string
+  quote: string
+  fix: string
+}
+
+const FIXES: Fix[] = [
+  {
+    label: 'Buried wedge',
+    quote: 'Healthcare role sits under ad-tech.',
+    fix: 'Reorder. Healthcare is her differentiator for clinical SaaS — should come first.',
+  },
+  {
+    label: 'No proof',
+    quote: '“Drove cross-functional initiatives that delivered measurable impact.”',
+    fix: 'Generic. Add one specific number per role. Her patient-intake redesign cut onboarding 14 → 3 days. That goes first.',
+  },
+  {
+    label: 'Anonymous headline',
+    quote: '“Strategic Product Leader.”',
+    fix: 'Every senior PM says this. Change to “Senior PM, B2B SaaS · healthcare and fintech.” Surfaces her in 4 of 5 clinical searches.',
+  },
+]
+
 export function SampleRead() {
   return (
     <section
@@ -30,7 +54,7 @@ export function SampleRead() {
         borderBottom: '1px solid rgba(255,255,255,0.04)',
       }}
     >
-      <div style={{ maxWidth: 880, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         {/* Section eyebrow + heading */}
         <div
           style={{
@@ -67,15 +91,14 @@ export function SampleRead() {
             color: '#9D9CB3',
             lineHeight: 1.55,
             textAlign: 'center',
-            maxWidth: 600,
+            maxWidth: 560,
             margin: '0 auto 36px',
           }}
         >
-          A sample from <em>Through a Recruiter&rsquo;s Eyes.</em> Identifying details
-          scrubbed; the read itself is exactly the shape and depth you receive.
+          A sample from <em>Through a Recruiter&rsquo;s Eyes.</em> Identifying details scrubbed.
         </p>
 
-        {/* The sample card — styled like a real tool result. */}
+        {/* The result card — dashboard layout */}
         <article
           style={{
             background: '#0F0F12',
@@ -100,14 +123,14 @@ export function SampleRead() {
             }}
           />
 
-          {/* Sample meta */}
+          {/* Sample meta row */}
           <div
             style={{
               display: 'flex',
-              gap: 8,
+              gap: 10,
               flexWrap: 'wrap',
-              marginBottom: 22,
               alignItems: 'center',
+              marginBottom: 28,
             }}
           >
             <span
@@ -134,66 +157,145 @@ export function SampleRead() {
                 color: '#8B8AA0',
               }}
             >
-              Senior Product Manager · 8 yrs · B2B SaaS · resume run on a Tuesday
+              Senior Product Manager · 8 yrs · B2B SaaS
             </span>
           </div>
 
-          {/* First-six-seconds read */}
-          <SubHead>First six seconds:</SubHead>
-          <Body>
-            <em>&ldquo;Eight years, three companies, current title is Senior PM. Healthcare
-            startup, then a fintech, now ad-tech. The healthcare line catches me first
-            because we&rsquo;re hiring for a clinical SaaS — I&rsquo;m looking to see if
-            she stayed long enough to ship something. Two years. OK. Keep reading.&rdquo;</em>
-          </Body>
-
-          {/* The line they'd land on */}
-          <SubHead>The line a recruiter lands on:</SubHead>
-          <Body>
-            <em>&ldquo;Drove cross-functional initiatives that delivered measurable impact
-            on platform growth.&rdquo;</em> — every senior PM resume says this. Tells me
-            nothing about what she actually did. The line below it says
-            <em> &ldquo;Owned the patient-intake redesign that cut onboarding from 14 days
-            to 3.&rdquo;</em> THAT&rsquo;S the line. Move it up.
-          </Body>
-
-          {/* Three things to change */}
-          <SubHead>Three things that would make me pause and screen this in:</SubHead>
-          <ol
+          {/* THE VERDICT — big visual anchor */}
+          <div
             style={{
-              margin: '0 0 22px',
-              paddingLeft: 22,
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: 14.5,
-              color: '#C9C7DA',
-              lineHeight: 1.65,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
+              gap: 18,
+              alignItems: 'stretch',
+              marginBottom: 28,
             }}
           >
-            <li style={{ marginBottom: 8 }}>
-              The healthcare role is buried under the ad-tech role. Reorder so healthcare
-              comes first. If she&rsquo;s targeting clinical SaaS, that&rsquo;s her wedge.
-            </li>
-            <li style={{ marginBottom: 8 }}>
-              No metric on the current role. Six years of platform work and not one number
-              I can repeat to a hiring manager? That&rsquo;s a self-inflicted screen-out.
-            </li>
-            <li style={{ marginBottom: 0 }}>
-              Headline says &ldquo;Strategic Product Leader.&rdquo; That&rsquo;s every senior
-              PM. Change to <em>&ldquo;Senior PM, B2B SaaS · healthcare and fintech.&rdquo;</em>
-              The boolean search I&rsquo;m running for clinical roles would surface her
-              instead of skipping her.
-            </li>
-          </ol>
+            <div
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(255,79,106,0.12), rgba(108,71,255,0.10))',
+                border: '1px solid rgba(255,79,106,0.30)',
+                borderRadius: 14,
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 10.5,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: '#FF8FA3',
+                  marginBottom: 8,
+                }}
+              >
+                Verdict
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 'clamp(22px, 2.8vw, 28px)',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.015em',
+                  color: '#F2F0FF',
+                }}
+              >
+                Borderline screen-in.
+              </div>
+            </div>
+            <div
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: 14,
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 10.5,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: '#A78BFA',
+                  marginBottom: 8,
+                }}
+              >
+                Today
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 18,
+                  color: '#F2F0FF',
+                  lineHeight: 1.3,
+                }}
+              >
+                In <span style={{ color: '#FF8FA3' }}>0 of 5</span> recruiter searches I&rsquo;d run.
+              </div>
+            </div>
+            <div
+              style={{
+                background: 'rgba(94,230,168,0.06)',
+                border: '1px solid rgba(94,230,168,0.30)',
+                borderRadius: 14,
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 10.5,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: '#5EE6A8',
+                  marginBottom: 8,
+                }}
+              >
+                After three fixes
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 18,
+                  color: '#F2F0FF',
+                  lineHeight: 1.3,
+                }}
+              >
+                In <span style={{ color: '#5EE6A8' }}>4 of 5</span> searches.
+              </div>
+            </div>
+          </div>
 
-          {/* The honest read */}
-          <SubHead>The honest read:</SubHead>
-          <Body>
-            Strong eight years of work, badly packaged. The healthcare experience is a
-            differentiator she&rsquo;s burying. Three small changes — reorder, add one
-            metric per role, rewrite the headline — and she shows up in 4 out of the 5
-            searches I would run for a Senior PM in clinical SaaS. Today she&rsquo;s in
-            zero of them.
-          </Body>
+          {/* THE THREE FIXES — scannable cards */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
+              gap: 14,
+              marginBottom: 28,
+            }}
+          >
+            {FIXES.map((fix, i) => (
+              <FixCard key={i} index={i + 1} fix={fix} />
+            ))}
+          </div>
 
           {/* CTA */}
           <Link
@@ -202,8 +304,7 @@ export function SampleRead() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 8,
-              marginTop: 12,
-              padding: '13px 22px',
+              padding: '13px 24px',
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
               border: 'none',
               borderRadius: 10,
@@ -223,37 +324,68 @@ export function SampleRead() {
   )
 }
 
-function SubHead({ children }: { children: React.ReactNode }) {
+function FixCard({ index, fix }: { index: number; fix: Fix }) {
   return (
     <div
       style={{
-        fontFamily: "'Figtree', sans-serif",
-        fontWeight: 800,
-        fontSize: 13,
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase',
-        color: '#A78BFA',
-        marginBottom: 8,
-        marginTop: 0,
+        background: '#14141B',
+        border: '1px solid rgba(167,139,250,0.18)',
+        borderRadius: 12,
+        padding: '18px 20px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
       }}
     >
-      {children}
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+        <span
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 13,
+            color: '#A78BFA',
+            opacity: 0.7,
+          }}
+        >
+          0{index}
+        </span>
+        <span
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 11,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: '#F2F0FF',
+          }}
+        >
+          {fix.label}
+        </span>
+      </div>
+      <div
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontStyle: 'italic',
+          fontWeight: 400,
+          fontSize: 13.5,
+          color: '#C9C7DA',
+          lineHeight: 1.5,
+          paddingLeft: 11,
+          borderLeft: '2px solid rgba(167,139,250,0.45)',
+        }}
+      >
+        {fix.quote}
+      </div>
+      <div
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontSize: 13.5,
+          color: '#F2F0FF',
+          lineHeight: 1.5,
+        }}
+      >
+        {fix.fix}
+      </div>
     </div>
-  )
-}
-
-function Body({ children }: { children: React.ReactNode }) {
-  return (
-    <p
-      style={{
-        fontFamily: "'Figtree', sans-serif",
-        fontSize: 15.5,
-        color: '#F2F0FF',
-        lineHeight: 1.6,
-        margin: '0 0 22px',
-      }}
-    >
-      {children}
-    </p>
   )
 }
