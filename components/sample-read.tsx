@@ -22,11 +22,11 @@ import { ArrowRight } from 'lucide-react'
 const FIXES: { label: string; fix: string }[] = [
   {
     label: 'Buried wedge.',
-    fix: 'Healthcare role is third. It’s her differentiator for clinical SaaS — should be first.',
+    fix: 'Your healthcare role is third. It’s your differentiator for clinical SaaS — should be first.',
   },
   {
     label: 'No proof.',
-    fix: 'Six years of platform work, not one number. Her patient-intake redesign cut onboarding 14 → 3 days. That line goes first.',
+    fix: 'Six years of platform work, not one number. Your patient-intake redesign cut onboarding 14 → 3 days. That line goes first.',
   },
   {
     label: 'Anonymous headline.',
@@ -71,23 +71,7 @@ export function SampleRead() {
             margin: '0 0 clamp(72px, 9vw, 112px)',
           }}
         >
-          A sample from <em>Through a Recruiter&rsquo;s Eyes.</em>
-        </p>
-
-        {/* Meta — one line, tiny. */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 600,
-            fontSize: 12,
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
-            color: '#6B6A82',
-            textAlign: 'center',
-            margin: '0 0 24px',
-          }}
-        >
-          Senior PM &middot; 8 yrs &middot; B2B SaaS
+          Imagine this is your resume — Senior PM, 8 yrs, B2B SaaS.
         </p>
 
         {/* THE VISUAL ANCHOR — two-column scoreboard. Big isolated stats,
@@ -157,7 +141,7 @@ export function SampleRead() {
                 marginTop: 18,
               }}
             >
-              recruiter searches she&rsquo;s in
+              recruiter searches you&rsquo;re in
             </div>
           </div>
 
@@ -216,7 +200,7 @@ export function SampleRead() {
                 marginTop: 18,
               }}
             >
-              searches she&rsquo;d surface in
+              searches you&rsquo;d surface in
             </div>
           </div>
         </div>

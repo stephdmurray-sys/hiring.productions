@@ -226,6 +226,35 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         {tool.desc}
       </p>
 
+      {/* "You get back" — concrete output preview. Optional. */}
+      {tool.getBack && (
+        <div
+          style={{
+            marginTop: 14,
+            paddingTop: 12,
+            borderTop: '1px dashed rgba(255,255,255,0.08)',
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 12.5,
+            color: '#C9C7DA',
+            lineHeight: 1.5,
+          }}
+        >
+          <span
+            style={{
+              fontWeight: 800,
+              fontSize: 10,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: theme.accent,
+              marginRight: 6,
+            }}
+          >
+            You get back:
+          </span>
+          {tool.getBack}
+        </div>
+      )}
+
       {/* CTA */}
       <div
         style={{

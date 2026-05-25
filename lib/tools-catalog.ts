@@ -79,6 +79,11 @@ export interface CatalogTool {
   hook: string
   /** Lucide icon name for the card header */
   icon: ToolIcon
+  /** Concrete one-line preview of what the tool actually returns.
+   *  Surfaced on every ToolCard as a small accent line so visitors
+   *  see WHAT they'll get back, not just what the tool DOES.
+   *  Optional — tools without it gracefully omit the line. */
+  getBack?: string
 }
 
 /**
@@ -137,6 +142,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: '49% of recruiters auto-reject AI resumes.',
     icon: 'Sparkles',
+    getBack: 'The exact lines that read AI-generated to a recruiter — and what to rewrite.',
   },
   {
     name: 'What This Job Actually Is',
@@ -151,6 +157,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'magenta',
     hook: '“fast-paced” → understaffed.',
     icon: 'FileText',
+    getBack: 'What the role really is. The unstated requirements. An honest verdict on whether to apply.',
   },
   {
     name: 'What Words Are Recruiters Searching For?',
@@ -165,6 +172,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: 'The 6 words missing from your resume.',
     icon: 'Hash',
+    getBack: 'The exact keywords recruiters search for that aren’t on your resume — and where to add them.',
   },
   {
     name: 'How to Negotiate This Offer',
@@ -179,6 +187,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'emerald',
     hook: 'The exact words to ask for more.',
     icon: 'DollarSign',
+    getBack: 'The opening line. The response to “best offer.” The exact number to ask for.',
   },
   {
     name: 'What’s Breaking Your Job Search',
@@ -193,6 +202,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'magenta',
     hook: 'One diagnosis. One 48-hour fix.',
     icon: 'AlertCircle',
+    getBack: 'One specific diagnosis from real recruiting practice — plus the single 48-hour fix to start with.',
   },
   {
     name: 'How to Explain My Employment Gap',
@@ -279,6 +289,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: '6 seconds. Out loud.',
     icon: 'Eye',
+    getBack: 'The recruiter’s internal monologue in the first six seconds. Three lines that would screen you in.',
   },
   {
     name: 'Would a Recruiter Even Find You?',
@@ -307,6 +318,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'blue',
     hook: '5 recruiter searches. Your rank in each one.',
     icon: 'Search',
+    getBack: 'The 5 boolean searches a recruiter would run. Your rank in each. The 3 moves that climb the most positions.',
   },
   {
     name: 'What Are My Chances?',
@@ -321,6 +333,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: 'The honest percentage. Before you apply.',
     icon: 'BarChart3',
+    getBack: 'Your honest % chance of an interview. The 3 highest-impact lifts that move it.',
   },
   {
     name: 'Your LinkedIn — Rewritten',
@@ -335,6 +348,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'blue',
     hook: 'Headline. About. Roles. Rewritten.',
     icon: 'Edit3',
+    getBack: 'Three headline options. A full About rewrite. Every recent role — sharpened for the searches that matter.',
   },
   {
     name: 'The Rehearsal Room',
@@ -349,6 +363,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'coral',
     hook: '10 questions. Calibrated to you.',
     icon: 'Mic',
+    getBack: 'Ten interview questions calibrated to your role + level. What each is testing for. The answer that lands.',
   },
   {
     name: 'What They’re Really Asking',
@@ -363,6 +378,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'coral',
     hook: 'The real question underneath the question.',
     icon: 'HelpCircle',
+    getBack: 'Each interview question decoded — what they’re really asking, the weak answer, the answer that lands.',
   },
 
   // --- PRO extras (also included with membership) ----------------------

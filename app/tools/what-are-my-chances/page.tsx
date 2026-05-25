@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
-import { InputPromptCard } from '@/components/input-prompt-card'
+import { ToolSamplePreview } from '@/components/tool-sample-preview'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { UnlockPrescriptionCard } from '@/components/unlock-prescription-card'
@@ -163,13 +163,25 @@ export default function WhatAreMyChancesPage() {
       isFree={true}
     >
       <div ref={formTopRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
-        <InputPromptCard
-          title="What you’ll get back:"
-          prompts={[
-            'Your honest percentage chance of getting an interview for this specific role',
-            'A one-line verdict on whether to apply, tailor, or move on',
-            'The 3 highest-impact lifts that would move your odds the most',
+        <ToolSamplePreview
+          eyebrow="A sample of what comes back"
+          statNumber="23%"
+          statCaption="Sample interview-chance score for a Senior PM applying to a clinical SaaS role."
+          snippets={[
+            {
+              label: 'Verdict:',
+              text: 'Long shot. Strong PM track but no healthcare signal. Tailor first, or skip.',
+            },
+            {
+              label: 'Lift 1:',
+              text: 'Add the patient-intake redesign (14 → 3 days) to your most recent role.',
+            },
+            {
+              label: 'Lift 2:',
+              text: 'Headline: change "Strategic Product Leader" to "Senior PM, B2B SaaS · healthcare and fintech."',
+            },
           ]}
+          note="Sample. Yours will be specific to your resume and the job you paste."
         />
 
         <RequiredFormHeader filledCount={filledRequired} totalRequired={2} />

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
-import { InputPromptCard } from '@/components/input-prompt-card'
+import { ToolSamplePreview } from '@/components/tool-sample-preview'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
 import { RequiredLabel, RequiredFormHeader } from '@/components/required-label'
 import { RankRevealCard } from '@/components/rank-reveal-card'
@@ -211,14 +211,25 @@ export default function RecruiterSearchRankPage() {
       isFree={true}
     >
       <div ref={formTopRef} style={{ maxWidth: '680px', margin: '0 auto', padding: '0 40px' }}>
-        <InputPromptCard
-          title="What you’ll get back:"
-          prompts={[
-            'The 5 boolean searches a recruiter for your target role would actually run',
-            'Your estimated rank in each — calibrated to how LinkedIn’s algorithm weights signals',
-            'The 3 highest-leverage moves to climb, ranked by total impact across every search',
-            'Exact text replacements — current line vs. recommended rewrite',
+        <ToolSamplePreview
+          eyebrow="A sample of what comes back"
+          statNumber="#47"
+          statCaption="Sample average rank for a Senior PM across 5 recruiter searches — before three small fixes."
+          snippets={[
+            {
+              label: '“Senior PM” AND SaaS',
+              text: '#31 — your headline is a near-match on the first 60 chars.',
+            },
+            {
+              label: '“Product Manager” AND B2B AND growth',
+              text: '#52 — your About front-loads function but skills are thin.',
+            },
+            {
+              label: 'Top move:',
+              text: 'Add "B2B SaaS" to your headline. Climbs your rank in 4 of 5 searches.',
+            },
           ]}
+          note="Sample. Yours will be specific to your LinkedIn profile and target role."
         />
 
         <RequiredFormHeader filledCount={filledRequired} totalRequired={2} />
