@@ -72,8 +72,8 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: 'unusual-situation',
-    title: 'Everyone’s Different',
+    id: 'situation',
+    title: 'The Situation',
     quote: 'gap, pivot, layoff, or new grad',
     sub: 'Specific tools for specific situations. Tell it true, the way someone who reads resumes for a living would.',
     toolNames: [
