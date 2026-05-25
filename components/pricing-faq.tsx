@@ -230,7 +230,7 @@ function FAQItem({ q, a }: Q) {
             padding: '0 22px 22px',
             fontFamily: "'Figtree', sans-serif",
             fontSize: 15,
-            color: '#C9C7DA',
+            color: '#5A5A6E',
             lineHeight: 1.65,
           }}
         >

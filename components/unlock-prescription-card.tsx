@@ -98,7 +98,7 @@ export function UnlockPrescriptionCard() {
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '14.5px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.65,
             marginBottom: 22,
             maxWidth: 560,

@@ -82,7 +82,7 @@ export function ToolSamplePreview({
               style={{
                 fontWeight: 500,
                 fontSize: 13,
-                color: '#9D9CB3',
+                color: '#5A5A6E',
                 marginTop: 6,
               }}
             >
@@ -100,7 +100,7 @@ export function ToolSamplePreview({
               style={{
                 fontWeight: 400,
                 fontSize: 13.5,
-                color: '#C9C7DA',
+                color: '#5A5A6E',
                 lineHeight: 1.55,
               }}
             >

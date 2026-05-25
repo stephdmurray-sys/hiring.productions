@@ -158,7 +158,7 @@ export default function ApplicantTriagePage() {
             marginBottom: '8px',
             fontFamily: "'Figtree', sans-serif",
             fontSize: '12.5px',
-            color: '#C9C7DA',
+            color: '#5A5A6E',
             lineHeight: 1.55,
           }}
         >
@@ -210,7 +210,7 @@ Sam Chen
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: '13px',
-              color: '#C9C7DA',
+              color: '#5A5A6E',
               marginBottom: '8px',
               letterSpacing: '0.02em',
             }}

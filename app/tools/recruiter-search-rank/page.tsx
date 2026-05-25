@@ -350,7 +350,7 @@ export default function RecruiterSearchRankPage() {
                 style={{
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '12.5px',
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                   lineHeight: 1.7,
                   textAlign: 'left',
                   maxWidth: '440px',
@@ -358,7 +358,7 @@ export default function RecruiterSearchRankPage() {
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div style={{ fontWeight: 700, color: '#C9C7DA', marginBottom: '6px', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                <div style={{ fontWeight: 700, color: '#5A5A6E', marginBottom: '6px', fontSize: '11px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                   How to export your profile (10 seconds)
                 </div>
                 <div>

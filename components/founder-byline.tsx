@@ -61,7 +61,7 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: 10.5,
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               letterSpacing: '0.02em',
               lineHeight: 1.2,
             }}
@@ -115,7 +115,7 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: 13,
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.5,
             marginBottom: 10,
           }}

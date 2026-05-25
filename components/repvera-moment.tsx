@@ -89,7 +89,7 @@ export function RepVeraMoment({ title, body, ctaLabel = 'Start your RepVera — 
             position: 'relative',
             fontFamily: "'Figtree', sans-serif",
             fontSize: '15.5px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.6,
             maxWidth: '560px',
             margin: '0 auto 24px',

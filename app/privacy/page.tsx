@@ -53,7 +53,7 @@ export default function PrivacyPage() {
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '17px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.7,
             marginBottom: '28px',
           }}
@@ -185,7 +185,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontSize: '15px',
-          color: '#C9C7DA',
+          color: '#5A5A6E',
           lineHeight: 1.7,
         }}
       >

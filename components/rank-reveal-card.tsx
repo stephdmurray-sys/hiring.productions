@@ -169,7 +169,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 600,
               fontSize: 'clamp(15px, 2.2vw, 18px)',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.4,
               maxWidth: 280,
             }}
@@ -276,7 +276,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '14px',
-                    color: '#9D9CB3',
+                    color: '#5A5A6E',
                     lineHeight: 1.55,
                   }}
                 >

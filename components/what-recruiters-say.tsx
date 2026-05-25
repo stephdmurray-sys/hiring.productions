@@ -389,7 +389,7 @@ export function WhatRecruitersSay() {
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 500,
               fontSize: 15,
-              color: '#C9C7DA',
+              color: '#5A5A6E',
               marginBottom: 14,
               lineHeight: 1.55,
             }}

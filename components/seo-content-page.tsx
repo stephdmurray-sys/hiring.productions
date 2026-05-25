@@ -406,7 +406,7 @@ export function SeoContentPage({
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 400,
                       fontSize: '15px',
-                      color: '#9D9CB3',
+                      color: '#5A5A6E',
                       lineHeight: 1.75,
                       marginTop: '12px',
                       marginBottom: 0,

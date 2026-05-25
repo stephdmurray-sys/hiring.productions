@@ -168,7 +168,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: '17px',
-              color: '#C9C7DA',
+              color: '#5A5A6E',
             }}
           >
             / month. Or $99/year.
@@ -180,7 +180,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 500,
             fontSize: '14px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.55,
             margin: '0 0 28px',
           }}

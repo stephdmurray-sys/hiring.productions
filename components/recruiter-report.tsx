@@ -773,7 +773,7 @@ function InlineUpgradeCard() {
               }}
             />
             <span style={{ fontWeight: 700, color: '#1A1A22' }}>{item.label}</span>{' '}
-            <span style={{ color: '#B8B6CF' }}>— {item.sub}</span>
+            <span style={{ color: '#5A5A6E' }}>— {item.sub}</span>
           </li>
         ))}
       </ul>

@@ -170,7 +170,7 @@ export default function AiVendorCompliancePage() {
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: '13px',
-              color: '#C9C7DA',
+              color: '#5A5A6E',
               marginBottom: '8px',
               letterSpacing: '0.02em',
             }}
@@ -206,7 +206,7 @@ export default function AiVendorCompliancePage() {
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: '13px',
-              color: '#C9C7DA',
+              color: '#5A5A6E',
               marginBottom: '8px',
               letterSpacing: '0.02em',
             }}

@@ -548,7 +548,7 @@ export default function PricingPage() {
                       borderBottom: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#C9C7DA', marginBottom: '2px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#5A5A6E', marginBottom: '2px' }}>
                       Teal+
                     </div>
                     <div style={{ fontSize: '11px', color: '#6B6A82', fontWeight: 500 }}>
@@ -562,7 +562,7 @@ export default function PricingPage() {
                       borderBottom: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#C9C7DA', marginBottom: '2px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#5A5A6E', marginBottom: '2px' }}>
                       Jobscan
                     </div>
                     <div style={{ fontSize: '11px', color: '#6B6A82', fontWeight: 500 }}>
@@ -576,7 +576,7 @@ export default function PricingPage() {
                       borderBottom: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#C9C7DA', marginBottom: '2px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#5A5A6E', marginBottom: '2px' }}>
                       Resume Worded
                     </div>
                     <div style={{ fontSize: '11px', color: '#6B6A82', fontWeight: 500 }}>
@@ -590,7 +590,7 @@ export default function PricingPage() {
                       borderBottom: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#C9C7DA', marginBottom: '2px' }}>
+                    <div style={{ fontSize: '13px', fontWeight: 700, color: '#5A5A6E', marginBottom: '2px' }}>
                       Cultivated Culture
                     </div>
                     <div style={{ fontSize: '11px', color: '#6B6A82', fontWeight: 500 }}>

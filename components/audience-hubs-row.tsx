@@ -93,7 +93,7 @@ export function AudienceHubsRow({ showHeader = true, padding = '60px 24px' }: Pr
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '15px',
-                color: '#9D9CB3',
+                color: '#5A5A6E',
                 lineHeight: 1.6,
                 margin: 0,
               }}
@@ -189,7 +189,7 @@ function HubCard({ hub }: { hub: Hub }) {
           fontWeight: 400,
           fontSize: '14px',
           lineHeight: 1.55,
-          color: '#9D9CB3',
+          color: '#5A5A6E',
           margin: '0 0 18px',
         }}
       >

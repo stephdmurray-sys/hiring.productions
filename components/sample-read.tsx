@@ -196,7 +196,7 @@ export function SampleRead() {
                 fontWeight: 500,
                 fontSize: 14,
                 lineHeight: 1.5,
-                color: '#C9C7DA',
+                color: '#5A5A6E',
                 marginTop: 18,
               }}
             >
@@ -226,7 +226,7 @@ export function SampleRead() {
                 }}
               >
                 <span style={{ fontWeight: 900 }}>{fix.label}</span>{' '}
-                <span style={{ color: '#9D9CB3' }}>{fix.fix}</span>
+                <span style={{ color: '#5A5A6E' }}>{fix.fix}</span>
               </p>
             </div>
           ))}

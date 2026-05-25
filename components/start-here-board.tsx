@@ -75,8 +75,32 @@ export function StartHereBoard() {
         </Heading>
         <SubHeading>Both sides of the table. In the open.</SubHeading>
 
+        {/* Journey framing — positions the three cards below as ACTS of a
+            single coached path, not three disconnected buckets. Per
+            PLATFORM-VISION.md, this is the positioning shift from
+            editorial ("read your situation") to operational ("we coach
+            you through every chapter"). Stays in production metaphor. */}
+        {!current && (
+          <div
+            style={{
+              marginTop: 'clamp(28px, 3.5vw, 40px)',
+              textAlign: 'center',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 600,
+              fontSize: 'clamp(14px, 1.4vw, 16px)',
+              color: '#5A4FE0',
+              letterSpacing: '0.01em',
+              lineHeight: 1.5,
+            }}
+          >
+            Every job search has the same three acts.
+            <br />
+            We coach you through every one — from silence to signed.
+          </div>
+        )}
+
         {/* The board */}
-        <div style={{ marginTop: 'clamp(40px, 6vw, 64px)' }}>
+        <div style={{ marginTop: current ? 'clamp(40px, 6vw, 64px)' : 'clamp(32px, 5vw, 56px)' }}>
           {current ? (
             <DetailView question={current} onBack={() => setSelected(null)} />
           ) : (
@@ -385,7 +409,7 @@ function DetailView({
             fontWeight: 400,
             fontSize: 'clamp(15px, 1.6vw, 17px)',
             lineHeight: 1.55,
-            color: '#C9C7DA',
+            color: '#5A5A6E',
             maxWidth: 680,
             marginBottom: 32,
           }}
@@ -544,7 +568,7 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
           fontWeight: 400,
           fontSize: 13.5,
           lineHeight: 1.5,
-          color: '#C9C7DA',
+          color: '#5A5A6E',
           display: '-webkit-box',
           WebkitLineClamp: 3,
           WebkitBoxOrient: 'vertical',

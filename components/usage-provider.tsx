@@ -390,7 +390,7 @@ function SimpleModal({
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '15px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.55,
             margin: '0 0 22px',
           }}

@@ -107,7 +107,7 @@ export function ProUpsellPanel({
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '13.5px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             margin: '0 0 20px',
             lineHeight: 1.55,
           }}
@@ -178,7 +178,7 @@ export function ProUpsellPanel({
                     style={{
                       fontFamily: "'Figtree', sans-serif",
                       fontSize: '13px',
-                      color: '#9D9CB3',
+                      color: '#5A5A6E',
                       lineHeight: 1.5,
                       marginBottom: '10px',
                     }}
@@ -218,7 +218,7 @@ export function ProUpsellPanel({
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
             }}
           >
             The whole production for{' '}
@@ -290,7 +290,7 @@ export function ProUpsellPanel({
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13.5px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.55,
               margin: '0 0 12px',
             }}

@@ -184,7 +184,7 @@ export function FromTheRoom() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 400,
                   fontSize: 13.5,
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                   lineHeight: 1.55,
                   margin: 0,
                 }}

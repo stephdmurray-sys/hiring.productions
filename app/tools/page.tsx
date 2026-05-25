@@ -203,7 +203,7 @@ export default function ToolsPage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: 17,
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.55,
               maxWidth: 560,
               margin: '0 auto 28px',
@@ -335,7 +335,7 @@ function MomentSection({
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: 16,
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.55,
             maxWidth: 640,
             margin: '0 0 32px',
@@ -403,7 +403,7 @@ function SubHeading({ children }: { children: React.ReactNode }) {
         fontWeight: 400,
         fontSize: 'clamp(16px, 1.8vw, 18px)',
         lineHeight: 1.55,
-        color: '#C9C7DA',
+        color: '#5A5A6E',
         textAlign: 'center',
         maxWidth: 600,
         margin: '20px auto 0',

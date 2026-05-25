@@ -159,7 +159,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               maxWidth: 380,
               lineHeight: 1.5,
             }}
@@ -233,7 +233,7 @@ const nextCardTitle: React.CSSProperties = {
 const nextCardBody: React.CSSProperties = {
   fontFamily: "'Figtree', sans-serif",
   fontSize: '13px',
-  color: '#9D9CB3',
+  color: '#5A5A6E',
   lineHeight: 1.55,
   marginBottom: 14,
 }

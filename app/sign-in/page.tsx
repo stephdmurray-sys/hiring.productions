@@ -127,7 +127,7 @@ export default function SignInPage() {
                 style={{
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '14px',
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                   margin: '0 0 24px',
                 }}
               >
@@ -251,7 +251,7 @@ export default function SignInPage() {
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '15px',
-                    color: '#9D9CB3',
+                    color: '#5A5A6E',
                     margin: 0,
                     lineHeight: 1.55,
                   }}
@@ -359,7 +359,7 @@ export default function SignInPage() {
                   textAlign: 'center',
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '14px',
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                 }}
               >
                 Not a member yet?{' '}

@@ -197,7 +197,7 @@ export default async function RoleRankPage({
               fontFamily: "'Figtree', sans-serif",
               fontSize: '18px',
               lineHeight: 1.6,
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               maxWidth: 640,
               margin: '0 auto 40px',
             }}
@@ -464,7 +464,7 @@ export default async function RoleRankPage({
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '13.5px',
-                    color: '#9D9CB3',
+                    color: '#5A5A6E',
                     lineHeight: 1.55,
                   }}
                 >
@@ -524,7 +524,7 @@ export default async function RoleRankPage({
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '16px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.7,
               marginBottom: 28,
             }}
@@ -640,7 +640,7 @@ export default async function RoleRankPage({
                     marginTop: 12,
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: 14.5,
-                    color: '#9D9CB3',
+                    color: '#5A5A6E',
                     lineHeight: 1.65,
                   }}
                 >

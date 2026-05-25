@@ -94,7 +94,7 @@ export default function ForCompaniesPage() {
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '18px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.6,
             marginBottom: '14px',
             maxWidth: '620px',
@@ -273,7 +273,7 @@ export default function ForCompaniesPage() {
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: 13.5,
                 lineHeight: 1.5,
-                color: '#9D9CB3',
+                color: '#5A5A6E',
                 marginTop: 2,
               }}>
                 {stage.desc}
@@ -328,7 +328,7 @@ export default function ForCompaniesPage() {
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: 17,
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.6,
             marginBottom: 28,
             maxWidth: 580,
@@ -488,7 +488,7 @@ export default function ForCompaniesPage() {
               <div style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '15px',
-                color: '#C9C7DA',
+                color: '#5A5A6E',
                 lineHeight: 1.6,
               }}>
                 {item.label}

@@ -230,7 +230,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
               }}
             >
               Your headline:{' '}
-              <span style={{ color: '#C9C7DA' }}>&ldquo;{state.headline}&rdquo;</span>
+              <span style={{ color: '#5A5A6E' }}>&ldquo;{state.headline}&rdquo;</span>
             </div>
 
             {/* The read */}
@@ -331,7 +331,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: 14,
-                  color: '#C9C7DA',
+                  color: '#5A5A6E',
                   cursor: 'pointer',
                 }}
               >
@@ -390,7 +390,7 @@ function HeadlineHelp({ onClose }: { onClose: () => void }) {
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontSize: 14,
-          color: '#C9C7DA',
+          color: '#5A5A6E',
           lineHeight: 1.55,
           margin: '0 0 16px',
         }}

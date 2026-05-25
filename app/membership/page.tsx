@@ -258,7 +258,7 @@ export default function MembershipPage() {
               textAlign: 'center',
               fontFamily: "'Figtree', sans-serif",
               fontSize: '13px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
             }}
           >
             Already a member?{' '}
@@ -522,7 +522,7 @@ export default function MembershipPage() {
         <p style={{
           fontFamily: "'Figtree', sans-serif",
           fontSize: '15px',
-          color: '#9D9CB3',
+          color: '#5A5A6E',
           textAlign: 'center',
           maxWidth: '620px',
           margin: '0 auto 48px',

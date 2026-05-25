@@ -185,7 +185,7 @@ export default function AnswersHubPage() {
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '17px',
-            color: '#9D9CB3',
+            color: '#5A5A6E',
             lineHeight: 1.6,
             maxWidth: '620px',
             margin: '0 auto',
@@ -272,7 +272,7 @@ export default function AnswersHubPage() {
                       style={{
                         fontFamily: "'Figtree', sans-serif",
                         fontSize: '13.5px',
-                        color: '#9D9CB3',
+                        color: '#5A5A6E',
                         lineHeight: 1.55,
                         margin: 0,
                       }}
@@ -330,7 +330,7 @@ export default function AnswersHubPage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '15.5px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.55,
               margin: '0 0 24px',
             }}

@@ -367,7 +367,7 @@ function LinkedInButtonRowMock() {
     fontWeight: 700,
     fontSize: '11.5px',
     border: '1px solid rgba(255,255,255,0.15)',
-    color: '#9D9CB3',
+    color: '#5A5A6E',
     background: '#FAFAFA',
     whiteSpace: 'nowrap',
   }

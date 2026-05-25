@@ -63,7 +63,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               ...quoteStyle(featured),
               borderLeftColor: t.accent,
-              color: '#C9C7DA',
+              color: '#5A5A6E',
             }}
           >
             “…with a question mark on the gap.”
@@ -250,7 +250,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
           >
             Volume-over-targeting
           </div>
-          <div style={{ fontSize: featured ? '14px' : '12px', color: '#C9C7DA', lineHeight: 1.5, marginBottom: 8 }}>
+          <div style={{ fontSize: featured ? '14px' : '12px', color: '#5A5A6E', lineHeight: 1.5, marginBottom: 8 }}>
             ATS filters out everyone who looks generic.
           </div>
           <div style={{ ...microNote(featured), color: t.accent, marginTop: 'auto', textTransform: 'uppercase', letterSpacing: '0.10em' }}>
@@ -730,7 +730,7 @@ function Bar({
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: featured ? '12px' : '10.5px',
-            color: '#C9C7DA',
+            color: '#5A5A6E',
             fontWeight: 600,
           }}
         >

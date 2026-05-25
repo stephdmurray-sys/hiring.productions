@@ -163,7 +163,7 @@ export default function ReturningToWorkPage() {
               fontFamily: "'Figtree', sans-serif",
               fontSize: '18px',
               fontWeight: 400,
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.55,
               maxWidth: '640px',
               margin: '0 auto',
@@ -252,7 +252,7 @@ export default function ReturningToWorkPage() {
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 400,
                       fontSize: '15px',
-                      color: '#C9C7DA',
+                      color: '#5A5A6E',
                       lineHeight: 1.65,
                       margin: '0 0 12px',
                     }}
@@ -349,7 +349,7 @@ export default function ReturningToWorkPage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '15.5px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.6,
               margin: '0 0 28px',
               position: 'relative',
@@ -448,7 +448,7 @@ function SectionHeader({
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontSize: '15px',
-          color: '#9D9CB3',
+          color: '#5A5A6E',
           lineHeight: 1.6,
           margin: 0,
         }}

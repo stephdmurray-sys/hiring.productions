@@ -109,7 +109,7 @@ export default function NegotiateThisOfferPage() {
             fontFamily: "'Figtree', sans-serif",
             fontSize: '13px',
             fontWeight: 500,
-            color: '#C9C7DA',
+            color: '#5A5A6E',
             lineHeight: 1.6,
           }}
         >

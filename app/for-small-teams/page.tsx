@@ -137,7 +137,7 @@ export default function ForSmallTeamsPage() {
               fontFamily: "'Figtree', sans-serif",
               fontSize: '18px',
               fontWeight: 400,
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.55,
               maxWidth: '640px',
               margin: '0 auto',
@@ -221,7 +221,7 @@ export default function ForSmallTeamsPage() {
                 style={{
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '14px',
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                   lineHeight: 1.55,
                   margin: '0 0 12px',
                 }}
@@ -280,7 +280,7 @@ export default function ForSmallTeamsPage() {
                 style={{
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '14px',
-                  color: '#9D9CB3',
+                  color: '#5A5A6E',
                   lineHeight: 1.55,
                   margin: 0,
                 }}
@@ -339,7 +339,7 @@ export default function ForSmallTeamsPage() {
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '15.5px',
-                    color: '#C9C7DA',
+                    color: '#5A5A6E',
                     lineHeight: 1.7,
                     margin: pIdx === 0 ? '0 0 14px' : '14px 0',
                   }}
@@ -422,7 +422,7 @@ export default function ForSmallTeamsPage() {
               position: 'relative',
               fontFamily: "'Figtree', sans-serif",
               fontSize: '16px',
-              color: '#9D9CB3',
+              color: '#5A5A6E',
               lineHeight: 1.65,
               maxWidth: '560px',
               margin: '0 auto 24px',
@@ -518,7 +518,7 @@ function SectionHeader({
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontSize: '15px',
-          color: '#9D9CB3',
+          color: '#5A5A6E',
           lineHeight: 1.6,
           margin: 0,
         }}
