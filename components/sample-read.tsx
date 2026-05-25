@@ -90,51 +90,136 @@ export function SampleRead() {
           Senior PM &middot; 8 yrs &middot; B2B SaaS
         </p>
 
-        {/* THE VISUAL ANCHOR — two sentences. The numbers are emphasized,
-            but they sit inside complete sentences so the meaning lands
-            instantly. No more isolated "0 → 4" requiring a caption to
-            decode. The reader gets the whole story in one breath. */}
-        <p
+        {/* THE VISUAL ANCHOR — two-column scoreboard. Big isolated stats,
+            captions below, no card borders, no decorative pills. The eye
+            lands on the numbers FIRST, then reads the labels. Sentence-
+            scale text was too slow because every word competed at equal
+            weight; scoreboard typography puts the focal point in the
+            ratios where it belongs. */}
+        <div
           style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: 'clamp(28px, 4vw, 44px)',
-            lineHeight: 1.18,
-            letterSpacing: '-0.02em',
-            color: '#9D9CB3',
-            textAlign: 'center',
-            margin: '0 0 14px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))',
+            gap: 'clamp(32px, 5vw, 64px)',
+            alignItems: 'start',
+            marginBottom: 'clamp(48px, 6vw, 80px)',
           }}
         >
-          Today she&rsquo;s in{' '}
-          <span style={{ color: '#FF8FA3', fontWeight: 900 }}>0 of 5</span>{' '}
-          recruiter searches.
-        </p>
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: 'clamp(28px, 4vw, 44px)',
-            lineHeight: 1.18,
-            letterSpacing: '-0.02em',
-            color: '#F2F0FF',
-            textAlign: 'center',
-            margin: '0 0 clamp(72px, 9vw, 112px)',
-          }}
-        >
-          Three small fixes —{' '}
-          <span
-            style={{
-              fontWeight: 900,
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            she&rsquo;s in 4 of 5.
-          </span>
-        </p>
+          {/* BEFORE */}
+          <div style={{ textAlign: 'center' }}>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 11,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: '#6B6A82',
+                marginBottom: 18,
+              }}
+            >
+              Today
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center' }}>
+              <span
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 'clamp(96px, 14vw, 160px)',
+                  lineHeight: 1,
+                  letterSpacing: '-0.04em',
+                  color: '#F2F0FF',
+                }}
+              >
+                0
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 'clamp(28px, 4vw, 48px)',
+                  lineHeight: 1,
+                  letterSpacing: '-0.02em',
+                  color: '#3F3D52',
+                  marginLeft: 6,
+                }}
+              >
+                /5
+              </span>
+            </div>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 500,
+                fontSize: 14,
+                lineHeight: 1.5,
+                color: '#8B8AA0',
+                marginTop: 18,
+              }}
+            >
+              recruiter searches she&rsquo;s in
+            </div>
+          </div>
+
+          {/* AFTER */}
+          <div style={{ textAlign: 'center' }}>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 11,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: '#A78BFA',
+                marginBottom: 18,
+              }}
+            >
+              After three fixes
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center' }}>
+              <span
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 'clamp(96px, 14vw, 160px)',
+                  lineHeight: 1,
+                  letterSpacing: '-0.04em',
+                  background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                4
+              </span>
+              <span
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 'clamp(28px, 4vw, 48px)',
+                  lineHeight: 1,
+                  letterSpacing: '-0.02em',
+                  color: '#5E4DB8',
+                  marginLeft: 6,
+                }}
+              >
+                /5
+              </span>
+            </div>
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 500,
+                fontSize: 14,
+                lineHeight: 1.5,
+                color: '#C9C7DA',
+                marginTop: 18,
+              }}
+            >
+              searches she&rsquo;d surface in
+            </div>
+          </div>
+        </div>
 
         {/* THE THREE FIXES — plain text. No cards. No borders. */}
         <div style={{ marginBottom: 'clamp(56px, 7vw, 80px)' }}>
