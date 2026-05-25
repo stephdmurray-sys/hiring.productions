@@ -448,6 +448,9 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
   const accent = tool.audience === 'hiring' ? '#FF4F6A' : '#A78BFA'
   const tintRgba = tool.audience === 'hiring' ? '255,79,106' : '108,71,255'
   const isComingSoon = tool.tier === 'soon'
+  // Same principle as the /tools page ToolCard: title + ONE result-focused
+  // tease + CTA. No subtitle, no long desc. Click into the tool for depth.
+  const tease = tool.getBack ?? tool.desc
 
   return (
     <Link
@@ -456,7 +459,7 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 8,
+        gap: 10,
         textDecoration: 'none',
         background: '#0F0F12',
         border: startHere
@@ -465,7 +468,10 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
         borderRadius: 14,
         padding: '20px 20px 18px',
         transition: 'all 0.18s ease',
-        minHeight: 168,
+        // Equal height enforcement: fill grid row + floor so cards stay
+        // visually balanced regardless of tease length.
+        height: '100%',
+        minHeight: 210,
         cursor: isComingSoon ? 'default' : 'pointer',
         opacity: isComingSoon ? 0.7 : 1,
         boxShadow: startHere ? `0 14px 36px rgba(${tintRgba}, 0.18)` : undefined,
@@ -534,25 +540,17 @@ function ToolCard({ tool, startHere }: { tool: CatalogTool; startHere?: boolean 
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
-          fontWeight: 600,
-          fontSize: 12,
-          color: accent,
-          letterSpacing: '0.01em',
-        }}
-      >
-        {tool.subtitle}
-      </div>
-      <div
-        style={{
-          fontFamily: "'Figtree', sans-serif",
           fontWeight: 400,
           fontSize: 13.5,
           lineHeight: 1.5,
-          color: '#9D9CB3',
-          marginTop: 2,
+          color: '#C9C7DA',
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
         }}
       >
-        {tool.desc}
+        {tease}
       </div>
       <div
         style={{

@@ -108,6 +108,13 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
   // tools keep the 2px gradient top stripe as a single restrained
   // flourish.
 
+  // The card content. Three reading zones only: tier badge, title,
+  // one result-focused tease line. CTA pushed to the bottom by flex so
+  // every card has its arrow at the same vertical position regardless of
+  // how long the tease line is. The detail page (one click away) is
+  // where the full description, sample output, and form live.
+  const tease = tool.getBack ?? tool.desc
+
   const card = (
     <article
       onMouseEnter={() => setHover(true)}
@@ -115,8 +122,8 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
       style={{
         background: '#14141B',
         border: `1px solid ${hover && isClickable ? theme.borderHover : theme.border}`,
-        borderRadius: isFeatured ? '18px' : '14px',
-        padding: isFeatured ? '24px 26px 22px' : '20px 22px 20px',
+        borderRadius: 14,
+        padding: '20px 22px 18px',
         display: 'flex',
         flexDirection: 'column',
         cursor: isClickable ? 'pointer' : 'default',
@@ -126,6 +133,11 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         boxShadow: hover && isClickable ? theme.glow : '0 4px 16px rgba(0,0,0,0.20)',
         position: 'relative',
         overflow: 'hidden',
+        // Equal height across the row. The grid stretches children to the
+        // tallest in the row; height:100% lets each card claim that full
+        // stretched height so CTAs line up.
+        height: '100%',
+        minHeight: 220,
       }}
     >
       {/* Flagship flourish — 2px brand-gradient bar at the top of the card.
@@ -145,12 +157,10 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         />
       )}
 
-      {/* Badges — tier on the right (always shown). Audience badge ONLY
-          when the tool crosses audiences (hiring-team tool on a candidate
-          page, or vice versa). On a candidate-side context the visitor
-          already knows they're seeing candidate tools — repeating
-          'Candidate' on every card is noise. */}
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+      {/* Tier badge — single chip, top of card. Audience badge stays only
+          when a hiring-team tool appears in a candidate context (or vice
+          versa) — otherwise it's noise. */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14 }}>
         {tool.audience === 'hiring' && (
           <Badge
             label={AUDIENCE_LABEL[tool.audience]}
@@ -162,106 +172,51 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         <Badge label={tier.label} bg={tier.bg} color={tier.color} border={tier.border} />
       </div>
 
-      {/* Brand name — the headline of the card */}
+      {/* Title — the question the user is already asking */}
       <h3
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 800,
-          fontSize: isFeatured ? '20px' : '18px',
+          fontSize: 18,
           letterSpacing: '-0.01em',
           color: '#F2F0FF',
           lineHeight: 1.22,
-          margin: '0 0 4px',
+          margin: '0 0 10px',
         }}
       >
         {tool.name}
       </h3>
 
-      {/* Plain-English subtitle — quieter than the title so the title
-          stays the dominant scanning element. Mixed case, regular weight,
-          muted color. */}
-      <div
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontWeight: 500,
-          fontSize: '12.5px',
-          color: '#8B8AA0',
-          marginBottom: '10px',
-        }}
-      >
-        {tool.subtitle}
-      </div>
-
-      {/* Featured-only hook line — only the hero card on a page gets this */}
-      {isFeatured && (
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 900,
-            fontSize: 'clamp(18px, 2vw, 22px)',
-            letterSpacing: '-0.02em',
-            color: '#F2F0FF',
-            lineHeight: 1.18,
-            margin: '4px 0 12px',
-          }}
-        >
-          {tool.hook}
-        </div>
-      )}
-
-      {/* Description — natural height (no flex:1 stretching). Cards size
-          to content, which means a row of cards with mixed description
-          lengths varies slightly in height instead of having dead space
-          below the short ones. The grid handles the alignment. */}
+      {/* ONE result-focused tease line — clamped to 3 lines so cards stay
+          uniform regardless of which tool. Uses `getBack` (result-focused
+          copy) when available, falls back to `desc`. The detail page is
+          where the full pitch lives. */}
       <p
         style={{
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 400,
-          fontSize: isFeatured ? '14px' : '13.5px',
-          color: '#9D9CB3',
-          lineHeight: 1.55,
+          fontSize: 13.5,
+          color: '#C9C7DA',
+          lineHeight: 1.5,
           margin: 0,
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
         }}
       >
-        {tool.desc}
+        {tease}
       </p>
 
-      {/* "You get back" — concrete output preview. Optional. */}
-      {tool.getBack && (
-        <div
-          style={{
-            marginTop: 14,
-            paddingTop: 12,
-            borderTop: '1px dashed rgba(255,255,255,0.08)',
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 12.5,
-            color: '#C9C7DA',
-            lineHeight: 1.5,
-          }}
-        >
-          <span
-            style={{
-              fontWeight: 800,
-              fontSize: 10,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: theme.accent,
-              marginRight: 6,
-            }}
-          >
-            You get back:
-          </span>
-          {tool.getBack}
-        </div>
-      )}
-
-      {/* CTA */}
+      {/* CTA — pushed to the bottom with marginTop:auto so every card's
+          arrow sits at the same vertical position in its row. */}
       <div
         style={{
-          marginTop: '14px',
+          marginTop: 'auto',
+          paddingTop: 18,
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 800,
-          fontSize: '13px',
+          fontSize: 13,
           color: tool.tier === 'soon' ? '#6B6A82' : theme.accent,
           display: 'inline-flex',
           alignItems: 'center',
@@ -284,7 +239,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
     </article>
   )
 
-  if (!isClickable) return <div>{card}</div>
+  if (!isClickable) return <div style={{ height: '100%' }}>{card}</div>
 
   return (
     <Link
@@ -293,6 +248,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         textDecoration: 'none',
         color: 'inherit',
         display: 'block',
+        height: '100%',
       }}
     >
       {card}
