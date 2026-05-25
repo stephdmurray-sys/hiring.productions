@@ -11,11 +11,7 @@ import { analytics } from '@/lib/analytics'
 
 /** Paths where the usage pill should show. */
 function isToolPath(pathname: string): boolean {
-  return (
-    pathname === '/resume' ||
-    pathname.startsWith('/tools/') ||
-    pathname === '/jd-seo-score'
-  )
+  return pathname === '/resume' || pathname.startsWith('/tools/')
 }
 
 /**

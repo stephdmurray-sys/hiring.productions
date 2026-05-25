@@ -182,18 +182,14 @@ export default function ForSmallTeamsPage() {
               marginInline: 'auto',
             }}
           >
-            <Link
-              href="/jd-seo-score"
+            <div
               style={{
-                textDecoration: 'none',
                 background: '#14141B',
-                border: '1px solid rgba(255,79,106,0.30)',
+                border: '1px dashed rgba(255,79,106,0.30)',
                 borderRadius: 14,
                 padding: '24px',
-                transition: 'border-color 0.18s ease, transform 0.18s ease',
-                display: 'block',
+                opacity: 0.85,
               }}
-              className="hp-st-tool-card"
             >
               <div
                 style={{
@@ -206,7 +202,7 @@ export default function ForSmallTeamsPage() {
                   marginBottom: 8,
                 }}
               >
-                Free · For Hiring Teams
+                On the way · For Hiring Teams
               </div>
               <div
                 style={{
@@ -239,12 +235,12 @@ export default function ForSmallTeamsPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '13px',
-                  color: '#FF4F6A',
+                  color: '#8B8AA0',
                 }}
               >
-                Score my JD →
+                In the queue
               </div>
-            </Link>
+            </div>
 
             <div
               style={{

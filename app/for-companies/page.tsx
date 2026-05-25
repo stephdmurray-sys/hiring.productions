@@ -184,7 +184,7 @@ export default function ForCompaniesPage() {
           {[
             { stage: '1. Define the role', tool: 'Role Clarity Tool', desc: 'Before the JD — what does 90-day success actually look like, and what level do you really need versus what you think you need?', status: 'soon' },
             { stage: '2. Write the JD', tool: 'Job Description Builder', desc: 'Not a template. A structured build that produces a JD that reads like a real job worth applying to.', status: 'soon', badge: 'First to ship' },
-            { stage: '3. Score the JD', tool: 'JD SEO Scorecard', desc: 'How your JD ranks across every major job board and AI matching engine — built today.', status: 'free', href: '/jd-seo-score' },
+            { stage: '3. Score the JD', tool: 'JD SEO Scorecard', desc: 'How your JD ranks across every major job board and AI matching engine.', status: 'soon' },
             { stage: '4. Pick the platform', tool: 'Platform Strategy Tool', desc: 'Where to post this specific role, how much to spend, how to adapt the language for each platform\'s algorithm.', status: 'soon' },
             { stage: '5. Screen smarter', tool: 'Triage 200 Applicants in 30 Seconds', desc: 'A scorecard for this role, the 3-5 signals that actually predict success, and how to read a resume for THIS position.', status: 'pro', href: '/tools/applicant-triage' },
             { stage: '6. Source what you missed', tool: 'The Search String That Finds Your Candidate', desc: 'Generate the boolean string to paste into LinkedIn Recruiter, Indeed, and Google to surface the ideal candidate.', status: 'pro', href: '/tools/boolean-builder' },
@@ -529,7 +529,6 @@ export default function ForCompaniesPage() {
           gap: '24px',
         }}>
           {[
-            { name: 'JD SEO Scorecard', desc: 'See exactly how your job descriptions rank for visibility and candidate attraction.', icon: BarChart2, href: '/jd-seo-score', external: false, featured: false },
             { name: 'Social Recruitment Guide', desc: 'Learn how to source and engage top talent directly where they already are.', icon: Share2, href: '/for-companies#social', external: false, featured: false },
             { name: 'RepVera for Hiring Teams', desc: 'See verified proof of how candidates actually show up at work. Zero FCRA liability.', icon: Users, href: 'https://www.repvera.com', external: true, featured: true },
           ].map((tool, idx) => (

@@ -90,11 +90,10 @@ export default function ConsultingPage() {
       <section className="hero">
         <div className="hero-inner">
           <p className="hero-eyebrow">Talent Acquisition Consulting</p>
-          <h1>Recruitment is <em>marketing.</em> Most organizations just haven&apos;t caught up yet.</h1>
+          <h1>Recruitment is marketing. Most organizations just haven&apos;t caught up yet.</h1>
           <p className="hero-sub">Nearly 20 years building the strategies, systems, and stories that make organizations impossible to ignore — for the people they actually want to hire.</p>
           <div className="hero-ctas">
             <button onClick={openModal} className="btn-primary">Request Services</button>
-            <a href="https://www.linkedin.com/in/stephaniemurray11/" target="_blank" rel="noopener noreferrer" className="btn-secondary">Follow on LinkedIn →</a>
           </div>
         </div>
         <div className="hero-photo">
@@ -114,7 +113,7 @@ export default function ConsultingPage() {
       {/* Recruitment Marketing Section */}
       <section className="rec-marketing">
         <div className="rec-marketing-inner">
-          <h2>Your recruiters are the <em>face of your organization.</em> Are they telling the right story?</h2>
+          <h2>Your recruiters are the face of your organization. Are they telling the right story?</h2>
           <div className="rec-blocks">
             <div className="rec-block">
               <div className="rec-block-title">Recruitment Marketing Strategy</div>
@@ -148,12 +147,12 @@ export default function ConsultingPage() {
       <section className="about">
         <div>
           <p className="about-label">Who I work with</p>
-          <h2>Organizations that know <em>something isn&apos;t working</em> — and are ready to fix it.</h2>
+          <h2>Organizations that know something isn&apos;t working — and are ready to fix it.</h2>
           <p>Healthcare and telehealth companies scaling fast. HR leaders who&apos;ve inherited a broken process. Startups building a recruiting function for the first time. If you&apos;re spending more on sourcing than results show, your JDs aren&apos;t converting, or your employer brand doesn&apos;t reflect who you actually are — that&apos;s exactly where I start.</p>
         </div>
         <div>
           <p className="about-label">Background</p>
-          <h2>Nearly two decades of <em>real results,</em> built inside the work.</h2>
+          <h2>Nearly two decades of real results, built inside the work.</h2>
           <p>I joined Brightside Health as employee #19 — fewer than 50 clinicians across 5 states. By building their recruitment marketing function from the ground up — employer brand, JD strategy, sourcing systems, candidate experience — we scaled to 1,500+ clinicians nationwide.</p>
           <p>With nearly 20 years in healthcare recruiting, I&apos;ve learned that recruitment done right is indistinguishable from great marketing. I know how LinkedIn&apos;s AI matching engine reads your postings. I know what makes a candidate apply — and what makes them ghost you at the offer stage. Every framework I bring has been stress-tested in high-growth, high-stakes environments.</p>
         </div>
@@ -164,7 +163,7 @@ export default function ConsultingPage() {
         <div className="services-inner">
           <div className="section-header">
             <p className="section-label">What I do</p>
-            <h2>Six ways I can <em>move the needle</em> for your team.</h2>
+            <h2>Six ways I can move the needle for your team.</h2>
           </div>
           <div className="services-grid">
             <div className="service-card">
@@ -205,7 +204,7 @@ export default function ConsultingPage() {
       <section className="packages">
         <div className="section-header">
           <p className="section-label">Engagement Options</p>
-          <h2>Choose how we <em>work together.</em></h2>
+          <h2>Choose how we work together.</h2>
         </div>
         <div className="packages-grid">
           <button onClick={openModal} className="package-card package-button">
@@ -223,11 +222,10 @@ export default function ConsultingPage() {
 
       {/* CTA Section */}
       <section className="cta-section">
-        <h2>Ready to make your hiring <em>a real production?</em></h2>
+        <h2>Ready to make your hiring a real production?</h2>
         <p>Let&apos;s talk about where your talent strategy is and where it needs to be.</p>
         <div className="cta-buttons">
           <button onClick={openModal} className="btn-white">Request Services</button>
-          <a href="https://www.linkedin.com/in/stephaniemurray11/" target="_blank" rel="noopener noreferrer" className="btn-outline-white">Connect on LinkedIn</a>
         </div>
       </section>
 
@@ -239,7 +237,7 @@ export default function ConsultingPage() {
           <div className="modal-card">
             <button className="modal-close" onClick={closeModal} aria-label="Close modal">×</button>
             
-            <h2 className="modal-headline">Let&apos;s <em>talk strategy.</em></h2>
+            <h2 className="modal-headline">Let&apos;s talk strategy.</h2>
             <p className="modal-subhead">Tell me about your hiring goals and where things are stuck. I&apos;ll review and reach out within 48 hours if there&apos;s a fit.</p>
 
             {submitState === 'success' ? (

@@ -125,9 +125,6 @@ export function Footer() {
             >
               Where Do You Rank in a Recruiter Search?
             </Link>
-            <Link href="/jd-seo-score" style={linkStyle} onMouseEnter={onHover} onMouseLeave={onLeave}>
-              JD SEO Scorecard
-            </Link>
             <Link
               href="/tools"
               style={{ ...linkStyle, color: '#A78BFA', fontWeight: 600 }}

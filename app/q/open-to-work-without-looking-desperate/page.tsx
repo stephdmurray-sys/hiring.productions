@@ -100,7 +100,7 @@ export default function OpenToWorkPage() {
         { label: 'How recruiters search LinkedIn for senior candidates', href: '/rank/recruiter' },
         { label: 'Why am I not getting responses?', href: '/q/why-am-i-not-getting-responses' },
         { label: 'How to beat an ATS', href: '/q/how-to-beat-ats' },
-        { label: 'Get found by recruiters', href: '/get-found' },
+        { label: 'Where do you rank in a recruiter search?', href: '/tools/recruiter-search-rank' },
       ]}
     />
   )

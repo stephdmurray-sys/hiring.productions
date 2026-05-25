@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/sign-in', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/stand-out', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/consulting', priority: 0.9, changeFrequency: 'monthly' },
-    { path: '/get-found', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/linkedin-guide', priority: 0.8, changeFrequency: 'monthly' },
     // Audience hubs — high-intent candidate-moment landing pages
     { path: '/for-new-grads', priority: 0.85, changeFrequency: 'monthly' },

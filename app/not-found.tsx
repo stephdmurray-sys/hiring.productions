@@ -288,9 +288,9 @@ export default function NotFound() {
               pillBg: 'rgba(108,71,255,0.12)',
             },
             {
-              href: '/jd-seo-score',
-              label: 'Is Your Job Even Being Seen?',
-              desc: 'Score your job post for search visibility.',
+              href: '/for-companies',
+              label: 'For Hiring Teams',
+              desc: 'How strong candidates actually read your job posts.',
               pill: 'For Hiring Teams',
               pillColor: '#FF4F6A',
               pillBg: 'rgba(255,79,106,0.12)',

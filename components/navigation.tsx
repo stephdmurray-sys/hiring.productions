@@ -40,7 +40,6 @@ function firstNameFromEmail(email: string | null): string {
 const forCompanies = [
   { href: '/for-companies', label: 'For Companies' },
   { href: '/for-small-teams', label: 'For Small Teams' },
-  { href: '/jd-seo-score', label: 'Is Your Job Even Being Seen?' },
   { href: '/consulting', label: 'Consulting' },
   { href: 'https://www.repvera.com', label: 'RepVera for Teams', external: true },
 ]
@@ -54,7 +53,6 @@ const forCandidates = [
   { href: '/stand-out', label: 'Stand Out in the Crowd' },
   { href: '/resume', label: 'Does My Resume Read as AI?' },
   { href: '/linkedin-guide', label: 'LinkedIn Guide' },
-  { href: '/get-found', label: 'Get Found Coaching' },
   { href: 'https://www.repvera.com', label: 'RepVera Profile', external: true },
 ]
 

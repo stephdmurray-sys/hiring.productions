@@ -459,15 +459,19 @@ export const CATALOG: CatalogTool[] = [
   // =====================================================================
 
   // --- FREE for hiring teams ------------------------------------------
+  // JD SEO Scorecard is marked 'soon' until a real Next page is built —
+  // the legacy public/jd-seo-score.html was deleted because it still
+  // used the killed "Inside Looks" product name. Catalog entry stays so
+  // the hiring-team waitlist surface knows it's coming.
   {
     name: 'Is Your Job Even Being Seen?',
     subtitle: 'JD SEO Scorecard',
     desc: 'Score your job description across every major platform candidates actually use. See exactly why your posting isn’t performing.',
-    tier: 'free',
+    tier: 'soon',
     audience: 'hiring',
     stage: 'before-you-post',
-    href: '/jd-seo-score',
-    cta: 'Score my JD',
+    href: '/tools',
+    cta: 'On the way',
     preview: 'jd-seo-score',
     theme: 'amber',
     hook: 'Score your JD across every platform.',
