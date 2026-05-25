@@ -269,18 +269,37 @@ export function QuickHeadlineRead() {
               >
                 The recruiter&rsquo;s read
               </div>
-              <p
+              {/* Render the response as distinct paragraphs. The system
+                  prompt asks for 3 sentences separated by \n\n. We split
+                  and render each one with breathing room so the eye sees
+                  three points, not a wall of text. */}
+              <div
                 style={{
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 'clamp(16px, 1.9vw, 18px)',
-                  lineHeight: 1.55,
-                  color: '#F2F0FF',
-                  margin: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 14,
                 }}
               >
-                {state.read}
-              </p>
+                {state.read
+                  .split(/\n\s*\n/)
+                  .map((p) => p.trim())
+                  .filter(Boolean)
+                  .map((paragraph, i) => (
+                    <p
+                      key={i}
+                      style={{
+                        fontFamily: "'Figtree', sans-serif",
+                        fontWeight: 500,
+                        fontSize: 'clamp(16px, 1.9vw, 18px)',
+                        lineHeight: 1.55,
+                        color: '#F2F0FF',
+                        margin: 0,
+                      }}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+              </div>
             </div>
 
             {/* Conversion ask */}
