@@ -119,7 +119,6 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         padding: isFeatured ? '24px 26px 22px' : '20px 22px 20px',
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
         cursor: isClickable ? 'pointer' : 'default',
         opacity: tool.tier === 'soon' ? 0.85 : 1,
         transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
@@ -146,15 +145,20 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         />
       )}
 
-      {/* Badges — audience on left (carries the side color), tier on right.
-          These read as quiet metadata above the title. */}
+      {/* Badges — tier on the right (always shown). Audience badge ONLY
+          when the tool crosses audiences (hiring-team tool on a candidate
+          page, or vice versa). On a candidate-side context the visitor
+          already knows they're seeing candidate tools — repeating
+          'Candidate' on every card is noise. */}
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
-        <Badge
-          label={AUDIENCE_LABEL[tool.audience]}
-          bg={`${theme.primary}1A`}
-          color={theme.accent}
-          border={`1px solid ${theme.primary}33`}
-        />
+        {tool.audience === 'hiring' && (
+          <Badge
+            label={AUDIENCE_LABEL[tool.audience]}
+            bg={`${theme.primary}1A`}
+            color={theme.accent}
+            border={`1px solid ${theme.primary}33`}
+          />
+        )}
         <Badge label={tier.label} bg={tier.bg} color={tier.color} border={tier.border} />
       </div>
 
@@ -173,16 +177,16 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         {tool.name}
       </h3>
 
-      {/* Plain-English subtitle */}
+      {/* Plain-English subtitle — quieter than the title so the title
+          stays the dominant scanning element. Mixed case, regular weight,
+          muted color. */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
-          fontWeight: 700,
-          fontSize: '11.5px',
-          color: theme.accent,
-          letterSpacing: '0.04em',
-          marginBottom: '12px',
-          textTransform: 'uppercase',
+          fontWeight: 500,
+          fontSize: '12.5px',
+          color: '#8B8AA0',
+          marginBottom: '10px',
         }}
       >
         {tool.subtitle}
@@ -205,7 +209,10 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         </div>
       )}
 
-      {/* Description */}
+      {/* Description — natural height (no flex:1 stretching). Cards size
+          to content, which means a row of cards with mixed description
+          lengths varies slightly in height instead of having dead space
+          below the short ones. The grid handles the alignment. */}
       <p
         style={{
           fontFamily: "'Figtree', sans-serif",
@@ -214,7 +221,6 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
           color: '#9D9CB3',
           lineHeight: 1.55,
           margin: 0,
-          flex: 1,
         }}
       >
         {tool.desc}
@@ -223,7 +229,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
       {/* CTA */}
       <div
         style={{
-          marginTop: '16px',
+          marginTop: '14px',
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 800,
           fontSize: '13px',
@@ -249,7 +255,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
     </article>
   )
 
-  if (!isClickable) return <div style={{ height: '100%' }}>{card}</div>
+  if (!isClickable) return <div>{card}</div>
 
   return (
     <Link
@@ -258,7 +264,6 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         textDecoration: 'none',
         color: 'inherit',
         display: 'block',
-        height: '100%',
       }}
     >
       {card}

@@ -46,7 +46,7 @@ export default function ToolsPage() {
       {/* HERO — direct, no theater */}
       <section style={heroSection}>
         <div style={{ position: 'relative', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
-          <Eyebrow>00 — Every tool</Eyebrow>
+          <Eyebrow>Every tool</Eyebrow>
           <Heading>
             Organized by the moment
             <br />
@@ -66,8 +66,8 @@ export default function ToolsPage() {
           title="Start anywhere."
           sub="No card. No email. Use them right now."
         >
-          {freeTopOfFunnel.map((tool, i) => (
-            <ToolCard key={tool.name} tool={tool} variant={i === 0 ? 'featured' : 'standard'} />
+          {freeTopOfFunnel.map((tool) => (
+            <ToolCard key={tool.name} tool={tool} variant="standard" />
           ))}
         </MomentSection>
       )}
