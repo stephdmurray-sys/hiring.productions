@@ -1,8 +1,11 @@
 # Claude instructions for hiring.productions
 
-**Read [BRAND.md](BRAND.md) before writing any user-facing copy, naming any tool, or making visual decisions.** It is the source of truth.
+**Required reading before any work on this project:**
 
-This file is the short version — the rules that apply to every change.
+1. **[PLATFORM-VISION.md](PLATFORM-VISION.md)** — the strategic anchor. The platform vision (job-search OS), the 3-stage roadmap, the behavioral framework, the decision filter for new features, the visual direction (light/warm palette pivot), the moat we will not dilute. On platform/strategy questions, this file overrides this one.
+2. **[BRAND.md](BRAND.md)** — voice and visual identity tokens. Read before writing any user-facing copy, naming any tool, or making visual decisions.
+
+This file (CLAUDE.md) is the short version — the operating rules that apply to every change.
 
 ## What this site is
 
