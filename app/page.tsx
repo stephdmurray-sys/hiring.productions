@@ -130,135 +130,104 @@ export default function HomePage() {
       */}
       <QuickHeadlineRead />
 
-      {/* ───────────────── CREDIBILITY ─────────────────
-         Why this tool, why this person. Anchors the
-         "nobody else can build this credibly" claim.
-      */}
+      {/* ─────────────── CLOSING ─────────────── */}
       <section
         style={{
           background: '#0F0F12',
-          padding: 'clamp(64px, 9vw, 100px) clamp(20px, 5vw, 40px)',
+          padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
         }}
       >
-        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
-          <div
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: '11px',
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              color: '#A78BFA',
-              marginBottom: 22,
-            }}
-          >
-            03 — WHO BUILT THIS
-          </div>
-
-          {/* Headshot — anchored to /public/stephanie.jpg. The image is
-              the credibility moment; for a solo expert-founder where the
-              moat IS the founder, a face in the credibility section is
-              the difference between "yet another resume tool" and "this
-              specific recruiter built this." */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 22 }}>
-            <Image
-              src="/stephanie.jpg"
-              alt="Stephanie Murray"
-              width={104}
-              height={104}
-              priority
-              style={{
-                borderRadius: '50%',
-                objectFit: 'cover',
-                border: '3px solid rgba(167,139,250,0.45)',
-                boxShadow: '0 18px 50px rgba(108,71,255,0.22)',
-              }}
-            />
-          </div>
-
+        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(28px, 3.8vw, 40px)',
-              letterSpacing: '-0.02em',
+              fontSize: 'clamp(32px, 5vw, 56px)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.08,
               color: '#F2F0FF',
-              lineHeight: 1.15,
-              marginBottom: 14,
             }}
           >
-            Built by a recruiter, not a resume tool company.
+            The goal isn&apos;t to win hiring.
           </h2>
-
-          {/* Name + role byline, sits under the H2 like a magazine credit
-              line. Small, restrained, but unambiguous about who is behind
-              the tool. */}
-          <div
+          <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
-              fontWeight: 700,
-              fontSize: 14,
-              color: '#A78BFA',
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-              marginBottom: 22,
+              fontWeight: 900,
+              fontSize: 'clamp(32px, 5vw, 56px)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.08,
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              marginTop: 0,
             }}
           >
-            Stephanie Murray · Senior TA Director · 20 years in talent
-          </div>
-
+            It&apos;s to finally understand it.
+          </h2>
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '17px',
               color: '#9D9CB3',
-              lineHeight: 1.7,
-              marginBottom: 18,
+              marginTop: 24,
             }}
           >
-            Senior Director of TA at Brightside Health. Transform&apos;s Talent Strategy of the Year,
-            2025. Every search, every read, every debrief on this site is the one I&rsquo;ve actually
-            been running for 20 years.
-          </p>
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '15px',
-              color: '#8B8AA0',
-              lineHeight: 1.65,
-              fontStyle: 'italic',
-              marginBottom: 28,
-            }}
-          >
-            No fabricated specifics. No invented stats.
+            The room you were never in. Open for the first time.
           </p>
 
-          {/* LinkedIn follow CTA — captures the "interested but not paying
-              today" segment. Every follow is a future buyer + amplifier.
-              Styled subtly so it doesn't compete with the wedge CTA above
-              or the membership CTA below. */}
-          <a
-            href="https://www.linkedin.com/in/stephaniemurray11/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '11px 20px',
-              background: 'rgba(10,102,194,0.12)',
-              border: '1px solid rgba(10,102,194,0.42)',
-              borderRadius: 10,
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 700,
-              fontSize: 14,
-              color: '#7BB7E8',
-              textDecoration: 'none',
+              marginTop: '40px',
+              display: 'flex',
+              gap: '14px',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
             }}
           >
-            <Linkedin size={15} strokeWidth={2.2} />
-            Follow Stephanie on LinkedIn for unfiltered recruiter takes
-          </a>
+            <Link
+              href="/membership"
+              className="hero-btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                color: 'white',
+                padding: '15px 34px',
+                borderRadius: '10px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: '16px',
+                textDecoration: 'none',
+                transition: 'transform 0.2s',
+              }}
+            >
+              Go Pro
+            </Link>
+            <Link
+              href="/tools"
+              className="hero-btn"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                border: '1.5px solid rgba(167,139,250,0.4)',
+                background: 'transparent',
+                color: '#A78BFA',
+                padding: '15px 30px',
+                borderRadius: '10px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 700,
+                fontSize: '15px',
+                textDecoration: 'none',
+                transition: 'transform 0.2s',
+              }}
+            >
+              See every tool →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -394,107 +363,6 @@ export default function HomePage() {
               No spam. Unsubscribe anytime.
             </p>
           </form>
-        </div>
-      </section>
-
-      {/* ─────────────── CLOSING ─────────────── */}
-      <section
-        style={{
-          background: '#0F0F12',
-          padding: 'clamp(56px, 8vw, 100px) clamp(20px, 5vw, 40px)',
-        }}
-      >
-        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <h2
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.08,
-              color: '#F2F0FF',
-            }}
-          >
-            The goal isn&apos;t to win hiring.
-          </h2>
-          <h2
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(32px, 5vw, 56px)',
-              letterSpacing: '-0.025em',
-              lineHeight: 1.08,
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              marginTop: 0,
-            }}
-          >
-            It&apos;s to finally understand it.
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '17px',
-              color: '#9D9CB3',
-              marginTop: 24,
-            }}
-          >
-            The room you were never in. Open for the first time.
-          </p>
-
-          <div
-            style={{
-              marginTop: '40px',
-              display: 'flex',
-              gap: '14px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            <Link
-              href="/membership"
-              className="hero-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                color: 'white',
-                padding: '15px 34px',
-                borderRadius: '10px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: '16px',
-                textDecoration: 'none',
-                transition: 'transform 0.2s',
-              }}
-            >
-              Go Pro
-            </Link>
-            <Link
-              href="/tools"
-              className="hero-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                border: '1.5px solid rgba(167,139,250,0.4)',
-                background: 'transparent',
-                color: '#A78BFA',
-                padding: '15px 30px',
-                borderRadius: '10px',
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 700,
-                fontSize: '15px',
-                textDecoration: 'none',
-                transition: 'transform 0.2s',
-              }}
-            >
-              See every tool →
-            </Link>
-          </div>
         </div>
       </section>
 

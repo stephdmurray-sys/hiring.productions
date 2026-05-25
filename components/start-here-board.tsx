@@ -120,32 +120,80 @@ export function StartHereBoard() {
 // =====================================================================
 
 function QuestionGrid({ onSelect }: { onSelect: (id: string) => void }) {
-  // 2x2 grid on desktop, 1 column on mobile. Four cards laid out as
-  // a clean square — no orphan card on a second row. Container width
-  // is constrained so auto-fit can never spawn a third column even on
-  // wide displays.
+  // Three numbered moments laid out as a journey. On desktop, 3 cards
+  // sit in a row + a "→ HIRED" payoff element at the end so the eye
+  // reads the cards as steps toward an outcome. On mobile, cards stack
+  // and the payoff sits below them.
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
-        gap: 18,
-        maxWidth: 820,
-        margin: '0 auto',
-      }}
-    >
-      {QUESTIONS.map((q) => (
-        <QuestionCard key={q.id} question={q} onClick={() => onSelect(q.id)} />
-      ))}
-    </div>
+    <>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
+          gap: 18,
+          maxWidth: 1080,
+          margin: '0 auto',
+        }}
+      >
+        {QUESTIONS.map((q, i) => (
+          <QuestionCard
+            key={q.id}
+            question={q}
+            index={i + 1}
+            onClick={() => onSelect(q.id)}
+          />
+        ))}
+      </div>
+
+      {/* The "hired" payoff — destination at the end of the three steps */}
+      <div
+        style={{
+          marginTop: 28,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 14,
+        }}
+        aria-hidden
+      >
+        <span
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 700,
+            fontSize: 13,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: '#8B8AA0',
+          }}
+        >
+          The destination
+        </span>
+        <span
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(20px, 2.4vw, 26px)',
+            letterSpacing: '-0.01em',
+            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          → Hired.
+        </span>
+      </div>
+    </>
   )
 }
 
 function QuestionCard({
   question,
+  index,
   onClick,
 }: {
   question: Question
+  index: number
   onClick: () => void
 }) {
   return (
@@ -175,9 +223,21 @@ function QuestionCard({
           box-shadow: 0 16px 40px rgba(108,71,255,0.12);
         }
       `}</style>
-      {/* TITLE — big, scannable. This is what visitors read at a glance to
-          spot their moment. Quote sits underneath as a smaller subtitle in
-          the visitor's own voice. */}
+      {/* NUMBER — editorial chapter marker. Tells the visitor this is
+          step N of a journey, not a random card grid. */}
+      <div
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 900,
+          fontSize: 13,
+          letterSpacing: '0.14em',
+          color: '#A78BFA',
+          marginBottom: 4,
+        }}
+      >
+        0{index}
+      </div>
+      {/* TITLE — big, scannable. */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",

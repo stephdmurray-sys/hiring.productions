@@ -35,29 +35,21 @@ export const MOMENTS: Moment[] = [
   {
     id: 'interview-prep',
     title: 'The Interview',
-    quote: 'I have an interview coming up',
-    sub: 'See the questions they’re really asking. Run a rehearsal that matches their actual rubric. Nail the opening line.',
+    quote: 'I have an interview — or an offer — coming up',
+    sub: 'Research the company before you go in. Decode the questions they’ll ask. Rehearse against their real rubric. Then negotiate when the offer lands.',
     toolNames: [
+      'What This Company Feels Like to Work At',
       'What They’re Really Asking',
       'The Rehearsal Room',
       'How You Actually Come Across',
-    ],
-  },
-  {
-    id: 'got-offer',
-    title: 'The Offer',
-    quote: 'I just got an offer',
-    sub: 'See what’s actually negotiable, get the exact script to ask for more, and read the company before you sign.',
-    toolNames: [
       'How to Negotiate This Offer',
-      'What This Company Feels Like to Work At',
     ],
   },
   {
-    id: 'situation',
-    title: 'The Situation',
+    id: 'story',
+    title: 'The Story',
     quote: 'gap, pivot, layoff, or new grad',
-    sub: 'Specific tools for specific situations. Tell it true, the way someone who reads resumes for a living would.',
+    sub: 'The unusual story is the asset, not the liability — when you tell it the way someone who reads resumes for a living would.',
     toolNames: [
       'How to Explain My Employment Gap',
       'Your Career Pivot, Translated',
