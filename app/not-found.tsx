@@ -303,7 +303,7 @@ export default function NotFound() {
               style={{
                 display: 'block',
                 width: '240px',
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '14px',
                 padding: '20px',

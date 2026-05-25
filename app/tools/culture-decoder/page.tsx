@@ -201,7 +201,7 @@ export default function CultureDecoderPage() {
         {error && (
           <div
             style={{
-              background: '#1A1A22',
+              background: '#FFFFFF',
               border: '1px solid rgba(255,79,106,0.2)',
               borderRadius: '8px',
               padding: '12px 14px',

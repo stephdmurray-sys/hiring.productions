@@ -172,7 +172,7 @@ export default function MembershipPage() {
             <div
               key={idx}
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '16px 24px',
@@ -181,6 +181,7 @@ export default function MembershipPage() {
                 fontSize: '13px',
                 fontWeight: 600,
                 color: '#1A1A22',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
             >
               {stat}
@@ -545,7 +546,7 @@ export default function MembershipPage() {
               href={tool.href}
               className="membership-tool-card"
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '24px',
@@ -556,6 +557,7 @@ export default function MembershipPage() {
                 textDecoration: 'none',
                 color: 'inherit',
                 transition: 'border-color 0.18s ease, transform 0.18s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
             >
               {/* Icon circle top-left */}

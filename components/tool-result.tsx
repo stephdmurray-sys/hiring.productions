@@ -151,7 +151,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
       {/* Results Card */}
       <div
         style={{
-          background: '#1A1A22',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.25)',
           borderRadius: '16px',
           padding: '36px',

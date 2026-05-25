@@ -170,7 +170,7 @@ export default function WhatTheyreAskingPage() {
         {error && (
           <div
             style={{
-              background: '#1A1A22',
+              background: '#FFFFFF',
               border: '1px solid rgba(255,79,106,0.2)',
               borderRadius: '10px',
               padding: '14px',

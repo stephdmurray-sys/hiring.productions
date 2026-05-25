@@ -242,7 +242,7 @@ export default async function RoleRankPage({
       {/* ───────────── WHAT LINKEDIN ACTUALLY WEIGHTS ───────────── */}
       <section
         style={{
-          background: '#1A1A22',
+          background: '#FFFFFF',
           borderTop: '1px solid rgba(108,71,255,0.18)',
           borderBottom: '1px solid rgba(108,71,255,0.18)',
           padding: 'clamp(56px, 8vw, 90px) clamp(20px, 5vw, 40px)',
@@ -429,7 +429,7 @@ export default async function RoleRankPage({
               <div
                 key={card.title}
                 style={{
-                  background: '#1A1A22',
+                  background: '#FFFFFF',
                   border: '1px solid #ECECF2',
                   borderRadius: 14,
                   padding: 22,
@@ -502,7 +502,7 @@ export default async function RoleRankPage({
       {/* ───────────── CREDIBILITY + MEMBERSHIP TAG ───────────── */}
       <section
         style={{
-          background: '#1A1A22',
+          background: '#FFFFFF',
           padding: 'clamp(56px, 8vw, 80px) clamp(20px, 5vw, 40px)',
         }}
       >

@@ -132,7 +132,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
       {/* Section 2 — Share */}
       <div
         style={{
-          background: '#1A1A22',
+          background: '#FFFFFF',
           border: '1px solid #ECECF2',
           borderRadius: 16,
           padding: '22px 24px',

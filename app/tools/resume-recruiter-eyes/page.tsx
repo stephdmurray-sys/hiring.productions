@@ -130,7 +130,7 @@ export default function ResumeRecruiterEyesPage() {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
-            background: '#1A1A22',
+            background: '#FFFFFF',
             border: '1px solid #ECECF2',
             borderRadius: '8px',
             padding: '10px 14px',
@@ -167,7 +167,7 @@ export default function ResumeRecruiterEyesPage() {
           <div>
             <div
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '32px',

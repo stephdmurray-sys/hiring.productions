@@ -165,7 +165,7 @@ export default function ForCandidatesPage() {
               <div
                 key={idx}
                 style={{
-                  background: '#1A1A22',
+                  background: '#FFFFFF',
                   border: '1px solid rgba(255,255,255,0.07)',
                   borderRadius: '12px',
                   padding: '12px 20px',
@@ -222,7 +222,7 @@ export default function ForCandidatesPage() {
             <div
               key={idx}
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid rgba(108,71,255,0.25)',
                 borderRadius: '14px',
                 padding: '28px',
@@ -276,7 +276,7 @@ export default function ForCandidatesPage() {
             <div
               key={idx}
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: tool.featured ? '2px solid rgba(108,71,255,0.4)' : '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '12px',
                 padding: '24px',
@@ -391,7 +391,7 @@ export default function ForCandidatesPage() {
 
       {/* Bottom CTA */}
       <section style={{
-        background: '#1A1A22',
+        background: '#FFFFFF',
         padding: '80px 40px',
         textAlign: 'center',
         marginBottom: '60px',

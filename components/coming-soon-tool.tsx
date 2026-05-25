@@ -121,7 +121,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
             display: 'inline-flex',
             alignItems: 'center',
             gap: '8px',
-            background: '#1A1A22',
+            background: '#FFFFFF',
             border: '1px solid rgba(255,79,106,0.3)',
             borderRadius: '8px',
             padding: '8px 16px',
@@ -150,7 +150,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
           {/* Email Capture Card */}
           <form onSubmit={handleSubmit} style={{
             marginTop: '48px',
-            background: '#1A1A22',
+            background: '#FFFFFF',
             border: '1px solid rgba(108,71,255,0.25)',
             borderRadius: '16px',
             padding: '36px',

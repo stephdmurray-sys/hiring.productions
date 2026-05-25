@@ -150,7 +150,7 @@ export default function StandOutPage() {
               <div
                 key={item.number}
                 style={{
-                  background: '#1A1A22',
+                  background: '#FFFFFF',
                   border: '1px solid #ECECF2',
                   borderRadius: '16px',
                   padding: '36px 40px',
@@ -317,7 +317,7 @@ export default function StandOutPage() {
       {/* Bottom CTA Section */}
       <section style={{
         borderTop: '1px solid rgba(255,255,255,0.06)',
-        background: '#1A1A22',
+        background: '#FFFFFF',
         padding: '60px 40px',
         marginTop: '40px',
         textAlign: 'center',

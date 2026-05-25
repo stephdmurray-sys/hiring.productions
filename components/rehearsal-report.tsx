@@ -314,7 +314,7 @@ function QuestionCard({ q, blurred }: { q: Question; blurred: boolean }) {
             width: '32px',
             height: '32px',
             borderRadius: '8px',
-            background: '#1A1A22',
+            background: '#FFFFFF',
             color: '#ffffff',
             fontWeight: 800,
             fontSize: '12px',

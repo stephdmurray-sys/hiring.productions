@@ -464,7 +464,7 @@ export default function ForCompaniesPage() {
             <div
               key={idx}
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: '1px solid #ECECF2',
                 borderRadius: '14px',
                 padding: 'clamp(22px, 4vw, 28px)',
@@ -535,7 +535,7 @@ export default function ForCompaniesPage() {
             <div
               key={idx}
               style={{
-                background: '#1A1A22',
+                background: '#FFFFFF',
                 border: tool.featured ? '2px solid rgba(108,71,255,0.4)' : '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '12px',
                 padding: '24px',
@@ -639,7 +639,7 @@ export default function ForCompaniesPage() {
               <div
                 key={item.step}
                 style={{
-                  background: '#1A1A22',
+                  background: '#FFFFFF',
                   border: '1px solid #ECECF2',
                   borderRadius: '12px',
                   padding: '24px',
@@ -669,7 +669,7 @@ export default function ForCompaniesPage() {
               <div
                 key={idx}
                 style={{
-                  background: '#1A1A22',
+                  background: '#FFFFFF',
                   border: '1px solid rgba(108,71,255,0.3)',
                   borderRadius: '20px',
                   padding: '12px 20px',
@@ -705,7 +705,7 @@ export default function ForCompaniesPage() {
 
       {/* Bottom CTA */}
       <section style={{
-        background: '#1A1A22',
+        background: '#FFFFFF',
         padding: '80px 40px',
         textAlign: 'center',
         marginBottom: '60px',

@@ -160,7 +160,7 @@ export default function WhatThisJobIsPage() {
         {error && jobDescription.length >= 200 && (
           <div
             style={{
-              background: '#1A1A22',
+              background: '#FFFFFF',
               border: '1px solid rgba(255,79,106,0.3)',
               borderRadius: '10px',
               padding: '16px 20px',

@@ -221,7 +221,7 @@ export function SeoContentPage({
             style={{
               maxWidth: '760px',
               margin: '0 auto',
-              background: '#1A1A22',
+              background: '#FFFFFF',
               border: '1px solid rgba(108,71,255,0.3)',
               borderRadius: '16px',
               padding: '36px',
