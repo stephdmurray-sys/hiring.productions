@@ -47,7 +47,7 @@ const ROWS: Row[] = [
   // ADDITIONAL THINGS THEY CHARGE FOR
   { label: 'Both sides — bilateral hiring tools', group: 'addon', hp: true, teal: false, jobscan: false, resumeWorded: false, cultivated: false },
   { label: 'Designed by recruiters who actually do the work', group: 'addon', hp: true, teal: 'Algorithmic', jobscan: 'Algorithmic', resumeWorded: 'Algorithmic', cultivated: true },
-  { label: 'Honest price (monthly or save with annual)', group: 'addon', hp: '$14.99/mo or $99/yr', teal: '$676/yr ($13/wk)', jobscan: '$599.40/yr', resumeWorded: '$408/yr', cultivated: '$297 + courses' },
+  { label: 'Price', group: 'addon', hp: '$14.99/m', teal: '$676/yr ($13/wk)', jobscan: '$599.40/yr', resumeWorded: '$408/yr', cultivated: '$297 + courses' },
 ]
 
 function CellContent({ value }: { value: Cell }) {

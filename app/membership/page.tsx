@@ -361,7 +361,7 @@ export default function MembershipPage() {
                 {[
                   {
                     label: 'Price',
-                    ours: '$14.99/mo or $99/yr',
+                    ours: '$14.99/m',
                     competitors: ['$49.95/mo', '$9/week', '$24.95/mo', 'Enterprise', '$200+/hr'],
                     isPrice: true,
                   },
