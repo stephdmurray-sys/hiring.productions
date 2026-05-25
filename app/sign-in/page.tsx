@@ -5,23 +5,23 @@ import Link from 'next/link'
 import { Mail, CheckCircle2 } from 'lucide-react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { createClient } from '@/lib/supabase/client'
 
 /**
- * Sign-in page — magic-link flow via Supabase Auth.
+ * Sign-in page — magic-link flow via OUR custom backend.
  *
- * The visitor enters their email, we send a magic link via Supabase (which
- * delivers the email through whatever SMTP/Resend Supabase is configured
- * with). They click the link in their email, land on /auth/callback, get a
- * session, and route into /dashboard or /onboarding depending on profile
- * state.
+ * Calls /api/auth/send-magic-link which:
+ *   - Generates a token via Supabase admin API (service-role)
+ *   - Sends a branded email through Resend (from: hiring.productions)
+ *   - Returns a token-only URL: /auth/verify?token=XXX
  *
- * No passwords. No "verify against Stripe" gating. Existing paying
- * customers sign in the same way — the Stripe webhook syncs their tier on
- * profiles.membership_tier when their payment events fire.
+ * The visitor clicks the email link → /auth/verify exchanges the token for
+ * a session via supabase.auth.verifyOtp() → routes to /onboarding or
+ * /dashboard.
+ *
+ * This flow bypasses Supabase's Site URL config entirely so we don't
+ * depend on dashboard settings + we get full email branding control.
  */
 export default function SignInPage() {
-  const supabase = createClient()
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
@@ -56,36 +56,35 @@ export default function SignInPage() {
     setLoading(true)
     setError('')
 
-    const { error: supaError } = await supabase.auth.signInWithOtp({
-      email: trimmed,
-      options: {
-        // Where the magic link sends the user after they click. The callback
-        // route exchanges the code for a session and routes them to either
-        // /onboarding (new user) or /dashboard (returning).
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-        // Allow new sign-ups via this same flow. Existing users sign in;
-        // new users get an account created automatically.
-        shouldCreateUser: true,
-      },
-    })
-
-    if (supaError) {
-      setError(supaError.message)
-      setLoading(false)
-      return
-    }
-
     try {
-      localStorage.setItem(
-        'hp_last_magic_link',
-        JSON.stringify({ email: trimmed, ts: Date.now() }),
-      )
-    } catch {
-      // ignore quota errors
-    }
+      const res = await fetch('/api/auth/send-magic-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: trimmed }),
+      })
+      const data = await res.json().catch(() => ({}))
 
-    setSent(true)
-    setLoading(false)
+      if (!res.ok) {
+        setError(data?.error ?? 'Something went wrong sending the link.')
+        setLoading(false)
+        return
+      }
+
+      try {
+        localStorage.setItem(
+          'hp_last_magic_link',
+          JSON.stringify({ email: trimmed, ts: Date.now() }),
+        )
+      } catch {
+        // ignore quota errors
+      }
+
+      setSent(true)
+    } catch {
+      setError("Couldn't reach the server. Try again in a moment.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
