@@ -90,64 +90,50 @@ export function SampleRead() {
           Senior PM &middot; 8 yrs &middot; B2B SaaS
         </p>
 
-        {/* THE VISUAL ANCHOR — the single focal point.
-            0 → 4 of 5 recruiter searches she'd surface in. */}
-        <div
+        {/* THE VISUAL ANCHOR — two sentences. The numbers are emphasized,
+            but they sit inside complete sentences so the meaning lands
+            instantly. No more isolated "0 → 4" requiring a caption to
+            decode. The reader gets the whole story in one breath. */}
+        <p
           style={{
-            display: 'flex',
-            alignItems: 'baseline',
-            justifyContent: 'center',
-            gap: 'clamp(16px, 3vw, 32px)',
-            marginBottom: 28,
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 'clamp(28px, 4vw, 44px)',
+            lineHeight: 1.18,
+            letterSpacing: '-0.02em',
+            color: '#9D9CB3',
+            textAlign: 'center',
+            margin: '0 0 14px',
           }}
         >
+          Today she&rsquo;s in{' '}
+          <span style={{ color: '#FF8FA3', fontWeight: 900 }}>0 of 5</span>{' '}
+          recruiter searches.
+        </p>
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 'clamp(28px, 4vw, 44px)',
+            lineHeight: 1.18,
+            letterSpacing: '-0.02em',
+            color: '#F2F0FF',
+            textAlign: 'center',
+            margin: '0 0 clamp(72px, 9vw, 112px)',
+          }}
+        >
+          Three small fixes —{' '}
           <span
             style={{
-              fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(96px, 16vw, 180px)',
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
-              color: '#3F3D52',
-            }}
-          >
-            0
-          </span>
-          <ArrowRight
-            size={48}
-            strokeWidth={2.5}
-            color="#A78BFA"
-            style={{ flexShrink: 0, alignSelf: 'center' }}
-          />
-          <span
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(96px, 16vw, 180px)',
-              lineHeight: 1,
-              letterSpacing: '-0.04em',
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}
           >
-            4
+            she&rsquo;s in 4 of 5.
           </span>
-        </div>
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 17,
-            color: '#9D9CB3',
-            textAlign: 'center',
-            lineHeight: 1.5,
-            margin: '0 0 clamp(72px, 9vw, 112px)',
-          }}
-        >
-          of 5 recruiter searches she&rsquo;d surface in,
-          <br />
-          after three small changes.
         </p>
 
         {/* THE THREE FIXES — plain text. No cards. No borders. */}
