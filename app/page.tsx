@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { StartHereBoard } from '@/components/start-here-board'
+import { DashboardPreview } from '@/components/dashboard-preview'
 
 /**
  * Homepage v2 — single-wedge positioning.
@@ -79,6 +80,16 @@ export default function HomePage() {
          the widget actually answers — not as a separate homepage section.
       */}
       <StartHereBoard />
+
+      {/* ──────────────── DASHBOARD PREVIEW ─────────────────
+         Conversion lever — shows visitors WHAT they get when they sign in
+         (saved progress, step checklist, recent insights). Animates on
+         scroll-into-view: progress bar fills, steps check off, insights
+         fade in. Pattern from Linear/Cal.com/Stripe Atlas. Behavioral
+         basis: goal gradient (Hull 1932) + endowed progress (Nunes &
+         Drèze 2006). Per PLATFORM-VISION.md Stage 1.
+      */}
+      <DashboardPreview />
 
       {/* ─────────────── CLOSING ───────────────
          Rule 5: one CTA per moment. Light-mode redesign: warm cream
