@@ -129,33 +129,7 @@ export default function HomePage() {
             Open for the first time.
           </h2>
 
-          <div
-            style={{
-              marginTop: 40,
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(40px, 5vw, 56px)',
-              letterSpacing: '-0.03em',
-              lineHeight: 1,
-              color: '#F2F0FF',
-            }}
-          >
-            $14.99
-            <span
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 600,
-                fontSize: 'clamp(15px, 1.6vw, 18px)',
-                color: '#9D9CB3',
-                letterSpacing: '0',
-                marginLeft: 8,
-              }}
-            >
-              / month · or $99 / year
-            </span>
-          </div>
-
-          <div style={{ marginTop: 32 }}>
+          <div style={{ marginTop: 44 }}>
             <Link
               href="/membership"
               className="hero-btn"
