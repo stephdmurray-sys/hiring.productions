@@ -128,7 +128,7 @@ export function PricingFAQ() {
     <section
       style={{
         padding: 'clamp(64px, 9vw, 112px) 24px',
-        background: '#0F0F12',
+        background: '#FAF8F3',
         borderTop: '1px solid rgba(255,255,255,0.04)',
       }}
     >
@@ -154,7 +154,7 @@ export function PricingFAQ() {
             fontSize: 'clamp(28px, 4vw, 42px)',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             textAlign: 'center',
             margin: '0 0 36px',
           }}
@@ -177,7 +177,7 @@ function FAQItem({ q, a }: Q) {
   return (
     <div
       style={{
-        background: '#14141B',
+        background: '#FFFFFF',
         border: `1px solid ${open ? 'rgba(167,139,250,0.35)' : 'rgba(255,255,255,0.06)'}`,
         borderRadius: 12,
         overflow: 'hidden',
@@ -201,7 +201,7 @@ function FAQItem({ q, a }: Q) {
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 700,
           fontSize: 16,
-          color: '#F2F0FF',
+          color: '#1A1A22',
           lineHeight: 1.35,
         }}
       >

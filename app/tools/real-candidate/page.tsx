@@ -66,14 +66,14 @@ export default function RealCandidatePage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -119,7 +119,7 @@ export default function RealCandidatePage() {
           placeholder="Paste the candidate's resume and cover letter as plain text. The whole thing, not just the summary. The more you paste, the more accurate the read."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -143,7 +143,7 @@ export default function RealCandidatePage() {
             placeholder="e.g. Senior Software Engineer (Backend, Python) at a Series B fintech"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
           <p
             style={{

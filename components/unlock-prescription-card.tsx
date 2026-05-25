@@ -19,7 +19,7 @@ export function UnlockPrescriptionCard() {
     <section
       style={{
         marginTop: 32,
-        background: '#14141B',
+        background: '#FFFFFF',
         border: '1px solid rgba(108,71,255,0.35)',
         borderRadius: 20,
         padding: 'clamp(28px, 5vw, 40px)',
@@ -85,7 +85,7 @@ export function UnlockPrescriptionCard() {
             fontWeight: 900,
             fontSize: 'clamp(22px, 3.2vw, 30px)',
             letterSpacing: '-0.015em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             lineHeight: 1.2,
             marginBottom: 12,
           }}
@@ -136,7 +136,7 @@ export function UnlockPrescriptionCard() {
                 gap: 8,
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13.5px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 lineHeight: 1.5,
               }}
             >

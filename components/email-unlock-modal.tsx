@@ -92,7 +92,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#14141B',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.30)',
           borderRadius: 20,
           padding: 32,
@@ -141,7 +141,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
             fontSize: '26px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             letterSpacing: '-0.02em',
             lineHeight: 1.15,
             margin: '0 0 10px',
@@ -158,7 +158,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 8px',
           }}
         >
-          Sign in for the upgraded experience — <span style={{ color: '#F2F0FF', fontWeight: 800 }}>8 more free insights</span>, no card, no password.
+          Sign in for the upgraded experience — <span style={{ color: '#1A1A22', fontWeight: 800 }}>8 more free insights</span>, no card, no password.
         </p>
         <p
           style={{
@@ -169,7 +169,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#F2F0FF', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $14.99/mo or $99/yr.
+          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#1A1A22', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $14.99/mo or $99/yr.
         </p>
 
         <form onSubmit={submit}>
@@ -185,12 +185,12 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             style={{
               width: '100%',
               padding: '14px 16px',
-              background: '#0F0F12',
+              background: '#FAF8F3',
               border: error
                 ? '1.5px solid #FF4F6A'
                 : '1.5px solid rgba(167,139,250,0.30)',
               borderRadius: 12,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               fontFamily: "'Figtree', sans-serif",
               fontSize: '15px',
               outline: 'none',

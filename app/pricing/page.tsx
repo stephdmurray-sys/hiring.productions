@@ -74,7 +74,7 @@ function CellContent({ value }: { value: Cell }) {
 
 export default function PricingPage() {
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* HERO */}
@@ -119,7 +119,7 @@ export default function PricingPage() {
               fontSize: 'clamp(40px, 5.5vw, 64px)',
               letterSpacing: '-0.025em',
               lineHeight: 1.05,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 20px',
             }}
           >
@@ -173,8 +173,8 @@ export default function PricingPage() {
           {/* FREE */}
           <div
             style={{
-              background: '#14141B',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: '#FFFFFF',
+              border: '1px solid #ECECF2',
               borderRadius: '20px',
               padding: '32px',
             }}
@@ -197,7 +197,7 @@ export default function PricingPage() {
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 900,
                 fontSize: '40px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 letterSpacing: '-0.02em',
                 lineHeight: 1,
                 marginBottom: '4px',
@@ -236,7 +236,7 @@ export default function PricingPage() {
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 500,
                     fontSize: '14px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                   }}
                 >
                   <Check size={16} color="#22C55E" strokeWidth={3} />
@@ -269,7 +269,7 @@ export default function PricingPage() {
           {/* PRO — featured */}
           <div
             style={{
-              background: '#14141B',
+              background: '#FFFFFF',
               border: '2px solid rgba(108,71,255,0.5)',
               borderRadius: '20px',
               padding: '32px',
@@ -317,7 +317,7 @@ export default function PricingPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 900,
                   fontSize: '40px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   letterSpacing: '-0.02em',
                   lineHeight: 1,
                 }}
@@ -339,7 +339,7 @@ export default function PricingPage() {
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 fontWeight: 700,
                 marginBottom: '6px',
               }}
@@ -385,7 +385,7 @@ export default function PricingPage() {
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 500,
                     fontSize: '14px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                   }}
                 >
                   <Check size={16} color="#A78BFA" strokeWidth={3} />
@@ -427,7 +427,7 @@ export default function PricingPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '15px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   cursor: 'pointer',
                   textAlign: 'center',
                 }}
@@ -462,7 +462,7 @@ export default function PricingPage() {
                 fontWeight: 900,
                 fontSize: 'clamp(28px, 3.5vw, 42px)',
                 letterSpacing: '-0.02em',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 margin: '0 0 14px',
                 lineHeight: 1.15,
               }}
@@ -487,7 +487,7 @@ export default function PricingPage() {
           {/* Table */}
           <div
             style={{
-              background: '#14141B',
+              background: '#FFFFFF',
               border: '1px solid rgba(108,71,255,0.20)',
               borderRadius: '16px',
               overflow: 'hidden',
@@ -531,7 +531,7 @@ export default function PricingPage() {
                       style={{
                         fontSize: '13px',
                         fontWeight: 800,
-                        color: '#F2F0FF',
+                        color: '#1A1A22',
                         marginBottom: '2px',
                       }}
                     >
@@ -636,7 +636,7 @@ export default function PricingPage() {
                             padding: '14px 20px',
                             fontSize: '14px',
                             fontWeight: 500,
-                            color: '#F2F0FF',
+                            color: '#1A1A22',
                             lineHeight: 1.45,
                           }}
                         >
@@ -687,7 +687,7 @@ export default function PricingPage() {
       </section>
 
       {/* CLOSING CTA */}
-      <section style={{ padding: '60px 24px 100px', background: '#0F0F12' }}>
+      <section style={{ padding: '60px 24px 100px', background: '#FAF8F3' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', textAlign: 'center' }}>
           <h2
             style={{
@@ -696,7 +696,7 @@ export default function PricingPage() {
               fontSize: 'clamp(28px, 4vw, 44px)',
               letterSpacing: '-0.02em',
               lineHeight: 1.1,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 16px',
             }}
           >
@@ -753,7 +753,7 @@ export default function PricingPage() {
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 800,
                 fontSize: '16px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 cursor: 'pointer',
               }}
             >

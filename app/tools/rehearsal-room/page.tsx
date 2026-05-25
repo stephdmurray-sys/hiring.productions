@@ -119,10 +119,10 @@ export default function RehearsalRoomPage() {
     width: '100%',
     minHeight: '200px',
     padding: '14px 16px',
-    background: '#0F0F12',
-    border: '1px solid rgba(255,255,255,0.12)',
+    background: '#FAF8F3',
+    border: '1px solid #ECECF2',
     borderRadius: '8px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     fontFamily: 'Figtree, monospace',
     fontSize: '13px',
     lineHeight: 1.7,
@@ -145,13 +145,13 @@ export default function RehearsalRoomPage() {
             bottom: '20px',
             right: '20px',
             background: '#1A1A22',
-            border: '1px solid rgba(255,255,255,0.12)',
+            border: '1px solid #ECECF2',
             borderRadius: '8px',
             padding: '10px 14px',
             zIndex: 50,
             fontSize: '11px',
             fontFamily: 'Figtree, sans-serif',
-            color: '#F2F0FF',
+            color: '#1A1A22',
           }}
         >
           <div style={{ marginBottom: '6px', color: '#8B8AA0' }}>
@@ -181,7 +181,7 @@ export default function RehearsalRoomPage() {
           <div
             style={{
               background: '#1A1A22',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid #ECECF2',
               borderRadius: '12px',
               padding: '32px',
               marginBottom: '24px',
@@ -277,7 +277,7 @@ export default function RehearsalRoomPage() {
               style={{
                 width: '100%',
                 height: '3px',
-                background: 'rgba(255,255,255,0.06)',
+                background: '#FFFFFF',
                 borderRadius: '2px',
                 overflow: 'hidden',
                 marginBottom: '32px',
@@ -296,7 +296,7 @@ export default function RehearsalRoomPage() {
             <div
               style={{
                 fontSize: '16px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 fontWeight: 600,
                 fontFamily: 'Figtree, sans-serif',
               }}
@@ -321,7 +321,7 @@ export default function RehearsalRoomPage() {
                   marginBottom: '8px',
                   letterSpacing: '-0.02em',
                   fontFamily: 'Figtree, sans-serif',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                 }}
               >
                 Your script for this interview.
@@ -386,7 +386,7 @@ export default function RehearsalRoomPage() {
                 fontWeight: 900,
                 marginBottom: '12px',
                 fontFamily: 'Figtree, sans-serif',
-                color: '#F2F0FF',
+                color: '#1A1A22',
               }}
             >
               Something broke on our end.

@@ -27,7 +27,7 @@ export function InputPromptCard({ title, prompts }: InputPromptCardProps) {
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 700,
           fontSize: '13px',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           marginBottom: '10px',
         }}
       >

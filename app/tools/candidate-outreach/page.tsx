@@ -84,14 +84,14 @@ export default function CandidateOutreachPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -116,7 +116,7 @@ export default function CandidateOutreachPage() {
     cursor: 'pointer',
     fontFamily: "'Figtree', sans-serif",
     fontSize: '13.5px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'all 0.15s ease',
   })
 
@@ -152,7 +152,7 @@ export default function CandidateOutreachPage() {
           placeholder="e.g. Jordan Lee, Senior PM at Notion for 3 years, was at Asana before. Recently posted on LinkedIn about building from 0 to 1 inside an established company. Open to startups."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="2. Role you want them to consider" filled={!!role.trim()} />
@@ -162,7 +162,7 @@ export default function CandidateOutreachPage() {
           placeholder="e.g. Senior PM, founding product team at a Series A B2B SaaS in fintech. They'd own discovery, ship 2-3 features in their first 90 days, report directly to founder."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="3. Channel" filled={!!channel.trim()} />
@@ -220,7 +220,7 @@ export default function CandidateOutreachPage() {
             placeholder="e.g. Just closed Series A from Index Ventures. 14 people. Building API-first fraud detection for fintechs. Eng team is 4 ex-Stripe."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 

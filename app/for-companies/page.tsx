@@ -26,7 +26,7 @@ export default function ForCompaniesPage() {
   }
 
   return (
-    <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* Hero Section */}
@@ -107,7 +107,7 @@ export default function ForCompaniesPage() {
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '17px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             fontWeight: 600,
             lineHeight: 1.6,
             marginBottom: '20px',
@@ -168,7 +168,7 @@ export default function ForCompaniesPage() {
           fontWeight: 900,
           fontSize: 'clamp(28px, 4vw, 44px)',
           letterSpacing: '-0.02em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           textAlign: 'center',
           marginBottom: '40px',
           lineHeight: 1.1,
@@ -201,7 +201,7 @@ export default function ForCompaniesPage() {
                 flexDirection: 'column',
                 gap: '8px',
                 textDecoration: 'none',
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: stage.status === 'soon'
                   ? '1px dashed rgba(255,143,163,0.3)'
                   : '1px solid rgba(255,79,106,0.25)',
@@ -246,7 +246,7 @@ export default function ForCompaniesPage() {
                 fontWeight: 800,
                 fontSize: 17,
                 lineHeight: 1.25,
-                color: '#F2F0FF',
+                color: '#1A1A22',
               }}>
                 {stage.tool}
               </div>
@@ -288,7 +288,7 @@ export default function ForCompaniesPage() {
         id="waitlist"
         style={{
           padding: 'clamp(64px, 9vw, 110px) clamp(20px, 5vw, 40px)',
-          background: '#14141B',
+          background: '#FFFFFF',
           borderTop: '1px solid rgba(255,79,106,0.15)',
           borderBottom: '1px solid rgba(255,79,106,0.15)',
         }}
@@ -310,7 +310,7 @@ export default function ForCompaniesPage() {
             fontWeight: 900,
             fontSize: 'clamp(32px, 4.5vw, 50px)',
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             lineHeight: 1.1,
             marginBottom: 18,
           }}>
@@ -377,13 +377,13 @@ export default function ForCompaniesPage() {
                 style={{
                   flex: '1 1 240px',
                   minWidth: 0,
-                  background: 'rgba(255,255,255,0.04)',
+                  background: '#FFFFFF',
                   border: '1px solid rgba(255,79,106,0.30)',
                   borderRadius: 10,
                   padding: '14px 16px',
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: 15,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   outline: 'none',
                 }}
               />
@@ -465,7 +465,7 @@ export default function ForCompaniesPage() {
               key={idx}
               style={{
                 background: '#1A1A22',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #ECECF2',
                 borderRadius: '14px',
                 padding: 'clamp(22px, 4vw, 28px)',
                 textAlign: 'left',
@@ -561,7 +561,7 @@ export default function ForCompaniesPage() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                 <tool.icon size={20} color="#FF4F6A" />
-                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#F2F0FF' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#1A1A22' }}>
                   {tool.name}
                 </h3>
               </div>
@@ -640,14 +640,14 @@ export default function ForCompaniesPage() {
                 key={item.step}
                 style={{
                   background: '#1A1A22',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid #ECECF2',
                   borderRadius: '12px',
                   padding: '24px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                   <item.icon size={20} color="#6C47FF" />
-                  <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#F2F0FF' }}>
+                  <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#1A1A22' }}>
                     {item.title}
                   </h3>
                 </div>
@@ -675,7 +675,7 @@ export default function ForCompaniesPage() {
                   padding: '12px 20px',
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                 }}
               >
                 {pill}

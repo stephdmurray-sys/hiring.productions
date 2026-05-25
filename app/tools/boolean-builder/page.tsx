@@ -69,14 +69,14 @@ export default function BooleanBuilderPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -118,7 +118,7 @@ export default function BooleanBuilderPage() {
           placeholder="e.g. Senior Software Engineer · Director of Marketing · Head of People"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -131,7 +131,7 @@ export default function BooleanBuilderPage() {
           placeholder="e.g. Python and Django · 5+ years backend · worked at a Series A–C SaaS · shipped a payment integration"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="3. Location" filled={!!location.trim()} />
@@ -142,7 +142,7 @@ export default function BooleanBuilderPage() {
           placeholder="e.g. NYC + remote within US · San Francisco Bay Area · fully remote · Austin TX"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -165,7 +165,7 @@ export default function BooleanBuilderPage() {
             placeholder="e.g. healthcare or fintech background · Kubernetes · led a small team · open-source contributor"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 
@@ -190,7 +190,7 @@ export default function BooleanBuilderPage() {
             placeholder="e.g. no agency recruiters · no FAANG · no current bootcamp grads"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 

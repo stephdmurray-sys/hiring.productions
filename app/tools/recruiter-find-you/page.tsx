@@ -77,14 +77,14 @@ export default function RecruiterFindYouPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -132,7 +132,7 @@ export default function RecruiterFindYouPage() {
           placeholder='e.g. "Senior Talent Acquisition Leader | Driving Strategic Growth | Healthcare TA Expert"'
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
         <div
           style={{
@@ -157,7 +157,7 @@ export default function RecruiterFindYouPage() {
           placeholder='e.g. "Founder & Recruiting Consultant" or "Sr Director, Talent Acquisition"'
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -171,7 +171,7 @@ export default function RecruiterFindYouPage() {
           placeholder="e.g. Senior Director of Talent Acquisition · VP of People · Director of Recruiting"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="4. Target industry" filled={!!industry.trim()} />
@@ -182,7 +182,7 @@ export default function RecruiterFindYouPage() {
           placeholder="e.g. Healthcare · B2B SaaS · Financial services · Edtech"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="5. Location / location preference" filled={!!location.trim()} />
@@ -193,7 +193,7 @@ export default function RecruiterFindYouPage() {
           placeholder="e.g. Seattle WA · NYC area · Remote (US) · Open to relocation to Austin"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Optional but high-value */}
@@ -209,7 +209,7 @@ export default function RecruiterFindYouPage() {
           rows={5}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -224,7 +224,7 @@ export default function RecruiterFindYouPage() {
           rows={3}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -239,7 +239,7 @@ export default function RecruiterFindYouPage() {
           placeholder="e.g. 12 years · 18 years · 6 years"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -254,7 +254,7 @@ export default function RecruiterFindYouPage() {
           placeholder='e.g. "Yes, recruiters-only mode" · "Yes, public green frame" · "No" · "Not sure"'
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Submit */}

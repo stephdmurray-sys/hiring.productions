@@ -77,7 +77,7 @@ export function RepVeraMoment({ title, body, ctaLabel = 'Start your RepVera — 
             fontSize: 'clamp(24px, 3.4vw, 34px)',
             letterSpacing: '-0.02em',
             lineHeight: 1.15,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '0 0 14px',
           }}
         >

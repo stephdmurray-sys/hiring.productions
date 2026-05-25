@@ -64,14 +64,14 @@ export default function KeywordGapPage() {
 
   const textareaStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '14px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -107,7 +107,7 @@ export default function KeywordGapPage() {
           placeholder="Paste your full resume — text only. Don't worry about formatting."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Job Description */}
@@ -118,7 +118,7 @@ export default function KeywordGapPage() {
           placeholder="Paste the full job description for the role you want — the more complete, the more accurate the scan."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Submit Button */}

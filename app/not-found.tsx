@@ -45,7 +45,7 @@ export default function NotFound() {
       <main
         style={{
           minHeight: '100vh',
-          background: '#0F0F12',
+          background: '#FAF8F3',
           fontFamily: "'Figtree', sans-serif",
           display: 'flex',
           flexDirection: 'column',
@@ -150,7 +150,7 @@ export default function NotFound() {
             fontWeight: 900,
             lineHeight: 1.05,
             letterSpacing: '-0.03em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             textAlign: 'center',
             marginBottom: '16px',
             maxWidth: '700px',
@@ -203,7 +203,7 @@ export default function NotFound() {
               alignItems: 'center',
               gap: '8px',
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               padding: '14px 32px',
               borderRadius: '10px',
               fontFamily: "'Figtree', sans-serif",
@@ -249,7 +249,7 @@ export default function NotFound() {
             width: '100%',
             maxWidth: '560px',
             height: '1px',
-            background: 'rgba(255,255,255,0.06)',
+            background: '#FFFFFF',
             marginBottom: '48px',
           }}
         />
@@ -304,7 +304,7 @@ export default function NotFound() {
                 display: 'block',
                 width: '240px',
                 background: '#1A1A22',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #ECECF2',
                 borderRadius: '14px',
                 padding: '20px',
                 textDecoration: 'none',
@@ -331,7 +331,7 @@ export default function NotFound() {
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '14px',
                   fontWeight: 800,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   lineHeight: 1.3,
                   marginBottom: '6px',
                 }}

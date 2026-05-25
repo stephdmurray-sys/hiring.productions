@@ -79,14 +79,14 @@ export default function GhostedPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -135,7 +135,7 @@ export default function GhostedPage() {
                 cursor: 'pointer',
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13.5px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 transition: 'all 0.15s ease',
               }}
             >
@@ -163,7 +163,7 @@ export default function GhostedPage() {
           placeholder="e.g. 9 days · 3 weeks · over a month · 6 days since the onsite"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -177,7 +177,7 @@ export default function GhostedPage() {
           rows={3}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -191,7 +191,7 @@ export default function GhostedPage() {
           placeholder="e.g. Sr Product Manager at a Series C startup · Marketing Director at a Fortune 500 · entry-level customer success"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -206,7 +206,7 @@ export default function GhostedPage() {
           rows={2}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <button

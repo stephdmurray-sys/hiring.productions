@@ -85,7 +85,7 @@ export default async function RoleRankPage({
   }
 
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22' }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
@@ -97,7 +97,7 @@ export default async function RoleRankPage({
         style={{
           position: 'relative',
           overflow: 'hidden',
-          background: '#0F0F12',
+          background: '#FAF8F3',
           padding: 'clamp(80px, 12vh, 120px) clamp(20px, 5vw, 40px) clamp(56px, 8vh, 90px)',
         }}
       >
@@ -169,7 +169,7 @@ export default async function RoleRankPage({
               fontSize: 'clamp(36px, 5.5vw, 64px)',
               lineHeight: 1.05,
               letterSpacing: '-0.025em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               marginBottom: 22,
             }}
           >
@@ -269,7 +269,7 @@ export default async function RoleRankPage({
               fontWeight: 900,
               fontSize: 'clamp(26px, 3.6vw, 38px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               textAlign: 'center',
               lineHeight: 1.15,
               marginBottom: 36,
@@ -283,8 +283,8 @@ export default async function RoleRankPage({
               <div
                 key={idx}
                 style={{
-                  background: '#0F0F12',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  background: '#FAF8F3',
+                  border: '1px solid #ECECF2',
                   borderRadius: 14,
                   padding: '20px 22px',
                   display: 'flex',
@@ -313,7 +313,7 @@ export default async function RoleRankPage({
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '15px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     lineHeight: 1.6,
                   }}
                 >
@@ -350,7 +350,7 @@ export default async function RoleRankPage({
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '15px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 lineHeight: 1.65,
               }}
             >
@@ -363,7 +363,7 @@ export default async function RoleRankPage({
       {/* ───────────── WHAT YOU GET BACK ───────────── */}
       <section
         style={{
-          background: '#0F0F12',
+          background: '#FAF8F3',
           padding: 'clamp(56px, 8vw, 90px) clamp(20px, 5vw, 40px)',
         }}
       >
@@ -388,7 +388,7 @@ export default async function RoleRankPage({
               fontWeight: 900,
               fontSize: 'clamp(26px, 3.6vw, 38px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               textAlign: 'center',
               lineHeight: 1.15,
               marginBottom: 36,
@@ -430,7 +430,7 @@ export default async function RoleRankPage({
                 key={card.title}
                 style={{
                   background: '#1A1A22',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid #ECECF2',
                   borderRadius: 14,
                   padding: 22,
                 }}
@@ -454,7 +454,7 @@ export default async function RoleRankPage({
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 800,
                     fontSize: '15.5px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     marginBottom: 8,
                   }}
                 >
@@ -513,7 +513,7 @@ export default async function RoleRankPage({
               fontWeight: 900,
               fontSize: 'clamp(26px, 3.6vw, 36px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               lineHeight: 1.2,
               marginBottom: 18,
             }}
@@ -576,7 +576,7 @@ export default async function RoleRankPage({
       */}
       <section
         style={{
-          background: '#0F0F12',
+          background: '#FAF8F3',
           borderTop: '1px solid rgba(255,255,255,0.06)',
           padding: 'clamp(56px, 8vw, 90px) clamp(20px, 5vw, 40px)',
         }}
@@ -602,7 +602,7 @@ export default async function RoleRankPage({
               fontWeight: 900,
               fontSize: 'clamp(26px, 3.6vw, 36px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               textAlign: 'center',
               lineHeight: 1.15,
               marginBottom: 32,
@@ -616,8 +616,8 @@ export default async function RoleRankPage({
               <details
                 key={idx}
                 style={{
-                  background: '#14141B',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  background: '#FFFFFF',
+                  border: '1px solid #ECECF2',
                   borderRadius: 12,
                   padding: '16px 20px',
                 }}
@@ -627,7 +627,7 @@ export default async function RoleRankPage({
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 800,
                     fontSize: 15.5,
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     cursor: 'pointer',
                     listStyle: 'none',
                     lineHeight: 1.4,

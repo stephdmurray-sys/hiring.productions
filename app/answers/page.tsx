@@ -132,7 +132,7 @@ const GROUPS: Group[] = [
 
 export default function AnswersHubPage() {
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* Hero */}
@@ -163,7 +163,7 @@ export default function AnswersHubPage() {
             fontSize: 'clamp(40px, 6vw, 64px)',
             letterSpacing: '-0.025em',
             lineHeight: 1.05,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '0 auto 18px',
             maxWidth: '780px',
           }}
@@ -215,7 +215,7 @@ export default function AnswersHubPage() {
                     fontWeight: 900,
                     fontSize: '28px',
                     letterSpacing: '-0.02em',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     margin: 0,
                   }}
                 >
@@ -246,7 +246,7 @@ export default function AnswersHubPage() {
                     href={item.href}
                     style={{
                       textDecoration: 'none',
-                      background: '#14141B',
+                      background: '#FFFFFF',
                       border: '1px solid rgba(167,139,250,0.18)',
                       borderRadius: 14,
                       padding: '20px 22px',
@@ -260,7 +260,7 @@ export default function AnswersHubPage() {
                         fontFamily: "'Figtree', sans-serif",
                         fontWeight: 800,
                         fontSize: '16px',
-                        color: '#F2F0FF',
+                        color: '#1A1A22',
                         letterSpacing: '-0.01em',
                         marginBottom: 8,
                         lineHeight: 1.3,
@@ -293,7 +293,7 @@ export default function AnswersHubPage() {
           style={{
             maxWidth: '720px',
             margin: '0 auto',
-            background: '#14141B',
+            background: '#FFFFFF',
             border: '1px solid rgba(108,71,255,0.30)',
             borderRadius: 20,
             padding: '40px 32px',
@@ -320,7 +320,7 @@ export default function AnswersHubPage() {
               fontWeight: 900,
               fontSize: 'clamp(26px, 3.6vw, 36px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 12px',
             }}
           >

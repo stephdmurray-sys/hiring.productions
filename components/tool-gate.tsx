@@ -70,7 +70,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
   return (
     <div
       style={{
-        background: '#0F0F12',
+        background: '#FAF8F3',
         padding: '24px 24px 80px',
         position: 'relative',
       }}
@@ -93,7 +93,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
           zIndex: 1,
           maxWidth: '560px',
           margin: '0 auto',
-          background: '#14141B',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.30)',
           borderRadius: '20px',
           padding: '40px 36px',
@@ -130,7 +130,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             fontWeight: 900,
             fontSize: 'clamp(26px, 3vw, 32px)',
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             lineHeight: 1.12,
             margin: 0,
           }}
@@ -228,7 +228,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 800,
                     fontSize: '15px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     marginBottom: '2px',
                     letterSpacing: '-0.005em',
                   }}
@@ -330,19 +330,19 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               placeholder="your@email.com"
               style={{
                 flex: 1,
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.10)',
+                background: '#FFFFFF',
+                border: '1px solid #ECECF2',
                 borderRadius: '8px',
                 padding: '10px 12px',
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 boxSizing: 'border-box',
                 outline: 'none',
                 transition: 'border-color 0.15s',
               }}
               onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
             />
             <button
               onClick={handleRestore}

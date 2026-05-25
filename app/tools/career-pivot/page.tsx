@@ -68,14 +68,14 @@ export default function CareerPivotPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -120,7 +120,7 @@ export default function CareerPivotPage() {
           placeholder="e.g. Senior Account Manager at an ad agency · Elementary teacher · Restaurant GM"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -134,7 +134,7 @@ export default function CareerPivotPage() {
           rows={6}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -148,7 +148,7 @@ export default function CareerPivotPage() {
           placeholder="e.g. Product Manager at a B2B SaaS · Customer Success at a fintech · UX Designer at a healthcare company"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -163,7 +163,7 @@ export default function CareerPivotPage() {
           rows={3}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <button

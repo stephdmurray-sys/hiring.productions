@@ -138,10 +138,10 @@ export default function LinkedinRewritePage() {
   const fieldInput: React.CSSProperties = {
     width: '100%',
     padding: '14px 16px',
-    background: '#0F0F12',
-    border: '1px solid rgba(255,255,255,0.12)',
+    background: '#FAF8F3',
+    border: '1px solid #ECECF2',
     borderRadius: '8px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     fontFamily: 'Figtree, sans-serif',
     fontSize: '14px',
     boxSizing: 'border-box',
@@ -171,13 +171,13 @@ export default function LinkedinRewritePage() {
             bottom: '20px',
             right: '20px',
             background: '#1A1A22',
-            border: '1px solid rgba(255,255,255,0.12)',
+            border: '1px solid #ECECF2',
             borderRadius: '8px',
             padding: '10px 14px',
             zIndex: 50,
             fontSize: '11px',
             fontFamily: 'Figtree, sans-serif',
-            color: '#F2F0FF',
+            color: '#1A1A22',
           }}
         >
           <div style={{ marginBottom: '6px', color: '#8B8AA0' }}>
@@ -207,7 +207,7 @@ export default function LinkedinRewritePage() {
           <div
             style={{
               background: '#1A1A22',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid #ECECF2',
               borderRadius: '12px',
               padding: '32px',
               marginBottom: '24px',
@@ -339,7 +339,7 @@ export default function LinkedinRewritePage() {
               style={{
                 width: '100%',
                 height: '3px',
-                background: 'rgba(255,255,255,0.06)',
+                background: '#FFFFFF',
                 borderRadius: '2px',
                 overflow: 'hidden',
                 marginBottom: '32px',
@@ -358,7 +358,7 @@ export default function LinkedinRewritePage() {
             <div
               style={{
                 fontSize: '16px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 fontWeight: 600,
                 fontFamily: 'Figtree, sans-serif',
               }}
@@ -382,7 +382,7 @@ export default function LinkedinRewritePage() {
                   marginBottom: '8px',
                   letterSpacing: '-0.02em',
                   fontFamily: 'Figtree, sans-serif',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                 }}
               >
                 Your reel, rewritten.
@@ -454,7 +454,7 @@ export default function LinkedinRewritePage() {
                 fontWeight: 900,
                 marginBottom: '12px',
                 fontFamily: 'Figtree, sans-serif',
-                color: '#F2F0FF',
+                color: '#1A1A22',
               }}
             >
               Something broke on our end.

@@ -66,14 +66,14 @@ export default function JdCandidateEyesPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -119,7 +119,7 @@ export default function JdCandidateEyesPage() {
           placeholder="Paste the complete posting — title, description, requirements, benefits, comp, the whole thing. The more you give, the more specific the read."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -143,7 +143,7 @@ export default function JdCandidateEyesPage() {
             placeholder="e.g. Senior PM at B2B SaaS · Director of Talent at healthcare startup · Mid-level engineer with 4–7 yrs"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
           <p
             style={{

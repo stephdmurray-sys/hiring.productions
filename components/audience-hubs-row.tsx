@@ -54,7 +54,7 @@ interface Props {
 
 export function AudienceHubsRow({ showHeader = true, padding = '60px 24px' }: Props) {
   return (
-    <section style={{ padding, background: '#0F0F12' }}>
+    <section style={{ padding, background: '#FAF8F3' }}>
       <div style={{ maxWidth: '1180px', margin: '0 auto' }}>
         {showHeader && (
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 36px' }}>
@@ -83,7 +83,7 @@ export function AudienceHubsRow({ showHeader = true, padding = '60px 24px' }: Pr
                 fontSize: 'clamp(26px, 3.4vw, 38px)',
                 letterSpacing: '-0.025em',
                 lineHeight: 1.1,
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 margin: '0 0 10px',
               }}
             >
@@ -128,8 +128,8 @@ function HubCard({ hub }: { hub: Hub }) {
         display: 'flex',
         flexDirection: 'column',
         padding: '24px 22px 26px',
-        background: '#14141B',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: '#FFFFFF',
+        border: '1px solid #ECECF2',
         borderRadius: '14px',
         textDecoration: 'none',
         color: 'inherit',
@@ -142,7 +142,7 @@ function HubCard({ hub }: { hub: Hub }) {
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
+        e.currentTarget.style.borderColor = '#ECECF2'
       }}
     >
       <div
@@ -177,7 +177,7 @@ function HubCard({ hub }: { hub: Hub }) {
           fontSize: '20px',
           letterSpacing: '-0.015em',
           lineHeight: 1.2,
-          color: '#F2F0FF',
+          color: '#1A1A22',
           marginBottom: '10px',
         }}
       >

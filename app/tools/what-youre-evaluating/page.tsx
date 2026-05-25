@@ -67,14 +67,14 @@ export default function WhatYoureEvaluatingPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -125,7 +125,7 @@ export default function WhatYoureEvaluatingPage() {
           placeholder="Paste the complete JD — title, description, responsibilities, requirements, comp. The more detail you give, the more specific the competencies."
           style={jdTextareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -138,7 +138,7 @@ export default function WhatYoureEvaluatingPage() {
           placeholder="e.g. Recruiter screen (30 min) — me, focused on level/comp fit. Hiring manager (60 min) — VP of Eng, focused on system design and previous shipping. IC peer (45 min) — Senior IC, focused on collaboration and code quality. Skip-level (30 min) — CEO, focused on growth potential and fit."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -161,7 +161,7 @@ export default function WhatYoureEvaluatingPage() {
             placeholder="e.g. Title inflation from past role · candidates who only describe team accomplishments not personal · gaps the candidate is dodging · level-down concern"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 

@@ -108,7 +108,7 @@ export function ToolSamplePreview({
                 <span
                   style={{
                     fontWeight: 800,
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     marginRight: 6,
                   }}
                 >

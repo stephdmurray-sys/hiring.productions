@@ -91,7 +91,7 @@ export function BilateralCallout({ audience }: BilateralCalloutProps) {
             fontSize: 'clamp(22px, 3.2vw, 30px)',
             letterSpacing: '-0.02em',
             lineHeight: 1.2,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '0 0 14px',
           }}
         >

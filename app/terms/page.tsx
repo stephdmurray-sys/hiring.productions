@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       <section
@@ -43,7 +43,7 @@ export default function TermsPage() {
             fontWeight: 900,
             letterSpacing: '-0.025em',
             lineHeight: 1.05,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '0 0 24px',
           }}
         >
@@ -172,7 +172,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
           fontSize: '20px',
           fontWeight: 800,
           letterSpacing: '-0.015em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           margin: '0 0 12px',
         }}
       >

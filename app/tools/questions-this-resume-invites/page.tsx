@@ -115,14 +115,14 @@ export default function QuestionsThisResumeInvitesPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     outline: 'none',
     boxSizing: 'border-box',
   }
@@ -159,8 +159,8 @@ export default function QuestionsThisResumeInvitesPage() {
           style={{
             marginBottom: 24,
             padding: 4,
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: 12,
             display: 'flex',
             gap: 4,
@@ -241,7 +241,7 @@ export default function QuestionsThisResumeInvitesPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: 14,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: 6,
                 }}
               >
@@ -269,7 +269,7 @@ export default function QuestionsThisResumeInvitesPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: 15,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: 6,
                 }}
               >
@@ -312,7 +312,7 @@ export default function QuestionsThisResumeInvitesPage() {
           placeholder="Optional. e.g. Senior PM at a Series B SaaS · Director of TA at a clinical org"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <button

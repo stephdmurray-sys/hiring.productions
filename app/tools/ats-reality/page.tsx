@@ -84,14 +84,14 @@ export default function ATSRealityPage() {
           rows={10}
           style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: '10px',
             padding: '16px 18px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
             fontSize: '15px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             resize: 'vertical',
             transition: 'border-color 0.2s',
             outline: 'none',
@@ -101,7 +101,7 @@ export default function ATSRealityPage() {
             e.target.style.borderColor = '#6C47FF'
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = 'rgba(255,255,255,0.08)'
+            e.target.style.borderColor = '#ECECF2'
           }}
         />
 
@@ -129,14 +129,14 @@ export default function ATSRealityPage() {
           rows={8}
           style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: '10px',
             padding: '16px 18px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
             fontSize: '15px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             resize: 'vertical',
             transition: 'border-color 0.2s',
             outline: 'none',
@@ -146,7 +146,7 @@ export default function ATSRealityPage() {
             e.target.style.borderColor = '#6C47FF'
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = 'rgba(255,255,255,0.08)'
+            e.target.style.borderColor = '#ECECF2'
           }}
         />
 
@@ -179,7 +179,7 @@ export default function ATSRealityPage() {
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 700,
             fontSize: '16px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             cursor: loading ? 'not-allowed' : 'pointer',
             transition: 'all 0.2s',
             opacity: loading ? 0.6 : 1,

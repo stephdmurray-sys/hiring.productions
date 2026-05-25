@@ -60,7 +60,7 @@ export default function MembershipPage() {
     }
   }, [])
   return (
-    <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <style>{`
         .membership-tool-card:hover {
           border-color: rgba(167,139,250,0.45) !important;
@@ -173,14 +173,14 @@ export default function MembershipPage() {
               key={idx}
               style={{
                 background: '#1A1A22',
-                border: '1px solid rgba(255,255,255,0.08)',
+                border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '16px 24px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 fontSize: '13px',
                 fontWeight: 600,
-                color: '#F2F0FF',
+                color: '#1A1A22',
               }}
             >
               {stat}
@@ -223,7 +223,7 @@ export default function MembershipPage() {
             style={{
               background: 'transparent',
               border: '1.5px solid rgba(167,139,250,0.45)',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               padding: '13.5px 24px',
               borderRadius: '10px',
               fontFamily: "'Figtree', sans-serif",
@@ -306,7 +306,7 @@ export default function MembershipPage() {
           <div style={{
             borderRadius: '16px',
             overflow: 'hidden',
-            border: '1px solid rgba(255,255,255,0.06)',
+            border: '1px solid #ECECF2',
             minWidth: '900px',
           }}>
             <table style={{
@@ -342,7 +342,7 @@ export default function MembershipPage() {
                       }}>
                         Best Value
                       </span>
-                      <span style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 800, fontSize: '20px', color: '#F2F0FF' }}>
+                      <span style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 800, fontSize: '20px', color: '#1A1A22' }}>
                         hiring.productions
                       </span>
                     </div>
@@ -356,7 +356,7 @@ export default function MembershipPage() {
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 700,
                       fontSize: '16px',
-                      color: '#F2F0FF',
+                      color: '#1A1A22',
                       borderBottom: '1px solid rgba(255,255,255,0.06)',
                       verticalAlign: 'bottom',
                     }}>
@@ -546,7 +546,7 @@ export default function MembershipPage() {
               className="membership-tool-card"
               style={{
                 background: '#1A1A22',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '24px',
                 display: 'flex',
@@ -627,7 +627,7 @@ export default function MembershipPage() {
                   fontSize: '15px',
                   fontWeight: 700,
                   marginBottom: '8px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   paddingRight: '32px',
                 }}>
                   {tool.name}
@@ -704,7 +704,7 @@ export default function MembershipPage() {
             style={{
               background: 'transparent',
               border: '1.5px solid rgba(167,139,250,0.45)',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               padding: '13.5px 24px',
               borderRadius: '10px',
               fontFamily: "'Figtree', sans-serif",

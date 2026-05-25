@@ -68,14 +68,14 @@ export default function InterviewersReadyPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -122,7 +122,7 @@ export default function InterviewersReadyPage() {
           placeholder="e.g. Senior Software Engineer, founding eng team at Series A B2B SaaS, ~6-10 yrs of experience, full-stack TypeScript + Python, reports to CTO, will be one of first 5 engineers."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -135,7 +135,7 @@ export default function InterviewersReadyPage() {
           placeholder="e.g. 1) Recruiter screen 30 min — me. 2) Hiring manager (VP Eng) 60 min — system design + previous shipping. 3) IC peer 45 min — coding pair + collaboration. 4) CEO 30 min — strategy + culture fit."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -158,7 +158,7 @@ export default function InterviewersReadyPage() {
             placeholder="e.g. Sam Chen, 8 yrs at Stripe, led the payouts platform rewrite. Active on LinkedIn about devex. Wants to join a smaller team where they can ship faster."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 
@@ -183,7 +183,7 @@ export default function InterviewersReadyPage() {
             placeholder="e.g. Also interviewing at Stripe (staying) and at a Series B company. Comp is comparable. We win on scope and ownership; we lose on brand and security."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 

@@ -55,7 +55,7 @@ export default function SignInPage() {
   }
 
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       <section
@@ -90,7 +90,7 @@ export default function SignInPage() {
           {memberState.active ? (
             <div
               style={{
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: '1px solid rgba(94,230,168,0.30)',
                 borderRadius: '20px',
                 padding: '36px',
@@ -117,7 +117,7 @@ export default function SignInPage() {
                   fontWeight: 900,
                   fontSize: '28px',
                   letterSpacing: '-0.02em',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   margin: '0 0 8px',
                 }}
               >
@@ -131,7 +131,7 @@ export default function SignInPage() {
                   margin: '0 0 24px',
                 }}
               >
-                Signed in as <strong style={{ color: '#F2F0FF' }}>{memberState.email}</strong>.
+                Signed in as <strong style={{ color: '#1A1A22' }}>{memberState.email}</strong>.
               </p>
               <Link
                 href="/tools"
@@ -209,7 +209,7 @@ export default function SignInPage() {
                   style={{
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: 14.5,
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     fontWeight: 700,
                     lineHeight: 1.45,
                   }}
@@ -240,7 +240,7 @@ export default function SignInPage() {
                     fontWeight: 900,
                     fontSize: 'clamp(32px, 4vw, 44px)',
                     letterSpacing: '-0.025em',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     margin: '0 0 12px',
                     lineHeight: 1.1,
                   }}
@@ -263,7 +263,7 @@ export default function SignInPage() {
               <form
                 onSubmit={handleSignIn}
                 style={{
-                  background: '#14141B',
+                  background: '#FFFFFF',
                   border: '1px solid rgba(108,71,255,0.25)',
                   borderRadius: '16px',
                   padding: '28px 24px',
@@ -294,19 +294,19 @@ export default function SignInPage() {
                   autoFocus
                   style={{
                     width: '100%',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.10)',
+                    background: '#FFFFFF',
+                    border: '1px solid #ECECF2',
                     borderRadius: '10px',
                     padding: '14px 16px',
                     fontFamily: "'Figtree', sans-serif",
                     fontSize: '15px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     outline: 'none',
                     boxSizing: 'border-box',
                     transition: 'border-color 0.15s',
                   }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
                 />
 
                 <button

@@ -63,8 +63,8 @@ export function FromTheRoom() {
     <section
       style={{
         position: 'relative',
-        background: '#0F0F12',
-        color: '#F2F0FF',
+        background: '#FAF8F3',
+        color: '#1A1A22',
         padding: 'clamp(64px, 9vw, 112px) 24px',
         borderTop: '1px solid rgba(255,255,255,0.04)',
       }}
@@ -100,7 +100,7 @@ export function FromTheRoom() {
               fontSize: 'clamp(28px, 4vw, 42px)',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: 0,
             }}
           >
@@ -138,8 +138,8 @@ export function FromTheRoom() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                background: '#14141B',
-                border: '1px solid rgba(255,255,255,0.06)',
+                background: '#FFFFFF',
+                border: '1px solid #ECECF2',
                 borderRadius: 14,
                 padding: '22px 22px 20px',
                 textDecoration: 'none',
@@ -172,7 +172,7 @@ export function FromTheRoom() {
                   fontWeight: 800,
                   fontSize: 17,
                   letterSpacing: '-0.01em',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   lineHeight: 1.25,
                   margin: '0 0 8px',
                 }}

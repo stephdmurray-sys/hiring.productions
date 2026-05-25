@@ -77,14 +77,14 @@ export default function ScamCheckPage() {
 
   const textareaStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -120,7 +120,7 @@ export default function ScamCheckPage() {
           placeholder="Paste the entire posting — title, company name, description, requirements, comp, contact info. The more complete, the more accurate the check."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="2. Where did you find this?" filled={!!platform.trim()} />
@@ -139,7 +139,7 @@ export default function ScamCheckPage() {
                 cursor: 'pointer',
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13.5px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 transition: 'all 0.15s ease',
               }}
             >
@@ -168,7 +168,7 @@ export default function ScamCheckPage() {
           rows={3}
           style={{ ...textareaStyle, minHeight: '80px' }}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <button

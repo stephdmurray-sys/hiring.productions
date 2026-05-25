@@ -183,14 +183,14 @@ export default function RecruiterSearchRankPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -301,7 +301,7 @@ export default function RecruiterSearchRankPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: '14px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: '6px',
                 }}
               >
@@ -340,7 +340,7 @@ export default function RecruiterSearchRankPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: '15px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: '14px',
                 }}
               >
@@ -362,7 +362,7 @@ export default function RecruiterSearchRankPage() {
                   How to export your profile (10 seconds)
                 </div>
                 <div>
-                  <strong style={{ color: '#F2F0FF' }}>1.</strong> Open{' '}
+                  <strong style={{ color: '#1A1A22' }}>1.</strong> Open{' '}
                   <a
                     href="https://www.linkedin.com/in/me"
                     target="_blank"
@@ -374,7 +374,7 @@ export default function RecruiterSearchRankPage() {
                   in a new tab.
                 </div>
                 <div>
-                  <strong style={{ color: '#F2F0FF' }}>2.</strong> Click the{' '}
+                  <strong style={{ color: '#1A1A22' }}>2.</strong> Click the{' '}
                   <span
                     style={{
                       display: 'inline-flex',
@@ -388,7 +388,7 @@ export default function RecruiterSearchRankPage() {
                       fontWeight: 800,
                       verticalAlign: 'middle',
                       margin: '0 2px',
-                      color: '#F2F0FF',
+                      color: '#1A1A22',
                       letterSpacing: '1px',
                     }}
                   >
@@ -397,12 +397,12 @@ export default function RecruiterSearchRankPage() {
                   button (next to <em>Open to</em> / <em>Add section</em>).
                 </div>
                 <div>
-                  <strong style={{ color: '#F2F0FF' }}>3.</strong> Pick{' '}
-                  <strong style={{ color: '#F2F0FF' }}>Save to PDF</strong>. It
+                  <strong style={{ color: '#1A1A22' }}>3.</strong> Pick{' '}
+                  <strong style={{ color: '#1A1A22' }}>Save to PDF</strong>. It
                   downloads to your computer automatically.
                 </div>
                 <div>
-                  <strong style={{ color: '#F2F0FF' }}>4.</strong> Drag the file
+                  <strong style={{ color: '#1A1A22' }}>4.</strong> Drag the file
                   here, or click to choose it.
                 </div>
               </div>
@@ -440,7 +440,7 @@ export default function RecruiterSearchRankPage() {
           placeholder="e.g. Senior Product Manager at a B2B SaaS · Director of TA at a healthcare company · Senior UX Designer"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* TARGET GEO — OPTIONAL */}
@@ -456,7 +456,7 @@ export default function RecruiterSearchRankPage() {
           placeholder="Optional. e.g. New York metro · San Francisco Bay Area · Remote US"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* JOB DESCRIPTION — OPTIONAL */}
@@ -472,7 +472,7 @@ export default function RecruiterSearchRankPage() {
           rows={4}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* OPEN-TO-WORK — OPTIONAL

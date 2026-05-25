@@ -73,14 +73,14 @@ export default function WhatsBreakingSearchPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -116,7 +116,7 @@ export default function WhatsBreakingSearchPage() {
           placeholder="e.g. 3 months · 6 weeks · since I got laid off in February"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* 2. Target roles */}
@@ -128,7 +128,7 @@ export default function WhatsBreakingSearchPage() {
           placeholder="e.g. Sr Director of TA at Series B startups · Product Marketing Manager at SaaS companies"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* 3. Approach (radio) */}
@@ -154,7 +154,7 @@ export default function WhatsBreakingSearchPage() {
                 cursor: 'pointer',
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '14px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 transition: 'all 0.15s ease',
               }}
             >
@@ -188,7 +188,7 @@ export default function WhatsBreakingSearchPage() {
           rows={4}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* 5. Resume — optional */}
@@ -204,7 +204,7 @@ export default function WhatsBreakingSearchPage() {
           rows={6}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* 6. LinkedIn headline + most recent role — what recruiters actually read */}
@@ -228,7 +228,7 @@ e.g. Sr Director, TA · Brightside Health (2022–Present)
           rows={8}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
         <div
           style={{

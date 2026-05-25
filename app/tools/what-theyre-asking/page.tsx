@@ -89,14 +89,14 @@ export default function WhatTheyreAskingPage() {
           rows={4}
           style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: '10px',
             padding: '12px 14px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
             fontSize: '14px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             resize: 'vertical',
             marginBottom: '4px',
           }}
@@ -131,14 +131,14 @@ export default function WhatTheyreAskingPage() {
           placeholder="e.g. Director of Talent Acquisition at a Series B startup"
           style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: '10px',
             padding: '12px 14px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
             fontSize: '14px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: '28px',
           }}
         />
@@ -158,7 +158,7 @@ export default function WhatTheyreAskingPage() {
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 700,
             fontSize: '14px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             cursor: loading || !interviewQuestion.trim() || !role.trim() ? 'not-allowed' : 'pointer',
             transition: 'all 0.2s',
           }}

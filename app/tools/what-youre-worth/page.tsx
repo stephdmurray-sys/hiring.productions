@@ -65,14 +65,14 @@ export default function NegotiateThisOfferPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -113,7 +113,7 @@ export default function NegotiateThisOfferPage() {
             lineHeight: 1.6,
           }}
         >
-          <strong style={{ color: '#F2F0FF' }}>Why we ask:</strong> AI compensation estimates go
+          <strong style={{ color: '#1A1A22' }}>Why we ask:</strong> AI compensation estimates go
           stale fast. The script we build is only as accurate as the market data you bring in. Spend
           5 minutes on the sites above first — then come back.
         </div>
@@ -129,7 +129,7 @@ export default function NegotiateThisOfferPage() {
           placeholder="e.g. Senior Director of Talent Acquisition"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Location */}
@@ -141,7 +141,7 @@ export default function NegotiateThisOfferPage() {
           placeholder="e.g. Seattle WA, Remote (US), New York City"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Experience */}
@@ -153,7 +153,7 @@ export default function NegotiateThisOfferPage() {
           placeholder="e.g. 12 years in TA, 4 years at director level"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Current or Pending Offer */}
@@ -165,7 +165,7 @@ export default function NegotiateThisOfferPage() {
           placeholder="e.g. $115,000 base + 10% bonus, or 'no offer yet — preparing for the call'"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Market Data — REQUIRED, user-supplied */}
@@ -177,7 +177,7 @@ export default function NegotiateThisOfferPage() {
           rows={5}
           style={{ ...inputStyle, resize: 'vertical', minHeight: '110px' }}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Company Type (Optional) */}
@@ -189,7 +189,7 @@ export default function NegotiateThisOfferPage() {
           placeholder="e.g. Series B startup, Fortune 500, healthcare nonprofit"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         {/* Submit Button */}

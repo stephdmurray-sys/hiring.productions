@@ -69,7 +69,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
           fontWeight: 900,
           fontSize: 'clamp(22px, 3vw, 30px)',
           letterSpacing: '-0.02em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           lineHeight: 1.2,
           marginBottom: 22,
         }}
@@ -92,7 +92,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
             ...nextCardStyle,
             cursor: 'pointer',
             textAlign: 'left',
-            background: '#0F0F12',
+            background: '#FAF8F3',
             font: 'inherit',
             color: 'inherit',
           }}
@@ -133,7 +133,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
       <div
         style={{
           background: '#1A1A22',
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid #ECECF2',
           borderRadius: 16,
           padding: '22px 24px',
           display: 'flex',
@@ -149,7 +149,7 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 800,
               fontSize: '14.5px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               marginBottom: 4,
             }}
           >
@@ -212,8 +212,8 @@ export function ResultNextSteps({ shareSummary, onRunAgain }: ResultNextStepsPro
 }
 
 const nextCardStyle: React.CSSProperties = {
-  background: '#0F0F12',
-  border: '1px solid rgba(255,255,255,0.06)',
+  background: '#FAF8F3',
+  border: '1px solid #ECECF2',
   borderRadius: 14,
   padding: 22,
   textDecoration: 'none',
@@ -225,7 +225,7 @@ const nextCardTitle: React.CSSProperties = {
   fontFamily: "'Figtree', sans-serif",
   fontWeight: 800,
   fontSize: '15.5px',
-  color: '#F2F0FF',
+  color: '#1A1A22',
   marginTop: 14,
   marginBottom: 8,
   lineHeight: 1.3,
@@ -248,13 +248,13 @@ const shareButtonStyle: React.CSSProperties = {
   alignItems: 'center',
   gap: 7,
   padding: '9px 14px',
-  background: 'rgba(255,255,255,0.04)',
-  border: '1px solid rgba(255,255,255,0.10)',
+  background: '#FFFFFF',
+  border: '1px solid #ECECF2',
   borderRadius: 8,
   fontFamily: "'Figtree', sans-serif",
   fontWeight: 700,
   fontSize: '13px',
-  color: '#F2F0FF',
+  color: '#1A1A22',
   textDecoration: 'none',
 }
 

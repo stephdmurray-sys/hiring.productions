@@ -33,8 +33,8 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
           alignItems: 'center',
           gap: 10,
           padding: '6px 12px 6px 6px',
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.08)',
+          background: '#FFFFFF',
+          border: '1px solid #ECECF2',
           borderRadius: 100,
         }}
       >
@@ -51,7 +51,7 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
               fontFamily: "'Figtree', sans-serif",
               fontSize: 12,
               fontWeight: 700,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               lineHeight: 1.2,
             }}
           >
@@ -80,8 +80,8 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
         alignItems: 'center',
         gap: 18,
         padding: '18px 20px',
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.06)',
+        background: '#FAFAFA',
+        border: '1px solid #ECECF2',
         borderRadius: 16,
         flexWrap: 'wrap',
       }}
@@ -104,7 +104,7 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 800,
             fontSize: 16,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: 3,
             letterSpacing: '-0.005em',
           }}

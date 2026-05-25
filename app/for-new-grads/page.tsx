@@ -96,7 +96,7 @@ export default function ForNewGradsPage() {
   ).filter((t): t is CatalogTool => Boolean(t))
 
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* HERO */}
@@ -142,7 +142,7 @@ export default function ForNewGradsPage() {
               fontSize: 'clamp(40px, 6vw, 76px)',
               letterSpacing: '-0.03em',
               lineHeight: 1.02,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 22px',
             }}
           >
@@ -218,7 +218,7 @@ export default function ForNewGradsPage() {
               <article
                 key={idx}
                 style={{
-                  background: '#14141B',
+                  background: '#FFFFFF',
                   border: '1px solid rgba(108,71,255,0.18)',
                   borderRadius: '16px',
                   padding: '28px 30px',
@@ -230,7 +230,7 @@ export default function ForNewGradsPage() {
                     fontWeight: 900,
                     fontSize: 'clamp(20px, 2.2vw, 24px)',
                     letterSpacing: '-0.015em',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     lineHeight: 1.25,
                     margin: '0 0 14px',
                   }}
@@ -290,7 +290,7 @@ export default function ForNewGradsPage() {
             maxWidth: '720px',
             margin: '0 auto',
             textAlign: 'center',
-            background: '#14141B',
+            background: '#FFFFFF',
             border: '1px solid rgba(108,71,255,0.30)',
             borderRadius: '22px',
             padding: '48px 32px',
@@ -333,7 +333,7 @@ export default function ForNewGradsPage() {
               fontSize: 'clamp(28px, 4vw, 42px)',
               letterSpacing: '-0.025em',
               lineHeight: 1.05,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 16px',
               position: 'relative',
             }}
@@ -433,7 +433,7 @@ function SectionHeader({
           fontSize: 'clamp(28px, 3.5vw, 42px)',
           letterSpacing: '-0.025em',
           lineHeight: 1.1,
-          color: '#F2F0FF',
+          color: '#1A1A22',
           margin: '0 0 12px',
         }}
       >

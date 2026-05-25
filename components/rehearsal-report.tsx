@@ -469,7 +469,7 @@ function InlineUpgradeCard() {
         background: 'linear-gradient(135deg, #1A1A22 0%, #2A1F3D 100%)',
         borderRadius: '14px',
         border: '1.5px solid rgba(108,71,255,0.4)',
-        color: '#F2F0FF',
+        color: '#1A1A22',
         fontFamily: 'Figtree, sans-serif',
       }}
     >

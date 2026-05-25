@@ -78,14 +78,14 @@ export default function ExplainMyGapPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -126,7 +126,7 @@ export default function ExplainMyGapPage() {
           placeholder="e.g. February 2024 · after I was laid off in March · spring 2023"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -140,7 +140,7 @@ export default function ExplainMyGapPage() {
           placeholder="e.g. 8 months · still ongoing · 2 years · 14 months"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="3. What was the main reason?" filled={!!reason.trim()} />
@@ -159,7 +159,7 @@ export default function ExplainMyGapPage() {
                 cursor: 'pointer',
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '13.5px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 transition: 'all 0.15s ease',
               }}
             >
@@ -187,7 +187,7 @@ export default function ExplainMyGapPage() {
           rows={5}
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -201,7 +201,7 @@ export default function ExplainMyGapPage() {
           placeholder="e.g. Senior Product Manager at a B2B SaaS · Director of Marketing at a healthcare startup"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <button

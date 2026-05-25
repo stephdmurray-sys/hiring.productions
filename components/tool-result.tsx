@@ -74,8 +74,8 @@ function renderInline(text: string, keyPrefix: string) {
             fontFamily:
               '"SF Mono", "Roboto Mono", "Menlo", "Consolas", ui-monospace, monospace',
             fontSize: '13.5px',
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.10)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             padding: '2px 7px',
             borderRadius: '5px',
             color: '#E8E6FF',
@@ -129,7 +129,7 @@ function renderInline(text: string, keyPrefix: string) {
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 800,
             fontSize: '12.5px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             textDecoration: 'none',
             letterSpacing: '0.01em',
             boxDecorationBreak: 'clone',
@@ -219,7 +219,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                     fontWeight: 800,
                     fontSize: '19px',
                     letterSpacing: '-0.005em',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     lineHeight: 1.3,
                   }}
                 >
@@ -286,7 +286,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 400,
                     fontSize: '15px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     lineHeight: 1.85,
                   }}
                 >
@@ -324,7 +324,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 400,
                     fontSize: '15px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     lineHeight: 1.85,
                   }}
                 >
@@ -342,7 +342,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
                 fontSize: '15px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 lineHeight: 1.85,
                 marginBottom: '8px',
               }}

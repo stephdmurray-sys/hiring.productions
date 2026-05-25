@@ -316,7 +316,7 @@ function SimpleModal({
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#14141B',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.30)',
           borderRadius: 20,
           padding: 32,
@@ -378,7 +378,7 @@ function SimpleModal({
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
             fontSize: '26px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             letterSpacing: '-0.02em',
             lineHeight: 1.15,
             margin: '0 0 10px',

@@ -80,14 +80,14 @@ export default function PayRangeCompliancePage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -111,7 +111,7 @@ export default function PayRangeCompliancePage() {
     cursor: 'pointer',
     fontFamily: "'Figtree', sans-serif",
     fontSize: '13.5px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'all 0.15s ease',
   })
 
@@ -144,7 +144,7 @@ export default function PayRangeCompliancePage() {
           placeholder="e.g. Senior Software Engineer · Director of Marketing · Recruiting Coordinator"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel label="2. Level" filled={!!level.trim()} />
@@ -172,7 +172,7 @@ export default function PayRangeCompliancePage() {
           placeholder="e.g. Engineering · Product Management · People / HR · Sales · Customer Success"
           style={inputStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -185,7 +185,7 @@ export default function PayRangeCompliancePage() {
           placeholder="e.g. NY, CA, TX · or 'Remote within US' · or 'In-office Austin TX only' · or 'Remote within CA, WA, CO, NY'"
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
         <p
           style={{
@@ -220,7 +220,7 @@ export default function PayRangeCompliancePage() {
             placeholder="e.g. $140K-$180K · $48-$58/hr · skip if you want a recommendation instead"
             style={inputStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
           <p
             style={{
@@ -255,7 +255,7 @@ export default function PayRangeCompliancePage() {
             placeholder="e.g. Base + 0.1-0.4% equity (early-stage) + 4-week PTO + medical/dental/vision + remote stipend. CO/WA/IL/MN/NJ/MA/HI require benefits in the disclosure."
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
         </div>
 

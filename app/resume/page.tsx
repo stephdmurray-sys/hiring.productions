@@ -102,7 +102,7 @@ export default function ResumeCheckerPage() {
   }
 
   return (
-    <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 24px' }}>
@@ -146,7 +146,7 @@ export default function ResumeCheckerPage() {
             <div
               style={{
                 background: '#1A1A22',
-                border: '1px solid rgba(255,255,255,0.06)',
+                border: '1px solid #ECECF2',
                 borderRadius: '12px',
                 padding: '32px',
                 marginBottom: '24px',
@@ -176,10 +176,10 @@ export default function ResumeCheckerPage() {
                       width: '100%',
                       minHeight: '240px',
                       padding: '16px',
-                      background: '#0F0F12',
-                      border: '1px solid rgba(255,255,255,0.12)',
+                      background: '#FAF8F3',
+                      border: '1px solid #ECECF2',
                       borderRadius: '8px',
-                      color: '#F2F0FF',
+                      color: '#1A1A22',
                       fontFamily: 'Figtree, monospace',
                       fontSize: '13px',
                       lineHeight: 1.7,
@@ -223,10 +223,10 @@ export default function ResumeCheckerPage() {
                   style={{
                     width: '100%',
                     padding: '14px 16px',
-                    background: '#0F0F12',
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    background: '#FAF8F3',
+                    border: '1px solid #ECECF2',
                     borderRadius: '8px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     fontFamily: 'Figtree, sans-serif',
                     fontSize: '14px',
                     boxSizing: 'border-box',
@@ -268,7 +268,7 @@ export default function ResumeCheckerPage() {
                 style={{
                   width: '100%',
                   height: '3px',
-                  background: 'rgba(255,255,255,0.06)',
+                  background: '#FFFFFF',
                   borderRadius: '2px',
                   overflow: 'hidden',
                   marginBottom: '32px',
@@ -289,7 +289,7 @@ export default function ResumeCheckerPage() {
             <div
               style={{
                 fontSize: '16px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 fontWeight: 600,
                 height: '24px',
                 fontFamily: 'Figtree, sans-serif',

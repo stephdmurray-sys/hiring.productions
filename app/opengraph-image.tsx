@@ -22,7 +22,7 @@ export default async function Image() {
           alignItems: 'flex-start',
           justifyContent: 'center',
           padding: '80px 96px',
-          background: '#0F0F12',
+          background: '#FAF8F3',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -60,7 +60,7 @@ export default async function Image() {
             fontSize: 44,
             fontWeight: 800,
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: 36,
             display: 'flex',
           }}
@@ -90,7 +90,7 @@ export default async function Image() {
             fontWeight: 900,
             letterSpacing: '-0.03em',
             lineHeight: 1.05,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             display: 'flex',
             flexDirection: 'column',
           }}

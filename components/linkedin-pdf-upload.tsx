@@ -139,7 +139,7 @@ export function LinkedInPdfUpload({
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 700,
                 fontSize: '14px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 marginBottom: '6px',
               }}
             >
@@ -232,7 +232,7 @@ function ExportGuide({
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 700,
           fontSize: '15px',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           marginBottom: '14px',
         }}
       >
@@ -245,7 +245,7 @@ function ExportGuide({
           maxWidth: '460px',
           margin: '0 auto',
           background: 'rgba(255,255,255,0.02)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          border: '1px solid #ECECF2',
           borderRadius: 10,
           padding: '16px 18px',
           cursor: 'default',
@@ -341,7 +341,7 @@ function Step({
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '13.5px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             lineHeight: 1.55,
           }}
         >
@@ -368,7 +368,7 @@ function LinkedInButtonRowMock() {
     fontSize: '11.5px',
     border: '1px solid rgba(255,255,255,0.15)',
     color: '#9D9CB3',
-    background: 'rgba(255,255,255,0.03)',
+    background: '#FAFAFA',
     whiteSpace: 'nowrap',
   }
   return (

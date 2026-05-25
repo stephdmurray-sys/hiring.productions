@@ -84,7 +84,7 @@ export function RecruiterReadingPreview() {
     <section
       ref={sectionRef}
       style={{
-        background: '#0F0F12',
+        background: '#FAF8F3',
         borderBottom: '1px solid rgba(108,71,255,0.12)',
         padding: '120px 24px 130px',
         position: 'relative',
@@ -132,7 +132,7 @@ export function RecruiterReadingPreview() {
             fontSize: 'clamp(36px, 5vw, 56px)',
             letterSpacing: '-0.025em',
             lineHeight: 1.08,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: '20px',
           }}
         >
@@ -160,7 +160,7 @@ export function RecruiterReadingPreview() {
           zIndex: 1,
           maxWidth: '760px',
           margin: '0 auto',
-          background: '#14141B',
+          background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.25)',
           borderRadius: '18px',
           boxShadow: '0 30px 100px rgba(108,71,255,0.18)',
@@ -174,7 +174,7 @@ export function RecruiterReadingPreview() {
             alignItems: 'center',
             gap: '14px',
             padding: '16px 22px',
-            background: '#0F0F12',
+            background: '#FAF8F3',
             borderBottom: '1px solid rgba(255,255,255,0.06)',
           }}
         >
@@ -251,7 +251,7 @@ export function RecruiterReadingPreview() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 500,
                   fontSize: '15.5px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   lineHeight: 1.55,
                   textAlign: 'left',
                 }}
@@ -305,7 +305,7 @@ export function RecruiterReadingPreview() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
                   fontSize: '15px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   textAlign: 'left',
                 }}
               >
@@ -323,7 +323,7 @@ export function RecruiterReadingPreview() {
             gap: '12px',
             padding: '14px 22px',
             borderTop: '1px solid rgba(255,255,255,0.06)',
-            background: '#0F0F12',
+            background: '#FAF8F3',
           }}
         >
           <div

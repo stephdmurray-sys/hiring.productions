@@ -49,7 +49,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
     fontWeight: 900,
     fontSize: featured ? 'clamp(36px, 4vw, 56px)' : 'clamp(28px, 3vw, 40px)',
     letterSpacing: '-0.03em',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     lineHeight: 1,
   }
 
@@ -79,7 +79,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
               fontSize: featured ? '14px' : '12px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               lineHeight: 1.55,
               background: 'rgba(0,0,0,0.35)',
               border: `1px solid ${t.border}`,
@@ -224,7 +224,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               ...quoteStyle(featured),
               borderLeftColor: t.accent,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               fontStyle: 'italic',
             }}
           >
@@ -277,7 +277,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               ...quoteStyle(featured),
               borderLeftColor: t.accent,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               fontStyle: 'italic',
             }}
           >
@@ -376,7 +376,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: featured ? '17px' : '15px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               lineHeight: 1.4,
             }}
           >
@@ -396,7 +396,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
               fontSize: featured ? '14px' : '12px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               lineHeight: 1.55,
               background: 'rgba(0,0,0,0.30)',
               border: `1px solid ${t.border}`,
@@ -419,7 +419,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
             style={{
               ...quoteStyle(featured),
               borderLeftColor: t.accent,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               fontStyle: 'italic',
             }}
           >
@@ -604,7 +604,7 @@ function questionLine(featured: boolean): React.CSSProperties {
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 700,
     fontSize: featured ? '20px' : '16px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     lineHeight: 1.3,
     letterSpacing: '-0.01em',
   }
@@ -671,7 +671,7 @@ function FlagLine({ text, color, featured }: { text: string; color: string; feat
       >
         ✕
       </span>
-      <span style={{ color: '#F2F0FF', fontFamily: "'Figtree', sans-serif" }}>{text}</span>
+      <span style={{ color: '#1A1A22', fontFamily: "'Figtree', sans-serif" }}>{text}</span>
     </div>
   )
 }
@@ -707,7 +707,7 @@ function RubricLine({
       >
         {mark}
       </span>
-      <span style={{ color: '#F2F0FF', fontFamily: "'Figtree', sans-serif" }}>{text}</span>
+      <span style={{ color: '#1A1A22', fontFamily: "'Figtree', sans-serif" }}>{text}</span>
     </div>
   )
 }
@@ -747,7 +747,7 @@ function Bar({
           {pct.toFixed(1)}%
         </span>
       </div>
-      <div style={{ height: featured ? 6 : 4, background: 'rgba(255,255,255,0.06)', borderRadius: 3 }}>
+      <div style={{ height: featured ? 6 : 4, background: '#FFFFFF', borderRadius: 3 }}>
         <div
           style={{
             width: `${Math.min(pct * 6, 100)}%`,

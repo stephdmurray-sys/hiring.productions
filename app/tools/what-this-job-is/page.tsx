@@ -84,14 +84,14 @@ export default function WhatThisJobIsPage() {
           rows={14}
           style={{
             width: '100%',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: '#FFFFFF',
+            border: '1px solid #ECECF2',
             borderRadius: '10px',
             padding: '16px 18px',
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
             fontSize: '15px',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             resize: 'vertical',
             transition: 'border-color 0.2s',
             outline: 'none',
@@ -100,7 +100,7 @@ export default function WhatThisJobIsPage() {
             e.target.style.borderColor = '#6C47FF'
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = 'rgba(255,255,255,0.08)'
+            e.target.style.borderColor = '#ECECF2'
           }}
         />
 

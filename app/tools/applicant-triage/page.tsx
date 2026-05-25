@@ -82,14 +82,14 @@ export default function ApplicantTriagePage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -142,7 +142,7 @@ export default function ApplicantTriagePage() {
           placeholder="Paste the complete JD — title, description, requirements, comp. The triage calls are calibrated against what THIS role actually needs."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -163,7 +163,7 @@ export default function ApplicantTriagePage() {
           }}
         >
           <strong style={{ color: '#A78BFA' }}>How to format:</strong> Paste each resume back-to-back.
-          Between each, paste a line like <code style={{ background: 'rgba(255,255,255,0.05)', padding: '1px 6px', borderRadius: 4 }}>--- CANDIDATE 1 ---</code>, then <code style={{ background: 'rgba(255,255,255,0.05)', padding: '1px 6px', borderRadius: 4 }}>--- CANDIDATE 2 ---</code>, etc. The separator is how the triage knows where one resume ends and the next begins.
+          Between each, paste a line like <code style={{ background: '#FFFFFF', padding: '1px 6px', borderRadius: 4 }}>--- CANDIDATE 1 ---</code>, then <code style={{ background: '#FFFFFF', padding: '1px 6px', borderRadius: 4 }}>--- CANDIDATE 2 ---</code>, etc. The separator is how the triage knows where one resume ends and the next begins.
         </div>
         <textarea
           value={applications}
@@ -179,7 +179,7 @@ Sam Chen
 ...`}
           style={applicationsTextareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
         <div
           style={{
@@ -223,7 +223,7 @@ Sam Chen
             placeholder="e.g. Must have 5+ years of Python · Must be authorized to work in US · No more than two roles under 18 months in the past 5 years"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
           <p
             style={{

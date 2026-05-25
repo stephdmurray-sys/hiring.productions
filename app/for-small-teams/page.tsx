@@ -68,7 +68,7 @@ const QA_BLOCKS: QA[] = [
 
 export default function ForSmallTeamsPage() {
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* Hero */}
@@ -114,7 +114,7 @@ export default function ForSmallTeamsPage() {
               fontSize: 'clamp(40px, 6vw, 72px)',
               letterSpacing: '-0.03em',
               lineHeight: 1.04,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 22px',
             }}
           >
@@ -184,7 +184,7 @@ export default function ForSmallTeamsPage() {
           >
             <div
               style={{
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: '1px dashed rgba(255,79,106,0.30)',
                 borderRadius: 14,
                 padding: '24px',
@@ -209,7 +209,7 @@ export default function ForSmallTeamsPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '18px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   letterSpacing: '-0.005em',
                   lineHeight: 1.3,
                   marginBottom: 8,
@@ -244,7 +244,7 @@ export default function ForSmallTeamsPage() {
 
             <div
               style={{
-                background: '#0F0F12',
+                background: '#FAF8F3',
                 border: '1px dashed rgba(255,79,106,0.22)',
                 borderRadius: 14,
                 padding: '24px',
@@ -268,7 +268,7 @@ export default function ForSmallTeamsPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '18px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   letterSpacing: '-0.005em',
                   lineHeight: 1.3,
                   marginBottom: 8,
@@ -314,7 +314,7 @@ export default function ForSmallTeamsPage() {
             <div
               key={idx}
               style={{
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: '1px solid rgba(255,79,106,0.18)',
                 borderRadius: 18,
                 padding: 'clamp(24px, 5vw, 36px)',
@@ -326,7 +326,7 @@ export default function ForSmallTeamsPage() {
                   fontWeight: 900,
                   fontSize: 'clamp(20px, 2.6vw, 26px)',
                   letterSpacing: '-0.015em',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   margin: '0 0 18px',
                   lineHeight: 1.25,
                 }}
@@ -410,7 +410,7 @@ export default function ForSmallTeamsPage() {
               fontSize: 'clamp(26px, 3.6vw, 38px)',
               letterSpacing: '-0.02em',
               lineHeight: 1.15,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 14px',
             }}
           >
@@ -508,7 +508,7 @@ function SectionHeader({
           fontSize: 'clamp(26px, 3.5vw, 38px)',
           letterSpacing: '-0.025em',
           lineHeight: 1.1,
-          color: '#F2F0FF',
+          color: '#1A1A22',
           margin: '0 0 12px',
         }}
       >

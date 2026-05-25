@@ -41,7 +41,7 @@ export function ProUpsellPanel({
     <section
       style={{
         marginTop: '32px',
-        background: '#14141B',
+        background: '#FFFFFF',
         border: '1px solid rgba(108,71,255,0.30)',
         borderRadius: '18px',
         padding: '28px 28px 24px',
@@ -96,7 +96,7 @@ export function ProUpsellPanel({
             fontWeight: 900,
             fontSize: '22px',
             letterSpacing: '-0.015em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             lineHeight: 1.2,
             margin: '0 0 6px',
           }}
@@ -114,7 +114,7 @@ export function ProUpsellPanel({
         >
           Members get the next Recruiter Insight on the same diagnosis — plus every tool from the
           other side of the table.{' '}
-          <span style={{ color: '#F2F0FF', fontWeight: 800 }}>Pro</span> — less than Jobscan
+          <span style={{ color: '#1A1A22', fontWeight: 800 }}>Pro</span> — less than Jobscan
           charges for one day.
         </p>
 
@@ -140,7 +140,7 @@ export function ProUpsellPanel({
               >
                 <div
                   style={{
-                    background: '#0F0F12',
+                    background: '#FAF8F3',
                     border: `1px solid ${theme.border}`,
                     borderRadius: '12px',
                     padding: '16px 18px',
@@ -166,7 +166,7 @@ export function ProUpsellPanel({
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 800,
                       fontSize: '15px',
-                      color: '#F2F0FF',
+                      color: '#1A1A22',
                       letterSpacing: '-0.005em',
                       lineHeight: 1.3,
                       marginBottom: '6px',
@@ -222,7 +222,7 @@ export function ProUpsellPanel({
             }}
           >
             The whole production for{' '}
-            <span style={{ color: '#F2F0FF', fontWeight: 800 }}>Pro</span>. Cancel anytime.
+            <span style={{ color: '#1A1A22', fontWeight: 800 }}>Pro</span>. Cancel anytime.
           </div>
           <Link
             href="/pricing"
@@ -278,7 +278,7 @@ export function ProUpsellPanel({
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 800,
               fontSize: '16px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               letterSpacing: '-0.005em',
               lineHeight: 1.35,
               marginBottom: '6px',

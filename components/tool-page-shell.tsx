@@ -34,13 +34,13 @@ export function ToolPageShell({
   const statusColor = isFree ? '#10b981' : '#A78BFA'
 
   return (
-    <div style={{ background: '#0F0F12', minHeight: '100vh' }}>
+    <div style={{ background: '#FAF8F3', minHeight: '100vh' }}>
       <Navigation />
 
       {/* Hero Section */}
       <section
         style={{
-          background: '#0F0F12',
+          background: '#FAF8F3',
           padding: '60px 40px 40px',
           textAlign: 'center',
         }}
@@ -72,7 +72,7 @@ export function ToolPageShell({
               fontSize: 'clamp(24px, 3.5vw, 38px)',
               fontWeight: 900,
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 16px 0',
             }}
           >

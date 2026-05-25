@@ -38,8 +38,8 @@ export function SampleRead() {
   return (
     <section
       style={{
-        background: '#0F0F12',
-        color: '#F2F0FF',
+        background: '#FAF8F3',
+        color: '#1A1A22',
         padding: 'clamp(96px, 12vw, 160px) 24px',
       }}
     >
@@ -52,7 +52,7 @@ export function SampleRead() {
             fontSize: 'clamp(34px, 5vw, 56px)',
             letterSpacing: '-0.025em',
             lineHeight: 1.05,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             textAlign: 'center',
             margin: '0 0 16px',
           }}
@@ -112,7 +112,7 @@ export function SampleRead() {
                   fontSize: 'clamp(96px, 14vw, 160px)',
                   lineHeight: 1,
                   letterSpacing: '-0.04em',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                 }}
               >
                 0
@@ -221,7 +221,7 @@ export function SampleRead() {
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: 'clamp(17px, 1.8vw, 19px)',
                   lineHeight: 1.6,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   margin: 0,
                 }}
               >

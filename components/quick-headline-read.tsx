@@ -77,10 +77,10 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
   // another container (e.g. The Silence detail view).
   const Wrapper = inline ? 'div' : 'section'
   const wrapperStyle: React.CSSProperties = inline
-    ? { color: '#F2F0FF', position: 'relative' }
+    ? { color: '#1A1A22', position: 'relative' }
     : {
-        background: '#0F0F12',
-        color: '#F2F0FF',
+        background: '#FAF8F3',
+        color: '#1A1A22',
         padding: 'clamp(56px, 8vw, 96px) 24px clamp(40px, 6vw, 72px)',
         position: 'relative',
       }
@@ -99,7 +99,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
               : 'clamp(28px, 4.2vw, 44px)',
             lineHeight: 1.1,
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             textAlign: 'center',
             margin: inline ? '0 0 22px' : '0 0 28px',
           }}
@@ -126,12 +126,12 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
               style={{
                 width: '100%',
                 padding: '18px 22px',
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: '1px solid rgba(167,139,250,0.30)',
                 borderRadius: 12,
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: 16,
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 outline: 'none',
                 boxSizing: 'border-box',
               }}
@@ -236,7 +236,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
             {/* The read */}
             <div
               style={{
-                background: '#14141B',
+                background: '#FFFFFF',
                 border: '1px solid rgba(255,79,106,0.30)',
                 borderRadius: 14,
                 padding: 'clamp(24px, 4vw, 32px)',
@@ -279,7 +279,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
                         fontWeight: 500,
                         fontSize: 'clamp(16px, 1.9vw, 18px)',
                         lineHeight: 1.55,
-                        color: '#F2F0FF',
+                        color: '#1A1A22',
                         margin: 0,
                       }}
                     >
@@ -326,7 +326,7 @@ export function QuickHeadlineRead({ inline = false }: { inline?: boolean } = {})
                   gap: 6,
                   padding: '14px 20px',
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.12)',
+                  border: '1px solid #ECECF2',
                   borderRadius: 10,
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 700,
@@ -360,7 +360,7 @@ function HeadlineHelp({ onClose }: { onClose: () => void }) {
     <div
       style={{
         marginTop: 14,
-        background: '#14141B',
+        background: '#FFFFFF',
         border: '1px solid rgba(167,139,250,0.30)',
         borderRadius: 14,
         padding: 'clamp(20px, 3vw, 26px)',

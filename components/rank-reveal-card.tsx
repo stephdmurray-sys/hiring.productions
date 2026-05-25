@@ -97,7 +97,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
   return (
     <div
       style={{
-        background: '#0F0F12',
+        background: '#FAF8F3',
         border: '1px solid rgba(108,71,255,0.32)',
         borderRadius: 20,
         padding: 'clamp(28px, 5vw, 44px)',
@@ -236,7 +236,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '16px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: 6,
                   lineHeight: 1.35,
                 }}
@@ -263,7 +263,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
                     fontFamily: "'Figtree', sans-serif",
                     fontWeight: 800,
                     fontSize: '12.5px',
-                    color: '#F2F0FF',
+                    color: '#1A1A22',
                     textDecoration: 'none',
                     letterSpacing: '0.01em',
                   }}

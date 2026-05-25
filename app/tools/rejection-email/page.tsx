@@ -86,14 +86,14 @@ export default function RejectionEmailPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -118,7 +118,7 @@ export default function RejectionEmailPage() {
     cursor: 'pointer',
     fontFamily: "'Figtree', sans-serif",
     fontSize: '13.5px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'all 0.15s ease',
   })
 
@@ -169,7 +169,7 @@ export default function RejectionEmailPage() {
           placeholder="e.g. Jordan Lee. Strong panel performance. Went with another finalist who had deeper experience scaling B2B sales teams from $10M to $50M ARR. Would absolutely consider for a less-senior role if one opens up."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
         <p
           style={{

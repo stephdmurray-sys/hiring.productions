@@ -84,7 +84,7 @@ const TOOLS_FOR_PAGE = [...CANDIDATE_TOOLS, REPVERA_TOOL]
 
 export default function ForCandidatesPage() {
   return (
-    <div style={{ background: '#0F0F12', color: '#F2F0FF', minHeight: '100vh' }}>
+    <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="dark" />
 
       {/* Hero Section */}
@@ -229,7 +229,7 @@ export default function ForCandidatesPage() {
               }}
             >
               <item.icon size={24} color="#6C47FF" style={{ marginBottom: '16px' }} />
-              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#F2F0FF', marginBottom: '12px' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#1A1A22', marginBottom: '12px' }}>
                 {item.title}
               </h3>
               <p style={{ fontSize: '14px', color: '#8B8AA0', lineHeight: 1.5 }}>
@@ -302,7 +302,7 @@ export default function ForCandidatesPage() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                 <tool.icon size={20} color="#A78BFA" />
-                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#F2F0FF' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#1A1A22' }}>
                   {tool.name}
                 </h3>
               </div>

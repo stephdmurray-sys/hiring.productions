@@ -104,7 +104,7 @@ export function SeoContentPage({
     : null
 
   return (
-    <div style={{ background: '#0F0F12', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#FAF8F3', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {ld && (
         <script
           type="application/ld+json"
@@ -117,7 +117,7 @@ export function SeoContentPage({
         {/* Hero Section */}
         <section
           style={{
-            background: '#0F0F12',
+            background: '#FAF8F3',
             padding: '80px 40px 60px',
             maxWidth: '760px',
             margin: '0 auto',
@@ -128,7 +128,7 @@ export function SeoContentPage({
             style={{
               display: 'inline-block',
               background: badgeBgColor,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 700,
               fontSize: '11px',
@@ -148,7 +148,7 @@ export function SeoContentPage({
               fontWeight: 900,
               fontSize: 'clamp(32px, 4.5vw, 52px)',
               letterSpacing: '-0.02em',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               marginTop: '16px',
               lineHeight: 1.2,
             }}
@@ -186,7 +186,7 @@ export function SeoContentPage({
                   fontFamily: "'Figtree', sans-serif",
                   fontWeight: 800,
                   fontSize: '22px',
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginBottom: '16px',
                   borderLeft: '3px solid #6C47FF',
                   paddingLeft: '16px',
@@ -247,7 +247,7 @@ export function SeoContentPage({
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 800,
                 fontSize: '22px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 marginTop: '12px',
               }}
             >
@@ -313,7 +313,7 @@ export function SeoContentPage({
                 fontWeight: 800,
                 fontSize: '14px',
                 background: 'linear-gradient(135deg, #6C47FF 0%, #FF4F6A 100%)',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 textDecoration: 'none',
                 borderRadius: '8px',
                 transition: 'all 0.3s ease',
@@ -382,7 +382,7 @@ export function SeoContentPage({
                 <details
                   key={idx}
                   style={{
-                    background: '#14141B',
+                    background: '#FFFFFF',
                     border: '1px solid rgba(167,139,250,0.18)',
                     borderRadius: '12px',
                     padding: '18px 22px',
@@ -393,7 +393,7 @@ export function SeoContentPage({
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 800,
                       fontSize: '16px',
-                      color: '#F2F0FF',
+                      color: '#1A1A22',
                       cursor: 'pointer',
                       listStyle: 'none',
                       letterSpacing: '-0.01em',
@@ -458,7 +458,7 @@ export function SeoContentPage({
                     fontWeight: 600,
                     fontSize: '13px',
                     color: '#8B8AA0',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    border: '1px solid #ECECF2',
                     borderRadius: '20px',
                     padding: '8px 16px',
                     textDecoration: 'none',
@@ -471,7 +471,7 @@ export function SeoContentPage({
                   }}
                   onMouseLeave={(e) => {
                     const target = e.target as HTMLElement
-                    target.style.borderColor = 'rgba(255,255,255,0.08)'
+                    target.style.borderColor = '#ECECF2'
                     target.style.color = '#8B8AA0'
                   }}
                 >

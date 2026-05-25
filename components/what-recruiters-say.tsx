@@ -139,8 +139,8 @@ export function WhatRecruitersSay() {
     <section
       style={{
         position: 'relative',
-        background: '#0F0F12',
-        color: '#F2F0FF',
+        background: '#FAF8F3',
+        color: '#1A1A22',
         padding: 'clamp(64px, 9vw, 112px) 24px',
         overflow: 'hidden',
         borderTop: '1px solid rgba(255,255,255,0.04)',
@@ -191,7 +191,7 @@ export function WhatRecruitersSay() {
             fontSize: 'clamp(28px, 4vw, 42px)',
             lineHeight: 1.12,
             letterSpacing: '-0.015em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: 0,
             marginBottom: 'clamp(28px, 4vw, 40px)',
           }}
@@ -205,7 +205,7 @@ export function WhatRecruitersSay() {
           href={current.toolHref}
           style={{
             display: 'block',
-            background: '#14141B',
+            background: '#FFFFFF',
             border: '1px solid rgba(255,143,163,0.22)',
             borderRadius: 24,
             padding: 'clamp(28px, 4.5vw, 48px) clamp(24px, 5vw, 56px) clamp(24px, 4vw, 36px)',
@@ -289,7 +289,7 @@ export function WhatRecruitersSay() {
               fontStyle: 'italic',
               fontSize: 'clamp(22px, 2.8vw, 30px)',
               lineHeight: 1.4,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: 0,
               marginBottom: 28,
               paddingLeft: 18,

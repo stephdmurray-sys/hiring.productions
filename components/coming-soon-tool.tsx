@@ -46,7 +46,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
     <>
       <Navigation />
       <main style={{
-        background: '#0F0F12',
+        background: '#FAF8F3',
         minHeight: 'calc(100vh - 60px)',
         display: 'flex',
         flexDirection: 'column',
@@ -95,7 +95,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
             fontWeight: 900,
             fontSize: 'clamp(28px, 4vw, 40px)',
             letterSpacing: '-0.02em',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             margin: '20px 0 12px',
             textAlign: 'center',
           }}>
@@ -159,7 +159,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 800,
               fontSize: '18px',
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: '0 0 8px 0',
             }}>
               Be first in the room when this drops.
@@ -183,21 +183,21 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
               required
               style={{
                 width: '100%',
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: '#FFFFFF',
+                border: '1px solid #ECECF2',
                 borderRadius: '10px',
                 padding: '14px 18px',
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 400,
                 fontSize: '15px',
-                color: '#F2F0FF',
+                color: '#1A1A22',
                 boxSizing: 'border-box',
                 outline: 'none',
                 marginTop: '20px',
                 transition: 'border-color 0.2s',
               }}
               onFocus={(e) => (e.currentTarget.style.borderColor = '#6C47FF')}
-              onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
             />
 
             <button

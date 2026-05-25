@@ -79,14 +79,14 @@ export default function OfferPitchPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%',
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
     borderRadius: '10px',
     padding: '14px 18px',
     fontFamily: "'Figtree', sans-serif",
     fontWeight: 400,
     fontSize: '15px',
-    color: '#F2F0FF',
+    color: '#1A1A22',
     transition: 'border-color 0.2s',
     outline: 'none',
     boxSizing: 'border-box',
@@ -129,7 +129,7 @@ export default function OfferPitchPage() {
           placeholder="e.g. Senior PM, founding product team at our Series A B2B SaaS. They'd own discovery + shipping for 2-3 of our biggest bets, reporting to CEO. First 90 days: rebuild the onboarding funnel; first 6 months: ship the API product."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -142,7 +142,7 @@ export default function OfferPitchPage() {
           placeholder="e.g. Series A, 18 people, $4M ARR growing 3x YoY. Just closed our biggest customer (Notion). Eng team is ex-Stripe and ex-Linear. We're profitable on a unit basis. CEO is technical and ships code."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -155,7 +155,7 @@ export default function OfferPitchPage() {
           placeholder="e.g. $185K base + 0.4% equity (4-year vest, 1-year cliff) + standard benefits. No bonus. 4 weeks PTO. Remote OK."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -168,7 +168,7 @@ export default function OfferPitchPage() {
           placeholder="e.g. Jordan Lee, 7 years at Stripe, last 2 leading the payouts product. Said in screen: tired of committee decisions, wants to ship faster. Spouse is also tech, two-income household. Lives in SF."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <RequiredLabel
@@ -181,7 +181,7 @@ export default function OfferPitchPage() {
           placeholder="e.g. Anthropic, Senior PM on the API team. $245K base + ~$200K RSUs/yr (~$445K total). They told us they like our scope better but the comp gap is real. Decision by Friday."
           style={textareaStyle}
           onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-          onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+          onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
         />
 
         <div style={{ marginTop: 24 }}>
@@ -205,7 +205,7 @@ export default function OfferPitchPage() {
             placeholder="e.g. Can go to $200K base · sign-on up to $25K · accelerated review at 6 months · founder access (CEO 1:1 weekly) · scope expansion (add the partnerships function)"
             style={textareaStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = '#FF4F6A')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+            onBlur={(e) => (e.currentTarget.style.borderColor = '#ECECF2')}
           />
           <p
             style={{

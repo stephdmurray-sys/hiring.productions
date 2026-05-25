@@ -81,12 +81,12 @@ const items = [
 
 export default function StandOutPage() {
   return (
-    <div style={{ background: '#0F0F12', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ background: '#FAF8F3', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navigation />
 
       {/* Hero Section */}
       <section style={{
-        background: '#0F0F12',
+        background: '#FAF8F3',
         padding: '100px 40px 60px',
         textAlign: 'center',
         maxWidth: '800px',
@@ -109,7 +109,7 @@ export default function StandOutPage() {
           lineHeight: 1.1,
           marginBottom: '20px',
           letterSpacing: '-0.02em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
         }}>
           What the candidates who actually get hired are doing differently.
         </h1>
@@ -151,7 +151,7 @@ export default function StandOutPage() {
                 key={item.number}
                 style={{
                   background: '#1A1A22',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid #ECECF2',
                   borderRadius: '16px',
                   padding: '36px 40px',
                   transition: 'all 0.2s ease',
@@ -161,7 +161,7 @@ export default function StandOutPage() {
                   e.currentTarget.style.borderColor = 'rgba(108,71,255,0.3)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'
+                  e.currentTarget.style.borderColor = '#ECECF2'
                 }}
               >
                 {/* Top row: number circle + icon circle + pill if needed */}
@@ -230,7 +230,7 @@ export default function StandOutPage() {
                   fontFamily: "'Figtree', sans-serif",
                   fontSize: '22px',
                   fontWeight: 900,
-                  color: '#F2F0FF',
+                  color: '#1A1A22',
                   marginTop: '20px',
                   marginBottom: '24px',
                   lineHeight: 1.3,
@@ -265,7 +265,7 @@ export default function StandOutPage() {
                           fontFamily: "'Figtree', sans-serif",
                           fontSize: '15px',
                           fontWeight: 400,
-                          color: '#F2F0FF',
+                          color: '#1A1A22',
                           lineHeight: 1.6,
                           margin: 0,
                         }}
@@ -339,7 +339,7 @@ export default function StandOutPage() {
             fontFamily: "'Figtree', sans-serif",
             fontSize: '36px',
             fontWeight: 900,
-            color: '#F2F0FF',
+            color: '#1A1A22',
             marginBottom: '24px',
             letterSpacing: '-0.02em',
           }}>
