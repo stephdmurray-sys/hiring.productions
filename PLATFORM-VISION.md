@@ -1,6 +1,6 @@
 # PLATFORM-VISION.md
 
-**Status:** DRAFT — pending Stephanie's review and revision.
+**Status:** APPROVED 2026-05-25. Active strategic anchor.
 **Owner:** Stephanie Murray. Claude proposes; Stephanie approves.
 **Precedence:** On platform/strategy questions, this file overrides `CLAUDE.md`. `BRAND.md` still owns visual identity tokens. `CLAUDE.md` still owns voice + tech rules.
 
