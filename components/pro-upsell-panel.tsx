@@ -114,7 +114,7 @@ export function ProUpsellPanel({
         >
           Members get the next Recruiter Insight on the same diagnosis — plus every tool from the
           other side of the table.{' '}
-          <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$14.99/mo or $99/yr</span> — less than Jobscan
+          <span style={{ color: '#F2F0FF', fontWeight: 800 }}>Pro</span> — less than Jobscan
           charges for one day.
         </p>
 
@@ -222,7 +222,7 @@ export function ProUpsellPanel({
             }}
           >
             The whole production for{' '}
-            <span style={{ color: '#F2F0FF', fontWeight: 800 }}>$14.99/mo or $99/yr</span>. Cancel anytime.
+            <span style={{ color: '#F2F0FF', fontWeight: 800 }}>Pro</span>. Cancel anytime.
           </div>
           <Link
             href="/pricing"

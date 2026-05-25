@@ -274,7 +274,7 @@ export default function CareerChangersPage() {
             eyebrow="WHEN YOU’RE READY TO APPLY"
             eyebrowColor="#A78BFA"
             title="Align your LinkedIn and resume to the new field."
-            sub="That's the translation work. Here are the Recruiter Insights that make sure recruiters in the new field can actually find you — $14.99/mo or $99/yr."
+            sub="That's the translation work. Here are the Recruiter Insights that make sure recruiters in the new field can actually find you."
           />
 
           <div

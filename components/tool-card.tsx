@@ -99,7 +99,14 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
   const isClickable = tool.tier !== 'soon'
   const isFeatured = variant === 'featured'
   const isFlagship = FLAGSHIP_PRO.includes(tool.name as never)
-  const Icon = ICON_MAP[tool.icon] ?? Sparkles
+
+  // Redesigned (May 2026): dropped the themed top band + icon disc.
+  // Stephanie's audit: "the icon above the words is taking up more space
+  // on the sections... too much going on." The icons were generic
+  // Lucide shapes not specific to each tool's intent. Cards now lead
+  // with title + subtitle, with badges as quiet metadata. Flagship
+  // tools keep the 2px gradient top stripe as a single restrained
+  // flourish.
 
   const card = (
     <article
@@ -109,7 +116,7 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         background: '#14141B',
         border: `1px solid ${hover && isClickable ? theme.borderHover : theme.border}`,
         borderRadius: isFeatured ? '18px' : '14px',
-        padding: 0,
+        padding: isFeatured ? '24px 26px 22px' : '20px 22px 20px',
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -122,8 +129,8 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         overflow: 'hidden',
       }}
     >
-      {/* Flagship flourish — 2px brand-gradient bar at the very top of the card.
-          Reserved for FLAGSHIP_PRO tools so it stays a moment, not decoration. */}
+      {/* Flagship flourish — 2px brand-gradient bar at the top of the card.
+          Reserved for FLAGSHIP_PRO so it stays a moment, not decoration. */}
       {isFlagship && (
         <div
           aria-hidden
@@ -139,149 +146,105 @@ export function ToolCard({ tool, variant = 'standard' }: ToolCardProps) {
         />
       )}
 
-      {/* Themed top band — subtle gradient + icon */}
-      <div
-        style={{
-          position: 'relative',
-          background: theme.previewBg,
-          padding: isFeatured ? '24px 26px 20px' : '20px 22px 18px',
-          borderBottom: `1px solid ${theme.border}`,
-        }}
-      >
-        {/* Icon — flagship tools use the brand gradient + white icon as the
-            second flourish. Non-flagship use a soft same-family disc. */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: isFeatured ? 44 : 38,
-            height: isFeatured ? 44 : 38,
-            borderRadius: '50%',
-            background: isFlagship ? BRAND_GRADIENT : `${theme.primary}20`,
-            border: isFlagship ? 'none' : `1px solid ${theme.primary}40`,
-            marginBottom: isFeatured ? 16 : 0,
-            boxShadow: isFlagship ? '0 6px 18px rgba(108,71,255,0.35)' : 'none',
-          }}
-        >
-          <Icon
-            size={isFeatured ? 20 : 18}
-            color={isFlagship ? '#FFFFFF' : theme.accent}
-            strokeWidth={2}
-          />
-        </div>
-
-        {/* Featured-only hook line */}
-        {isFeatured && (
-          <div
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(20px, 2.2vw, 26px)',
-              letterSpacing: '-0.02em',
-              color: '#F2F0FF',
-              lineHeight: 1.15,
-              maxWidth: '90%',
-            }}
-          >
-            {tool.hook}
-          </div>
-        )}
+      {/* Badges — audience on left (carries the side color), tier on right.
+          These read as quiet metadata above the title. */}
+      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
+        <Badge
+          label={AUDIENCE_LABEL[tool.audience]}
+          bg={`${theme.primary}1A`}
+          color={theme.accent}
+          border={`1px solid ${theme.primary}33`}
+        />
+        <Badge label={tier.label} bg={tier.bg} color={tier.color} border={tier.border} />
       </div>
 
-      {/* Content area */}
+      {/* Brand name — the headline of the card */}
+      <h3
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 800,
+          fontSize: isFeatured ? '20px' : '18px',
+          letterSpacing: '-0.01em',
+          color: '#F2F0FF',
+          lineHeight: 1.22,
+          margin: '0 0 4px',
+        }}
+      >
+        {tool.name}
+      </h3>
+
+      {/* Plain-English subtitle */}
       <div
         style={{
-          padding: isFeatured ? '22px 26px 24px' : '18px 22px 20px',
-          display: 'flex',
-          flexDirection: 'column',
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 700,
+          fontSize: '11.5px',
+          color: theme.accent,
+          letterSpacing: '0.04em',
+          marginBottom: '12px',
+          textTransform: 'uppercase',
+        }}
+      >
+        {tool.subtitle}
+      </div>
+
+      {/* Featured-only hook line — only the hero card on a page gets this */}
+      {isFeatured && (
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(18px, 2vw, 22px)',
+            letterSpacing: '-0.02em',
+            color: '#F2F0FF',
+            lineHeight: 1.18,
+            margin: '4px 0 12px',
+          }}
+        >
+          {tool.hook}
+        </div>
+      )}
+
+      {/* Description */}
+      <p
+        style={{
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 400,
+          fontSize: isFeatured ? '14px' : '13.5px',
+          color: '#9D9CB3',
+          lineHeight: 1.55,
+          margin: 0,
           flex: 1,
         }}
       >
-        {/* Badges — audience on left (carries the side color), tier on right
-            (lavender, ambient — tells you what it costs without competing
-            for attention with the audience signal). */}
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
-          <Badge
-            label={AUDIENCE_LABEL[tool.audience]}
-            bg={`${theme.primary}1A`}
-            color={theme.accent}
-            border={`1px solid ${theme.primary}33`}
-          />
-          <Badge label={tier.label} bg={tier.bg} color={tier.color} border={tier.border} />
-        </div>
+        {tool.desc}
+      </p>
 
-        {/* Brand name */}
-        <h3
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: isFeatured ? '19px' : '17px',
-            letterSpacing: '-0.01em',
-            color: '#F2F0FF',
-            lineHeight: 1.25,
-            margin: '0 0 4px',
-          }}
-        >
-          {tool.name}
-        </h3>
-
-        {/* Plain-English subtitle */}
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: '11.5px',
-            color: theme.accent,
-            letterSpacing: '0.04em',
-            marginBottom: '12px',
-            textTransform: 'uppercase',
-          }}
-        >
-          {tool.subtitle}
-        </div>
-
-        {/* Description */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: isFeatured ? '14px' : '13px',
-            color: '#9D9CB3',
-            lineHeight: 1.55,
-            margin: 0,
-            flex: 1,
-          }}
-        >
-          {tool.desc}
-        </p>
-
-        {/* CTA */}
-        <div
-          style={{
-            marginTop: '18px',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: '13px',
-            color: tool.tier === 'soon' ? '#6B6A82' : theme.accent,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-          }}
-        >
-          {tool.cta}
-          {isClickable && (
-            <span
-              style={{
-                display: 'inline-block',
-                transition: 'transform 0.2s ease',
-                transform: hover ? 'translateX(4px)' : 'translateX(0)',
-              }}
-            >
-              →
-            </span>
-          )}
-        </div>
+      {/* CTA */}
+      <div
+        style={{
+          marginTop: '16px',
+          fontFamily: "'Figtree', sans-serif",
+          fontWeight: 800,
+          fontSize: '13px',
+          color: tool.tier === 'soon' ? '#6B6A82' : theme.accent,
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+        }}
+      >
+        {tool.cta}
+        {isClickable && (
+          <span
+            style={{
+              display: 'inline-block',
+              transition: 'transform 0.2s ease',
+              transform: hover ? 'translateX(4px)' : 'translateX(0)',
+            }}
+          >
+            →
+          </span>
+        )}
       </div>
     </article>
   )

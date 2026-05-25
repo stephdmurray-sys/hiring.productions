@@ -265,7 +265,7 @@ export default function ForNewGradsPage() {
             eyebrow="WHEN YOU HAVE INTERVIEWS LINED UP"
             eyebrowColor="#A78BFA"
             title="The Recruiter Insights that get new grads to “yes.”"
-            sub="You know what they look for. Here are the Recruiter Insights every new grad uses before their first round of real interviews — $14.99/mo or $99/yr."
+            sub="You know what they look for. Here are the Recruiter Insights every new grad uses before their first round of real interviews."
           />
 
           <div

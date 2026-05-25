@@ -106,7 +106,7 @@ export function UnlockPrescriptionCard() {
         >
           Free runs show the diagnosis. The exact word-for-word rewrites — the lines
           to delete, the headline to replace, the skill entries to add — are part of
-          your $14.99/mo or $99/yr membership.
+          your Pro membership.
         </p>
 
         {/* What's locked, line-listed */}
@@ -163,7 +163,7 @@ export function UnlockPrescriptionCard() {
             letterSpacing: '0.01em',
           }}
         >
-          Unlock the rewrites — $14.99/mo or $99/yr →
+          Unlock the rewrites →
         </StripeCheckoutButton>
 
         <div

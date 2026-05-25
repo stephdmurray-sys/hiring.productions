@@ -412,7 +412,7 @@ export default function PricingPage() {
                   boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
                 }}
               >
-                Start monthly — $14.99/mo
+                Start monthly
               </StripeCheckoutButton>
               <StripeCheckoutButton
                 plan="annual"
@@ -431,7 +431,7 @@ export default function PricingPage() {
                   textAlign: 'center',
                 }}
               >
-                Save 45% — $99/year
+                Choose annual
               </StripeCheckoutButton>
             </div>
           </div>
@@ -739,7 +739,7 @@ export default function PricingPage() {
                 boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
               }}
             >
-              Start monthly — $14.99/mo
+              Start monthly
             </StripeCheckoutButton>
             <StripeCheckoutButton
               plan="annual"
@@ -756,7 +756,7 @@ export default function PricingPage() {
                 cursor: 'pointer',
               }}
             >
-              Save 45% — $99/year
+              Choose annual
             </StripeCheckoutButton>
           </div>
 

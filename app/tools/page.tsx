@@ -6,7 +6,6 @@ import { Footer } from '@/components/footer'
 import { ToolCard } from '@/components/tool-card'
 import { CATALOG, type CatalogTool } from '@/lib/tools-catalog'
 import { MOMENTS } from '@/lib/moments'
-import { StripeCheckoutButton } from '@/components/stripe-checkout-button'
 import { ArrowRight } from 'lucide-react'
 
 /**
@@ -54,8 +53,7 @@ export default function ToolsPage() {
             you&rsquo;re actually in.
           </Heading>
           <SubHeading>
-            Free to start. Pro unlocks the deeper tools — both sides of the table,
-            $14.99/mo or $99/yr.
+            Free to start. Pro unlocks the deeper tools — both sides of the table.
           </SubHeading>
         </div>
       </section>
@@ -211,50 +209,28 @@ export default function ToolsPage() {
               margin: '0 auto 28px',
             }}
           >
-            $14.99/month or $99/year — save 45%. Less than one hour with a career coach.
+            Less than one hour with a career coach.
           </p>
-          <div
+          <Link
+            href="/pricing"
             style={{
-              display: 'flex',
-              gap: 12,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '15px 32px',
+              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+              border: 'none',
+              color: 'white',
+              borderRadius: 10,
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 15,
+              textDecoration: 'none',
+              boxShadow: '0 14px 38px rgba(108,71,255,0.28)',
             }}
           >
-            <StripeCheckoutButton
-              plan="monthly"
-              style={{
-                padding: '15px 28px',
-                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                border: 'none',
-                color: 'white',
-                borderRadius: 10,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: 15,
-                cursor: 'pointer',
-                boxShadow: '0 14px 38px rgba(108,71,255,0.28)',
-              }}
-            >
-              Start monthly — $14.99/mo
-            </StripeCheckoutButton>
-            <StripeCheckoutButton
-              plan="annual"
-              style={{
-                padding: '13.5px 28px',
-                background: 'transparent',
-                border: '1.5px solid rgba(167,139,250,0.45)',
-                color: '#F2F0FF',
-                borderRadius: 10,
-                fontFamily: "'Figtree', sans-serif",
-                fontWeight: 800,
-                fontSize: 15,
-                cursor: 'pointer',
-              }}
-            >
-              Save 45% — $99/year
-            </StripeCheckoutButton>
-          </div>
+            See pricing <ArrowRight size={15} strokeWidth={2.5} />
+          </Link>
         </div>
       </section>
 

@@ -208,7 +208,7 @@ export default function MembershipPage() {
               display: 'block',
             }}
           >
-            Start monthly — $14.99/mo
+            Start monthly
           </StripeCheckoutButton>
           <StripeCheckoutButton
             plan="annual"
@@ -226,7 +226,7 @@ export default function MembershipPage() {
               display: 'block',
             }}
           >
-            Save 45% — $99/year
+            Choose annual
           </StripeCheckoutButton>
         </div>
 
@@ -684,7 +684,7 @@ export default function MembershipPage() {
               display: 'block',
             }}
           >
-            Start monthly — $14.99/mo
+            Start monthly
           </StripeCheckoutButton>
           <StripeCheckoutButton
             plan="annual"
@@ -702,7 +702,7 @@ export default function MembershipPage() {
               display: 'block',
             }}
           >
-            Save 45% — $99/year
+            Choose annual
           </StripeCheckoutButton>
         </div>
         <p style={{

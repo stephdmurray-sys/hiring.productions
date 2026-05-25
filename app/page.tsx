@@ -317,7 +317,7 @@ export default function HomePage() {
             }}
           >
             <span style={{ color: '#F2F0FF', fontWeight: 700 }}>Both sides of the table.</span>{' '}
-            One membership. $14.99/mo or $99/yr.
+            One membership.
           </p>
 
           <p
@@ -355,7 +355,6 @@ export default function HomePage() {
               className="recruiter-insight-card"
               style={cardStyle}
             >
-              <IconCircle Icon={Edit3} accent="#A78BFA" tintRgba="108,71,255" />
               <Pill text="CANDIDATE · PRO" accent="#A78BFA" tintRgba="108,71,255" />
               <h3 style={cardTitle}>Your LinkedIn — Rewritten</h3>
               <SubLabel text="Full Profile Rewrite" color="#A78BFA" />
@@ -371,7 +370,6 @@ export default function HomePage() {
               className="recruiter-insight-card"
               style={cardStyle}
             >
-              <IconCircle Icon={UserCheck} accent="#FF4F6A" tintRgba="255,79,106" />
               <Pill text="HIRING TEAM" accent="#FF4F6A" tintRgba="255,79,106" />
               <h3 style={cardTitle}>Is This Even a Real Candidate?</h3>
               <SubLabel text="AI Application Detector" color="#FF4F6A" />
@@ -387,7 +385,6 @@ export default function HomePage() {
               className="recruiter-insight-card"
               style={cardStyle}
             >
-              <IconCircle Icon={FileText} accent="#A78BFA" tintRgba="108,71,255" />
               <Pill text="CANDIDATE · FREE" accent="#A78BFA" tintRgba="108,71,255" />
               <h3 style={cardTitle}>Does My Resume Read as AI?</h3>
               <SubLabel text="AI Resume Detector" color="#A78BFA" />
@@ -405,7 +402,6 @@ export default function HomePage() {
               className="recruiter-insight-card"
               style={cardStyle}
             >
-              <IconCircle Icon={Star} accent="#A78BFA" tintRgba="108,71,255" />
               <Pill text="REPVERA · FREE" accent="#A78BFA" tintRgba="108,71,255" />
               <h3 style={cardTitle}>The part hiring still can&apos;t see</h3>
               <SubLabel text="Verified Reference Profile" color="#A78BFA" />
@@ -670,7 +666,7 @@ export default function HomePage() {
                 transition: 'transform 0.2s',
               }}
             >
-              The whole production — $14.99/mo or $99/yr
+              Go Pro
             </Link>
             <Link
               href="/tools"

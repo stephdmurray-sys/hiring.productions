@@ -533,7 +533,7 @@ export default async function RoleRankPage({
             Director of TA at Brightside Health. The searches you&apos;ll see are the same ones she
             ran on LinkedIn Recruiter every day to fill {config.displayName.toLowerCase()} roles.
             The simulator is part of the whole production — every Recruiter Insight on the site is
-            built from real recruiting practice. $14.99/mo or $99/yr unlocks all of it, both sides of the
+            built from real recruiting practice. unlocks all of it, both sides of the
             table.
           </p>
           <div
@@ -561,7 +561,7 @@ export default async function RoleRankPage({
                 textDecoration: 'none',
               }}
             >
-              See the whole production — $14.99/mo or $99/yr →
+              See the whole production. →
             </Link>
           </div>
         </div>
