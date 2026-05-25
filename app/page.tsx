@@ -24,6 +24,7 @@ import {
   BarChart3,
 } from 'lucide-react'
 import { StartHereBoard } from '@/components/start-here-board'
+import { QuickHeadlineRead } from '@/components/quick-headline-read'
 import { WhatRecruitersSay } from '@/components/what-recruiters-say'
 import { SampleRead } from '@/components/sample-read'
 import { FromTheRoom } from '@/components/from-the-room'
@@ -122,6 +123,15 @@ export default function HomePage() {
          Question-led entry. The primary homepage funnel for candidates.
       */}
       <StartHereBoard />
+
+      {/* ──────────────── LIVE QUICK READ ─────────────────
+         Paste-your-headline live widget. The visitor's first interaction
+         with the site is using the product itself, not reading about it.
+         Cal.com / Anthropic / Cursor-style engagement pattern. Uses
+         /api/quick-read (Haiku, ~$0.002 per run, capped by global $5/day
+         budget ceiling).
+      */}
+      <QuickHeadlineRead />
 
       {/* ──────────── WHAT RECRUITERS SAY — ROTATING MONOLOGUE ────────────
          Auto-rotating quote section showing dramatic-but-real recruiter
