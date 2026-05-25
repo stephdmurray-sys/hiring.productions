@@ -43,14 +43,15 @@ export function StartHereBoard() {
     <section
       style={{
         position: 'relative',
-        background: '#0F0F12',
-        color: '#F2F0FF',
+        background: '#FAF8F3',
+        color: '#1A1A22',
         padding: 'clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px)',
         overflow: 'hidden',
       }}
     >
       <style>{FIGTREE_IMPORT}</style>
-      {/* Ambient backdrop — restrained, single radial glow */}
+      {/* Ambient backdrop — restrained, single radial glow. Lighter
+          on cream than on dark, but still gives the hero some depth. */}
       <div
         aria-hidden
         style={{
@@ -61,7 +62,7 @@ export function StartHereBoard() {
           width: 760,
           height: 760,
           background:
-            'radial-gradient(circle, rgba(108,71,255,0.12) 0%, transparent 60%)',
+            'radial-gradient(circle, rgba(108,71,255,0.08) 0%, transparent 60%)',
           pointerEvents: 'none',
         }}
       />
@@ -159,14 +160,15 @@ function QuestionCard({
       className="start-here-card"
       style={{
         textAlign: 'left',
-        background: '#14141B',
-        border: '1px solid rgba(167,139,250,0.15)',
+        background: '#FFFFFF',
+        border: '1px solid #ECECF2',
         borderRadius: 16,
         padding: '24px 24px 22px',
         cursor: 'pointer',
         fontFamily: "'Figtree', sans-serif",
-        color: '#F2F0FF',
+        color: '#1A1A22',
         transition: 'all 0.18s ease',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.04)',
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
@@ -179,12 +181,12 @@ function QuestionCard({
     >
       <style>{`
         .start-here-card:hover {
-          border-color: rgba(167,139,250,0.55) !important;
+          border-color: rgba(108,71,255,0.40) !important;
           transform: translateY(-2px);
-          box-shadow: 0 16px 40px rgba(108,71,255,0.12);
+          box-shadow: 0 12px 28px rgba(108,71,255,0.10);
         }
         .start-here-card:hover .start-here-cta {
-          color: #F2F0FF !important;
+          color: #1A1A22 !important;
         }
       `}</style>
 
@@ -237,16 +239,14 @@ function QuestionCard({
           fontSize: 'clamp(26px, 3.2vw, 32px)',
           lineHeight: 1.1,
           letterSpacing: '-0.015em',
-          color: '#F2F0FF',
+          color: '#1A1A22',
           marginBottom: 4,
         }}
       >
         {question.title}
       </div>
 
-      {/* QUOTE — the visitor's voice. Slightly smaller than body to keep
-          the title dominant; text-wrap: balance lets browsers distribute
-          line breaks more evenly when the quote does wrap at narrow widths. */}
+      {/* QUOTE — the visitor's voice. */}
       <div
         style={{
           fontFamily: "'Figtree', sans-serif",
@@ -254,19 +254,14 @@ function QuestionCard({
           fontStyle: 'italic',
           fontSize: 13,
           lineHeight: 1.4,
-          color: '#9D9CB3',
+          color: '#5A5A6E',
           textWrap: 'balance',
         }}
       >
         &ldquo;{question.quote}&rdquo;
       </div>
 
-      {/* BULLETS — always visible. The value-tease lives on the card so
-          visitors see WHAT they get without having to click in. Pushed
-          to the bottom of the card with marginTop:auto so the CTA-row
-          alignment works regardless of how long the title or quote
-          wraps; all three cards lock to identical height via the grid +
-          height:100% on the card itself. */}
+      {/* BULLETS — always visible. The value-tease lives on the card. */}
       <ul
         style={{
           listStyle: 'none',
@@ -274,7 +269,7 @@ function QuestionCard({
           margin: 0,
           marginTop: 14,
           paddingTop: 14,
-          borderTop: '1px dashed rgba(167,139,250,0.18)',
+          borderTop: '1px dashed #ECECF2',
           display: 'flex',
           flexDirection: 'column',
           gap: 6,
@@ -287,7 +282,7 @@ function QuestionCard({
               fontFamily: "'Figtree', sans-serif",
               fontSize: 13,
               fontWeight: 500,
-              color: '#C9C7DA',
+              color: '#3A3A4A',
               lineHeight: 1.45,
               display: 'flex',
               alignItems: 'flex-start',
@@ -297,7 +292,7 @@ function QuestionCard({
             <span
               aria-hidden
               style={{
-                color: '#FF8FA3',
+                color: '#6C47FF',
                 fontWeight: 800,
                 lineHeight: 1.45,
                 flexShrink: 0,
@@ -591,7 +586,7 @@ function Heading({ children }: { children: React.ReactNode }) {
         lineHeight: 1.05,
         letterSpacing: '-0.02em',
         textAlign: 'center',
-        color: '#F2F0FF',
+        color: '#1A1A22',
         margin: 0,
       }}
     >
@@ -608,7 +603,7 @@ function SubHeading({ children }: { children: React.ReactNode }) {
         fontWeight: 400,
         fontSize: 'clamp(16px, 1.8vw, 19px)',
         lineHeight: 1.55,
-        color: '#C9C7DA',
+        color: '#5A5A6E',
         textAlign: 'center',
         maxWidth: 600,
         margin: '20px auto 0',

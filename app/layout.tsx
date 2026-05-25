@@ -155,7 +155,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={figtree.className} style={{ backgroundColor: '#0F0F12' }}>
+    <html lang="en" className={figtree.className} style={{ backgroundColor: '#FAF8F3' }}>
       <head>
         {/* Structured data for search engines — Organization + WebSite schema
             so Google/Bing can pull a knowledge panel and sitelinks search box. */}
@@ -165,10 +165,10 @@ export default function RootLayout({
         />
         <style dangerouslySetInnerHTML={{ __html: `
           *, *::before, *::after { font-family: 'Figtree', sans-serif !important; }
-          html, body { background-color: #0F0F12 !important; color: #F2F0FF; }
+          html, body { background-color: #FAF8F3 !important; color: #1A1A22; }
         `}} />
       </head>
-      <body style={{ backgroundColor: '#0F0F12', color: '#F2F0FF' }}>
+      <body style={{ backgroundColor: '#FAF8F3', color: '#1A1A22' }}>
         <UsageProvider>{children}</UsageProvider>
         {/* First-party server-side page-view beacon — fires on every
             page load + client route change, logs to /api/track/view.

@@ -1,20 +1,44 @@
 @import 'tailwindcss';
 
 :root {
-  /* Hiring.Productions Design System */
-  --bg-dark: #0F0F12;
-  --bg-surface: #1A1A22;
-  --color-primary: #6C47FF;
-  --color-secondary: #FF4F6A;
-  --color-muted: #A78BFA;
-  --color-text-primary: #F2F0FF;
-  --color-text-secondary: #8B8AA0;
+  /* Hiring.Productions Design System — LIGHT MODE
+     Per PLATFORM-VISION.md (approved 2026-05-25): site is shifting
+     from dark-mode editorial to light-mode operational. Warm-cream
+     bg + white card surfaces, indigo/coral accents retained,
+     success-green elevated to a load-bearing platform color. */
+
+  /* Surfaces */
+  --bg: #FAF8F3;           /* page background — warm cream (Wellfound/Anthropic pattern) */
+  --bg-surface: #FFFFFF;   /* card surface — pure white with shadows */
+  --bg-subtle: #F4F1FF;    /* very-light indigo wash for callouts */
+  --border: #ECECF2;       /* almost-invisible separation between surfaces */
+
+  /* Text */
+  --text: #1A1A22;         /* primary text — near-black, not pure */
+  --text-secondary: #5A5A6E; /* body copy, captions */
+  --text-tertiary: #8B8AA0; /* metadata, timestamps */
+
+  /* Brand accents (unchanged from dark mode) */
+  --color-primary: #6C47FF;     /* indigo — candidate side */
+  --color-secondary: #FF4F6A;   /* coral — hiring side */
+  --color-deep-indigo: #5A4FE0; /* deeper indigo for better contrast on light */
+  --color-muted: #A78BFA;       /* lavender — ambient accent only */
+  --color-success: #1F8A55;     /* PLATFORM-VISION elevates this to load-bearing */
   --gradient-main: linear-gradient(135deg, #6C47FF, #FF4F6A);
+
   --radius: 12px;
 
-  /* Override shadcn defaults to match dark theme */
-  --background: #0F0F12;
-  --foreground: #F2F0FF;
+  /* Legacy dark tokens — KEPT during transition so per-surface
+     conversion can happen without breaking unconverted pages.
+     These will be removed once every surface is on light. */
+  --bg-dark-legacy: #0F0F12;
+  --bg-surface-legacy: #1A1A22;
+  --color-text-primary-legacy: #F2F0FF;
+  --color-text-secondary-legacy: #8B8AA0;
+
+  /* Override shadcn defaults */
+  --background: var(--bg);
+  --foreground: var(--text);
 }
 
 @theme inline {
@@ -129,8 +153,8 @@
   html, body {
     font-family: 'Figtree', sans-serif !important;
     scroll-behavior: smooth;
-    background-color: #0F0F12 !important;
-    color: #F2F0FF;
+    background-color: #FAF8F3 !important;
+    color: #1A1A22;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

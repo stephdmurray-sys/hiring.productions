@@ -19,13 +19,13 @@ import { StartHereBoard } from '@/components/start-here-board'
  */
 export default function HomePage() {
   return (
-    <main style={{ background: '#0F0F12', color: '#F2F0FF' }}>
+    <main style={{ background: '#FAF8F3', color: '#1A1A22' }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap');
         .recruiter-insight-card:hover {
           border-color: rgba(108,71,255,0.4) !important;
           transform: translateY(-4px);
-          box-shadow: 0 20px 60px rgba(108,71,255,0.12);
+          box-shadow: 0 20px 60px rgba(108,71,255,0.10);
         }
         .hero-btn:hover {
           transform: translateY(-2px);
@@ -34,7 +34,7 @@ export default function HomePage() {
           border-color: rgba(108,71,255,0.35) !important;
         }
       `}</style>
-      <Navigation variant="dark" />
+      <Navigation variant="light" />
 
       {/* ──────────────── AUDIENCE PRE-ROUTER ─────────────────
          Thin strip above the candidate hero so hiring leaders landing
@@ -47,14 +47,14 @@ export default function HomePage() {
         href="/for-companies"
         style={{
           display: 'block',
-          background: '#14141B',
+          background: '#FFF4F1',
           borderBottom: '1px solid rgba(255,79,106,0.18)',
           padding: '12px 24px',
           textAlign: 'center',
           fontFamily: "'Figtree', sans-serif",
           fontSize: 13.5,
           fontWeight: 600,
-          color: '#C9C7DA',
+          color: '#5A5A6E',
           textDecoration: 'none',
           letterSpacing: '0.005em',
         }}
@@ -62,9 +62,9 @@ export default function HomePage() {
         Hiring, not job-seeking?{' '}
         <span
           style={{
-            color: '#FF8FA3',
+            color: '#C73E5A',
             fontWeight: 800,
-            borderBottom: '1px solid rgba(255,143,163,0.45)',
+            borderBottom: '1px solid rgba(199,62,90,0.45)',
             paddingBottom: 1,
           }}
         >
@@ -81,13 +81,12 @@ export default function HomePage() {
       <StartHereBoard />
 
       {/* ─────────────── CLOSING ───────────────
-         Rule 5: one CTA per moment. The page never names what Pro costs
-         above the fold; the closing carries the price so visitors leave
-         with the number, not just the metaphor. Secondary path is a
-         text link so it doesn't compete as a button. */}
+         Rule 5: one CTA per moment. Light-mode redesign: warm cream
+         background, indigo→coral gradient still carries the resolution
+         line, single Go Pro CTA, secondary path as text link. */}
       <section
         style={{
-          background: '#0F0F12',
+          background: '#FAF8F3',
           padding: 'clamp(72px, 10vw, 120px) clamp(20px, 5vw, 40px)',
         }}
       >
@@ -99,7 +98,7 @@ export default function HomePage() {
               fontSize: 'clamp(36px, 5.5vw, 64px)',
               letterSpacing: '-0.028em',
               lineHeight: 1.04,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               margin: 0,
             }}
           >

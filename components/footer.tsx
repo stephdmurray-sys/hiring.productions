@@ -13,7 +13,7 @@ const linkStyle: React.CSSProperties = {
   transition: 'color 0.2s',
 }
 const onHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  e.currentTarget.style.color = '#F2F0FF'
+  e.currentTarget.style.color = '#1A1A22'
 }
 const onLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
   e.currentTarget.style.color = '#8B8AA0'
@@ -36,8 +36,8 @@ export function Footer() {
     <footer
       className="hp-footer"
       style={{
-        background: '#0F0F12',
-        borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+        background: '#FAF8F3',
+        borderTop: '1px solid #ECECF2',
         padding: '64px 40px 48px',
         // Breathing room from whatever page content sits above. Guarantees a
         // visible gap even when a tool's result card or upsell panel runs
@@ -61,7 +61,7 @@ export function Footer() {
               fontFamily: "'Figtree', sans-serif",
               fontSize: '18px',
               fontWeight: 800,
-              color: '#F2F0FF',
+              color: '#1A1A22',
               textDecoration: 'none',
               display: 'block',
               marginBottom: '12px',
@@ -290,7 +290,7 @@ export function Footer() {
         style={{
           maxWidth: '1180px',
           margin: '0 auto',
-          borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+          borderTop: '1px solid #ECECF2',
           paddingTop: '24px',
           display: 'flex',
           justifyContent: 'space-between',

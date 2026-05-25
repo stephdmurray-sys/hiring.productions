@@ -105,7 +105,7 @@ function DropdownMenu({
           fontSize: '14px',
           fontWeight: 600,
           letterSpacing: '0.02em',
-          color: isActive || open ? '#A78BFA' : '#F2F0FF',
+          color: isActive || open ? '#A78BFA' : '#1A1A22',
           transition: 'color 0.15s ease',
           whiteSpace: 'nowrap',
         }}
@@ -145,9 +145,9 @@ function DropdownMenu({
               padding: '12px 0',
               borderRadius: '8px',
               zIndex: 200,
-              background: '#1A1A22',
-              border: '1px solid rgba(255,255,255,0.06)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+              background: '#FFFFFF',
+              border: '1px solid #ECECF2',
+              boxShadow: '0 12px 32px rgba(0,0,0,0.10)',
             }}
           >
           {items.map((item) => (
@@ -171,7 +171,7 @@ function DropdownMenu({
                     whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#F2F0FF'
+                    e.currentTarget.style.color = '#1A1A22'
                     e.currentTarget.style.backgroundColor = 'rgba(108,71,255,0.08)'
                   }}
                   onMouseLeave={(e) => {
@@ -198,7 +198,7 @@ function DropdownMenu({
                     whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#F2F0FF'
+                    e.currentTarget.style.color = '#1A1A22'
                     e.currentTarget.style.backgroundColor = 'rgba(108,71,255,0.08)'
                   }}
                   onMouseLeave={(e) => {
@@ -272,8 +272,8 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '20px 32px',
-          background: '#0F0F12',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: 'rgba(250,248,243,0.95)',
+          borderBottom: '1px solid #ECECF2',
           backdropFilter: 'blur(10px)',
         }}
       >
@@ -283,7 +283,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
             fontFamily: "'Figtree', sans-serif",
             fontSize: '18px',
             textDecoration: 'none',
-            color: '#F2F0FF',
+            color: '#1A1A22',
             display: 'flex',
             alignItems: 'baseline',
             fontWeight: 800,
@@ -318,7 +318,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 fontSize: '14px',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
-                color: pathname === '/' ? '#A78BFA' : '#F2F0FF',
+                color: pathname === '/' ? '#A78BFA' : '#1A1A22',
                 textDecoration: 'none',
                 transition: 'color 0.15s ease',
                 whiteSpace: 'nowrap',
@@ -335,7 +335,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 fontSize: '14px',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
-                color: pathname === '/for-companies' ? '#FF8FA3' : '#F2F0FF',
+                color: pathname === '/for-companies' ? '#FF8FA3' : '#1A1A22',
                 textDecoration: 'none',
                 transition: 'color 0.15s ease',
                 whiteSpace: 'nowrap',
@@ -352,7 +352,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                 fontSize: '14px',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
-                color: pathname === '/tools' ? '#A78BFA' : '#F2F0FF',
+                color: pathname === '/tools' ? '#A78BFA' : '#1A1A22',
                 textDecoration: 'none',
                 transition: 'color 0.15s ease',
                 whiteSpace: 'nowrap',
@@ -370,7 +370,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
                   fontSize: '14px',
                   fontWeight: 600,
                   letterSpacing: '0.02em',
-                  color: pathname === '/sign-in' ? '#A78BFA' : '#F2F0FF',
+                  color: pathname === '/sign-in' ? '#A78BFA' : '#1A1A22',
                   textDecoration: 'none',
                   transition: 'color 0.15s ease',
                   whiteSpace: 'nowrap',
