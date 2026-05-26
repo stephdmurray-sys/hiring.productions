@@ -15,6 +15,7 @@ The product is the moment of recognition: *"Wait. Is this what's been happening 
 
 ## Voice rules — apply to every line of copy
 
+- **No em dashes (—).** Stephanie considers them an AI tell. Use commas, parentheses, colons, periods, or restructure the sentence. This is a firm rule and applies to ALL copy: headings, body, captions, CTAs, error states. Do NOT use them anywhere a visitor can read.
 - **No emojis.** Not in copy, not in CTAs, not in error states. Anywhere.
 - **No fake testimonials.** No invented names, no invented quotes, no fabricated company logos.
 - **No made-up stats.** Every number on the site must be sourceable. If it's not, cut it.

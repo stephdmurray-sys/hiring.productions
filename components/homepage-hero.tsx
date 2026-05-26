@@ -56,6 +56,26 @@ export function HomepageHero() {
           textAlign: 'center',
         }}
       >
+        {/* Brand-promise eyebrow. The metaphor stays in the brand but
+            is no longer the H1, so visitors who don't know the category
+            aren't asked to decode poetry first. */}
+        <div
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 12,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color: '#5A4FE0',
+            marginBottom: 18,
+          }}
+        >
+          Pull back the curtain on hiring
+        </div>
+
+        {/* H1 — plain-English category statement. Job seeker (audience),
+            run your search (outcome verb), recruiter would (mechanism +
+            differentiator). 5-second test friendly. */}
         <h1
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -67,23 +87,42 @@ export function HomepageHero() {
             margin: 0,
           }}
         >
-          Pull back the curtain
-          <br />
-          on hiring.
+          Run your job search the way a recruiter would.
         </h1>
+
+        {/* Subhead 1 — category clarity. What it IS (software), who it's
+            FOR (stalled, laid off, pivoting), who BUILT it (recruiter). */}
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 500,
+            fontSize: 'clamp(17px, 2vw, 21px)',
+            lineHeight: 1.5,
+            color: '#1A1A22',
+            maxWidth: 720,
+            margin: '24px auto 0',
+          }}
+        >
+          Job-search software for the moment you&apos;re stalled, laid off, or
+          pivoting. Built by Stephanie Murray, a 20-year recruiter.
+        </p>
+
+        {/* Subhead 2 — mechanism + outcome, brand-voiced. The "scene with
+            you" line moved here as supporting color (not the primary
+            positioning). */}
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(16px, 1.8vw, 19px)',
+            fontSize: 'clamp(15px, 1.6vw, 17px)',
             lineHeight: 1.55,
             color: '#5A5A6E',
-            maxWidth: 620,
-            margin: '20px auto 0',
+            maxWidth: 640,
+            margin: '14px auto 0',
           }}
         >
-          A recruiter in the scene with you — networking, interviewing, negotiating.
-          Play by play.
+          A recruiter in the scene with you. Networking, interviewing,
+          negotiating. From silence to signed.
         </p>
 
         <div
@@ -125,7 +164,7 @@ export function HomepageHero() {
               color: '#5A5A6E',
             }}
           >
-            No credit card. Magic-link sign-in. ~30 seconds.
+            No credit card. Five free tools. Magic-link sign-in.
           </div>
           <style>{`.hp-hero-cta:hover { transform: translateY(-2px); }`}</style>
         </div>
