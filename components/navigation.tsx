@@ -382,7 +382,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
           )}
           <li style={{ listStyle: 'none' }}>
             <Link
-              href={memberActive ? '/sign-in' : '/membership'}
+              href={memberActive ? '/sign-in' : '/pro'}
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontSize: '14px',
@@ -570,7 +570,7 @@ export function Navigation({ variant = 'light' }: NavigationProps) {
           {/* Primary CTA — Go Pro for guests, personal greeting for members */}
           <li style={{ marginBottom: '32px' }}>
             <Link
-              href={memberActive ? '/sign-in' : '/membership'}
+              href={memberActive ? '/sign-in' : '/pro'}
               onClick={() => setIsOpen(false)}
               style={{
                 display: 'inline-block',

@@ -109,11 +109,11 @@ const QUESTIONS: Q[] = [
     ),
   },
   {
-    q: 'Is the same membership for hiring teams?',
+    q: 'Is the same Pro tier for hiring teams?',
     a: (
       <>
         The Pro tier ($14.99/mo or $99/yr) unlocks both candidate-side AND
-        hiring-team tools — same membership, both sides of the table. The
+        hiring-team tools. Same Pro, both sides of the table. The
         dedicated hiring-team tier ($199/yr) is a separate product for small companies
         who want the full hiring workflow (role clarity, JD builder, interview rubric,
         offer-letter reverse-read). That tier is currently in waitlist as we ship the

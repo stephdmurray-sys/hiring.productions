@@ -10,7 +10,7 @@ const stripe = process.env.STRIPE_SECRET_KEY
   : null
 
 /**
- * Stripe Checkout redirects back to `/membership?session_id=...` on
+ * Stripe Checkout redirects back to `/pro?session_id=...` on
  * success. The membership page calls this endpoint to:
  *
  *   1. Pull the customer's email + custom fields (for localStorage greeting).

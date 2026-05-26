@@ -251,7 +251,7 @@ export function PricingTransparency() {
               script, recruiter eyes resume read. Cancel anytime.
             </p>
             <Link
-              href="/membership"
+              href="/pro"
               style={{
                 display: 'inline-block',
                 padding: '10px 18px',

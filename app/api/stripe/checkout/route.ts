@@ -75,8 +75,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${origin}/membership?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/membership`,
+      success_url: `${origin}/pro?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/pro`,
       allow_promotion_codes: true,
       // Collected so we can greet the member by name and tailor copy / tools
       // to whether they're job-seeking, hiring, or doing both. Stripe Checkout

@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/for-companies', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/tools', priority: 0.9, changeFrequency: 'weekly' },
     { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
-    { path: '/membership', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/pro', priority: 0.9, changeFrequency: 'monthly' },
     // /sign-in intentionally NOT in the sitemap. It carries
     // robots: { index: false } via app/sign-in/layout.tsx because
     // a sign-in page has no public search value. Listing it in the

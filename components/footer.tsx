@@ -82,7 +82,7 @@ export function Footer() {
             The only place where both sides of hiring finally see the whole thing.
           </p>
           <Link
-            href="/membership"
+            href="/pro"
             className="btn-primary"
             style={{
               padding: '10px 20px',

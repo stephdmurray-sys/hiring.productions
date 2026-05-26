@@ -202,7 +202,7 @@ export default function HomePage() {
 
           <div style={{ marginTop: 18 }}>
             <Link
-              href="/membership"
+              href="/pro"
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 600,

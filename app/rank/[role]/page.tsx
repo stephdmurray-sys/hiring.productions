@@ -545,7 +545,7 @@ export default async function RoleRankPage({
             }}
           >
             <Link
-              href="/membership"
+              href="/pro"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',

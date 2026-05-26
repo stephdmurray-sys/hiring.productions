@@ -332,7 +332,7 @@ export default function SignInPage() {
               >
                 Not sure yet?{' '}
                 <Link
-                  href="/membership"
+                  href="/pro"
                   style={{
                     color: '#5A4FE0',
                     fontWeight: 700,
