@@ -10,6 +10,26 @@ import { User, Building2, Lock } from 'lucide-react'
 import { CATALOG } from '@/lib/tools-catalog'
 import { PricingFAQ } from '@/components/pricing-faq'
 
+/**
+ * Membership page — momentum-positioning rewrite (5/26 strategist).
+ *
+ * Old framing: "buy access to a feature catalog."
+ * New framing: "buy ongoing direction during a stressful process."
+ *
+ * The critic's core call was that the page suffered from a positioning
+ * identity crisis. The actual value is guidance, momentum, and direction
+ * during a high-stress moment in someone's life. The old hero
+ * ("The whole production. One price. No nonsense.") and the dominant
+ * "How We Compare" feature-vs-feature table both read as software-y.
+ *
+ * Strategic rewrite:
+ *   - Hero leads with momentum, not catalog
+ *   - New "Why searches stall" section names the pain
+ *   - New 4-week path section shows progression, not tracking
+ *   - Comparison table cut (had dark-mode color leftovers anyway)
+ *   - Price defense folded into a single sentence
+ *   - Tools grid retained but reframed
+ */
 // Tools shown on the membership page — sourced from the catalog so they stay
 // in sync as we add tools. We exclude `soon`-tier tools because the page is
 // "what you actually get when you become a member," and showing tools that
@@ -22,21 +42,51 @@ const tools = CATALOG.filter((t) => t.tier !== 'soon').map((t) => ({
   href: t.href,
 }))
 
+// Pain anchors for the "Why searches stall" section.
+const STALL_REASONS = [
+  'Applications disappear into silence.',
+  'Follow-ups get forgotten.',
+  'Momentum dies after the first wave of effort.',
+  'People stop knowing what to do next.',
+]
+
+// Four-week progression. Action-verb headers mirror the homepage
+// hero pattern (Get Seen / Get In / Get the Offer). Each step builds
+// on the last so the visitor reads it as compounding progress.
+const PATH = [
+  {
+    week: 'Week 1',
+    title: 'Get found.',
+    body: 'Fix what is keeping you invisible. Resume, LinkedIn, recruiter visibility.',
+  },
+  {
+    week: 'Week 2',
+    title: 'Get in.',
+    body: 'Find the right people. Send messages that actually get opened.',
+  },
+  {
+    week: 'Week 3',
+    title: 'Get through.',
+    body: 'Walk into interviews prepared. Decoded questions, real rehearsal.',
+  },
+  {
+    week: 'Week 4',
+    title: 'Get the offer.',
+    body: 'Read what is actually on the table. Negotiate without leaving money behind.',
+  },
+]
+
 export default function MembershipPage() {
   const [showSuccess, setShowSuccess] = useState(false)
   // Tracks whether the visitor already has a member signal (localStorage
   // flag set by Stripe success flow). Used to gate the "Already a member?
   // Sign in" link so it doesn't intercept first-time buyers at the moment
-  // of intent. Real session data (Clarity recording 05-14) showed a user
-  // click Get Full Access then immediately click the Sign in link below
-  // it, get bounced to /sign-in with no account, and abandon the buy.
+  // of intent.
   const [hasMemberSignal, setHasMemberSignal] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Check for existing-member signal. Drives whether to show the
-    // "Already a member?" recovery link (see comment on the state above).
     setHasMemberSignal(isMember())
 
     const params = new URLSearchParams(window.location.search)
@@ -59,6 +109,7 @@ export default function MembershipPage() {
       }
     }
   }, [])
+
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <style>{`
@@ -66,480 +117,575 @@ export default function MembershipPage() {
           border-color: rgba(167,139,250,0.45) !important;
           transform: translateY(-2px);
         }
+        .week-card:hover {
+          border-color: rgba(108,71,255,0.35) !important;
+          transform: translateY(-3px);
+        }
       `}</style>
       <Navigation variant="light" />
 
       {/* Success Banner */}
       {showSuccess && (
-        <div style={{
-          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-          padding: '20px 40px',
-          textAlign: 'center',
-          width: '100%',
-        }}>
-          <h2 style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '24px',
-            fontWeight: 900,
-            color: 'white',
-            margin: 0,
-          }}>
-            You&apos;re in. The whole production is yours.
+        <div
+          style={{
+            background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+            padding: '20px 40px',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: '24px',
+              fontWeight: 900,
+              color: 'white',
+              margin: 0,
+            }}
+          >
+            You are in. The whole production is yours.
           </h2>
-          <p style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '14px',
-            fontWeight: 400,
-            color: 'rgba(255,255,255,0.85)',
-            marginTop: '6px',
-            margin: '6px 0 0 0',
-          }}>
-            Check your email for your receipt.{' '}
-            <Link href="/tools" style={{
+          <p
+            style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: '14px',
-              fontWeight: 700,
-              color: 'white',
-              textDecoration: 'underline',
-            }}>
+              fontWeight: 400,
+              color: 'rgba(255,255,255,0.85)',
+              margin: '6px 0 0 0',
+            }}
+          >
+            Check your email for your receipt.{' '}
+            <Link
+              href="/tools"
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: '14px',
+                fontWeight: 700,
+                color: 'white',
+                textDecoration: 'underline',
+              }}
+            >
               Start exploring →
             </Link>
           </p>
         </div>
       )}
 
-      {/* Hero */}
-      <section style={{
-        padding: '100px 40px',
-        textAlign: 'center',
-        maxWidth: '800px',
-        margin: '0 auto',
-        position: 'relative',
-      }}>
-        {/* Radial glows */}
-        <div style={{
-          position: 'absolute',
-          top: '-5%',
-          right: '-10%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(108,71,255,0.2) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute',
-          bottom: '-10%',
-          left: '-10%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(255,79,106,0.15) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
+      {/* ──────────────── HERO ─────────────────
+         Momentum-positioned. "Keep your job search moving." is the
+         strategist's strongest direction. Subhead anchors continuity
+         (pick up where you left off), not storage. */}
+      <section
+        style={{
+          padding: 'clamp(80px, 11vw, 128px) 24px clamp(40px, 6vw, 64px)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Ambient indigo glow — single restrained source, on-brand for
+            light mode. */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: -220,
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: 820,
+            height: 820,
+            background:
+              'radial-gradient(circle, rgba(108,71,255,0.10) 0%, transparent 60%)',
+            pointerEvents: 'none',
+          }}
+        />
 
-        <h1 style={{
-          fontSize: 'clamp(38px, 6vw, 72px)',
-          fontWeight: 900,
-          lineHeight: 1.1,
-          marginBottom: '16px',
-          letterSpacing: '-0.02em',
-          position: 'relative',
-          zIndex: 1,
-        }}>
-          The whole production. One price. No nonsense.
-        </h1>
-        <p style={{
-          fontSize: '18px',
-          color: '#8B8AA0',
-          lineHeight: 1.6,
-          marginBottom: '32px',
-          position: 'relative',
-          zIndex: 1,
-        }}>
-          Less than Jobscan charges for a single day. Unlimited runs, both sides of hiring, forever.
-        </p>
+        <div
+          style={{
+            position: 'relative',
+            maxWidth: 880,
+            margin: '0 auto',
+            textAlign: 'center',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 12,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: '#5A4FE0',
+              marginBottom: 18,
+            }}
+          >
+            Your job search, with direction
+          </div>
 
-        {/* Stat pills */}
-        <div style={{
-          display: 'flex',
-          gap: '12px',
-          justifyContent: 'center',
-          marginBottom: '32px',
-          flexWrap: 'wrap',
-          position: 'relative',
-          zIndex: 1,
-        }}>
-          {[`${tools.length} Recruiter Insights`, 'Both Sides of Hiring', 'Cancel anytime'].map((stat, idx) => (
-            <div
-              key={idx}
+          <h1
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(40px, 6.5vw, 72px)',
+              fontWeight: 900,
+              lineHeight: 1.04,
+              letterSpacing: '-0.022em',
+              color: '#1A1A22',
+              margin: 0,
+            }}
+          >
+            Keep your job search
+            <br />
+            moving.
+          </h1>
+
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 500,
+              fontSize: 'clamp(17px, 1.95vw, 21px)',
+              lineHeight: 1.55,
+              color: '#1A1A22',
+              maxWidth: 700,
+              margin: '28px auto 0',
+            }}
+          >
+            Pick up exactly where you left off, with clear next steps every
+            time you come back.
+          </p>
+
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 500,
+              fontSize: 'clamp(14.5px, 1.55vw, 16.5px)',
+              lineHeight: 1.55,
+              color: '#5A5A6E',
+              maxWidth: 620,
+              margin: '18px auto 0',
+            }}
+          >
+            Resume, LinkedIn, outreach, interviews, offers. All connected.
+            All moving forward together.
+          </p>
+
+          {/* Dual-tier CTA. Single visual unit on desktop, stacks on mobile. */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
+              gap: 12,
+              maxWidth: 480,
+              margin: 'clamp(32px, 4vw, 44px) auto 0',
+            }}
+          >
+            <StripeCheckoutButton
+              plan="monthly"
               style={{
-                background: '#FFFFFF',
-                border: '1px solid #ECECF2',
-                borderRadius: '12px',
+                background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                border: 'none',
+                color: '#fff',
                 padding: '16px 24px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                fontSize: '13px',
-                fontWeight: 600,
-                color: '#1A1A22',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                borderRadius: 12,
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 16,
+                fontWeight: 800,
+                cursor: 'pointer',
+                width: '100%',
+                display: 'block',
+                boxShadow: '0 14px 32px rgba(108,71,255,0.22)',
               }}
             >
-              {stat}
+              Start monthly · $14.99
+            </StripeCheckoutButton>
+            <StripeCheckoutButton
+              plan="annual"
+              style={{
+                background: '#FFFFFF',
+                border: '1.5px solid rgba(108,71,255,0.35)',
+                color: '#1A1A22',
+                padding: '14.5px 24px',
+                borderRadius: 12,
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 16,
+                fontWeight: 800,
+                cursor: 'pointer',
+                width: '100%',
+                display: 'block',
+              }}
+            >
+              Annual · $99 (save 45%)
+            </StripeCheckoutButton>
+          </div>
+
+          {/* Price defense in one line (replaces the cut comparison table). */}
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 13,
+              fontWeight: 500,
+              color: '#8B8AA0',
+              marginTop: 14,
+              letterSpacing: '0.005em',
+            }}
+          >
+            Less than one hour of career coaching. Less than Jobscan charges
+            for a single day. Cancel anytime.
+          </p>
+
+          {hasMemberSignal && (
+            <div
+              style={{
+                position: 'relative',
+                marginTop: 18,
+                textAlign: 'center',
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                color: '#5A5A6E',
+              }}
+            >
+              Already a member?{' '}
+              <Link
+                href="/sign-in"
+                style={{
+                  color: '#5A4FE0',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                }}
+              >
+                Sign in →
+              </Link>
             </div>
-          ))}
+          )}
+        </div>
+      </section>
+
+      {/* ──────────────── WHY SEARCHES STALL ─────────────────
+         Names the pain of NOT having this. Strategist's core insight:
+         the page only described benefits, never the cost of staying
+         stuck. Four stall causes, one resolution. */}
+      <section
+        style={{
+          padding: 'clamp(56px, 8vw, 96px) 24px',
+          background: '#FAF8F3',
+        }}
+      >
+        <div style={{ maxWidth: 880, margin: '0 auto' }}>
+          <div
+            style={{
+              textAlign: 'center',
+              marginBottom: 'clamp(32px, 4vw, 48px)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 12,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#C73E5A',
+                marginBottom: 14,
+              }}
+            >
+              Why most job searches stall
+            </div>
+            <h2
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 'clamp(30px, 4.4vw, 46px)',
+                fontWeight: 900,
+                lineHeight: 1.06,
+                letterSpacing: '-0.022em',
+                color: '#1A1A22',
+                margin: 0,
+              }}
+            >
+              It is not because people stop trying.
+            </h2>
+          </div>
+
+          <div
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid #ECECF2',
+              borderRadius: 18,
+              overflow: 'hidden',
+              boxShadow: '0 4px 24px rgba(108,71,255,0.05)',
+            }}
+          >
+            {STALL_REASONS.map((reason, i) => (
+              <div
+                key={i}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 18,
+                  padding: 'clamp(18px, 2.4vw, 26px) clamp(20px, 3vw, 32px)',
+                  borderTop: i === 0 ? 'none' : '1px solid #F2F0F8',
+                }}
+              >
+                <span
+                  aria-hidden
+                  style={{
+                    flexShrink: 0,
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: '#FF4F6A',
+                    opacity: 0.85,
+                  }}
+                />
+                <p
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 'clamp(16px, 1.85vw, 19px)',
+                    fontWeight: 600,
+                    color: '#1A1A22',
+                    margin: 0,
+                    lineHeight: 1.4,
+                    letterSpacing: '-0.005em',
+                  }}
+                >
+                  {reason}
+                </p>
+              </div>
+            ))}
+
+            {/* Resolution row — structurally part of the card so it
+                cannot be misread as a floating line. Gradient-tinted
+                background + indigo accent bar set it apart from the
+                pain rows above. */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 18,
+                padding: 'clamp(22px, 2.8vw, 30px) clamp(20px, 3vw, 32px)',
+                borderTop: '1px solid #F2F0F8',
+                background:
+                  'linear-gradient(135deg, rgba(108,71,255,0.07), rgba(255,79,106,0.05))',
+              }}
+            >
+              <span
+                aria-hidden
+                style={{
+                  flexShrink: 0,
+                  width: 4,
+                  height: 28,
+                  borderRadius: 2,
+                  background:
+                    'linear-gradient(180deg, #6C47FF, #FF4F6A)',
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 'clamp(16px, 1.9vw, 20px)',
+                  lineHeight: 1.4,
+                  color: '#5A4FE0',
+                  margin: 0,
+                  letterSpacing: '-0.005em',
+                }}
+              >
+                This keeps your search organized, guided, and moving forward.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── 4-WEEK PATH ─────────────────
+         A path, not a tracker. Strategist's specific ask: show
+         progression, not application storage. Action-verb headers
+         mirror the homepage hero pattern. */}
+      <section
+        style={{
+          padding: 'clamp(56px, 8vw, 96px) 24px',
+          background: '#FAF8F3',
+        }}
+      >
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+          <div
+            style={{
+              textAlign: 'center',
+              marginBottom: 'clamp(36px, 4.5vw, 52px)',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 12,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: '#5A4FE0',
+                marginBottom: 14,
+              }}
+            >
+              A path, not a tracker
+            </div>
+            <h2
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 'clamp(30px, 4.4vw, 46px)',
+                fontWeight: 900,
+                lineHeight: 1.06,
+                letterSpacing: '-0.022em',
+                color: '#1A1A22',
+                margin: '0 0 12px',
+              }}
+            >
+              Your search, week by week.
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 'clamp(15px, 1.65vw, 17px)',
+                color: '#5A5A6E',
+                maxWidth: 580,
+                margin: '0 auto',
+                lineHeight: 1.55,
+              }}
+            >
+              Every week builds on the last. Your progress compounds instead
+              of resetting.
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns:
+                'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
+              gap: 16,
+            }}
+          >
+            {PATH.map((step, i) => (
+              <article
+                key={step.week}
+                className="week-card"
+                style={{
+                  background: '#FFFFFF',
+                  border: '1px solid #ECECF2',
+                  borderRadius: 16,
+                  padding: 'clamp(22px, 2.8vw, 28px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 10,
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 4px 16px rgba(108,71,255,0.04)',
+                  position: 'relative',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 900,
+                    fontSize: 12,
+                    letterSpacing: '0.16em',
+                    color: '#A78BFA',
+                  }}
+                >
+                  0{i + 1} · {step.week.toUpperCase()}
+                </span>
+                <h3
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 900,
+                    fontSize: 'clamp(22px, 2.6vw, 26px)',
+                    letterSpacing: '-0.015em',
+                    color: '#1A1A22',
+                    margin: 0,
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 500,
+                    fontSize: 14.5,
+                    color: '#5A5A6E',
+                    margin: 0,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  {step.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────── TOOLS GRID ─────────────────
+         Reframed header — these are the steps inside the system, not
+         a catalog of features. */}
+      <section
+        style={{
+          padding: 'clamp(56px, 8vw, 96px) 24px',
+          maxWidth: 1200,
+          margin: '0 auto',
+        }}
+      >
+        <div
+          style={{
+            textAlign: 'center',
+            marginBottom: 'clamp(36px, 4.5vw, 52px)',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 12,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: '#5A4FE0',
+              marginBottom: 14,
+            }}
+          >
+            What is inside
+          </div>
+          <h2
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(28px, 4vw, 42px)',
+              fontWeight: 900,
+              lineHeight: 1.08,
+              letterSpacing: '-0.02em',
+              color: '#1A1A22',
+              margin: '0 0 12px',
+            }}
+          >
+            Every Recruiter Insight, both sides of the table.
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(14.5px, 1.6vw, 16.5px)',
+              color: '#5A5A6E',
+              textAlign: 'center',
+              maxWidth: 620,
+              margin: '0 auto',
+              lineHeight: 1.55,
+            }}
+          >
+            One subscription unlocks every candidate-side tool and every
+            hiring-team tool. A candidate who sees how recruiters screen
+            becomes a better applicant. A hiring team that sees what
+            candidates worry about writes better job posts.
+          </p>
         </div>
 
-        {/* Dual-tier CTA. Monthly is the primary path (active search
-            lifecycle pays while you need it). Annual is the savings
-            play — 45% off ($93/yr saved vs paying monthly all year). */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
-            gap: '12px',
-            position: 'relative',
-            zIndex: 1,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: 18,
           }}
         >
-          <StripeCheckoutButton
-            plan="monthly"
-            style={{
-              background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-              border: 'none',
-              color: '#fff',
-              padding: '15px 24px',
-              borderRadius: '10px',
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '16px',
-              fontWeight: 800,
-              cursor: 'pointer',
-              width: '100%',
-              display: 'block',
-            }}
-          >
-            Start monthly
-          </StripeCheckoutButton>
-          <StripeCheckoutButton
-            plan="annual"
-            style={{
-              background: 'transparent',
-              border: '1.5px solid rgba(167,139,250,0.45)',
-              color: '#1A1A22',
-              padding: '13.5px 24px',
-              borderRadius: '10px',
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '16px',
-              fontWeight: 800,
-              cursor: 'pointer',
-              width: '100%',
-              display: 'block',
-            }}
-          >
-            Choose annual
-          </StripeCheckoutButton>
-        </div>
-
-        {/* "Already a member?" recovery link — gated behind an existing
-            localStorage member signal so it doesn't intercept first-time
-            buyers at the moment of intent. The Clarity recording for
-            b90nty showed exactly this failure mode: visitor clicks Get
-            Full Access, sees this Sign-in link directly below, doubts
-            whether they already paid, clicks Sign-in, lands on /sign-in
-            with no account to recover, and abandons the buy without
-            completing checkout. For users without a member signal the
-            link is now hidden; if they paid on another device they can
-            still reach /sign-in via the top navigation. */}
-        {hasMemberSignal && (
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 1,
-              marginTop: '14px',
-              textAlign: 'center',
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '13px',
-              color: '#5A5A6E',
-            }}
-          >
-            Already a member?{' '}
-            <Link
-              href="/sign-in"
-              style={{
-                color: '#A78BFA',
-                fontWeight: 700,
-                textDecoration: 'none',
-              }}
-            >
-              Sign in →
-            </Link>
-          </div>
-        )}
-      </section>
-
-      {/* Comparison Table */}
-      <section style={{
-        padding: '100px 40px',
-        maxWidth: '1200px',
-        margin: '0 auto',
-      }}>
-        <div style={{
-          fontSize: '11px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '1px',
-          color: '#8B8AA0',
-          marginBottom: '20px',
-          textAlign: 'center',
-        }}>
-          Feature Comparison
-        </div>
-        <h2 style={{
-          fontSize: '32px',
-          fontWeight: 900,
-          marginBottom: '48px',
-          textAlign: 'center',
-          letterSpacing: '-0.02em',
-        }}>
-          How We Compare
-        </h2>
-
-        <div style={{ overflowX: 'auto' }}>
-          <div style={{
-            borderRadius: '16px',
-            overflow: 'hidden',
-            border: '1px solid #ECECF2',
-            minWidth: '900px',
-          }}>
-            <table style={{
-              width: '100%',
-              borderCollapse: 'collapse',
-              fontSize: '14px',
-            }}>
-              <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                  {/* Row label column */}
-                  <th style={{ padding: '24px 20px', background: 'transparent', border: 'none' }} />
-
-                  {/* hiring.productions — dominant column */}
-                  <th style={{
-                    padding: '32px 20px 24px',
-                    textAlign: 'left',
-                    background: 'rgba(108,71,255,0.15)',
-                    border: '2px solid #6C47FF',
-                    verticalAlign: 'top',
-                  }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
-                      <span style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        padding: '4px 12px',
-                        borderRadius: '20px',
-                        fontSize: '10px',
-                        fontWeight: 700,
-                        textTransform: 'uppercase' as const,
-                        letterSpacing: '0.5px',
-                        background: 'rgba(255,79,106,0.15)',
-                        color: '#FF4F6A',
-                      }}>
-                        Best Value
-                      </span>
-                      <span style={{ fontFamily: "'Figtree', sans-serif", fontWeight: 800, fontSize: '20px', color: '#1A1A22' }}>
-                        hiring.productions
-                      </span>
-                    </div>
-                  </th>
-
-                  {/* Competitor columns */}
-                  {['Jobscan', 'Teal', 'Resume.io', 'VMock', 'Career Coach'].map((name) => (
-                    <th key={name} style={{
-                      padding: '24px 20px',
-                      textAlign: 'left',
-                      fontFamily: "'Figtree', sans-serif",
-                      fontWeight: 700,
-                      fontSize: '16px',
-                      color: '#1A1A22',
-                      borderBottom: '1px solid rgba(255,255,255,0.06)',
-                      verticalAlign: 'bottom',
-                    }}>
-                      {name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  {
-                    label: 'Price',
-                    ours: '$14.99/m',
-                    competitors: ['$49.95/mo', '$9/week', '$24.95/mo', 'Enterprise', '$200+/hr'],
-                    isPrice: true,
-                  },
-                  {
-                    label: 'Candidate Recruiter Insights',
-                    ours: `✓ ${tools.filter((t) => t.type === 'candidate').length}`,
-                    competitors: ['Resume only', 'Resume only', 'Resume only', 'Resume only', 'Varies'],
-                  },
-                  {
-                    label: 'Hiring team Recruiter Insights',
-                    ours: `✓ ${tools.filter((t) => t.type === 'hiring').length}`,
-                    competitors: ['✗', '✗', '✗', '✗', '✗'],
-                  },
-                  {
-                    label: 'Both sides of hiring',
-                    ours: '✓ Only platform',
-                    competitors: ['✗', '✗', '✗', '✗', '✗'],
-                  },
-                  {
-                    label: 'JD decoder',
-                    ours: '✓',
-                    competitors: ['✗', '✗', '✗', '✗', '✗'],
-                  },
-                  {
-                    label: 'ATS reality check',
-                    ours: '✓',
-                    competitors: ['✓', '✓', '✗', '✓', '✗'],
-                  },
-                  {
-                    label: 'Culture decoder',
-                    ours: '✓',
-                    competitors: ['✗', '✗', '✗', '✗', '✗'],
-                  },
-                  {
-                    label: 'Salary negotiation script',
-                    ours: '✓',
-                    competitors: ['✗', '✗', '✗', '✗', '✓'],
-                  },
-                  {
-                    label: 'AI candidate detection',
-                    ours: '✓',
-                    competitors: ['✗', '✗', '✗', '✗', '✗'],
-                  },
-                  {
-                    label: 'Unlimited runs',
-                    ours: '✓',
-                    competitors: ['✗ Limited', '✗ Limited', '✗ Limited', '✗ Limited', 'Per session'],
-                  },
-                  {
-                    label: 'Built by TA experts',
-                    ours: '✓ Real practice',
-                    competitors: ['✗', '✗', '✗', '✗', 'Varies'],
-                  },
-                ].map((row, idx) => (
-                  <tr key={idx} style={{
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
-                    background: 'transparent',
-                  }}>
-                    {/* Row label */}
-                    <td style={{
-                      padding: '16px 20px',
-                      fontWeight: 600,
-                      color: '#8B8AA0',
-                      whiteSpace: 'nowrap' as const,
-                    }}>
-                      {row.label}
-                    </td>
-
-                    {/* Our column */}
-                    <td style={{
-                      padding: '16px 20px',
-                      background: 'rgba(108,71,255,0.08)',
-                      borderLeft: '2px solid #6C47FF',
-                      borderRight: '2px solid #6C47FF',
-                    }}>
-                      {row.isPrice ? (
-                        <span style={{
-                          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          fontSize: '18px',
-                          fontWeight: 900,
-                          fontFamily: "'Figtree', sans-serif",
-                        }}>
-                          {row.ours}
-                        </span>
-                      ) : (
-                        <span style={{
-                          color: '#6C47FF',
-                          fontWeight: 700,
-                          fontSize: row.ours === '✓' ? '20px' : '14px',
-                          fontFamily: "'Figtree', sans-serif",
-                        }}>
-                          {row.ours}
-                        </span>
-                      )}
-                    </td>
-
-                    {/* Competitor columns */}
-                    {row.competitors.map((val, cIdx) => {
-                      const isX = val === '✗' || val.startsWith('✗')
-                      return (
-                        <td key={cIdx} style={{
-                          padding: '16px 20px',
-                          color: isX ? 'rgba(255,255,255,0.15)' : '#8B8AA0',
-                          fontSize: val === '✓' ? '20px' : '14px',
-                          fontFamily: "'Figtree', sans-serif",
-                          fontWeight: 400,
-                        }}>
-                          {val}
-                        </td>
-                      )
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* All 20 Tools Grid */}
-      <section style={{
-        padding: '100px 40px',
-        maxWidth: '1200px',
-        margin: '0 auto',
-      }}>
-        <div style={{
-          fontSize: '11px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '1px',
-          color: '#8B8AA0',
-          marginBottom: '20px',
-          textAlign: 'center',
-        }}>
-          Your Recruiter Insights
-        </div>
-        <h2 style={{
-          fontSize: '32px',
-          fontWeight: 900,
-          marginBottom: '14px',
-          textAlign: 'center',
-          letterSpacing: '-0.02em',
-        }}>
-          All {tools.length} Recruiter Insights — both sides of the table
-        </h2>
-        <p style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '15px',
-          color: '#5A5A6E',
-          textAlign: 'center',
-          maxWidth: '620px',
-          margin: '0 auto 48px',
-          lineHeight: 1.6,
-        }}>
-          One membership unlocks every candidate-side tool AND every hiring-team tool.
-          Understanding the other side is what makes you better at your own — a candidate
-          who sees how recruiters screen becomes a better applicant; a hiring team that
-          sees what candidates worry about writes better job posts.
-        </p>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '24px',
-          marginBottom: '32px',
-        }}>
           {tools.map((tool, idx) => (
             <Link
               key={idx}
@@ -548,55 +694,56 @@ export default function MembershipPage() {
               style={{
                 background: '#FFFFFF',
                 border: '1px solid #ECECF2',
-                borderRadius: '12px',
-                padding: '24px',
+                borderRadius: 14,
+                padding: 24,
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative',
-                minHeight: '160px',
+                minHeight: 168,
                 textDecoration: 'none',
                 color: 'inherit',
                 transition: 'border-color 0.18s ease, transform 0.18s ease',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
               }}
             >
-              {/* Icon circle top-left */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '16px',
-                  left: '16px',
-                  width: '40px',
-                  height: '40px',
+                  top: 16,
+                  left: 16,
+                  width: 40,
+                  height: 40,
                   borderRadius: '50%',
-                  background: tool.type === 'candidate' ? 'rgba(108,71,255,0.15)' : 'rgba(255,79,106,0.15)',
+                  background:
+                    tool.type === 'candidate'
+                      ? 'rgba(108,71,255,0.15)'
+                      : 'rgba(255,79,106,0.15)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
                 {tool.type === 'candidate' ? (
-                  <User size={18} color="#A78BFA" />
+                  <User size={18} color="#6C47FF" />
                 ) : (
                   <Building2 size={18} color="#FF4F6A" />
                 )}
               </div>
 
-              {/* Free or Pro badge top-right */}
               {tool.free ? (
                 <div
                   style={{
                     position: 'absolute',
-                    top: '16px',
-                    right: '16px',
-                    background: 'rgba(34,197,94,0.15)',
-                    color: '#22C55E',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    padding: '4px 12px',
-                    borderRadius: '20px',
+                    top: 16,
+                    right: 16,
+                    background: 'rgba(94,230,168,0.18)',
+                    color: '#138A55',
+                    fontSize: 10,
+                    fontWeight: 800,
+                    padding: '4px 10px',
+                    borderRadius: 100,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
+                    letterSpacing: '0.12em',
                   }}
                 >
                   Free
@@ -605,41 +752,48 @@ export default function MembershipPage() {
                 <div
                   style={{
                     position: 'absolute',
-                    top: '16px',
-                    right: '16px',
-                    display: 'flex',
+                    top: 16,
+                    right: 16,
+                    display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    background: 'rgba(168,85,247,0.15)',
-                    color: '#A855F7',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    padding: '4px 12px',
-                    borderRadius: '20px',
+                    gap: 5,
+                    background: 'rgba(167,139,250,0.18)',
+                    color: '#5A4FE0',
+                    fontSize: 10,
+                    fontWeight: 800,
+                    padding: '4px 10px',
+                    borderRadius: 100,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
+                    letterSpacing: '0.12em',
                   }}
                 >
-                  <Lock size={12} /> Pro
+                  <Lock size={11} /> Pro
                 </div>
               )}
 
-              <div style={{ paddingTop: '32px' }}>
-                <h3 style={{
-                  fontSize: '15px',
-                  fontWeight: 700,
-                  marginBottom: '8px',
-                  color: '#1A1A22',
-                  paddingRight: '32px',
-                }}>
+              <div style={{ paddingTop: 36 }}>
+                <h3
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 15,
+                    fontWeight: 800,
+                    color: '#1A1A22',
+                    margin: '0 0 8px',
+                    paddingRight: 32,
+                    lineHeight: 1.3,
+                  }}
+                >
                   {tool.name}
                 </h3>
-                <p style={{
-                  fontSize: '13px',
-                  color: '#8B8AA0',
-                  flex: 1,
-                  lineHeight: 1.5,
-                }}>
+                <p
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 13,
+                    color: '#5A5A6E',
+                    margin: 0,
+                    lineHeight: 1.5,
+                  }}
+                >
                   {tool.desc}
                 </p>
               </div>
@@ -647,40 +801,61 @@ export default function MembershipPage() {
           ))}
         </div>
 
-        <p style={{
-          fontSize: '13px',
-          color: '#8B8AA0',
-          textAlign: 'center',
-          marginTop: '32px',
-        }}>
-          Free tools — JD SEO Scorecard and Resume AI Checker — stay free forever. No account needed.
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 13,
+            color: '#8B8AA0',
+            textAlign: 'center',
+            marginTop: 32,
+            lineHeight: 1.55,
+          }}
+        >
+          Free tools stay free forever. No account needed.
         </p>
       </section>
 
-      {/* CTA Section */}
-      <section style={{
-        padding: '100px 40px',
-        textAlign: 'center',
-        maxWidth: '600px',
-        margin: '0 auto',
-      }}>
-        <div style={{
-          fontSize: '11px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '1px',
-          color: '#8B8AA0',
-          marginBottom: '20px',
+      {/* ──────────────── CTA ─────────────────
+         Final ask. Mirrors the hero CTA so the funnel reads as one
+         consistent offer. */}
+      <section
+        style={{
+          padding: 'clamp(64px, 9vw, 112px) 24px',
           textAlign: 'center',
-        }}>
-          Ready to Get Started?
-        </div>
+          maxWidth: 620,
+          margin: '0 auto',
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            fontWeight: 900,
+            lineHeight: 1.08,
+            letterSpacing: '-0.02em',
+            color: '#1A1A22',
+            margin: '0 0 14px',
+          }}
+        >
+          Your search, finally moving forward.
+        </h2>
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 16,
+            color: '#5A5A6E',
+            margin: '0 0 32px',
+            lineHeight: 1.55,
+          }}
+        >
+          Start today. Cancel anytime. Free tools stay free forever.
+        </p>
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(min(220px, 100%), 1fr))',
-            gap: '12px',
-            marginBottom: '16px',
+            gap: 12,
+            marginBottom: 14,
           }}
         >
           <StripeCheckoutButton
@@ -689,43 +864,47 @@ export default function MembershipPage() {
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
               border: 'none',
               color: '#fff',
-              padding: '15px 24px',
-              borderRadius: '10px',
+              padding: '16px 24px',
+              borderRadius: 12,
               fontFamily: "'Figtree', sans-serif",
-              fontSize: '16px',
+              fontSize: 16,
               fontWeight: 800,
               cursor: 'pointer',
               width: '100%',
               display: 'block',
+              boxShadow: '0 14px 32px rgba(108,71,255,0.22)',
             }}
           >
-            Start monthly
+            Start monthly · $14.99
           </StripeCheckoutButton>
           <StripeCheckoutButton
             plan="annual"
             style={{
-              background: 'transparent',
-              border: '1.5px solid rgba(167,139,250,0.45)',
+              background: '#FFFFFF',
+              border: '1.5px solid rgba(108,71,255,0.35)',
               color: '#1A1A22',
-              padding: '13.5px 24px',
-              borderRadius: '10px',
+              padding: '14.5px 24px',
+              borderRadius: 12,
               fontFamily: "'Figtree', sans-serif",
-              fontSize: '16px',
+              fontSize: 16,
               fontWeight: 800,
               cursor: 'pointer',
               width: '100%',
               display: 'block',
             }}
           >
-            Choose annual
+            Annual · $99 (save 45%)
           </StripeCheckoutButton>
         </div>
-        <p style={{
-          fontSize: '13px',
-          color: '#8B8AA0',
-          marginTop: '16px',
-        }}>
-          Cancel anytime. Free tools stay free forever. Access delivered instantly to your email. No account needed for free tools.
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontSize: 13,
+            color: '#8B8AA0',
+            marginTop: 12,
+          }}
+        >
+          Less than one hour of coaching. Less than Jobscan for a single day.
         </p>
       </section>
 
