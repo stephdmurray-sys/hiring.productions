@@ -19,7 +19,7 @@ const HUBS: Hub[] = [
     href: '/for-new-grads',
     eyebrow: 'NEW GRADS',
     title: 'No experience yet?',
-    tagline: 'Resume, GPA, school, keywords — what hiring managers really weigh in the first six seconds.',
+    tagline: 'Resume, GPA, school, keywords. What hiring managers really weigh in the first six seconds.',
     accent: HUB_ACCENT,
   },
   {
@@ -33,7 +33,7 @@ const HUBS: Hub[] = [
     href: '/career-changers',
     eyebrow: 'CAREER CHANGERS',
     title: 'Switching fields?',
-    tagline: 'Translate your past into the language of the new field — without losing the credibility you’ve built.',
+    tagline: 'Translate your past into the language of the new field, without losing the credibility you’ve built.',
     accent: HUB_ACCENT,
   },
   {

@@ -112,9 +112,9 @@ export function ProUpsellPanel({
             lineHeight: 1.55,
           }}
         >
-          Members get the next Recruiter Insight on the same diagnosis — plus every tool from the
+          Members get the next Recruiter Insight on the same diagnosis, plus every tool from the
           other side of the table.{' '}
-          <span style={{ color: '#1A1A22', fontWeight: 800 }}>Pro</span> — less than Jobscan
+          <span style={{ color: '#1A1A22', fontWeight: 800 }}>Pro</span> costs less than Jobscan
           charges for one day.
         </p>
 
@@ -206,7 +206,7 @@ export function ProUpsellPanel({
           style={{
             marginTop: '18px',
             paddingTop: '16px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
+            borderTop: '1px solid #ECECF2',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -271,7 +271,7 @@ export function ProUpsellPanel({
               marginBottom: '10px',
             }}
           >
-            Or — change the medium
+            Another way in
           </div>
           <div
             style={{
@@ -317,7 +317,7 @@ export function ProUpsellPanel({
               letterSpacing: '0.01em',
             }}
           >
-            Start your RepVera — free →
+            Start your RepVera, free →
           </a>
         </div>
       </div>

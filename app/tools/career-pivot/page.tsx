@@ -226,7 +226,7 @@ export default function CareerPivotPage() {
         >
           <ToolResult result={result} cta={null} />
           <ProUpsellPanel
-            recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}
+            recommend={['Your LinkedIn, Rewritten', 'Through a Recruiter’s Eyes']}
             heading="Now align your LinkedIn and resume to the new positioning."
           />
         </div>

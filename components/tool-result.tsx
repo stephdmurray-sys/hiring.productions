@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { Lock } from 'lucide-react'
 
 interface ToolResultProps {
@@ -17,7 +18,7 @@ interface ToolResultProps {
 
 const DEFAULT_CTA = {
   subtext: 'Want to turn insights into proof? Get real recommendations from people who actually worked with you.',
-  label: 'Start your RepVera — free →',
+  label: 'Start your RepVera, free →',
   href: 'https://www.repvera.com',
 }
 
@@ -146,16 +147,35 @@ function renderInline(text: string, keyPrefix: string) {
 }
 
 export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
+  const wrapperRef = useRef<HTMLDivElement | null>(null)
+
+  // Auto-scroll the result card into view on mount so visitors do not
+  // have to scroll down to find the answer they just asked for. Every
+  // tool page in /tools/* renders ToolResult conditionally when result
+  // is set, so this fires the moment the answer appears. One source of
+  // truth, every tool covered.
+  useEffect(() => {
+    if (!wrapperRef.current) return
+    requestAnimationFrame(() => {
+      wrapperRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    })
+  }, [])
+
   return (
     <>
       {/* Results Card */}
       <div
+        ref={wrapperRef}
         style={{
           background: '#FFFFFF',
           border: '1px solid rgba(108,71,255,0.25)',
           borderRadius: '16px',
           padding: '36px',
           boxShadow: '0 8px 40px rgba(108,71,255,0.08)',
+          scrollMarginTop: '24px',
         }}
       >
         {/* Parse and Render Markdown Result */}

@@ -138,7 +138,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
               background: '#FF4F6A',
               animation: 'pulse 1.5s infinite',
             }} />
-            In production — launching soon
+            In production. Launching soon
             <style jsx>{`
               @keyframes pulse {
                 0%, 100% { opacity: 1; }
@@ -257,7 +257,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
               color: '#8B8AA0',
               marginBottom: '8px',
             }}>
-              While you wait — start building proof of how you actually work.
+              While you wait, start building proof of how you actually work.
             </p>
             <a
               href="https://www.repvera.com"
@@ -275,7 +275,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
                 cursor: 'pointer',
               }}
             >
-              Start your RepVera — free →
+              Start your RepVera, free →
             </a>
           </div>
         </div>

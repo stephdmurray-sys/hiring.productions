@@ -264,7 +264,7 @@ export default function ExplainMyGapPage() {
         >
           <ToolResult result={result} cta={null} />
           <ProUpsellPanel
-            recommend={['Through a Recruiter’s Eyes', 'Your LinkedIn — Rewritten']}
+            recommend={['Through a Recruiter’s Eyes', 'Your LinkedIn, Rewritten']}
             heading="Now make sure your resume and LinkedIn carry the same frame."
           />
         </div>

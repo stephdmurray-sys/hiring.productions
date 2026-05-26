@@ -17,7 +17,7 @@ const CHANGER_TOOLS = [
 ] as const
 
 const CHANGER_PRO_TEASE = [
-  'Your LinkedIn — Rewritten',
+  'Your LinkedIn, Rewritten',
   'Through a Recruiter’s Eyes',
 ] as const
 

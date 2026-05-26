@@ -318,7 +318,7 @@ e.g. Sr Director, TA · Brightside Health (2022–Present)
           <ToolResult result={result} cta={null} />
           <ShareResult source="whats-breaking-search" variant="dark" />
           <ProUpsellPanel
-            recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}
+            recommend={['Your LinkedIn, Rewritten', 'Through a Recruiter’s Eyes']}
             heading="Want the full LinkedIn analysis and resume read?"
           />
         </div>

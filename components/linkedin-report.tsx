@@ -319,7 +319,7 @@ function SearchKeywordsSection({ section, blurred }: { section: Section; blurred
       title="What recruiters actually search for"
       accentColor="#7A6CFF"
       eyebrow="The search side of the audition"
-      description="LinkedIn Recruiter weights different sections of your profile differently. These are the exact terms recruiters type — grouped by where they need to live to surface you in their search."
+      description="LinkedIn Recruiter weights different sections of your profile differently. These are the exact terms recruiters type, grouped by where they need to live to surface you in their search."
     >
       <div
         style={{
@@ -451,7 +451,7 @@ function SkillsToAddSection({ section, blurred }: { section: Section; blurred: b
       title="Skills to add to your Skills section"
       accentColor="#7A6CFF"
       eyebrow="The filter match"
-      description="LinkedIn matches recruiter skill filters literally. Add these so you appear in the right filtered searches — only ones that legitimately apply to your background."
+      description="LinkedIn matches recruiter skill filters literally. Add these so you appear in the right filtered searches. Only ones that legitimately apply to your background."
     >
       <div
         style={{
@@ -754,7 +754,7 @@ function HeadlineOptionsSection({ section, blurred }: { section: Section; blurre
 
   return (
     <SectionShell
-      title="Your headline — rewritten three ways"
+      title="Your headline, rewritten three ways"
       accentColor="#FF4F6A"
       eyebrow="Your opening line"
       description="Pick the one that sounds most like you. Each option is under 220 characters and tuned to your background."
@@ -819,10 +819,10 @@ function AboutSectionRender({ section, blurred }: { section: Section; blurred: b
   const text = section.body.trim()
   return (
     <SectionShell
-      title="Your About section — rewritten"
+      title="Your About section, rewritten"
       accentColor="#7A6CFF"
       eyebrow="Your sizzle reel"
-      description="Stops the scroll, tells your story in your voice, ends with a clear next step. Ready to paste — fill in any [your number] placeholders with your actual specifics."
+      description="Stops the scroll, tells your story in your voice, ends with a clear next step. Ready to paste. Fill in any [your number] placeholders with your actual specifics."
     >
       <div style={{ position: 'relative' }}>
         <div
@@ -884,7 +884,7 @@ function RecentRoleSection({ section, blurred }: { section: Section; blurred: bo
 
   return (
     <SectionShell
-      title="Your most recent role — rewritten"
+      title="Your most recent role, rewritten"
       accentColor="#7A6CFF"
       eyebrow="Your highlight clips"
       description="Impact-driven bullets in past tense, ready to paste. Fill in any [your number] placeholders with your actual specifics."
@@ -1024,7 +1024,7 @@ function InlineUpgradeCard() {
         Want the rewrites?
       </div>
       <div style={{ fontSize: '20px', fontWeight: 900, lineHeight: 1.3, marginBottom: '20px' }}>
-        That was the recruiter&apos;s read of your reel. Members see the actual rewrites — three headline options, your About section rewritten end-to-end, and your most recent role in impact-driven bullets. All ready to paste.
+        That was the recruiter&apos;s read of your reel. Members see the actual rewrites: three headline options, your About section rewritten end-to-end, and your most recent role in impact-driven bullets. All ready to paste.
       </div>
       <div style={{ fontSize: '14px', color: '#8B8AA0', marginBottom: '16px' }}>
         $14.99/mo or $99/yr. Use it on every revision. Cancel anytime.
@@ -1042,7 +1042,7 @@ function InlineUpgradeCard() {
           cursor: 'pointer',
         }}
       >
-        Get full access — $14.99/mo or $99/yr
+        Get full access · $14.99/mo or $99/yr
       </StripeCheckoutButton>
     </div>
   )

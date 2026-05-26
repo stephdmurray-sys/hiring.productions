@@ -370,7 +370,7 @@ export default function PricingPage() {
               {[
                 'Through a Recruiter\'s Eyes',
                 'Find You on LinkedIn (boolean)',
-                'Your LinkedIn — Rewritten',
+                'Your LinkedIn, Rewritten',
                 'The Rehearsal Room',
                 'What They\'re Really Asking',
                 'Every hiring-team tool too — see how recruiters actually screen, source, and decide',

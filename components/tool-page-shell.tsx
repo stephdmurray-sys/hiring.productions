@@ -29,7 +29,7 @@ export function ToolPageShell({
   const categoryPillColor = category === 'candidate' ? '#A78BFA' : '#FF4F6A'
   const categoryPillBg = category === 'candidate' ? 'rgba(108,71,255,0.15)' : 'rgba(255,79,106,0.15)'
   const categoryLabel = category === 'candidate' ? 'Candidate' : 'Hiring Team'
-  const statusLabel = isFree ? 'Free Tool — No account needed.' : 'Pro Tool — Included in membership.'
+  const statusLabel = isFree ? 'Free Tool · No account needed.' : 'Pro Tool · Included in membership.'
   const statusBg = isFree ? 'rgba(52,211,153,0.15)' : 'rgba(108,71,255,0.15)'
   const statusColor = isFree ? '#10b981' : '#A78BFA'
 

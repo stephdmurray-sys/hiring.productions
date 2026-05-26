@@ -53,7 +53,7 @@ export const MOMENTS: Moment[] = [
     toolNames: [
       'What Words Are Recruiters Searching For?',
       'Where Do You Rank in a Recruiter Search?',
-      'Your LinkedIn — Rewritten',
+      'Your LinkedIn, Rewritten',
       'What’s Breaking Your Job Search',
       'How to Explain My Employment Gap',
       'Your Career Pivot, Translated',

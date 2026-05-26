@@ -18,7 +18,7 @@ const LAYOFF_TOOLS = [
 
 const LAYOFF_PRO_TEASE = [
   'Through a Recruiter’s Eyes',
-  'Your LinkedIn — Rewritten',
+  'Your LinkedIn, Rewritten',
 ] as const
 
 interface QA {

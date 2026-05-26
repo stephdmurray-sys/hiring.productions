@@ -35,7 +35,7 @@ const FEATURED: Article[] = [
   {
     href: '/q/resume-red-flags',
     category: 'question',
-    title: 'Resume red flags — the real list.',
+    title: 'Resume red flags. The real list.',
     hook: 'Not the LinkedIn-influencer list. The actual things recruiters mark a resume down for.',
   },
   {
@@ -54,7 +54,7 @@ const FEATURED: Article[] = [
     href: '/rank/software-engineer',
     category: 'rank',
     title: 'Where engineers rank in a recruiter search.',
-    hook: 'The exact title/skill combos that surface — and the ones that hide you.',
+    hook: 'The exact title/skill combos that surface, and the ones that hide you.',
   },
 ]
 
@@ -81,7 +81,7 @@ export function FromTheRoom() {
             marginBottom: 16,
           }}
         >
-          05 — From the room
+          05 · From the room
         </div>
         <div
           style={{

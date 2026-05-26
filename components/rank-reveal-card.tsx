@@ -86,7 +86,7 @@ export function RankRevealCard({ result, targetRole }: RankRevealCardProps) {
     averageRank <= 20
       ? 'Recruiters are finding you.'
       : averageRank <= 50
-      ? 'Recruiters can find you — but not first.'
+      ? 'Recruiters can find you, but not first.'
       : averageRank <= 100
       ? "You're in the result set. Just not high enough to get clicked."
       : 'Most recruiters never scroll this far.'

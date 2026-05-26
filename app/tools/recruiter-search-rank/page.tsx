@@ -591,7 +591,7 @@ export default function RecruiterSearchRankPage() {
           {redacted && <UnlockPrescriptionCard />}
 
           <ProUpsellPanel
-            recommend={['Your LinkedIn — Rewritten', 'Through a Recruiter’s Eyes']}
+            recommend={['Your LinkedIn, Rewritten', 'Through a Recruiter’s Eyes']}
             heading="Now ship the moves. Rewrite your headline, About, and recent roles to climb every search at once."
           />
 

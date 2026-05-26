@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ToolPageShell } from '@/components/tool-page-shell'
 import { ToolResult } from '@/components/tool-result'
 import { ProUpsellPanel } from '@/components/pro-upsell-panel'
@@ -35,6 +35,23 @@ export default function GhostedPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const runningStage = useStageRotation(RUNNING_STAGES, loading)
+  const resultRef = useRef<HTMLDivElement | null>(null)
+
+  // Scroll the result block into view the moment it renders. Without
+  // this the visitor finishes the form, sees the button reset, and
+  // has to scroll down to find the answer they just asked for.
+  useEffect(() => {
+    if (!result || !resultRef.current) return
+    // Wait one frame so React has painted the result block before we
+    // measure its position. scrollIntoView with smooth behavior gives
+    // a clear visual handoff from form to answer.
+    requestAnimationFrame(() => {
+      resultRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    })
+  }, [result])
 
   const filledRequired = [stage, howLong, lastContact, roleType].filter((v) => v.trim()).length
   const canSubmit = filledRequired === 4
@@ -102,7 +119,7 @@ export default function GhostedPage() {
   return (
     <ToolPageShell
       toolName="Have I Been Ghosted?"
-      toolDescription="Tell us where you are in their process and how long it’s been. Get the honest read on what’s actually happening — and exactly what to do next."
+      toolDescription="Tell us where you are in their process and how long it’s been. Get the honest read on what’s actually happening, and exactly what to do next."
       category="candidate"
       isFree={true}
     >
@@ -110,9 +127,9 @@ export default function GhostedPage() {
         <InputPromptCard
           title="What you’ll get back:"
           prompts={[
-            'Verdict — Ghosted / Probably still in process / Worth following up',
+            'Verdict: ghosted, probably still in process, or worth following up',
             'What’s likely actually happening on their side at this stage',
-            'The specific 48-hour action — wait, follow up, or move on',
+            'The specific 48-hour action: wait, follow up, or move on',
             'A ready-to-send follow-up email (if it’s worth sending)',
           ]}
         />
@@ -259,18 +276,20 @@ export default function GhostedPage() {
 
       {result && (
         <div
+          ref={resultRef}
           style={{
             marginTop: '40px',
             maxWidth: '680px',
             marginLeft: 'auto',
             marginRight: 'auto',
             padding: '0 40px',
+            scrollMarginTop: '24px',
           }}
         >
           <ToolResult result={result} cta={null} />
           <ProUpsellPanel
             recommend={['Through a Recruiter’s Eyes', 'Would a Recruiter Even Find You?']}
-            heading="If your search keeps going quiet, the cause is upstream — see what’s breaking it."
+            heading="If your search keeps going quiet, the cause is upstream. See what’s breaking it."
           />
         </div>
       )}

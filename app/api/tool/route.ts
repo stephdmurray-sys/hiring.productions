@@ -537,7 +537,7 @@ Be direct. If their headline is mostly fine, say so and name the 1-2 things to u
 
 Format: "[The headline option, ready to paste]"
 
-Then: "(Want three options + a full About + role rewrites? Try Your LinkedIn — Rewritten.)"]
+Then: "(Want three options + a full About + role rewrites? Try Your LinkedIn, Rewritten.)"]
 
 **Your current role title — what to change:**
 [Quote their currentTitleOnLi. If it's working, say so. If it's hurting them (Founder, Consultant, Owner, anything that doesn't match the targetRole), name it and tell them the alternate title to display. They can update the role title on LinkedIn without changing their actual job.]

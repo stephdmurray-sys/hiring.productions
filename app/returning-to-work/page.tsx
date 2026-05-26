@@ -17,7 +17,7 @@ const RETURN_TOOLS = [
 ] as const
 
 const RETURN_PRO_TEASE = [
-  'Your LinkedIn — Rewritten',
+  'Your LinkedIn, Rewritten',
   'Through a Recruiter’s Eyes',
 ] as const
 

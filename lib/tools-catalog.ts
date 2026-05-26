@@ -132,7 +132,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Does My Resume Read as AI?',
     subtitle: 'AI Resume Detector',
-    desc: 'See exactly which lines on your resume look AI-generated to a recruiter — and what to rewrite in your own voice.',
+    desc: 'See exactly which lines on your resume look AI-generated to a recruiter, plus what to rewrite in your own voice.',
     tier: 'free',
     audience: 'candidate',
     stage: 'when-you-apply',
@@ -142,7 +142,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: '49% of recruiters auto-reject AI resumes.',
     icon: 'Sparkles',
-    getBack: 'The exact lines that read AI-generated to a recruiter — and what to rewrite.',
+    getBack: 'The exact lines that read AI-generated to a recruiter. Plus what to rewrite.',
   },
   {
     name: 'What This Job Actually Is',
@@ -162,7 +162,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'What Words Are Recruiters Searching For?',
     subtitle: 'Resume Keyword Scanner',
-    desc: 'Paste your resume + a job description. See the exact keywords recruiters are searching for that aren’t on your page — and where to add them.',
+    desc: 'Paste your resume and a job description. See the exact keywords recruiters are searching for that aren’t on your page, and where to add them.',
     tier: 'free',
     audience: 'candidate',
     stage: 'when-you-apply',
@@ -172,12 +172,12 @@ export const CATALOG: CatalogTool[] = [
     theme: 'indigo',
     hook: 'The 6 words missing from your resume.',
     icon: 'Hash',
-    getBack: 'The exact keywords recruiters search for that aren’t on your resume — and where to add them.',
+    getBack: 'The exact keywords recruiters search for that aren’t on your resume, and where to add them.',
   },
   {
     name: 'How to Negotiate This Offer',
     subtitle: 'Salary Negotiation Script Builder',
-    desc: 'Bring your offer + market data points. Get the exact script — opening line, response to “best offer,” the number to ask for.',
+    desc: 'Bring your offer and market data points. Get the exact script: opening line, response to “best offer,” the number to ask for.',
     tier: 'free',
     audience: 'candidate',
     stage: 'when-you-get-an-offer',
@@ -192,7 +192,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'What’s Breaking Your Job Search',
     subtitle: 'Job Search Diagnostic',
-    desc: 'Tell us about your search. Get one specific diagnosis from real recruiting practice — not five maybes — and the single 48-hour fix to start with.',
+    desc: 'Tell us about your search. Get one specific diagnosis from real recruiting practice, not five maybes, plus the single 48-hour fix to start with.',
     tier: 'free',
     audience: 'candidate',
     stage: 'when-its-not-working',
@@ -202,12 +202,12 @@ export const CATALOG: CatalogTool[] = [
     theme: 'magenta',
     hook: 'One diagnosis. One 48-hour fix.',
     icon: 'AlertCircle',
-    getBack: 'One specific diagnosis from real recruiting practice — plus the single 48-hour fix to start with.',
+    getBack: 'One specific diagnosis from real recruiting practice. Plus the single 48-hour fix to start with.',
   },
   {
     name: 'How to Explain My Employment Gap',
     subtitle: 'Employment Gap Explainer',
-    desc: 'Tell us when the gap happened and what you were actually doing. Get three honest scripts — resume one-liner, cover letter version, interview answer — written in your voice.',
+    desc: 'Tell us when the gap happened and what you were actually doing. Get three honest scripts (resume one-liner, cover letter version, interview answer), written in your voice.',
     tier: 'free',
     audience: 'candidate',
     stage: 'when-its-not-working',
@@ -294,7 +294,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Would a Recruiter Even Find You?',
     subtitle: 'LinkedIn Boolean Visibility Check',
-    desc: 'The exact boolean string a recruiter pastes into LinkedIn Recruiter to find candidates like you — and the precise reason your profile doesn’t surface.',
+    desc: 'The exact boolean string a recruiter pastes into LinkedIn Recruiter to find candidates like you, plus the precise reason your profile doesn’t surface.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'before-you-apply',
@@ -302,13 +302,13 @@ export const CATALOG: CatalogTool[] = [
     cta: 'Test my visibility',
     preview: 'boolean-string',
     theme: 'blue',
-    hook: 'The boolean string that finds — or hides — you.',
+    hook: 'The boolean string that finds you, or hides you.',
     icon: 'Search',
   },
   {
     name: 'Where Do You Rank in a Recruiter Search?',
     subtitle: 'LinkedIn Recruiter Search Ranking Simulator',
-    desc: 'Drop your LinkedIn profile PDF. See the 5 boolean searches a recruiter would actually run for your target role — and your estimated rank in each. Plus the 3 highest-leverage moves to climb, ranked by impact across all five.',
+    desc: 'Drop your LinkedIn profile PDF. See the 5 boolean searches a recruiter would actually run for your target role, and your estimated rank in each. Plus the 3 highest-leverage moves to climb, ranked by impact across all five.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'before-you-apply',
@@ -323,7 +323,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'What Are My Chances?',
     subtitle: 'Application Odds Calculator',
-    desc: 'Drop your resume. Paste the job. See the honest percentage chance you’d get an interview — calibrated against how recruiters actually screen this exact stack — and the 3 highest-impact lifts that would move it.',
+    desc: 'Drop your resume. Paste the job. See the honest percentage chance you’d get an interview (calibrated against how recruiters actually screen this exact stack), plus the 3 highest-impact lifts that would move it.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'when-you-apply',
@@ -338,7 +338,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Questions This Resume Invites',
     subtitle: 'Resume → Interview Question Map',
-    desc: 'Paste a resume — yours or a candidate’s. Get the 8 questions an interviewer will probe on, what each is testing for, and the answer pattern that lands.',
+    desc: 'Paste a resume (yours or a candidate’s). Get the 8 questions an interviewer will probe on, what each is testing for, and the answer pattern that lands.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'when-you-interview',
@@ -351,7 +351,7 @@ export const CATALOG: CatalogTool[] = [
     getBack: 'Eight resume-specific interview questions, what each is testing for, and the strong-answer pattern for each.',
   },
   {
-    name: 'Your LinkedIn — Rewritten',
+    name: 'Your LinkedIn, Rewritten',
     subtitle: 'Full LinkedIn Profile Rewrite',
     desc: 'Three headline options. A full About rewrite. Every recent role rewritten for impact. Tuned to the searches that matter.',
     tier: 'pro',
@@ -363,7 +363,7 @@ export const CATALOG: CatalogTool[] = [
     theme: 'blue',
     hook: 'Headline. About. Roles. Rewritten.',
     icon: 'Edit3',
-    getBack: 'Three headline options. A full About rewrite. Every recent role — sharpened for the searches that matter.',
+    getBack: 'Three headline options. A full About rewrite. Every recent role, sharpened for the searches that matter.',
   },
   {
     name: 'The Rehearsal Room',
@@ -393,14 +393,14 @@ export const CATALOG: CatalogTool[] = [
     theme: 'coral',
     hook: 'The real question underneath the question.',
     icon: 'HelpCircle',
-    getBack: 'Each interview question decoded — what they’re really asking, the weak answer, the answer that lands.',
+    getBack: 'Each interview question decoded: what they’re really asking, the weak answer, the answer that lands.',
   },
 
   // --- PRO extras (also included with membership) ----------------------
   {
     name: 'Would Your Resume Even Make It Through?',
     subtitle: 'ATS Screening Check',
-    desc: 'See if your resume passes the automated screen — what the ATS catches, what it misses, and three specific fixes to make it through.',
+    desc: 'See if your resume passes the automated screen. What the ATS catches, what it misses, and three specific fixes to make it through.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'when-you-apply',
@@ -428,7 +428,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'What This Company Feels Like to Work At',
     subtitle: 'Culture Decoder',
-    desc: 'Paste any company’s About page or careers copy. Get a plain-English read on what their culture actually means in practice — who thrives, who leaves.',
+    desc: 'Paste any company’s About page or careers copy. Get a plain-English read on what their culture actually means in practice. Who thrives, who leaves.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'before-you-apply',
@@ -442,7 +442,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'How You Actually Come Across',
     subtitle: '“Tell Me About Yourself” Rewrite',
-    desc: 'Write how you’d describe yourself. Get an honest assessment of how it lands plus three rewrites — interview, networking, LinkedIn DM.',
+    desc: 'Write how you’d describe yourself. Get an honest assessment of how it lands plus three rewrites for interview, networking, and LinkedIn DM.',
     tier: 'pro',
     audience: 'candidate',
     stage: 'when-you-interview',
@@ -482,7 +482,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Your Job Post, Through Candidate Eyes',
     subtitle: 'JD Reverse-Read',
-    desc: 'See your job description the way a strong candidate reads it — and exactly why they click away.',
+    desc: 'See your job description the way a strong candidate reads it, plus exactly why they click away.',
     tier: 'pro',
     audience: 'hiring',
     stage: 'before-you-post',
@@ -524,7 +524,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'How to Reach Out Without Being Ignored',
     subtitle: 'Candidate Outreach Composer',
-    desc: 'Messages that actually get responses — not the templated openers everyone archives.',
+    desc: 'Messages that actually get responses, not the templated openers everyone archives.',
     tier: 'pro',
     audience: 'hiring',
     stage: 'while-you-source',
@@ -566,7 +566,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Win Them Against the Big-Name Offer',
     subtitle: 'Offer Pitch Builder',
-    desc: 'They have a competing offer from a name brand. You can\'t match the comp. Build the pitch that wins them anyway — scope, autonomy, equity, the call that closes the deal.',
+    desc: 'They have a competing offer from a name brand. You can\'t match the comp. Build the pitch that wins them anyway. Scope, autonomy, equity, the call that closes the deal.',
     tier: 'pro',
     audience: 'hiring',
     stage: 'when-you-extend',
@@ -594,7 +594,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'The Rejection Email That Doesn\'t Burn the Bridge',
     subtitle: 'Stage-Aware Rejection Email Writer',
-    desc: 'Drop in the candidate context and what stage they reached. Get a stage-appropriate rejection — short, specific, kind, signed. Auto-reject through final round.',
+    desc: 'Drop in the candidate context and what stage they reached. Get a stage-appropriate rejection. Short, specific, kind, signed. Auto-reject through final round.',
     tier: 'pro',
     audience: 'hiring',
     stage: 'while-you-interview',
@@ -650,7 +650,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'Your Hiring Process, From the Outside',
     subtitle: 'Candidate Experience Audit',
-    desc: 'Every step of your process through a candidate’s eyes — where strong ones drop out, and why.',
+    desc: 'Every step of your process through a candidate’s eyes. Where strong ones drop out, and why.',
     tier: 'soon',
     audience: 'hiring',
     stage: 'while-you-interview',
@@ -664,7 +664,7 @@ export const CATALOG: CatalogTool[] = [
   {
     name: 'What Day One Actually Looks Like',
     subtitle: 'Onboarding Plan Reverse-Read',
-    desc: 'See your onboarding the way a new hire experiences it — and where they form an early opinion that sticks.',
+    desc: 'See your onboarding the way a new hire experiences it. Where they form an early opinion that sticks.',
     tier: 'soon',
     audience: 'hiring',
     stage: 'when-you-extend',
@@ -688,7 +688,7 @@ export const HIRING_TOOLS = CATALOG.filter((t) => t.audience === 'hiring')
 export const FLAGSHIP_PRO = [
   'Through a Recruiter’s Eyes',
   'Would a Recruiter Even Find You?',
-  'Your LinkedIn — Rewritten',
+  'Your LinkedIn, Rewritten',
   'The Rehearsal Room',
   'What They’re Really Asking',
 ] as const

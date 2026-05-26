@@ -158,7 +158,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 8px',
           }}
         >
-          Sign in for the upgraded experience — <span style={{ color: '#1A1A22', fontWeight: 800 }}>8 more free insights</span>, no card, no password.
+          Sign in for the upgraded experience. <span style={{ color: '#1A1A22', fontWeight: 800 }}>8 more free insights</span>, no card, no password.
         </p>
         <p
           style={{
@@ -169,7 +169,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
             margin: '0 0 22px',
           }}
         >
-          Or go Pro for unlimited — every Recruiter Insight, <span style={{ color: '#1A1A22', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $14.99/mo or $99/yr.
+          Or go Pro for unlimited. Every Recruiter Insight, <span style={{ color: '#1A1A22', fontWeight: 800 }}>both sides of the table</span>. The candidate tools AND the hiring-team tools that show how recruiters actually screen. $14.99/mo or $99/yr.
         </p>
 
         <form onSubmit={submit}>
@@ -261,7 +261,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
               letterSpacing: '0.01em',
             }}
           >
-            See Pro — $14.99/mo or $99/yr →
+            See Pro · $14.99/mo or $99/yr →
           </Link>
           <span style={{ color: '#3F3E50', fontSize: '13px' }}>·</span>
           <a
@@ -284,7 +284,7 @@ export function EmailUnlockModal({ open, onClose, source, onUnlocked }: EmailUnl
               letterSpacing: '0.01em',
             }}
           >
-            Start your RepVera — free →
+            Start your RepVera, free →
           </a>
         </div>
 
