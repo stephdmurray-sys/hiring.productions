@@ -28,9 +28,9 @@ const SCENES: Array<{ id: Scene; title: string; quote: string; subtitle: string 
   {
     id: 'networking',
     title: 'The Networking',
-    quote: "I'm running my search",
+    quote: "I'm actively applying",
     subtitle:
-      "You're applying, building your pipeline, or stuck in the silence. Your story might need translation (gap, pivot, layoff, new grad). Whether you just started or it's been months, this is your scene.",
+      "You're sending applications, building your pipeline, or stuck in the silence. Your story might need translation (gap, pivot, layoff, new grad). Whether you just started or it's been months, this is your scene.",
   },
   {
     id: 'interview',
