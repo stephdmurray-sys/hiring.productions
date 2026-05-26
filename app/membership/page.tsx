@@ -50,27 +50,25 @@ const STALL_REASONS = [
   'People stop knowing what to do next.',
 ]
 
-// Four-week progression. Action-verb headers mirror the homepage
-// hero pattern (Get Seen / Get In / Get the Offer). Each step builds
-// on the last so the visitor reads it as compounding progress.
+// Four-scene progression. Action-verb headers mirror the homepage
+// hero pattern (Get Seen / Get In / Get the Offer). Each scene builds
+// on the last so the visitor reads it as compounding progress. No
+// time labels — we move people through the whole production of
+// hiring, but pace varies by person and we will not promise weeks.
 const PATH = [
   {
-    week: 'Week 1',
     title: 'Get found.',
     body: 'Fix what is keeping you invisible. Resume, LinkedIn, recruiter visibility.',
   },
   {
-    week: 'Week 2',
     title: 'Get in.',
     body: 'Find the right people. Send messages that actually get opened.',
   },
   {
-    week: 'Week 3',
     title: 'Get through.',
     body: 'Walk into interviews prepared. Decoded questions, real rehearsal.',
   },
   {
-    week: 'Week 4',
     title: 'Get the offer.',
     body: 'Read what is actually on the table. Negotiate without leaving money behind.',
   },
@@ -391,10 +389,10 @@ export default function MembershipPage() {
             <h2
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 'clamp(30px, 4.4vw, 46px)',
+                fontSize: 'clamp(34px, 5vw, 52px)',
                 fontWeight: 900,
-                lineHeight: 1.06,
-                letterSpacing: '-0.022em',
+                lineHeight: 1.04,
+                letterSpacing: '-0.024em',
                 color: '#1A1A22',
                 margin: 0,
               }}
@@ -494,10 +492,10 @@ export default function MembershipPage() {
         </div>
       </section>
 
-      {/* ──────────────── 4-WEEK PATH ─────────────────
-         A path, not a tracker. Strategist's specific ask: show
-         progression, not application storage. Action-verb headers
-         mirror the homepage hero pattern. */}
+      {/* ──────────────── THE FOUR SCENES ─────────────────
+         A path, not a tracker. Four scenes the system moves the
+         visitor through. No time commitment — pace varies by
+         person and we will not promise weeks. */}
       <section
         style={{
           padding: 'clamp(56px, 8vw, 96px) 24px',
@@ -527,27 +525,27 @@ export default function MembershipPage() {
             <h2
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 'clamp(30px, 4.4vw, 46px)',
+                fontSize: 'clamp(34px, 5vw, 52px)',
                 fontWeight: 900,
-                lineHeight: 1.06,
-                letterSpacing: '-0.022em',
+                lineHeight: 1.04,
+                letterSpacing: '-0.024em',
                 color: '#1A1A22',
-                margin: '0 0 12px',
+                margin: '0 0 14px',
               }}
             >
-              Your search, week by week.
+              The whole production, scene by scene.
             </h2>
             <p
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 'clamp(15px, 1.65vw, 17px)',
+                fontSize: 'clamp(15.5px, 1.7vw, 17.5px)',
                 color: '#5A5A6E',
-                maxWidth: 580,
+                maxWidth: 600,
                 margin: '0 auto',
                 lineHeight: 1.55,
               }}
             >
-              Every week builds on the last. Your progress compounds instead
+              Each scene builds on the last. Your progress compounds instead
               of resetting.
             </p>
           </div>
@@ -562,7 +560,7 @@ export default function MembershipPage() {
           >
             {PATH.map((step, i) => (
               <article
-                key={step.week}
+                key={step.title}
                 className="week-card"
                 style={{
                   background: '#FFFFFF',
@@ -586,7 +584,7 @@ export default function MembershipPage() {
                     color: '#A78BFA',
                   }}
                 >
-                  0{i + 1} · {step.week.toUpperCase()}
+                  Scene 0{i + 1}
                 </span>
                 <h3
                   style={{
@@ -651,12 +649,12 @@ export default function MembershipPage() {
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
-              fontSize: 'clamp(28px, 4vw, 42px)',
+              fontSize: 'clamp(34px, 5vw, 52px)',
               fontWeight: 900,
-              lineHeight: 1.08,
-              letterSpacing: '-0.02em',
+              lineHeight: 1.04,
+              letterSpacing: '-0.024em',
               color: '#1A1A22',
-              margin: '0 0 12px',
+              margin: '0 0 14px',
             }}
           >
             Every Recruiter Insight, both sides of the table.
@@ -829,10 +827,10 @@ export default function MembershipPage() {
         <h2
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(28px, 4vw, 40px)',
+            fontSize: 'clamp(34px, 5vw, 52px)',
             fontWeight: 900,
-            lineHeight: 1.08,
-            letterSpacing: '-0.02em',
+            lineHeight: 1.04,
+            letterSpacing: '-0.024em',
             color: '#1A1A22',
             margin: '0 0 14px',
           }}
