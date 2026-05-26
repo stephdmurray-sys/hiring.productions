@@ -90,14 +90,11 @@ export function HomepageHero() {
           Run your job search the way a recruiter would.
         </h1>
 
-        {/* Subhead — the most valuable line on the page.
-            Lists scope (4 concrete activities the visitor recognizes
-            as job-search work), names the mechanism (coached), retains
-            credibility without naming the founder (a recruiter), and
-            closes with the brand-tied journey arc (from silence to
-            signed). No mention of Stephanie by name — her credentials
-            land in the AuthorityStrip at the bottom of the page,
-            right before the closing CTA. */}
+        {/* Subhead 1 — SCOPE. Lists 4 activities the visitor
+            recognizes as job-search work, names the mechanism
+            (coached), retains credibility without naming the founder
+            (a recruiter), closes with the brand-tied journey arc
+            (from silence to signed). */}
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -111,6 +108,28 @@ export function HomepageHero() {
         >
           Networking. Applying. Interviewing. Negotiating. Coached by a
           recruiter, from silence to signed.
+        </p>
+
+        {/* Subhead 2 — CONCRETE DELIVERABLES. Answers the visitor's
+            actual question: "what do I get when I click that button?"
+            Each item maps to a scene in subhead 1: keywords →
+            networking; resume lines → applying; questions → interview;
+            script → negotiation. Tangible things they can grab on
+            day 1, not abstract promises. */}
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 400,
+            fontSize: 'clamp(15px, 1.6vw, 17px)',
+            lineHeight: 1.6,
+            color: '#5A5A6E',
+            maxWidth: 720,
+            margin: '14px auto 0',
+          }}
+        >
+          The keywords recruiters search for. The resume lines to rewrite.
+          The interview questions before they&apos;re asked. The script for
+          the offer call.
         </p>
 
         <div
