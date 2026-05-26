@@ -77,14 +77,17 @@ export default function HomePage() {
       </Link>
 
       {/* ──────────────── HERO ─────────────────
-         The hook + positioning + primary CTA. Extracted from
-         StartHereBoard so the homepage flow is now:
-           Hero → DashboardPreview → AuthorityStrip → ScenesBoard →
-           PricingTransparency → Closing.
-         This narrative order — established by user audit of the original
-         layout — matches how a skeptical job seeker actually decides:
-           hook → product proof → who built it → free entry → cost →
-           ask. */}
+         The hook + positioning + primary CTA. Homepage flow is now:
+           Hero → DashboardPreview → ScenesBoard → PricingTransparency
+           → AuthorityStrip → Closing.
+         AuthorityStrip is the LAST trust signal before the closing
+         CTA. Per Stephanie's instinct and the Cialdini authority-
+         at-decision-moment research: founder credentials fire hardest
+         right before a buy decision, not as the third thing visitors
+         see. Hero already names her ("Built by Stephanie Murray, a
+         20-year recruiter") so the credential is established for cold
+         traffic; the photo + full credentials become the closing
+         argument. */}
       <HomepageHero />
 
       {/* ──────────────── DASHBOARD PREVIEW ─────────────────
@@ -93,12 +96,6 @@ export default function HomePage() {
          Atlas. Behavioral basis: goal gradient (Hull 1932) + endowed
          progress (Nunes & Drèze 2006). */}
       <DashboardPreview />
-
-      {/* ──────────────── AUTHORITY ─────────────────
-         Trust signal for skeptical job seekers. Source credibility
-         (Hovland & Weiss 1951). Real recruiter, real credentials, photo,
-         no fake metrics. */}
-      <AuthorityStrip />
 
       {/* ──────────────── FREE TOOLS ENTRY ─────────────────
          "Or skip the system, try a free tool right now." Demoted to
@@ -112,6 +109,14 @@ export default function HomePage() {
          forces it. Three tiers: free forever, $14.99/mo Pro tools,
          coached platform coming soon. */}
       <PricingTransparency />
+
+      {/* ──────────────── AUTHORITY ─────────────────
+         Trust signal positioned as the closing argument, just before
+         the final Go Pro CTA. Source credibility (Hovland & Weiss 1951)
+         fires hardest at the decision moment, not 4 sections before
+         it. Stephanie's photo + Brightside + Transform Award land
+         right when the visitor is deciding whether to convert. */}
+      <AuthorityStrip />
 
       {/* ─────────────── CLOSING ───────────────
          Rule 5: one CTA per moment. Light-mode redesign: warm cream
