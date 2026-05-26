@@ -28,20 +28,23 @@ const SCENES: Array<{ id: Scene; title: string; quote: string; subtitle: string 
   {
     id: 'networking',
     title: 'The Networking',
-    quote: 'no one is responding to me',
-    subtitle: 'You\'re applying, hearing nothing, or your story needs translation (gap, pivot, layoff, new grad).',
+    quote: "I'm running my search",
+    subtitle:
+      "You're applying, building your pipeline, or stuck in the silence. Your story might need translation (gap, pivot, layoff, new grad). Whether you just started or it's been months, this is your scene.",
   },
   {
     id: 'interview',
     title: 'The Interview',
     quote: 'I have one coming up',
-    subtitle: 'You need to research the company, decode the questions, and rehearse against the real rubric.',
+    subtitle:
+      'You need to research the company, decode the questions, and rehearse against the real rubric.',
   },
   {
     id: 'offer',
     title: 'The Offer',
-    quote: 'I have an offer — now what?',
-    subtitle: 'You need to read what\'s actually on the table and negotiate without leaving money behind.',
+    quote: 'I have an offer, now what?',
+    subtitle:
+      "You need to read what's actually on the table and negotiate without leaving money behind.",
   },
 ]
 
