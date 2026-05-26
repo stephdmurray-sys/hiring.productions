@@ -73,9 +73,10 @@ export function HomepageHero() {
           Pull back the curtain on hiring
         </div>
 
-        {/* H1 — plain-English category statement. Job seeker (audience),
-            run your search (outcome verb), recruiter would (mechanism +
-            differentiator). 5-second test friendly. */}
+        {/* H1 — production metaphor used as STRUCTURE not decoration.
+            "Produced" implies a managed, professional system covering
+            every part. "Your entire job search" sets the scope before
+            the metaphor. Two short sentences land in 5 seconds. */}
         <h1
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -87,50 +88,66 @@ export function HomepageHero() {
             margin: 0,
           }}
         >
-          Run your job search the way a recruiter would.
+          Your entire job search.
+          <br />
+          Produced.
         </h1>
 
-        {/* Subhead 1 — SCOPE. Lists 4 activities the visitor
-            recognizes as job-search work, names the mechanism
-            (coached), retains credibility without naming the founder
-            (a recruiter), closes with the brand-tied journey arc
-            (from silence to signed). */}
+        {/* Subhead 1 — the unified promise. Memorable, parallel with
+            the H1's brevity. Tells the visitor the production
+            metaphor isn't decoration; it's the organizing principle.
+            Bolded indigo to act as the anchor between H1 and the
+            action list below. */}
         <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(18px, 2vw, 22px)',
+            lineHeight: 1.45,
+            color: '#5A4FE0',
+            margin: '24px auto 0',
+            letterSpacing: '0.005em',
+          }}
+        >
+          Every scene, covered.
+        </p>
+
+        {/* Subhead 2 — the action list. Concrete deliverables grouped
+            into pairs that map to journey phases:
+              Line 1: resume + LinkedIn  → "Get Seen"
+              Line 2: outreach + scripts → "Get In"
+              Line 3: interviews + offers → "Get the Offer"
+            Each is an action verb the visitor recognizes, then a
+            unifying "All in one place" closes the loop. */}
+        <div
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 500,
-            fontSize: 'clamp(17px, 2vw, 21px)',
-            lineHeight: 1.5,
+            fontSize: 'clamp(16px, 1.85vw, 19px)',
+            lineHeight: 1.55,
             color: '#1A1A22',
-            maxWidth: 760,
-            margin: '24px auto 0',
+            maxWidth: 700,
+            margin: '20px auto 0',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
           }}
         >
-          Networking. Applying. Interviewing. Negotiating. Coached by a
-          recruiter, from silence to signed.
-        </p>
-
-        {/* Subhead 2 — CONCRETE DELIVERABLES. Answers the visitor's
-            actual question: "what do I get when I click that button?"
-            Each item maps to a scene in subhead 1: keywords →
-            networking; resume lines → applying; questions → interview;
-            script → negotiation. Tangible things they can grab on
-            day 1, not abstract promises. */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: 'clamp(15px, 1.6vw, 17px)',
-            lineHeight: 1.6,
-            color: '#5A5A6E',
-            maxWidth: 720,
-            margin: '14px auto 0',
-          }}
-        >
-          The keywords recruiters search for. The resume lines to rewrite.
-          The interview questions before they&apos;re asked. The script for
-          the offer call.
-        </p>
+          <span>Fix your resume. Upgrade your LinkedIn.</span>
+          <span>Find the right people. Know what to say.</span>
+          <span>
+            Turn conversations into interviews, and offers into better ones.
+          </span>
+          <span
+            style={{
+              color: '#5A4FE0',
+              fontWeight: 700,
+              marginTop: 10,
+            }}
+          >
+            All in one place.
+          </span>
+        </div>
 
         <div
           style={{
@@ -171,7 +188,8 @@ export function HomepageHero() {
               color: '#5A5A6E',
             }}
           >
-            No credit card. Five free tools. Magic-link sign-in.
+            Get your resume, outreach, and next steps in minutes. No credit
+            card.
           </div>
           <style>{`.hp-hero-cta:hover { transform: translateY(-2px); }`}</style>
         </div>
