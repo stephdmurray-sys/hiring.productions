@@ -248,7 +248,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
         eyebrow="ACT TWO — RECRUITER INSIGHTS"
         title="You've used every free insight."
         body="Unlocks both sides — every candidate Recruiter Insight AND every hiring-team tool, unlimited, $14.99/month or $99/year. Less than Jobscan charges for one day."
-        primary={{ label: 'Get Full Access', href: '/pricing' }}
+        primary={{ label: 'Go Pro', href: '/pricing' }}
       />
       <SimpleModal
         open={modal === 'capacity'}
@@ -256,7 +256,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
         eyebrow="AT CAPACITY"
         title="We're at today's capacity."
         body="The free tier is capped so it stays free. It resets at midnight UTC. Members keep going without the cap."
-        primary={{ label: 'See membership', href: '/pricing' }}
+        primary={{ label: 'See Pro', href: '/pricing' }}
       />
       <SimpleModal
         open={modal === 'pro-tool'}
@@ -264,7 +264,7 @@ export function UsageProvider({ children }: UsageProviderProps) {
         eyebrow="ACT TWO — RECRUITER INSIGHTS"
         title="This one's a Recruiter Insight."
         body="Unlocks both sides of the table — every candidate Recruiter Insight AND every hiring-team tool, for $14.99/mo or $99/yr. Less than Jobscan charges for one day."
-        primary={{ label: 'Get Full Access', href: '/pricing' }}
+        primary={{ label: 'Go Pro', href: '/pricing' }}
       />
     </>
   )

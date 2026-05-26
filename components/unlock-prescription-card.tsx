@@ -106,7 +106,7 @@ export function UnlockPrescriptionCard() {
         >
           Free runs show the diagnosis. The exact word-for-word rewrites — the lines
           to delete, the headline to replace, the skill entries to add — are part of
-          your Pro membership.
+          your Pro access.
         </p>
 
         {/* What's locked, line-listed */}

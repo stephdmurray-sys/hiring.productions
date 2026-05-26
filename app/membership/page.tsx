@@ -77,7 +77,7 @@ const PATH = [
 export default function MembershipPage() {
   const [showSuccess, setShowSuccess] = useState(false)
   // Tracks whether the visitor already has a member signal (localStorage
-  // flag set by Stripe success flow). Used to gate the "Already a member?
+  // flag set by Stripe success flow). Used to gate the "Already Pro?
   // Sign in" link so it doesn't intercept first-time buyers at the moment
   // of intent.
   const [hasMemberSignal, setHasMemberSignal] = useState(false)
@@ -340,7 +340,7 @@ export default function MembershipPage() {
                 color: '#5A5A6E',
               }}
             >
-              Already a member?{' '}
+              Already Pro?{' '}
               <Link
                 href="/sign-in"
                 style={{

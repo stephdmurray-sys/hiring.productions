@@ -112,7 +112,7 @@ export function ProUpsellPanel({
             lineHeight: 1.55,
           }}
         >
-          Members get the next Recruiter Insight on the same diagnosis, plus every tool from the
+          Pro gets the next Recruiter Insight on the same diagnosis, plus every tool from the
           other side of the table.{' '}
           <span style={{ color: '#1A1A22', fontWeight: 800 }}>Pro</span> costs less than Jobscan
           charges for one day.

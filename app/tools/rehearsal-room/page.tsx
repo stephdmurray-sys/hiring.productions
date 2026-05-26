@@ -265,7 +265,7 @@ export default function RehearsalRoomPage() {
             <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
               {isMemberUser
                 ? 'Members see all ten questions with full breakdowns.'
-                : 'See the kind of interview + your first question free. The full script is for members.'}
+                : 'See the kind of interview + your first question free. The full script is for Pro.'}
             </p>
           </div>
         )}

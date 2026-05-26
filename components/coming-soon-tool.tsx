@@ -242,7 +242,7 @@ export function ComingSoonTool({ toolName, toolDescription, category }: ComingSo
             textAlign: 'center',
             marginTop: '20px',
           }}>
-            Already a member? All current Recruiter Insights are unlocked in your account.
+            Already Pro? All current Recruiter Insights are unlocked in your account.
           </p>
 
           {/* RepVera CTA */}

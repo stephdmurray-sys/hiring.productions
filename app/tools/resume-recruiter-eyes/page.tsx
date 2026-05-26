@@ -285,7 +285,7 @@ export default function ResumeRecruiterEyesPage() {
               <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
                 {isMemberUser
                   ? 'Members see the full read.'
-                  : 'See the verdict free. The full monologue is for members.'}
+                  : 'See the verdict free. The full monologue is for Pro.'}
               </p>
             </div>
           </div>

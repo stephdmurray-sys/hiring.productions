@@ -139,7 +139,7 @@ export default function PricingPage() {
           >
             Jobscan tells you if your resume passes the ATS. We tell you what the recruiter thinks
             when it does — and the hiring-team tools that show you how candidates get screened, sourced,
-            and decided on. Both sides of the table, one membership.
+            and decided on. Both sides of the table, one subscription.
           </p>
 
           <p

@@ -104,7 +104,7 @@ export function StripeCheckoutButton({
             fontWeight: 600,
           }}
         >
-          You’re already a member.
+          You’re already Pro.
         </p>
       </div>
     )

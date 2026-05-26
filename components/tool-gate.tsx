@@ -57,7 +57,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
         window.location.reload()
       } else {
         setRestoreError(
-          'No active membership found for this email. Use the same email you paid with at checkout.',
+          'No active Pro account found for this email. Use the same email you paid with at checkout.',
         )
       }
     } catch {
@@ -120,7 +120,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
           }}
         >
           <Lock size={11} strokeWidth={2.5} />
-          Members only · $14.99/mo or $99/yr
+          Pro · $14.99/mo or $99/yr
         </div>
 
         {/* Headline */}
@@ -135,7 +135,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             margin: 0,
           }}
         >
-          The reads that change how you apply.
+          Unlock the whole production.
         </h2>
 
         {/* Price callout — OUR price is the hero */}
@@ -282,7 +282,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
             boxShadow: '0 12px 30px rgba(108,71,255,0.30)',
           }}
         >
-          Get Full Access
+          Go Pro
         </StripeCheckoutButton>
 
         {/* Reassurance line */}
@@ -304,7 +304,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
         <div
           style={{
             margin: '26px 0 18px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
+            borderTop: '1px solid #ECECF2',
           }}
         />
 
@@ -319,7 +319,7 @@ export function ToolGate({ toolName, toolDescription, children, isFree = false }
               marginBottom: '10px',
             }}
           >
-            Already a member?
+            Already Pro?
           </div>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
             <input

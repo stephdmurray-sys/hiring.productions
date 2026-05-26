@@ -794,7 +794,7 @@ function InlineUpgradeCard() {
           cursor: 'pointer',
         }}
       >
-        Get full access — $14.99/mo or $99/yr
+        Go Pro · $14.99/mo or $99/yr
       </StripeCheckoutButton>
     </div>
   )

@@ -327,7 +327,7 @@ export default function LinkedinRewritePage() {
             <p style={{ marginTop: '14px', fontSize: '12px', color: '#8B8AA0', textAlign: 'center' }}>
               {isMemberUser
                 ? 'Members see everything: keywords, skills, settings, full rewrites, and recommendations strategy.'
-                : 'See the recruiter’s read free. The full report is for members.'}
+                : 'See the recruiter’s read free. The full report is for Pro.'}
             </p>
           </div>
         )}
