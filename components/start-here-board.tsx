@@ -526,7 +526,7 @@ function DetailView({
             actually answers). Visitor sees the recruiter take in 3
             seconds, then the deeper tools below earn the click for the
             full run. */}
-        {question.id === 'no-responses' && (
+        {question.id === 'networking' && (
           <div
             style={{
               marginBottom: 32,

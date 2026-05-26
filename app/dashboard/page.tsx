@@ -75,12 +75,9 @@ export default async function DashboardPage() {
   const nextStep = STEP_DEFINITIONS.find((s) => !completed.includes(s.id))
 
   const greeting = profile.display_name ?? user.email?.split('@')[0] ?? 'there'
-  const currentMoment = MOMENTS.find((m) => {
-    if (profile.current_scene === 'networking') return m.id === 'no-responses'
-    if (profile.current_scene === 'interview') return m.id === 'interview-prep'
-    if (profile.current_scene === 'offer') return m.id === 'story'
-    return false
-  })
+  // Moment IDs now match Supabase profiles.current_scene values
+  // ('networking' | 'interview' | 'offer'), so this is a direct lookup.
+  const currentMoment = MOMENTS.find((m) => m.id === profile.current_scene)
 
   return (
     <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
