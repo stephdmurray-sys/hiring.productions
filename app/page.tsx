@@ -109,65 +109,10 @@ export default function HomePage() {
          works" beat the page was missing. */}
       <ProofMoment />
 
-      {/* ──────────────── EMOTIONAL BRIDGE ─────────────────
-         One line in Stephanie's voice. The page is system-heavy; this
-         is the moment the founder shows up. */}
-      <section
-        style={{
-          background: '#FAF8F3',
-          padding: 'clamp(24px, 4vw, 48px) 24px',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontStyle: 'italic',
-            fontWeight: 500,
-            fontSize: 'clamp(18px, 2.2vw, 24px)',
-            lineHeight: 1.45,
-            color: '#5A4FE0',
-            textAlign: 'center',
-            maxWidth: 720,
-            margin: '0 auto',
-            letterSpacing: '-0.005em',
-          }}
-        >
-          You are not bad at this. The system is broken. Here is the one I
-          would build for you.
-        </p>
-      </section>
-
       {/* ──────────────── DEEPER EXPLORATION ─────────────────
          Scene cards as a piece of the system, sampled one at a time.
          For visitors who want to taste before they sign up. */}
       <StartHereBoard hideHero />
-
-      {/* ──────────────── PROOF BRIDGE ─────────────────
-         Brightside scale (19 → 1,500). Sourceable. Frames the price
-         against a real outcome, not against "free." */}
-      <section
-        style={{
-          background: '#FAF8F3',
-          padding: 'clamp(16px, 3vw, 32px) 24px clamp(8px, 2vw, 16px)',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 600,
-            fontSize: 'clamp(14px, 1.55vw, 16px)',
-            lineHeight: 1.55,
-            color: '#5A5A6E',
-            textAlign: 'center',
-            maxWidth: 640,
-            margin: '0 auto',
-            letterSpacing: '0.005em',
-          }}
-        >
-          The playbook that scaled one healthcare team from 19 to 1,500
-          clinicians. The same system, opened up for you.
-        </p>
-      </section>
 
       {/* ──────────────── PRICING TRANSPARENCY ─────────────────
          Outcome-first tier copy. Anti-competitor reframe. */}
