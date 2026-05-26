@@ -32,18 +32,23 @@ import Link from 'next/link'
  *     destination (where this ends up).
  */
 
+// Rewritten 2026-05-25: outcome-first phrasing instead of tool-named
+// steps. Cold visitors don't care about "run the AI detector"; they
+// care about "make sure your resume reads human." Same six steps,
+// rephrased as the visitor's pain instead of the product's noun.
+// Per CLAUDE.md: "Tool names are questions the user is already asking."
 const STEPS = [
-  { label: 'Define your target role', tool: 'target-role' },
-  { label: 'Run a recruiter visibility check', tool: 'recruiter-search-rank' },
-  { label: 'Audit your LinkedIn audition reel', tool: 'linkedin-rewrite' },
-  { label: 'Run your resume through the AI detector', tool: 'resume-ai-check' },
-  { label: 'Prep for your first interview', tool: 'rehearsal-room' },
-  { label: 'Decode an offer', tool: 'offer-pitch' },
+  { label: 'Lock in the role you actually want', tool: 'target-role' },
+  { label: 'See if recruiters can find you', tool: 'recruiter-search-rank' },
+  { label: 'Fix what is killing your LinkedIn', tool: 'linkedin-rewrite' },
+  { label: 'Make sure your resume reads human', tool: 'resume-ai-check' },
+  { label: 'Walk into your interview rehearsed', tool: 'rehearsal-room' },
+  { label: 'Read the offer before you negotiate', tool: 'offer-pitch' },
 ]
 
 const SAMPLE_INSIGHTS = [
   { title: 'Where Do You Rank in a Recruiter Search?', when: '2 days ago' },
-  { title: 'Your LinkedIn — Rewritten', when: '3 days ago' },
+  { title: 'Your LinkedIn, Rewritten', when: '3 days ago' },
   { title: 'What Words Are Recruiters Searching For?', when: '5 days ago' },
 ]
 
@@ -140,6 +145,28 @@ export function DashboardPreview() {
             Every step is mapped and saved, from your resume to your offer. No
             more guessing what to do next. Just follow the system.
           </p>
+
+          {/* Reality-punch line (added 5/25 per critic feedback): the
+              dashboard preview was reading as "a feature" instead of as
+              the center of the product. This single bold line repositions
+              the dashboard as the place the entire job search lives, so
+              visitors stop scanning it as "another screenshot" and start
+              reading it as "this is the thing." */}
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 'clamp(16px, 1.9vw, 19px)',
+              color: '#1A1A22',
+              maxWidth: 640,
+              margin: '20px auto 0',
+              lineHeight: 1.45,
+              letterSpacing: '-0.005em',
+            }}
+          >
+            This is where your entire job search lives. Every tool, every step,
+            every result.
+          </p>
         </div>
 
         {/* Pain + promise tag — calls out the universal stalled-after-
@@ -223,7 +250,18 @@ export function DashboardPreview() {
                 lineHeight: 1.1,
               }}
             >
-              Welcome back, Sarah.
+              Welcome back,{' '}
+              <span
+                style={{
+                  color: '#A78BFA',
+                  fontWeight: 700,
+                  fontStyle: 'italic',
+                  letterSpacing: '-0.01em',
+                }}
+              >
+                [your name]
+              </span>
+              .
             </div>
           </div>
 
@@ -473,7 +511,7 @@ export function DashboardPreview() {
             }}
             className="hp-dashboard-preview-cta"
           >
-            Start your search, free →
+            Build your plan, free →
           </Link>
           <style>{`.hp-dashboard-preview-cta:hover { transform: translateY(-2px); }`}</style>
           <div
@@ -484,7 +522,7 @@ export function DashboardPreview() {
               color: '#8B8AA0',
             }}
           >
-            See your first steps in under 2 minutes.
+            Your first six steps, mapped in 2 minutes. No credit card.
           </div>
         </div>
       </div>

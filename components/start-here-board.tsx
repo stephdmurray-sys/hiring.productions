@@ -164,6 +164,11 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
             forced to choose; they're given the option. */}
         {hideHero && !current && (
           <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 48px)' }}>
+            {/* Reframed 5/25 per audit: previously positioned as "skip the
+                system, try a tool" which contradicted the hero's
+                "all in one place" promise. New framing: scenes ARE the
+                system, sampled one at a time. Honest taste of the
+                product, not a separate offering. */}
             <div
               style={{
                 fontFamily: "'Figtree', sans-serif",
@@ -175,7 +180,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
                 marginBottom: 14,
               }}
             >
-              Or skip the system
+              Or sample the system, one scene at a time
             </div>
             <h2
               style={{
@@ -188,7 +193,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
                 margin: '0 0 14px',
               }}
             >
-              Try a free tool right now.
+              Try one piece of the system, free.
             </h2>
             <p
               style={{
@@ -200,8 +205,8 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
                 lineHeight: 1.55,
               }}
             >
-              Pick the scene you&apos;re in. We&apos;ll route you to a free tool that
-              answers the exact pain. No account needed.
+              Each scene is a free tool pulled straight from the dashboard.
+              Pick the one you are in. No account needed.
             </p>
           </div>
         )}
@@ -519,7 +524,7 @@ function DetailView({
             marginBottom: 32,
           }}
         >
-          {question.sub.replace(/\\u2014/g, '—')}
+          {question.sub}
         </div>
 
         {/* Live Quick Read — only on The Silence (the moment Quick Read

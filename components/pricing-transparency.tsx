@@ -53,11 +53,31 @@ export function PricingTransparency() {
               letterSpacing: '-0.02em',
               lineHeight: 1.08,
               color: '#1A1A22',
-              margin: '0 0 10px',
+              margin: '0 0 14px',
             }}
           >
             No surprises. No upsells.
           </h2>
+
+          {/* Anti-competitor reframe (added 5/25 per audit): the price
+              looks different when the comparison is "everything you are
+              already paying for" instead of "free." Names the alternative
+              the visitor is currently mentally comparing against. */}
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 500,
+              fontSize: 'clamp(15px, 1.7vw, 17px)',
+              lineHeight: 1.55,
+              color: '#5A5A6E',
+              maxWidth: 620,
+              margin: '0 auto',
+            }}
+          >
+            This replaces the resume sites, the rank checkers, the negotiation
+            coaches, and the spreadsheet you have been keeping. One system, by
+            someone who actually hires.
+          </p>
         </div>
 
         <div
@@ -102,18 +122,32 @@ export function PricingTransparency() {
             >
               $0
             </div>
+            {/* Outcome-first framing (5/25 audit): lead with what this
+                tier accomplishes, then list tools as evidence. */}
             <p
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 13.5,
-                color: '#5A5A6E',
+                fontSize: 14.5,
+                fontWeight: 700,
+                color: '#1A1A22',
+                lineHeight: 1.45,
+                margin: '0 0 10px',
+              }}
+            >
+              Find out what is breaking your search before you send another
+              application.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                color: '#8B8AA0',
                 lineHeight: 1.55,
                 margin: 0,
               }}
             >
-              Every diagnostic tool. Resume AI check, recruiter search rank,
-              job description decoder, ghost-job detector, what&apos;s breaking
-              your search.
+              Resume AI check, recruiter search rank, job description decoder,
+              ghost-job detector.
             </p>
           </div>
 
@@ -195,15 +229,26 @@ export function PricingTransparency() {
             <p
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 13.5,
-                color: '#5A5A6E',
+                fontSize: 14.5,
+                fontWeight: 700,
+                color: '#1A1A22',
+                lineHeight: 1.45,
+                margin: '0 0 10px',
+              }}
+            >
+              Get the words. Get seen. Get the offer.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                color: '#8B8AA0',
                 lineHeight: 1.55,
                 margin: '0 0 16px',
               }}
             >
-              Every individual tool. LinkedIn rewrite, interview rehearsal
-              room, offer negotiation script, recruiter eyes resume read.
-              Cancel anytime.
+              LinkedIn rewrite, interview rehearsal room, offer negotiation
+              script, recruiter eyes resume read. Cancel anytime.
             </p>
             <Link
               href="/membership"
@@ -219,7 +264,7 @@ export function PricingTransparency() {
                 borderRadius: 8,
               }}
             >
-              See what&apos;s inside →
+              See what is inside Pro →
             </Link>
           </div>
 
@@ -261,15 +306,26 @@ export function PricingTransparency() {
             <p
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 13.5,
-                color: '#5A5A6E',
+                fontSize: 14.5,
+                fontWeight: 700,
+                color: '#1A1A22',
+                lineHeight: 1.45,
+                margin: '0 0 10px',
+              }}
+            >
+              A coached job search that ends in an offer.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                color: '#8B8AA0',
                 lineHeight: 1.55,
                 margin: 0,
               }}
             >
-              The full coached system. Progress tracking, interview
-              transcription, multi-role pipeline, weekly nudges, a
-              recruiter in every scene.
+              Progress tracking, interview transcription, multi-role pipeline,
+              weekly nudges, a recruiter in every scene.
             </p>
           </div>
         </div>

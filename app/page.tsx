@@ -47,18 +47,22 @@ export default function HomePage() {
          the homepage default; this strip is a passive signpost for
          visitors in the wrong room.
       */}
+      {/* Quieted per critic feedback (5/25): the previous pink-tinted
+         strip competed with the hero CTA for first-glance attention.
+         Path-choosing belongs AFTER commitment, not before it. We keep
+         the link for hiring-side visitors who land cold, but render it
+         as a subtle, near-invisible signpost rather than a banner. */}
       <Link
         href="/for-companies"
         style={{
           display: 'block',
-          background: '#FFF4F1',
-          borderBottom: '1px solid rgba(255,79,106,0.18)',
-          padding: '12px 24px',
+          background: 'transparent',
+          padding: '8px 24px',
           textAlign: 'center',
           fontFamily: "'Figtree', sans-serif",
-          fontSize: 13.5,
-          fontWeight: 600,
-          color: '#5A5A6E',
+          fontSize: 12,
+          fontWeight: 500,
+          color: '#8B8AA0',
           textDecoration: 'none',
           letterSpacing: '0.005em',
         }}
@@ -66,9 +70,9 @@ export default function HomePage() {
         Hiring, not job-seeking?{' '}
         <span
           style={{
-            color: '#C73E5A',
-            fontWeight: 800,
-            borderBottom: '1px solid rgba(199,62,90,0.45)',
+            color: '#5A5A6E',
+            fontWeight: 600,
+            borderBottom: '1px solid rgba(139,138,160,0.3)',
             paddingBottom: 1,
           }}
         >
@@ -97,12 +101,72 @@ export default function HomePage() {
          progress (Nunes & Drèze 2006). */}
       <DashboardPreview />
 
+      {/* ──────────────── EMOTIONAL BRIDGE ─────────────────
+         One line of acknowledgment between system sections (5/25 audit).
+         The page was reading as competent but cold. A skeptical job
+         seeker needs ONE moment where the founder shows up and says
+         "I see you" before they trust the system. Italic, lavender,
+         restrained — not a heading, just a voice. */}
+      <section
+        style={{
+          background: '#FAF8F3',
+          padding: 'clamp(24px, 4vw, 48px) 24px',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontStyle: 'italic',
+            fontWeight: 500,
+            fontSize: 'clamp(18px, 2.2vw, 24px)',
+            lineHeight: 1.45,
+            color: '#5A4FE0',
+            textAlign: 'center',
+            maxWidth: 720,
+            margin: '0 auto',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          You are not bad at this. The system is broken. Here is the one I
+          would build for you.
+        </p>
+      </section>
+
       {/* ──────────────── FREE TOOLS ENTRY ─────────────────
-         "Or skip the system, try a free tool right now." Demoted to
-         secondary surface because the dashboard preview above shows
-         visitors the full product first. Lower-pressure framing reduces
-         decision paralysis (Schwartz 2004). */}
+         Reframed 5/25: scenes are positioned as a piece of the system
+         sampled one at a time, not as a separate offering. Resolves the
+         contradiction with the hero's "all in one place" promise. */}
       <StartHereBoard hideHero />
+
+      {/* ──────────────── PROOF BRIDGE ─────────────────
+         Single honest, sourceable line that frames Pricing below. The
+         site had no proof anywhere; this is the one verifiable result
+         we have (Brightside Health scale, Transform Award 2025). It
+         sits BEFORE pricing so $14.99 is read against a real outcome,
+         not against "free." */}
+      <section
+        style={{
+          background: '#FAF8F3',
+          padding: 'clamp(16px, 3vw, 32px) 24px clamp(8px, 2vw, 16px)',
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 600,
+            fontSize: 'clamp(14px, 1.55vw, 16px)',
+            lineHeight: 1.55,
+            color: '#5A5A6E',
+            textAlign: 'center',
+            maxWidth: 640,
+            margin: '0 auto',
+            letterSpacing: '0.005em',
+          }}
+        >
+          The playbook that scaled one healthcare team from 19 to 1,500
+          clinicians. The same system, opened up for you.
+        </p>
+      </section>
 
       {/* ──────────────── PRICING TRANSPARENCY ─────────────────
          Kills the "wait, what's this cost" objection before the closing
@@ -159,9 +223,14 @@ export default function HomePage() {
             Open for the first time.
           </h2>
 
+          {/* CTA realigned 5/25 per audit: the entire page sells the
+              Stage 1 free conversion (sign in, get your dashboard). The
+              closing was breaking that funnel by jumping to "Go Pro"
+              before the visitor had seen the product. Pro sells itself
+              once they are in the dashboard. */}
           <div style={{ marginTop: 44 }}>
             <Link
-              href="/membership"
+              href="/sign-in"
               className="hero-btn"
               style={{
                 display: 'inline-flex',
@@ -179,13 +248,26 @@ export default function HomePage() {
                 boxShadow: '0 16px 40px rgba(108,71,255,0.28)',
               }}
             >
-              Go Pro
+              Start your search, free →
             </Link>
           </div>
 
-          <div style={{ marginTop: 20 }}>
+          <div style={{ marginTop: 14 }}>
+            <span
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13,
+                fontWeight: 500,
+                color: '#8B8AA0',
+              }}
+            >
+              No credit card. Magic-link sign-in. About 30 seconds.
+            </span>
+          </div>
+
+          <div style={{ marginTop: 18 }}>
             <Link
-              href="/tools"
+              href="/membership"
               style={{
                 fontFamily: "'Figtree', sans-serif",
                 fontWeight: 600,
@@ -196,7 +278,7 @@ export default function HomePage() {
                 paddingBottom: 1,
               }}
             >
-              Browse tools →
+              Or see what is inside Pro →
             </Link>
           </div>
         </div>

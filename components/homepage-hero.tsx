@@ -93,41 +93,28 @@ export function HomepageHero() {
           Produced.
         </h1>
 
-        {/* Subhead 1 — the unified promise. Memorable, parallel with
-            the H1's brevity. Tells the visitor the production
-            metaphor isn't decoration; it's the organizing principle.
-            Bolded indigo to act as the anchor between H1 and the
-            action list below. */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(18px, 2vw, 22px)',
-            lineHeight: 1.45,
-            color: '#5A4FE0',
-            margin: '24px auto 0',
-            letterSpacing: '0.005em',
-          }}
-        >
-          Every scene, covered.
-        </p>
+        {/* Reordered 5/25 per audit: the metaphor was demanding decoding
+            BEFORE the concrete promise landed. Now the action list sits
+            directly under the H1, so cold visitors see what they get
+            inside three seconds. The metaphor callback ("Every scene,
+            covered. All in one place.") moves below as the resolution
+            line, not the gatekeeper. */}
 
-        {/* Subhead 2 — the action list. Concrete deliverables grouped
-            into pairs that map to journey phases:
+        {/* Action list — concrete deliverables grouped into pairs that
+            map to journey phases:
               Line 1: resume + LinkedIn  → "Get Seen"
               Line 2: outreach + scripts → "Get In"
               Line 3: interviews + offers → "Get the Offer"
-            Each is an action verb the visitor recognizes, then a
-            unifying "All in one place" closes the loop. */}
+            Lands the unambiguous promise. */}
         <div
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 500,
-            fontSize: 'clamp(16px, 1.85vw, 19px)',
+            fontSize: 'clamp(17px, 1.95vw, 21px)',
             lineHeight: 1.55,
             color: '#1A1A22',
-            maxWidth: 700,
-            margin: '20px auto 0',
+            maxWidth: 720,
+            margin: '28px auto 0',
             display: 'flex',
             flexDirection: 'column',
             gap: 4,
@@ -138,16 +125,24 @@ export function HomepageHero() {
           <span>
             Turn conversations into interviews, and offers into better ones.
           </span>
-          <span
-            style={{
-              color: '#5A4FE0',
-              fontWeight: 700,
-              marginTop: 10,
-            }}
-          >
-            All in one place.
-          </span>
         </div>
+
+        {/* Metaphor callback — the production metaphor resolves the
+            action list rather than gatekeeping it. Indigo bold for the
+            anchor moment between promise and CTA. */}
+        <p
+          style={{
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(17px, 1.9vw, 21px)',
+            lineHeight: 1.4,
+            color: '#5A4FE0',
+            margin: '22px auto 0',
+            letterSpacing: '0.005em',
+          }}
+        >
+          Every scene, covered. All in one place.
+        </p>
 
         <div
           style={{
