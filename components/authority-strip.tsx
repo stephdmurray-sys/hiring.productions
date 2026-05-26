@@ -84,7 +84,7 @@ export function AuthorityStrip() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(22px, 3vw, 30px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.02em',
               lineHeight: 1.15,
               color: '#1A1A22',

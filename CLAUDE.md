@@ -74,11 +74,26 @@ re-read these.
    color only marks the most important moments.
 
 4. **Type does the work; chrome doesn't.** Hierarchy is established
-   by SIZE alone. 56-72px for hero headings. 32-42px for section
-   titles. 17-19px for body. 12-14px for captions. No tinted
-   background cards, no bordered pills, no eyebrow labels everywhere.
-   If a border doesn't earn its place by separating distinct
-   entities, it doesn't get one. Decorative chrome is cut.
+   by SIZE alone. **Section titles are never small.** Use the
+   following minimums and stick to them:
+   - **Hero H1: `clamp(40px, 6.5vw, 72px)`** (or larger). The
+     biggest text on any page.
+   - **Section H2 (anywhere): `clamp(40px, 6vw, 64px)`.** This is
+     the **minimum** for any title that introduces a homepage,
+     membership-page, or marketing-page section. Updated 5/26
+     after section titles like "Where are you stuck?" and "Your
+     job search, finally moving." were rendering too small relative
+     to the hero. **Never use clamp(28-32px, ..., 40-48px) for a
+     section title again** — those are sub-heading sizes, not
+     section anchors.
+   - **Sub-heading inside a card: 22-26px.** OK for tertiary
+     hierarchy inside a card or callout.
+   - **Body: 17-19px.** Captions: 12-14px.
+
+   No tinted background cards, no bordered pills, no eyebrow
+   labels everywhere. If a border doesn't earn its place by
+   separating distinct entities, it doesn't get one. Decorative
+   chrome is cut.
 
 5. **One CTA per moment.** Every section has zero or one buttons.
    Two buttons compete for the visitor's attention — split it and

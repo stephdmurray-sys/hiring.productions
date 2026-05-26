@@ -389,7 +389,7 @@ export default function MembershipPage() {
             <h2
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 'clamp(34px, 5vw, 52px)',
+                fontSize: 'clamp(40px, 6vw, 64px)',
                 fontWeight: 900,
                 lineHeight: 1.04,
                 letterSpacing: '-0.024em',
@@ -525,7 +525,7 @@ export default function MembershipPage() {
             <h2
               style={{
                 fontFamily: "'Figtree', sans-serif",
-                fontSize: 'clamp(34px, 5vw, 52px)',
+                fontSize: 'clamp(40px, 6vw, 64px)',
                 fontWeight: 900,
                 lineHeight: 1.04,
                 letterSpacing: '-0.024em',
@@ -649,7 +649,7 @@ export default function MembershipPage() {
           <h2
             style={{
               fontFamily: "'Figtree', sans-serif",
-              fontSize: 'clamp(34px, 5vw, 52px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               fontWeight: 900,
               lineHeight: 1.04,
               letterSpacing: '-0.024em',
@@ -827,7 +827,7 @@ export default function MembershipPage() {
         <h2
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(34px, 5vw, 52px)',
+            fontSize: 'clamp(40px, 6vw, 64px)',
             fontWeight: 900,
             lineHeight: 1.04,
             letterSpacing: '-0.024em',

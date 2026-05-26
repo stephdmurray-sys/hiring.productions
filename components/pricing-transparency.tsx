@@ -49,7 +49,7 @@ export function PricingTransparency() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(28px, 4vw, 40px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.02em',
               lineHeight: 1.08,
               color: '#1A1A22',

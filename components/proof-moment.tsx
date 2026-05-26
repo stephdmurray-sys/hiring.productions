@@ -51,7 +51,7 @@ export function ProofMoment() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(28px, 4vw, 42px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.022em',
               lineHeight: 1.08,
               color: '#1A1A22',

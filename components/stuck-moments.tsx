@@ -96,7 +96,7 @@ export function StuckMoments() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(32px, 4.8vw, 52px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.025em',
               lineHeight: 1.04,
               color: '#1A1A22',

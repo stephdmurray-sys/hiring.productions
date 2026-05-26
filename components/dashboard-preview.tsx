@@ -123,7 +123,7 @@ export function DashboardPreview() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(32px, 4.5vw, 48px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.025em',
               lineHeight: 1.06,
               color: '#1A1A22',

@@ -137,7 +137,7 @@ export default function HomePage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(36px, 5.5vw, 64px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.028em',
               lineHeight: 1.04,
               color: '#1A1A22',
@@ -150,7 +150,7 @@ export default function HomePage() {
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontWeight: 900,
-              fontSize: 'clamp(36px, 5.5vw, 64px)',
+              fontSize: 'clamp(40px, 6vw, 64px)',
               letterSpacing: '-0.028em',
               lineHeight: 1.04,
               background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
