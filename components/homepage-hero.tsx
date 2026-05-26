@@ -90,8 +90,14 @@ export function HomepageHero() {
           Run your job search the way a recruiter would.
         </h1>
 
-        {/* Subhead 1 — category clarity. What it IS (software), who it's
-            FOR (stalled, laid off, pivoting), who BUILT it (recruiter). */}
+        {/* Subhead — the most valuable line on the page.
+            Lists scope (4 concrete activities the visitor recognizes
+            as job-search work), names the mechanism (coached), retains
+            credibility without naming the founder (a recruiter), and
+            closes with the brand-tied journey arc (from silence to
+            signed). No mention of Stephanie by name — her credentials
+            land in the AuthorityStrip at the bottom of the page,
+            right before the closing CTA. */}
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -99,30 +105,12 @@ export function HomepageHero() {
             fontSize: 'clamp(17px, 2vw, 21px)',
             lineHeight: 1.5,
             color: '#1A1A22',
-            maxWidth: 720,
+            maxWidth: 760,
             margin: '24px auto 0',
           }}
         >
-          Job-search software for the moment you&apos;re stalled, laid off, or
-          pivoting. Built by Stephanie Murray, a 20-year recruiter.
-        </p>
-
-        {/* Subhead 2 — mechanism + outcome, brand-voiced. The "scene with
-            you" line moved here as supporting color (not the primary
-            positioning). */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 400,
-            fontSize: 'clamp(15px, 1.6vw, 17px)',
-            lineHeight: 1.55,
-            color: '#5A5A6E',
-            maxWidth: 640,
-            margin: '14px auto 0',
-          }}
-        >
-          A recruiter in the scene with you. Networking, interviewing,
-          negotiating. From silence to signed.
+          Networking. Applying. Interviewing. Negotiating. Coached by a
+          recruiter, from silence to signed.
         </p>
 
         <div
