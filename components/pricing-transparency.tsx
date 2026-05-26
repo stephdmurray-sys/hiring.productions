@@ -111,7 +111,7 @@ export function PricingTransparency() {
                 margin: 0,
               }}
             >
-              Every diagnostic tool — resume AI check, recruiter search rank,
+              Every diagnostic tool. Resume AI check, recruiter search rank,
               job description decoder, ghost-job detector, what&apos;s breaking
               your search.
             </p>
@@ -190,7 +190,7 @@ export function PricingTransparency() {
                 marginBottom: 12,
               }}
             >
-              or $99 / year — save 45%
+              or $99 / year. Save 45%.
             </div>
             <p
               style={{
@@ -201,7 +201,7 @@ export function PricingTransparency() {
                 margin: '0 0 16px',
               }}
             >
-              Every individual tool — LinkedIn rewrite, interview rehearsal
+              Every individual tool. LinkedIn rewrite, interview rehearsal
               room, offer negotiation script, recruiter eyes resume read.
               Cancel anytime.
             </p>
@@ -267,7 +267,7 @@ export function PricingTransparency() {
                 margin: 0,
               }}
             >
-              The full coached system — progress tracking, interview
+              The full coached system. Progress tracking, interview
               transcription, multi-role pipeline, weekly nudges, a
               recruiter in every scene.
             </p>

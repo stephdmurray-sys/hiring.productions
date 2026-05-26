@@ -88,7 +88,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
               on hiring.
             </Heading>
             <SubHeading>
-              A recruiter in the scene with you — networking, interviewing, negotiating.
+              A recruiter in the scene with you. Networking, interviewing, negotiating.
               Play by play.
             </SubHeading>
 
@@ -123,7 +123,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
                   }}
                   className="hp-start-cta"
                 >
-                  Start your search — free →
+                  Start your search, free →
                 </Link>
                 <div
                   style={{
@@ -201,7 +201,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
               }}
             >
               Pick the scene you&apos;re in. We&apos;ll route you to a free tool that
-              answers the exact pain — no account needed.
+              answers the exact pain. No account needed.
             </p>
           </div>
         )}

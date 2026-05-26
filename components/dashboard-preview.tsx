@@ -132,7 +132,7 @@ export function DashboardPreview() {
             }}
           >
             Every tool you run is saved. Every step you complete shows up here.
-            Your whole search, in one place — scripted scene by scene.
+            Your whole search, in one place. Scripted scene by scene.
           </p>
         </div>
 
@@ -423,7 +423,7 @@ export function DashboardPreview() {
             }}
             className="hp-dashboard-preview-cta"
           >
-            Start your search — free →
+            Start your search, free →
           </Link>
           <style>{`.hp-dashboard-preview-cta:hover { transform: translateY(-2px); }`}</style>
           <div

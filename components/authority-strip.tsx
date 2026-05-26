@@ -91,7 +91,7 @@ export function AuthorityStrip() {
               margin: '0 0 14px',
             }}
           >
-            Stephanie Murray — 20 years inside hiring.
+            Stephanie Murray. 20 years inside hiring.
           </h2>
           <p
             style={{
@@ -102,9 +102,9 @@ export function AuthorityStrip() {
               margin: '0 0 16px',
             }}
           >
-            Senior Director of Talent Acquisition at Brightside Health —
-            scaled the team from employee #19 to 1,500+ clinicians nationwide.
-            Transform Award Winner, Talent Strategy of the Year 2025.
+            Senior Director of Talent Acquisition at Brightside Health. Scaled
+            the team from employee #19 to 1,500+ clinicians nationwide. Transform
+            Award Winner, Talent Strategy of the Year 2025.
           </p>
           <p
             style={{

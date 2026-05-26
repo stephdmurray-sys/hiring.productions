@@ -28,11 +28,11 @@ export const MOMENTS: Moment[] = [
     id: 'no-responses',
     title: 'The Silence',
     quote: 'no one is responding to me',
-    sub: 'You’ve applied and the silence is the worst part. Start with the keyword scan — that’s where the screen breaks first.',
+    sub: 'You’ve applied and the silence is the worst part. Start with the keyword scan. That’s where the screen breaks first.',
     bullets: [
       'Where you rank in real recruiter searches',
       'The keywords missing from your resume',
-      'Your full LinkedIn — rewritten',
+      'Your full LinkedIn, rewritten',
     ],
     toolNames: [
       'What Words Are Recruiters Searching For?',
@@ -62,7 +62,7 @@ export const MOMENTS: Moment[] = [
     id: 'story',
     title: 'The Story',
     quote: 'gap, pivot, layoff, or new grad',
-    sub: 'The unusual story is the asset, not the liability — when you tell it the way someone who reads resumes for a living would.',
+    sub: 'The unusual story is the asset, not the liability, when you tell it the way someone who reads resumes for a living would.',
     bullets: [
       'Tell the gap honestly',
       'Translate the pivot',
