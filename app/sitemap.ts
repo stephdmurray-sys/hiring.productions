@@ -72,6 +72,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/q/references-vs-linkedin-recommendations', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/q/what-does-culture-fit-actually-mean', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/q/how-to-use-linkedin-alumni-tool', priority: 0.85, changeFrequency: 'monthly' },
+    // Round 4 of the SEO cluster (May 2026, post-GSC audit) — three
+    // high-volume, low-competition queries the site has direct tool
+    // matches for. Each routes into a Pro Recruiter Insight or the
+    // free Have I Been Ghosted? diagnostic.
+    { path: '/q/am-i-being-ghosted-by-a-recruiter', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/q/can-recruiters-find-me-on-linkedin', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/q/what-do-recruiters-actually-search-for-on-linkedin', priority: 0.85, changeFrequency: 'monthly' },
   ]
 
   // /rank/[role] SEO landing pages — one per RoleConfig in lib/rank-roles.
