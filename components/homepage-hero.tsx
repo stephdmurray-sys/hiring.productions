@@ -3,23 +3,28 @@
 import Link from 'next/link'
 
 /**
- * Homepage hero — the dedicated hook/positioning/primary-CTA block.
+ * Homepage hero — pain-anchor rewrite (5/25 strategist critique).
  *
- * Extracted from StartHereBoard so the homepage flow becomes:
- *   1. HomepageHero (hook + positioning + primary CTA)
- *   2. DashboardPreview ("here's what you get")
- *   3. AuthorityStrip ("here's who built it")
- *   4. StartHereBoard hideHero ("or skip ahead — try a free tool")
- *   5. PricingTransparency
- *   6. Closing
+ * Previous hero ("Your entire job search. Produced.") was the brand
+ * positioning, but cold visitors weren't connecting it to their own
+ * stuck moment. The critic's diagnosis: the page explains the product
+ * instead of speaking to current frustration. Strategic shift:
  *
- * Behavioral grounding (per PLATFORM-VISION.md):
- *   - Identity-protective cognition bypass: "Pull back the curtain"
- *     reads as voyeurism, not feedback — defenses don't fire
- *   - Concrete positioning: "networking, interviewing, negotiating"
- *     beats abstract "career coaching"
- *   - Single primary CTA: skeptical job seekers respond to clarity, not
- *     option overload (Schwartz 2004, paradox of choice)
+ *   From: "All-in-one job search tools"
+ *   To:   "Fix what is not working in your job search, starting right now."
+ *
+ * Hero now leads with:
+ *   1. A pain anchor in the eyebrow ("if your job search isn't working")
+ *   2. A direct H1 that names the visitor's actual experience
+ *      ("Stop guessing what to do next")
+ *   3. The product as a system — who to reach, what to fix, what to do
+ *   4. A tension line that contrasts current behavior vs. new path
+ *   5. A CTA that promises immediate value ("Get your job search plan")
+ *
+ * The production metaphor still owns the brand voice (scene cards,
+ * closing) but does not gate the first-impression moment. Brand voice
+ * rule: "if it doesn't fit naturally, drop it" — and on a cold-traffic
+ * hero, metaphor is friction the visitor pays for before comprehension.
  */
 export function HomepageHero() {
   return (
@@ -56,9 +61,10 @@ export function HomepageHero() {
           textAlign: 'center',
         }}
       >
-        {/* Brand-promise eyebrow. The metaphor stays in the brand but
-            is no longer the H1, so visitors who don't know the category
-            aren't asked to decode poetry first. */}
+        {/* Pain-anchor eyebrow. The visitor sees themselves named in the
+            first 12px before the H1 even lands. Coral accent matches the
+            "warning / something is wrong" semantic without alarming —
+            it is the system saying "I see what is happening." */}
         <div
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -66,47 +72,36 @@ export function HomepageHero() {
             fontSize: 12,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: '#5A4FE0',
+            color: '#C73E5A',
             marginBottom: 18,
           }}
         >
-          Pull back the curtain on hiring
+          If your job search isn&apos;t working
         </div>
 
-        {/* H1 — production metaphor used as STRUCTURE not decoration.
-            "Produced" implies a managed, professional system covering
-            every part. "Your entire job search" sets the scope before
-            the metaphor. Two short sentences land in 5 seconds. */}
+        {/* H1 — direct, second-person, present-tense. No metaphor in the
+            way of the promise. "Stop guessing" names the current state.
+            "What to do next" is the visitor's actual question. */}
         <h1
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
             fontSize: 'clamp(40px, 6.5vw, 72px)',
-            lineHeight: 1.05,
-            letterSpacing: '-0.02em',
+            lineHeight: 1.04,
+            letterSpacing: '-0.022em',
             color: '#1A1A22',
             margin: 0,
           }}
         >
-          Your entire job search.
+          Stop guessing
           <br />
-          Produced.
+          what to do next.
         </h1>
 
-        {/* Reordered 5/25 per audit: the metaphor was demanding decoding
-            BEFORE the concrete promise landed. Now the action list sits
-            directly under the H1, so cold visitors see what they get
-            inside three seconds. The metaphor callback ("Every scene,
-            covered. All in one place.") moves below as the resolution
-            line, not the gatekeeper. */}
-
-        {/* Action list — concrete deliverables grouped into pairs that
-            map to journey phases:
-              Line 1: resume + LinkedIn  → "Get Seen"
-              Line 2: outreach + scripts → "Get In"
-              Line 3: interviews + offers → "Get the Offer"
-            Lands the unambiguous promise. */}
-        <div
+        {/* Subhead — the system, in plain language. Three concrete things
+            the product does, then "we help you do it" to flag this is
+            not just diagnosis. Avoids feature names. */}
+        <p
           style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 500,
@@ -115,33 +110,34 @@ export function HomepageHero() {
             color: '#1A1A22',
             maxWidth: 720,
             margin: '28px auto 0',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 4,
+            letterSpacing: '-0.003em',
           }}
         >
-          <span>Fix your resume. Upgrade your LinkedIn.</span>
-          <span>Find the right people. Know what to say.</span>
-          <span>
-            Turn conversations into interviews, and offers into better ones.
+          We show you exactly who to reach out to, what to fix, and what to
+          do next.{' '}
+          <span style={{ fontWeight: 800, color: '#5A4FE0' }}>
+            Then we help you do it.
           </span>
-        </div>
+        </p>
 
-        {/* Metaphor callback — the production metaphor resolves the
-            action list rather than gatekeeping it. Indigo bold for the
-            anchor moment between promise and CTA. */}
+        {/* Tension line — the contrast that creates urgency without
+            manufactured deadlines. Italic, slightly muted, sits as
+            connective tissue between subhead and CTA. */}
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(17px, 1.9vw, 21px)',
-            lineHeight: 1.4,
-            color: '#5A4FE0',
-            margin: '22px auto 0',
-            letterSpacing: '0.005em',
+            fontWeight: 500,
+            fontStyle: 'italic',
+            fontSize: 'clamp(15px, 1.65vw, 17.5px)',
+            lineHeight: 1.5,
+            color: '#5A5A6E',
+            maxWidth: 620,
+            margin: '20px auto 0',
+            letterSpacing: '0.003em',
           }}
         >
-          Every scene, covered. All in one place.
+          If you keep applying and waiting, nothing changes. This shows you
+          what to do instead.
         </p>
 
         <div
@@ -173,7 +169,7 @@ export function HomepageHero() {
               transition: 'transform 0.2s ease',
             }}
           >
-            Start your search, free →
+            Get your job search plan →
           </Link>
           <div
             style={{
@@ -183,8 +179,7 @@ export function HomepageHero() {
               color: '#5A5A6E',
             }}
           >
-            Get your resume, outreach, and next steps in minutes. No credit
-            card.
+            Free. No credit card. About 2 minutes.
           </div>
           <style>{`.hp-hero-cta:hover { transform: translateY(-2px); }`}</style>
         </div>

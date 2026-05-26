@@ -4,22 +4,34 @@ import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { HomepageHero } from '@/components/homepage-hero'
+import { StuckMoments } from '@/components/stuck-moments'
 import { DashboardPreview } from '@/components/dashboard-preview'
+import { ProofMoment } from '@/components/proof-moment'
 import { AuthorityStrip } from '@/components/authority-strip'
 import { StartHereBoard } from '@/components/start-here-board'
 import { PricingTransparency } from '@/components/pricing-transparency'
 
 /**
- * Homepage v2 — single-wedge positioning.
+ * Homepage — pain-anchor restructure (5/25 strategist critique).
  *
- * Clarity data (May 2026) showed two patterns: (1) brief homepage exits
- * with no clicks, and (2) users hopping between For Companies and For
- * Candidates before bouncing. Both diagnose the same root: the homepage
- * was asking visitors to pick a side before showing them anything they
- * could DO. This rebuild leads with one tool — Where Do You Rank in a
- * Recruiter Search — as the single front door. Bilateral access (which
- * is still the wedge of the product) is preserved as the membership
- * benefit below the fold, not the homepage tagline above it.
+ * Strategic shift: the page used to lead with "all-in-one job search
+ * tools." It now leads with "fix what is not working in your job search,
+ * starting right now." Cold visitors arrive in a stuck moment; the
+ * homepage now meets them in that moment first, then shows the system
+ * that fixes it.
+ *
+ * Section flow:
+ *   1. Audience pre-router (quiet)
+ *   2. Hero — pain anchor + tension line + "Get your job search plan"
+ *   3. Stuck Moments — five scannable pain prompts, one shared CTA
+ *   4. Dashboard Preview — "Here is what happens when you start"
+ *   5. Proof Moment — LinkedIn before/after, the "oh, it actually works"
+ *   6. Emotional bridge — one line of acknowledgment in Stephanie's voice
+ *   7. StartHereBoard — scene cards as deeper exploration
+ *   8. Proof bridge — Brightside scale framing line
+ *   9. Pricing Transparency — outcome-first tier copy
+ *  10. Authority Strip — founder credibility at decision moment
+ *  11. Closing — final ask, same CTA as hero (funnel bookend)
  */
 export default function HomePage() {
   return (
@@ -41,17 +53,8 @@ export default function HomePage() {
       <Navigation variant="light" />
 
       {/* ──────────────── AUDIENCE PRE-ROUTER ─────────────────
-         Thin strip above the candidate hero so hiring leaders landing
-         cold don't have to scroll past four candidate question cards
-         to find the "different door." The candidate experience is
-         the homepage default; this strip is a passive signpost for
-         visitors in the wrong room.
-      */}
-      {/* Quieted per critic feedback (5/25): the previous pink-tinted
-         strip competed with the hero CTA for first-glance attention.
-         Path-choosing belongs AFTER commitment, not before it. We keep
-         the link for hiring-side visitors who land cold, but render it
-         as a subtle, near-invisible signpost rather than a banner. */}
+         Quieted 5/25: subtle signpost for hiring-side visitors who
+         landed in the wrong room. Does not compete with hero. */}
       <Link
         href="/for-companies"
         style={{
@@ -81,32 +84,34 @@ export default function HomePage() {
       </Link>
 
       {/* ──────────────── HERO ─────────────────
-         The hook + positioning + primary CTA. Homepage flow is now:
-           Hero → DashboardPreview → ScenesBoard → PricingTransparency
-           → AuthorityStrip → Closing.
-         AuthorityStrip is the LAST trust signal before the closing
-         CTA. Per Stephanie's instinct and the Cialdini authority-
-         at-decision-moment research: founder credentials fire hardest
-         right before a buy decision, not as the third thing visitors
-         see. Hero already names her ("Built by Stephanie Murray, a
-         20-year recruiter") so the credential is established for cold
-         traffic; the photo + full credentials become the closing
-         argument. */}
+         Pain anchor + tension + "Get your job search plan." Production
+         metaphor stays in the brand voice elsewhere; it does not gate
+         the first-impression moment. */}
       <HomepageHero />
 
+      {/* ──────────────── STUCK MOMENTS ─────────────────
+         The search-intent mirror. Five stuck moments, scannable rows,
+         shared CTA. Visitor finds themselves in the list before the
+         system asks them to trust it. */}
+      <StuckMoments />
+
       {/* ──────────────── DASHBOARD PREVIEW ─────────────────
-         Conversion lever — shows visitors WHAT they get when they sign in.
-         Animates on scroll-into-view. Pattern from Linear/Cal.com/Stripe
-         Atlas. Behavioral basis: goal gradient (Hull 1932) + endowed
-         progress (Nunes & Drèze 2006). */}
+         "Here is what happens when you start." The dashboard mock IS
+         the visualization of the 6-step what-happens-after-signup flow
+         the strategist asked for. Six outcome-named checkboxes, real
+         dashboard chrome. */}
       <DashboardPreview />
 
+      {/* ──────────────── PROOF MOMENT ─────────────────
+         LinkedIn before/after. One artifact the visitor can read and
+         immediately understand the difference between what they have
+         now and what the system gives them. The "oh, it actually
+         works" beat the page was missing. */}
+      <ProofMoment />
+
       {/* ──────────────── EMOTIONAL BRIDGE ─────────────────
-         One line of acknowledgment between system sections (5/25 audit).
-         The page was reading as competent but cold. A skeptical job
-         seeker needs ONE moment where the founder shows up and says
-         "I see you" before they trust the system. Italic, lavender,
-         restrained — not a heading, just a voice. */}
+         One line in Stephanie's voice. The page is system-heavy; this
+         is the moment the founder shows up. */}
       <section
         style={{
           background: '#FAF8F3',
@@ -132,18 +137,14 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* ──────────────── FREE TOOLS ENTRY ─────────────────
-         Reframed 5/25: scenes are positioned as a piece of the system
-         sampled one at a time, not as a separate offering. Resolves the
-         contradiction with the hero's "all in one place" promise. */}
+      {/* ──────────────── DEEPER EXPLORATION ─────────────────
+         Scene cards as a piece of the system, sampled one at a time.
+         For visitors who want to taste before they sign up. */}
       <StartHereBoard hideHero />
 
       {/* ──────────────── PROOF BRIDGE ─────────────────
-         Single honest, sourceable line that frames Pricing below. The
-         site had no proof anywhere; this is the one verifiable result
-         we have (Brightside Health scale, Transform Award 2025). It
-         sits BEFORE pricing so $14.99 is read against a real outcome,
-         not against "free." */}
+         Brightside scale (19 → 1,500). Sourceable. Frames the price
+         against a real outcome, not against "free." */}
       <section
         style={{
           background: '#FAF8F3',
@@ -169,23 +170,17 @@ export default function HomePage() {
       </section>
 
       {/* ──────────────── PRICING TRANSPARENCY ─────────────────
-         Kills the "wait, what's this cost" objection before the closing
-         forces it. Three tiers: free forever, $14.99/mo Pro tools,
-         coached platform coming soon. */}
+         Outcome-first tier copy. Anti-competitor reframe. */}
       <PricingTransparency />
 
       {/* ──────────────── AUTHORITY ─────────────────
-         Trust signal positioned as the closing argument, just before
-         the final Go Pro CTA. Source credibility (Hovland & Weiss 1951)
-         fires hardest at the decision moment, not 4 sections before
-         it. Stephanie's photo + Brightside + Transform Award land
-         right when the visitor is deciding whether to convert. */}
+         Founder credibility at decision moment (Hovland & Weiss 1951). */}
       <AuthorityStrip />
 
       {/* ─────────────── CLOSING ───────────────
-         Rule 5: one CTA per moment. Light-mode redesign: warm cream
-         background, indigo→coral gradient still carries the resolution
-         line, single Go Pro CTA, secondary path as text link. */}
+         Final ask. Same CTA as the hero — funnel bookend. The metaphor
+         lives here: "the room you were never in" earns its placement
+         as the resolution line. */}
       <section
         style={{
           background: '#FAF8F3',
@@ -223,11 +218,6 @@ export default function HomePage() {
             Open for the first time.
           </h2>
 
-          {/* CTA realigned 5/25 per audit: the entire page sells the
-              Stage 1 free conversion (sign in, get your dashboard). The
-              closing was breaking that funnel by jumping to "Go Pro"
-              before the visitor had seen the product. Pro sells itself
-              once they are in the dashboard. */}
           <div style={{ marginTop: 44 }}>
             <Link
               href="/sign-in"
@@ -248,7 +238,7 @@ export default function HomePage() {
                 boxShadow: '0 16px 40px rgba(108,71,255,0.28)',
               }}
             >
-              Start your search, free →
+              Get your job search plan →
             </Link>
           </div>
 
@@ -261,7 +251,7 @@ export default function HomePage() {
                 color: '#8B8AA0',
               }}
             >
-              No credit card. Magic-link sign-in. About 30 seconds.
+              Free. No credit card. About 2 minutes.
             </span>
           </div>
 

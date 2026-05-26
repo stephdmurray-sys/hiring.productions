@@ -117,7 +117,7 @@ export function DashboardPreview() {
               marginBottom: 14,
             }}
           >
-            See exactly how your search comes together
+            Here is what happens when you start
           </div>
           <h2
             style={{
@@ -130,20 +130,21 @@ export function DashboardPreview() {
               margin: '0 0 14px',
             }}
           >
-            A job search that actually moves forward.
+            Your job search, finally moving.
           </h2>
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: 16.5,
               color: '#5A5A6E',
-              maxWidth: 620,
+              maxWidth: 640,
               margin: '0 auto',
               lineHeight: 1.55,
             }}
           >
-            Every step is mapped and saved, from your resume to your offer. No
-            more guessing what to do next. Just follow the system.
+            Add your resume. We show you what is holding you back, give you
+            people to reach out to, write what to say, and prep you for what
+            comes next. One screen. One plan. One next step at a time.
           </p>
 
           {/* Reality-punch line (added 5/25 per critic feedback): the
@@ -568,7 +569,7 @@ export function DashboardPreview() {
             }}
             className="hp-dashboard-preview-cta"
           >
-            Build your plan, free →
+            See your next steps →
           </Link>
           <style>{`.hp-dashboard-preview-cta:hover { transform: translateY(-2px); }`}</style>
           <div
