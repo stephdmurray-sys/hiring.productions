@@ -31,6 +31,13 @@ interface StuckMoment {
   answer: string
 }
 
+// Stuck moments mapped to tools that actually ship. Rewritten 5/26
+// after honesty audit found two prompts ("Don't know who to reach
+// out to?" and "Not sure what to say in messages?") promising tools
+// we have not built yet (candidate-side recruiter-finder and outreach
+// composer). Replaced both with real pain moments that route to
+// existing tools, so the homepage never promises something the
+// dashboard cannot deliver.
 const MOMENTS: StuckMoment[] = [
   {
     question: 'Not getting responses?',
@@ -38,14 +45,14 @@ const MOMENTS: StuckMoment[] = [
       'We show you exactly why your resume is being skipped and what to fix.',
   },
   {
-    question: "Don't know who to reach out to?",
+    question: "Can't tell if recruiters can find you?",
     answer:
-      'We find the recruiters and hiring managers who are actually hiring for your role.',
+      'We run the real boolean searches a recruiter for your target role would use, and show you where you rank in each.',
   },
   {
-    question: 'Not sure what to say in messages?',
+    question: 'Worried your LinkedIn is invisible?',
     answer:
-      'We write outreach that gets opened, in your voice, for the specific person.',
+      'We rewrite your headline, About section, and recent roles for the searches that actually find you.',
   },
   {
     question: 'Got an interview but feel unprepared?',

@@ -61,19 +61,20 @@ export function HomepageHero() {
           textAlign: 'center',
         }}
       >
-        {/* Pain-anchor eyebrow. The visitor sees themselves named in the
-            first 12px before the H1 even lands. Coral accent matches the
-            "warning / something is wrong" semantic without alarming —
-            it is the system saying "I see what is happening." */}
+        {/* Pain-anchor eyebrow. Bumped from 12px to 15px (5/26) so it
+            actually carries visual weight as the pain hook. The eyebrow
+            is doing critical work (it names the visitor's current
+            state before the H1 even lands), and 12px was rendering as
+            fine-print rather than a load-bearing line. */}
         <div
           style={{
             fontFamily: "'Figtree', sans-serif",
-            fontWeight: 800,
-            fontSize: 12,
-            letterSpacing: '0.18em',
+            fontWeight: 900,
+            fontSize: 15,
+            letterSpacing: '0.14em',
             textTransform: 'uppercase',
             color: '#C73E5A',
-            marginBottom: 18,
+            marginBottom: 22,
           }}
         >
           If your job search isn&apos;t working
@@ -98,9 +99,19 @@ export function HomepageHero() {
           what to do next.
         </h1>
 
-        {/* Subhead — the system, in plain language. Three concrete things
-            the product does, then "we help you do it" to flag this is
-            not just diagnosis. Avoids feature names. */}
+        {/* Subhead — the system, in plain language. Four concrete
+            things the product does. "Why it all matters" is the new
+            focal emphasis (5/26): the recruiter-side context is the
+            actual moat (most career sites prescribe without
+            explaining; we explain). "Then we help you do it" stays
+            in body color so it does not compete with the indigo
+            emphasis on "why it all matters" — one focal point per
+            paragraph per CLAUDE.md design rule 1.
+
+            Honesty pass (5/26): dropped "who to reach out to" because
+            no candidate-side outreach-finder tool ships yet. Replaced
+            with "what's breaking your search" which routes to the
+            diagnostic tool that does ship. */}
         <p
           style={{
             fontFamily: "'Figtree', sans-serif",
@@ -113,31 +124,12 @@ export function HomepageHero() {
             letterSpacing: '-0.003em',
           }}
         >
-          We show you exactly who to reach out to, what to fix, and what to
-          do next.{' '}
+          We show you what is breaking your search, what to fix, what to do
+          next, and{' '}
           <span style={{ fontWeight: 800, color: '#5A4FE0' }}>
-            Then we help you do it.
+            why it all matters
           </span>
-        </p>
-
-        {/* Tension line — the contrast that creates urgency without
-            manufactured deadlines. Italic, slightly muted, sits as
-            connective tissue between subhead and CTA. */}
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 500,
-            fontStyle: 'italic',
-            fontSize: 'clamp(15px, 1.65vw, 17.5px)',
-            lineHeight: 1.5,
-            color: '#5A5A6E',
-            maxWidth: 620,
-            margin: '20px auto 0',
-            letterSpacing: '0.003em',
-          }}
-        >
-          If you keep applying and waiting, nothing changes. This shows you
-          what to do instead.
+          . Then we help you do it.
         </p>
 
         <div
