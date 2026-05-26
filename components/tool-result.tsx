@@ -75,11 +75,14 @@ function renderInline(text: string, keyPrefix: string) {
             fontFamily:
               '"SF Mono", "Roboto Mono", "Menlo", "Consolas", ui-monospace, monospace',
             fontSize: '13.5px',
-            background: '#FFFFFF',
-            border: '1px solid #ECECF2',
+            background: '#F4F1FF',
+            border: '1px solid rgba(108,71,255,0.22)',
             padding: '2px 7px',
             borderRadius: '5px',
-            color: '#E8E6FF',
+            // Was #E8E6FF (near-white lavender), a dark-mode leftover that
+            // rendered as invisible text on the light-mode pill background.
+            // Deep indigo gives WCAG AA contrast against the lavender tint.
+            color: '#5A4FE0',
             wordBreak: 'break-word',
             boxDecorationBreak: 'clone',
             WebkitBoxDecorationBreak: 'clone',
@@ -94,11 +97,15 @@ function renderInline(text: string, keyPrefix: string) {
         <span
           key={`${keyPrefix}-${i}`}
           style={{
-            background: 'rgba(108, 71, 255, 0.14)',
-            color: '#E8E6FF',
+            background: 'rgba(108, 71, 255, 0.10)',
+            // Was #E8E6FF (near-white lavender) on a near-white pill.
+            // Invisible against the light-mode background. Deep indigo
+            // gives the quoted-phrase highlight contrast it needs.
+            color: '#5A4FE0',
             padding: '1px 6px',
             borderRadius: '4px',
             fontStyle: 'italic',
+            fontWeight: 600,
             boxDecorationBreak: 'clone',
             WebkitBoxDecorationBreak: 'clone',
           }}
@@ -376,7 +383,7 @@ export function ToolResult({ result, cta = DEFAULT_CTA }: ToolResultProps) {
       {/* CTA — overridable per tool. Pass cta={null} to hide entirely. */}
       {cta !== null && (
         <>
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', margin: '28px 0' }} />
+      <div style={{ borderTop: '1px solid #ECECF2', margin: '28px 0' }} />
 
       <div style={{ textAlign: 'center' }}>
         <div
