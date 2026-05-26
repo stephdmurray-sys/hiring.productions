@@ -146,22 +146,43 @@ export default function SignInPage() {
                     fontSize: 'clamp(32px, 4vw, 44px)',
                     letterSpacing: '-0.025em',
                     color: '#1A1A22',
-                    margin: '0 0 12px',
+                    margin: '0 0 14px',
                     lineHeight: 1.1,
                   }}
                 >
                   Start your search.
                 </h1>
+                {/* Value reminder before the email field — this is the
+                    last beat before friction. Strategist note (5/25):
+                    the prior copy ("same magic link, no resets...") was
+                    internal language and gave zero reason to convert
+                    right now. New copy names the three concrete things
+                    the visitor gets the moment they sign in. */}
                 <p
                   style={{
                     fontFamily: "'Figtree', sans-serif",
-                    fontSize: '15px',
+                    fontSize: '15.5px',
                     color: '#5A5A6E',
                     margin: 0,
                     lineHeight: 1.55,
+                    maxWidth: 400,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
                   }}
                 >
-                  New here or returning — same magic link. No passwords, no resets, no friction.
+                  Get your{' '}
+                  <strong style={{ color: '#1A1A22', fontWeight: 700 }}>
+                    next steps
+                  </strong>
+                  ,{' '}
+                  <strong style={{ color: '#1A1A22', fontWeight: 700 }}>
+                    outreach targets
+                  </strong>
+                  , and{' '}
+                  <strong style={{ color: '#1A1A22', fontWeight: 700 }}>
+                    what to say
+                  </strong>
+                  . In minutes. No passwords.
                 </p>
               </div>
 
@@ -240,8 +261,25 @@ export default function SignInPage() {
                         : '0 12px 28px rgba(108,71,255,0.20)',
                   }}
                 >
-                  {loading ? 'Sending…' : 'Send magic link'}
+                  {loading ? 'Sending…' : 'Send sign-in link'}
                 </button>
+
+                {/* Conversion nudge anchored directly under the button.
+                    Not a floating line — it lives INSIDE the form card,
+                    tied to the action it qualifies. Subtle, gray, small. */}
+                <div
+                  style={{
+                    marginTop: 10,
+                    textAlign: 'center',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    color: '#8B8AA0',
+                    letterSpacing: '0.005em',
+                  }}
+                >
+                  Takes less than 60 seconds.
+                </div>
 
                 {error && (
                   <div
@@ -292,7 +330,7 @@ export default function SignInPage() {
                   color: '#5A5A6E',
                 }}
               >
-                Not signed up yet?{' '}
+                Not sure yet?{' '}
                 <Link
                   href="/membership"
                   style={{
@@ -301,7 +339,7 @@ export default function SignInPage() {
                     textDecoration: 'none',
                   }}
                 >
-                  See what you get →
+                  See exactly what you&apos;ll get →
                 </Link>
               </div>
             </>
