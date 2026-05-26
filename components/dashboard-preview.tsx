@@ -169,26 +169,83 @@ export function DashboardPreview() {
           </p>
         </div>
 
-        {/* Pain + promise tag — calls out the universal stalled-after-
-            applications state, then positions the dashboard below as
-            the answer. Lands the "this is for you" gut moment before
-            the visitor sees the UI. */}
+        {/* Pain + promise pill (5/25 design upgrade): the line was
+            doing critical work but rendered as gray italic body text,
+            so the eye scanned past it. Promoted to a centered gradient
+            pill with two-tone copy — the diagnosis stays neutral, the
+            promise reads as the product's stamp. Lavender border keeps
+            it on-brand (not "warning" red), gradient tint matches the
+            primary CTA without competing for attention.
+
+            Two-part hierarchy:
+              - "Most job searches stall after applications." (diagnosis,
+                regular weight, deep slate)
+              - "This keeps you moving." (promise, 800 weight, indigo)
+            Separated by an indigo middot. Reads as one beat on desktop,
+            stacks gracefully on mobile via flex-wrap. */}
         <div
           style={{
-            textAlign: 'center',
-            marginBottom: 'clamp(20px, 3vw, 28px)',
-            fontFamily: "'Figtree', sans-serif",
-            fontWeight: 600,
-            fontSize: 'clamp(14px, 1.5vw, 16px)',
-            color: '#5A5A6E',
-            maxWidth: 540,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            lineHeight: 1.5,
-            fontStyle: 'italic',
+            display: 'flex',
+            justifyContent: 'center',
+            marginBottom: 'clamp(24px, 3.5vw, 36px)',
+            padding: '0 16px',
           }}
         >
-          Most job searches stall after applications. This keeps you moving.
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '8px 12px',
+              padding: '14px 26px',
+              background:
+                'linear-gradient(135deg, rgba(108,71,255,0.09), rgba(255,79,106,0.07))',
+              border: '1px solid rgba(108,71,255,0.28)',
+              borderRadius: 100,
+              boxShadow: '0 4px 18px rgba(108,71,255,0.08)',
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(14px, 1.5vw, 16px)',
+              lineHeight: 1.35,
+              letterSpacing: '0.005em',
+              maxWidth: 720,
+              textAlign: 'center',
+            }}
+          >
+            <span
+              style={{
+                fontWeight: 600,
+                color: '#3A3A4A',
+              }}
+            >
+              Most job searches stall after applications.
+            </span>
+            <span
+              aria-hidden
+              style={{
+                color: '#6C47FF',
+                fontWeight: 900,
+                fontSize: '0.95em',
+                lineHeight: 1,
+              }}
+            >
+              ·
+            </span>
+            <span
+              style={{
+                fontWeight: 800,
+                color: '#5A4FE0',
+                background:
+                  'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                letterSpacing: '-0.005em',
+              }}
+            >
+              This keeps you moving.
+            </span>
+          </div>
         </div>
 
         {/* The mock dashboard card */}
