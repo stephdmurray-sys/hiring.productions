@@ -134,80 +134,81 @@ export function ProUpsellPanel({
           {tools.map((tool) => {
             const theme = getTheme(tool)
             return (
+              // Single-element card: the Link IS the card. The previous
+              // Link-wrapping-div structure was fighting itself because
+              // height: 100% on the Link did not cascade to the inner
+              // div reliably, so marginTop: auto on the CTA had nothing
+              // to push against. Collapsing to one element makes the
+              // grid cell stretch the Link directly, flex column on the
+              // Link gives the CTA's marginTop: auto a real anchor.
               <Link
                 key={tool.href}
                 href={tool.href}
+                className="hp-upsell-card"
                 style={{
                   textDecoration: 'none',
+                  background: '#FAF8F3',
+                  border: `1px solid ${theme.border}`,
+                  borderRadius: '12px',
+                  padding: '16px 18px',
+                  transition: 'border-color 0.18s ease, transform 0.18s ease',
                   display: 'flex',
+                  flexDirection: 'column',
                   height: '100%',
+                  minHeight: 0,
                 }}
               >
                 <div
                   style={{
-                    background: '#FAF8F3',
-                    border: `1px solid ${theme.border}`,
-                    borderRadius: '12px',
-                    padding: '16px 18px',
-                    transition: 'border-color 0.18s ease, transform 0.18s ease',
-                    width: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '10px',
+                    letterSpacing: '0.10em',
+                    color: theme.accent,
+                    textTransform: 'uppercase',
+                    marginBottom: '6px',
                   }}
-                  className="hp-upsell-card"
                 >
-                  <div
-                    style={{
-                      fontFamily: "'Figtree', sans-serif",
-                      fontWeight: 800,
-                      fontSize: '10px',
-                      letterSpacing: '0.10em',
-                      color: theme.accent,
-                      textTransform: 'uppercase',
-                      marginBottom: '6px',
-                    }}
-                  >
-                    {tool.subtitle}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Figtree', sans-serif",
-                      fontWeight: 800,
-                      fontSize: '15px',
-                      color: '#1A1A22',
-                      letterSpacing: '-0.005em',
-                      lineHeight: 1.3,
-                      marginBottom: '6px',
-                    }}
-                  >
-                    {tool.name}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Figtree', sans-serif",
-                      fontSize: '13px',
-                      color: '#5A5A6E',
-                      lineHeight: 1.5,
-                      marginBottom: '10px',
-                    }}
-                  >
-                    {tool.hook}
-                  </div>
-                  {/* CTA pinned to the bottom of the card via auto top
-                      margin. Combined with flex column + height 100% on
-                      the parent, this aligns the CTAs across all cards
-                      regardless of hook length. */}
-                  <div
-                    style={{
-                      marginTop: 'auto',
-                      fontFamily: "'Figtree', sans-serif",
-                      fontWeight: 800,
-                      fontSize: '12.5px',
-                      color: theme.accent,
-                    }}
-                  >
-                    {tool.cta} →
-                  </div>
+                  {tool.subtitle}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '15px',
+                    color: '#1A1A22',
+                    letterSpacing: '-0.005em',
+                    lineHeight: 1.3,
+                    marginBottom: '6px',
+                  }}
+                >
+                  {tool.name}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: '13px',
+                    color: '#5A5A6E',
+                    lineHeight: 1.5,
+                    marginBottom: '10px',
+                  }}
+                >
+                  {tool.hook}
+                </div>
+                {/* CTA pinned to bottom. With the Link itself being the
+                    flex-column container and height: 100% making it
+                    fill its grid cell, marginTop: auto here has the
+                    extra space to push against. */}
+                <div
+                  style={{
+                    marginTop: 'auto',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontWeight: 800,
+                    fontSize: '12.5px',
+                    color: theme.accent,
+                  }}
+                >
+                  {tool.cta} →
                 </div>
               </Link>
             )
