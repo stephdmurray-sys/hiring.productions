@@ -56,7 +56,7 @@ export function StartHereBoard({ hideHero = false }: StartHereBoardProps = {}) {
         background: '#FAF8F3',
         color: '#1A1A22',
         padding: hideHero
-          ? 'clamp(32px, 5vw, 64px) 24px clamp(48px, 7vw, 96px)'
+          ? 'clamp(32px, 5vw, 64px) 24px clamp(28px, 4vw, 48px)'
           : 'clamp(64px, 9vw, 120px) 24px clamp(48px, 7vw, 96px)',
         overflow: 'hidden',
       }}
@@ -255,18 +255,20 @@ function QuestionGrid({ onSelect }: { onSelect: (id: string) => void }) {
       </div>
 
       {/* The destination — a visual payoff. No eyebrow label; the size
-          of the word IS the label. Generous whitespace above so it
-          reads as the resolution of the journey, not a card caption. */}
+          of the word IS the label. Margin tightened 5/25 so it reads
+          as the closing punctuation of this section, not an orphan
+          floating in cream before Pricing starts. */}
       <div
         aria-hidden
         style={{
-          marginTop: 'clamp(56px, 7vw, 88px)',
+          marginTop: 'clamp(40px, 5vw, 64px)',
           textAlign: 'center',
           fontFamily: "'Figtree', sans-serif",
           fontWeight: 900,
           fontSize: 'clamp(56px, 9vw, 104px)',
           letterSpacing: '-0.035em',
           lineHeight: 1,
+          paddingBottom: 'clamp(8px, 1.5vw, 16px)',
           background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',

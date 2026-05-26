@@ -64,7 +64,7 @@ export function StuckMoments() {
     <section
       style={{
         background: '#FAF8F3',
-        padding: 'clamp(56px, 8vw, 96px) 24px clamp(48px, 7vw, 80px)',
+        padding: 'clamp(40px, 6vw, 72px) 24px clamp(48px, 7vw, 80px)',
       }}
     >
       <div style={{ maxWidth: 880, margin: '0 auto' }}>
