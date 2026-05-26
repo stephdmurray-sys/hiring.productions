@@ -18,7 +18,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/tools', priority: 0.9, changeFrequency: 'weekly' },
     { path: '/pricing', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/membership', priority: 0.9, changeFrequency: 'monthly' },
-    { path: '/sign-in', priority: 0.5, changeFrequency: 'monthly' },
+    // /sign-in intentionally NOT in the sitemap. It carries
+    // robots: { index: false } via app/sign-in/layout.tsx because
+    // a sign-in page has no public search value. Listing it in the
+    // sitemap while noindex'ing it creates a "Excluded by noindex"
+    // warning in Google Search Console for a conflict that should
+    // not exist. Same reasoning applies to /dashboard, /onboarding,
+    // /admin, and /auth/verify, all of which are intentionally
+    // omitted from this list.
     { path: '/stand-out', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/consulting', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/linkedin-guide', priority: 0.8, changeFrequency: 'monthly' },
