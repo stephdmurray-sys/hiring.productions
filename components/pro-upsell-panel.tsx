@@ -118,13 +118,17 @@ export function ProUpsellPanel({
           charges for one day.
         </p>
 
-        {/* Tool cards */}
+        {/* Tool cards — equal-height enforced via flex column + auto-margin
+            on the CTA. Without this, cards size to their content and a
+            tool with a longer hook line renders taller than its neighbor,
+            producing the staircased card heights Stephanie flagged. */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns:
               tools.length === 1 ? '1fr' : 'repeat(auto-fit, minmax(220px, 1fr))',
             gap: '12px',
+            alignItems: 'stretch',
           }}
         >
           {tools.map((tool) => {
@@ -135,7 +139,8 @@ export function ProUpsellPanel({
                 href={tool.href}
                 style={{
                   textDecoration: 'none',
-                  display: 'block',
+                  display: 'flex',
+                  height: '100%',
                 }}
               >
                 <div
@@ -145,6 +150,9 @@ export function ProUpsellPanel({
                     borderRadius: '12px',
                     padding: '16px 18px',
                     transition: 'border-color 0.18s ease, transform 0.18s ease',
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                   className="hp-upsell-card"
                 >
@@ -185,8 +193,13 @@ export function ProUpsellPanel({
                   >
                     {tool.hook}
                   </div>
+                  {/* CTA pinned to the bottom of the card via auto top
+                      margin. Combined with flex column + height 100% on
+                      the parent, this aligns the CTAs across all cards
+                      regardless of hook length. */}
                   <div
                     style={{
+                      marginTop: 'auto',
                       fontFamily: "'Figtree', sans-serif",
                       fontWeight: 800,
                       fontSize: '12.5px',

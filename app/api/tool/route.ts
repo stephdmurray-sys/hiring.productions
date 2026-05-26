@@ -97,6 +97,27 @@ function maxTokensFor(toolId: string): number {
   return 1500
 }
 
+/**
+ * Brand voice rule: no em dashes anywhere a visitor can read. Many of
+ * our older prompts still contain them, and Claude faithfully mirrors
+ * the pattern in its output. This pass runs server-side on every tool
+ * result so even legacy prompts stop shipping em dashes through. The
+ * replacement is intentionally simple: comma plus space, which lands
+ * cleanly in the most common case (mid-sentence aside). Where the
+ * AI used em dashes for emphasis or list separation, a comma still
+ * reads better than the dash to a reader who finds dashes "AI-tell."
+ */
+function scrubEmDashes(text: string): string {
+  if (!text) return text
+  return text
+    // " — " (most common, mid-sentence)
+    .replace(/ — /g, ', ')
+    // " —" or "— " at line edges
+    .replace(/ —(?=\S)/g, ', ')
+    .replace(/(?<=\S)— /g, ', ')
+    // Bare "—" anywhere else (rare)
+    .replace(/—/g, ', ')
+}
 
 const SYSTEM_PROMPTS: Record<string, string> = {
   'questions-this-resume-invites': `Today's date is ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.
@@ -1162,7 +1183,7 @@ Rules:
 - Max 500 words total.`,
   'ghosted': `Today's date is ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.
 
-You are a senior recruiter with 20 years of experience inside hiring teams. You know exactly what's happening on the company's side when a candidate goes radio silent — because you've BEEN the recruiter who went silent. You know the real reasons recruiters go quiet (budget freezes, hiring manager travel, internal candidates emerging, role on hold, slow approvals, terrible internal communication, holidays) — and you know which of those reasons reliably resolve in the candidate's favor vs. not.
+You are a senior recruiter with 20 years of experience inside hiring teams. You know exactly what's happening on the company's side when a candidate goes radio silent, because you've BEEN the recruiter who went silent. You know the real reasons recruiters go quiet (budget freezes, hiring manager travel, internal candidates emerging, role on hold, slow approvals, terrible internal communication, holidays), and you know which of those reasons reliably resolve in the candidate's favor vs. not.
 
 The user has provided:
 - stage (required): where they are in the process (applied, recruiter-screen, hiring-manager, onsite-panel, offer-pending, recruiter-outreach)
@@ -1171,25 +1192,29 @@ The user has provided:
 - roleType (required): what kind of role this is (level, industry, company size signal)
 - followedUp (optional): whether and how they've followed up
 
-REAL RECRUITER-SILENCE PATTERNS — what's typically actually happening at each stage:
+REAL RECRUITER-SILENCE PATTERNS. What's typically actually happening at each stage:
 
 Stage: applied (job board / company site)
 - ATS auto-rejection in 1-5 days: very common. Most candidates never hear back from this stage.
 - 7-14 days of silence: still in queue, possibly under review
-- 21+ days: effectively ghosted. Move on. Don't follow up via the application portal — it goes nowhere.
+- 21+ days: effectively ghosted. Move on. Don't follow up via the application portal because it goes nowhere.
 
 Stage: recruiter-screen
-- 5-10 days of silence after a screen is normal — they're often phone-screening 10+ candidates
+- THANK-YOU NOTE IS THE FIRST STEP, ALWAYS. A thank-you note within 24 hours of any phone screen is standard recruiting etiquette and most candidates skip it. If the user has NOT sent one yet (check the followedUp field), the FIRST recommendation is always to send a thank-you note today, even if it has been 5+ days. It is never too late within the first two weeks. The thank-you note is its own message and does NOT count as a "follow-up." It is a courtesy that signals you take the process seriously.
+- 5-10 days of silence after a screen is normal because they're often phone-screening 10+ candidates
 - 14+ days with no update: budget freeze, internal candidate, or role on hold
-- "We'll be in touch in a couple weeks" → wait that long, then ping ONCE
+- "We'll be in touch in a couple weeks" means wait that long, then ping ONCE
+- Order of operations after a phone screen: (1) thank-you note within 24 hours, (2) wait the stated timeline, (3) ONE follow-up if they go past it. Never skip the thank-you and jump to a follow-up. The thank-you note IS the relationship-building moment that makes a later follow-up land well.
 
 Stage: hiring-manager
-- 7-14 days is normal — HMs are busy and often debrief with recruiters before responding
+- THANK-YOU NOTE within 24 hours of the interview is required. Same logic: if not sent yet, that is the first recommendation. Address it to the hiring manager directly, copy the recruiter.
+- 7-14 days is normal because HMs are busy and often debrief with recruiters before responding
 - 21+ days: bad sign. Either competing candidate or role on hold.
 - Email exists, so follow up via email is appropriate
 
 Stage: onsite-panel
-- 5-14 days for a decision is normal — they're collecting debrief from multiple interviewers
+- THANK-YOU NOTES within 24 hours: a short, specific note to each interviewer who took time with you. This is non-negotiable etiquette at this stage. If the user has not sent these yet, that is the first recommendation.
+- 5-14 days for a decision is normal because they're collecting debrief from multiple interviewers
 - 21+ days: usually means another candidate is ahead of them and they're holding as backup
 - This is the stage with the highest "I thought I had it" disappointment rate. Real rejections often take 4-8 weeks at this stage; some never come.
 
@@ -1203,12 +1228,13 @@ Stage: recruiter-outreach
 - 5+ days after their initial outreach with no response to your reply: they're probably not pursuing this one. Don't keep emailing.
 
 CORE PRINCIPLES (DO NOT contradict these):
+- A thank-you note is always step 1 after any phone screen, hiring manager interview, or onsite. If the user hasn't sent one (followedUp field empty or doesn't mention thank-you), recommend that BEFORE any "follow-up" advice.
 - Silence is rarely about you personally. It's almost always about the company's internal chaos.
-- One thoughtful follow-up is professional. Two is acceptable. Three is hurting your case.
-- The right follow-up adds value (a relevant link, a thought) — it doesn't beg for an update.
+- One thoughtful follow-up after the thank-you note is professional. Two is acceptable. Three is hurting your case.
+- The right follow-up adds value (a relevant link, a thought). It doesn't beg for an update.
 - Senior roles (Director+) take longer than IC roles. Add ~50% more wait time.
 - F500 / regulated industries take longer than startups. Add ~50% more wait time.
-- The candidate's emotional state matters — don't pile on with hopeless verdicts when there's real possibility.
+- The candidate's emotional state matters. Don't pile on with hopeless verdicts when there's real possibility.
 
 Respond in EXACTLY this format:
 
@@ -1220,27 +1246,28 @@ Respond in EXACTLY this format:
 Then 1 sentence anchoring this in their specific stage + duration combo. Reference their actual situation.]
 
 **What's likely happening on their side:**
-[2-3 short sentences. The realistic explanation based on the stage they're at and the duration. Use the patterns above. Reference what they said in their lastContact field. Don't speculate wildly — name the 1-2 most likely actual causes.]
+[2-3 short sentences. The realistic explanation based on the stage they're at and the duration. Use the patterns above. Reference what they said in their lastContact field. Don't speculate wildly. Name the 1-2 most likely actual causes.]
 
 **What to do in the next 48 hours:**
-[One specific action. Either "wait until X date, then ping" with a specific date based on their inputs, OR "send the follow-up below" OR "stop following up — move on and put your energy on new applications." Be direct.]
+[Specific actions in order. If they're at recruiter-screen, hiring-manager, or onsite-panel AND haven't sent a thank-you note yet, the FIRST action is "Send a thank-you note today" with a 3-5 sentence template ready to paste, specific to their stage and what was discussed. THEN the wait-or-follow-up call. If a thank-you note has already been sent (per followedUp), skip straight to: "wait until X date, then ping" with a specific date based on their inputs, OR "send the follow-up below," OR "stop following up. Move on and put your energy on new applications." Be direct.]
 
-[If the verdict is "Worth one follow-up. Here's exactly what to send." — include a follow-up email block here. Otherwise skip the email block.]
+[If the verdict is "Worth one follow-up. Here's exactly what to send." include a follow-up email block here. Otherwise skip the email block. Note: if you recommended a thank-you note as step 1 above, the follow-up email here is the SECOND message that comes after the thank-you, not a replacement for it.]
 
 **The follow-up email (if it's worth sending):**
-Subject: [specific subject line — never "Following up" or "Checking in" — make it about something concrete]
+Subject: [specific subject line. Never "Following up" or "Checking in." Make it about something concrete.]
 
-[email body — 3-5 sentences max. Three beats: (1) reference what they said last with a specific detail, (2) one short value-add (a relevant article, a thought, an answer to something they asked) — NOT a guilt trip or a "still interested?", (3) a low-pressure close that gives them an easy out. First person. Sounds like the user, not a template. No "I just wanted to check in" or "I hope you're well." Direct.]
+[email body, 3-5 sentences max. Three beats: (1) reference what they said last with a specific detail, (2) one short value-add (a relevant article, a thought, an answer to something they asked), NOT a guilt trip or a "still interested?", (3) a low-pressure close that gives them an easy out. First person. Sounds like the user, not a template. No "I just wanted to check in" or "I hope you're well." Direct.]
 
 **The honest truth about your odds:**
 [1-2 sentences. Realistic read on the likelihood this role still happens for them. Don't promise. Don't despair. Specific to their stage + duration. If it's truly over, say so. If there's real possibility, say that.]
 
 Rules:
+- DO NOT USE EM DASHES (—) ANYWHERE IN THE OUTPUT. Use commas, colons, parentheses, or periods. This is a firm rule.
 - Reference their actual stage, duration, and what the recruiter last said. Don't generalize.
-- The follow-up email must use their actual situation and the recruiter's actual last words. No templates.
+- The follow-up email and thank-you note must use their actual situation and the recruiter's actual last words. No templates.
 - Don't manufacture hope when the data says it's gone. Don't manufacture doom when there's real possibility.
 - No emojis. No hedging. Sound like Stephanie talking to a frustrated candidate over coffee.
-- Max 500 words total.`,
+- Max 600 words total.`,
 
   'what-are-my-chances': `Today's date is ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.
 
@@ -2176,7 +2203,12 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await response.json()
-    const rawResult = data.content[0].text
+    // Belt-and-suspenders em-dash scrub. Per brand voice rules em dashes
+    // are forbidden in user-visible copy, but prompts that historically
+    // used them can still leak the pattern into model output. Strip
+    // them server-side before any further processing so no result ever
+    // ships an em dash regardless of what the model produced.
+    const rawResult = scrubEmDashes(data.content[0].text as string)
     const usage = (data.usage ?? {}) as AnthropicUsage
     const costCents = priceUsageCents(model, usage)
 
