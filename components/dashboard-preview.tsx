@@ -93,8 +93,14 @@ export function DashboardPreview() {
       }}
     >
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-        {/* Section header */}
-        <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 4vw, 48px)' }}>
+        {/* Section header — reframed from "what happens after you sign
+            in" (passive, observational) to "see the system that moves
+            you forward" (active, forward-momentum). Per external
+            critic: a new user isn't asking what happens AFTER they
+            sign in; they're deciding whether to bother signing up at
+            all. Reframing flips the section from preview-of-work into
+            here-is-the-system-that-walks-you-to-an-offer. */}
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 3vw, 36px)' }}>
           <div
             style={{
               fontFamily: "'Figtree', sans-serif",
@@ -106,7 +112,7 @@ export function DashboardPreview() {
               marginBottom: 14,
             }}
           >
-            After you sign in
+            See exactly how your search comes together
           </div>
           <h2
             style={{
@@ -119,21 +125,43 @@ export function DashboardPreview() {
               margin: '0 0 14px',
             }}
           >
-            Your search, day by day.
+            A job search that actually moves forward.
           </h2>
           <p
             style={{
               fontFamily: "'Figtree', sans-serif",
               fontSize: 16.5,
               color: '#5A5A6E',
-              maxWidth: 580,
+              maxWidth: 620,
               margin: '0 auto',
               lineHeight: 1.55,
             }}
           >
-            Every tool you run is saved. Every step you complete shows up here.
-            Your whole search, in one place. Scripted scene by scene.
+            Every step is mapped and saved, from your resume to your offer. No
+            more guessing what to do next. Just follow the system.
           </p>
+        </div>
+
+        {/* Pain + promise tag — calls out the universal stalled-after-
+            applications state, then positions the dashboard below as
+            the answer. Lands the "this is for you" gut moment before
+            the visitor sees the UI. */}
+        <div
+          style={{
+            textAlign: 'center',
+            marginBottom: 'clamp(20px, 3vw, 28px)',
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 600,
+            fontSize: 'clamp(14px, 1.5vw, 16px)',
+            color: '#5A5A6E',
+            maxWidth: 540,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            lineHeight: 1.5,
+            fontStyle: 'italic',
+          }}
+        >
+          Most job searches stall after applications. This keeps you moving.
         </div>
 
         {/* The mock dashboard card */}
@@ -405,8 +433,26 @@ export function DashboardPreview() {
           </div>
         </div>
 
+        {/* Closing tagline under the dashboard — forward-motion trio.
+            Three short imperatives that land "this is a guide, not a
+            tracker." Reinforces the active-system framing of the
+            section. */}
+        <div
+          style={{
+            textAlign: 'center',
+            marginTop: 'clamp(24px, 3.5vw, 36px)',
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 'clamp(16px, 1.8vw, 19px)',
+            color: '#1A1A22',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          Know where you stand. Know what&apos;s next. Keep going.
+        </div>
+
         {/* Action under the preview */}
-        <div style={{ textAlign: 'center', marginTop: 'clamp(28px, 4vw, 40px)' }}>
+        <div style={{ textAlign: 'center', marginTop: 'clamp(22px, 3vw, 30px)' }}>
           <Link
             href="/sign-in"
             style={{
@@ -438,7 +484,7 @@ export function DashboardPreview() {
               color: '#8B8AA0',
             }}
           >
-            Your saved insights persist forever on Pro. 30 days on free.
+            See your first steps in under 2 minutes.
           </div>
         </div>
       </div>
