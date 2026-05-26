@@ -88,7 +88,7 @@ export function DashboardPreview() {
   return (
     <section
       style={{
-        padding: 'clamp(56px, 8vw, 96px) 24px',
+        padding: 'clamp(40px, 6vw, 72px) 24px',
         background: '#FAF8F3',
       }}
     >
@@ -368,9 +368,13 @@ export function DashboardPreview() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     gap: 12,
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? 'translateY(0)' : 'translateY(6px)',
-                    transition: `all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) ${
+                    // Cards are always visible by default (avoids a
+                    // broken "empty section" snapshot when the
+                    // IntersectionObserver hasn't fired yet). The
+                    // animation is a subtle lift on visible-state.
+                    opacity: 1,
+                    transform: visible ? 'translateY(0)' : 'translateY(4px)',
+                    transition: `transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) ${
                       0.4 + i * 0.18
                     }s`,
                   }}

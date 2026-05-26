@@ -26,7 +26,7 @@ export function PricingTransparency() {
   return (
     <section
       style={{
-        padding: 'clamp(48px, 7vw, 80px) 24px',
+        padding: 'clamp(40px, 6vw, 64px) 24px',
         background: '#FAF8F3',
       }}
     >

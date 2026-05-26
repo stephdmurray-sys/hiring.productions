@@ -28,7 +28,7 @@ export function AuthorityStrip() {
     <section
       style={{
         background: '#FFFFFF',
-        padding: 'clamp(48px, 7vw, 80px) 24px',
+        padding: 'clamp(36px, 5vw, 60px) 24px',
         borderTop: '1px solid #ECECF2',
         borderBottom: '1px solid #ECECF2',
       }}

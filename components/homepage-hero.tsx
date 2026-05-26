@@ -154,7 +154,7 @@ export function HomepageHero() {
               transition: 'transform 0.2s ease',
             }}
           >
-            Start your search — free →
+            Start your search, free →
           </Link>
           <div
             style={{
