@@ -222,7 +222,7 @@ export default function WhatsBreakingSearchPage() {
 e.g. Senior Director, Talent Acquisition | B2B SaaS
 
 [Current/most recent role — title, company, bullets]
-e.g. Sr Director, TA · Brightside Health (2022–Present)
+e.g. Sr Director, TA · Series C Health Tech (2022–Present)
 - Built recruiting team from 2 to 8...
 - Reduced time-to-hire from 60 to 28 days...`}
           rows={8}

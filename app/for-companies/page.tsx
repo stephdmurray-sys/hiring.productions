@@ -104,15 +104,15 @@ export default function ForCompaniesPage() {
             maxWidth: '660px',
             fontWeight: 500,
           }}>
-            Stephanie Murray built the{' '}
+            Stephanie Murray built and ran the talent function at a
+            fast-growing healthcare startup, scaling from 19 employees
+            to over 1,500 clinicians. Reduced time-to-hire to 15 days.
+            Cut onboarding times by more than half. The relationship-first
+            methodology won the{' '}
             <strong style={{ color: '#1A1A22', fontWeight: 800 }}>
-              Brightside Talent Collective
+              2025 Transform Award for Talent Strategy of the Year
             </strong>
-            : the relationship-first hiring methodology that scaled the
-            company from 19 employees to over 1,500 clinicians, reduced
-            time-to-hire to 15 days, and cut onboarding times by more
-            than half. The methodology that won the 2025 Transform Award
-            for Talent Strategy of the Year.
+            .
           </p>
           <p style={{
             fontFamily: "'Figtree', sans-serif",

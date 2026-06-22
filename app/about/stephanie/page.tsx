@@ -9,46 +9,45 @@ const CANONICAL = 'https://hiring.productions/about/stephanie'
 /**
  * /about/stephanie — Stephanie Murray founder bio page.
  *
- * Built 5/26 after the Transform Award strategic audit. The page does
- * three jobs at once:
+ * Built 5/26 after the Transform Award strategic audit, then revised
+ * the same day per a voice constraint Stephanie raised: Brightside
+ * gets at most one credential-level mention per page, never in
+ * titles, never as a named methodology. The page now centers HER
+ * achievements (15-day time-to-hire, 50%+ onboarding cut, 19 to
+ * 1,500+ scale, 2025 Transform Award) with the company genericized
+ * to "a fast-growing healthcare startup" everywhere except the one
+ * bio-credential mention.
  *
+ * The page does three jobs:
  *   1. Search results for "Stephanie Murray hiring" should land here,
  *      not on LinkedIn or the Transform article. Owns the founder
- *      identity on our own domain.
+ *      identity on her own domain.
  *   2. Backlink magnet. When podcast hosts, journalists, or speaking-
- *      gig organizers Google her, this is the page they share when
- *      introducing her. Each share = a real referral signal.
- *   3. Closing argument for both audiences. Hiring teams considering
- *      working with her see the full credentials. Job seekers
- *      considering the tools see the recruiter is real.
- *
- * Built around the actual Transform Award piece content (sourceable,
- * public, verifiable). No fabricated stats. Direct quotes from the
- * award piece are pulled in with attribution.
- *
- * Layout intentionally simple: hero, story sections, two-CTA close.
- * No flashy chrome, no decorative graphics. The credentials are the
- * design.
+ *      gig organizers Google her, this is the page they share.
+ *   3. Closing argument for both audiences. Hiring teams see full
+ *      credentials. Job seekers see the recruiter is real.
  */
 
 export const metadata: Metadata = {
-  title: 'Stephanie Murray: Senior Director of TA, Transform Award Winner',
+  title: 'Stephanie Murray: 20 Years in Hiring, 2025 Transform Award Winner',
   description:
-    'Stephanie Murray built the Brightside Talent Collective, scaling clinician hiring from 19 to over 1,500 and winning the 2025 Transform Award for Talent Strategy of the Year. Now coaching candidates and small hiring teams.',
+    'Stephanie Murray scaled clinician hiring from 19 to over 1,500 at a fast-growing healthcare startup. Reduced time-to-hire to 15 days. Won the 2025 Transform Award for Talent Strategy of the Year. Now coaching candidates and small hiring teams.',
   alternates: { canonical: CANONICAL },
   openGraph: {
     type: 'profile',
-    title: 'Stephanie Murray: Senior Director of TA, Transform Award Winner',
+    title: 'Stephanie Murray: 20 years in hiring, 2025 Transform Award winner',
     description:
-      'The recruiter behind hiring.productions. 2025 Transform Award winner. Built the Brightside Talent Collective.',
+      'The recruiter behind hiring.productions. Built and ran the talent function at a fast-growing healthcare startup. 2025 Transform Award winner.',
     url: CANONICAL,
   },
 }
 
 /**
- * Person + Organization JSON-LD so Google reads this as an authoritative
- * founder profile, not just a marketing page. Pulls in the Transform
- * Award + Brightside affiliation + the hiring.productions org link.
+ * Person JSON-LD so Google reads this as an authoritative founder
+ * profile. Job-title and worksFor reference the actual employer
+ * (Brightside Health) as the bio-credential mention. Award field
+ * carries the Transform 2025 credential without naming the company
+ * methodology.
  */
 const PERSON_SCHEMA = {
   '@context': 'https://schema.org',
@@ -56,26 +55,15 @@ const PERSON_SCHEMA = {
   name: 'Stephanie Murray',
   jobTitle: 'Senior Director of Talent Acquisition, Brightside Health',
   description:
-    'Senior Director of Talent Acquisition at Brightside Health and founder of hiring.productions. 2025 Transform Award winner for Talent Strategy of the Year. Built the Brightside Talent Collective, scaling clinician hiring from 19 to over 1,500.',
+    'Senior Director of Talent Acquisition and founder of hiring.productions. 2025 Transform Award winner for Talent Strategy of the Year. Built and ran the talent function at a fast-growing healthcare startup, scaling clinician hiring from 19 to over 1,500.',
   url: CANONICAL,
-  award:
-    '2025 Transform Award, Talent Strategy of the Year (Brightside Talent Collective)',
-  worksFor: [
-    {
-      '@type': 'Organization',
-      name: 'Brightside Health',
-      url: 'https://brightside.com',
-    },
-    {
-      '@type': 'Organization',
-      name: 'hiring.productions',
-      url: 'https://hiring.productions',
-    },
-  ],
-  sameAs: [
-    'https://www.linkedin.com/in/stephaniedmurray/',
-    'https://transform.us/articles/brightside-health-transform-award-talent-strategy/',
-  ],
+  award: '2025 Transform Award, Talent Strategy of the Year',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'hiring.productions',
+    url: 'https://hiring.productions',
+  },
+  sameAs: ['https://www.linkedin.com/in/stephaniedmurray/'],
 }
 
 export default function StephanieMurrayAboutPage() {
@@ -87,8 +75,7 @@ export default function StephanieMurrayAboutPage() {
       />
       <Navigation variant="light" />
 
-      {/* Hero. Photo on the left at desktop, stacked on mobile. Award
-          credential leads everything; H1 is the name + role. */}
+      {/* Hero */}
       <section
         style={{
           padding: 'clamp(80px, 10vw, 128px) 24px clamp(48px, 6vw, 72px)',
@@ -104,7 +91,6 @@ export default function StephanieMurrayAboutPage() {
             alignItems: 'start',
           }}
         >
-          {/* Photo */}
           <div
             style={{
               width: '100%',
@@ -118,7 +104,7 @@ export default function StephanieMurrayAboutPage() {
           >
             <Image
               src="/images/stephanie-murray.jpg"
-              alt="Stephanie Murray, Senior Director of Talent Acquisition at Brightside Health and founder of hiring.productions"
+              alt="Stephanie Murray, founder of hiring.productions"
               fill
               sizes="240px"
               style={{ objectFit: 'cover' }}
@@ -166,16 +152,15 @@ export default function StephanieMurrayAboutPage() {
                 fontWeight: 500,
               }}
             >
-              Senior Director of Talent Acquisition at Brightside Health.
               Founder of hiring.productions. The recruiter who built the
-              Brightside Talent Collective, then opened the playbook to
-              everyone.
+              talent function at a fast-growing healthcare startup, then
+              opened the playbook to everyone else.
             </p>
           </div>
         </div>
       </section>
 
-      {/* The Brightside Talent Collective story */}
+      {/* The story */}
       <section
         style={{
           padding: 'clamp(56px, 7vw, 88px) 24px',
@@ -197,7 +182,7 @@ export default function StephanieMurrayAboutPage() {
               textAlign: 'center',
             }}
           >
-            The methodology that won the award
+            How she built it
           </div>
           <h2
             style={{
@@ -211,7 +196,7 @@ export default function StephanieMurrayAboutPage() {
               textAlign: 'center',
             }}
           >
-            The Brightside Talent Collective.
+            From 19 employees to 1,500+ clinicians.
           </h2>
 
           <p
@@ -223,12 +208,13 @@ export default function StephanieMurrayAboutPage() {
               margin: '0 0 18px',
             }}
           >
-            When Stephanie joined Brightside Health as employee #19, the
-            company was a small mental-health startup with an outsized
-            ambition: provide remote psychiatric care at scale. Scale
-            meant clinicians. Lots of them. Across every state. In a
-            market where qualified clinicians had their pick of employers
-            and most were burned out from traditional health systems.
+            When Stephanie joined as employee #19 of a fast-growing
+            healthcare startup, the company was a small mental-health
+            company with an outsized ambition: provide remote psychiatric
+            care at scale. Scale meant clinicians. A lot of them. Across
+            every state. In a market where qualified clinicians had their
+            pick of employers and most were burned out from traditional
+            health systems.
           </p>
           <p
             style={{
@@ -241,17 +227,12 @@ export default function StephanieMurrayAboutPage() {
           >
             The conventional answer would have been to spin up a
             transactional sourcing function: post jobs, screen applicants,
-            run interviews, send offers. Stephanie did something
-            different. She built a relationship-first community called
-            the{' '}
-            <strong style={{ fontWeight: 800 }}>
-              Brightside Talent Collective
-            </strong>{' '}
-            : a curated network of clinicians who connected with
-            Brightside long before they were ready to apply, through
-            meet-and-greet events, mission-aligned content, and
-            intentional human moments designed for a fully remote
-            workforce.
+            run interviews, send offers. Stephanie did something different.
+            She built a relationship-first community: a curated network of
+            clinicians who connected with the company long before they
+            were ready to apply, through meet-and-greet events,
+            mission-aligned content, and intentional human moments
+            designed for a fully remote workforce.
           </p>
 
           <blockquote
@@ -298,9 +279,9 @@ export default function StephanieMurrayAboutPage() {
             The results were exactly what you would expect when hiring
             stops being a transaction and starts being a relationship.
             Time-to-hire dropped to 15 days. Onboarding times were cut by
-            more than half. Brightside scaled from 19 employees to over
-            1,500 clinicians nationwide. And in 2025, Transform named
-            the methodology the Talent Strategy of the Year.
+            more than half. The team scaled from 19 employees to over
+            1,500 clinicians nationwide. And in 2025, Transform named the
+            approach the Talent Strategy of the Year.
           </p>
           <p
             style={{
@@ -311,8 +292,8 @@ export default function StephanieMurrayAboutPage() {
               margin: 0,
             }}
           >
-            Stephanie&rsquo;s argument inside the company, and the
-            argument the award validated, was simple: candidates and
+            The argument Stephanie made inside the company, and the
+            argument the award validated, was simple. Candidates and
             employees increasingly expect experiences that support their
             individual needs, not just efficient processes.
             Relationship-building, creativity, and human-centered
@@ -384,13 +365,12 @@ export default function StephanieMurrayAboutPage() {
               margin: '0 0 18px',
             }}
           >
-            Hiring.productions is the operationalization of the Brightside
-            Talent Collective methodology for both sides. For candidates:
+            Hiring.productions is the operationalization of that
+            award-winning approach for both sides. For candidates:
             recruiter-side tools that show how the other side actually
             screens, sources, and decides. For small hiring teams: the
-            same relationship-first playbook that scaled Brightside,
-            adapted for companies that do not have a senior TA leader
-            on staff.
+            same relationship-first playbook, adapted for companies that
+            do not have a senior TA leader on staff.
           </p>
           <p
             style={{
@@ -408,7 +388,7 @@ export default function StephanieMurrayAboutPage() {
         </div>
       </section>
 
-      {/* Credentials at a glance */}
+      {/* Stats grid */}
       <section
         style={{
           padding: 'clamp(40px, 5vw, 64px) 24px',
@@ -426,11 +406,8 @@ export default function StephanieMurrayAboutPage() {
             }}
           >
             {[
-              {
-                stat: '1,500+',
-                label: 'Clinicians hired at Brightside Health',
-              },
-              { stat: '15 days', label: 'Reduced clinician time-to-hire to' },
+              { stat: '1,500+', label: 'Clinicians hired and scaled to' },
+              { stat: '15 days', label: 'Time-to-hire reduced to' },
               { stat: '50%+', label: 'Cut in onboarding times' },
               {
                 stat: '2025',
@@ -561,26 +538,6 @@ export default function StephanieMurrayAboutPage() {
               Try the tools she built →
             </Link>
           </div>
-
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: 13.5,
-              color: '#8B8AA0',
-              marginTop: 28,
-              lineHeight: 1.55,
-            }}
-          >
-            Read the original Transform Award profile{' '}
-            <a
-              href="https://transform.us/articles/brightside-health-transform-award-talent-strategy/"
-              target="_blank"
-              rel="noopener"
-              style={{ color: '#5A4FE0', fontWeight: 700, textDecoration: 'none' }}
-            >
-              here →
-            </a>
-          </p>
         </div>
       </section>
 

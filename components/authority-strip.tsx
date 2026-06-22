@@ -6,27 +6,21 @@ import Link from 'next/link'
 /**
  * Authority strip — the trust signal for skeptical visitors.
  *
- * Rewritten 5/26 after a strategic gap surfaced: the previous version
- * listed credentials but did not carry Stephanie's actual voice. The
- * Transform Award piece on transform.us has public, sourceable quotes
- * from her that read on-brand for this site. Bringing one of them
- * forward makes the strip carry her voice, not just her resume.
- *
- * Also surfaces the specific numbers from the Transform Award piece:
- *   - Reduced clinician time-to-hire to 15 days
- *   - Cut onboarding times by more than half
- *   - Built the Brightside Talent Collective (named methodology that
- *     won the 2025 Transform Award)
- * Numbers replace the previous vague "scaled from 19 to 1,500" line
- * with the WHY behind the scale.
+ * Voice constraint (per Stephanie 5/26): Brightside appears at most
+ * once per page as a credential-level bio mention. Never in titles.
+ * Never as a named methodology ("the Brightside Talent Collective"
+ * was used today and removed). Throughout the body, the achievement
+ * is reframed as work she did at "a fast-growing healthcare startup,"
+ * with the specific numbers (15-day time-to-hire, 50%+ onboarding
+ * cut, 19 to 1,500+ clinicians scale) intact because those are HER
+ * credentials, verifiable through the public Transform Award piece.
  *
  * Behavioral grounding:
- *   - Source credibility (Hovland & Weiss 1951): claims weighted by
- *     perceived expertise of the source. A direct quote from an
- *     award-winning recruiter beats a credentials list.
- *   - Specificity over abstraction: "time-to-hire reduced to 15 days"
- *     beats "improved time-to-hire."
- *   - Sourceable: every claim links back to transform.us article.
+ *   - Source credibility (Hovland & Weiss 1951): direct quote from
+ *     an award-winning recruiter beats a credentials list.
+ *   - Specificity over abstraction: the time-to-hire and onboarding
+ *     numbers carry the weight that the named-methodology mentions
+ *     used to do.
  */
 export function AuthorityStrip() {
   return (
@@ -48,9 +42,6 @@ export function AuthorityStrip() {
           alignItems: 'center',
         }}
       >
-        {/* Photo. If /images/stephanie-murray.jpg is missing the
-            next/image component renders nothing but the alt is set
-            so screen readers still surface the identity. */}
         <div
           style={{
             width: '100%',
@@ -72,7 +63,6 @@ export function AuthorityStrip() {
           />
         </div>
 
-        {/* Authority text */}
         <div>
           <div
             style={{
@@ -101,10 +91,6 @@ export function AuthorityStrip() {
             Stephanie Murray. 20 years inside hiring.
           </h2>
 
-          {/* Pullquote from the Transform Award piece. Direct quote so
-              brand-voice em-dash rule does not apply (her words, not
-              our marketing copy). Lavender italic. The left bar
-              anchors it as a quote, not floating text. */}
           <blockquote
             style={{
               borderLeft: '3px solid #6C47FF',
@@ -134,13 +120,9 @@ export function AuthorityStrip() {
             }}
           >
             Senior Director of Talent Acquisition at Brightside Health.
-            Built the{' '}
-            <strong style={{ color: '#1A1A22', fontWeight: 700 }}>
-              Brightside Talent Collective
-            </strong>
-            , scaling the team from employee #19 to over 1,500 clinicians.
-            Reduced time-to-hire to 15 days. Cut onboarding times by more
-            than half.{' '}
+            Built and ran the talent function as it scaled from 19 employees
+            to over 1,500 clinicians. Reduced time-to-hire to 15 days. Cut
+            onboarding times by more than half.{' '}
             <strong style={{ color: '#5A4FE0', fontWeight: 800 }}>
               2025 Transform Award Winner, Talent Strategy of the Year.
             </strong>

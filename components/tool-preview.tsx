@@ -423,7 +423,7 @@ export function ToolPreview({ kind, theme, featured = false }: Props) {
               fontStyle: 'italic',
             }}
           >
-            “Saw your work on the Brightside scale-up — we’re tackling something similar at X.”
+            “Saw your work scaling that healthcare team. We’re tackling something similar at X.”
           </div>
           <div style={{ ...microNote(featured), color: t.primary, marginTop: 'auto' }}>
             ↳ <strong>3.4× higher response rate</strong>
