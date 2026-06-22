@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { submitLead } from '@/lib/submit-lead'
@@ -15,6 +15,24 @@ export default function ConsultingPage() {
     setSubmitState('idle')
   }
   const closeModal = () => setShowModal(false)
+
+  // URL hash handler: /consulting#contact opens the inquiry modal
+  // automatically. Lets other pages (/for-companies, /about/stephanie)
+  // route directly to the form in one click instead of requiring the
+  // visitor to click "Request Services" again after landing. Listens
+  // on mount + on hashchange so back/forward navigation also opens
+  // the modal when appropriate.
+  useEffect(() => {
+    const checkHash = () => {
+      if (window.location.hash === '#contact') {
+        setShowModal(true)
+        setSubmitState('idle')
+      }
+    }
+    checkHash()
+    window.addEventListener('hashchange', checkHash)
+    return () => window.removeEventListener('hashchange', checkHash)
+  }, [])
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {

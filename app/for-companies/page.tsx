@@ -113,7 +113,7 @@ export default function ForCompaniesPage() {
           </p>
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: 32 }}>
-            <Link href="/consulting" className="btn-primary">
+            <Link href="/consulting#contact" className="btn-primary">
               Tell Stephanie about your hiring →
             </Link>
             <Link href="/about/stephanie" className="btn-ghost">
@@ -178,7 +178,7 @@ export default function ForCompaniesPage() {
           ].map((stage) => (
             <Link
               key={stage.stage}
-              href={stage.href ?? '/consulting'}
+              href={stage.href ?? '/consulting#contact'}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -326,7 +326,7 @@ export default function ForCompaniesPage() {
             back from her directly.
           </p>
           <Link
-            href="/consulting"
+            href="/consulting#contact"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -649,7 +649,7 @@ export default function ForCompaniesPage() {
           Book a consultation or start with the free tools.
         </p>
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/consulting" className="btn-primary">
+          <Link href="/consulting#contact" className="btn-primary">
             Book a Consultation
           </Link>
           <Link href="/tools" className="btn-ghost">
