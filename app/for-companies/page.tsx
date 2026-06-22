@@ -220,16 +220,16 @@ export default function ForCompaniesPage() {
           gap: '16px',
         }}>
           {[
-            { stage: '1. Define the role', tool: 'Role Clarity Tool', desc: 'Before the JD — what does 90-day success actually look like, and what level do you really need versus what you think you need?', status: 'soon' },
+            { stage: '1. Define the role', tool: 'Role Clarity Tool', desc: 'Before the JD. What does 90-day success actually look like, and what level do you really need versus what you think you need?', status: 'soon' },
             { stage: '2. Write the JD', tool: 'Job Description Builder', desc: 'Not a template. A structured build that produces a JD that reads like a real job worth applying to.', status: 'soon', badge: 'First to ship' },
             { stage: '3. Score the JD', tool: 'JD SEO Scorecard', desc: 'How your JD ranks across every major job board and AI matching engine.', status: 'soon' },
             { stage: '4. Pick the platform', tool: 'Platform Strategy Tool', desc: 'Where to post this specific role, how much to spend, how to adapt the language for each platform\'s algorithm.', status: 'soon' },
             { stage: '5. Screen smarter', tool: 'Triage 200 Applicants in 30 Seconds', desc: 'A scorecard for this role, the 3-5 signals that actually predict success, and how to read a resume for THIS position.', status: 'pro', href: '/tools/applicant-triage' },
             { stage: '6. Source what you missed', tool: 'The Search String That Finds Your Candidate', desc: 'Generate the boolean string to paste into LinkedIn Recruiter, Indeed, and Google to surface the ideal candidate.', status: 'pro', href: '/tools/boolean-builder' },
-            { stage: '7. Spot AI applications', tool: 'Is This Even a Real Candidate?', desc: 'Paste any application — get a verdict on whether it\'s human-authored or AI-generated, and what flagged it.', status: 'pro', href: '/tools/real-candidate' },
+            { stage: '7. Spot AI applications', tool: 'Is This Even a Real Candidate?', desc: 'Paste any application. Get a verdict on whether it\'s human-authored or AI-generated, and what flagged it.', status: 'pro', href: '/tools/real-candidate' },
             { stage: '8. Run real interviews', tool: 'Interview Guide Builder', desc: 'Structured questions calibrated to the role and level. Prevents illegal questions, repeats, and vibe-based decisions.', status: 'soon' },
-            { stage: '9. Audit the experience', tool: 'Your Hiring Process, From the Outside', desc: 'Every step of the process through a candidate\'s eyes — where strong candidates drop out and why.', status: 'soon' },
-            { stage: '10. Close the offer', tool: 'How Your Offer Actually Lands', desc: 'How the offer reads to a candidate with two other options — and what to say in the offer call to close them.', status: 'soon' },
+            { stage: '9. Audit the experience', tool: 'Your Hiring Process, From the Outside', desc: 'Every step of the process through a candidate\'s eyes. Where strong candidates drop out and why.', status: 'soon' },
+            { stage: '10. Close the offer', tool: 'How Your Offer Actually Lands', desc: 'How the offer reads to a candidate with two other options, and what to say in the offer call to close them.', status: 'soon' },
           ].map((stage) => (
             <Link
               key={stage.stage}
@@ -372,7 +372,7 @@ export default function ForCompaniesPage() {
             maxWidth: 580,
             margin: '0 auto 28px',
           }}>
-            Role clarity through signed offer, end to end. Planned at $199/year — less than one
+            Role clarity through signed offer, end to end. Planned at $199/year. Less than one
             LinkedIn job post, and built for small teams who hire two to three times a year and
             want the workflow when they need it. The full toolkit is in build; the waitlist
             gets the launch email and founder pricing.
@@ -392,7 +392,7 @@ export default function ForCompaniesPage() {
                 margin: '0 auto',
               }}
             >
-              You&rsquo;re on the list. One email when JD Builder ships — that&rsquo;s it.
+              You&rsquo;re on the list. One email when JD Builder ships. That&rsquo;s it.
             </div>
           ) : (
             <form
@@ -492,11 +492,11 @@ export default function ForCompaniesPage() {
             },
             {
               kicker: 'The leverage point',
-              label: 'The job description does more selling than the recruiter does — especially at companies candidates haven’t heard of.',
+              label: 'The job description does more selling than the recruiter does, especially at companies candidates haven’t heard of.',
             },
             {
               kicker: 'The wrong fight',
-              label: 'Most small teams compete on comp. The actual fight is clarity — about the role, the work, and what the next 12 months look like.',
+              label: 'Most small teams compete on comp. The actual fight is clarity about the role, the work, and what the next 12 months look like.',
             },
           ].map((item, idx) => (
             <div
@@ -669,10 +669,10 @@ export default function ForCompaniesPage() {
             marginBottom: '48px',
           }}>
             {[
-              { step: 1, title: 'Skills align. Candidate looks right.', desc: 'Someone checks out — "Do you have a moment? I have a quick question." You know what to look for, but you still don\'t know if this person is who their resume says they are.', icon: CheckSquare },
+              { step: 1, title: 'Skills align. Candidate looks right.', desc: 'Someone checks out. "Do you have a moment? I have a quick question." You know what to look for, but you still don\'t know if this person is who their resume says they are.', icon: CheckSquare },
               { step: 2, title: 'Respect it. Before you schedule.', desc: 'One message: "Do you mind if I take a look?" No email thread. No awkward follow-up. No "by system requirements." Nothing that could land before you\'re ready.', icon: Clock },
               { step: 3, title: 'Walk in already knowing.', desc: 'You already know how they work. How they lead. How others experience them. You\'ve read their receipts.', icon: Users },
-              { step: 4, title: 'Hire with confidence.', desc: 'Something changed. Teams noticed. You could have known — you could have seen something that might have changed it all.', icon: Star },
+              { step: 4, title: 'Hire with confidence.', desc: 'Something changed. Teams noticed. You could have known. You could have seen something that might have changed it all.', icon: Star },
             ].map((item) => (
               <div
                 key={item.step}
