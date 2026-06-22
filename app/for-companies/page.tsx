@@ -1,30 +1,12 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { BilateralCallout } from '@/components/bilateral-callout'
-import { submitLead } from '@/lib/submit-lead'
 import { BarChart2, Share2, Users, CheckSquare, Clock, Star } from 'lucide-react'
 
 export default function ForCompaniesPage() {
-  const [waitlistState, setWaitlistState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-
-  const handleWaitlistSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const email = (formData.get('email') ?? '').toString().trim()
-    if (!email) return
-    setWaitlistState('submitting')
-    try {
-      await submitLead({ email, source: 'hiring-team-waitlist' })
-      setWaitlistState('success')
-    } catch {
-      setWaitlistState('error')
-    }
-  }
-
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
       <Navigation variant="light" />
@@ -57,10 +39,12 @@ export default function ForCompaniesPage() {
         }} />
 
         <div style={{ position: 'relative', zIndex: 1 }}>
-          {/* Lead with the Transform Award credential. Hiring-team
-              consulting buyers respond to peer-validated proof more
-              than to product description. The Award is the specific
-              authority signal that closes those conversations. */}
+          {/* Rewritten 5/26 per Stephanie: her actual consulting
+              tactic is recruitment marketing, not "talent strategy."
+              Job posting SEO across Indeed, LinkedIn, Glassdoor, and
+              Google for Jobs. Employer value proposition development.
+              Channel strategy. End-to-end function build. The
+              Transform Award is proof of the work, not the lead. */}
           <div style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 800,
@@ -70,7 +54,7 @@ export default function ForCompaniesPage() {
             color: '#C73E5A',
             marginBottom: '22px',
           }}>
-            2025 Transform Award · Talent Strategy of the Year
+            Recruitment Marketing · Built from zero
           </div>
           <h1 style={{
             fontFamily: "'Figtree', sans-serif",
@@ -80,9 +64,7 @@ export default function ForCompaniesPage() {
             marginBottom: '24px',
             letterSpacing: '-0.028em',
           }}>
-            The hiring playbook
-            <br />
-            that won Transform 2025.
+            Stop posting jobs.
             <br />
             <span
               style={{
@@ -92,7 +74,7 @@ export default function ForCompaniesPage() {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              For your team.
+              Start running recruitment marketing.
             </span>
           </h1>
           <p style={{
@@ -101,18 +83,15 @@ export default function ForCompaniesPage() {
             color: '#1A1A22',
             lineHeight: 1.55,
             marginBottom: '16px',
-            maxWidth: '660px',
+            maxWidth: '680px',
             fontWeight: 500,
           }}>
-            Stephanie Murray built and ran the talent function at a
-            fast-growing healthcare startup, scaling from 19 employees
-            to over 1,500 clinicians. Reduced time-to-hire to 15 days.
-            Cut onboarding times by more than half. The relationship-first
-            methodology won the{' '}
-            <strong style={{ color: '#1A1A22', fontWeight: 800 }}>
-              2025 Transform Award for Talent Strategy of the Year
-            </strong>
-            .
+            Job posts optimized for Indeed, LinkedIn, Glassdoor, and
+            Google for Jobs. Employer value propositions that actually
+            attract the right candidates instead of repelling them.
+            Channel strategy that puts your budget where the hires come
+            from. End-to-end setup, from zero to a working recruitment
+            marketing engine.
           </p>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
@@ -120,56 +99,22 @@ export default function ForCompaniesPage() {
             color: '#5A5A6E',
             lineHeight: 1.6,
             marginBottom: '14px',
-            maxWidth: '640px',
+            maxWidth: '660px',
           }}>
-            Now, the same methodology adapted for small companies
-            without a Talent Acquisition function. The tools that
-            operationalize it, the workflow that runs the whole
-            production, and direct access to Stephanie when the stakes
-            are high.
+            Built by Stephanie Murray, who set up the recruitment
+            marketing function at a fast-growing healthcare startup and
+            scaled it from 19 employees to over 1,500 clinicians.{' '}
+            <strong style={{ color: '#1A1A22', fontWeight: 700 }}>
+              2025 Transform Award winner for Talent Strategy of the
+              Year
+            </strong>
+            . Now adapted for small companies that need the function
+            built right the first time.
           </p>
 
-          {/* Transform Award pullquote. Direct quote from the public
-              Transform piece, so it does not count as marketing copy
-              under brand voice rules. Lavender accent bar matches the
-              AuthorityStrip pattern. */}
-          <blockquote
-            style={{
-              borderLeft: '3px solid #FF4F6A',
-              paddingLeft: 18,
-              margin: '28px 0 28px',
-              fontFamily: "'Figtree', sans-serif",
-              fontStyle: 'italic',
-              fontWeight: 500,
-              fontSize: '17px',
-              lineHeight: 1.55,
-              color: '#1A1A22',
-              maxWidth: '600px',
-            }}
-          >
-            &ldquo;Our culture thrives when we lead with empathy, clear
-            communication, and a sense of belonging from the very first
-            interaction.&rdquo;
-            <span
-              style={{
-                display: 'block',
-                marginTop: 8,
-                fontFamily: "'Figtree', sans-serif",
-                fontStyle: 'normal',
-                fontWeight: 700,
-                fontSize: '12px',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                color: '#8B8AA0',
-              }}
-            >
-              Stephanie Murray, Transform Award winner profile
-            </span>
-          </blockquote>
-
-          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-            <Link href="#waitlist" className="btn-primary">
-              Bring it to your team →
+          <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: 32 }}>
+            <Link href="/consulting" className="btn-primary">
+              Tell Stephanie about your hiring →
             </Link>
             <Link href="/about/stephanie" className="btn-ghost">
               Read Stephanie&rsquo;s full story
@@ -233,7 +178,7 @@ export default function ForCompaniesPage() {
           ].map((stage) => (
             <Link
               key={stage.stage}
-              href={stage.href ?? '#waitlist'}
+              href={stage.href ?? '/consulting'}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -321,9 +266,13 @@ export default function ForCompaniesPage() {
         </div>
       </section>
 
-      {/* ─────────────── $199 WAITLIST ─────────────── */}
+      {/* ─────────────── INQUIRY CTA ───────────────
+         Replaced the prior "Hiring-team Pro waitlist" inline form
+         (5/26 per Stephanie). The real next step is a consulting
+         inquiry, not an email-only waitlist. /consulting has the
+         rich inquiry form (company, hiring stage, goals, timeline)
+         she actually reviews. CTA routes there. */}
       <section
-        id="waitlist"
         style={{
           padding: 'clamp(64px, 9vw, 110px) clamp(20px, 5vw, 40px)',
           background: '#FFFFFF',
@@ -341,18 +290,18 @@ export default function ForCompaniesPage() {
             color: '#FF8FA3',
             marginBottom: 16,
           }}>
-            Hiring-team Pro · Coming soon
+            Work with Stephanie
           </div>
           <h2 style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 900,
-            fontSize: 'clamp(32px, 4.5vw, 50px)',
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(40px, 6vw, 64px)',
+            letterSpacing: '-0.024em',
             color: '#1A1A22',
-            lineHeight: 1.1,
+            lineHeight: 1.04,
             marginBottom: 18,
           }}>
-            The whole hiring workflow.
+            Tell her about your hiring.
             <br />
             <span style={{
               background: 'linear-gradient(135deg, #FF4F6A 0%, #6C47FF 100%)',
@@ -360,7 +309,7 @@ export default function ForCompaniesPage() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>
-              Coming this year.
+              She&rsquo;ll review it personally.
             </span>
           </h2>
           <p style={{
@@ -368,105 +317,41 @@ export default function ForCompaniesPage() {
             fontSize: 17,
             color: '#5A5A6E',
             lineHeight: 1.6,
-            marginBottom: 28,
             maxWidth: 580,
-            margin: '0 auto 28px',
+            margin: '0 auto 32px',
           }}>
-            Role clarity through signed offer, end to end. Planned at $199/year. Less than one
-            LinkedIn job post, and built for small teams who hire two to three times a year and
-            want the workflow when they need it. The full toolkit is in build; the waitlist
-            gets the launch email and founder pricing.
+            The inquiry form takes about three minutes. Stephanie reads
+            every one. Tell her about the role, the team, the platforms
+            you&rsquo;re posting on, and what is not working. You will hear
+            back from her directly.
           </p>
-          {waitlistState === 'success' ? (
-            <div
-              style={{
-                background: 'rgba(94,230,168,0.10)',
-                border: '1px solid rgba(94,230,168,0.35)',
-                borderRadius: 12,
-                padding: '20px 24px',
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: 15,
-                color: '#5EE6A8',
-                fontWeight: 600,
-                maxWidth: 520,
-                margin: '0 auto',
-              }}
-            >
-              You&rsquo;re on the list. One email when JD Builder ships. That&rsquo;s it.
-            </div>
-          ) : (
-            <form
-              onSubmit={handleWaitlistSubmit}
-              style={{
-                display: 'flex',
-                gap: 10,
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                maxWidth: 540,
-                margin: '0 auto',
-              }}
-            >
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="you@yourcompany.com"
-                disabled={waitlistState === 'submitting'}
-                style={{
-                  flex: '1 1 240px',
-                  minWidth: 0,
-                  background: '#FFFFFF',
-                  border: '1px solid rgba(255,79,106,0.30)',
-                  borderRadius: 10,
-                  padding: '14px 16px',
-                  fontFamily: "'Figtree', sans-serif",
-                  fontSize: 15,
-                  color: '#1A1A22',
-                  outline: 'none',
-                }}
-              />
-              <button
-                type="submit"
-                disabled={waitlistState === 'submitting'}
-                style={{
-                  padding: '14px 24px',
-                  background: waitlistState === 'submitting'
-                    ? 'rgba(255,79,106,0.5)'
-                    : 'linear-gradient(135deg, #FF4F6A, #6C47FF)',
-                  border: 'none',
-                  borderRadius: 10,
-                  fontFamily: "'Figtree', sans-serif",
-                  fontWeight: 800,
-                  fontSize: 15,
-                  color: 'white',
-                  cursor: waitlistState === 'submitting' ? 'not-allowed' : 'pointer',
-                  boxShadow: '0 12px 30px rgba(255,79,106,0.30)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {waitlistState === 'submitting' ? 'Adding you…' : 'Join the waitlist'}
-              </button>
-            </form>
-          )}
-          {waitlistState === 'error' && (
-            <p
-              style={{
-                fontFamily: "'Figtree', sans-serif",
-                fontSize: 13,
-                color: '#FF8FA3',
-                marginTop: 14,
-              }}
-            >
-              Couldn&rsquo;t add you just now. Try again in a moment.
-            </p>
-          )}
+          <Link
+            href="/consulting"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '17px 32px',
+              background: 'linear-gradient(135deg, #FF4F6A, #6C47FF)',
+              color: '#FFFFFF',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 17,
+              letterSpacing: '0.005em',
+              borderRadius: 12,
+              textDecoration: 'none',
+              boxShadow: '0 14px 32px rgba(255,79,106,0.22)',
+            }}
+          >
+            Start the conversation →
+          </Link>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: 13,
             color: '#8B8AA0',
-            marginTop: 14,
+            marginTop: 18,
           }}>
-            We&rsquo;ll send one email when it&rsquo;s live. No marketing series.
+            Direct reply from Stephanie, usually within 48 hours.
           </p>
         </div>
       </section>
