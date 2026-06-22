@@ -157,7 +157,7 @@ export default function ForSmallTeamsPage() {
               marginTop: '20px',
             }}
           >
-            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
+            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at a fast-growing healthcare startup
           </p>
         </div>
       </section>

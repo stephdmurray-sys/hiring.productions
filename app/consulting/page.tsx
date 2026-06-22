@@ -153,7 +153,7 @@ export default function ConsultingPage() {
         <div>
           <p className="about-label">Background</p>
           <h2>Nearly two decades of real results, built inside the work.</h2>
-          <p>I joined Brightside Health as employee #19 — fewer than 50 clinicians across 5 states. By building their recruitment marketing function from the ground up — employer brand, JD strategy, sourcing systems, candidate experience — we scaled to 1,500+ clinicians nationwide.</p>
+          <p>I joined a fast-growing healthcare startup as employee #19, fewer than 50 clinicians across 5 states. By building the recruitment marketing function from the ground up (employer brand, JD strategy, sourcing systems, candidate experience), we scaled to 1,500+ clinicians nationwide.</p>
           <p>With nearly 20 years in healthcare recruiting, I&apos;ve learned that recruitment done right is indistinguishable from great marketing. I know how LinkedIn&apos;s AI matching engine reads your postings. I know what makes a candidate apply — and what makes them ghost you at the offer stage. Every framework I bring has been stress-tested in high-growth, high-stakes environments.</p>
         </div>
       </section>

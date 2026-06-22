@@ -530,7 +530,7 @@ export default async function RoleRankPage({
             }}
           >
             Stephanie Murray spent 20 years in talent acquisition — most recently as Senior
-            Director of TA at Brightside Health. The searches you&apos;ll see are the same ones she
+            Director of TA at a fast-growing healthcare startup. The searches you&apos;ll see are the same ones she
             ran on LinkedIn Recruiter every day to fill {config.displayName.toLowerCase()} roles.
             The simulator is part of the whole production — every Recruiter Insight on the site is
             built from real recruiting practice. unlocks all of it, both sides of the

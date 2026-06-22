@@ -53,7 +53,7 @@ const PERSON_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Stephanie Murray',
-  jobTitle: 'Senior Director of Talent Acquisition, Brightside Health',
+  jobTitle: 'Senior Director of Talent Acquisition',
   description:
     'Senior Director of Talent Acquisition and founder of hiring.productions. 2025 Transform Award winner for Talent Strategy of the Year. Built and ran the talent function at a fast-growing healthcare startup, scaling clinician hiring from 19 to over 1,500.',
   url: CANONICAL,

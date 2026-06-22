@@ -315,7 +315,7 @@ export default function AnswersHubPage() {
             }}
           >
             These answers are written by Stephanie Murray. 20 years in
-            talent acquisition. Senior Director of TA at Brightside Health,
+            talent acquisition. Senior Director of TA at a fast-growing healthcare startup,
             where she scaled the clinician hiring system from 19 employees
             to over 1,500. 2025 Transform Award winner for Talent Strategy
             of the Year. She has personally read more than 10,000 resumes

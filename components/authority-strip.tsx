@@ -119,7 +119,7 @@ export function AuthorityStrip() {
               margin: '0 0 14px',
             }}
           >
-            Senior Director of Talent Acquisition at Brightside Health.
+            Senior Director of Talent Acquisition at a fast-growing healthcare startup.
             Built and ran the talent function as it scaled from 19 employees
             to over 1,500 clinicians. Reduced time-to-hire to 15 days. Cut
             onboarding times by more than half.{' '}

@@ -23,7 +23,7 @@ export default function WhatRecruitersLookForNewGradsPage() {
       badge="FOR NEW GRADS"
       badgeColor="indigo"
       headline="What recruiters actually look for in new grads"
-      intro="Twenty years on the recruiter side — most recently as Senior Director of TA at Brightside Health. New-grad screening isn’t mysterious. It’s a fast scan for five specific signals, in a specific order. Polish doesn’t pass the filter. These five do."
+      intro="Twenty years on the recruiter side — most recently as Senior Director of TA at a fast-growing healthcare startup. New-grad screening isn’t mysterious. It’s a fast scan for five specific signals, in a specific order. Polish doesn’t pass the filter. These five do."
       canonicalUrl={CANONICAL}
       sections={[
         {

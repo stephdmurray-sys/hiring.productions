@@ -120,7 +120,7 @@ export function FounderByline({ variant = 'full' }: FounderBylineProps) {
             marginBottom: 10,
           }}
         >
-          Senior Director of TA at Brightside Health for 4 years. 20 years in
+          Senior Director of TA at a fast-growing healthcare startup for 4 years. 20 years in
           talent acquisition total. Built hiring.productions because nobody
           outside recruiting can see how it actually works.
         </div>

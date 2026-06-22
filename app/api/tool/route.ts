@@ -231,7 +231,7 @@ Rewrite: "[the new version — actual replacement words, not advice]"
 Why: [one short sentence on why this works]
 
 **Move 3: Add**
-Add to: [name the specific role/section on the resume — e.g., "Brightside Health, Senior Director role"]
+Add to: [name the specific role/section on the resume, e.g., "Senior Director role at the healthcare startup"]
 Add this: "[the new line — must include a specific number, vendor name, tool, or small moment from the work that no AI would invent]"
 Why: [one short sentence on why this is exactly the kind of thing AI never generates]
 
@@ -306,7 +306,7 @@ Direction: [Plain English description of what to change. Do NOT write the new li
 Why: [one short sentence]
 
 **Move 3: Add a new bullet**
-Add to: [name the specific role/section on the resume — e.g., "Brightside Health, Senior Director role"]
+Add to: [name the specific role/section on the resume, e.g., "Senior Director role at the healthcare startup"]
 Topic: [the subject area for this addition — e.g., "experimentation impact" or "client acquisition story" or "a specific recovery moment"]
 Shape: [Plain English description of how the new bullet should be structured — what details to include (a specific number + an outcome metric + a vendor or tool name or moment from the actual work). Maximum 2 sentences. Do NOT write the bullet. Do NOT include a quoted example.]
 Why: [one short sentence on why this lands as authentic and relevant]
