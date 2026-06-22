@@ -1,38 +1,27 @@
 import Link from 'next/link'
 
+/**
+ * "Both sides of the table" callout — candidate-only.
+ *
+ * Tells a candidate that their Pro tier also unlocks the hiring-team
+ * tools so they can see exactly how recruiters source, screen, and
+ * decide. That bilateral perspective is the candidate-side wedge.
+ *
+ * Reframed 5/26: this component is no longer rendered on hiring-team
+ * pages. Hiring teams are consulting clients, not Pro subscribers,
+ * so showing them the $14.99/mo or $99/yr Pro pricing is the wrong
+ * conversion path. The hiring-team variant has been removed.
+ *
+ * Previous prop `audience: 'candidate' | 'hiring'` is now just
+ * 'candidate' — kept as a literal in the type so any leftover
+ * `audience="hiring"` usage fails type-check at build time and
+ * surfaces the regression.
+ */
 interface BilateralCalloutProps {
-  /** Which side the visitor is currently on. The callout shows the OTHER side. */
-  audience: 'candidate' | 'hiring'
+  audience: 'candidate'
 }
 
-/**
- * Small "both sides of the table" callout that sits inside audience hubs
- * (after-layoff, for-small-teams, etc.) to make the bilateral access
- * benefit of Pro visible.
- *
- * A candidate-side visitor sees: "Your Pro membership also unlocks the hiring-team
- * tools — see exactly how recruiters source, screen, and decide."
- *
- * A hiring-side visitor sees: "Your Pro membership also unlocks the candidate tools
- * — see exactly what applicants run their resume through before it hits
- * your inbox."
- *
- * That bilateral promise is the brand's core wedge per BRAND.md ("both
- * sides over either side"), but it's not currently visible enough.
- */
-export function BilateralCallout({ audience }: BilateralCalloutProps) {
-  const isForCandidate = audience === 'candidate'
-  const title = isForCandidate
-    ? 'Your Pro membership unlocks the other side of the table.'
-    : 'Your Pro membership unlocks the candidate side of the table.'
-  const body = isForCandidate
-    ? "Every hiring-team tool (JD-through-candidate-eyes, the boolean string a recruiter actually pastes, the AI-application detector, the interview scorecard, the offer pitch) is included in your $14.99/mo or $99/yr. The candidates who close offers fastest are the ones who can see how the other side actually thinks."
-    : "Every candidate-side tool (the AI resume check, the recruiter's actual read on a resume, the keyword gap analysis, the LinkedIn rewrite) is included in your $14.99/mo or $99/yr. The hiring teams that hire well are the ones who can see what their applicants are running their resumes through before they hit the inbox."
-  const cta = isForCandidate
-    ? 'See the hiring-team tools →'
-    : 'See the candidate-side tools →'
-  const href = '/tools'
-
+export function BilateralCallout(_: BilateralCalloutProps) {
   return (
     <section style={{ padding: 'clamp(48px, 6vw, 64px) clamp(20px, 5vw, 24px)' }}>
       <div
@@ -95,7 +84,7 @@ export function BilateralCallout({ audience }: BilateralCalloutProps) {
             margin: '0 0 14px',
           }}
         >
-          {title}
+          Your Pro tier unlocks the other side of the table.
         </h2>
         <p
           style={{
@@ -107,10 +96,14 @@ export function BilateralCallout({ audience }: BilateralCalloutProps) {
             margin: '0 0 20px',
           }}
         >
-          {body}
+          Every hiring-team tool (JD-through-candidate-eyes, the boolean
+          string a recruiter actually pastes, the AI-application detector,
+          the interview scorecard, the offer pitch) is included with Pro
+          at $14.99/mo or $99/yr. The candidates who close offers fastest
+          are the ones who can see how the other side actually thinks.
         </p>
         <Link
-          href={href}
+          href="/tools"
           style={{
             position: 'relative',
             fontFamily: "'Figtree', sans-serif",
@@ -121,7 +114,7 @@ export function BilateralCallout({ audience }: BilateralCalloutProps) {
             letterSpacing: '0.01em',
           }}
         >
-          {cta}
+          See the hiring-team tools →
         </Link>
       </div>
     </section>

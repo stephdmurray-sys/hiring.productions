@@ -29,7 +29,11 @@ export function ToolPageShell({
   const categoryPillColor = category === 'candidate' ? '#A78BFA' : '#FF4F6A'
   const categoryPillBg = category === 'candidate' ? 'rgba(108,71,255,0.15)' : 'rgba(255,79,106,0.15)'
   const categoryLabel = category === 'candidate' ? 'Candidate' : 'Hiring Team'
-  const statusLabel = isFree ? 'Free Tool · No account needed.' : 'Pro Tool · Included in membership.'
+  const statusLabel = isFree
+    ? 'Free Tool · No account needed.'
+    : category === 'hiring'
+    ? 'Hiring-team Tool · Part of the consulting engagement.'
+    : 'Pro Tool · Included with Pro.'
   const statusBg = isFree ? 'rgba(52,211,153,0.15)' : 'rgba(108,71,255,0.15)'
   const statusColor = isFree ? '#10b981' : '#A78BFA'
 
@@ -114,12 +118,17 @@ export function ToolPageShell({
         </div>
       </section>
 
-      {/* Tool Content — auto-gated unless the page opts out */}
+      {/* Tool Content — auto-gated unless the page opts out.
+          Category flows through to ToolGate so hiring-team tools
+          render the consulting CTA panel instead of the $14.99
+          Pro paywall (hiring teams are consulting clients, not
+          subscribers, per Stephanie 5/26). */}
       {gated ? (
         <ToolGate
           toolName={toolName}
           toolDescription={toolDescription}
           isFree={isFree}
+          category={category}
         >
           {children}
         </ToolGate>

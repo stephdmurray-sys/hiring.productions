@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { BilateralCallout } from '@/components/bilateral-callout'
 import { BarChart2, Share2, Users, CheckSquare, Clock, Star } from 'lucide-react'
 
 export default function ForCompaniesPage() {
@@ -658,7 +657,10 @@ export default function ForCompaniesPage() {
         </div>
       </section>
 
-      <BilateralCallout audience="hiring" />
+      {/* BilateralCallout removed 5/26: it showed the $14.99/mo Pro
+          pricing to hiring-team visitors. Stephanie's positioning is
+          that hiring teams are consulting clients, not Pro subscribers.
+          The conversion path here is /consulting, not /pro. */}
 
       <Footer />
     </div>

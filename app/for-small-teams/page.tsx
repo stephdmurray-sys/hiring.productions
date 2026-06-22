@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { BilateralCallout } from '@/components/bilateral-callout'
 
 interface QA {
   question: string
@@ -456,7 +455,9 @@ export default function ForSmallTeamsPage() {
         </div>
       </section>
 
-      <BilateralCallout audience="hiring" />
+      {/* BilateralCallout removed 5/26: hiring-team visitors should
+          not see $14.99/mo Pro pricing. Conversion path here is
+          /consulting, not /pro. */}
 
       <Footer />
 
