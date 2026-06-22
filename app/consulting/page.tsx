@@ -288,7 +288,13 @@ export default function ConsultingPage() {
 
               <div className="form-group">
                 <label htmlFor="company-url">Company website or LinkedIn</label>
-                <input type="url" id="company-url" name="company_url" required />
+                {/* type="text" intentionally (was type="url"). The
+                    browser's URL validator rejects bare domains like
+                    "www.repvera.com" without "https://" prefix, which
+                    is friction for the visitor who is just trying to
+                    paste their site URL. Stephanie reads every inquiry
+                    personally, so loose-format input is fine. */}
+                <input type="text" id="company-url" name="company_url" required />
               </div>
 
               <div className="form-group">
