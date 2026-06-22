@@ -29,6 +29,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/stand-out', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/consulting', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/linkedin-guide', priority: 0.8, changeFrequency: 'monthly' },
+    // Founder bio + Person JSON-LD. High priority because this is the
+    // canonical landing page for "Stephanie Murray hiring" queries and
+    // the page external press / podcast / conference outreach links to.
+    { path: '/about/stephanie', priority: 0.9, changeFrequency: 'monthly' },
     // Audience hubs — high-intent candidate-moment landing pages
     { path: '/for-new-grads', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/after-layoff', priority: 0.85, changeFrequency: 'monthly' },

@@ -57,28 +57,32 @@ export default function ForCompaniesPage() {
         }} />
 
         <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* Lead with the Transform Award credential. Hiring-team
+              consulting buyers respond to peer-validated proof more
+              than to product description. The Award is the specific
+              authority signal that closes those conversations. */}
           <div style={{
             fontFamily: "'Figtree', sans-serif",
             fontWeight: 800,
-            fontSize: '11px',
+            fontSize: '13px',
             textTransform: 'uppercase',
-            letterSpacing: '0.22em',
-            color: '#FF4F6A',
+            letterSpacing: '0.18em',
+            color: '#C73E5A',
             marginBottom: '22px',
           }}>
-            FOR HIRING TEAMS · IN BETA
+            2025 Transform Award · Talent Strategy of the Year
           </div>
           <h1 style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(40px, 6vw, 72px)',
+            fontSize: 'clamp(44px, 6.5vw, 76px)',
             fontWeight: 900,
-            lineHeight: 1.04,
-            marginBottom: '22px',
-            letterSpacing: '-0.03em',
+            lineHeight: 1.02,
+            marginBottom: '24px',
+            letterSpacing: '-0.028em',
           }}>
-            A bad hire is the most
+            The hiring playbook
             <br />
-            expensive mistake a small
+            that won Transform 2025.
             <br />
             <span
               style={{
@@ -88,53 +92,87 @@ export default function ForCompaniesPage() {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              company makes.
+              For your team.
             </span>
           </h1>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
-            fontSize: '18px',
-            color: '#5A5A6E',
-            lineHeight: 1.6,
-            marginBottom: '14px',
-            maxWidth: '620px',
+            fontSize: '19px',
+            color: '#1A1A22',
+            lineHeight: 1.55,
+            marginBottom: '16px',
+            maxWidth: '660px',
+            fontWeight: 500,
           }}>
-            Most happen because the job description was wrong before the first resume came in. The
-            wrong title attracts the wrong pool. The wrong screen filters out the right candidate.
-            The wrong interview asks the wrong questions. By the time you&rsquo;re reading the offer
-            committee&rsquo;s notes, the mistake is already three weeks old.
+            Stephanie Murray built the{' '}
+            <strong style={{ color: '#1A1A22', fontWeight: 800 }}>
+              Brightside Talent Collective
+            </strong>
+            : the relationship-first hiring methodology that scaled the
+            company from 19 employees to over 1,500 clinicians, reduced
+            time-to-hire to 15 days, and cut onboarding times by more
+            than half. The methodology that won the 2025 Transform Award
+            for Talent Strategy of the Year.
           </p>
           <p style={{
             fontFamily: "'Figtree', sans-serif",
             fontSize: '17px',
-            color: '#1A1A22',
-            fontWeight: 600,
+            color: '#5A5A6E',
             lineHeight: 1.6,
-            marginBottom: '20px',
-            maxWidth: '620px',
+            marginBottom: '14px',
+            maxWidth: '640px',
           }}>
-            The hiring-team toolkit walks you through every stage — role clarity to signed offer —
-            from someone who&rsquo;s run TA functions for 20 years.
+            Now, the same methodology adapted for small companies
+            without a Talent Acquisition function. The tools that
+            operationalize it, the workflow that runs the whole
+            production, and direct access to Stephanie when the stakes
+            are high.
           </p>
-          <p
+
+          {/* Transform Award pullquote. Direct quote from the public
+              Transform piece, so it does not count as marketing copy
+              under brand voice rules. Lavender accent bar matches the
+              AuthorityStrip pattern. */}
+          <blockquote
             style={{
+              borderLeft: '3px solid #FF4F6A',
+              paddingLeft: 18,
+              margin: '28px 0 28px',
               fontFamily: "'Figtree', sans-serif",
-              fontSize: '13px',
-              fontWeight: 600,
-              color: '#A78BFA',
-              letterSpacing: '0.03em',
-              marginBottom: '32px',
+              fontStyle: 'italic',
+              fontWeight: 500,
+              fontSize: '17px',
+              lineHeight: 1.55,
+              color: '#1A1A22',
+              maxWidth: '600px',
             }}
           >
-            By Stephanie Murray · 20 years in talent acquisition · Built the TA function at Brightside Health
-          </p>
+            &ldquo;Our culture thrives when we lead with empathy, clear
+            communication, and a sense of belonging from the very first
+            interaction.&rdquo;
+            <span
+              style={{
+                display: 'block',
+                marginTop: 8,
+                fontFamily: "'Figtree', sans-serif",
+                fontStyle: 'normal',
+                fontWeight: 700,
+                fontSize: '12px',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: '#8B8AA0',
+              }}
+            >
+              Stephanie Murray, Transform Award winner profile
+            </span>
+          </blockquote>
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
             <Link href="#waitlist" className="btn-primary">
-              Join the hiring-team waitlist →
+              Bring it to your team →
             </Link>
-            <Link href="/tools" className="btn-ghost">
-              Use what&rsquo;s live today
+            <Link href="/about/stephanie" className="btn-ghost">
+              Read Stephanie&rsquo;s full story
             </Link>
           </div>
         </div>
