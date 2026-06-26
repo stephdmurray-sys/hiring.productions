@@ -42,6 +42,13 @@ interface LeadInput {
   firstName?: string
   lastName?: string
   role?: string
+  /**
+   * Source-specific structured data. Used by welcomeForSource to
+   * interpolate context into the welcome email (e.g., calculator
+   * result figures, score, level). Values are stringified at the
+   * client.
+   */
+  extras?: Record<string, string>
 }
 
 /**
@@ -50,7 +57,56 @@ interface LeadInput {
  * insights" message that doesn't fit (e.g., PDF downloaders aren't
  * here for the tool gate).
  */
-function welcomeForSource(source: string): { subject: string; text: string } | null {
+function welcomeForSource(
+  source: string,
+  extras?: Record<string, string>,
+): { subject: string; text: string } | null {
+  // Mis-hire calculator result delivery email (RepVera-branded).
+  // Interpolates the cost figures the user just calculated so the
+  // email IS the result they came for. Voice: RepVera, not Stephanie.
+  // No dashes, no banned words (testimonial, feedback, endorsement,
+  // insights, AI summary).
+  if (source === 'mis_hire_calculator') {
+    const roleLabel = extras?.role_label ?? 'this role'
+    const salary = extras?.salary_fmt ?? ''
+    const hires = extras?.hires ?? ''
+    const rate = extras?.rate ?? ''
+    const costRange = extras?.cost_range ?? ''
+    const annual = extras?.annual ?? ''
+    const shrmLabel = extras?.shrm_label ?? ''
+    return {
+      subject: `Your mis-hire exposure: ${annual} per year`,
+      text: [
+        'Thanks for running the True Cost of a Mis-Hire calculator.',
+        '',
+        'Here is what you saw, in writing.',
+        '',
+        `Role level: ${roleLabel}`,
+        `Annual salary: ${salary}`,
+        `Hires like this per year: ${hires}`,
+        `Assumed mis-hire rate: ${rate}%`,
+        '',
+        'Cost of a single mis-hire at this level:',
+        costRange,
+        shrmLabel,
+        '',
+        'Your estimated exposure per year:',
+        annual,
+        `Assuming ${hires} hires like this a year and a ${rate}% mis-hire rate.`,
+        '',
+        'You can verify what someone can do. The harder question is how they actually show up, and that is where mis-hires are made.',
+        '',
+        'See how RepVera helps:',
+        'https://repvera.com',
+        '',
+        'Methodology: SHRM Talent Acquisition Benchmarking on cost of bad hire (50 to 75 percent of salary for entry, 100 to 150 percent for mid-level, 200 to 213 percent for executive). U.S. Department of Labor on the conservative floor (about 30 percent of first-year earnings). Leadership IQ on behavioral failure (46 to 89 percent of new hires do not last 18 months, almost none on technical ability). These are estimates to size the problem, not a quote.',
+        '',
+        'RepVera',
+        'repvera.com',
+      ].join('\n'),
+    }
+  }
+
   if (source.startsWith('coming_soon:')) {
     const toolId = source.slice('coming_soon:'.length) || 'this tool'
     return {
@@ -166,7 +222,7 @@ async function addToResendAudience(input: LeadInput): Promise<void> {
     })
 
     const from = process.env.RESEND_FROM_EMAIL
-    const welcome = welcomeForSource(input.source)
+    const welcome = welcomeForSource(input.source, input.extras)
     if (from && welcome) {
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -195,6 +251,20 @@ export async function POST(request: NextRequest) {
     const firstName: string = (body?.firstName ?? '').toString().slice(0, 80)
     const lastName: string = (body?.lastName ?? '').toString().slice(0, 80)
     const role: string = (body?.role ?? '').toString().slice(0, 120)
+    // Parse source-specific structured extras for welcome-email
+    // interpolation. Limited to plain string values, capped per key
+    // so a malformed client cannot stuff arbitrary content into an
+    // outgoing email.
+    const rawExtras = body?.extras
+    let extras: Record<string, string> | undefined
+    if (rawExtras && typeof rawExtras === 'object') {
+      extras = {}
+      for (const [k, v] of Object.entries(rawExtras)) {
+        if (typeof k !== 'string' || k.length > 64) continue
+        if (typeof v !== 'string') continue
+        extras[k] = v.slice(0, 280)
+      }
+    }
 
     if (!EMAIL_RE.test(rawEmail) || rawEmail.length > 200) {
       return NextResponse.json({ error: 'invalid-email' }, { status: 400 })
@@ -219,7 +289,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    await addToResendAudience({ email: rawEmail, source, firstName, lastName, role })
+    await addToResendAudience({ email: rawEmail, source, firstName, lastName, role, extras })
 
     // Feed the admin event log so /api/admin/stats can count captures.
     void logEvent('email_capture', { source })

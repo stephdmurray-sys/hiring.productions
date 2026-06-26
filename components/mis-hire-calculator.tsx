@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { submitLead } from '@/lib/submit-lead'
 
 /**
  * True Cost of a Mis-Hire calculator.
@@ -58,17 +59,62 @@ function money(n: number): string {
   return '$' + rounded.toLocaleString('en-US')
 }
 
+const roleLabelFor: Record<RoleLevel, string> = {
+  entry: 'Entry or hourly',
+  mid: 'Mid-level, technical, or manager',
+  exec: 'Executive or leadership',
+}
+
 export default function MisHireCalculator() {
   const [role, setRole] = useState<RoleLevel>('mid')
   const [salary, setSalary] = useState<number>(120000)
   const [hires, setHires] = useState<number>(4)
   const [rate, setRate] = useState<number>(20)
 
+  // Email capture state. The result is shown regardless of email
+  // (no gate). The form just offers to send the result to the
+  // visitor's inbox via Resend, with the cost numbers interpolated
+  // into the welcome email by /api/lead.
+  const [email, setEmail] = useState<string>('')
+  const [sendState, setSendState] = useState<
+    'idle' | 'sending' | 'success' | 'error'
+  >('idle')
+
   const r = ranges[role]
   const lo = salary * r.lo
   const hi = salary * r.hi
   const mid = (salary * (r.lo + r.hi)) / 2
   const annual = hires * (rate / 100) * mid
+
+  const handleSend = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const trimmed = email.trim()
+    if (!trimmed) return
+    setSendState('sending')
+    try {
+      const res = await submitLead({
+        email: trimmed,
+        source: 'mis_hire_calculator',
+        audience: 'hiring',
+        legacyExtras: {
+          role_label: roleLabelFor[role],
+          salary_fmt: money(salary),
+          hires: String(hires),
+          rate: String(rate),
+          cost_range: money(lo) + ' to ' + money(hi),
+          annual: money(annual),
+          shrm_label: r.label,
+        },
+      })
+      if (res.resendOk) {
+        setSendState('success')
+      } else {
+        setSendState('error')
+      }
+    } catch {
+      setSendState('error')
+    }
+  }
 
   return (
     <div
@@ -400,6 +446,129 @@ export default function MisHireCalculator() {
               year and a {rate}% mis-hire rate.
             </div>
           </div>
+        </div>
+
+        {/* Email capture. Optional, ungated. The result above shows
+            regardless. We just offer to send it to their inbox. The
+            welcome email is RepVera-branded and interpolates the
+            calculated numbers via /api/lead. */}
+        <div
+          style={{
+            marginTop: 22,
+            padding: '18px 20px',
+            borderRadius: 12,
+            background: '#FFFFFF',
+            border: '1px solid #F0F0F0',
+          }}
+        >
+          {sendState === 'success' ? (
+            <p
+              style={{
+                fontSize: 14,
+                fontWeight: 500,
+                color: '#1A1A1A',
+                lineHeight: 1.55,
+                margin: 0,
+              }}
+            >
+              Sent to your inbox. If it does not arrive in a minute, check
+              spam.
+            </p>
+          ) : (
+            <form onSubmit={handleSend}>
+              <label
+                htmlFor="mhc-email"
+                style={{
+                  display: 'block',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: '#4A4A4A',
+                  marginBottom: 8,
+                }}
+              >
+                Want this in your inbox?
+              </label>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 8,
+                  flexWrap: 'wrap',
+                }}
+              >
+                <input
+                  id="mhc-email"
+                  className="mhc-input"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={sendState === 'sending'}
+                  placeholder="you@yourcompany.com"
+                  style={{
+                    flex: '1 1 220px',
+                    minWidth: 0,
+                    padding: '11px 13px',
+                    fontFamily: 'inherit',
+                    fontSize: 14,
+                    color: '#1A1A1A',
+                    border: '1px solid #DDD',
+                    borderRadius: 9,
+                    background: '#FFFFFF',
+                    transition: 'border-color 0.15s',
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="mhc-cta"
+                  disabled={sendState === 'sending' || !email.trim()}
+                  style={{
+                    padding: '11px 18px',
+                    background:
+                      sendState === 'sending' || !email.trim()
+                        ? '#B0B0C0'
+                        : '#5955F2',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    fontFamily: 'inherit',
+                    fontWeight: 500,
+                    fontSize: 14,
+                    borderRadius: 9,
+                    cursor:
+                      sendState === 'sending' || !email.trim()
+                        ? 'not-allowed'
+                        : 'pointer',
+                    transition: 'background 0.15s',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {sendState === 'sending' ? 'Sending' : 'Send it to me'}
+                </button>
+              </div>
+              {sendState === 'error' && (
+                <p
+                  style={{
+                    fontSize: 12.5,
+                    color: '#C03050',
+                    marginTop: 8,
+                    lineHeight: 1.45,
+                  }}
+                >
+                  Could not send right now. Try again in a moment.
+                </p>
+              )}
+              <p
+                style={{
+                  fontSize: 12,
+                  color: '#888888',
+                  marginTop: 8,
+                  lineHeight: 1.45,
+                  marginBottom: 0,
+                }}
+              >
+                One email with your result. No marketing series.
+              </p>
+            </form>
+          )}
         </div>
 
         {/* Closing editorial line + soft CTA. Closing line is verbatim
