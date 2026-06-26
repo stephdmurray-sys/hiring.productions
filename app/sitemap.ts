@@ -33,6 +33,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // canonical landing page for "Stephanie Murray hiring" queries and
     // the page external press / podcast / conference outreach links to.
     { path: '/about/stephanie', priority: 0.9, changeFrequency: 'monthly' },
+    // RepVera-branded free calculator for talent leaders, top-of-funnel.
+    // SHRM/DOL-backed. Lives on hiring.productions, soft-CTAs to RepVera.
+    { path: '/tools/mis-hire-calculator', priority: 0.85, changeFrequency: 'monthly' },
     // Audience hubs — high-intent candidate-moment landing pages
     { path: '/for-new-grads', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/after-layoff', priority: 0.85, changeFrequency: 'monthly' },
