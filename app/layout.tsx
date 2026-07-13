@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { UsageProvider } from '@/components/usage-provider'
 import { PageViewTracker } from '@/components/page-view-tracker'
+import { ScrollReset } from '@/components/scroll-reset'
 import './globals.css'
 
 const figtree = Figtree({ 
@@ -170,6 +171,8 @@ export default function RootLayout({
       </head>
       <body style={{ backgroundColor: '#FAF8F3', color: '#1A1A22' }}>
         <UsageProvider>{children}</UsageProvider>
+        {/* Fixes scroll position persisting across navigations — see component. */}
+        <ScrollReset />
         {/* First-party server-side page-view beacon — fires on every
             page load + client route change, logs to /api/track/view.
             Feeds the /admin dashboard's visitor + top-pages counts.

@@ -130,9 +130,15 @@ export async function POST(request: NextRequest) {
 
   // We always generate magiclink type now (createUser + magiclink instead
   // of signup-link), so type is fixed.
-  const verifyUrl = new URL(`${siteUrl}/auth/verify`)
-  verifyUrl.searchParams.set('token', hashedToken)
-  verifyUrl.searchParams.set('type', 'magiclink')
+  //
+  // PATH form, not query params. Email pipelines that re-decode
+  // quoted-printable treat `=` + two hex digits as an escape sequence, so
+  // `token=` followed by a hex token was mangled in transit (the `=` and
+  // the first two token chars vanished, breaking every sign-in link). A
+  // path URL contains no `=` so there is nothing to mangle.
+  const verifyUrl = new URL(
+    `${siteUrl}/auth/verify/magiclink/${encodeURIComponent(hashedToken)}`,
+  )
 
   // Send the branded email via Resend.
   const resendApiKey = process.env.RESEND_API_KEY

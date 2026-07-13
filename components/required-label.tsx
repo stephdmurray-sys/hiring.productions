@@ -44,7 +44,7 @@ export function RequiredLabel({ label, filled, required = true, first = false }:
         {required ? (
           <span
             style={{
-              color: filled ? '#5EE6A8' : '#FF4F6A',
+              color: filled ? '#0F7A4F' : '#C1113A',
               fontWeight: 800,
               fontSize: '10px',
               letterSpacing: '0.06em',
@@ -101,7 +101,7 @@ export function RequiredFormHeader({ filledCount, totalRequired }: RequiredFormH
         style={{
           fontWeight: 700,
           fontSize: '13px',
-          color: complete ? '#5EE6A8' : '#F2F0FF',
+          color: complete ? '#0F7A4F' : '#1A1A22',
         }}
       >
         {complete ? 'All required fields filled — ready to run.' : 'Fill all required fields to continue.'}
@@ -111,7 +111,7 @@ export function RequiredFormHeader({ filledCount, totalRequired }: RequiredFormH
           fontFamily: "'JetBrains Mono', ui-monospace, Menlo, monospace",
           fontWeight: 700,
           fontSize: '12px',
-          color: complete ? '#5EE6A8' : '#FF4F6A',
+          color: complete ? '#0F7A4F' : '#C1113A',
         }}
       >
         {filledCount}/{totalRequired}
