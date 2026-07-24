@@ -1,0 +1,670 @@
+'use client'
+
+import { useState } from 'react'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
+import { CheckCircle2 } from 'lucide-react'
+
+/**
+ * /consider-me — bench signup for recruiters and talent assessors.
+ *
+ * Stephanie pulls vetted talent people into fast client projects
+ * (interview assessments, search, advisory). This page is how they
+ * raise their hand. The RepVera link is the key field: receipts
+ * instead of reference chasing, which is the whole point of the bench
+ * moving fast.
+ *
+ * Submits to /api/consider-me (Redis + Resend notification to
+ * Stephanie + confirmation to the applicant). If the API is ever
+ * unreachable the error state offers a prefilled mailto fallback so a
+ * submission is never lost.
+ */
+
+const SPECIALTIES = [
+  'Healthcare & clinical',
+  'Tech & engineering',
+  'Executive & leadership',
+  'Sales & go to market',
+  'General & cross industry',
+  'Other',
+]
+
+const YEARS = ['1 to 3', '4 to 7', '8 to 15', '15+']
+
+const AVAILABILITY = [
+  'Available now',
+  'A few hours a week',
+  'Project by project',
+  'Just keeping in touch',
+]
+
+const STEPS = [
+  {
+    num: '01',
+    title: 'Tell us who you are',
+    body: 'Name, specialty, availability. Two minutes, one form.',
+  },
+  {
+    num: '02',
+    title: 'Bring your receipts',
+    body: 'Share your verified RepVera profile so we can see how you work, fast.',
+  },
+  {
+    num: '03',
+    title: 'We call when it fits',
+    body: 'When a client project matches your specialty, you hear from us directly.',
+  },
+]
+
+export default function ConsiderMePage() {
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  const [specialty, setSpecialty] = useState('')
+  const [years, setYears] = useState('')
+  const [availability, setAvailability] = useState('')
+  const [repvera, setRepvera] = useState('')
+  const [notes, setNotes] = useState('')
+
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const isUrl = (v: string) => /^https?:\/\/\S+\.\S+/.test(v.trim())
+
+  const missing: string[] = []
+  if (!fullName.trim()) missing.push('full name')
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) missing.push('email')
+  if (!specialty) missing.push('specialty')
+  if (!years) missing.push('years')
+  if (!availability) missing.push('availability')
+  if (!isUrl(repvera)) missing.push('RepVera link')
+  const canSubmit = missing.length === 0
+
+  // Prefilled mailto fallback. Keeps a submission recoverable even if
+  // the API is down. Values are joined into a plain text body.
+  const mailtoHref = () => {
+    const body = [
+      `Name: ${fullName}`,
+      `Email: ${email}`,
+      `LinkedIn: ${linkedin || '(not provided)'}`,
+      `Specialty: ${specialty}`,
+      `Years assessing or hiring: ${years}`,
+      `Availability: ${availability}`,
+      `RepVera: ${repvera}`,
+      '',
+      'Notes:',
+      notes || '(none)',
+    ].join('\n')
+    return `mailto:stephdmurray@gmail.com?subject=${encodeURIComponent(
+      `Consider me: ${fullName}`,
+    )}&body=${encodeURIComponent(body)}`
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!canSubmit || submitting) return
+    setSubmitting(true)
+    setError('')
+    try {
+      const res = await fetch('/api/consider-me', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName,
+          email,
+          linkedin,
+          specialty,
+          years,
+          availability,
+          repvera,
+          notes,
+        }),
+      })
+      if (!res.ok) throw new Error('submit-failed')
+      setSubmitted(true)
+    } catch {
+      setError(
+        'Something went wrong on our end. Try again in a minute, or send it straight to Stephanie:',
+      )
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const label: React.CSSProperties = {
+    display: 'block',
+    fontFamily: "'Figtree', sans-serif",
+    fontWeight: 700,
+    fontSize: 13,
+    color: '#1A1A22',
+    marginBottom: 6,
+  }
+
+  const input: React.CSSProperties = {
+    width: '100%',
+    background: '#FFFFFF',
+    border: '1px solid #ECECF2',
+    borderRadius: 10,
+    padding: '13px 16px',
+    fontFamily: "'Figtree', sans-serif",
+    fontSize: 15,
+    color: '#1A1A22',
+    outline: 'none',
+    boxSizing: 'border-box',
+  }
+
+  const field: React.CSSProperties = { marginBottom: 18 }
+
+  const focus = (e: React.FocusEvent<HTMLElement>) =>
+    ((e.currentTarget as HTMLElement).style.borderColor = '#6C47FF')
+  const blur = (e: React.FocusEvent<HTMLElement>) =>
+    ((e.currentTarget as HTMLElement).style.borderColor = '#ECECF2')
+
+  return (
+    <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
+      <Navigation variant="light" />
+
+      {/* Hero */}
+      <section
+        style={{
+          padding: 'clamp(72px, 10vw, 128px) 24px clamp(48px, 6vw, 72px)',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: 780, margin: '0 auto' }}>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 700,
+              fontSize: 12,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: '#A78BFA',
+              margin: '0 0 16px',
+            }}
+          >
+            For recruiters and talent assessors
+          </p>
+          <h1
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(40px, 6.5vw, 72px)',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.05,
+              margin: '0 0 22px',
+            }}
+          >
+            Get pulled in when
+            <br />
+            the work comes.
+          </h1>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 'clamp(16px, 1.8vw, 19px)',
+              lineHeight: 1.6,
+              color: '#5A5A6E',
+              maxWidth: 620,
+              margin: '0 auto',
+            }}
+          >
+            Hiring.Productions brings vetted talent people into fast, high trust
+            client projects. Interview assessments, search, advisory. This page
+            is how you get on the bench.
+          </p>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section style={{ padding: '0 24px clamp(48px, 6vw, 80px)' }}>
+        <div
+          style={{
+            maxWidth: 980,
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: 16,
+          }}
+        >
+          {STEPS.map((s) => (
+            <div
+              key={s.num}
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid #ECECF2',
+                borderRadius: 16,
+                padding: '28px 26px',
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  letterSpacing: '0.08em',
+                  color: '#A78BFA',
+                  margin: '0 0 10px',
+                }}
+              >
+                {s.num}
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 22,
+                  letterSpacing: '-0.01em',
+                  margin: '0 0 8px',
+                }}
+              >
+                {s.title}
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 15,
+                  lineHeight: 1.55,
+                  color: '#5A5A6E',
+                  margin: 0,
+                }}
+              >
+                {s.body}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* RepVera callout */}
+      <section style={{ padding: '0 24px clamp(56px, 7vw, 96px)' }}>
+        <div
+          style={{
+            maxWidth: 780,
+            margin: '0 auto',
+            background: '#FFFFFF',
+            border: '1.5px solid rgba(108,71,255,0.30)',
+            borderRadius: 20,
+            padding: 'clamp(28px, 4vw, 44px)',
+            boxShadow: '0 18px 44px -30px rgba(108,71,255,0.35)',
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 900,
+              fontSize: 'clamp(24px, 3vw, 30px)',
+              letterSpacing: '-0.02em',
+              margin: '0 0 14px',
+            }}
+          >
+            Why we ask for a RepVera, not references.
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: '#5A5A6E',
+              margin: '0 0 10px',
+            }}
+          >
+            When a client needs someone next week, there is no time to chase
+            reference calls. So instead of a list of names, send your receipts.
+          </p>
+          <p
+            style={{
+              fontFamily: "'Figtree', sans-serif",
+              fontSize: 16,
+              lineHeight: 1.65,
+              color: '#5A5A6E',
+              margin: '0 0 24px',
+            }}
+          >
+            A verified RepVera profile shows how the people who actually worked
+            with you describe you. It is free and takes a few minutes.
+          </p>
+          <a
+            href="https://repvera.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              background: '#FF4F6A',
+              color: '#FFFFFF',
+              fontFamily: "'Figtree', sans-serif",
+              fontWeight: 800,
+              fontSize: 15,
+              padding: '13px 26px',
+              borderRadius: 10,
+              textDecoration: 'none',
+              boxShadow: '0 12px 28px rgba(255,79,106,0.25)',
+            }}
+          >
+            Create your free RepVera
+          </a>
+        </div>
+      </section>
+
+      {/* Form */}
+      <section style={{ padding: '0 24px clamp(80px, 10vw, 128px)' }}>
+        <div style={{ maxWidth: 640, margin: '0 auto' }}>
+          {submitted ? (
+            <div
+              role="status"
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid rgba(94,230,168,0.45)',
+                borderRadius: 20,
+                padding: 'clamp(32px, 5vw, 48px)',
+                textAlign: 'center',
+              }}
+            >
+              <CheckCircle2
+                size={40}
+                color="#0F7A4F"
+                strokeWidth={2}
+                style={{ marginBottom: 16 }}
+              />
+              <h2
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 28,
+                  letterSpacing: '-0.02em',
+                  margin: '0 0 10px',
+                }}
+              >
+                You are on the list.
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 16,
+                  lineHeight: 1.6,
+                  color: '#5A5A6E',
+                  margin: 0,
+                }}
+              >
+                We read every submission and we review your RepVera. When a
+                project fits your specialty, you hear from Stephanie directly.
+                A confirmation is on its way to your inbox.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} noValidate>
+              <h2
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 900,
+                  fontSize: 'clamp(30px, 4vw, 40px)',
+                  letterSpacing: '-0.02em',
+                  textAlign: 'center',
+                  margin: '0 0 8px',
+                }}
+              >
+                Consider me.
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 15,
+                  color: '#5A5A6E',
+                  textAlign: 'center',
+                  margin: '0 0 32px',
+                }}
+              >
+                Two minutes. The RepVera link is the part we read first.
+              </p>
+
+              <div style={field}>
+                <label htmlFor="cm-name" style={label}>
+                  Full name <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <input
+                  id="cm-name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  style={input}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-email" style={label}>
+                  Email <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <input
+                  id="cm-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={input}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-linkedin" style={label}>
+                  LinkedIn URL
+                </label>
+                <input
+                  id="cm-linkedin"
+                  type="url"
+                  placeholder="https://linkedin.com/in/you"
+                  value={linkedin}
+                  onChange={(e) => setLinkedin(e.target.value)}
+                  style={input}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-specialty" style={label}>
+                  Specialty <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <select
+                  id="cm-specialty"
+                  required
+                  value={specialty}
+                  onChange={(e) => setSpecialty(e.target.value)}
+                  style={{ ...input, appearance: 'auto', cursor: 'pointer' }}
+                  onFocus={focus}
+                  onBlur={blur}
+                >
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  {SPECIALTIES.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-years" style={label}>
+                  Years assessing or hiring talent{' '}
+                  <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <select
+                  id="cm-years"
+                  required
+                  value={years}
+                  onChange={(e) => setYears(e.target.value)}
+                  style={{ ...input, appearance: 'auto', cursor: 'pointer' }}
+                  onFocus={focus}
+                  onBlur={blur}
+                >
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  {YEARS.map((y) => (
+                    <option key={y} value={y}>
+                      {y}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-availability" style={label}>
+                  Availability <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <select
+                  id="cm-availability"
+                  required
+                  value={availability}
+                  onChange={(e) => setAvailability(e.target.value)}
+                  style={{ ...input, appearance: 'auto', cursor: 'pointer' }}
+                  onFocus={focus}
+                  onBlur={blur}
+                >
+                  <option value="" disabled>
+                    Choose one
+                  </option>
+                  {AVAILABILITY.map((a) => (
+                    <option key={a} value={a}>
+                      {a}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* RepVera link — the key field, visually emphasized */}
+              <div
+                style={{
+                  background: 'rgba(108,71,255,0.06)',
+                  border: '1.5px solid rgba(108,71,255,0.35)',
+                  borderRadius: 14,
+                  padding: '18px 18px 16px',
+                  marginBottom: 18,
+                }}
+              >
+                <label htmlFor="cm-repvera" style={label}>
+                  RepVera profile link <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <input
+                  id="cm-repvera"
+                  type="url"
+                  required
+                  placeholder="https://repvera.com/p/your-profile"
+                  value={repvera}
+                  onChange={(e) => setRepvera(e.target.value)}
+                  aria-describedby="cm-repvera-help"
+                  style={input}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+                <p
+                  id="cm-repvera-help"
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 13,
+                    lineHeight: 1.5,
+                    color: '#5A5A6E',
+                    margin: '8px 0 0',
+                  }}
+                >
+                  Paste your RepVera profile or collection link. No profile yet?
+                  Build one free at{' '}
+                  <a
+                    href="https://repvera.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#6C47FF', fontWeight: 700 }}
+                  >
+                    repvera.com
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div style={field}>
+                <label htmlFor="cm-notes" style={label}>
+                  Anything we should know
+                </label>
+                <textarea
+                  id="cm-notes"
+                  rows={4}
+                  placeholder="Niches you own, clients you love, rates, timing. Whatever helps."
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  style={{ ...input, resize: 'vertical', minHeight: 96, lineHeight: 1.5 }}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!canSubmit || submitting}
+                style={{
+                  width: '100%',
+                  marginTop: 6,
+                  background:
+                    !canSubmit || submitting
+                      ? 'rgba(108,71,255,0.35)'
+                      : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  border: 'none',
+                  borderRadius: 12,
+                  padding: '16px 24px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 16,
+                  color: '#FFFFFF',
+                  cursor: !canSubmit || submitting ? 'not-allowed' : 'pointer',
+                  boxShadow:
+                    !canSubmit || submitting
+                      ? 'none'
+                      : '0 14px 32px rgba(108,71,255,0.22)',
+                }}
+              >
+                {submitting
+                  ? 'Sending...'
+                  : canSubmit
+                  ? 'Consider me'
+                  : `Add your ${missing[0]} to submit`}
+              </button>
+
+              {error && (
+                <div
+                  role="alert"
+                  style={{
+                    marginTop: 14,
+                    background: '#FFFFFF',
+                    border: '1px solid rgba(255,79,106,0.35)',
+                    borderRadius: 10,
+                    padding: '14px 18px',
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 14,
+                    color: '#1A1A22',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {error}{' '}
+                  <a href={mailtoHref()} style={{ color: '#6C47FF', fontWeight: 700 }}>
+                    email your details instead
+                  </a>
+                  .
+                </div>
+              )}
+            </form>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}
