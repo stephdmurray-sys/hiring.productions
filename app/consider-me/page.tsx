@@ -65,10 +65,15 @@ export default function ConsiderMePage() {
   const [availability, setAvailability] = useState('')
   const [repvera, setRepvera] = useState('')
   const [notes, setNotes] = useState('')
+  const [resume, setResume] = useState<File | null>(null)
+  const [resumeError, setResumeError] = useState('')
 
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  // Missing-field messaging only appears after the first submit attempt,
+  // so a fresh visitor sees a normal form, not a wall of warnings.
+  const [attempted, setAttempted] = useState(false)
 
   const isUrl = (v: string) => /^https?:\/\/\S+\.\S+/.test(v.trim())
 
@@ -76,10 +81,47 @@ export default function ConsiderMePage() {
   if (!fullName.trim()) missing.push('full name')
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) missing.push('email')
   if (!specialty) missing.push('specialty')
-  if (!years) missing.push('years')
+  if (!years) missing.push('years assessing or hiring talent')
   if (!availability) missing.push('availability')
-  if (!isUrl(repvera)) missing.push('RepVera link')
+  if (!isUrl(repvera)) missing.push('RepVera profile link')
   const canSubmit = missing.length === 0
+
+  const RESUME_MAX_BYTES = 3 * 1024 * 1024
+  const RESUME_TYPES = new Set([
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  ])
+
+  const handleResume = (file: File | null) => {
+    setResumeError('')
+    if (!file) {
+      setResume(null)
+      return
+    }
+    if (!RESUME_TYPES.has(file.type)) {
+      setResume(null)
+      setResumeError('Use a PDF or Word file.')
+      return
+    }
+    if (file.size > RESUME_MAX_BYTES) {
+      setResume(null)
+      setResumeError('Keep it under 3 MB.')
+      return
+    }
+    setResume(file)
+  }
+
+  const fileToBase64 = (file: File) =>
+    new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        const result = reader.result as string
+        resolve(result.slice(result.indexOf(',') + 1))
+      }
+      reader.onerror = () => reject(reader.error)
+      reader.readAsDataURL(file)
+    })
 
   // Prefilled mailto fallback. Keeps a submission recoverable even if
   // the API is down. Values are joined into a plain text body.
@@ -103,10 +145,18 @@ export default function ConsiderMePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!canSubmit || submitting) return
+    if (submitting) return
+    setAttempted(true)
+    if (!canSubmit) return
     setSubmitting(true)
     setError('')
     try {
+      const resumePayload = resume
+        ? {
+            resumeName: resume.name.slice(0, 120),
+            resumeData: await fileToBase64(resume),
+          }
+        : {}
       const res = await fetch('/api/consider-me', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -119,6 +169,7 @@ export default function ConsiderMePage() {
           availability,
           repvera,
           notes,
+          ...resumePayload,
         }),
       })
       if (!res.ok) throw new Error('submit-failed')
@@ -469,6 +520,41 @@ export default function ConsiderMePage() {
               </div>
 
               <div style={field}>
+                <label htmlFor="cm-resume" style={label}>
+                  Resume
+                </label>
+                <input
+                  id="cm-resume"
+                  type="file"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  onChange={(e) => handleResume(e.target.files?.[0] ?? null)}
+                  aria-describedby="cm-resume-help"
+                  style={{
+                    ...input,
+                    padding: '11px 16px',
+                    cursor: 'pointer',
+                    background: '#FFFFFF',
+                  }}
+                />
+                <p
+                  id="cm-resume-help"
+                  style={{
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 13,
+                    lineHeight: 1.5,
+                    color: resumeError ? '#C1113A' : '#8B8AA0',
+                    margin: '6px 0 0',
+                  }}
+                >
+                  {resumeError
+                    ? resumeError
+                    : resume
+                    ? `Attached: ${resume.name}`
+                    : 'Optional. PDF or Word, up to 3 MB.'}
+                </p>
+              </div>
+
+              <div style={field}>
                 <label htmlFor="cm-specialty" style={label}>
                   Specialty <span style={{ color: '#C1113A' }}>*</span>
                 </label>
@@ -608,14 +694,13 @@ export default function ConsiderMePage() {
 
               <button
                 type="submit"
-                disabled={!canSubmit || submitting}
+                disabled={submitting}
                 style={{
                   width: '100%',
                   marginTop: 6,
-                  background:
-                    !canSubmit || submitting
-                      ? 'rgba(108,71,255,0.35)'
-                      : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                  background: submitting
+                    ? 'rgba(108,71,255,0.35)'
+                    : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
                   border: 'none',
                   borderRadius: 12,
                   padding: '16px 24px',
@@ -623,19 +708,30 @@ export default function ConsiderMePage() {
                   fontWeight: 800,
                   fontSize: 16,
                   color: '#FFFFFF',
-                  cursor: !canSubmit || submitting ? 'not-allowed' : 'pointer',
-                  boxShadow:
-                    !canSubmit || submitting
-                      ? 'none'
-                      : '0 14px 32px rgba(108,71,255,0.22)',
+                  cursor: submitting ? 'not-allowed' : 'pointer',
+                  boxShadow: submitting
+                    ? 'none'
+                    : '0 14px 32px rgba(108,71,255,0.22)',
                 }}
               >
-                {submitting
-                  ? 'Sending...'
-                  : canSubmit
-                  ? 'Consider me'
-                  : `Add your ${missing[0]} to submit`}
+                {submitting ? 'Sending...' : 'Consider me'}
               </button>
+
+              {attempted && !canSubmit && (
+                <p
+                  role="alert"
+                  style={{
+                    marginTop: 12,
+                    fontFamily: "'Figtree', sans-serif",
+                    fontSize: 14,
+                    color: '#C1113A',
+                    lineHeight: 1.5,
+                    textAlign: 'center',
+                  }}
+                >
+                  Almost there. Still needed: {missing.join(', ')}.
+                </p>
+              )}
 
               {error && (
                 <div

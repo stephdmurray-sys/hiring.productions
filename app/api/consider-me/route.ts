@@ -68,6 +68,23 @@ export async function POST(request: NextRequest) {
     const repvera: string = (body?.repvera ?? '').toString().trim().slice(0, 300)
     const notes: string = (body?.notes ?? '').toString().trim().slice(0, 2000)
 
+    // Optional resume, sent as base64 and forwarded to Stephanie as an
+    // email attachment. 3 MB file cap on the client; base64 inflates by
+    // ~4/3 so allow 4.2 MB of encoded payload here. Anything bigger is
+    // dropped, not rejected: the signup itself still matters more.
+    const resumeName: string = (body?.resumeName ?? '')
+      .toString()
+      .replace(/[^\w.\- ]/g, '')
+      .slice(0, 120)
+    let resumeData: string = (body?.resumeData ?? '').toString()
+    if (
+      resumeData.length > 4.2 * 1024 * 1024 ||
+      !/^[A-Za-z0-9+/=]*$/.test(resumeData)
+    ) {
+      resumeData = ''
+    }
+    const hasResume = Boolean(resumeName && resumeData)
+
     if (!fullName) {
       return NextResponse.json({ error: 'missing-name' }, { status: 400 })
     }
@@ -104,6 +121,7 @@ export async function POST(request: NextRequest) {
           availability,
           repvera,
           notes,
+          resume: hasResume ? resumeName : null,
           ts: Date.now(),
         }),
       )
@@ -125,6 +143,7 @@ export async function POST(request: NextRequest) {
         `Years assessing or hiring: ${years}`,
         `Availability: ${availability}`,
         `RepVera: ${repvera}`,
+        `Resume: ${hasResume ? `attached (${resumeName})` : '(not provided)'}`,
         '',
         'Notes:',
         notes || '(none)',
@@ -143,6 +162,9 @@ export async function POST(request: NextRequest) {
           subject: `Bench signup: ${fullName} (${specialty}, ${availability})`,
           text: notifyText,
           tags: [{ name: 'category', value: 'consider-me' }],
+          ...(hasResume
+            ? { attachments: [{ filename: resumeName, content: resumeData }] }
+            : {}),
         }),
       })
 
