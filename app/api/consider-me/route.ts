@@ -37,13 +37,14 @@ function getRedis(): Redis | null {
   return new Redis({ url, token })
 }
 
-const SPECIALTIES = new Set([
-  'Healthcare & clinical',
-  'Tech & engineering',
-  'Executive & leadership',
-  'Sales & go to market',
-  'General & cross industry',
-  'Other',
+const SKILLS = new Set([
+  'Interviewing & assessment',
+  'Sourcing & search',
+  'Screening & qualifying',
+  'Offer negotiation & closing',
+  'Onboarding',
+  'Employer branding & recruitment marketing',
+  'Talent strategy & advisory',
 ])
 
 const YEARS = new Set(['1 to 3', '4 to 7', '8 to 15', '15+'])
@@ -61,7 +62,12 @@ export async function POST(request: NextRequest) {
     const fullName: string = (body?.fullName ?? '').toString().trim().slice(0, 120)
     const email: string = (body?.email ?? '').toString().trim().toLowerCase().slice(0, 200)
     const linkedin: string = (body?.linkedin ?? '').toString().trim().slice(0, 300)
-    const specialty: string = (body?.specialty ?? '').toString().trim().slice(0, 60)
+    // What they are great at, within talent work. Multi select.
+    const rawSkills = Array.isArray(body?.skills) ? body.skills : []
+    const skills: string[] = rawSkills
+      .map((x: unknown) => (x ?? '').toString())
+      .filter((x: string) => SKILLS.has(x))
+      .slice(0, 10)
     const years: string = (body?.years ?? '').toString().trim().slice(0, 20)
     const availability: string = (body?.availability ?? '').toString().trim().slice(0, 40)
     const repvera: string = (body?.repvera ?? '').toString().trim().slice(0, 300)
@@ -105,8 +111,8 @@ export async function POST(request: NextRequest) {
     if (!EMAIL_RE.test(email)) {
       return NextResponse.json({ error: 'invalid-email' }, { status: 400 })
     }
-    if (!SPECIALTIES.has(specialty)) {
-      return NextResponse.json({ error: 'invalid-specialty' }, { status: 400 })
+    if (skills.length === 0) {
+      return NextResponse.json({ error: 'missing-skills' }, { status: 400 })
     }
     if (!YEARS.has(years)) {
       return NextResponse.json({ error: 'invalid-years' }, { status: 400 })
@@ -114,7 +120,7 @@ export async function POST(request: NextRequest) {
     if (!AVAILABILITY.has(availability)) {
       return NextResponse.json({ error: 'invalid-availability' }, { status: 400 })
     }
-    if (!/^https?:\/\/\S+\.\S+/.test(repvera)) {
+    if (repvera && !/^https?:\/\/\S+\.\S+/.test(repvera)) {
       return NextResponse.json({ error: 'invalid-repvera' }, { status: 400 })
     }
     // Applications are per role. No blanket bench submissions.
@@ -137,7 +143,7 @@ export async function POST(request: NextRequest) {
           fullName,
           email,
           linkedin,
-          specialty,
+          skills,
           years,
           availability,
           repvera,
@@ -165,10 +171,10 @@ export async function POST(request: NextRequest) {
         `Name: ${fullName}`,
         `Email: ${email}`,
         `LinkedIn: ${linkedin || '(not provided)'}`,
-        `Specialty: ${specialty}`,
+        `Great at: ${skills.join(', ')}`,
         `Years assessing or hiring: ${years}`,
         `Availability: ${availability}`,
-        `RepVera: ${repvera}`,
+        `RepVera: ${repvera || '(not provided)'}`,
         `Hourly consulting rate: ${hourlyRate}`,
         `Resume: ${hasResume ? `attached (${resumeName})` : '(not provided)'}`,
         ...answers.flatMap((x) => ['', x.q, x.a]),
@@ -187,9 +193,7 @@ export async function POST(request: NextRequest) {
           from: fromAddress,
           to: NOTIFY_TO,
           reply_to: email,
-          subject: opportunity
-            ? `Applicant: ${fullName} for ${opportunity}`
-            : `Bench signup: ${fullName} (${specialty}, ${availability})`,
+          subject: `Applicant: ${fullName} for ${opportunity}`,
           text: notifyText,
           tags: [{ name: 'category', value: 'consider-me' }],
           ...(hasResume
@@ -209,7 +213,7 @@ export async function POST(request: NextRequest) {
         '',
         `Your application for ${opportunity} is in.`,
         '',
-        'Here is how it works. We read every application and we review your RepVera. If it fits the engagement, you hear from Stephanie directly. No newsletters, no drip sequence, just a call if it is a match.',
+        'Here is how it works. We read every application, and if you shared a RepVera we review it closely. If it fits the engagement, you hear from Stephanie directly. No newsletters, no drip sequence, just a call if it is a match.',
         '',
         'Stephanie Murray',
         'hiring.productions',

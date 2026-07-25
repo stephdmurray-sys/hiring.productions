@@ -17,13 +17,14 @@ import type { Opportunity } from '@/lib/opportunities'
  * an application is never lost.
  */
 
-const SPECIALTIES = [
-  'Healthcare & clinical',
-  'Tech & engineering',
-  'Executive & leadership',
-  'Sales & go to market',
-  'General & cross industry',
-  'Other',
+const SKILLS = [
+  'Interviewing & assessment',
+  'Sourcing & search',
+  'Screening & qualifying',
+  'Offer negotiation & closing',
+  'Onboarding',
+  'Employer branding & recruitment marketing',
+  'Talent strategy & advisory',
 ]
 
 const YEARS = ['1 to 3', '4 to 7', '8 to 15', '15+']
@@ -34,7 +35,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [linkedin, setLinkedin] = useState('')
-  const [specialty, setSpecialty] = useState('')
+  const [skills, setSkills] = useState<string[]>([])
   const [years, setYears] = useState('')
   const [availability, setAvailability] = useState('')
   const [repvera, setRepvera] = useState('')
@@ -54,14 +55,19 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
 
   const isUrl = (v: string) => /^https?:\/\/\S+\.\S+/.test(v.trim())
 
+  const toggleSkill = (skill: string) =>
+    setSkills((prev) =>
+      prev.includes(skill) ? prev.filter((x) => x !== skill) : [...prev, skill],
+    )
+
   const missing: string[] = []
   if (!fullName.trim()) missing.push('full name')
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) missing.push('email')
-  if (!specialty) missing.push('specialty')
+  if (skills.length === 0) missing.push('at least one thing you are great at')
   if (!years) missing.push('years assessing or hiring talent')
   if (!availability) missing.push('availability')
   if (!hourlyRate.trim()) missing.push('hourly consulting rate')
-  if (!isUrl(repvera)) missing.push('RepVera profile link')
+  if (repvera.trim() && !isUrl(repvera)) missing.push('a valid RepVera link')
   for (const q of opportunity.questions) {
     if (!(answers[q] ?? '').trim()) missing.push('the experience question')
   }
@@ -112,11 +118,11 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
       `Name: ${fullName}`,
       `Email: ${email}`,
       `LinkedIn: ${linkedin || '(not provided)'}`,
-      `Specialty: ${specialty}`,
+      `Great at: ${skills.join(', ')}`,
       `Years assessing or hiring: ${years}`,
       `Availability: ${availability}`,
       `Hourly consulting rate: ${hourlyRate}`,
-      `RepVera: ${repvera}`,
+      `RepVera: ${repvera || '(not provided)'}`,
       ...opportunity.questions.map((q) => `\n${q}\n${answers[q] ?? ''}`),
       '',
       'Notes:',
@@ -148,7 +154,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
           fullName,
           email,
           linkedin,
-          specialty,
+          skills,
           years,
           availability,
           repvera,
@@ -232,9 +238,9 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
             margin: 0,
           }}
         >
-          We read every application and we review your RepVera. If it fits the
-          engagement, you hear from Stephanie directly. A confirmation is on
-          its way to your inbox.
+          We read every application, and if you shared a RepVera we review it
+          closely. If it fits the engagement, you hear from Stephanie directly.
+          A confirmation is on its way to your inbox.
         </p>
       </div>
     )
@@ -263,7 +269,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
           margin: '0 0 20px',
         }}
       >
-        Two minutes. The RepVera link is the part we read first.
+        Two minutes. Receipts optional, but they move you to the front.
       </p>
 
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 26 }}>
@@ -366,29 +372,60 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
         </p>
       </div>
 
-      <div style={field}>
-        <label htmlFor="cm-specialty" style={label}>
-          Specialty <span style={{ color: '#C1113A' }}>*</span>
-        </label>
-        <select
-          id="cm-specialty"
-          required
-          value={specialty}
-          onChange={(e) => setSpecialty(e.target.value)}
-          style={{ ...input, appearance: 'auto', cursor: 'pointer' }}
-          onFocus={focus}
-          onBlur={blur}
+      <fieldset style={{ ...field, border: 'none', padding: 0, margin: '0 0 18px' }}>
+        <legend style={{ ...label, padding: 0 }}>
+          What are you great at? <span style={{ color: '#C1113A' }}>*</span>{' '}
+          <span style={{ fontWeight: 400, color: '#8B8AA0' }}>Check all that apply.</span>
+        </legend>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: 8,
+            marginTop: 4,
+          }}
         >
-          <option value="" disabled>
-            Choose one
-          </option>
-          {SPECIALTIES.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
-      </div>
+          {SKILLS.map((skill) => {
+            const checked = skills.includes(skill)
+            return (
+              <label
+                key={skill}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  background: checked ? 'rgba(108,71,255,0.07)' : '#FFFFFF',
+                  border: checked
+                    ? '1.5px solid rgba(108,71,255,0.45)'
+                    : '1px solid #ECECF2',
+                  borderRadius: 10,
+                  padding: '11px 14px',
+                  fontFamily: "'Figtree', sans-serif",
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#1A1A22',
+                  cursor: 'pointer',
+                  userSelect: 'none',
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => toggleSkill(skill)}
+                  style={{
+                    accentColor: '#6C47FF',
+                    width: 16,
+                    height: 16,
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                  }}
+                />
+                {skill}
+              </label>
+            )
+          })}
+        </div>
+      </fieldset>
 
       <div style={field}>
         <label htmlFor="cm-years" style={label}>
@@ -485,12 +522,12 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
         }}
       >
         <label htmlFor="cm-repvera" style={label}>
-          RepVera profile link <span style={{ color: '#C1113A' }}>*</span>
+          RepVera profile link{' '}
+          <span style={{ fontWeight: 400, color: '#8B8AA0' }}>Optional</span>
         </label>
         <input
           id="cm-repvera"
           type="url"
-          required
           placeholder="https://repvera.com/r/your-name"
           value={repvera}
           onChange={(e) => setRepvera(e.target.value)}
@@ -509,9 +546,9 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
             margin: '8px 0 0',
           }}
         >
-          To reduce time to trust, we use RepVera for verified proof of how
-          others experience working with you. Paste your profile or collection
-          link. No profile yet? Build one free at{' '}
+          Optional, and applications with receipts move first. To reduce time
+          to trust, we use RepVera for verified proof of how others experience
+          working with you. No profile yet? Build one free at{' '}
           <a
             href="https://repvera.com"
             target="_blank"
