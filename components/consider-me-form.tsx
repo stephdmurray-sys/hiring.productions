@@ -50,6 +50,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
   // Missing-field messaging only appears after the first submit attempt,
   // so a fresh visitor sees a normal form, not a wall of warnings.
   const [attempted, setAttempted] = useState(false)
+  const [showWhy, setShowWhy] = useState(false)
 
   const isUrl = (v: string) => /^https?:\/\/\S+\.\S+/.test(v.trim())
 
@@ -509,10 +510,8 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
           }}
         >
           To reduce time to trust, we use RepVera for verified proof of how
-          others experience working with you. Paste your profile link here,
-          then send your collection link to the people who can vouch for you.
-          Your profile updates automatically as they respond. No profile yet?
-          Build one free at{' '}
+          others experience working with you. Paste your profile or collection
+          link. No profile yet? Build one free at{' '}
           <a
             href="https://repvera.com"
             target="_blank"
@@ -523,6 +522,89 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
           </a>
           .
         </p>
+
+        <button
+          type="button"
+          onClick={() => setShowWhy((v) => !v)}
+          aria-expanded={showWhy}
+          aria-controls="cm-repvera-why"
+          style={{
+            marginTop: 12,
+            background: 'transparent',
+            border: 'none',
+            padding: 0,
+            fontFamily: "'Figtree', sans-serif",
+            fontWeight: 800,
+            fontSize: 13.5,
+            color: '#6C47FF',
+            cursor: 'pointer',
+          }}
+        >
+          {showWhy ? 'Hide' : 'Why a RepVera, not references?'}
+        </button>
+
+        {showWhy && (
+          <div id="cm-repvera-why" style={{ marginTop: 10 }}>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#5A5A6E',
+                margin: '0 0 10px',
+              }}
+            >
+              When a client needs someone next week, there is no time to chase
+              reference calls. So instead of a list of names, you send verified
+              proof.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#5A5A6E',
+                margin: '0 0 10px',
+              }}
+            >
+              Your RepVera is portable and it is yours. Build it once and it
+              travels with you from engagement to engagement. Pull in the
+              recognition and recommendations you already have, so your
+              receipts live in one place.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#5A5A6E',
+                margin: '0 0 14px',
+              }}
+            >
+              Send your collection link to the people who can vouch for you.
+              Your profile updates automatically as they respond. Free, and it
+              takes a few minutes.
+            </p>
+            <a
+              href="https://repvera.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                background: '#FF4F6A',
+                color: '#FFFFFF',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 800,
+                fontSize: 14,
+                padding: '11px 20px',
+                borderRadius: 10,
+                textDecoration: 'none',
+              }}
+            >
+              Create your free RepVera
+            </a>
+          </div>
+        )}
       </div>
 
       <div style={field}>
@@ -547,9 +629,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
         style={{
           width: '100%',
           marginTop: 6,
-          background: submitting
-            ? 'rgba(108,71,255,0.35)'
-            : 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+          background: submitting ? 'rgba(108,71,255,0.35)' : '#6C47FF',
           border: 'none',
           borderRadius: 12,
           padding: '16px 24px',
@@ -558,7 +638,7 @@ export function ConsiderMeForm({ opportunity }: { opportunity: Opportunity }) {
           fontSize: 16,
           color: '#FFFFFF',
           cursor: submitting ? 'not-allowed' : 'pointer',
-          boxShadow: submitting ? 'none' : '0 14px 32px rgba(108,71,255,0.22)',
+          boxShadow: submitting ? 'none' : '0 12px 26px rgba(108,71,255,0.25)',
         }}
       >
         {submitting ? 'Sending...' : 'Consider me'}

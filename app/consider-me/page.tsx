@@ -22,7 +22,7 @@ const STEPS = [
   {
     num: '02',
     title: 'Bring your receipts',
-    body: 'Share your verified RepVera profile so we can see how you work, fast.',
+    body: 'Share your verified RepVera profile: portable proof of how others experience working with you, including recognition you already have. Build one free at repvera.com.',
   },
   {
     num: '03',
@@ -220,7 +220,7 @@ export default function ConsiderMeIndexPage() {
       </section>
 
       {/* How it works */}
-      <section style={{ padding: '0 24px clamp(48px, 6vw, 80px)' }}>
+      <section style={{ padding: '0 24px clamp(80px, 10vw, 128px)' }}>
         <div
           style={{
             maxWidth: 980,
@@ -276,79 +276,6 @@ export default function ConsiderMeIndexPage() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* RepVera callout */}
-      <section style={{ padding: '0 24px clamp(80px, 10vw, 128px)' }}>
-        <div
-          style={{
-            maxWidth: 780,
-            margin: '0 auto',
-            background: '#FFFFFF',
-            border: '1.5px solid rgba(108,71,255,0.30)',
-            borderRadius: 20,
-            padding: 'clamp(28px, 4vw, 44px)',
-            boxShadow: '0 18px 44px -30px rgba(108,71,255,0.35)',
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(24px, 3vw, 30px)',
-              letterSpacing: '-0.02em',
-              margin: '0 0 14px',
-            }}
-          >
-            Why we ask for a RepVera, not references.
-          </h2>
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: 16,
-              lineHeight: 1.65,
-              color: '#5A5A6E',
-              margin: '0 0 10px',
-            }}
-          >
-            When a client needs someone next week, there is no time to chase
-            reference calls. So instead of a list of names, send your receipts.
-          </p>
-          <p
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: 16,
-              lineHeight: 1.65,
-              color: '#5A5A6E',
-              margin: '0 0 24px',
-            }}
-          >
-            To reduce time to trust, we leverage RepVera for verified proof of
-            how others experience working with you. Create your profile, paste
-            the link in your application, then send your collection link to the
-            people who can vouch for you. Your profile updates automatically as
-            they respond. It is free and takes a few minutes.
-          </p>
-          <a
-            href="https://repvera.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-block',
-              background: '#FF4F6A',
-              color: '#FFFFFF',
-              fontFamily: "'Figtree', sans-serif",
-              fontWeight: 800,
-              fontSize: 15,
-              padding: '13px 26px',
-              borderRadius: 10,
-              textDecoration: 'none',
-              boxShadow: '0 12px 28px rgba(255,79,106,0.25)',
-            }}
-          >
-            Create your free RepVera
-          </a>
         </div>
       </section>
 
