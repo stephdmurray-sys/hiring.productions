@@ -207,21 +207,65 @@ export async function POST(request: NextRequest) {
         console.error('[consider-me] notify email failed:', notifyRes.status, err)
       }
 
-      // Short confirmation to the applicant. Plain, on voice, no promises.
+      // Confirmation to the applicant. Branded HTML matching the
+      // magic-link email template: styled wordmark, no images (images
+      // hurt deliverability), plain text fallback included.
+      const firstName = fullName.split(' ')[0]
       const confirmText = [
-        `Thanks, ${fullName.split(' ')[0]}.`,
+        `Hi ${firstName},`,
         '',
-        `Your application for ${opportunity} is in.`,
+        `Thank you for applying on short notice for ${opportunity}. That speed is exactly what these engagements run on.`,
         '',
-        'Here is how it works. We read every application, and if you shared a RepVera we review it closely. If it fits the engagement, you hear from Stephanie directly. No newsletters, no drip sequence, just a call if it is a match.',
+        'Here is what happens next. We are reviewing applications over the next three days. If your background fits, I will reach out directly to set up a short intro call.',
+        '',
+        'If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at repvera.com and reply to this email with the link. Receipts move applications to the front.',
+        '',
+        'Either way, thank you for raising your hand. New engagements always post first at hiring.productions/consider-me.',
         '',
         'Stephanie Murray',
-        'hiring.productions',
+        'Founder, hiring.productions',
       ].join('\n')
+
+      const para = 'font-size:15px;color:#5A5A6E;line-height:1.6;margin:0 0 16px;'
+      const confirmHtml = `<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Application received</title>
+  </head>
+  <body style="margin:0;padding:0;background:#FAF8F3;font-family:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1A1A22;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#FAF8F3;">
+      <tr>
+        <td align="center" style="padding:40px 20px;">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="520" style="max-width:520px;background:#FFFFFF;border:1px solid #ECECF2;border-radius:16px;padding:36px 32px;">
+            <tr>
+              <td>
+                <div style="font-size:14px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#5A4FE0;margin-bottom:10px;">hiring.productions</div>
+                <h1 style="font-size:24px;font-weight:900;letter-spacing:-0.015em;color:#1A1A22;line-height:1.2;margin:0 0 14px;">Application received.</h1>
+                <p style="${para}">Hi ${firstName},</p>
+                <p style="${para}">Thank you for applying on short notice for <strong style="color:#1A1A22;">${opportunity}</strong>. That speed is exactly what these engagements run on.</p>
+                <p style="${para}">Here is what happens next. We are reviewing applications over the next three days. If your background fits, I will reach out directly to set up a short intro call.</p>
+                <p style="${para}">If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at <a href="https://repvera.com" style="color:#5A4FE0;font-weight:700;">repvera.com</a> and reply to this email with the link. Receipts move applications to the front.</p>
+                <p style="font-size:15px;color:#5A5A6E;line-height:1.6;margin:0 0 24px;">Either way, thank you for raising your hand. New engagements always post first at <a href="https://hiring.productions/consider-me" style="color:#5A4FE0;font-weight:700;">hiring.productions/consider-me</a>.</p>
+                <p style="font-size:15px;color:#1A1A22;line-height:1.5;margin:0;">
+                  <strong>Stephanie Murray</strong><br />
+                  <span style="color:#8B8AA0;font-size:13px;">Founder, hiring.productions</span>
+                </p>
+              </td>
+            </tr>
+          </table>
+          <div style="font-size:11px;color:#8B8AA0;margin-top:18px;font-family:'Figtree',-apple-system,sans-serif;">
+            hiring.productions &middot; Both sides of the table. In the open.
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`
 
       // Awaited on purpose: Vercel freezes the function once the response
       // returns, so a fire-and-forget send here would be killed mid-flight.
-      // Failures are logged but never fail the signup.
+      // Failures are logged but never fail the application.
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -231,11 +275,13 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           from: fromAddress,
           to: email,
-          subject: 'Application received.',
+          subject: 'Application received. Here is what happens next.',
+          html: confirmHtml,
           text: confirmText,
           tags: [{ name: 'category', value: 'consider-me' }],
         }),
       }).catch((err) => console.error('[consider-me] confirm email failed', err))
+
     } else {
       console.error('[consider-me] RESEND_API_KEY or RESEND_FROM_EMAIL missing')
     }
