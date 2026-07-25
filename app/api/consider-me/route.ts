@@ -67,6 +67,10 @@ export async function POST(request: NextRequest) {
     const availability: string = (body?.availability ?? '').toString().trim().slice(0, 40)
     const repvera: string = (body?.repvera ?? '').toString().trim().slice(0, 300)
     const notes: string = (body?.notes ?? '').toString().trim().slice(0, 2000)
+    // Which open engagement the person applied for, if any. Free text
+    // from the client but capped and only ever echoed into our own
+    // notification email and Redis record.
+    const opportunity: string = (body?.opportunity ?? '').toString().trim().slice(0, 160)
 
     // Optional resume, sent as base64 and forwarded to Stephanie as an
     // email attachment. 3 MB file cap on the client; base64 inflates by
@@ -121,6 +125,7 @@ export async function POST(request: NextRequest) {
           availability,
           repvera,
           notes,
+          opportunity: opportunity || null,
           resume: hasResume ? resumeName : null,
           ts: Date.now(),
         }),
@@ -134,7 +139,9 @@ export async function POST(request: NextRequest) {
       // Notification to Stephanie with every field. This is the one
       // that matters: it is how the bench actually gets reviewed.
       const notifyText = [
-        'New bench signup from /consider-me.',
+        opportunity
+          ? `New application from /consider-me for: ${opportunity}`
+          : 'New bench signup from /consider-me.',
         '',
         `Name: ${fullName}`,
         `Email: ${email}`,
@@ -159,7 +166,9 @@ export async function POST(request: NextRequest) {
           from: fromAddress,
           to: NOTIFY_TO,
           reply_to: email,
-          subject: `Bench signup: ${fullName} (${specialty}, ${availability})`,
+          subject: opportunity
+            ? `Applicant: ${fullName} for ${opportunity}`
+            : `Bench signup: ${fullName} (${specialty}, ${availability})`,
           text: notifyText,
           tags: [{ name: 'category', value: 'consider-me' }],
           ...(hasResume

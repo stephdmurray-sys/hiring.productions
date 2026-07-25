@@ -38,6 +38,56 @@ const AVAILABILITY = [
   'Just keeping in touch',
 ]
 
+/**
+ * Open engagements. Add or remove entries here and the page updates:
+ * the hero banner, the Open opportunities section, and the form tag
+ * all read from this array. Empty array hides the section.
+ */
+const OPPORTUNITIES = [
+  {
+    id: 'clinical-talent-assessment-houston',
+    title: 'Clinical Talent Assessment Consultant',
+    meta: 'Contract. Remote. Short term, project based.',
+    client:
+      'A growing outpatient psychiatry practice in the Greater Houston area. Client named once you are engaged.',
+    sections: [
+      {
+        heading: 'The role',
+        body: 'Our client is expanding their physician team and needs a highly experienced clinical talent leader to help assess psychiatrist candidates during an active hiring push. This is a focused, high trust engagement. You bring the seasoned eye they do not have in house, and you give them the confidence to move quickly on the right people.',
+      },
+      {
+        heading: 'What you will do',
+        bullets: [
+          'Conduct one hour interviews with psychiatrist candidates',
+          'Assess clinical fit, communication, and how each candidate is likely to show up in practice',
+          'Deliver a brief written summary after each interview with your impressions and a clear recommendation',
+        ],
+      },
+      {
+        heading: 'Who we are looking for',
+        bullets: [
+          'Deep talent acquisition or talent assessment experience, ideally in healthcare or clinical hiring',
+          'Comfortable evaluating physician or provider candidates. Psychiatry or behavioral health a plus',
+          'Strong judgment, and the ability to turn one conversation into a crisp, decision ready write up',
+          'Available to begin the week of July 28 or August 3',
+        ],
+      },
+      {
+        heading: 'Details',
+        bullets: [
+          'Contract, paid per interview or per project. Rate discussed on intro call',
+          'Candidate interviews expected to begin next week or the week after',
+          'Flexible scheduling around candidate availability',
+        ],
+      },
+      {
+        heading: 'To be considered',
+        body: 'Use the form below. Add a short note on your clinical hiring background and include your verified RepVera profile so we can see how the people who have worked with you describe you.',
+      },
+    ],
+  },
+]
+
 const STEPS = [
   {
     num: '01',
@@ -67,6 +117,10 @@ export default function ConsiderMePage() {
   const [notes, setNotes] = useState('')
   const [resume, setResume] = useState<File | null>(null)
   const [resumeError, setResumeError] = useState('')
+  const [openOpp, setOpenOpp] = useState<string | null>(
+    OPPORTUNITIES.length === 1 ? OPPORTUNITIES[0].id : null,
+  )
+  const [applyingFor, setApplyingFor] = useState('')
 
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -127,6 +181,7 @@ export default function ConsiderMePage() {
   // the API is down. Values are joined into a plain text body.
   const mailtoHref = () => {
     const body = [
+      `Opportunity: ${applyingFor || 'General bench signup'}`,
       `Name: ${fullName}`,
       `Email: ${email}`,
       `LinkedIn: ${linkedin || '(not provided)'}`,
@@ -169,6 +224,7 @@ export default function ConsiderMePage() {
           availability,
           repvera,
           notes,
+          opportunity: applyingFor,
           ...resumePayload,
         }),
       })
@@ -265,8 +321,236 @@ export default function ConsiderMePage() {
             client projects. Interview assessments, search, advisory. This page
             is how you get on the bench.
           </p>
+          {OPPORTUNITIES.length > 0 && (
+            <a
+              href="#opportunities"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                marginTop: 28,
+                background: '#FFFFFF',
+                border: '1.5px solid rgba(108,71,255,0.35)',
+                borderRadius: 999,
+                padding: '11px 22px',
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 700,
+                fontSize: 14.5,
+                color: '#1A1A22',
+                textDecoration: 'none',
+                boxShadow: '0 10px 26px -18px rgba(108,71,255,0.5)',
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  background: '#0F7A4F',
+                  display: 'inline-block',
+                }}
+              />
+              {OPPORTUNITIES.length === 1
+                ? `Open now: ${OPPORTUNITIES[0].title}`
+                : `${OPPORTUNITIES.length} opportunities open now`}
+            </a>
+          )}
         </div>
       </section>
+
+      {/* Open opportunities */}
+      {OPPORTUNITIES.length > 0 && (
+        <section
+          id="opportunities"
+          style={{ padding: '0 24px clamp(48px, 6vw, 80px)', scrollMarginTop: 90 }}
+        >
+          <div style={{ maxWidth: 780, margin: '0 auto' }}>
+            <p
+              style={{
+                fontFamily: "'Figtree', sans-serif",
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#A78BFA',
+                textAlign: 'center',
+                margin: '0 0 20px',
+              }}
+            >
+              Open opportunities
+            </p>
+            {OPPORTUNITIES.map((opp) => {
+              const isOpen = openOpp === opp.id
+              return (
+                <div
+                  key={opp.id}
+                  style={{
+                    background: '#FFFFFF',
+                    border: '1.5px solid rgba(108,71,255,0.30)',
+                    borderRadius: 20,
+                    marginBottom: 16,
+                    overflow: 'hidden',
+                    boxShadow: '0 18px 44px -30px rgba(108,71,255,0.35)',
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenOpp(isOpen ? null : opp.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={`opp-body-${opp.id}`}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: 16,
+                      background: 'transparent',
+                      border: 'none',
+                      textAlign: 'left',
+                      padding: 'clamp(20px, 3vw, 28px)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <span>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontFamily: "'Figtree', sans-serif",
+                          fontWeight: 900,
+                          fontSize: 'clamp(20px, 2.6vw, 26px)',
+                          letterSpacing: '-0.015em',
+                          color: '#1A1A22',
+                          marginBottom: 6,
+                        }}
+                      >
+                        {opp.title}
+                      </span>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontFamily: "'Figtree', sans-serif",
+                          fontSize: 14,
+                          color: '#5A5A6E',
+                        }}
+                      >
+                        {opp.meta}
+                      </span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        fontFamily: "'Figtree', sans-serif",
+                        fontSize: 22,
+                        fontWeight: 700,
+                        color: '#6C47FF',
+                        transform: isOpen ? 'rotate(45deg)' : 'none',
+                        transition: 'transform 0.15s ease',
+                        flexShrink: 0,
+                      }}
+                    >
+                      +
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div
+                      id={`opp-body-${opp.id}`}
+                      style={{
+                        padding: '0 clamp(20px, 3vw, 28px) clamp(24px, 3vw, 32px)',
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: "'Figtree', sans-serif",
+                          fontSize: 14,
+                          lineHeight: 1.55,
+                          color: '#5A5A6E',
+                          background: 'rgba(108,71,255,0.06)',
+                          borderRadius: 10,
+                          padding: '12px 16px',
+                          margin: '0 0 20px',
+                        }}
+                      >
+                        <strong style={{ color: '#1A1A22' }}>Client:</strong>{' '}
+                        {opp.client}
+                      </p>
+                      {opp.sections.map((s) => (
+                        <div key={s.heading} style={{ marginBottom: 18 }}>
+                          <h3
+                            style={{
+                              fontFamily: "'Figtree', sans-serif",
+                              fontWeight: 800,
+                              fontSize: 16,
+                              margin: '0 0 8px',
+                            }}
+                          >
+                            {s.heading}
+                          </h3>
+                          {'body' in s && s.body && (
+                            <p
+                              style={{
+                                fontFamily: "'Figtree', sans-serif",
+                                fontSize: 15,
+                                lineHeight: 1.6,
+                                color: '#5A5A6E',
+                                margin: 0,
+                              }}
+                            >
+                              {s.body}
+                            </p>
+                          )}
+                          {'bullets' in s && s.bullets && (
+                            <ul style={{ margin: 0, paddingLeft: 20 }}>
+                              {s.bullets.map((b) => (
+                                <li
+                                  key={b}
+                                  style={{
+                                    fontFamily: "'Figtree', sans-serif",
+                                    fontSize: 15,
+                                    lineHeight: 1.6,
+                                    color: '#5A5A6E',
+                                    marginBottom: 6,
+                                  }}
+                                >
+                                  {b}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setApplyingFor(opp.title)
+                          document
+                            .getElementById('apply')
+                            ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }}
+                        style={{
+                          background: 'linear-gradient(135deg, #6C47FF, #FF4F6A)',
+                          border: 'none',
+                          borderRadius: 10,
+                          padding: '14px 28px',
+                          fontFamily: "'Figtree', sans-serif",
+                          fontWeight: 800,
+                          fontSize: 15,
+                          color: '#FFFFFF',
+                          cursor: 'pointer',
+                          boxShadow: '0 12px 28px rgba(108,71,255,0.22)',
+                        }}
+                      >
+                        Apply for this role
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </section>
+      )}
 
       {/* How it works */}
       <section style={{ padding: '0 24px clamp(48px, 6vw, 80px)' }}>
@@ -399,7 +683,10 @@ export default function ConsiderMePage() {
       </section>
 
       {/* Form */}
-      <section style={{ padding: '0 24px clamp(80px, 10vw, 128px)' }}>
+      <section
+        id="apply"
+        style={{ padding: '0 24px clamp(80px, 10vw, 128px)', scrollMarginTop: 90 }}
+      >
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
           {submitted ? (
             <div
@@ -463,11 +750,56 @@ export default function ConsiderMePage() {
                   fontSize: 15,
                   color: '#5A5A6E',
                   textAlign: 'center',
-                  margin: '0 0 32px',
+                  margin: '0 0 20px',
                 }}
               >
                 Two minutes. The RepVera link is the part we read first.
               </p>
+
+              {applyingFor && (
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginBottom: 26,
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 10,
+                      background: 'rgba(108,71,255,0.08)',
+                      border: '1.5px solid rgba(108,71,255,0.35)',
+                      borderRadius: 999,
+                      padding: '9px 16px',
+                      fontFamily: "'Figtree', sans-serif",
+                      fontWeight: 700,
+                      fontSize: 13.5,
+                      color: '#1A1A22',
+                    }}
+                  >
+                    Applying for: {applyingFor}
+                    <button
+                      type="button"
+                      onClick={() => setApplyingFor('')}
+                      aria-label="Switch to a general bench signup"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6C47FF',
+                        fontFamily: "'Figtree', sans-serif",
+                        fontWeight: 800,
+                        fontSize: 13,
+                        cursor: 'pointer',
+                        padding: 0,
+                      }}
+                    >
+                      Clear
+                    </button>
+                  </span>
+                </div>
+              )}
 
               <div style={field}>
                 <label htmlFor="cm-name" style={label}>
@@ -644,7 +976,7 @@ export default function ConsiderMePage() {
                   id="cm-repvera"
                   type="url"
                   required
-                  placeholder="https://repvera.com/p/your-profile"
+                  placeholder="https://repvera.com/r/your-name"
                   value={repvera}
                   onChange={(e) => setRepvera(e.target.value)}
                   aria-describedby="cm-repvera-help"
