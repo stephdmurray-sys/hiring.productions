@@ -35,7 +35,6 @@ const AVAILABILITY = [
   'Available now',
   'A few hours a week',
   'Project by project',
-  'Just keeping in touch',
 ]
 
 /**
@@ -82,8 +81,11 @@ const OPPORTUNITIES = [
       },
       {
         heading: 'To be considered',
-        body: 'Use the form below. Add a short note on your clinical hiring background and include your verified RepVera profile so we can see how the people who have worked with you describe you.',
+        body: 'Use the application below. Tell us about your clinical hiring background and include your verified RepVera profile so we can see how the people who have worked with you describe you.',
       },
+    ],
+    questions: [
+      'Describe your experience interviewing and qualifying psychiatrists for outpatient roles. Settings, volume, and how you judge clinical fit.',
     ],
   },
 ]
@@ -101,8 +103,8 @@ const STEPS = [
   },
   {
     num: '03',
-    title: 'We call when it fits',
-    body: 'When a client project matches your specialty, you hear from us directly.',
+    title: 'We move quickly',
+    body: 'Your application goes straight to Stephanie. If it fits the engagement, you hear back fast.',
   },
 ]
 
@@ -120,7 +122,15 @@ export default function ConsiderMePage() {
   const [openOpp, setOpenOpp] = useState<string | null>(
     OPPORTUNITIES.length === 1 ? OPPORTUNITIES[0].id : null,
   )
-  const [applyingFor, setApplyingFor] = useState('')
+  // Applications are per role, no general bench. With one open
+  // engagement the form is locked to it from the start.
+  const [applyingFor, setApplyingFor] = useState(
+    OPPORTUNITIES.length === 1 ? OPPORTUNITIES[0].title : '',
+  )
+  const [hourlyRate, setHourlyRate] = useState('')
+  const [answers, setAnswers] = useState<Record<string, string>>({})
+
+  const activeOpp = OPPORTUNITIES.find((o) => o.title === applyingFor)
 
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -138,6 +148,10 @@ export default function ConsiderMePage() {
   if (!years) missing.push('years assessing or hiring talent')
   if (!availability) missing.push('availability')
   if (!isUrl(repvera)) missing.push('RepVera profile link')
+  if (!hourlyRate.trim()) missing.push('hourly consulting rate')
+  for (const q of activeOpp?.questions ?? []) {
+    if (!(answers[q] ?? '').trim()) missing.push('the experience question')
+  }
   const canSubmit = missing.length === 0
 
   const RESUME_MAX_BYTES = 3 * 1024 * 1024
@@ -189,6 +203,8 @@ export default function ConsiderMePage() {
       `Years assessing or hiring: ${years}`,
       `Availability: ${availability}`,
       `RepVera: ${repvera}`,
+      `Hourly consulting rate: ${hourlyRate}`,
+      ...(activeOpp?.questions ?? []).map((q) => `\n${q}\n${answers[q] ?? ''}`),
       '',
       'Notes:',
       notes || '(none)',
@@ -225,6 +241,11 @@ export default function ConsiderMePage() {
           repvera,
           notes,
           opportunity: applyingFor,
+          hourlyRate,
+          answers: (activeOpp?.questions ?? []).map((q) => ({
+            q,
+            a: answers[q] ?? '',
+          })),
           ...resumePayload,
         }),
       })
@@ -318,8 +339,8 @@ export default function ConsiderMePage() {
             }}
           >
             Hiring.Productions brings vetted talent people into fast, high trust
-            client projects. Interview assessments, search, advisory. This page
-            is how you get on the bench.
+            client projects. Interview assessments, search, advisory. Every
+            application is for a specific open engagement.
           </p>
           {OPPORTUNITIES.length > 0 && (
             <a
@@ -657,8 +678,11 @@ export default function ConsiderMePage() {
               margin: '0 0 24px',
             }}
           >
-            A verified RepVera profile shows how the people who actually worked
-            with you describe you. It is free and takes a few minutes.
+            To reduce time to trust, we leverage RepVera for verified proof of
+            how others experience working with you. Create your profile, paste
+            the link in your application, then send your collection link to the
+            people who can vouch for you. Your profile updates automatically as
+            they respond. It is free and takes a few minutes.
           </p>
           <a
             href="https://repvera.com"
@@ -714,7 +738,7 @@ export default function ConsiderMePage() {
                   margin: '0 0 10px',
                 }}
               >
-                You are on the list.
+                Application received.
               </h2>
               <p
                 style={{
@@ -725,9 +749,9 @@ export default function ConsiderMePage() {
                   margin: 0,
                 }}
               >
-                We read every submission and we review your RepVera. When a
-                project fits your specialty, you hear from Stephanie directly.
-                A confirmation is on its way to your inbox.
+                We read every application and we review your RepVera. If it
+                fits the engagement, you hear from Stephanie directly. A
+                confirmation is on its way to your inbox.
               </p>
             </div>
           ) : (
@@ -742,7 +766,7 @@ export default function ConsiderMePage() {
                   margin: '0 0 8px',
                 }}
               >
-                Consider me.
+                {applyingFor ? 'Apply for this engagement.' : 'Consider me.'}
               </h2>
               <p
                 style={{
@@ -768,7 +792,7 @@ export default function ConsiderMePage() {
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
-                      gap: 10,
+                      gap: 8,
                       background: 'rgba(108,71,255,0.08)',
                       border: '1.5px solid rgba(108,71,255,0.35)',
                       borderRadius: 999,
@@ -780,23 +804,6 @@ export default function ConsiderMePage() {
                     }}
                   >
                     Applying for: {applyingFor}
-                    <button
-                      type="button"
-                      onClick={() => setApplyingFor('')}
-                      aria-label="Switch to a general bench signup"
-                      style={{
-                        background: 'transparent',
-                        border: 'none',
-                        color: '#6C47FF',
-                        fontFamily: "'Figtree', sans-serif",
-                        fontWeight: 800,
-                        fontSize: 13,
-                        cursor: 'pointer',
-                        padding: 0,
-                      }}
-                    >
-                      Clear
-                    </button>
                   </span>
                 </div>
               )}
@@ -959,6 +966,44 @@ export default function ConsiderMePage() {
                 </select>
               </div>
 
+              <div style={field}>
+                <label htmlFor="cm-rate" style={label}>
+                  Hourly consulting rate ($) <span style={{ color: '#C1113A' }}>*</span>
+                </label>
+                <input
+                  id="cm-rate"
+                  type="text"
+                  required
+                  inputMode="numeric"
+                  placeholder="e.g. 150, or a range like 125 to 175"
+                  value={hourlyRate}
+                  onChange={(e) => setHourlyRate(e.target.value)}
+                  style={input}
+                  onFocus={focus}
+                  onBlur={blur}
+                />
+              </div>
+
+              {(activeOpp?.questions ?? []).map((q, i) => (
+                <div style={field} key={q}>
+                  <label htmlFor={`cm-q-${i}`} style={label}>
+                    {q} <span style={{ color: '#C1113A' }}>*</span>
+                  </label>
+                  <textarea
+                    id={`cm-q-${i}`}
+                    rows={4}
+                    required
+                    value={answers[q] ?? ''}
+                    onChange={(e) =>
+                      setAnswers((prev) => ({ ...prev, [q]: e.target.value }))
+                    }
+                    style={{ ...input, resize: 'vertical', minHeight: 96, lineHeight: 1.5 }}
+                    onFocus={focus}
+                    onBlur={blur}
+                  />
+                </div>
+              ))}
+
               {/* RepVera link — the key field, visually emphasized */}
               <div
                 style={{
@@ -994,8 +1039,11 @@ export default function ConsiderMePage() {
                     margin: '8px 0 0',
                   }}
                 >
-                  Paste your RepVera profile or collection link. No profile yet?
-                  Build one free at{' '}
+                  To reduce time to trust, we use RepVera for verified proof of
+                  how others experience working with you. Paste your profile
+                  link here, then send your collection link to the people who
+                  can vouch for you. Your profile updates automatically as they
+                  respond. No profile yet? Build one free at{' '}
                   <a
                     href="https://repvera.com"
                     target="_blank"

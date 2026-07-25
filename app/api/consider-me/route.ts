@@ -52,7 +52,6 @@ const AVAILABILITY = new Set([
   'Available now',
   'A few hours a week',
   'Project by project',
-  'Just keeping in touch',
 ])
 
 export async function POST(request: NextRequest) {
@@ -71,6 +70,17 @@ export async function POST(request: NextRequest) {
     // from the client but capped and only ever echoed into our own
     // notification email and Redis record.
     const opportunity: string = (body?.opportunity ?? '').toString().trim().slice(0, 160)
+    const hourlyRate: string = (body?.hourlyRate ?? '').toString().trim().slice(0, 60)
+    // Role specific screening answers: [{ q, a }], capped so a
+    // malformed client cannot stuff arbitrary content into the email.
+    const rawAnswers = Array.isArray(body?.answers) ? body.answers : []
+    const answers: Array<{ q: string; a: string }> = rawAnswers
+      .slice(0, 5)
+      .map((x: { q?: unknown; a?: unknown }) => ({
+        q: (x?.q ?? '').toString().slice(0, 300),
+        a: (x?.a ?? '').toString().slice(0, 2000),
+      }))
+      .filter((x: { q: string; a: string }) => x.q && x.a)
 
     // Optional resume, sent as base64 and forwarded to Stephanie as an
     // email attachment. 3 MB file cap on the client; base64 inflates by
@@ -107,6 +117,13 @@ export async function POST(request: NextRequest) {
     if (!/^https?:\/\/\S+\.\S+/.test(repvera)) {
       return NextResponse.json({ error: 'invalid-repvera' }, { status: 400 })
     }
+    // Applications are per role. No blanket bench submissions.
+    if (!opportunity) {
+      return NextResponse.json({ error: 'missing-opportunity' }, { status: 400 })
+    }
+    if (!hourlyRate) {
+      return NextResponse.json({ error: 'missing-rate' }, { status: 400 })
+    }
 
     const emailHash = await hash(email)
 
@@ -125,7 +142,9 @@ export async function POST(request: NextRequest) {
           availability,
           repvera,
           notes,
-          opportunity: opportunity || null,
+          opportunity,
+          hourlyRate,
+          answers,
           resume: hasResume ? resumeName : null,
           ts: Date.now(),
         }),
@@ -150,7 +169,9 @@ export async function POST(request: NextRequest) {
         `Years assessing or hiring: ${years}`,
         `Availability: ${availability}`,
         `RepVera: ${repvera}`,
+        `Hourly consulting rate: ${hourlyRate}`,
         `Resume: ${hasResume ? `attached (${resumeName})` : '(not provided)'}`,
+        ...answers.flatMap((x) => ['', x.q, x.a]),
         '',
         'Notes:',
         notes || '(none)',
@@ -186,9 +207,9 @@ export async function POST(request: NextRequest) {
       const confirmText = [
         `Thanks, ${fullName.split(' ')[0]}.`,
         '',
-        'You are on the bench list at Hiring.Productions.',
+        `Your application for ${opportunity} is in.`,
         '',
-        'Here is how it works. We read every submission and we review your RepVera. When a client project fits your specialty and availability, you hear from Stephanie directly. No newsletters, no drip sequence, just a call when the work comes.',
+        'Here is how it works. We read every application and we review your RepVera. If it fits the engagement, you hear from Stephanie directly. No newsletters, no drip sequence, just a call if it is a match.',
         '',
         'Stephanie Murray',
         'hiring.productions',
@@ -206,7 +227,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           from: fromAddress,
           to: email,
-          subject: 'You are on the bench list.',
+          subject: 'Application received.',
           text: confirmText,
           tags: [{ name: 'category', value: 'consider-me' }],
         }),
