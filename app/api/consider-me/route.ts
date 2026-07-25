@@ -218,7 +218,7 @@ export async function POST(request: NextRequest) {
         '',
         'Here is what happens next. We are reviewing applications over the next three days. If your background fits, I will reach out directly to set up a short intro call.',
         '',
-        'If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at repvera.com and reply to this email with the link. Receipts move applications to the front.',
+        'If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at repvera.com and reply to this email with the link. Having others speak for how you show up is extra validation and reduces time to trust.',
         '',
         'Either way, thank you for raising your hand. New engagements always post first at hiring.productions/consider-me.',
         '',
@@ -245,7 +245,7 @@ export async function POST(request: NextRequest) {
                 <p style="${para}">Hi ${firstName},</p>
                 <p style="${para}">Thank you for applying on short notice for <strong style="color:#1A1A22;">${opportunity}</strong>. That speed is exactly what these engagements run on.</p>
                 <p style="${para}">Here is what happens next. We are reviewing applications over the next three days. If your background fits, I will reach out directly to set up a short intro call.</p>
-                <p style="${para}">If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at <a href="https://repvera.com" style="color:#5A4FE0;font-weight:700;">repvera.com</a> and reply to this email with the link. Receipts move applications to the front.</p>
+                <p style="${para}">If you shared a RepVera, I read it closely. If you have not yet, there is still time: build one free at <a href="https://repvera.com" style="color:#5A4FE0;font-weight:700;">repvera.com</a> and reply to this email with the link. Having others speak for how you show up is extra validation and reduces time to trust.</p>
                 <p style="font-size:15px;color:#5A5A6E;line-height:1.6;margin:0 0 24px;">Either way, thank you for raising your hand. New engagements always post first at <a href="https://hiring.productions/consider-me" style="color:#5A4FE0;font-weight:700;">hiring.productions/consider-me</a>.</p>
                 <p style="font-size:15px;color:#1A1A22;line-height:1.5;margin:0;">
                   <strong>Stephanie Murray</strong><br />
