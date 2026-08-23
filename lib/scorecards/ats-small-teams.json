@@ -11,7 +11,8 @@
     "user": "Average of public G2 and Capterra ratings weighted by review count, cited as dated facts.",
     "product": "Expert rubric + vendor submittals. DRAFT until founder markup.",
     "collection": "Manual, logged-out citation of public pages, search listings, and Internet Archive snapshots. No accounts, no scraping, no bot-defense bypass.",
-    "momentum_rationale": "All-time review totals reward incumbency. Momentum measures direction of travel from a dated baseline forward, so a 3-year-old product competes on current trajectory, not accumulated history. Known limitation: velocity partly reflects vendor review campaigns; anomalous spikes are flagged and re-verified at the next refresh."
+    "momentum_rationale": "All-time review totals reward incumbency. Momentum measures direction of travel from a dated baseline forward, so a 3-year-old product competes on current trajectory, not accumulated history. Known limitation: velocity partly reflects vendor review campaigns; anomalous spikes are flagged and re-verified at the next refresh.",
+    "segments": "Tools are ranked within team-size tiers, not against each other across tiers. Small: under 20 hires a year, no full-time recruiter. Growing: 20 to 50 hires a year, first dedicated recruiter. Scaling: 50+ hires a year, dedicated TA function. Axis is hires per year plus who runs hiring, not company headcount, because hiring volume is what determines tool fit."
   },
   "tools": [
     {
@@ -51,7 +52,8 @@
       },
       "product_score_draft": 4.4,
       "overall_draft": 4.43,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "small"
     },
     {
       "name": "Teamtailor",
@@ -90,7 +92,8 @@
       },
       "product_score_draft": 4.2,
       "overall_draft": 4.38,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "growing"
     },
     {
       "name": "Pinpoint",
@@ -129,7 +132,8 @@
       },
       "product_score_draft": 4.3,
       "overall_draft": 4.26,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "growing"
     },
     {
       "name": "BambooHR",
@@ -168,7 +172,8 @@
       },
       "product_score_draft": 3.9,
       "overall_draft": 4.14,
-      "data_notes": "Full HRIS; review volume reflects whole suite"
+      "data_notes": "Full HRIS; review volume reflects whole suite",
+      "segment": "growing"
     },
     {
       "name": "Breezy HR",
@@ -207,7 +212,8 @@
       },
       "product_score_draft": 4.5,
       "overall_draft": 4.11,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "small"
     },
     {
       "name": "Greenhouse",
@@ -246,7 +252,8 @@
       },
       "product_score_draft": 4.0,
       "overall_draft": 4.04,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "scaling"
     },
     {
       "name": "Ashby",
@@ -285,7 +292,8 @@
       },
       "product_score_draft": 4.0,
       "overall_draft": 4.03,
-      "data_notes": "Capterra sample tiny (12 reviews)"
+      "data_notes": "Capterra sample tiny (12 reviews)",
+      "segment": "scaling"
     },
     {
       "name": "Zoho Recruit",
@@ -324,7 +332,8 @@
       },
       "product_score_draft": 3.9,
       "overall_draft": 4.01,
-      "data_notes": "Tranco excluded: suite-level domain. G2 count lowest-confidence"
+      "data_notes": "Tranco excluded: suite-level domain. G2 count lowest-confidence",
+      "segment": "small"
     },
     {
       "name": "Workable",
@@ -363,7 +372,8 @@
       },
       "product_score_draft": 4.2,
       "overall_draft": 4.0,
-      "data_notes": "G2 product listing 4.6/443; seller aggregate 4.4/702"
+      "data_notes": "G2 product listing 4.6/443; seller aggregate 4.4/702",
+      "segment": "growing"
     },
     {
       "name": "JazzHR",
@@ -402,7 +412,8 @@
       },
       "product_score_draft": 4.4,
       "overall_draft": 3.98,
-      "data_notes": "G2 count varies across snippets (483-843)"
+      "data_notes": "G2 count varies across snippets (483-843)",
+      "segment": "growing"
     },
     {
       "name": "Recruitee",
@@ -441,7 +452,8 @@
       },
       "product_score_draft": 4.1,
       "overall_draft": 3.91,
-      "data_notes": "Now branded Tellent Recruitee"
+      "data_notes": "Now branded Tellent Recruitee",
+      "segment": "growing"
     },
     {
       "name": "Lever",
@@ -480,7 +492,8 @@
       },
       "product_score_draft": 3.8,
       "overall_draft": 3.91,
-      "data_notes": ""
+      "data_notes": "",
+      "segment": "scaling"
     },
     {
       "name": "Homerun",
@@ -519,7 +532,8 @@
       },
       "product_score_draft": 4.0,
       "overall_draft": 3.81,
-      "data_notes": "EUR pricing only"
+      "data_notes": "EUR pricing only",
+      "segment": "small"
     },
     {
       "name": "Fountain",
@@ -558,7 +572,8 @@
       },
       "product_score_draft": 3.8,
       "overall_draft": 3.72,
-      "data_notes": "Capterra figure from single snippet"
+      "data_notes": "Capterra figure from single snippet",
+      "segment": "scaling"
     }
   ]
 }

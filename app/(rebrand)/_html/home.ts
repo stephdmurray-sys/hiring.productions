@@ -421,7 +421,7 @@ export const html = `<style>
   </footer>
 
   <div class="sticky">
-    <span><b>Just released:</b> Our 2026 guide to the best ATS for small teams</span>
+    <span><b>Just released:</b> Our 2026 ATS guide, ranked by team size</span>
     <a href="/guides/best-ats-for-small-teams" class="sticky-btn">Read the ATS guide</a>
   </div>
 
