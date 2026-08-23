@@ -163,11 +163,11 @@ export const html = `<style>
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <h1>Hiring is a Production. Find the right tools and training to make it easier.</h1>
+        <h1>Hiring is a Production.<br>We&rsquo;re here for everyone in it.</h1>
         <p class="hero-sub">
-          Independent reviews of hiring software and recruiter training for
-          hiring teams, and job search tools and career coaching for job
-          seekers. Expert-vetted, updated quarterly.
+          Tools, software, research, and training for the people doing the
+          hiring, and for the people trying to get hired. Independently
+          reviewed, with the receipts shown.
         </p>
         <div class="hero-doors">
           <div class="hdoor">
