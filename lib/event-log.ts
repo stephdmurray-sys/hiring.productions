@@ -32,6 +32,7 @@ export type EventType =
   | 'tool_run_success'
   | 'tool_run_blocked'
   | 'email_capture'
+  | 'affiliate_click'
   | 'paywall_open'
   | 'checkout_start'
   | 'payment_success'

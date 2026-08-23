@@ -165,8 +165,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <style dangerouslySetInnerHTML={{ __html: `
-          *, *::before, *::after { font-family: 'Figtree', sans-serif !important; }
-          html, body { background-color: #FAF8F3 !important; color: #1A1A22; }
+          html, body { color: #1A1A22; }
         `}} />
       </head>
       <body style={{ backgroundColor: '#FAF8F3', color: '#1A1A22' }}>
