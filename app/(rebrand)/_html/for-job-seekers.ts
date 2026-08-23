@@ -138,6 +138,45 @@ export const html = `<style>
     .fcols{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
   }
+
+  /* Track pages */
+  body{padding-bottom:0;}
+  .track-hero{background:linear-gradient(160deg,var(--hero) 55%,var(--hero-2));color:#fff;padding:44px 0 48px;}
+  .crumb{font-size:12.5px;color:#8B7FBF;margin-bottom:14px;}
+  .crumb a{color:#B3A8DE;}
+  .track-hero h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.8vw,44px);margin-bottom:12px;}
+  .track-sub{font-size:14.5px;color:#C9BFE8;max-width:640px;line-height:1.7;}
+  .hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;font-size:12.5px;color:#B3A8DE;font-weight:600;}
+  .hero-meta span{display:flex;align-items:center;gap:8px;}
+  .sec{padding:60px 0 0;}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:26px;flex-wrap:wrap;}
+  .sec-head h2{font-weight:700;font-size:clamp(24px,3vw,34px);letter-spacing:-0.01em;}
+  .sec-head p{font-size:13.5px;color:var(--gray);max-width:460px;line-height:1.6;}
+  .gcard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .gcard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px 20px;display:flex;flex-direction:column;box-shadow:0 2px 10px rgba(20,20,32,0.04);transition:box-shadow .15s,transform .15s;}
+  a.gcard:hover{box-shadow:0 10px 26px rgba(20,20,32,0.12);transform:translateY(-2px);}
+  .gcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+  .icon-tile{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .badge{font-family:'Poppins',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 9px;border-radius:5px;}
+  .badge-live{background:#E7F8F0;color:#0E9F5D;}
+  .badge-next{background:#EDE9FE;color:#6D28D9;}
+  .badge-plan{background:#F1F2F4;color:#6B7280;}
+  .gcard h3{font-weight:600;font-size:16px;line-height:1.35;margin-bottom:7px;}
+  .gcard-desc{font-size:12.5px;color:var(--gray);line-height:1.6;margin-bottom:18px;}
+  .gcard-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px;border-top:1px solid var(--border);}
+  .mini-stack{display:flex;padding-left:2px;}
+  .mchip{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,0.16);display:flex;align-items:center;justify-content:center;margin-right:-8px;}
+  .mchip img{border-radius:50%;display:block;}
+  .gcard-cta{font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--purple);white-space:nowrap;}
+  .gcard-cta.muted{color:var(--faint);}
+  .fit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .fit-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 18px 18px;box-shadow:0 2px 8px rgba(20,20,32,0.04);display:flex;flex-direction:column;}
+  .fit-q{font-family:'Poppins',sans-serif;font-weight:600;font-size:13.5px;line-height:1.4;margin-bottom:8px;}
+  .fit-a{font-size:12.5px;color:var(--gray);line-height:1.55;margin-bottom:14px;}
+  .fit-link{font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--purple);margin-top:auto;}
+  .method-link{display:inline-block;margin-top:22px;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--purple);}
+  @media(max-width:920px){.gcard-grid{grid-template-columns:repeat(2,1fr);}.fit-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.gcard-grid,.fit-grid{grid-template-columns:1fr;}}
 </style>
 <div class="navbar">
     <div class="wrap">
@@ -157,17 +196,55 @@ export const html = `<style>
       </nav>
     </div>
   </div>
-  <div class="page-hero" style="background:linear-gradient(160deg,#1A1038 55%,#241452);color:#fff;padding:40px 0 44px;">
+  
+  <div class="track-hero">
     <div class="wrap">
-      <p style="font-size:12.5px;color:#8B7FBF;margin-bottom:14px;"><a href="/" style="color:#B3A8DE;">Home</a> &rsaquo; For job seekers</p>
-      <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,40px);margin-bottom:10px;">For job seekers</h1>
-      <p style="font-size:14.5px;color:#C9BFE8;max-width:640px;line-height:1.7;">The tools that actually move a search: resume, interviews, tracking, negotiation, and career coaching. Free picks first, paid picks when they earn it.</p>
+      <p class="crumb"><a href="/">Home</a> &rsaquo; For job seekers</p>
+      <h1>For job seekers</h1>
+      <p class="track-sub">The tools that get you seen: resume builders, ATS checkers, application trackers, interview practice, and coaching. Reviewed with the same scoring we use on the hiring side.</p>
+      <div class="hero-meta"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 6 buyer guides in production</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 30+ tools researched</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> Scores refreshed weekly</span></div>
     </div>
   </div>
-  <section class="cats wrap" style="padding:52px 24px 64px;">
-    <p class="side-label" style="margin-top:0;">Tool guides</p>
-    <div class="cat-grid"><a href="#" class="ccard"><h3>Best ATS Resume Checkers</h3><p class="upd">Coming next</p></a><a href="#" class="ccard"><h3>Best Resume Builders</h3><p class="upd">Coming next</p></a><a href="#" class="ccard"><h3>Best AI Interview Practice</h3><p class="upd">Planned</p></a><a href="#" class="ccard"><h3>Best Job Search Trackers</h3><p class="upd">Planned</p></a><a href="#" class="ccard"><h3>Best LinkedIn Optimization Tools</h3><p class="upd">Planned</p></a><a href="#" class="ccard"><h3>Best Career Coaching Platforms</h3><p class="upd">Planned</p></a></div>
+  <section class="sec wrap">
+    <div class="sec-head">
+      <h2>Buyer guides</h2>
+      <p>We review the hiring software companies use, so we know which job seeker tools actually match how recruiters and ATS platforms read your application.</p>
+    </div>
+    <div class="gcard-grid"><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#EDE9FE;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/><path d="m17 17-1.9-1.9"/></svg></span><span class="badge badge-next">Coming Next</span></span><h3>ATS Resume Checkers</h3><p class="gcard-desc">See your resume the way the software sees it, before a recruiter ever does.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=jobscan.co&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=tealhq.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=resumeworded.com&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#DBEAFE;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4 13V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2h-7"/><path d="M10.4 15.6a2 2 0 1 1 3 3L8 24l-4 1 1-4Z"/></svg></span><span class="badge badge-next">Coming Next</span></span><h3>Resume Builders</h3><p class="gcard-desc">Templates recruiters actually read, not the ones that break ATS parsing.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=resume.io&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=kickresume.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=novoresume.com&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#CCFBF1;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v11"/><path d="M12 5v6"/><path d="M18 5v14"/></svg></span><span class="badge badge-next">Coming Next</span></span><h3>Job Search Trackers</h3><p class="gcard-desc">Every application, contact, and follow-up in one pipeline instead of seventeen tabs.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=tealhq.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=huntr.co&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=notion.so&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#FFEDD5;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span><span class="badge badge-plan">Planned</span></span><h3>Interview Practice</h3><p class="gcard-desc">Rehearse with AI and real interviewers before the answer counts.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=interviewing.io&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=yoodli.ai&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=finalroundai.com&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#FFE4E9;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span><span class="badge badge-plan">Planned</span></span><h3>Career Coaching</h3><p class="gcard-desc">For when you need a person, not another tool. Vetted programs only.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=themuse.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=betterup.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div><div class="gcard"><span class="gcard-top"><span class="icon-tile" style="background:#DCFCE7;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg></span><span class="badge badge-plan">Planned</span></span><h3>LinkedIn and Profile Tools</h3><p class="gcard-desc">Get found by recruiters instead of chasing them. Profile, headline, and visibility.</p><span class="gcard-foot"><span class="mini-stack"><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=careerflow.ai&sz=64" width="18" height="18" alt=""></span><span class="mchip"><img src="https://www.google.com/s2/favicons?domain=kickresume.com&sz=64" width="18" height="18" alt=""></span></span><span class="gcard-cta muted">In research now</span></span></div></div>
   </section>
+  <section class="sec wrap">
+    <div class="sec-head">
+      <h2>Top rated for job seekers right now</h2>
+      <p>The tools that keep earning their spot while the full guides are in research.</p>
+    </div>
+    <div class="top-cards"><div class="tcard"><div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best career platform for active job seekers</span></div><div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=tealhq.com&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Teal</span></div><div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Popularity Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:92%"></span></span><b>4.6</b> User Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:86%"></span></span><b>4.3</b> Product Score</div><a href="/go/teal" class="visit">Visit Website <span>&#8599;</span></a></div><div class="tcard"><div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best resume-to-job match reports</span></div><div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=jobscan.co&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Jobscan</span></div><div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Popularity Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:86%"></span></span><b>4.3</b> User Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Product Score</div><a href="/go/jobscan" class="visit">Visit Website <span>&#8599;</span></a></div><div class="tcard"><div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best visual job search organizer</span></div><div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=huntr.co&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Huntr</span></div><div class="rating"><span class="stars"><span class="stars-fill" style="width:84%"></span></span><b>4.2</b> Popularity Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> User Score</div><div class="rating"><span class="stars"><span class="stars-fill" style="width:86%"></span></span><b>4.3</b> Product Score</div><a href="/go/huntr" class="visit">Visit Website <span>&#8599;</span></a></div></div>
+  </section>
+  <section class="sec wrap" style="padding-bottom:8px;">
+    <div class="sec-head">
+      <h2>Start with what is going wrong</h2>
+      <p>Match the tool to the actual problem, not the other way around.</p>
+    </div>
+    <div class="fit-grid"><div class="fit-card" style="border-top:3px solid #6D28D9;"><p class="fit-q">Applying but hearing nothing back?</p><p class="fit-a">Your resume may not be parsing. Run it through Jobscan before the next application goes out.</p><a href="/go/jobscan" class="fit-link">Visit Jobscan &rarr;</a></div><div class="fit-card" style="border-top:3px solid #0D9488;"><p class="fit-q">Losing track of applications?</p><p class="fit-a">Teal keeps every application, contact, and follow-up in one pipeline.</p><a href="/go/teal" class="fit-link">Visit Teal &rarr;</a></div><div class="fit-card" style="border-top:3px solid #2563EB;"><p class="fit-q">Rewriting your resume from scratch?</p><p class="fit-a">The resume builders guide is in research. Resume.io is the current front-runner.</p><a href="/go/resume-io" class="fit-link">Visit Resume.io &rarr;</a></div><div class="fit-card" style="border-top:3px solid #EA580C;"><p class="fit-q">Interviews not converting?</p><p class="fit-a">The interview practice guide is in research now. One email when it goes live.</p><a href="#news" class="fit-link">Get the launch email &rarr;</a></div></div>
+  </section>
+  <section class="method">
+    <div class="wrap">
+      <h2>How these reviews work</h2>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><h3>Research the field</h3><p>Every serious platform in the category gets mapped: pricing, integrations, contract terms, and deal-breakers. No pay-to-play placement.</p></div>
+        <div class="step"><div class="step-n">2</div><h3>Score on evidence</h3><p>Three weighted scores per tool, and every number traces to a source. Where the evidence is thin, the score says so.</p></div>
+        <div class="step"><div class="step-n">3</div><h3>Refresh weekly</h3><p>Pricing pages, market rankings, and community sentiment get re-checked on a schedule, so a 2026 score never quietly goes stale.</p></div>
+      </div>
+      <a href="/how-we-review" class="method-link">Read the full methodology &rarr;</a>
+    </div>
+  </section>
+
+  <section class="wrap" id="news">
+    <div class="news">
+      <div><h2>Get new guides first</h2><p>One email when a guide goes live or a ranking changes. No filler.</p></div>
+      <form class="news-form" onsubmit="return false;"><input type="email" class="news-input" placeholder="Work email"><button class="news-btn">Subscribe</button></form>
+    </div>
+  </section>
+
   <footer>
     <div class="wrap">
       <div class="fcols">
