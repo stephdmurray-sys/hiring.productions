@@ -204,7 +204,7 @@ export const html = `<style>
     <h2>Find the best software for your hiring</h2>
     <div class="top-cards">
       <div class="tcard">
-        <div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best ATS for teams hiring under 50 people a year</span></div>
+        <div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best free tier for teams under 50 hires a year</span></div>
         <div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Breezy HR</span></div>
         <div class="rating"><span class="stars"><span class="stars-fill" style="width:60%"></span></span><b>3.0</b> Market Score</div>
         <div class="rating"><span class="stars"><span class="stars-fill" style="width:89%"></span></span><b>4.5</b> User Score</div>

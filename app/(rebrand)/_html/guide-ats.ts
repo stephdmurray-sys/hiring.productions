@@ -142,35 +142,35 @@ export const html = `<style>
       If your team hires fewer than 50 people a year and nobody is a full-time
       recruiter, you need three things from an ATS: a pipeline your hiring
       managers understand in one meeting, pricing that does not assume an
-      enterprise budget, and setup measured in days. These three deliver that.
+      enterprise budget, and setup measured in days. These three lead on today&rsquo;s data: the standings leader, the user favorite, and the free-tier pick.
       The other eleven are below, with the reasons you would pick them instead.
     </p>
     <div class="picks">
       <div class="pick winner">
-        <span class="pick-flag">Top pick</span>
-        <div class="pick-id">
-          <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
-          <span class="pick-name">Breezy HR</span>
-        </div>
-        <p class="pick-best">Best overall for teams hiring under 50 a year. Real free tier, pipeline anyone can read.</p>
-        <a href="/go/breezy-hr" class="visit">Visit Breezy HR &#8599;</a>
-      </div>
-      <div class="pick">
-        <div class="pick-id">
-          <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=jazzhr.com&sz=64" width="22" height="22" alt=""></span>
-          <span class="pick-name">JazzHR</span>
-        </div>
-        <p class="pick-best">Best step up when you outgrow the free tier and need more workflow control.</p>
-        <a href="/go/jazzhr" class="visit">Visit JazzHR &#8599;</a>
-      </div>
-      <div class="pick">
+        <span class="pick-flag">Leads the standings</span>
         <div class="pick-id">
           <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=manatal.com&sz=64" width="22" height="22" alt=""></span>
           <span class="pick-name">Manatal</span>
         </div>
-        <p class="pick-best">Best on a tight budget. Serious features at the lowest real price in the category.</p>
+        <p class="pick-best">Best value and the fastest-rising ATS in the field. Serious features at $15 per user.</p>
         <a href="/go/manatal" class="visit">Visit Manatal &#8599;</a>
       </div>
+      <div class="pick">
+        <div class="pick-id">
+          <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=pinpointhq.com&sz=64" width="22" height="22" alt=""></span>
+          <span class="pick-name">Pinpoint</span>
+        </div>
+        <p class="pick-best">Highest user scores of all 14 systems reviewed. Candidate experience is the reason.</p>
+        <a href="/go/pinpoint" class="visit">Visit Pinpoint &#8599;</a>
+      </div>
+      <div class="pick">
+        <div class="pick-id">
+          <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
+          <span class="pick-name">Breezy HR</span>
+        </div>
+        <p class="pick-best">Best free tier for teams under 50 hires a year. Start at $0 and see if you outgrow it.</p>
+        <a href="/go/breezy-hr" class="visit">Visit Breezy HR &#8599;</a>
+      </div></div>
     </div>
   </section>
 
@@ -203,7 +203,7 @@ export const html = `<style>
     <div class="review">
       <div class="review-head">
         <span class="review-id">
-          <span class="review-rank">#1</span>
+          <span class="review-rank">#5</span>
           <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
           <span class="review-name">Breezy HR</span>
         </span>
@@ -211,9 +211,9 @@ export const html = `<style>
       </div>
       <p class="review-updated">Updated August 22, 2026 &middot; Pricing verified this week</p>
       <div class="scores-row">
-        <span class="sc"><span class="st">★★★★☆</span> <b>4.4</b> Market</span>
+        <span class="sc"><span class="st">★★★☆☆</span> <b>3.0</b> Market</span>
         <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> User</span>
-        <span class="sc"><span class="st">★★★★★</span> <b>4.6</b> Practitioner</span>
+        <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> Practitioner</span>
       </div>
       <div class="verdict">
         <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the Bootstrap tier is a real product, not a demo.</span></div>
@@ -228,7 +228,7 @@ export const html = `<style>
     <div class="review">
       <div class="review-head">
         <span class="review-id">
-          <span class="review-rank">#2</span>
+          <span class="review-rank">#10</span>
           <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=jazzhr.com&sz=64" width="22" height="22" alt=""></span>
           <span class="review-name">JazzHR</span>
         </span>
@@ -236,9 +236,9 @@ export const html = `<style>
       </div>
       <p class="review-updated">Updated August 22, 2026</p>
       <div class="scores-row">
-        <span class="sc"><span class="st">★★★★☆</span> <b>4.2</b> Market</span>
-        <span class="sc"><span class="st">★★★★☆</span> <b>4.2</b> User</span>
-        <span class="sc"><span class="st">★★★★☆</span> <b>4.3</b> Practitioner</span>
+        <span class="sc"><span class="st">★★★☆☆</span> <b>2.8</b> Market</span>
+        <span class="sc"><span class="st">★★★★☆</span> <b>4.4</b> User</span>
+        <span class="sc"><span class="st">★★★★☆</span> <b>4.4</b> Practitioner</span>
       </div>
       <div class="verdict">
         <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You outgrew a free tier and need real workflow control: custom stages, approvals, and reporting a small team can actually run.</span></div>

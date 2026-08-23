@@ -214,12 +214,12 @@ export const html = `<style>
               <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
               <span class="sample-name">Breezy HR</span>
             </span>
-            <span class="etag etag-demo">Vendor demoed</span>
+            <span class="etag etag-res">Research based</span>
           </div>
           <p class="sample-note">Best for teams hiring under 50 people a year</p>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:88%"></span></span><b>4.4</b> Market Score <span class="when">refreshed Aug 18, 2026</span></div>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> User Score <span class="when">synthesized Aug 2026</span></div>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:92%"></span></span><b>4.6</b> Practitioner Score <span class="when">re-scored Q3 2026</span></div>
+          <div class="rating"><span class="stars"><span class="stars-fill" style="width:60%"></span></span><b>3.0</b> Market Score <span class="when">refreshed Aug 22, 2026</span></div>
+          <div class="rating"><span class="stars"><span class="stars-fill" style="width:89%"></span></span><b>4.5</b> User Score <span class="when">synthesized Aug 2026</span></div>
+          <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Practitioner Score <span class="when">in final review</span></div>
           <a href="#" class="sample-link">How these scores are calculated &#8599;</a>
         </div>
       </section>
@@ -229,7 +229,7 @@ export const html = `<style>
         <p class="lead">We tell you exactly what our verdict rests on. No review pretends to be more than it is.</p>
         <div class="evidence">
           <div class="ecard">
-            <span class="etag etag-demo">Vendor demoed</span>
+            <span class="etag etag-res">Research based</span>
             <p>The vendor walked us through the live product and answered our structured questionnaire. Our strongest evidence level.</p>
           </div>
           <div class="ecard">
