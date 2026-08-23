@@ -1,0 +1,131 @@
+{
+  "guide": "job-seeker-tools",
+  "as_of": "2026-08-23",
+  "methodology": {
+    "weights": {
+      "market_traction": 0.25,
+      "user": 0.35,
+      "product": 0.4
+    },
+    "user_basis": "Consumer career tools often have no G2/Capterra presence. User Score uses count-weighted averages across whichever public review platforms carry real volume (G2, Capterra, Chrome Web Store), each cited with a date. Trustpilot excluded by policy.",
+    "momentum": "Neutral 2.5 prior for all tools; today's counts are the baseline for momentum at the next refresh."
+  },
+  "tools": [
+    {
+      "name": "Teal",
+      "domain": "tealhq.com",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.9,
+            "reviews": 3200,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "tranco_rank": 53045,
+        "pricing": "Free tier; Teal+ $13/wk, $29/mo, or $79/quarter"
+      },
+      "computed": {
+        "traffic_score": 2.93,
+        "review_volume_score": 5.0,
+        "footprint_score": 3.96,
+        "market_traction_score": 3.23,
+        "user_score": 4.9
+      },
+      "product_score_draft": 4.3,
+      "overall_draft": 4.24,
+      "data_notes": "No G2 or Capterra listing exists; User Score basis is Chrome Web Store (4.9, 3.2K ratings, 200K users, read live). Vendor pricing page blocks fetches; prices cross-checked across two 2026 reviews. Weekly billing pattern worth disclosing in reviews."
+    },
+    {
+      "name": "Jobscan",
+      "domain": "jobscan.co",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.1,
+            "reviews": 12,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.3,
+            "reviews": 44,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "tranco_rank": 66126,
+        "pricing": "Free: 5 scans/mo; paid $49.95/mo or $89.95/quarter"
+      },
+      "computed": {
+        "traffic_score": 2.82,
+        "review_volume_score": 2.2,
+        "footprint_score": 2.51,
+        "market_traction_score": 2.5,
+        "user_score": 4.26
+      },
+      "product_score_draft": 4.2,
+      "overall_draft": 3.8,
+      "data_notes": "THIN EVIDENCE: total citable review base is 56 across G2 and Chrome. The Capterra listing under this name is a different company. Strong brand, weak receipts; scores reflect that honestly."
+    },
+    {
+      "name": "Huntr",
+      "domain": "huntr.co",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.8,
+            "reviews": 1300,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "tranco_rank": 228978,
+        "pricing": "Free: track 100 jobs; Pro $40/mo, $30/mo quarterly"
+      },
+      "computed": {
+        "traffic_score": 2.17,
+        "review_volume_score": 4.38,
+        "footprint_score": 3.27,
+        "market_traction_score": 2.88,
+        "user_score": 4.8
+      },
+      "product_score_draft": 4.3,
+      "overall_draft": 4.12,
+      "data_notes": "No consumer G2/Capterra listing (Capterra lists only the B2B Huntr Advisor). User basis: Chrome Web Store 4.8, 1.3K ratings, 80K users, read live."
+    },
+    {
+      "name": "Deel",
+      "domain": "deel.com",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.8,
+            "reviews": 14287,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Capterra",
+            "rating": 4.9,
+            "reviews": 4306,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "tranco_rank": 29967,
+        "pricing": "ATS $14/worker/mo; contractor $49/mo; EOR $599/employee/mo"
+      },
+      "computed": {
+        "traffic_score": 3.23,
+        "review_volume_score": 5.0,
+        "footprint_score": 4.12,
+        "market_traction_score": 3.31,
+        "user_score": 4.82
+      },
+      "product_score_draft": 4.5,
+      "overall_draft": 4.31,
+      "data_notes": "G2 figure is the seller aggregate across Deel's listings, all at 4.8. Capterra read from live page."
+    }
+  ]
+}
