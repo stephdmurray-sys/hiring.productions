@@ -77,6 +77,16 @@ export const html = `<style>
   .chip-up{background:#E7F8F0;color:#0A7D48;}
   .chip-flat{background:#F1F2F4;color:#6B7280;}
   .chip-na{background:#F1F2F4;color:#9CA3AF;}
+  .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;}
+  .vid-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(20,20,32,0.04);background:#fff;}
+  .vid-card iframe{display:block;width:100%;aspect-ratio:16/9;border:0;}
+  .vid-meta{padding:14px 16px 16px;}
+  .vid-tool{font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px;}
+  .vid-src{font-size:12px;color:var(--gray-lt);}
+  .vtag{display:inline-block;font-family:'Poppins',sans-serif;font-weight:700;font-size:9.5px;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;margin-bottom:8px;}
+  .vtag-third{background:#EDE9FE;color:#6D28D9;}
+  .vtag-vendor{background:#F1F2F4;color:#6B7280;}
+  @media(max-width:880px){.vid-grid{grid-template-columns:1fr;}}
   .v-bad{color:#C1113A;}
   .v-watch{color:var(--gray-lt);}
   .v-val{color:var(--gray);}
@@ -196,6 +206,38 @@ export const html = `<style>
     </table>
     <p class="callout"><b>Skip the enterprise suites</b> (Greenhouse, Lever, Workday) until you pass 50 hires a year or add a dedicated recruiter. You will pay for depth you cannot use and setup you cannot staff.</p>
   </section>
+
+  <section class="wrap narrow">
+    <h2>Watch them in action</h2>
+    <p class="lead">Reading about software is not the same as watching someone click through it. Every video is labeled by who made it, because a vendor demo and an independent review are not the same kind of evidence.</p>
+    <div class="vid-grid">
+      <div class="vid-card">
+        <iframe src="https://www.youtube-nocookie.com/embed/DxS220ZTfII" title="Manatal Review - Top Features, Pros and Cons" loading="lazy" allowfullscreen></iframe>
+        <div class="vid-meta">
+          <span class="vtag vtag-third">Third-party review</span>
+          <p class="vid-tool">Manatal</p>
+          <p class="vid-src">TechnologyAdvice on YouTube. Features, pros and cons, alternatives.</p>
+        </div>
+      </div>
+      <div class="vid-card">
+        <iframe src="https://www.youtube-nocookie.com/embed/54I-MIZaHOo" title="Pinpoint Full ATS Platform Walkthrough" loading="lazy" allowfullscreen></iframe>
+        <div class="vid-meta">
+          <span class="vtag vtag-vendor">Vendor demo</span>
+          <p class="vid-tool">Pinpoint</p>
+          <p class="vid-src">Pinpoint&rsquo;s own walkthrough. Expect the best-case tour; the table above keeps it honest.</p>
+        </div>
+      </div>
+      <div class="vid-card">
+        <iframe src="https://www.youtube-nocookie.com/embed/1zcPr_py6g4" title="Intro to Breezy HR Full Demo" loading="lazy" allowfullscreen></iframe>
+        <div class="vid-meta">
+          <span class="vtag vtag-vendor">Vendor demo</span>
+          <p class="vid-tool">Breezy HR</p>
+          <p class="vid-src">Breezy&rsquo;s own full demo. Watch the pipeline view; it is the reason small teams pick it.</p>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:var(--gray-lt);margin-top:16px;line-height:1.6;">Videos play from the creator&rsquo;s own YouTube channel. Reviewed one of these tools on camera? Send it to hello@hiring.productions and we will consider featuring it, labeled and credited.</p>
+  
 
   <section class="wrap narrow">
     <h2>The full reviews</h2>
