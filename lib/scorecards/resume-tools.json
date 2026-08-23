@@ -1,0 +1,339 @@
+{
+  "guide": "best-resume-tools",
+  "as_of": "2026-08-23",
+  "methodology": {
+    "weights": {
+      "market_traction": 0.25,
+      "user": 0.35,
+      "product": 0.4
+    },
+    "min_evidence": "A User Score requires at least 25 citable public reviews across G2, Capterra, app stores, Chrome Web Store, and Product Hunt (dated). Below that, User and Overall show 'not enough evidence' rather than an invented number. Trustpilot and Sitejabber excluded by policy.",
+    "momentum": "Neutral 2.5 prior; today's counts are the momentum baseline for the next refresh."
+  },
+  "tools": [
+    {
+      "name": "Teal",
+      "domain": "tealhq.com",
+      "segment": "checker",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.9,
+            "reviews": 3200,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 3200,
+        "tranco_rank": 53045,
+        "free_tier": "Yes, real free tier",
+        "pricing": "$29/mo; $79/quarter; $13/wk"
+      },
+      "computed": {
+        "traffic_score": 2.93,
+        "review_volume_score": 5.0,
+        "footprint_score": 3.96,
+        "market_traction_score": 3.23,
+        "user_score": 4.9
+      },
+      "product_score_draft": 4.3,
+      "overall_draft": 4.24,
+      "data_notes": "User basis: Chrome Web Store (200K users), read live. No G2/Capterra listing exists. Weekly billing option worth watching."
+    },
+    {
+      "name": "Jobscan",
+      "domain": "jobscan.co",
+      "segment": "checker",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.1,
+            "reviews": 12,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.3,
+            "reviews": 44,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 56,
+        "tranco_rank": 66126,
+        "free_tier": "5 scans/mo",
+        "pricing": "$49.95/mo; $89.95/quarter"
+      },
+      "computed": {
+        "traffic_score": 2.82,
+        "review_volume_score": 2.2,
+        "footprint_score": 2.51,
+        "market_traction_score": 2.5,
+        "user_score": 4.26
+      },
+      "product_score_draft": 4.2,
+      "overall_draft": 3.8,
+      "data_notes": "THIN: 56 total citable reviews. The Capterra listing under this name is a different company."
+    },
+    {
+      "name": "Resume Worded",
+      "domain": "resumeworded.com",
+      "segment": "checker",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.5,
+            "reviews": 1,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Product Hunt",
+            "rating": 4.4,
+            "reviews": 8,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 9,
+        "tranco_rank": 83329,
+        "free_tier": "Score only",
+        "pricing": "$49/mo; $229/yr"
+      },
+      "computed": {
+        "traffic_score": 2.7,
+        "review_volume_score": 1.0,
+        "footprint_score": 1.85,
+        "market_traction_score": 2.17,
+        "user_score": null
+      },
+      "product_score_draft": 3.6,
+      "overall_draft": null,
+      "data_notes": "INSUFFICIENT EVIDENCE (9 citable reviews). Documented pattern: free score is the sales funnel; recurring billing complaints; no refunds on first purchase."
+    },
+    {
+      "name": "Kickresume",
+      "domain": "kickresume.com",
+      "segment": "builder",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.4,
+            "reviews": 10,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Capterra",
+            "rating": 4.8,
+            "reviews": 5,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "App Store",
+            "rating": 4.7,
+            "reviews": 4000,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Google Play",
+            "rating": 4.33,
+            "reviews": 2400,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Chrome Web Store",
+            "rating": 3.7,
+            "reviews": 18,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 6433,
+        "tranco_rank": 69542,
+        "free_tier": "Yes, basic templates",
+        "pricing": "$96/yr; $24/mo"
+      },
+      "computed": {
+        "traffic_score": 2.79,
+        "review_volume_score": 5.0,
+        "footprint_score": 3.9,
+        "market_traction_score": 3.2,
+        "user_score": 4.56
+      },
+      "product_score_draft": 4.3,
+      "overall_draft": 4.12,
+      "data_notes": "User basis dominated by 6,400 mobile app ratings, read from live store pages. Students get 6 months premium free."
+    },
+    {
+      "name": "FlowCV",
+      "domain": "flowcv.com",
+      "segment": "builder",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "Product Hunt",
+            "rating": 4.9,
+            "reviews": 83,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 83,
+        "tranco_rank": 129029,
+        "free_tier": "Yes, watermark-free PDF",
+        "pricing": "Free; Pro $60/yr"
+      },
+      "computed": {
+        "traffic_score": 2.47,
+        "review_volume_score": 2.47,
+        "footprint_score": 2.47,
+        "market_traction_score": 2.49,
+        "user_score": 4.9
+      },
+      "product_score_draft": 4.2,
+      "overall_draft": 4.02,
+      "data_notes": "The only builder with genuinely free, watermark-free PDF downloads. User basis: Product Hunt."
+    },
+    {
+      "name": "Rezi",
+      "domain": "rezi.ai",
+      "segment": "builder",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 4.8,
+            "reviews": 15,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Chrome Web Store",
+            "rating": 4.5,
+            "reviews": 17,
+            "as_of": "2026-08-23"
+          },
+          {
+            "platform": "Product Hunt",
+            "rating": 3.8,
+            "reviews": 5,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 37,
+        "tranco_rank": 140891,
+        "free_tier": "1 resume, 3 PDFs",
+        "pricing": "$29/mo; $149 lifetime"
+      },
+      "computed": {
+        "traffic_score": 2.42,
+        "review_volume_score": 1.91,
+        "footprint_score": 2.17,
+        "market_traction_score": 2.33,
+        "user_score": 4.53
+      },
+      "product_score_draft": 4.0,
+      "overall_draft": 3.77,
+      "data_notes": "37 citable reviews, small-N flag. G2 count single-source. Chrome extension listing appears reset (older snapshot showed 2.0/66). Lifetime plan is the value play."
+    },
+    {
+      "name": "Resume.io",
+      "domain": "resume.io",
+      "segment": "builder",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "Product Hunt",
+            "rating": 1.5,
+            "reviews": 195,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 195,
+        "tranco_rank": 37549,
+        "free_tier": ".txt only",
+        "pricing": "$2.95 trial, renews $29.95/4wk"
+      },
+      "computed": {
+        "traffic_score": 3.11,
+        "review_volume_score": 3.06,
+        "footprint_score": 3.08,
+        "market_traction_score": 2.79,
+        "user_score": 1.5
+      },
+      "product_score_draft": 3.2,
+      "overall_draft": 2.5,
+      "data_notes": "Only citable review base is Product Hunt: 1.5/5 across 195 reviews, overwhelmingly trial-billing complaints. Free download is plain text only. 4-week cycle = 13 charges/yr. App Store apps under this name are third-party lookalikes."
+    },
+    {
+      "name": "Enhancv",
+      "domain": "enhancv.com",
+      "segment": "builder",
+      "sources": {
+        "ratings": [
+          {
+            "platform": "G2",
+            "rating": 5.0,
+            "reviews": 1,
+            "as_of": "2026-08-23"
+          }
+        ],
+        "total_citable_reviews": 1,
+        "tranco_rank": 41730,
+        "free_tier": "7-day trial, watermarked",
+        "pricing": "from ~$13.33/mo (6-mo billing)"
+      },
+      "computed": {
+        "traffic_score": 3.06,
+        "review_volume_score": 1.0,
+        "footprint_score": 2.03,
+        "market_traction_score": 2.26,
+        "user_score": null
+      },
+      "product_score_draft": 4.0,
+      "overall_draft": null,
+      "data_notes": "INSUFFICIENT EVIDENCE (1 citable review). No free plan: trial downloads carry a watermark."
+    },
+    {
+      "name": "Novoresume",
+      "domain": "novoresume.com",
+      "segment": "builder",
+      "sources": {
+        "ratings": [],
+        "total_citable_reviews": 0,
+        "tranco_rank": 44857,
+        "free_tier": "1-page PDF",
+        "pricing": "$19.99/mo"
+      },
+      "computed": {
+        "traffic_score": 3.02,
+        "review_volume_score": 1.0,
+        "footprint_score": 2.01,
+        "market_traction_score": 2.25,
+        "user_score": null
+      },
+      "product_score_draft": 3.9,
+      "overall_draft": null,
+      "data_notes": "INSUFFICIENT EVIDENCE (no citable review listings anywhere). Genuinely free one-page PDF; 2026 reviews report a watermark on free downloads."
+    },
+    {
+      "name": "Zety",
+      "domain": "zety.com",
+      "segment": "builder",
+      "sources": {
+        "ratings": [],
+        "total_citable_reviews": 0,
+        "tranco_rank": 38074,
+        "free_tier": ".txt only",
+        "pricing": "$1.95 trial, renews $25.95/4wk"
+      },
+      "computed": {
+        "traffic_score": 3.1,
+        "review_volume_score": 1.0,
+        "footprint_score": 2.05,
+        "market_traction_score": 2.27,
+        "user_score": null
+      },
+      "product_score_draft": 3.3,
+      "overall_draft": null,
+      "data_notes": "INSUFFICIENT EVIDENCE (no citable review listings). Free download is plain text only. 4-week cycle = 13 charges/yr."
+    }
+  ]
+}
