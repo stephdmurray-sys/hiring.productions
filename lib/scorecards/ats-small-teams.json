@@ -1,0 +1,409 @@
+{
+  "guide": "best-ats-for-small-teams",
+  "as_of": "2026-08-22",
+  "methodology": {
+    "weights": {
+      "popularity": 0.25,
+      "user": 0.35,
+      "product": 0.4
+    },
+    "popularity": "Mean of traffic score and review-volume score. Traffic: 5 - 1.2*(log10(Tranco rank) - 3), clamped 1-5. Volume: 1 + 1.6*(log10(total G2+Capterra reviews) - 1), clamped 1-5. Suite-level domains (Zoho) use volume only.",
+    "user": "Average of public G2 and Capterra ratings, weighted by each platform's review count, cited as dated facts.",
+    "product": "Expert rubric evaluation (pricing transparency, small-team feature fit, integrations, contract terms) plus vendor submittals. DRAFT until founder markup.",
+    "collection": "Manual, logged-out citation of public pages and search listings. No accounts, no scraping, no bot-defense bypass."
+  },
+  "tools": [
+    {
+      "name": "Breezy HR",
+      "domain": "breezy.hr",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 683,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 1420,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 26826,
+        "pricing": "$157/mo annual (free Bootstrap tier: 1 position)",
+        "free_tier": true
+      },
+      "computed": {
+        "traffic_score": 3.29,
+        "review_volume_score": 4.72,
+        "popularity_score": 4.0,
+        "user_score": 4.47
+      },
+      "product_score_draft": 4.5,
+      "overall_draft": 4.36,
+      "data_notes": ""
+    },
+    {
+      "name": "Zoho Recruit",
+      "domain": "zoho.com/recruit",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 1850,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 1192,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": null,
+        "pricing": "$25/user/mo annual (Forever Free: 1 active job)",
+        "free_tier": true
+      },
+      "computed": {
+        "traffic_score": null,
+        "review_volume_score": 4.97,
+        "popularity_score": 4.97,
+        "user_score": 4.44
+      },
+      "product_score_draft": 3.9,
+      "overall_draft": 4.36,
+      "data_notes": "Tranco excluded: zoho.com rank (820) covers whole Zoho suite. G2 count lowest-confidence (snippets 1,300-1,850)"
+    },
+    {
+      "name": "Greenhouse",
+      "domain": "greenhouse.io",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 3935,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 765,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 4526,
+        "pricing": "Custom / contact sales",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 4.21,
+        "review_volume_score": 5.0,
+        "popularity_score": 4.61,
+        "user_score": 4.42
+      },
+      "product_score_draft": 4.0,
+      "overall_draft": 4.3,
+      "data_notes": ""
+    },
+    {
+      "name": "Workable",
+      "domain": "workable.com",
+      "sources": {
+        "g2": {
+          "rating": 4.6,
+          "reviews": 443,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.4,
+          "reviews": 661,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 10489,
+        "pricing": "$299/mo annual (1-20 employees; old $149 Starter closed)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.78,
+        "review_volume_score": 4.27,
+        "popularity_score": 4.02,
+        "user_score": 4.48
+      },
+      "product_score_draft": 4.2,
+      "overall_draft": 4.25,
+      "data_notes": "G2 product listing 4.6/443; seller aggregate shows 4.4/702"
+    },
+    {
+      "name": "BambooHR",
+      "domain": "bamboohr.com",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 5414,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 3546,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 8132,
+        "pricing": "$250/mo flat under 26 employees; $10/employee/mo above",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.91,
+        "review_volume_score": 5.0,
+        "popularity_score": 4.46,
+        "user_score": 4.48
+      },
+      "product_score_draft": 3.9,
+      "overall_draft": 4.24,
+      "data_notes": "Full HRIS; ATS is one module - review volume reflects whole suite"
+    },
+    {
+      "name": "Teamtailor",
+      "domain": "teamtailor.com",
+      "sources": {
+        "g2": {
+          "rating": 4.6,
+          "reviews": 505,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 109,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 16375,
+        "pricing": "Quote-only",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.54,
+        "review_volume_score": 3.86,
+        "popularity_score": 3.7,
+        "user_score": 4.6
+      },
+      "product_score_draft": 4.2,
+      "overall_draft": 4.21,
+      "data_notes": ""
+    },
+    {
+      "name": "Manatal",
+      "domain": "manatal.com",
+      "sources": {
+        "g2": {
+          "rating": 4.8,
+          "reviews": 306,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 141,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 127786,
+        "pricing": "$15/user/mo annual",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 2.47,
+        "review_volume_score": 3.64,
+        "popularity_score": 3.06,
+        "user_score": 4.74
+      },
+      "product_score_draft": 4.4,
+      "overall_draft": 4.18,
+      "data_notes": ""
+    },
+    {
+      "name": "Lever",
+      "domain": "lever.co",
+      "sources": {
+        "g2": {
+          "rating": 4.3,
+          "reviews": 2115,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 654,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 9457,
+        "pricing": "Custom / contact sales",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.83,
+        "review_volume_score": 4.91,
+        "popularity_score": 4.37,
+        "user_score": 4.37
+      },
+      "product_score_draft": 3.8,
+      "overall_draft": 4.14,
+      "data_notes": ""
+    },
+    {
+      "name": "Pinpoint",
+      "domain": "pinpointhq.com",
+      "sources": {
+        "g2": {
+          "rating": 4.8,
+          "reviews": 134,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.7,
+          "reviews": 91,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 68916,
+        "pricing": "Quote-only (third-party estimates $4.6k-15k/yr, unverified)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 2.79,
+        "review_volume_score": 3.16,
+        "popularity_score": 2.98,
+        "user_score": 4.76
+      },
+      "product_score_draft": 4.3,
+      "overall_draft": 4.13,
+      "data_notes": ""
+    },
+    {
+      "name": "Recruitee",
+      "domain": "recruitee.com",
+      "sources": {
+        "g2": {
+          "rating": 4.5,
+          "reviews": 450,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.4,
+          "reviews": 192,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 19306,
+        "pricing": "Quote-only (1-yr minimum; ~$199/mo third-party estimate, unverified)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.46,
+        "review_volume_score": 3.89,
+        "popularity_score": 3.67,
+        "user_score": 4.47
+      },
+      "product_score_draft": 4.1,
+      "overall_draft": 4.12,
+      "data_notes": "Now branded Tellent Recruitee"
+    },
+    {
+      "name": "JazzHR",
+      "domain": "jazzhr.com",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 843,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.3,
+          "reviews": 492,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 238094,
+        "pricing": "$1,000/yr Hero (~$83/mo, ~3 postings/mo)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 2.15,
+        "review_volume_score": 4.4,
+        "popularity_score": 3.28,
+        "user_score": 4.36
+      },
+      "product_score_draft": 4.4,
+      "overall_draft": 4.11,
+      "data_notes": "G2 count varies across snippets (483-843); used G2-attributed figure"
+    },
+    {
+      "name": "Ashby",
+      "domain": "ashbyhq.com",
+      "sources": {
+        "g2": {
+          "rating": 4.7,
+          "reviews": 107,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 12,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 21286,
+        "pricing": "$400/mo Foundations (up to 100 employees)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 3.41,
+        "review_volume_score": 2.72,
+        "popularity_score": 3.07,
+        "user_score": 4.68
+      },
+      "product_score_draft": 4.0,
+      "overall_draft": 4.01,
+      "data_notes": "Capterra sample tiny (12 reviews)"
+    },
+    {
+      "name": "Homerun",
+      "domain": "homerun.co",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 158,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 77,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 151939,
+        "pricing": "EUR 99/mo (3 job slots)",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 2.38,
+        "review_volume_score": 3.19,
+        "popularity_score": 2.79,
+        "user_score": 4.43
+      },
+      "product_score_draft": 4.0,
+      "overall_draft": 3.85,
+      "data_notes": "EUR pricing only"
+    },
+    {
+      "name": "Fountain",
+      "domain": "fountain.com",
+      "sources": {
+        "g2": {
+          "rating": 4.3,
+          "reviews": 126,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 39,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 70427,
+        "pricing": "Quote-only",
+        "free_tier": false
+      },
+      "computed": {
+        "traffic_score": 2.78,
+        "review_volume_score": 2.95,
+        "popularity_score": 2.87,
+        "user_score": 4.37
+      },
+      "product_score_draft": 3.8,
+      "overall_draft": 3.77,
+      "data_notes": "Capterra figure from single snippet"
+    }
+  ]
+}
