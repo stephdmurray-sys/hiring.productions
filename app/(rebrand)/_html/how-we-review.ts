@@ -182,8 +182,8 @@ export const html = `<style>
           <div class="scard">
             <p class="pct">25%</p>
             <h3>Market Score</h3>
-            <p>Traction and momentum: company stability, customer base, product velocity, search interest.</p>
-            <p class="src"><b>Source:</b> public market data, refreshed automatically every week.</p>
+            <p>Footprint and momentum: web-traffic rank, total review volume, and review velocity, meaning how fast real users are adopting the tool right now, measured against dated archive baselines.</p>
+            <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive baselines. Refreshed weekly.</p>
           </div>
           <div class="scard">
             <p class="pct">35%</p>

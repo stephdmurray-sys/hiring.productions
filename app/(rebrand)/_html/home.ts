@@ -206,25 +206,25 @@ export const html = `<style>
       <div class="tcard">
         <div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best ATS for teams hiring under 50 people a year</span></div>
         <div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Breezy HR</span></div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:92%"></span></span><b>4.6</b> Popularity Score</div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:88%"></span></span><b>4.4</b> User Score</div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Product Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:60%"></span></span><b>3.0</b> Market Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:89%"></span></span><b>4.5</b> User Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Practitioner Score</div>
         <a href="/go/breezy-hr" class="visit">Visit Website <span>&#8599;</span></a>
       </div>
       <div class="tcard">
         <div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best career platform for active job seekers</span></div>
         <div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=tealhq.com&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Teal</span></div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Popularity Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Market Score</div>
         <div class="rating"><span class="stars"><span class="stars-fill" style="width:92%"></span></span><b>4.6</b> User Score</div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:86%"></span></span><b>4.3</b> Product Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:86%"></span></span><b>4.3</b> Practitioner Score</div>
         <a href="/go/teal" class="visit">Visit Website <span>&#8599;</span></a>
       </div>
       <div class="tcard">
         <div class="ribbon"><span class="ribbon-tag">TOP</span><span class="ribbon-desc">Best payroll and EOR for distributed teams</span></div>
         <div class="tool-id"><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=deel.com&sz=64" width="26" height="26" alt=""></span><span class="tool-name">Deel</span></div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:88%"></span></span><b>4.4</b> Popularity Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:88%"></span></span><b>4.4</b> Market Score</div>
         <div class="rating"><span class="stars"><span class="stars-fill" style="width:92%"></span></span><b>4.6</b> User Score</div>
-        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Product Score</div>
+        <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Practitioner Score</div>
         <a href="/go/deel" class="visit">Visit Website <span>&#8599;</span></a>
       </div>
     </div>
