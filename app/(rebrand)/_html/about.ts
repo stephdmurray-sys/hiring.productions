@@ -134,6 +134,11 @@ export const html = `<style>
     .fcols{grid-template-columns:1fr 1fr;}
     .nav-links{display:none;}
   }
+
+  @media(max-width:880px){
+    .receipt-grid{grid-template-columns:repeat(2,1fr) !important;}
+    .about-grid,.rules-grid{grid-template-columns:1fr !important;}
+  }
 </style>
 <div class="navbar">
     <div class="wrap">
@@ -149,13 +154,70 @@ export const html = `<style>
               </nav>
     </div>
   </div>
-  <div class="wrap" style="max-width:760px;padding:52px 24px 72px;">
-    <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:32px;margin-bottom:18px;">Advertiser disclosure</h1>
-    <p style="color:#4B5563;margin-bottom:14px;">Some links on Hiring.Productions are affiliate links. If you click one and buy, the vendor pays us a commission. It costs you nothing extra.</p>
-    <p style="color:#4B5563;margin-bottom:14px;">That is the entire business model, and it never touches the scores. Vendors cannot pay to be reviewed, to be ranked, or to be recommended. Listing is free. Demos are welcome. Scores are earned.</p>
-    <p style="color:#4B5563;margin-bottom:14px;">Some tools we rank highly, including some number one picks, have no affiliate relationship with us at all. We rank them anyway, because the rankings are the product.</p>
-    <p style="color:#4B5563;">Questions: <b>hello@hiring.productions</b>. See also <a href="/how-we-review" style="color:#6D28D9;font-weight:700;">how we review</a>.</p>
+
+  
+  <div class="page-hero" style="background:linear-gradient(160deg,var(--hero) 55%,var(--hero-2));color:#fff;padding:56px 0 52px;">
+    <div class="wrap">
+      <p style="font-size:12.5px;color:#8B7FBF;margin-bottom:14px;"><a href="/" style="color:#B3A8DE;">Home</a> &rsaquo; About</p>
+      <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.2;max-width:820px;margin-bottom:16px;">Why is hiring still this hard, on both sides of the table?</h1>
+      <p style="font-size:15px;color:#C9BFE8;max-width:640px;line-height:1.75;">Hiring teams drown in software they picked from pay-to-play rankings. Job seekers get burned by tools priced to be forgotten. Both sides are guessing, and the sites that claim to help are paid by the products they rank. Hiring.Productions exists to be the other thing: reviews with the receipts shown.</p>
+    </div>
   </div>
+
+  <section class="wrap" style="padding:56px 24px 0;">
+    <h2 style="font-weight:700;font-size:clamp(24px,3vw,34px);margin-bottom:8px;">What the receipts look like</h2>
+    <p style="font-size:13.5px;color:var(--gray);max-width:560px;line-height:1.6;margin-bottom:26px;">Every number our research produces is sourced and dated. These came from building the first three guides.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;" class="receipt-grid">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px;">
+        <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--hero);">43</p>
+        <p style="font-size:13px;color:var(--gray);line-height:1.55;">tools and programs ranked across three live guides, every score traceable to a source</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px;">
+        <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--hero);">7 of 14</p>
+        <p style="font-size:13px;color:var(--gray);line-height:1.55;">applicant tracking systems refuse to publish a price. We print that on every row</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px;">
+        <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--hero);">13</p>
+        <p style="font-size:13px;color:var(--gray);line-height:1.55;">renewal charges a year in the leading resume builders&rsquo; fine print: 4-week cycles, not monthly</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 22px;">
+        <p style="font-family:'Poppins',sans-serif;font-weight:800;font-size:30px;color:var(--hero);">7</p>
+        <p style="font-size:13px;color:var(--gray);line-height:1.55;">dead or damaged brands cut from our guides so far. A guide you can trust has a graveyard</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding:64px 24px 0;">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;" class="about-grid">
+      <div>
+        <h2 style="font-weight:700;font-size:clamp(24px,3vw,34px);line-height:1.25;">Who does the reviewing</h2>
+      </div>
+      <div style="font-size:14.5px;color:var(--gray);line-height:1.8;">
+        <p style="margin-bottom:14px;"><b style="color:var(--ink);">Stephanie Murray</b> has spent 18 years inside hiring, on the side of the table that buys the software and reads the resumes. She scaled Brightside Health&rsquo;s clinical team from under 50 clinicians to more than 1,500 nationwide, and won the 2025 Transform Award for Talent Strategy of the Year.</p>
+        <p style="margin-bottom:14px;">That work is the Practitioner Score: the 40% of every ranking that comes from knowing how these tools hold up in real hiring, not in a demo. The other 60% comes from sourced public data: traffic ranks, review volumes, dated ratings, and momentum measured against archive baselines.</p>
+        <p>She still runs hiring engagements for a small number of companies, which keeps the reviews honest in the way that matters most: this site recommends what she would install for a paying client.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding:64px 24px 0;">
+    <h2 style="font-weight:700;font-size:clamp(24px,3vw,34px);margin-bottom:22px;">The rules we will not break</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;" class="rules-grid">
+      <div style="background:var(--card);border-radius:12px;padding:20px 22px;font-size:13.5px;color:var(--gray);line-height:1.65;"><b style="color:var(--ink);">Placement cannot be bought.</b> Vendors pay us commissions when readers buy; they cannot pay for position, scores, or coverage. Our top picks in two guides currently pay us nothing.</div>
+      <div style="background:var(--card);border-radius:12px;padding:20px 22px;font-size:13.5px;color:var(--gray);line-height:1.65;"><b style="color:var(--ink);">No invented stars.</b> Under 25 citable public reviews, a tool gets &ldquo;not enough evidence,&rdquo; not a rating. Every number carries an as-of date.</div>
+      <div style="background:var(--card);border-radius:12px;padding:20px 22px;font-size:13.5px;color:var(--gray);line-height:1.65;"><b style="color:var(--ink);">Every review states its evidence level.</b> Research based, vendor submitted, vendor demoed, or reviewed on camera. No review pretends to be more than it is.</div>
+      <div style="background:var(--card);border-radius:12px;padding:20px 22px;font-size:13.5px;color:var(--gray);line-height:1.65;"><b style="color:var(--ink);">The fine print gets printed.</b> Renewal cycles, download traps, hidden pricing, and review-count surges go in the table, not in a footnote nobody reads.</div>
+    </div>
+    <a href="/how-we-review" style="display:inline-block;margin-top:26px;font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:var(--purple);">See exactly how the scoring works &rarr;</a>
+  </section>
+
+  <section class="wrap" style="padding:56px 24px 64px;">
+    <div class="news">
+      <div><h2 style="font-weight:700;font-size:22px;margin-bottom:4px;">Get new guides first</h2><p style="font-size:13.5px;color:#C9BFE8;">One email when a guide goes live or a ranking changes. No filler.</p></div>
+      <form class="news-form" onsubmit="return false;"><input type="email" class="news-input" placeholder="Work email"><button class="news-btn">Subscribe</button></form>
+    </div>
+  </section>
+
   <footer>
     <div class="wrap">
       <div class="fcols">

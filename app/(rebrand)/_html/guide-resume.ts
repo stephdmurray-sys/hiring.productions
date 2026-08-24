@@ -21,9 +21,6 @@ export const html = `<style>
   .nav-links a:hover{color:#fff;}
   .chev{font-size:9px;opacity:0.7;margin-left:3px;}
   .free-chip{background:var(--green);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;margin-left:5px;}
-  .nav-search{display:flex;background:#fff;border-radius:6px;overflow:hidden;}
-  .nav-search input{border:none;outline:none;padding:9px 12px;font-family:inherit;font-size:13px;width:180px;}
-  .nav-search button{border:none;background:var(--purple);color:#fff;padding:0 14px;cursor:pointer;display:flex;align-items:center;}
 
   .page-hero{background:linear-gradient(160deg,var(--hero) 55%,var(--hero-2));color:#fff;padding:32px 0 38px;}
   .crumbs{font-size:12.5px;color:#8B7FBF;margin-bottom:16px;}
@@ -103,7 +100,7 @@ export const html = `<style>
 
   footer{background:var(--hero);color:#B3A8DE;margin-top:64px;padding:32px 0;font-size:12.5px;text-align:center;}
 
-  @media(max-width:1080px){.nav-search{display:none;}}
+  @media(max-width:1080px){}
   @media(max-width:880px){.picks{grid-template-columns:1fr;}.nav-links{display:none;}}
 
   /* Responsive data tables + author strip */
@@ -128,11 +125,7 @@ export const html = `<style>
           <a href="/for-vendors">For Vendors <span class="chev">&#9660;</span></a>
           <a href="/consulting">Get a Recommendation<span class="free-chip">FREE</span></a>
         </span>
-        <span class="nav-search">
-          <input type="text" placeholder="Search hiring software...">
-          <button aria-label="Search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.5-4.5"/></svg></button>
-        </span>
-      </nav>
+              </nav>
     </div>
   </div>
 
