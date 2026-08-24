@@ -105,6 +105,17 @@ export const html = `<style>
 
   @media(max-width:1080px){.nav-search{display:none;}}
   @media(max-width:880px){.picks{grid-template-columns:1fr;}.nav-links{display:none;}}
+
+  /* Responsive data tables + author strip */
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:20px;}
+  .tscroll table{min-width:640px;margin-top:0;}
+  .tscroll th,.tscroll td{padding:11px 8px;}
+  @media(max-width:880px){
+    .tscroll th,.tscroll td{padding:10px 9px;font-size:12.5px;}
+  }
+  .author-strip{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;box-shadow:0 2px 8px rgba(20,20,32,0.04);}
+  .author-avatar{width:44px;height:44px;border-radius:50%;background:var(--hero);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;}
+  .author-strip p{font-size:13px;color:var(--gray);line-height:1.55;}
 </style>
 
 
@@ -146,6 +157,13 @@ export const html = `<style>
     </div>
   </div>
 
+  <section class="wrap narrow" style="padding:22px 24px 0;">
+    <div class="author-strip">
+      <span class="author-avatar">SM</span>
+      <p><b style="color:var(--ink);font-family:'Poppins',sans-serif;">Reviewed by Stephanie Murray</b><br>18 years of in-house talent acquisition &middot; 2025 Transform Award, Talent Strategy of the Year &middot; <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How we score</a></p>
+    </div>
+  </section>
+
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">
@@ -181,20 +199,20 @@ export const html = `<style>
     </div>
   </section>
 
-  <section class="wrap narrow">
+  <section class="wrap">
     <h2>All 14, ranked for your team size</h2>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:34px 0 6px;">Small teams: under 20 hires a year</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">Nobody is a full-time recruiter. Hiring managers work the pipeline between meetings. You need simple, cheap, and fast to set up.</p>
-    <table>
+    <div class="tscroll"><table>
       <tr><th>#</th><th>Tool</th><th>Best for</th><th>Starting price</th><th>Free option</th><th>Review growth /yr</th><th>Market</th><th>User</th><th>Practitioner*</th><th>Overall*</th></tr>
       <tr><td>1</td><td><img src="https://www.google.com/s2/favicons?domain=manatal.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Manatal</b></td><td>Tight budgets. Fastest-rising ATS in the field</td><td>$15/user/mo</td><td>Trial</td><td><span class="chip chip-up">+153%/yr</span></td><td>4.03</td><td>4.74</td><td>4.4</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.43</span></td></tr>
       <tr><td>2</td><td><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Breezy HR</b></td><td>Best free tier. Hiring managers run the pipeline</td><td>$0 free; $157/mo paid</td><td>Yes</td><td><span class="chip chip-flat">+0%/yr</span></td><td>3.00</td><td>4.47</td><td>4.5</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.11</span></td></tr>
       <tr><td>3</td><td><img src="https://www.google.com/s2/favicons?domain=zoho.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Zoho Recruit</b></td><td>Zoho-suite shops and staffing agencies</td><td>$25/user/mo</td><td>Yes</td><td><span class="chip chip-flat">+3%/yr</span></td><td>3.57</td><td>4.44</td><td>3.9</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.01</span></td></tr>
       <tr><td>4</td><td><img src="https://www.google.com/s2/favicons?domain=homerun.co&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Homerun</b></td><td>Small European teams. EUR pricing</td><td>&euro;99/mo</td><td>Trial</td><td><span class="chip chip-na">n/a</span></td><td>2.65</td><td>4.43</td><td>4.0</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.81</span></td></tr>
-    </table>
+    </table></div>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:34px 0 6px;">Growing teams: 20 to 50 hires a year</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">Your first recruiter, or an office manager who became one. You need workflow control, approvals, and reporting without enterprise weight.</p>
-    <table>
+    <div class="tscroll"><table>
       <tr><th>#</th><th>Tool</th><th>Best for</th><th>Starting price</th><th>Free option</th><th>Review growth /yr</th><th>Market</th><th>User</th><th>Practitioner*</th><th>Overall*</th></tr>
       <tr><td>1</td><td><img src="https://www.google.com/s2/favicons?domain=teamtailor.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Teamtailor</b></td><td>Employer-brand-heavy teams</td><td>Custom</td><td>Demo</td><td><span class="chip chip-up">+65%/yr&dagger;</span></td><td>4.35</td><td>4.60</td><td>4.2</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.38</span></td></tr>
       <tr><td>2</td><td><img src="https://www.google.com/s2/favicons?domain=pinpointhq.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Pinpoint</b></td><td>Candidate experience focus. Highest user scores</td><td>Custom</td><td>Demo</td><td><span class="chip chip-up">+33%/yr</span></td><td>3.49</td><td>4.76</td><td>4.3</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.26</span></td></tr>
@@ -202,16 +220,16 @@ export const html = `<style>
       <tr><td>4</td><td><img src="https://www.google.com/s2/favicons?domain=workable.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Workable</b></td><td>All-rounder with sourcing built in</td><td>$299/mo</td><td>Trial</td><td><span class="chip chip-flat">-1%/yr</span></td><td>2.99</td><td>4.48</td><td>4.2</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.00</span></td></tr>
       <tr><td>5</td><td><img src="https://www.google.com/s2/favicons?domain=jazzhr.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>JazzHR</b></td><td>Structured hiring on a budget</td><td>$1,000/yr (~$83/mo)</td><td>Trial</td><td><span class="chip chip-flat">+4%/yr</span></td><td>2.77</td><td>4.36</td><td>4.4</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.98</span></td></tr>
       <tr><td>6</td><td><img src="https://www.google.com/s2/favicons?domain=recruitee.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Recruitee</b></td><td>Collaborative hiring for lean teams</td><td>Custom</td><td>Trial</td><td><span class="chip chip-flat">+0%/yr</span></td><td>2.84</td><td>4.47</td><td>4.1</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.91</span></td></tr>
-    </table>
+    </table></div>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:34px 0 6px;">Scaling teams: 50+ hires a year</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">A dedicated TA function. Depth stops being overkill and starts being the point. High-volume hourly hiring is its own category; see Fountain&rsquo;s row.</p>
-    <table>
+    <div class="tscroll"><table>
       <tr><th>#</th><th>Tool</th><th>Best for</th><th>Starting price</th><th>Free option</th><th>Review growth /yr</th><th>Market</th><th>User</th><th>Practitioner*</th><th>Overall*</th></tr>
       <tr><td>1</td><td><img src="https://www.google.com/s2/favicons?domain=ashbyhq.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Ashby</b></td><td>Startup-native speed with real analytics</td><td>$400/mo</td><td>Demo</td><td><span class="chip chip-up">+22%/yr</span></td><td>3.18</td><td>4.68</td><td>4.2</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.11</span></td></tr>
       <tr><td>2</td><td><img src="https://www.google.com/s2/favicons?domain=greenhouse.io&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Greenhouse</b></td><td>The structured-hiring standard</td><td>Custom</td><td>Demo</td><td><span class="chip chip-up">+8%/yr</span></td><td>3.56</td><td>4.42</td><td>4.0</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">4.04</span></td></tr>
       <tr><td>3</td><td><img src="https://www.google.com/s2/favicons?domain=fountain.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Fountain</b></td><td>High-volume hourly hiring. See our high-volume guide</td><td>Custom</td><td>Demo</td><td><span class="chip chip-na">n/a</span></td><td>2.69</td><td>4.37</td><td>3.8</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.72</span></td></tr>
       <tr><td>4</td><td><img src="https://www.google.com/s2/favicons?domain=lever.co&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Lever</b></td><td>CRM-first recruiting</td><td>Custom</td><td>Demo</td><td><span class="chip chip-na">n/a</span></td><td>3.44</td><td>4.37</td><td>3.3</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.71</span></td></tr>
-    </table>
+    </table></div>
     <p style="text-align:center;color:var(--gray-lt);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 22, 2026. Rankings are within each tier; tiers are set by hires per year and who runs hiring, not company headcount. Market and User scores are computed from sourced public data (methodology on <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How We Review</a>). *Practitioner and Overall scores are in final review. &dagger;Review-volume surge under verification at next refresh.</p>
     <p class="callout"><b>Skip the enterprise suites</b> (Greenhouse, Lever, Workday) until you pass 50 hires a year or add a dedicated recruiter. You will pay for depth you cannot use and setup you cannot staff.</p>
   </section>

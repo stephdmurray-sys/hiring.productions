@@ -105,6 +105,17 @@ export const html = `<style>
 
   @media(max-width:1080px){.nav-search{display:none;}}
   @media(max-width:880px){.picks{grid-template-columns:1fr;}.nav-links{display:none;}}
+
+  /* Responsive data tables + author strip */
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:20px;}
+  .tscroll table{min-width:640px;margin-top:0;}
+  .tscroll th,.tscroll td{padding:11px 8px;}
+  @media(max-width:880px){
+    .tscroll th,.tscroll td{padding:10px 9px;font-size:12.5px;}
+  }
+  .author-strip{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 18px;box-shadow:0 2px 8px rgba(20,20,32,0.04);}
+  .author-avatar{width:44px;height:44px;border-radius:50%;background:var(--hero);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;flex-shrink:0;}
+  .author-strip p{font-size:13px;color:var(--gray);line-height:1.55;}
 </style>
 <div class="navbar">
     <div class="wrap">
@@ -134,6 +145,13 @@ export const html = `<style>
       <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">Some links below are affiliate links: if you buy through them, the provider pays us a commission. Our three top picks currently pay us nothing. Placement, rankings, and scores cannot be bought. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
     </div>
   </div>
+  <section class="wrap narrow" style="padding:22px 24px 0;">
+    <div class="author-strip">
+      <span class="author-avatar">SM</span>
+      <p><b style="color:var(--ink);font-family:'Poppins',sans-serif;">Reviewed by Stephanie Murray</b><br>18 years of in-house talent acquisition &middot; 2025 Transform Award, Talent Strategy of the Year &middot; <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How we score</a></p>
+    </div>
+  </section>
+
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">Training is where hiring quality actually changes, and it is also where public review data is thinnest. So this guide leans hardest on the Practitioner side of our scoring: 18 years of watching which programs make recruiters better and which just print certificates. Two lists below: recruiter and sourcing craft first, then HR certification prep and the recertification credits certified people must buy every three years.</p>
@@ -167,11 +185,11 @@ export const html = `<style>
       </div>
     </div>
   </section>
-  <section class="wrap narrow">
+  <section class="wrap">
     <h2>Ranked for how you recruit</h2>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:30px 0 6px;">Recruiter and sourcing training</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">The craft itself: sourcing, screening, interviewing, closing, and leading recruiting teams.</p>
-    <table>
+    <div class="tscroll"><table>
       <tr><th>#</th><th>Program</th><th>Best for</th><th>Price</th><th>Format</th><th>SHRM/HRCI credits</th><th>Practitioner*</th></tr>
       <tr><td>1</td><td><img src="https://www.google.com/s2/favicons?domain=airsdirectory.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>AIRS Recruiter Academy</b></td><td>The standard credential set, new to advanced</td><td>$1,995&ndash;$2,495</td><td>Self-paced or +live</td><td>Both</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.5</span></td></tr>
       <tr><td>2</td><td><img src="https://www.google.com/s2/favicons?domain=eretraining.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>SourceCon Academy</b></td><td>Sourcers going deep</td><td>$995/yr</td><td>Self-paced</td><td>Eligible</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.4</span></td></tr>
@@ -184,10 +202,10 @@ export const html = `<style>
       <tr><td>9</td><td><img src="https://www.google.com/s2/favicons?domain=naps360.org&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>NAPS CPC</b></td><td>Agency recruiters, employment law</td><td>$300&ndash;$600</td><td>Self-paced</td><td>Own CE system</td><td><span class="tstars">&#9733;</span> <span class="tscore">3.8</span></td></tr>
       <tr><td>10</td><td><img src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>LinkedIn Learning recruiting certificates</b></td><td>Broad library on a subscription</td><td>~$40/mo</td><td>Self-paced</td><td>SHRM</td><td><span class="tstars">&#9733;</span> <span class="tscore">3.8</span></td></tr>
       <tr><td>11</td><td><img src="https://www.google.com/s2/favicons?domain=skillpanel.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>SkillPanel Tech Recruitment Certification</b></td><td>Free tech-recruiting foundation</td><td>Free</td><td>Self-paced</td><td>None</td><td><span class="tstars">&#9733;</span> <span class="tscore">3.7</span></td></tr>
-    </table>
+    </table></div>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:34px 0 6px;">HR certification prep and recertification credits</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">Prep for aPHR, PHR, SPHR, SHRM-CP, and SHRM-SCP, plus the 60 recertification credits every certified professional must earn on a three-year cycle.</p>
-    <table>
+    <div class="tscroll"><table>
       <tr><th>#</th><th>Program</th><th>Best for</th><th>Price</th><th>Format</th><th>SHRM/HRCI credits</th><th>Practitioner*</th></tr>
       <tr><td>1</td><td><img src="https://www.google.com/s2/favicons?domain=shrm.org&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>SHRM Certification Prep System</b></td><td>The official SHRM-CP/SCP system</td><td>$820&ndash;$1,330</td><td>Self-paced or instructor</td><td>Prep for SHRM</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.4</span></td></tr>
       <tr><td>2</td><td><img src="https://www.google.com/s2/favicons?domain=hrcp.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>HRCP Complete Program</b></td><td>Best-value prep, pass-or-refund since 1995</td><td>$270&ndash;$480</td><td>Materials + practice exams</td><td>Prep for both</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.3</span></td></tr>
@@ -197,7 +215,7 @@ export const html = `<style>
       <tr><td>6</td><td><img src="https://www.google.com/s2/favicons?domain=workology.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Workology Ace the HR Exam</b></td><td>Audio-first prep for busy schedules</td><td>~$549/yr; $999 lifetime</td><td>Self-paced + audio</td><td>Prep + ethics credit course</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.0</span></td></tr>
       <tr><td>7</td><td><img src="https://www.google.com/s2/favicons?domain=pocketprep.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Pocket Prep</b></td><td>Practice questions on your phone</td><td>From $10.99/mo</td><td>App</td><td>Prep for both</td><td><span class="tstars">&#9733;</span> <span class="tscore">4.0</span></td></tr>
       <tr><td>8</td><td><img src="https://www.google.com/s2/favicons?domain=mometrix.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Mometrix</b></td><td>Practice-heavy prep with printed guides</td><td>$129.99/mo</td><td>Online + books</td><td>Prep for both</td><td><span class="tstars">&#9733;</span> <span class="tscore">3.7</span></td></tr>
-    </table>
+    </table></div>
     <p style="text-align:center;color:var(--gray-lt);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 23, 2026, verified on each provider&rsquo;s own pages. Public review data is thin in this category, so every row is <b>Research based</b> and rankings lean on the Practitioner score. *Practitioner scores are in final review.</p>
     <div style="border-left:3px solid var(--purple);background:var(--card);border-radius:0 10px 10px 0;padding:14px 18px;font-size:13px;color:var(--gray);line-height:1.65;margin-top:22px;"><b style="color:var(--ink);">What we cut, and why.</b> Recruiter.com Academy (discontinued), Pathrise (wound down 2025), upstartHR courses (site compromised, content dated to 2014 exam windows), HR University (catalog last updated December 2023, review counts unverifiable), Moore eSSentials (founders retiring from live training end of 2026), Interview Kickstart (hidden pricing, complaint patterns). A guide you can trust has a graveyard.</div>
   </section>
