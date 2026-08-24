@@ -209,7 +209,6 @@ export const footerHtml = `<footer>
         </div>
         <div class="flinks">
           <p class="fh">Company</p>
-          <a href="/about">About</a>
           <a href="/how-we-review">How We Review</a>
           <a href="/advertiser-disclosure">Advertiser Disclosure</a>
           <a href="#">Contact</a>
