@@ -159,7 +159,6 @@ export const html = `<style>
       <a href="#example">What it looks like</a>
       <a href="#evidence">Evidence levels</a>
       <a href="#refresh">Refresh schedule</a>
-      <a href="#money">How we make money</a>
       <a href="#vendors">For vendors</a>
     </aside>
 
@@ -278,19 +277,7 @@ export const html = `<style>
         </p>
       </section>
 
-      <section id="money">
-        <div class="money">
-          <h2>How this site makes money</h2>
-          <p>
-            Some links on this site are affiliate links: if you buy through
-            them, the vendor pays us a commission. That is the entire business
-            model, and it never touches the scores. Vendors cannot pay to be
-            reviewed, ranked, or recommended. Listing is free. Demos are
-            welcome. Scores are earned. When a specific link earns us a
-            commission, the page says so.
-          </p>
-        </div>
-      </section>
+      <p style="font-size:12.5px;color:var(--gray-lt);line-height:1.7;max-width:720px;margin-top:8px;">Some links on this site are affiliate links: vendors pay us a commission when readers buy, never for placement, rankings, or scores. Details in the <a href="/advertiser-disclosure" style="color:var(--purple);font-weight:600;">advertiser disclosure</a>.</p>
 
       <section id="vendors">
         <div class="vendor-cta">
