@@ -30,7 +30,7 @@ export default function Page() {
       title="The tools that get you seen, ranked by someone who reads the other side."
       dek="Resume builders and ATS checkers, scored on dated public evidence and judged by a recruiter who knows what happens after you click apply."
       dateline={`Evidence checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
-      logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}` }))}
+      logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
       feature={{
         domain: top.domain,
         name: top.name,

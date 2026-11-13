@@ -28,7 +28,7 @@ export default function Page() {
       title="The software behind well-run hiring, ranked by someone who has run it."
       dek="Applicant tracking systems ranked by team size and recruiter training ranked for how you recruit, scored on dated public evidence and a practitioner's read of what holds up in live hiring."
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
-      logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: '/guides/best-ats-for-small-teams' }))}
+      logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: '/guides/best-ats-for-small-teams', tip: `${t.name} · ${t.overall_draft.toFixed(2)}` }))}
       feature={{
         domain: top.domain,
         name: top.name,

@@ -1,3 +1,5 @@
+import { Motion } from './motion'
+
 /**
  * Shared navigation and footer. The nav is a solid indigo bar (the brand
  * color, on every page); the footer is the dark backstage band.
@@ -74,6 +76,7 @@ export function SiteNav({ active = null }: { active?: NavKey }) {
 export function SiteFooter() {
   return (
     <footer className="site-footer">
+      <Motion />
       <div className="wrap">
         <div className="fgrid">
           <div>

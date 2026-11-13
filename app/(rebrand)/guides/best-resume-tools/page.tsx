@@ -266,7 +266,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
         )}
         <p className="ef-visit">
           <a href={`/reviews/${t.id}`} className="tl tl-strong">
-            Read the full {t.name} review &rarr;
+            Read the full {t.name} review <span className="arr">&rarr;</span>
           </a>
           <span className="faint"> &middot; </span>
           <a href={`/go/${t.id}`} className="tl">

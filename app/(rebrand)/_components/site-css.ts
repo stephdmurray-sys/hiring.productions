@@ -59,7 +59,18 @@ export const siteCss = `
   .sublead{font-size:16px;color:var(--ink-2);max-width:700px;}
   .footnote{font-size:14px;color:var(--ink-3);line-height:1.6;margin-top:16px;max-width:860px;}
   .footnote a,.tl{color:var(--indigo-text);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
-  .tl:hover,.footnote a:hover{text-decoration-thickness:2px;}
+  .tl,.footnote a{transition:text-underline-offset .18s ease,text-decoration-thickness .18s ease;}
+  .tl:hover,.footnote a:hover{text-decoration-thickness:2px;text-underline-offset:5px;}
+  .arr{display:inline-block;transition:transform .2s ease;}
+  a:hover > .arr,a:focus-visible > .arr{transform:translateX(4px);}
+
+  /* Tooltips on logo tiles and list tiles: the name and the number, on hover or keyboard focus */
+  [data-tip]{position:relative;}
+  @media (hover:hover){
+    [data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;font-size:13px;font-weight:700;line-height:1.35;padding:6px 10px;border-radius:6px;white-space:nowrap;z-index:20;transition:opacity .15s ease,transform .15s ease;}
+    [data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:translate(-50%,0);}
+  }
+  @media (prefers-reduced-motion: reduce){.arr,[data-tip]::after,.tl{transition:none;}}
   .tl-strong{font-weight:700;}
   .hl-seekers{color:var(--indigo);}
   .hl-hiring{color:var(--coral-text);}

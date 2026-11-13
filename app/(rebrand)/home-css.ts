@@ -64,6 +64,12 @@ export const homeCss = `
   .pub span{color:#B9ABF5;}
   .pub.counts{background:rgba(94,230,168,0.12);box-shadow:inset 0 0 0 1px rgba(94,230,168,0.55);}
   .pub.counts span{color:var(--ok-bright);font-weight:700;}
+  .pub{transition:background-color .2s ease;cursor:default;}
+  .pub:hover,.pub:focus-visible{background:rgba(255,255,255,0.12);}
+  .pub[data-tip]::after{background:#fff;color:var(--ink);white-space:normal;width:230px;font-weight:600;}
+  .guide .lg-stack .lg{transition:margin .25s ease;}
+  .guide:hover .lg-stack .lg{margin-right:4px;}
+  @media (prefers-reduced-motion: reduce){.pub,.guide .lg-stack .lg{transition:none;}}
 
   /* Guides: ruled rows, not cards */
   .guides{border-top:1px solid var(--ink);margin-top:36px;}

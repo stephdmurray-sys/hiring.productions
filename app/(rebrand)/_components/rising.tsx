@@ -117,7 +117,7 @@ export function OnTheRise({
             {pick.t.rank ? ` · #${pick.t.rank} ${pick.t.segment}` : ''}
           </p>
           <a className="tl tl-strong" href={`/reviews/${pick.t.id}`}>
-            Is {pick.t.name} worth it? &rarr;
+            Is {pick.t.name} worth it? <span className="arr">&rarr;</span>
           </a>
         </div>
       )}

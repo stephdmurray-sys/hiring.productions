@@ -114,7 +114,7 @@ export default function Home() {
             <h2 id="side-seekers-h">Resume builders and ATS checkers, ranked on evidence</h2>
             <div className="side-logos">
               {SEEKER_LOGOS.map((id) => byId[id]).map((t) => (
-                <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`}>
+                <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`} data-tip={`${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}`}>
                   <Logo domain={t.domain} name={t.name} size={52} />
                 </a>
               ))}
@@ -129,7 +129,7 @@ export default function Home() {
               </div>
             </div>
             <a className="side-go" href="/guides/best-resume-tools">
-              Open the resume tools guide &rarr;
+              Open the resume tools guide <span className="arr">&rarr;</span>
             </a>
           </section>
 
@@ -143,7 +143,7 @@ export default function Home() {
               {HIRING_LOGOS.map((n) => atsByName[n])
                 .filter(Boolean)
                 .map((t) => (
-                  <a key={t.name} href="/guides/best-ats-for-small-teams" aria-label={`${t.name} in the ATS guide`}>
+                  <a key={t.name} href="/guides/best-ats-for-small-teams" aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${t.overall_draft.toFixed(2)}`}>
                     <Logo domain={t.domain} name={t.name} size={52} />
                   </a>
                 ))}
@@ -158,7 +158,7 @@ export default function Home() {
               </div>
             </div>
             <a className="side-go" href="/guides/best-ats-for-small-teams">
-              Open the ATS guide &rarr;
+              Open the ATS guide <span className="arr">&rarr;</span>
             </a>
           </section>
         </div>
@@ -251,12 +251,12 @@ export default function Home() {
               independent, so they count. The rest are out of date, or published by companies that sell what they rank.
             </p>
             <a className="tl tl-strong" href="/guides/best-resume-tools#agree">
-              See where every list lands &rarr;
+              See where every list lands <span className="arr">&rarr;</span>
             </a>
           </div>
           <div className="pubs">
             {benchmarks.map((l) => (
-              <div key={l.id} className={`pub${l.status === 'counts' ? ' counts' : ''}`}>
+              <div key={l.id} className={`pub${l.status === 'counts' ? ' counts' : ''}`} data-tip={l.reason} tabIndex={0}>
                 <Logo domain={PUBLISHER_DOMAINS[l.publication]} name={l.publication} size={36} round />
                 <span>
                   <b>{l.publication}</b>

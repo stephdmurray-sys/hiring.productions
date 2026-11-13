@@ -14,16 +14,17 @@ export const calcCss = `
   .calc-key i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px;}
   .calc-key .k-on{background:var(--indigo);}
   .calc-key .k-forget{background:repeating-linear-gradient(135deg,#FFB3C0 0 3px,#FFE0E6 3px 6px);}
-  .calc-row{display:grid;grid-template-columns:36px minmax(0,160px) minmax(0,1fr) minmax(0,190px);gap:14px;align-items:center;padding:12px 26px;border-bottom:1px solid var(--rule-soft);}
+  .calc-row{display:grid;grid-template-columns:36px minmax(0,160px) minmax(0,1fr) minmax(0,190px);gap:14px;align-items:center;padding:12px 26px;border-bottom:1px solid var(--rule-soft);background:var(--surface);position:relative;}
+  .calc-row:hover{background:var(--surface-2);}
   .calc-row:last-child{border-bottom:0;}
   .calc-row b{font-weight:800;font-size:16px;}
   .calc-row b a:hover{text-decoration:underline;text-underline-offset:3px;}
   .calc-name small{display:block;font-size:12.5px;color:var(--ink-3);font-weight:400;line-height:1.3;}
   .calc-name small.warn{color:var(--coral-text);font-weight:700;}
   .calc-bar{position:relative;height:14px;background:#F2F0F7;border-radius:4px;overflow:hidden;}
-  .calc-bar .forget{position:absolute;inset:0 auto 0 0;background:repeating-linear-gradient(135deg,#FFB3C0 0 3px,#FFE0E6 3px 6px);border-radius:4px;}
+  .calc-bar .forget{position:absolute;inset:0 auto 0 0;background:repeating-linear-gradient(135deg,#FFB3C0 0 3px,#FFE0E6 3px 6px);border-radius:4px;transition:width .35s cubic-bezier(.2,.7,.2,1);}
   .calc-bar .on{position:absolute;inset:0 auto 0 0;background:var(--indigo);border-radius:4px;transition:width .35s cubic-bezier(.2,.7,.2,1);}
-  @media (prefers-reduced-motion: reduce){.calc-bar .on{transition:none;}}
+  @media (prefers-reduced-motion: reduce){.calc-bar .on,.calc-bar .forget{transition:none;}}
   .calc-cost{text-align:right;font-variant-numeric:tabular-nums;}
   .calc-cost b{font-size:19px;font-weight:900;}
   .calc-cost span{display:block;font-size:12.5px;color:var(--ink-3);}

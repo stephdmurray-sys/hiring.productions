@@ -35,7 +35,7 @@ export interface HubProps {
   title: string
   dek: string
   dateline: string
-  logos: { domain: string; name: string; href: string }[]
+  logos: { domain: string; name: string; href: string; tip?: string }[]
   feature: { domain: string; name: string; title: string; line: string; href: string; linkText: string }
   situations: HubSituation[]
   situationsCta?: { text: string; href: string; label: string }
@@ -94,7 +94,7 @@ export function Hub(props: HubProps) {
               <p className="dek">{props.dek}</p>
               <div className="hub-logos">
                 {props.logos.map((l) => (
-                  <a key={l.name} href={l.href} aria-label={l.name}>
+                  <a key={l.name} href={l.href} aria-label={l.name} data-tip={l.tip}>
                     <Logo domain={l.domain} name={l.name} size={48} />
                   </a>
                 ))}
@@ -111,7 +111,7 @@ export function Hub(props: HubProps) {
               </div>
               <p>{props.feature.line}</p>
               <a className="tl" href={props.feature.href}>
-                {props.feature.linkText} &rarr;
+                {props.feature.linkText} <span className="arr">&rarr;</span>
               </a>
             </aside>
           </div>
@@ -127,7 +127,7 @@ export function Hub(props: HubProps) {
               <div>
                 <p>{s.a}</p>
                 <a className="tl tl-strong" href={s.href}>
-                  {s.link} &rarr;
+                  {s.link} <span className="arr">&rarr;</span>
                 </a>
               </div>
             </div>

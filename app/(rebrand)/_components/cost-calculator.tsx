@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useId, useLayoutEffect, useRef, useState } from 'react'
 
 /**
  * What will your search cost? Drag the months; every tool re-sorts by the
@@ -33,6 +33,25 @@ export function CostCalculator({ tools, checked, initial = 3 }: { tools: CalcToo
   const max = Math.max(...tools.flatMap((t) => t.forgets))
   const sorted = [...tools].sort((a, b) => a.costs[months - 1] - b.costs[months - 1])
   const plural = months === 1 ? '' : 's'
+
+  // When the order changes, slide each row from where it was to where it is now.
+  const rowEls = useRef(new Map<string, HTMLDivElement>())
+  const lastTop = useRef(new Map<string, number>())
+  useLayoutEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    rowEls.current.forEach((el, key) => {
+      const top = el.offsetTop
+      const before = lastTop.current.get(key)
+      if (!reduce && before !== undefined && before !== top && typeof el.animate === 'function') {
+        el.animate([{ transform: `translateY(${before - top}px)` }, { transform: 'translateY(0)' }], {
+          duration: 420,
+          easing: 'cubic-bezier(.2,.7,.2,1)',
+        })
+      }
+      lastTop.current.set(key, top)
+    })
+  }, [months])
+
   return (
     <div className="calc">
       <div className="calc-top">
@@ -79,7 +98,15 @@ export function CostCalculator({ tools, checked, initial = 3 }: { tools: CalcToo
           const forget = t.forgets[months - 1]
           const forgetMore = forget > on + 0.005
           return (
-            <div className="calc-row" role="listitem" key={t.id}>
+            <div
+              className="calc-row"
+              role="listitem"
+              key={t.id}
+              ref={(el) => {
+                if (el) rowEls.current.set(t.id, el)
+                else rowEls.current.delete(t.id)
+              }}
+            >
               <span className="lg" style={{ width: 36, height: 36, fontSize: 15 }} aria-hidden="true">
                 <span className="lg-letter">{t.name.charAt(0)}</span>
                 <img src={`https://www.google.com/s2/favicons?domain=${t.domain}&sz=128`} alt="" loading="lazy" />

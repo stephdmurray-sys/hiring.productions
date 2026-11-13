@@ -37,6 +37,17 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 - **Review page** (`reviews/[tool]`): one per tool. Answers "is it worth it", "is it free", the real cost, who else names it, videos, alternatives and an FAQ with schema.
 - **Stance**: words in color. "Agrees with the field" green, "Breaks from the pack" indigo, "Too little evidence" gray italic.
 
+## Motion: it has to show you something
+
+Every movement on the site reveals evidence. None of it is decoration.
+- Score bars fill when they scroll into view (`motion.tsx`).
+- Hovering a scoreboard row splits its bar into users, market and recruiter, and the line under the name swaps to those three numbers.
+- Publisher logos fan out on hover so each list is visible.
+- Logo tiles show the tool's name and score; list tiles show why a list counts or doesn't.
+- In the calculator, rows slide into their new order as you drag.
+- Links: the underline drops and the arrow nudges.
+- Still banned: hover lifts, scale-ups, glows, parallax, counting-up stat numbers. Everything respects reduced motion.
+
 ## Rules that keep color from turning into slop
 
 - Color marks a side or a fact. Indigo means job seeker, coral means hiring team or "this costs you". Never decoration.

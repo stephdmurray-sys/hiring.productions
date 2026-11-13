@@ -109,7 +109,7 @@ export default function Page() {
             </p>
             <p>
               <a className="tl tl-strong" href="/how-we-review">
-                Read how we review &rarr;
+                Read how we review <span className="arr">&rarr;</span>
               </a>
             </p>
           </div>
