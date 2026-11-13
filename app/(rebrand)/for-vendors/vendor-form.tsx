@@ -86,10 +86,12 @@ export function VendorForm() {
         ))}
       </fieldset>
       <label>
-        Anything we should know? <span className="vf-opt">Optional</span>
+        <span>
+          Anything we should know? <span className="vf-opt">(optional)</span>
+        </span>
         <textarea name="note" rows={3} placeholder="Who it's for, what's new, where the public reviews live" />
       </label>
-      <button type="submit" disabled={state === 'sending'}>
+      <button type="submit" className="btn" disabled={state === 'sending'}>
         {state === 'sending' ? 'Sending…' : 'Send it in'}
       </button>
       {state === 'error' && (
@@ -97,7 +99,7 @@ export function VendorForm() {
           {error}
         </p>
       )}
-      <p className="vf-fine">Listing is free and always will be. Nothing on this form buys a score, a ranking, or a recommendation.</p>
+      <p className="vf-fine">Listing is free and always will be. Nothing on this form buys a score or a ranking.</p>
     </form>
   )
 }

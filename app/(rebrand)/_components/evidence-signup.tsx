@@ -49,7 +49,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button type="submit" disabled={state === 'sending'}>
+      <button type="submit" className="btn" disabled={state === 'sending'}>
         {state === 'sending' ? 'Adding you…' : 'Send me the monthly check'}
       </button>
       {state === 'error' && (

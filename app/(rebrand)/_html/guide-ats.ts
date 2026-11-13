@@ -153,7 +153,7 @@ export const html = `<style>
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">
-      Match the ATS to your hiring volume, not to a feature list. Under 20 hires a year with no recruiter, you need simple and cheap. From 20 to 50, your first recruiter needs workflow control. Past 50, depth stops being overkill. One pick per tier below, then the full standings for each.</p>
+      Pick the ATS for your hiring volume first. The feature list comes second. Under 20 hires a year with no recruiter, you need simple and cheap. From 20 to 50, your first recruiter needs workflow control. Past 50, depth stops being overkill. One pick per tier below, then the full standings for each.</p>
     <div class="picks">
       <div class="pick winner">
         <span class="pick-flag">Small teams pick</span>
@@ -272,7 +272,7 @@ export const html = `<style>
         <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> Practitioner</span>
       </div>
       <div class="verdict">
-        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the Bootstrap tier is a real product, not a demo.</span></div>
+        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the Bootstrap tier is a real product.</span></div>
         <div class="v-row"><span class="v-key v-bad">Skip it if</span><span class="v-val">You need serious reporting, multi-entity compliance, or agency workflows. It will frustrate you within a quarter.</span></div>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Fastest setup in the category. Position posting to 50+ boards in one step. Pricing that scales with postings, not seats.</span></div>
         <div class="v-row"><span class="v-key v-watch">Watch for</span><span class="v-val">The automation templates tempt you to over-automate candidate email. Keep a human in the thread.</span></div>
@@ -313,7 +313,7 @@ export const html = `<style>
     <h2>Questions small teams actually ask</h2>
     <details><summary>Do I even need an ATS under 10 hires a year?</summary><p>Usually not a paid one. Breezy&rsquo;s free tier or a shared inbox with discipline covers you until scheduling and candidate volume start costing you real hours. The switch point is when candidates start falling through cracks you cannot see.</p></details>
     <details><summary>What does an ATS actually cost for a small team?</summary><p>Between $0 and $300 a month for the tools on this list. Anyone quoting you five figures a year is selling enterprise software to the wrong buyer.</p></details>
-    <details><summary>How long does setup take?</summary><p>For every tool in our top 5: days, not months. If a vendor proposes an implementation project, that is a signal the product is built for a bigger company than yours.</p></details>
+    <details><summary>How long does setup take?</summary><p>For every tool in our top 5: a few days. If a vendor proposes an implementation project, that is a signal the product is built for a bigger company than yours.</p></details>
   </section>
 
   <footer>

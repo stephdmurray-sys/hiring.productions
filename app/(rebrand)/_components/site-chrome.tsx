@@ -1,39 +1,44 @@
 /**
- * Shared navigation and footer for the rebuilt (React) pages, so every
- * page links only to places that exist.
+ * Shared navigation and footer. Paper header with a wordmark (the brand
+ * is written in lowercase, BRAND.md), plain text links, and a footer set
+ * like the back page of a report: a heavy rule, columns of links.
  */
 
 export const chromeCss = `
-  .site-nav{background:var(--hero);color:#fff;position:relative;z-index:30;}
-  .site-nav nav{display:flex;align-items:center;gap:28px;height:64px;}
-  .site-nav .logo{display:flex;align-items:center;gap:9px;font-family:inherit;font-weight:800;font-size:19px;color:#fff;}
-  .site-nav .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--purple-chip);display:flex;align-items:center;justify-content:center;font-size:15px;}
-  .site-nav .links{display:flex;gap:6px;align-items:center;margin-left:auto;}
-  .site-nav .links a{font-family:inherit;font-size:13.5px;font-weight:600;color:#D6CCF5;padding:8px 12px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s;}
-  .site-nav .links a:hover{color:#fff;background:rgba(255,255,255,0.08);}
-  .site-nav .links a.on{color:#fff;background:rgba(255,255,255,0.1);}
-  .site-nav .links a.cta{border:1.5px solid rgba(255,79,106,0.7);color:#fff;margin-left:6px;}
-  .site-nav .links a.cta:hover{background:rgba(255,79,106,0.16);}
-  .site-nav a:focus-visible{outline:3px solid #C4B5FD;outline-offset:2px;}
+  .site-nav{background:var(--paper);border-bottom:1px solid var(--rule);position:relative;z-index:30;}
+  .site-nav nav{display:flex;align-items:center;gap:28px;min-height:68px;}
+  .wordmark{font-weight:800;font-size:21px;letter-spacing:-0.01em;color:var(--ink);white-space:nowrap;}
+  .wordmark i{font-style:normal;color:var(--coral);}
+  .site-nav .links{display:flex;gap:26px;align-items:center;margin-left:auto;}
+  .site-nav .links a{font-size:15px;font-weight:600;color:var(--ink-2);padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap;}
+  .site-nav .links a:hover{color:var(--ink);border-bottom-color:var(--rule-2);}
+  .site-nav .links a.on{color:var(--ink);border-bottom-color:var(--ink);}
   @media(max-width:900px){
-    .site-nav nav{height:auto;min-height:60px;flex-wrap:wrap;gap:8px;padding:12px 0;}
-    .site-nav .links{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none;gap:4px;padding-bottom:2px;}
+    .site-nav nav{flex-wrap:wrap;gap:4px 0;padding:14px 0 6px;}
+    .site-nav .links{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none;gap:22px;}
     .site-nav .links::-webkit-scrollbar{display:none;}
-    .site-nav .links a{font-size:13px;padding:10px 12px;}
+    .site-nav .links a{padding:10px 0;}
   }
 
-  .site-footer{background:var(--hero);color:#B3A8DE;margin-top:clamp(96px,12vw,140px);padding:64px 0 32px;font-size:14px;text-align:left;line-height:1.5;}
-  .site-footer .fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;}
-  .site-footer .fabout{max-width:300px;line-height:1.7;margin-top:14px;}
-  .site-footer .fh{font-family:inherit;color:#fff;font-weight:700;font-size:13px;margin-bottom:14px;text-transform:none;letter-spacing:0;}
-  .site-footer .flinks a{display:block;margin-bottom:10px;color:#B3A8DE;transition:color .15s;}
-  .site-footer .flinks a:hover{color:#fff;}
-  .site-footer .fbase{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.12);font-size:12.5px;color:#8B7FBF;}
-  .site-footer .fbase a{color:#B3A8DE;}
+  .site-footer{margin-top:clamp(96px,12vw,150px);border-top:2px solid var(--ink);padding:44px 0 36px;font-size:15px;color:var(--ink-2);text-align:left;background:var(--paper);}
+  .site-footer .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;}
+  .site-footer .fabout{max-width:300px;margin-top:12px;line-height:1.6;}
+  .site-footer .fh{font-weight:800;color:var(--ink);font-size:15px;margin-bottom:12px;text-transform:none;letter-spacing:0;}
+  .site-footer .flinks a{display:block;padding:5px 0;color:var(--ink-2);}
+  .site-footer .flinks a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px;}
+  .site-footer .fbase{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink-3);}
   @media(max-width:760px){.site-footer .fgrid{grid-template-columns:1fr 1fr;}.site-footer .fgrid > div:first-child{grid-column:1 / -1;}}
 `
 
 type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | null
+
+export function Wordmark() {
+  return (
+    <span className="wordmark">
+      hiring<i>.</i>productions
+    </span>
+  )
+}
 
 export function SiteNav({ active = null }: { active?: NavKey }) {
   const link = (key: NavKey, href: string, label: string) => (
@@ -45,17 +50,15 @@ export function SiteNav({ active = null }: { active?: NavKey }) {
     <div className="site-nav">
       <div className="wrap">
         <nav aria-label="Main">
-          <a href="/" className="logo">
-            <span className="logo-mark">H</span>Hiring.Productions
+          <a href="/" aria-label="hiring.productions home">
+            <Wordmark />
           </a>
           <span className="links">
-            {link('seekers', '/for-job-seekers', 'For Job Seekers')}
-            {link('hiring', '/for-hiring-teams', 'For Hiring Teams')}
-            {link('review', '/how-we-review', 'How We Review')}
-            {link('vendors', '/for-vendors', 'For Vendors')}
-            <a href="/consulting" className={`cta${active === 'consulting' ? ' on' : ''}`}>
-              Get a recommendation
-            </a>
+            {link('seekers', '/for-job-seekers', 'For job seekers')}
+            {link('hiring', '/for-hiring-teams', 'For hiring teams')}
+            {link('review', '/how-we-review', 'How we review')}
+            {link('vendors', '/for-vendors', 'For vendors')}
+            {link('consulting', '/consulting', 'Free stack recommendation')}
           </span>
         </nav>
       </div>
@@ -69,15 +72,8 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="fgrid">
           <div>
-            <a href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: 9, color: '#fff', fontWeight: 800, fontSize: 18 }}>
-              <span className="logo-mark" style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--purple-chip)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>
-                H
-              </span>
-              Hiring.Productions
-            </a>
-            <p className="fabout">
-              Independent reviews of the tools on both sides of hiring. Researched, cited, and re-checked every month.
-            </p>
+            <Wordmark />
+            <p className="fabout">Independent reviews of the tools on both sides of hiring. Every score carries the date we checked it.</p>
           </div>
           <div className="flinks">
             <p className="fh">Job seekers</p>
@@ -90,20 +86,20 @@ export function SiteFooter() {
             <p className="fh">Hiring teams</p>
             <a href="/guides/best-ats-for-small-teams">Applicant tracking systems</a>
             <a href="/guides/best-recruiter-training">Recruiter training</a>
-            <a href="/consulting">Get a free recommendation</a>
+            <a href="/consulting">Free stack recommendation</a>
             <a href="/for-hiring-teams">All hiring team guides</a>
           </div>
           <div className="flinks">
-            <p className="fh">Company</p>
+            <p className="fh">About</p>
             <a href="/how-we-review">How we review</a>
             <a href="/advertiser-disclosure">Advertiser disclosure</a>
             <a href="/for-vendors">For vendors</a>
-            <a href="mailto:hello@hiring.productions">Contact</a>
+            <a href="mailto:hello@hiring.productions">hello@hiring.productions</a>
           </div>
         </div>
         <div className="fbase">
-          <span>&copy; 2026 Hiring.Productions. All rights reserved.</span>
-          <span>No vendor can pay for a placement, a ranking, or a score.</span>
+          <span>&copy; 2026 hiring.productions</span>
+          <span>No vendor can pay for a placement, a ranking or a score.</span>
         </div>
       </div>
     </footer>
