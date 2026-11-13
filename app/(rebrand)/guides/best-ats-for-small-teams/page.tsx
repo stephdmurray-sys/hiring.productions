@@ -3,10 +3,11 @@ import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-ats'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/guides/best-ats-for-small-teams' },
   title: 'The 14 Best Applicant Tracking Systems of 2026, Ranked by Team Size',
   description: 'The best ATS for small, growing, and scaling teams, ranked within each tier by a recruiter with 18 years in-house.',
 }
 
 export default function Page() {
-  return <MockPage html={html} />
+  return <MockPage html={html} active="hiring" />
 }

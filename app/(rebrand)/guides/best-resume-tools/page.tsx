@@ -1,45 +1,58 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import { guideCss } from './guide-css'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
+import { HashOpener } from '@/app/(rebrand)/_components/hash-opener'
 import {
   MIN_REVIEWS,
   STANCE_LABEL,
   STATUS_LABEL,
   VIDEO_KIND_LABEL,
+  absenceUnconfirmed,
   formatCount,
   formatDate,
   formatMonth,
+  gridCell,
   guide,
   hasUnverified,
   latestCheck,
   resumeLists,
   resumeTools,
+  risingPick,
   videos,
   type Appearance,
   type ToolEvidence,
 } from '@/lib/evidence'
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/guides/best-resume-tools' },
   title: 'The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Evidence',
   description:
-    'Ten resume builders and ATS checkers ranked on citable public evidence, checked every month against what other reviewers rank, with demo videos and every renewal price printed plainly.',
+    'Ten resume builders and ATS checkers ranked on citable public evidence, checked every month against what other reviewers rank, with labeled demo videos and what a year of each one really costs.',
 }
-
-const FONTS =
-  "@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Open+Sans:wght@400;600;700&display=swap');"
 
 const SEGMENT_LABEL = { checker: 'Checkers', builder: 'Builders' } as const
 const SEGMENT_SINGULAR = { checker: 'checker', builder: 'builder' } as const
 
-function favicon(domain: string, size = 16) {
+const ON_THIS_PAGE = [
+  ['short', 'Our picks'],
+  ['agree', 'Do reviewers agree?'],
+  ['rankings', 'Rankings'],
+  ['cost', 'What a year costs'],
+  ['videos', 'Watch before you pay'],
+  ['evidence', 'Evidence file'],
+  ['faq', 'Questions'],
+] as const
+
+function Logo({ domain, size = 16 }: { domain: string; size?: number }) {
   return (
     <img
+      className="logo-img"
       src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
       width={size}
       height={size}
       alt=""
-      style={{ verticalAlign: '-3px', borderRadius: 4, marginRight: 6 }}
     />
   )
 }
@@ -49,14 +62,8 @@ function stars(n: number) {
   return '★'.repeat(full) + '☆'.repeat(5 - full)
 }
 
-function shortDate(iso: string) {
-  const [y, m, d] = iso.split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  })
+function money(n: number) {
+  return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
 }
 
 function placement(a: Appearance) {
@@ -65,7 +72,7 @@ function placement(a: Appearance) {
 }
 
 function rankLabel(t: ToolEvidence) {
-  if (!t.enoughEvidence) return 'Not ranked: thin evidence'
+  if (!t.enoughEvidence) return 'Unranked'
   return `#${t.rank} ${SEGMENT_SINGULAR[t.segment]}`
 }
 
@@ -73,10 +80,25 @@ function Stance({ t }: { t: ToolEvidence }) {
   return <span className={`stance stance-${t.call.stance}`}>{STANCE_LABEL[t.call.stance]}</span>
 }
 
+function Bar({ label, value, note }: { label: string; value: number | null; note?: string }) {
+  return (
+    <div className="sbar">
+      <span className="sbar-label">{label}</span>
+      <span className="sbar-track" aria-hidden="true">
+        {value !== null && <span className="sbar-fill" style={{ width: `${(value / 5) * 100}%` }} />}
+      </span>
+      <span className="sbar-val">
+        {value !== null ? value.toFixed(label === 'Market' ? 2 : 1) : 'n/e'}
+        {note && <span className="muted"> {note}</span>}
+      </span>
+    </div>
+  )
+}
+
 function RankTable({ tools }: { tools: ToolEvidence[] }) {
   return (
     <div className="tscroll">
-      <table>
+      <table className="rank-table">
         <thead>
           <tr>
             <th>#</th>
@@ -93,28 +115,24 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
         <tbody>
           {tools.map((t) => (
             <tr key={t.id}>
-              <td>{t.rank}</td>
-              <td>
-                {favicon(t.domain)}
-                <b>
-                  <a href={`#evidence-${t.id}`} style={{ color: 'var(--ink)' }}>
-                    {t.name}
-                  </a>
-                </b>
+              <td className="rank-n">{t.enoughEvidence ? t.rank : '–'}</td>
+              <td className="tool-cell">
+                <Logo domain={t.domain} size={18} />
+                <a href={`#evidence-${t.id}`}>{t.name}</a>
               </td>
               <td>{t.bestFor}</td>
               <td>{t.freeTier}</td>
               <td>{t.pricing}</td>
-              <td>
+              <td className="nowrap">
                 {t.overall !== null ? (
                   <>
                     <span className="tstars">{stars(t.overall)}</span> <span className="tscore">{t.overall.toFixed(2)}</span>
                   </>
                 ) : (
-                  <span style={{ color: 'var(--faint)' }}>n/e&dagger;</span>
+                  <span className="faint">n/e&dagger;</span>
                 )}
               </td>
-              <td>{t.userScore !== null ? t.userScore.toFixed(1) : <span style={{ color: 'var(--faint)' }}>n/e&dagger;</span>}</td>
+              <td>{t.userScore !== null ? t.userScore.toFixed(1) : <span className="faint">n/e&dagger;</span>}</td>
               <td>{t.marketScore.toFixed(2)}</td>
               <td>{t.practitionerScore.toFixed(1)}</td>
             </tr>
@@ -128,142 +146,152 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
 function EvidenceFile({ t }: { t: ToolEvidence }) {
   const ratingsDate = t.ratings.length ? t.ratings.map((r) => r.asOf).sort().slice(-1)[0] : null
   return (
-    <div className="efile" id={`evidence-${t.id}`}>
-      <div className="review-head">
-        <div className="review-id">
-          <span className="review-rank">
-            {t.enoughEvidence ? `#${t.rank}` : 'Unranked'} &middot; {SEGMENT_LABEL[t.segment]}
-          </span>
-          <span className="favicon">{favicon(t.domain, 20)}</span>
-          <span className="review-name">{t.name}</span>
+    <details className="efile" id={`evidence-${t.id}`}>
+      <summary>
+        <span className="ef-rank">
+          {t.enoughEvidence ? `#${t.rank}` : 'Unranked'}
+          <span className="ef-seg">{SEGMENT_LABEL[t.segment]}</span>
+        </span>
+        <span className="ef-logo">
+          <Logo domain={t.domain} size={24} />
+        </span>
+        <span className="ef-name">{t.name}</span>
+        <span className="ef-score">{t.overall !== null ? t.overall.toFixed(2) : 'n/e'}</span>
+        <Stance t={t} />
+        <span className="ef-chev" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 5l4 4 4-4" />
+          </svg>
+        </span>
+      </summary>
+
+      <div className="ef-body">
+        <p className="ef-call">{t.call.line}</p>
+
+        <div className="sbars">
+          <Bar label="User" value={t.userScore} />
+          <Bar label="Market" value={t.marketScore} />
+          <Bar label="Practitioner" value={t.practitionerScore} note="*" />
         </div>
-        <span className="etag etag-res">{t.walkthrough ? 'Vendor demoed' : 'Research based'}</span>
-      </div>
 
-      <div className="scores-row" style={{ marginTop: 12 }}>
-        <span className="sc">
-          Overall <b>{t.overall !== null ? t.overall.toFixed(2) : 'n/e'}</b>
-        </span>
-        <span className="sc">
-          User <b>{t.userScore !== null ? t.userScore.toFixed(1) : 'n/e'}</b>
-        </span>
-        <span className="sc">
-          Market <b>{t.marketScore.toFixed(2)}</b>
-        </span>
-        <span className="sc">
-          Practitioner <b>{t.practitionerScore.toFixed(1)}</b> <span className="muted">draft</span>
-        </span>
-      </div>
+        <div className="erows">
+          <div className="erow">
+            <h4>What users say</h4>
+            {t.enoughEvidence ? (
+              <p className="sum">
+                {t.userScore?.toFixed(1)} from {formatCount(t.citableReviews)} citable reviews
+              </p>
+            ) : (
+              <p className="sum">
+                Not enough evidence: {formatCount(t.citableReviews)} citable review{t.citableReviews === 1 ? '' : 's'}, and we need{' '}
+                {MIN_REVIEWS}.
+              </p>
+            )}
+            <ul>
+              {t.ratings.length === 0 && <li>No citable review listings found.</li>}
+              {t.ratings.map((r) => (
+                <li key={r.platform} className={r.droppedBecause ? 'dropped' : undefined}>
+                  {r.rating} &middot; {formatCount(r.reviews)} reviews &middot; {r.platform}
+                  {r.sourceStatus === 'permission-pending' && !r.droppedBecause && <span className="flag">Permission pending</span>}
+                  {r.droppedBecause && <span className="muted"> &middot; not counted: {r.droppedBecause}</span>}
+                </li>
+              ))}
+            </ul>
+            {ratingsDate && <p className="muted">Read {formatDate(ratingsDate)}</p>}
+          </div>
 
-      <div className="erows">
-        <div className="erow">
-          <h4>What users say</h4>
-          {t.enoughEvidence ? (
+          <div className="erow">
+            <h4>What other reviewers rank</h4>
+            {t.counted.length === 0 && (
+              <p className="sum">
+                {absenceUnconfirmed(t)
+                  ? 'Not on the current lists we’ve checked so far. Full lists are confirmed at the next check.'
+                  : 'Not named on any current list we track.'}
+              </p>
+            )}
+            <ul>
+              {t.counted.map((a) => (
+                <li key={a.list.id}>
+                  <a href={a.list.url} target="_blank" rel="noopener noreferrer">
+                    {a.list.publication}
+                  </a>{' '}
+                  {placement(a)} &middot; {a.list.edition}
+                </li>
+              ))}
+              {t.notCounted.map((a) => (
+                <li key={a.list.id} className="dropped">
+                  {a.list.publication} {placement(a)} &middot; not counted: {STATUS_LABEL[a.list.status].toLowerCase()}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="erow">
+            <h4>Demos</h4>
             <p className="sum">
-              User score {t.userScore?.toFixed(1)} from {formatCount(t.citableReviews)} citable reviews
+              {t.walkthrough ? `Walked through with the vendor, ${formatDate(t.walkthrough.date)}` : 'Our walkthrough: not booked yet'}
             </p>
-          ) : (
-            <p className="sum">
-              Not enough evidence: {formatCount(t.citableReviews)} citable review{t.citableReviews === 1 ? '' : 's'}. We need{' '}
-              {MIN_REVIEWS}.
-            </p>
-          )}
-          <ul>
-            {t.ratings.length === 0 && <li>No citable review listings found.</li>}
-            {t.ratings.map((r) => (
-              <li key={r.platform} className={r.droppedBecause ? 'dropped' : undefined}>
-                {r.rating} &middot; {formatCount(r.reviews)} reviews &middot; {r.platform}
-                {r.sourceStatus === 'permission-pending' && !r.droppedBecause && <span className="flag">Permission pending</span>}
-                {r.droppedBecause && <span className="muted"> &middot; not counted: {r.droppedBecause}</span>}
-              </li>
-            ))}
-          </ul>
-          {ratingsDate && <p className="muted">Read {formatDate(ratingsDate)}</p>}
+            <ul>
+              {t.videos.length === 0 && <li>No demo video pulled yet.</li>}
+              {t.videos.map((v) => (
+                <li key={v.youtubeId}>
+                  <a href={`https://www.youtube.com/watch?v=${v.youtubeId}`} target="_blank" rel="noopener noreferrer">
+                    {v.title}
+                  </a>{' '}
+                  <span className="muted">
+                    &middot; {VIDEO_KIND_LABEL[v.kind].toLowerCase()}
+                    {v.year && !v.title.includes(String(v.year)) ? ` · ${v.year}` : ''}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="erow">
+            <h4>What it really costs</h4>
+            <p className="sum">{t.pricingLine}</p>
+            {t.yearCost && (
+              <p className="muted">
+                A year of the paid plan: {t.yearCost.approx ? 'about ' : ''}
+                {money(t.yearCost.amount)} ({t.yearCost.how.charAt(0).toLowerCase() + t.yearCost.how.slice(1)})
+              </p>
+            )}
+          </div>
         </div>
 
-        <div className="erow">
-          <h4>What other reviewers rank</h4>
-          {t.counted.length === 0 && <p className="sum">Not named on any current list we track.</p>}
-          <ul>
-            {t.counted.map((a) => (
-              <li key={a.list.id}>
-                <a href={a.list.url} target="_blank" rel="noopener noreferrer">
-                  {a.list.publication}
-                </a>{' '}
-                {placement(a)} &middot; {a.list.edition}
-              </li>
-            ))}
-            {t.notCounted.map((a) => (
-              <li key={a.list.id} className="dropped">
-                {a.list.publication} {placement(a)} &middot; not counted: {STATUS_LABEL[a.list.status].toLowerCase()}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="erow">
-          <h4>Demos</h4>
-          <p className="sum">
-            {t.walkthrough ? `Walked through with the vendor, ${formatDate(t.walkthrough.date)}` : 'Our walkthrough: not booked yet'}
-          </p>
-          <ul>
-            {t.videos.length === 0 && <li>No demo video pulled yet.</li>}
-            {t.videos.map((v) => (
-              <li key={v.youtubeId}>
-                <a href={`https://www.youtube.com/watch?v=${v.youtubeId}`} target="_blank" rel="noopener noreferrer">
-                  {v.title}
-                </a>{' '}
-                <span className="muted">
-                  &middot; {VIDEO_KIND_LABEL[v.kind].toLowerCase()}
-                  {v.year && !v.title.includes(String(v.year)) ? ` · ${v.year}` : ''}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="erow">
-          <h4>Our call</h4>
-          <Stance t={t} />
-          <p className="call-line">{t.call.line}</p>
-        </div>
+        {t.verdict && (
+          <div className="verdict">
+            <div className="v-row">
+              <span className="v-key v-good">Best if</span>
+              <span className="v-val">{t.verdict.bestIf}</span>
+            </div>
+            <div className="v-row">
+              <span className="v-key">Skip it if</span>
+              <span className="v-val">{t.verdict.skipIf}</span>
+            </div>
+            <div className="v-row">
+              <span className="v-key">What we like</span>
+              <span className="v-val">{t.verdict.like}</span>
+            </div>
+            <div className="v-row">
+              <span className="v-key">Watch for</span>
+              <span className="v-val">{t.verdict.watch}</span>
+            </div>
+          </div>
+        )}
+        <a href={`/go/${t.id}`} className="textlink">
+          Visit {t.name} &#8599;
+        </a>
       </div>
-
-      {t.verdict && (
-        <div className="verdict">
-          <div className="v-row">
-            <span className="v-key v-good">Best if</span>
-            <span className="v-val">{t.verdict.bestIf}</span>
-          </div>
-          <div className="v-row">
-            <span className="v-key">Skip it if</span>
-            <span className="v-val">{t.verdict.skipIf}</span>
-          </div>
-          <div className="v-row">
-            <span className="v-key">What we like</span>
-            <span className="v-val">{t.verdict.like}</span>
-          </div>
-          <div className="v-row">
-            <span className="v-key">Watch for</span>
-            <span className="v-val">{t.verdict.watch}</span>
-          </div>
-        </div>
-      )}
-      <p style={{ fontSize: 12.5, color: 'var(--gray-lt)', marginTop: 12 }}>Pricing: {t.pricingLine}</p>
-      <a href={`/go/${t.id}`} className="visit" style={{ maxWidth: 280, marginTop: 14 }}>
-        Visit {t.name} &#8599;
-      </a>
-    </div>
+    </details>
   )
 }
 
 function Faq({ q, children }: { q: string; children: ReactNode }) {
   return (
-    <details
-      style={{ background: '#fff', border: '1px solid var(--border)', borderRadius: 12, padding: '16px 20px', marginTop: 14 }}
-    >
-      <summary style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 600, fontSize: 14, cursor: 'pointer' }}>{q}</summary>
-      <p style={{ fontSize: 13.5, color: 'var(--gray)', lineHeight: 1.7, marginTop: 10 }}>{children}</p>
+    <details className="faq-item">
+      <summary>{q}</summary>
+      <p>{children}</p>
     </details>
   )
 }
@@ -279,59 +307,57 @@ export default function Page() {
   const checked = latestCheck()
   const ratingPlatforms = Array.from(new Set(all.flatMap((t) => t.ratings.map((r) => r.platform))))
   const ratingsRead = all.flatMap((t) => t.ratings.map((r) => r.asOf)).sort().slice(-1)[0]
+  const rising = byId[risingPick.tool]
+  const costRows = all.filter((t) => t.yearCost).sort((a, b) => a.yearCost!.amount - b.yearCost!.amount)
+  const maxCost = Math.max(...costRows.map((t) => t.yearCost!.amount))
+  const listsCountingIds = new Set(counting.map((l) => l.id))
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: FONTS + guideCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss }} />
+      <HashOpener prefix="evidence-" />
 
-      <div className="navbar">
-        <div className="wrap">
-          <nav>
-            <a href="/" className="logo">
-              <span className="logo-mark">H</span>Hiring.Productions
-            </a>
-            <span className="nav-links">
-              <a href="/for-hiring-teams">
-                For Hiring Teams <span className="chev">&#9660;</span>
-              </a>
-              <a href="/for-job-seekers">
-                For Job Seekers <span className="chev">&#9660;</span>
-              </a>
-              <a href="/how-we-review">How We Review</a>
-              <a href="/for-vendors">
-                For Vendors <span className="chev">&#9660;</span>
-              </a>
-              <a href="/consulting">
-                Get a Recommendation<span className="free-chip">FREE</span>
-              </a>
-            </span>
-          </nav>
-        </div>
-      </div>
+      <SiteNav active="seekers" />
 
-      <div className="page-hero" style={{ padding: '40px 0 44px' }}>
+      <header className="g-hero">
         <div className="wrap">
           <p className="crumbs">
             <a href="/">Home</a> &rsaquo; <a href="/for-job-seekers">For job seekers</a> &rsaquo; Resume tools
           </p>
-          <h1>The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Evidence</h1>
+          <h1>The best resume tools of 2026</h1>
+          <p className="dek">
+            Builders and ATS checkers, ranked on dated evidence and checked every month against the other lists you&rsquo;re likely to
+            read.
+          </p>
+          <div className="glance">
+            <div>
+              <b>{all.length}</b>
+              <span>tools compared</span>
+            </div>
+            <div>
+              <b>{lists.length}</b>
+              <span>other reviewers&rsquo; lists checked</span>
+            </div>
+            <div>
+              <b>{videos.length}</b>
+              <span>demo and review videos</span>
+            </div>
+            <div>
+              <b>Monthly</b>
+              <span>next check {formatMonth(guide.nextCheck)}</span>
+            </div>
+          </div>
           <p className="byline">
             Lists and videos checked {formatDate(checked)} <span className="dot">&middot;</span> Ratings read {formatDate(ratingsRead)}{' '}
-            <span className="dot">&middot;</span> Next full check {formatMonth(guide.nextCheck)}{' '}
-            <span className="dot">&middot;</span> {all.length} tools <span className="dot">&middot;</span>{' '}
-            <a href="/how-we-review" style={{ color: '#D6CCF5' }}>
-              How we review
-            </a>
+            <span className="dot">&middot;</span> <a href="/how-we-review">How we review</a>
           </p>
-          <div className="disclosure">
-            Some links below are affiliate links: if you buy through them, the vendor pays us a commission. Placement, rankings, and
-            scores cannot be bought, which is why the category&rsquo;s biggest advertiser ranks where the evidence puts it.{' '}
-            <a href="/advertiser-disclosure" style={{ color: '#fff' }}>
-              Full disclosure
-            </a>
-          </div>
+          <p className="disclosure">
+            Some links below are affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
+            can&rsquo;t be bought, which is why the category&rsquo;s biggest advertiser ranks where the evidence puts it.{' '}
+            <a href="/advertiser-disclosure">Full disclosure</a>
+          </p>
         </div>
-      </div>
+      </header>
 
       {hasUnverified() && (
         <div className="demo-note">
@@ -342,51 +368,94 @@ export default function Page() {
         </div>
       )}
 
-      <section className="wrap narrow" style={{ padding: '22px 24px 0' }}>
-        <div className="author-strip">
-          <span className="author-avatar">SM</span>
-          <p>
-            <b style={{ color: 'var(--ink)', fontFamily: "'Poppins',sans-serif" }}>
-              {guide.callsReviewed ? 'Reviewed by Stephanie Murray' : 'Scored by Stephanie Murray'}
-            </b>
-            <br />
-            {guide.callsReviewed ? '18 years of in-house talent acquisition' : 'Practitioner scores and calls in final review'} &middot; 2025
-            Transform Award, Talent Strategy of the Year &middot;{' '}
-            <a href="/how-we-review" style={{ color: 'var(--purple)', fontWeight: 600 }}>
-              How we score
+      <nav className="toc-bar" aria-label="On this page">
+        <div className="wrap">
+          {ON_THIS_PAGE.map(([id, label]) => (
+            <a key={id} href={`#${id}`}>
+              {label}
             </a>
-          </p>
+          ))}
         </div>
-      </section>
+      </nav>
 
-      <section className="wrap narrow">
-        <h2>The short version</h2>
+      <section className="wrap" id="short">
+        <h2>Our picks</h2>
         <p className="lead">
           Resume tools are where job seekers get burned: free builders that charge for the download, $2 trials that quietly renew every
-          4 weeks, and scores designed to sell the fix. So this guide ranks on citable evidence, checks itself against every other list
-          you are likely to read, and prints every renewal price. Where a tool has fewer than {MIN_REVIEWS} citable public reviews, we
-          say &ldquo;not enough evidence&rdquo; instead of inventing stars.
+          4 weeks, and scores designed to sell the fix. So this guide ranks on citable evidence, checks itself against the other lists
+          you&rsquo;ll read, and prints every renewal price.
         </p>
         <div className="picks">
-          {guide.picks.map((p) => {
+          {guide.picks.map((p, i) => {
             const t = byId[p.tool]
             return (
-              <div className="pick winner" key={p.tool}>
-                <span className="pick-flag">{p.label}</span>
+              <div className="pick" key={p.tool}>
+                <span className="pick-label">{p.label}</span>
                 <div className="pick-id">
-                  <span className="favicon">{favicon(t.domain, 22)}</span>
+                  <span className="pick-logo">
+                    <Logo domain={t.domain} size={28} />
+                  </span>
                   <span className="pick-name">{t.name}</span>
+                </div>
+                <div className="pick-stats">
+                  <span>
+                    <b>{t.overall?.toFixed(2)}</b>overall score
+                  </span>
+                  <span>
+                    <b>#{t.rank}</b>
+                    {SEGMENT_SINGULAR[t.segment]}
+                  </span>
+                  {t.yearCost && (
+                    <span>
+                      <b>{money(t.yearCost.amount)}</b>a year, paid
+                    </span>
+                  )}
                 </div>
                 <p className="pick-best">
                   {p.line}
                   {t.headlineRating ? ` ${t.headlineRating}.` : ''}
                 </p>
-                <a href={`/go/${t.id}`} className="visit">
+                <a href={`/go/${t.id}`} className={i === 0 ? 'btn btn-solid' : 'btn btn-outline'}>
                   Visit {t.name} &#8599;
                 </a>
               </div>
             )
           })}
+          <div className="pick pick-rising">
+            <span className="pick-label">{risingPick.label}</span>
+            <div className="pick-id">
+              <span className="pick-logo">
+                <Logo domain={rising.domain} size={28} />
+              </span>
+              <span className="pick-name">{rising.name}</span>
+            </div>
+            <div className="pick-stats">
+              <span>
+                <b>{rising.userScore?.toFixed(1)}</b>from {formatCount(rising.citableReviews)} users
+              </span>
+              <span>
+                <b>#{rising.rank}</b>
+                {SEGMENT_SINGULAR[rising.segment]}, on evidence
+              </span>
+              <span>
+                <b>$0</b>for a clean PDF
+              </span>
+            </div>
+            <p className="pick-best">{risingPick.line}</p>
+            <div className="rising-by">
+              <span className="rising-avatar" aria-hidden="true">
+                SM
+              </span>
+              <span>
+                <b>Stephanie Murray</b>
+                <br />
+                2025 Transform Award, Talent Strategy of the Year
+              </span>
+            </div>
+            <a href={`/go/${rising.id}`} className="btn btn-light">
+              Visit {rising.name} &#8599;
+            </a>
+          </div>
         </div>
       </section>
 
@@ -394,54 +463,71 @@ export default function Page() {
         <h2>Do the other reviewers agree?</h2>
         <p className="lead">
           We track {lists.length} other &ldquo;best resume tool&rdquo; lists and re-check them every month. Only {counting.length} count:
-          current, and not published by a company that sells what it ranks. Here is where they land next to us.
+          current, and not published by a company that sells what it ranks. Here&rsquo;s where they land next to us.
         </p>
         <div className="tscroll">
-          <table className="agree-table">
+          <table className="agree-grid">
             <thead>
               <tr>
                 <th>Tool</th>
                 <th>Our rank</th>
                 <th>Users</th>
-                <th>Named on lists that count</th>
+                {counting.map((l) => (
+                  <th key={l.id} className="col-list">
+                    {l.publication}
+                    <span>{l.edition}</span>
+                  </th>
+                ))}
+                <th className="col-list">
+                  Not counted
+                  <span>{notCounting} lists</span>
+                </th>
                 <th>Our call</th>
               </tr>
             </thead>
             <tbody>
               {all.map((t) => (
                 <tr key={t.id}>
-                  <td>
-                    {favicon(t.domain)}
-                    <b>
-                      <a href={`#evidence-${t.id}`} style={{ color: 'var(--ink)' }}>
-                        {t.name}
-                      </a>
-                    </b>
+                  <td className="tool-cell">
+                    <Logo domain={t.domain} size={18} />
+                    <a href={`#evidence-${t.id}`}>{t.name}</a>
                   </td>
-                  <td>{rankLabel(t)}</td>
-                  <td>
+                  <td className="nowrap">{rankLabel(t)}</td>
+                  <td className="nowrap">
                     {t.userScore !== null ? (
                       <>
                         <b>{t.userScore.toFixed(1)}</b> <span className="muted">({formatCount(t.citableReviews)})</span>
                       </>
                     ) : (
-                      <span className="muted">Too few reviews</span>
+                      <span className="muted">Too few</span>
                     )}
                   </td>
-                  <td>
-                    {t.counted.length === 0 && <span className="muted">None</span>}
-                    {t.counted.map((a) => (
-                      <span className="lchip" key={a.list.id}>
-                        <a href={a.list.url} target="_blank" rel="noopener noreferrer">
-                          {a.list.publication} {placement(a)}
-                        </a>
+                  {counting.map((l) => {
+                    const c = gridCell(t, l)
+                    return (
+                      <td key={l.id} className="cell">
+                        {c.state === 'named' && <span className="dot-named">{c.label}</span>}
+                        {c.state === 'unknown' && (
+                          <span className="dot-unknown" title="Full list not confirmed yet">
+                            ?
+                          </span>
+                        )}
+                        {c.state === 'not-named' && <span className="dot-no" title="Checked: not named" />}
+                        {c.state === 'not-covered' && (
+                          <span className="dot-na" title="This list doesn't cover this kind of tool">
+                            &middot;
+                          </span>
+                        )}
+                      </td>
+                    )
+                  })}
+                  <td className="cell">
+                    {t.notCounted.length > 0 ? (
+                      <span className="dot-muted" title={t.notCounted.map((a) => a.list.publication).join(', ')}>
+                        {t.notCounted.length}
                       </span>
-                    ))}
-                    {t.notCounted.length > 0 && (
-                      <span className="muted">
-                        {' '}
-                        +{t.notCounted.length} not counted
-                      </span>
+                    ) : (
+                      <span className="dot-na">&middot;</span>
                     )}
                   </td>
                   <td>
@@ -452,31 +538,35 @@ export default function Page() {
             </tbody>
           </table>
         </div>
+        <p className="legend">
+          <span className="dot-named">#1</span> named, with its position <span className="dot-unknown">?</span> full list not confirmed yet{' '}
+          <span className="dot-na">&middot;</span> list doesn&rsquo;t cover this kind of tool
+        </p>
 
         {breaks.length > 0 && (
           <>
-            <h3 style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: 19, margin: '34px 0 0' }}>
-              Where we break from the pack
-            </h3>
+            <h3 className="h3">Where we break from the pack</h3>
             <div className="breaks-grid">
               {breaks.map((t) => (
-                <div className="break-card" key={t.id}>
-                  <p className="bc-name">
-                    {favicon(t.domain, 18)}
+                <a className="break-card" key={t.id} href={`#evidence-${t.id}`}>
+                  <span className="bc-name">
+                    <Logo domain={t.domain} size={20} />
                     {t.name}
-                  </p>
-                  <p>{t.call.line}</p>
-                  <a href={`#evidence-${t.id}`}>See the evidence &rarr;</a>
-                </div>
+                  </span>
+                  <span className="bc-line">{t.call.line}</span>
+                  <span className="bc-more">See the evidence &rarr;</span>
+                </a>
               ))}
             </div>
           </>
         )}
 
         <div className="owner-note">
-          <b>Who owns the list you&rsquo;re reading?</b> BOLD owns MyPerfectResume, LiveCareer and Zety. It also owns FlexJobs and
-          Monster, and both of their &ldquo;best resume builder&rdquo; lists put BOLD brands on top. We show those lists. We don&rsquo;t
-          count them.
+          <p className="on-eyebrow">Who owns the list you&rsquo;re reading?</p>
+          <p>
+            BOLD owns MyPerfectResume, LiveCareer and Zety. It also owns FlexJobs and Monster, and both of their &ldquo;best resume
+            builder&rdquo; lists put BOLD brands on top. We show those lists. We don&rsquo;t count them.
+          </p>
         </div>
 
         <details className="lists-details">
@@ -499,13 +589,13 @@ export default function Page() {
                     <td>
                       <b>{l.publication}</b>
                       <br />
-                      <a href={l.url} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--purple)' }}>
+                      <a href={l.url} target="_blank" rel="noopener noreferrer">
                         {l.title}
                       </a>
                     </td>
                     <td>{l.edition}</td>
                     <td>
-                      <span className={`lstatus${l.status === 'counts' ? ' lstatus-counts' : ''}`}>{STATUS_LABEL[l.status]}</span>
+                      <span className={`lstatus${listsCountingIds.has(l.id) ? ' lstatus-counts' : ''}`}>{STATUS_LABEL[l.status]}</span>
                     </td>
                     <td>{l.reason}</td>
                   </tr>
@@ -514,38 +604,70 @@ export default function Page() {
             </table>
           </div>
           <p className="muted" style={{ marginTop: 12 }}>
-            A list counts when it shows an update or current-year edition within the last 12 months and its publisher does not own what it
-            ranks. Every list is re-checked monthly and saved to the Internet Archive.
+            A list counts when it shows an update or current-year edition within the last 12 months and its publisher doesn&rsquo;t own
+            what it ranks. Every list is re-checked monthly and saved to the Internet Archive.
           </p>
         </details>
       </section>
 
-      <section className="wrap">
+      <section className="wrap" id="rankings">
         <h2>Ranked on evidence</h2>
-        <h3 style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: 19, margin: '30px 0 6px' }}>ATS resume checkers</h3>
-        <p style={{ fontSize: 13.5, color: 'var(--gray)', maxWidth: 760, lineHeight: 1.65 }}>
-          Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.
+        <p className="lead">
+          Where a tool has fewer than {MIN_REVIEWS} citable public reviews, we say &ldquo;not enough evidence&rdquo; instead of inventing
+          stars.
         </p>
+        <h3 className="h3">ATS resume checkers</h3>
+        <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
         <RankTable tools={checkers} />
-        <h3 style={{ fontFamily: "'Poppins',sans-serif", fontWeight: 700, fontSize: 19, margin: '34px 0 6px' }}>Resume builders</h3>
-        <p style={{ fontSize: 13.5, color: 'var(--gray)', maxWidth: 760, lineHeight: 1.65 }}>
-          Where you actually write the thing. The &ldquo;Actually free?&rdquo; column is the one to read first.
-        </p>
+        <h3 className="h3">Resume builders</h3>
+        <p className="sublead">Where you actually write the thing. Read the &ldquo;Actually free?&rdquo; column first.</p>
         <RankTable tools={builders} />
-        <p style={{ textAlign: 'center', color: 'var(--gray-lt)', fontSize: 12, lineHeight: 1.6, marginTop: 16 }}>
+        <p className="footnote">
           Ratings read {formatDate(ratingsRead)} from dated public sources: {ratingPlatforms.join(', ')}. The G2 family (G2, Capterra,
-          GetApp, Software Advice) shares one review pool and counts once. Methodology on{' '}
-          <a href="/how-we-review" style={{ color: 'var(--purple)', fontWeight: 600 }}>
-            How We Review
-          </a>
-          . *Practitioner and Overall scores are in final review. &dagger;n/e = fewer than {MIN_REVIEWS} citable public reviews exist; we
-          do not invent stars.
+          GetApp, Software Advice) shares one review pool and counts once. *Practitioner and Overall scores are in final review.
+          &dagger;n/e: fewer than {MIN_REVIEWS} citable public reviews exist. Methodology on <a href="/how-we-review">How We Review</a>.
+        </p>
+      </section>
+
+      <section className="wrap" id="cost">
+        <h2>What a year really costs</h2>
+        <p className="lead">
+          The sticker price is the trial. This is the cheapest published way to pay for 12 months of each paid plan. Plans billed every 4
+          weeks charge you 13 times a year, not 12.
+        </p>
+        <div className="cost-chart" role="list">
+          {costRows.map((t) => {
+            const c = t.yearCost!
+            return (
+              <div className={`cost-row${c.renewsEvery4Weeks ? ' cost-trap' : ''}`} role="listitem" key={t.id}>
+                <span className="cost-name">
+                  <Logo domain={t.domain} size={18} />
+                  {t.name}
+                </span>
+                <span className="cost-track">
+                  <span className="cost-fill" style={{ width: `${Math.max(4, (c.amount / maxCost) * 100)}%` }} />
+                </span>
+                <span className="cost-amt">
+                  {c.approx ? 'about ' : ''}
+                  {money(c.amount)}
+                </span>
+                <span className="cost-how">
+                  {c.how}
+                  {c.renewsEvery4Weeks && <b> &middot; renews every 4 weeks</b>}
+                  {t.freeTier.startsWith('Yes') && <> &middot; real free tier too</>}
+                </span>
+              </div>
+            )
+          })}
+        </div>
+        <p className="footnote">
+          Worked out from the vendors&rsquo; published prices, read {formatDate(ratingsRead)}. Pricing pages are saved to the Internet
+          Archive every month.
         </p>
         <div className="callout">
-          <b>Billing patterns, plainly.</b> Resume.io and Zety let you build free, then only export plain text unless you pay: a $2.95 or
-          $1.95 trial that renews at $29.95 or $25.95 <b>every 4 weeks</b>, which is 13 charges a year, not 12. Resume.io&rsquo;s only
-          citable review base is 1.5 out of 5 across 195 Product Hunt reviews, overwhelmingly about exactly this. Enhancv has no free plan
-          at all: the trial watermarks your download. If you take one thing from this page: never leave a 4-week resume trial running.
+          <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for
+          free, then only export plain text unless you pay. Resume.io&rsquo;s only citable review base is 1.5 out of 5 across 195 Product
+          Hunt reviews, overwhelmingly about exactly this.
         </div>
       </section>
 
@@ -579,12 +701,12 @@ export default function Page() {
 
       <section className="wrap narrow" id="evidence">
         <h2>The evidence file</h2>
-        <p className="lead">
-          Every tool, every source, dated. This is what each ranking above rests on, and what changes when the evidence does.
-        </p>
-        {all.map((t) => (
-          <EvidenceFile key={t.id} t={t} />
-        ))}
+        <p className="lead">Every tool, every source, dated. Open any tool to see what its ranking rests on.</p>
+        <div className="efiles">
+          {all.map((t) => (
+            <EvidenceFile key={t.id} t={t} />
+          ))}
+        </div>
         <ul className="refresh-log">
           {guide.refreshLog.map((entry) => (
             <li key={entry.date}>
@@ -594,37 +716,37 @@ export default function Page() {
         </ul>
       </section>
 
-      <section className="wrap narrow" style={{ paddingBottom: 64 }}>
+      <section className="wrap narrow" id="faq">
         <h2>Questions job seekers actually ask</h2>
-        <Faq q="Are free resume builders actually free?">
-          Usually not. The common pattern is free to build, paid to download anything usable. In this field, only FlowCV gives you a
-          watermark-free PDF for nothing, and Teal and Kickresume have free tiers that produce real documents. Everyone else charges at the
-          exit.
-        </Faq>
-        <Faq q="Do ATS scores mean anything?">
-          Partly. Keyword and formatting checks catch real problems, and Jobscan&rsquo;s per-job reports are useful. But a score is also a
-          sales device: a middling free number with a paid path to a better one. Real applicant tracking systems do not grade you out of
-          100. Use the checks; do not chase the number.
-        </Faq>
-        <Faq q="What should a resume tool cost?">
-          $0 covers most people: FlowCV plus Teal&rsquo;s free tier is a complete setup. If you are applying at volume, $79 to $96 a year
-          buys the top paid tools. Anything billed every 4 weeks is priced to be forgotten, not to be fair.
-        </Faq>
-        <Faq q="Why don't you count every “best resume builder” list?">
-          Because some of the most visible ones are published by companies that sell resume builders. When a list&rsquo;s owner also
-          owns the tools at the top of it, that is an ad, not a review. We still show every list we checked and say why it does or
-          doesn&rsquo;t count, so you can judge for yourself.
-        </Faq>
-        <Faq q="How often does this page change?">
-          Every month. In the first week of each month we re-read every rating, re-check every list, pull new demo videos and save each
-          vendor&rsquo;s pricing page to the Internet Archive, so a price change is on record. If a ranking moves, the evidence file says
-          why.
-        </Faq>
+        <div className="faq">
+          <Faq q="Are free resume builders actually free?">
+            Usually not. The common pattern is free to build, paid to download anything usable. In this field, only FlowCV gives you a
+            watermark-free PDF for nothing, and Teal and Kickresume have free tiers that produce real documents. Everyone else charges at
+            the exit.
+          </Faq>
+          <Faq q="Do ATS scores mean anything?">
+            Partly. Keyword and formatting checks catch real problems, and Jobscan&rsquo;s per-job reports are useful. But a score is also a
+            sales device: a middling free number with a paid path to a better one. Real applicant tracking systems don&rsquo;t grade you out
+            of 100. Use the checks; don&rsquo;t chase the number.
+          </Faq>
+          <Faq q="What should a resume tool cost?">
+            $0 covers most people: FlowCV plus Teal&rsquo;s free tier is a complete setup. If you&rsquo;re applying at volume, $79 to $96 a
+            year buys the top paid tools. Anything billed every 4 weeks is priced to be forgotten, not to be fair.
+          </Faq>
+          <Faq q="Why don't you count every “best resume builder” list?">
+            Because some of the most visible ones are published by companies that sell resume builders. When a list&rsquo;s owner also
+            owns the tools at the top of it, that&rsquo;s an ad, not a review. We still show every list we checked and say why it does or
+            doesn&rsquo;t count, so you can judge for yourself.
+          </Faq>
+          <Faq q="How often does this page change?">
+            Every month. In the first week of each month we re-read every rating, re-check every list, pull new demo videos and save each
+            vendor&rsquo;s pricing page to the Internet Archive, so a price change is on record. If a ranking moves, the evidence file says
+            why.
+          </Faq>
+        </div>
       </section>
 
-      <footer>
-        &copy; 2026 Hiring.Productions &middot; How We Review &middot; Advertiser Disclosure &middot; Privacy &middot; Terms
-      </footer>
+      <SiteFooter />
     </>
   )
 }

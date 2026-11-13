@@ -138,12 +138,6 @@ export const html = `<style>
       <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">Some links below are affiliate links: if you buy through them, the provider pays us a commission. Our three top picks currently pay us nothing. Placement, rankings, and scores cannot be bought. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
     </div>
   </div>
-  <section class="wrap narrow" style="padding:22px 24px 0;">
-    <div class="author-strip">
-      <span class="author-avatar">SM</span>
-      <p><b style="color:var(--ink);font-family:'Poppins',sans-serif;">Reviewed by Stephanie Murray</b><br>18 years of in-house talent acquisition &middot; 2025 Transform Award, Talent Strategy of the Year &middot; <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How we score</a></p>
-    </div>
-  </section>
 
   <section class="wrap narrow">
     <h2>The short version</h2>

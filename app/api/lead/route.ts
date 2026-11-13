@@ -162,6 +162,22 @@ function welcomeForSource(
     }
   }
 
+  // Monthly evidence check signup from the review site (rebrand pages).
+  if (source === 'evidence_report') {
+    return {
+      subject: "You're on the list for the monthly evidence check",
+      text: [
+        'Thanks for signing up. Once a month, after we re-check every rating, list and price, you get one short email: what moved, what changed price, and which tools broke from the pack.',
+        '',
+        'While you wait, start with the resume tools guide, including what a year of each tool really costs:',
+        'https://hiring.productions/guides/best-resume-tools',
+        '',
+        'Stephanie',
+        'hiring.productions',
+      ].join('\n'),
+    }
+  }
+
   if (source === 'newsletter') {
     return {
       subject: "You're in. First read coming soon.",

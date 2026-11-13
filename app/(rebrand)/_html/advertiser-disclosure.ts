@@ -154,7 +154,7 @@ export const html = `<style>
     <p style="color:#4B5563;margin-bottom:14px;">Some links on Hiring.Productions are affiliate links. If you click one and buy, the vendor pays us a commission. It costs you nothing extra.</p>
     <p style="color:#4B5563;margin-bottom:14px;">That is the entire business model, and it never touches the scores. Vendors cannot pay to be reviewed, to be ranked, or to be recommended. Listing is free. Demos are welcome. Scores are earned.</p>
     <p style="color:#4B5563;margin-bottom:14px;">Some tools we rank highly, including some number one picks, have no affiliate relationship with us at all. We rank them anyway, because the rankings are the product.</p>
-    <p style="color:#4B5563;">Questions: <b>hello@hiring.productions</b>. See also <a href="/how-we-review" style="color:#6D28D9;font-weight:700;">how we review</a>.</p>
+    <p style="color:#4B5563;">Questions: <a href="mailto:hello@hiring.productions" style="color:var(--purple);font-weight:600;">hello@hiring.productions</a>. See also <a href="/how-we-review" style="color:#6D28D9;font-weight:700;">how we review</a>.</p>
   </div>
   <footer>
     <div class="wrap">

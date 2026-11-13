@@ -150,13 +150,6 @@ export const html = `<style>
     </div>
   </div>
 
-  <section class="wrap narrow" style="padding:22px 24px 0;">
-    <div class="author-strip">
-      <span class="author-avatar">SM</span>
-      <p><b style="color:var(--ink);font-family:'Poppins',sans-serif;">Reviewed by Stephanie Murray</b><br>18 years of in-house talent acquisition &middot; 2025 Transform Award, Talent Strategy of the Year &middot; <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How we score</a></p>
-    </div>
-  </section>
-
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">
@@ -188,7 +181,7 @@ export const html = `<style>
         </div>
         <p class="pick-best">What the strongest scaling recruiting teams run. Greenhouse if you want the old structured-hiring standard.</p>
         <a href="/go/ashby" class="visit">Visit Ashby &#8599;</a>
-      </div></div>
+      </div>
     </div>
   </section>
 
@@ -256,7 +249,8 @@ export const html = `<style>
         </div>
       </div>
     </div>
-    <p style="font-size:12.5px;color:var(--gray-lt);margin-top:16px;line-height:1.6;">Videos play from the creator&rsquo;s own YouTube channel. Reviewed one of these tools on camera? Send it to hello@hiring.productions and we will consider featuring it, labeled and credited.</p>
+    <p style="font-size:12.5px;color:var(--gray-lt);margin-top:16px;line-height:1.6;">Videos play from the creator&rsquo;s own YouTube channel. Reviewed one of these tools on camera? Send it to <a href="mailto:hello@hiring.productions" style="color:var(--purple);font-weight:600;">hello@hiring.productions</a> and we will consider featuring it, labeled and credited.</p>
+  </section>
   
 
   <section class="wrap narrow">
@@ -308,11 +302,11 @@ export const html = `<style>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Unlimited users on every plan, so hiring managers cost nothing to add. Clean upgrade path from scrappy to structured.</span></div>
         <div class="v-row"><span class="v-key v-watch">Watch for</span><span class="v-val">Per-job pricing on the entry plan adds up fast if you post many short-lived roles.</span></div>
       </div>
-      <p class="pricing-line">Pricing: from $99/mo (Hero plan) &middot; annual contract discounts</p>
+      <p class="pricing-line">Pricing: $1,000 a year on the Hero plan (about $83 a month, around 3 postings a month)</p>
       <a href="/go/jazzhr" class="visit">Visit JazzHR &#8599;</a>
     </div>
 
-    <p class="callout" style="text-align:center;"><b>Mockup truncates here.</b> The real guide continues through all 14 with the same format.</p>
+    <p class="callout"><b>Full write-ups for the other 12 systems are in progress.</b> The standings above already cover all 14, with every score sourced and dated.</p>
   </section>
 
   <section class="wrap narrow faq">

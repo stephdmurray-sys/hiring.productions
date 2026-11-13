@@ -145,8 +145,6 @@ export const html = `<style>
       <div class="byline">
         <span class="badge-live"><span class="pulse"></span> Re-checked monthly</span>
         <span>Last updated November 13, 2026</span>
-        <span class="dot">&middot;</span>
-        <span>Scored by Stephanie Murray</span>
       </div>
     </div>
   </div>
@@ -167,9 +165,9 @@ export const html = `<style>
       <section id="scores">
         <h2>Three scores, three different sources</h2>
         <p class="lead">
-          Every tool carries three scores, calculated independently and never
-          averaged into one number, because a tool can be popular and still be
-          wrong for you.
+          Every tool carries three scores, calculated independently and always
+          shown separately, because a tool can be popular and still be wrong for
+          you. The weighted blend only sets the order of the list.
         </p>
         <div class="score-cards">
           <div class="scard">
@@ -242,7 +240,7 @@ export const html = `<style>
           <div class="rating"><span class="stars"><span class="stars-fill" style="width:60%"></span></span><b>3.0</b> Market Score <span class="when">refreshed Aug 22, 2026</span></div>
           <div class="rating"><span class="stars"><span class="stars-fill" style="width:89%"></span></span><b>4.5</b> User Score <span class="when">synthesized Aug 2026</span></div>
           <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Practitioner Score <span class="when">in final review</span></div>
-          <a href="#" class="sample-link">How these scores are calculated &#8599;</a>
+          <a href="#scores" class="sample-link">How these scores are calculated &#8599;</a>
         </div>
       </section>
 
@@ -311,7 +309,7 @@ export const html = `<style>
             <h2>Vendors: get your evidence level up</h2>
             <p>Submit your product or book a demo walkthrough. Both are free, and both make your review more complete.</p>
           </div>
-          <a href="#" class="vbtn">Submit your product</a>
+          <a href="/for-vendors" class="vbtn">Submit your product</a>
         </div>
       </section>
     </div>

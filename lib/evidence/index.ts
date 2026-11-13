@@ -100,12 +100,27 @@ export interface ToolEvidence {
   call: { stance: Stance; line: string }
   verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
   walkthrough: { date: string; by: string } | null
+  yearCost: YearCost | null
   counted: Appearance[]
   notCounted: Appearance[]
   videos: Video[]
   headlineRating: string | null
   dataNotes: string
 }
+
+export interface YearCost {
+  amount: number
+  how: string
+  renewsEvery4Weeks: boolean
+  /** True when the vendor only publishes an approximate price. */
+  approx?: boolean
+}
+
+export type GridCell =
+  | { state: 'named'; label: string }
+  | { state: 'not-named' }
+  | { state: 'unknown' }
+  | { state: 'not-covered' }
 
 export const WEIGHTS = { market: 0.25, user: 0.35, practitioner: 0.4 }
 export const MIN_REVIEWS = 25
@@ -248,6 +263,7 @@ interface EditorialTool {
   call: { stance: Stance; line: string }
   verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
   walkthrough: { date: string; by: string } | null
+  yearCost?: YearCost
 }
 
 const editorialTools = guide.tools as unknown as Record<string, EditorialTool>
@@ -281,6 +297,7 @@ function build(tool: ScorecardTool): ToolEvidence {
     call: editorial.call as { stance: Stance; line: string },
     verdict: editorial.verdict,
     walkthrough: editorial.walkthrough as { date: string; by: string } | null,
+    yearCost: editorial.yearCost ?? null,
     counted,
     notCounted,
     videos: videos.filter((v) => v.tool === id),
@@ -321,3 +338,33 @@ export function latestCheck(): string {
   const log = guide.refreshLog
   return log[log.length - 1].date
 }
+
+const SEGMENT_COVER: Record<ToolEvidence['segment'], string> = { checker: 'checkers', builder: 'builders' }
+
+/**
+ * One cell of the agreement grid: did this list name this tool?
+ * A list we have not read in full never claims a tool is missing.
+ */
+export function gridCell(t: ToolEvidence, list: BenchmarkList): GridCell {
+  const pick = list.picks.find((p) => p.tool === t.id)
+  if (pick) return { state: 'named', label: pick.position ? `#${pick.position}` : 'Pick' }
+  if (!list.covers.includes(SEGMENT_COVER[t.segment])) return { state: 'not-covered' }
+  return list.picksComplete ? { state: 'not-named' } : { state: 'unknown' }
+}
+
+/** True when no counting list names the tool but at least one relevant list has not been read in full. */
+export function absenceUnconfirmed(t: ToolEvidence): boolean {
+  if (t.counted.length > 0) return false
+  return benchmarks.some(
+    (l) => l.status === 'counts' && l.covers.includes(SEGMENT_COVER[t.segment]) && !l.picksComplete,
+  )
+}
+
+export interface RisingPick {
+  tool: string
+  label: string
+  line: string
+  confirmed: boolean
+}
+
+export const risingPick = (guide as unknown as { risingPick: RisingPick }).risingPick
