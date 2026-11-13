@@ -138,7 +138,7 @@ export const html = `<style>
       <div class="byline">
         <span>Updated August 22, 2026</span>
         <span class="dot">&middot;</span>
-        <span>Scores refresh weekly</span>
+        <span>Evidence re-checked monthly</span>
         <span class="dot">&middot;</span>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>

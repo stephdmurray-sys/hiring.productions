@@ -1,0 +1,109 @@
+{
+  "_about": "Editorial layer for /guides/best-resume-tools. Numbers never live here: ratings, prices and scores come from lib/scorecards/resume-tools.json, other reviewers from benchmarks.json, videos from videos.json. call.stance: agrees (we land where current lists land) | breaks (we land somewhere else, and say why) | thin (not enough evidence for anyone to rank it). call lines are drafts until the founder marks them up (callsReviewed).",
+  "callsReviewed": false,
+  "refreshLog": [
+    {
+      "date": "2026-08-23",
+      "what": "Ratings, review counts, prices and traffic ranks",
+      "how": "Read on the live pages."
+    },
+    {
+      "date": "2026-11-13",
+      "what": "Other reviewers' lists and demo videos added",
+      "how": "Gathered from search listings. Confirmed on the live pages at the next monthly check."
+    }
+  ],
+  "nextCheck": "2026-12-01",
+  "picks": [
+    { "tool": "teal", "label": "Best overall", "line": "Checker, builder, and job tracker in one, with a real free tier." },
+    { "tool": "flowcv", "label": "Best truly free", "line": "The only builder here with genuinely free, watermark-free PDF downloads." },
+    { "tool": "kickresume", "label": "Best paid builder", "line": "Honest annual pricing at $96, and students get six months free." }
+  ],
+  "tools": {
+    "teal": {
+      "bestFor": "Checker, builder, and tracker in one. Real free tier",
+      "call": { "stance": "agrees", "line": "Three current lists name Teal, and we rank it first too. The reason is boring and rare: the free tier is a real product." },
+      "verdict": {
+        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free tier is a real product, and 200,000 Chrome users rate it 4.9.",
+        "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
+        "like": "Free tier that does not hold your resume hostage. Quarterly billing at $79 is the sane paid option.",
+        "watch": "The $13 weekly plan reads cheap and compounds fast. Pick monthly or quarterly, never weekly."
+      },
+      "pricingLine": "Free tier · Teal+ $29/mo or $79/quarter",
+      "walkthrough": null
+    },
+    "jobscan": {
+      "bestFor": "Deep per-job match reports",
+      "call": { "stance": "agrees", "line": "The current lists put Jobscan near the top for per-job matching, and so do we. Use the report, ignore the score." },
+      "verdict": null,
+      "pricingLine": "5 free scans a month · $49.95/mo or $89.95/quarter",
+      "walkthrough": null
+    },
+    "resume-worded": {
+      "bestFor": "Instant free score; the fixes cost $49/mo",
+      "call": { "stance": "thin", "line": "One list names it, and that list is about three years old. With 9 citable reviews, nobody has enough evidence to rank it, us included." },
+      "verdict": null,
+      "pricingLine": "Free score only · $49/mo or $229/yr",
+      "walkthrough": null
+    },
+    "kickresume": {
+      "bestFor": "Best paid builder. Templates recruiters read",
+      "call": { "stance": "agrees", "line": "Zapier picks it and so do we. $96 a year is the whole price, which in this category counts as a feature." },
+      "verdict": {
+        "bestIf": "You want a polished paid builder without billing games: $96 a year, flat, with 6,400 mobile ratings averaging 4.6 to back it up.",
+        "skipIf": "FlowCV's free tier already covers you. Pay for a builder only when you need multiple tailored versions.",
+        "like": "Free tier allows real downloads on basic templates. Students get six months of premium free with a student ID.",
+        "watch": "Web and iOS pricing differ; the App Store subscription is cheaper. Check both before paying."
+      },
+      "pricingLine": "Free tier · premium $96/yr, $54/quarter, or $24/mo",
+      "walkthrough": null
+    },
+    "flowcv": {
+      "bestFor": "The genuinely free builder. No watermark",
+      "call": { "stance": "breaks", "line": "No current list we track names FlowCV. We rank it the best free builder anyway: it is the only one here that hands you a clean PDF for nothing." },
+      "verdict": null,
+      "pricingLine": "Free · Pro $60/yr",
+      "walkthrough": null
+    },
+    "rezi": {
+      "bestFor": "ATS-first formatting; $149 lifetime option",
+      "call": { "stance": "breaks", "line": "Only a 2024 list mentions Rezi. We rank it third of seven builders for ATS-first formatting and a $149 lifetime plan that never renews." },
+      "verdict": null,
+      "pricingLine": "1 resume and 3 PDFs free · $29/mo or $149 lifetime",
+      "walkthrough": null
+    },
+    "resume-io": {
+      "bestFor": "Polished editor behind a billing trap",
+      "call": { "stance": "breaks", "line": "Zapier picks Resume.io. We rank it fourth of seven: the $2.95 trial renews at $29.95 every 4 weeks, and creators are now posting how-to-cancel videos." },
+      "verdict": {
+        "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you treat it as a $2.95 one-week rental.",
+        "skipIf": "You might forget to cancel. The trial renews at $29.95 every 4 weeks, 13 times a year, and the free download is plain text with your formatting stripped.",
+        "like": "The editor itself is genuinely good, which is what makes the billing model such a shame.",
+        "watch": "Its only citable public review base is 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewal pattern. The App Store apps under this name are third-party lookalikes, not Resume.io."
+      },
+      "pricingLine": "$2.95 7-day trial, renews $29.95 every 4 weeks · free download is .txt only",
+      "walkthrough": null
+    },
+    "enhancv": {
+      "bestFor": "Design-forward, trial-only",
+      "call": { "stance": "thin", "line": "No current list we track names it, and it has 1 citable review. No free plan, and the trial watermarks your download." },
+      "verdict": null,
+      "pricingLine": "7-day watermarked trial · from about $13.33/mo on 6-month billing",
+      "walkthrough": null
+    },
+    "novoresume": {
+      "bestFor": "Clean free one-pager",
+      "call": { "stance": "thin", "line": "No current list we track names it, and there are no citable reviews to score yet." },
+      "verdict": null,
+      "pricingLine": "Free 1-page PDF · $19.99/mo",
+      "walkthrough": null
+    },
+    "zety": {
+      "bestFor": "Heavily advertised; free download is .txt",
+      "call": { "stance": "breaks", "line": "Zety's strongest placements are on lists owned by its own parent company, BOLD. We show those lists and don't count them. On the evidence we do count, it doesn't earn a rank." },
+      "verdict": null,
+      "pricingLine": "$1.95 trial, renews $25.95 every 4 weeks · free download is .txt only",
+      "walkthrough": null
+    }
+  }
+}

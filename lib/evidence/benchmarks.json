@@ -1,0 +1,260 @@
+{
+  "_about": "Other reviewers' lists we compare our rankings against. Re-checked monthly (see lib/evidence/REFRESH.md). status decides whether a list counts toward convergence: counts | stale | owner-conflict | ranks-itself | lead-page. verified=false means the entry came from search listings and has not yet been confirmed on the live page.",
+  "rules": {
+    "counts": "Shows an update or a current-year edition within the last 12 months, and the publisher does not own or sell any product it ranks.",
+    "stale": "Not updated in the last 12 months. Shown, not counted.",
+    "owner-conflict": "The publisher, or its parent company, owns products it ranks. Shown, not counted.",
+    "ranks-itself": "The publisher puts its own product on the list. Shown, not counted.",
+    "lead-page": "Built as a lead-generation page rather than an editorial review. Shown, not counted."
+  },
+  "lists": [
+    {
+      "id": "zapier-ai-resume-builders",
+      "publication": "Zapier",
+      "title": "The 6 best AI resume builders in 2026",
+      "url": "https://zapier.com/blog/best-resume-builder/",
+      "covers": ["builders"],
+      "format": "picks",
+      "picks": [
+        { "tool": "resume-io" },
+        { "tool": "kickresume" },
+        { "tool": "teal" }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "counts",
+      "reason": "2026 edition. No ownership conflict found.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "geekflare-resume-builders",
+      "publication": "Geekflare",
+      "title": "12 Best Resume Builders of 2026",
+      "url": "https://geekflare.com/guides/best-resume-builders/",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [{ "name": "VisualCV" }],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "counts",
+      "reason": "2026 edition. No ownership conflict found. Only its first pick was visible; the full order is confirmed at the live check.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "fastcompany-ai-job-tools",
+      "publication": "Fast Company",
+      "title": "Use these 5 great AI-powered tools to land a new job this year",
+      "url": "https://www.fastcompany.com/91514957/ai-job-search-tools",
+      "covers": ["checkers"],
+      "format": "ranked",
+      "picks": [
+        { "tool": "teal", "position": 1 },
+        { "name": "JobCopilot", "position": 2 },
+        { "name": "Revarta", "position": 3 },
+        { "tool": "jobscan", "position": 5 }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "counts",
+      "reason": "Published in 2026. No ownership conflict found.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "skillscouter-ai-job-tools",
+      "publication": "SkillScouter",
+      "title": "Best AI Tools for Job Seekers in 2026 (Tested & Ranked)",
+      "url": "https://skillscouter.com/best-ai-tools-for-job-seekers/",
+      "covers": ["checkers"],
+      "format": "ranked",
+      "picks": [
+        { "name": "ChatGPT", "position": 1 },
+        { "name": "Claude", "position": 2 },
+        { "tool": "teal", "position": 3 },
+        { "tool": "jobscan", "position": 4 }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "counts",
+      "reason": "2026 edition. No ownership conflict found.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "forbes-vetted-resume-builders",
+      "publication": "Forbes Vetted",
+      "title": "The 6 Best Resume Builders",
+      "url": "https://www.forbes.com/sites/forbes-personal-shopper/article/best-resume-builders/",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [
+        { "tool": "kickresume", "position": 1 },
+        { "name": "Resume.com", "position": 2 },
+        { "name": "Resume Now", "position": 3 },
+        { "tool": "zety" },
+        { "name": "MyPerfectResume" }
+      ],
+      "picksComplete": false,
+      "edition": "2024",
+      "status": "stale",
+      "reason": "The page's own data dates it to 2024.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "techradar-resume-builders",
+      "publication": "TechRadar",
+      "title": "Best resume builder of 2025",
+      "url": "https://www.techradar.com/best/best-resume-builder",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [{ "name": "Indeed", "position": 1 }],
+      "picksComplete": false,
+      "edition": "2025",
+      "status": "stale",
+      "reason": "Still the 2025 edition.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "muse-ai-resume-builders",
+      "publication": "The Muse",
+      "title": "5 Best AI Resume Builders to Consider in 2024",
+      "url": "https://www.themuse.com/advice/best-ai-resume-builders",
+      "covers": ["builders"],
+      "format": "picks",
+      "picks": [
+        { "tool": "resume-io" },
+        { "tool": "zety" },
+        { "tool": "rezi" }
+      ],
+      "picksComplete": false,
+      "edition": "2024",
+      "status": "stale",
+      "reason": "Last updated August 14, 2024.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "money-resume-builders",
+      "publication": "Money",
+      "title": "10 Best Resume Builders",
+      "url": "https://money.com/best-resume-builder/",
+      "covers": ["builders"],
+      "format": "picks",
+      "picks": [
+        { "name": "Resume Genius" },
+        { "name": "Canva" },
+        { "tool": "resume-io" }
+      ],
+      "picksComplete": false,
+      "edition": "2023",
+      "status": "stale",
+      "reason": "Cites 2023 data.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "makeuseof-resume-scanners",
+      "publication": "MakeUseOf",
+      "title": "5 Resume Scanners You Can Use to Develop an ATS-Friendly Resume",
+      "url": "https://www.makeuseof.com/ats-friendly-resume-scanners-to-help/",
+      "covers": ["checkers"],
+      "format": "ranked",
+      "picks": [
+        { "tool": "resume-worded", "position": 1 },
+        { "tool": "jobscan", "position": 2 },
+        { "name": "SkillSyncer", "position": 3 }
+      ],
+      "picksComplete": false,
+      "edition": "2023",
+      "status": "stale",
+      "reason": "About three years old.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "forbes-advisor-resume-builders",
+      "publication": "Forbes Advisor",
+      "title": "Best Resume Builders for 2026",
+      "url": "https://www.forbes.com/advisor/l/resume-builder/",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [
+        { "name": "Resume Now", "position": 1 },
+        { "name": "MyPerfectResume", "position": 2 },
+        { "tool": "zety", "position": 3 },
+        { "name": "LiveCareer", "position": 4 }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "lead-page",
+      "reason": "A scored landing page, not an editorial review. Three of its top four (MyPerfectResume, Zety, LiveCareer) are owned by one company, BOLD.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "flexjobs-resume-builders",
+      "publication": "FlexJobs",
+      "title": "7 Best Resume Builders in 2026",
+      "url": "https://www.flexjobs.com/blog/post/best-resume-builders-today-ranked",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [
+        { "name": "MyPerfectResume", "position": 1 },
+        { "name": "Monster", "position": 2 },
+        { "name": "LiveCareer", "position": 3 },
+        { "tool": "zety", "position": 4 }
+      ],
+      "picksComplete": true,
+      "edition": "2026",
+      "status": "owner-conflict",
+      "reason": "FlexJobs is owned by BOLD, which also owns MyPerfectResume, LiveCareer, Zety and Monster: its entire top four.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "monster-resume-builders",
+      "publication": "Monster",
+      "title": "10 Best Resume Builders in 2026",
+      "url": "https://www.monster.com/career-advice/resume/best-resume-builders-today",
+      "covers": ["builders"],
+      "format": "ranked",
+      "picks": [
+        { "name": "Monster", "position": 1 },
+        { "name": "MyPerfectResume" },
+        { "tool": "zety" },
+        { "name": "LiveCareer" },
+        { "tool": "teal" },
+        { "tool": "kickresume" }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "ranks-itself",
+      "reason": "Monster ranks its own builder first, and its parent company BOLD also owns MyPerfectResume, Zety and LiveCareer.",
+      "checked": "2026-11-13",
+      "verified": false
+    },
+    {
+      "id": "indeed-resume-programs",
+      "publication": "Indeed",
+      "title": "15 Popular Resume Programs To Consider for Your Job Search",
+      "url": "https://www.indeed.com/career-advice/resumes-cover-letters/resume-programs",
+      "covers": ["builders"],
+      "format": "picks",
+      "picks": [
+        { "name": "Indeed" },
+        { "tool": "zety" },
+        { "name": "VisualCV" }
+      ],
+      "picksComplete": false,
+      "edition": "2026",
+      "status": "ranks-itself",
+      "reason": "Indeed lists its own resume tool first.",
+      "checked": "2026-11-13",
+      "verified": false
+    }
+  ]
+}

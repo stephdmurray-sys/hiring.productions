@@ -195,7 +195,7 @@ export const html = `<style>
       <p class="crumb"><a href="/">Home</a> &rsaquo; For job seekers</p>
       <h1>For job seekers</h1>
       <p class="track-sub">The tools that get you seen: resume builders, ATS checkers, application trackers, interview practice, and coaching. Reviewed with the same scoring we use on the hiring side.</p>
-      <div class="hero-meta"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 6 buyer guides in production</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 30+ tools researched</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> Scores refreshed weekly</span></div>
+      <div class="hero-meta"><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 6 buyer guides in production</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> 30+ tools researched</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8B7FBF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5.5"/></svg> Evidence re-checked monthly</span></div>
     </div>
   </div>
   <section class="sec wrap">
@@ -217,7 +217,7 @@ export const html = `<style>
       <h2>Start with what is going wrong</h2>
       <p>Match the tool to the actual problem, not the other way around.</p>
     </div>
-    <div class="fit-grid"><div class="fit-card" style="border-top:3px solid #6D28D9;"><p class="fit-q">Applying but hearing nothing back?</p><p class="fit-a">Your resume may not be parsing. Run it through Jobscan before the next application goes out.</p><a href="/go/jobscan" class="fit-link">Visit Jobscan &rarr;</a></div><div class="fit-card" style="border-top:3px solid #0D9488;"><p class="fit-q">Losing track of applications?</p><p class="fit-a">Teal keeps every application, contact, and follow-up in one pipeline.</p><a href="/go/teal" class="fit-link">Visit Teal &rarr;</a></div><div class="fit-card" style="border-top:3px solid #2563EB;"><p class="fit-q">Rewriting your resume from scratch?</p><p class="fit-a">The resume builders guide is in research. Resume.io is the current front-runner.</p><a href="/go/resume-io" class="fit-link">Visit Resume.io &rarr;</a></div><div class="fit-card" style="border-top:3px solid #EA580C;"><p class="fit-q">Interviews not converting?</p><p class="fit-a">The interview practice guide is in research now. One email when it goes live.</p><a href="#news" class="fit-link">Get the launch email &rarr;</a></div></div>
+    <div class="fit-grid"><div class="fit-card" style="border-top:3px solid #6D28D9;"><p class="fit-q">Applying but hearing nothing back?</p><p class="fit-a">Your resume may not be parsing. Run it through Jobscan before the next application goes out.</p><a href="/go/jobscan" class="fit-link">Visit Jobscan &rarr;</a></div><div class="fit-card" style="border-top:3px solid #0D9488;"><p class="fit-q">Losing track of applications?</p><p class="fit-a">Teal keeps every application, contact, and follow-up in one pipeline.</p><a href="/go/teal" class="fit-link">Visit Teal &rarr;</a></div><div class="fit-card" style="border-top:3px solid #2563EB;"><p class="fit-q">Rewriting your resume from scratch?</p><p class="fit-a">FlowCV gives you a clean PDF for free. Kickresume is the paid pick at $96 a year, flat.</p><a href="/guides/best-resume-tools" class="fit-link">Read the resume tools guide &rarr;</a></div><div class="fit-card" style="border-top:3px solid #EA580C;"><p class="fit-q">Interviews not converting?</p><p class="fit-a">The interview practice guide is in research now. One email when it goes live.</p><a href="#news" class="fit-link">Get the launch email &rarr;</a></div></div>
   </section>
   <section class="method">
     <div class="wrap">
@@ -225,7 +225,7 @@ export const html = `<style>
       <div class="steps">
         <div class="step"><div class="step-n">1</div><h3>Research the field</h3><p>Every serious platform in the category gets mapped: pricing, integrations, contract terms, and deal-breakers. No pay-to-play placement.</p></div>
         <div class="step"><div class="step-n">2</div><h3>Score on evidence</h3><p>Three weighted scores per tool, and every number traces to a source. Where the evidence is thin, the score says so.</p></div>
-        <div class="step"><div class="step-n">3</div><h3>Refresh weekly</h3><p>Pricing pages, market rankings, and community sentiment get re-checked on a schedule, so a 2026 score never quietly goes stale.</p></div>
+        <div class="step"><div class="step-n">3</div><h3>Re-check monthly</h3><p>Ratings, prices, other reviewers&rsquo; lists and demo videos get re-checked in the first week of every month, so a 2026 score never quietly goes stale.</p></div>
       </div>
       <a href="/how-we-review" class="method-link">Read the full methodology &rarr;</a>
     </div>
@@ -243,7 +243,7 @@ export const html = `<style>
       <div class="fcols">
         <div>
           <a href="#" class="logo" style="color:#fff;margin-bottom:14px;"><span class="logo-mark">H</span>Hiring.Productions</a>
-          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, tested, and updated quarterly.</p>
+          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, cited, and re-checked every month.</p>
           <p style="margin-top:14px;font-size:12.5px;">hello@hiring.productions</p>
           <div style="display:flex;gap:12px;margin-top:14px;">
             <a href="#" aria-label="LinkedIn" style="width:30px;height:30px;border-radius:6px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="#C9BFE8"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2-.04-4.65-2.83-4.65-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>

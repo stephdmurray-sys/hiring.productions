@@ -1,0 +1,323 @@
+/**
+ * Evidence layer for the review guides.
+ *
+ * One rule: numbers live in data files, never in page copy. Pages read
+ * from here, so a monthly refresh (see REFRESH.md) updates the JSON and
+ * every page that shows the number changes with it.
+ *
+ *   lib/scorecards/resume-tools.json  ratings, prices, traffic, practitioner drafts
+ *   lib/evidence/benchmarks.json      other reviewers' lists
+ *   lib/evidence/videos.json          demo and review videos
+ *   lib/evidence/sources.json         which sources we use and the rules for each
+ *   lib/evidence/resume-guide.json    picks, our calls, verdict copy, refresh log
+ */
+import scorecard from '@/lib/scorecards/resume-tools.json'
+import benchmarksData from './benchmarks.json'
+import videosData from './videos.json'
+import sourcesData from './sources.json'
+import guideData from './resume-guide.json'
+
+export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
+export type Stance = 'agrees' | 'breaks' | 'thin'
+export type VideoKind = 'vendor' | 'independent' | 'comparison'
+export type SourceStatus = 'foundation' | 'secondary' | 'permission-pending' | 'excluded'
+
+export interface BenchmarkPick {
+  tool?: string
+  name?: string
+  position?: number
+}
+
+export interface BenchmarkList {
+  id: string
+  publication: string
+  title: string
+  url: string
+  covers: string[]
+  format: string
+  picks: BenchmarkPick[]
+  picksComplete: boolean
+  edition: string
+  status: ListStatus
+  reason: string
+  checked: string
+  verified: boolean
+}
+
+export interface Video {
+  tool: string
+  youtubeId: string
+  title: string
+  kind: VideoKind
+  basis: string
+  year: number | null
+  featured: boolean
+  verified: boolean
+}
+
+export interface Source {
+  id: string
+  name: string
+  role: string
+  status: SourceStatus
+  reads: string
+  rule: string
+  family?: string[]
+}
+
+export interface Rating {
+  platform: string
+  rating: number
+  reviews: number
+  asOf: string
+  sourceStatus: SourceStatus
+  /** Present when this rating was dropped to avoid double counting. */
+  droppedBecause?: string
+}
+
+export interface Appearance {
+  list: BenchmarkList
+  position?: number
+}
+
+export interface ToolEvidence {
+  id: string
+  name: string
+  domain: string
+  segment: 'checker' | 'builder'
+  rank: number | null
+  ratings: Rating[]
+  citableReviews: number
+  enoughEvidence: boolean
+  userScore: number | null
+  marketScore: number
+  practitionerScore: number
+  overall: number | null
+  freeTier: string
+  pricing: string
+  bestFor: string
+  pricingLine: string
+  call: { stance: Stance; line: string }
+  verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
+  walkthrough: { date: string; by: string } | null
+  counted: Appearance[]
+  notCounted: Appearance[]
+  videos: Video[]
+  headlineRating: string | null
+  dataNotes: string
+}
+
+export const WEIGHTS = { market: 0.25, user: 0.35, practitioner: 0.4 }
+export const MIN_REVIEWS = 25
+
+export const STATUS_LABEL: Record<ListStatus, string> = {
+  counts: 'Counts',
+  stale: 'Out of date',
+  'owner-conflict': 'Owner conflict',
+  'ranks-itself': 'Ranks itself',
+  'lead-page': 'Lead page',
+}
+
+export const STANCE_LABEL: Record<Stance, string> = {
+  agrees: 'Agrees with the field',
+  breaks: 'Breaks from the pack',
+  thin: 'Too little evidence',
+}
+
+export const VIDEO_KIND_LABEL: Record<VideoKind, string> = {
+  vendor: 'Made by the company',
+  independent: 'Independent creator',
+  comparison: 'Side-by-side test',
+}
+
+export const sources = sourcesData.sources as Source[]
+export const benchmarks = benchmarksData.lists as BenchmarkList[]
+export const videos = videosData.videos as Video[]
+export const guide = guideData
+
+/** Platform name as written in the scorecards -> source id in sources.json. */
+const PLATFORM_SOURCE: Record<string, string> = {
+  G2: 'g2',
+  Capterra: 'g2',
+  GetApp: 'g2',
+  'Software Advice': 'g2',
+  'Chrome Web Store': 'chrome-web-store',
+  'Google Play': 'google-play',
+  'App Store': 'app-store',
+  'Product Hunt': 'product-hunt',
+  TrustRadius: 'trustradius',
+}
+
+const G2_FAMILY = new Set(['Capterra', 'GetApp', 'Software Advice'])
+
+export function slug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
+export function sourceStatusFor(platform: string): SourceStatus {
+  const id = PLATFORM_SOURCE[platform]
+  const s = sources.find((x) => x.id === id)
+  return s ? s.status : 'excluded'
+}
+
+/**
+ * The G2 family shares one review pool. If a tool has a G2 rating, any
+ * Capterra, GetApp or Software Advice rating is dropped so the same reviews
+ * are not counted twice. Excluded sources never count.
+ */
+export function usableRatings(raw: { platform: string; rating: number; reviews: number; as_of: string }[]): Rating[] {
+  const hasG2 = raw.some((r) => r.platform === 'G2')
+  return raw.map((r) => {
+    const rating: Rating = {
+      platform: r.platform,
+      rating: r.rating,
+      reviews: r.reviews,
+      asOf: r.as_of,
+      sourceStatus: sourceStatusFor(r.platform),
+    }
+    if (hasG2 && G2_FAMILY.has(r.platform)) {
+      rating.droppedBecause = 'Shares G2’s review pool, so it is counted once, as G2.'
+    } else if (rating.sourceStatus === 'excluded') {
+      rating.droppedBecause = 'Source excluded by policy.'
+    }
+    return rating
+  })
+}
+
+function round(n: number, places = 2): number {
+  const f = 10 ** places
+  return Math.round(n * f) / f
+}
+
+export function userScoreFrom(ratings: Rating[]): { score: number | null; citable: number } {
+  const used = ratings.filter((r) => !r.droppedBecause)
+  const citable = used.reduce((s, r) => s + r.reviews, 0)
+  if (citable < MIN_REVIEWS) return { score: null, citable }
+  const weighted = used.reduce((s, r) => s + r.rating * r.reviews, 0) / citable
+  return { score: round(weighted), citable }
+}
+
+export function overallFrom(market: number, user: number | null, practitioner: number): number | null {
+  if (user === null) return null
+  return round(WEIGHTS.market * market + WEIGHTS.user * user + WEIGHTS.practitioner * practitioner)
+}
+
+export function formatCount(n: number): string {
+  return n.toLocaleString('en-US')
+}
+
+export function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number)
+  const date = new Date(Date.UTC(y, (m || 1) - 1, d || 1))
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+}
+
+export function formatMonth(iso: string): string {
+  const [y, m] = iso.split('-').map(Number)
+  const date = new Date(Date.UTC(y, (m || 1) - 1, 1))
+  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+}
+
+/** "4.9 across 3,200 Chrome Web Store ratings": the largest usable source. */
+function headline(ratings: Rating[]): string | null {
+  const used = ratings.filter((r) => !r.droppedBecause)
+  if (!used.length) return null
+  const top = [...used].sort((a, b) => b.reviews - a.reviews)[0]
+  if (top.reviews < MIN_REVIEWS) return null
+  return `${top.rating} across ${formatCount(top.reviews)} ${top.platform} ratings`
+}
+
+function appearancesFor(toolId: string): { counted: Appearance[]; notCounted: Appearance[] } {
+  const counted: Appearance[] = []
+  const notCounted: Appearance[] = []
+  for (const list of benchmarks) {
+    const pick = list.picks.find((p) => p.tool === toolId)
+    if (!pick) continue
+    const a: Appearance = { list, position: pick.position }
+    if (list.status === 'counts') counted.push(a)
+    else notCounted.push(a)
+  }
+  return { counted, notCounted }
+}
+
+type ScorecardTool = (typeof scorecard.tools)[number]
+
+interface EditorialTool {
+  bestFor: string
+  pricingLine: string
+  call: { stance: Stance; line: string }
+  verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
+  walkthrough: { date: string; by: string } | null
+}
+
+const editorialTools = guide.tools as unknown as Record<string, EditorialTool>
+
+function build(tool: ScorecardTool): ToolEvidence {
+  const id = slug(tool.name)
+  const editorial = editorialTools[id]
+  if (!editorial) throw new Error(`resume-guide.json has no entry for ${id}`)
+  const ratings = usableRatings(tool.sources.ratings as { platform: string; rating: number; reviews: number; as_of: string }[])
+  const { score: userScore, citable } = userScoreFrom(ratings)
+  const marketScore = tool.computed.market_traction_score
+  const practitionerScore = tool.product_score_draft
+  const { counted, notCounted } = appearancesFor(id)
+  return {
+    id,
+    name: tool.name,
+    domain: tool.domain,
+    segment: tool.segment as 'checker' | 'builder',
+    rank: null,
+    ratings,
+    citableReviews: citable,
+    enoughEvidence: userScore !== null,
+    userScore,
+    marketScore,
+    practitionerScore,
+    overall: overallFrom(marketScore, userScore, practitionerScore),
+    freeTier: tool.sources.free_tier,
+    pricing: tool.sources.pricing,
+    bestFor: editorial.bestFor,
+    pricingLine: editorial.pricingLine,
+    call: editorial.call as { stance: Stance; line: string },
+    verdict: editorial.verdict,
+    walkthrough: editorial.walkthrough as { date: string; by: string } | null,
+    counted,
+    notCounted,
+    videos: videos.filter((v) => v.tool === id),
+    headlineRating: headline(ratings),
+    dataNotes: tool.data_notes,
+  }
+}
+
+/** Rank inside each segment: overall score first, thin-evidence tools last by practitioner score. */
+function rankSegment(tools: ToolEvidence[]): ToolEvidence[] {
+  const sorted = [...tools].sort((a, b) => {
+    if (a.overall !== null && b.overall !== null) return b.overall - a.overall
+    if (a.overall !== null) return -1
+    if (b.overall !== null) return 1
+    return b.practitionerScore - a.practitionerScore
+  })
+  return sorted.map((t, i) => ({ ...t, rank: i + 1 }))
+}
+
+export function resumeTools(): { checkers: ToolEvidence[]; builders: ToolEvidence[]; all: ToolEvidence[] } {
+  const built = scorecard.tools.map(build)
+  const checkers = rankSegment(built.filter((t) => t.segment === 'checker'))
+  const builders = rankSegment(built.filter((t) => t.segment === 'builder'))
+  return { checkers, builders, all: [...checkers, ...builders] }
+}
+
+export function resumeLists(): BenchmarkList[] {
+  const order: ListStatus[] = ['counts', 'stale', 'lead-page', 'owner-conflict', 'ranks-itself']
+  return [...benchmarks].sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status))
+}
+
+/** True while any list or video on the page still rests on search listings rather than the live page. */
+export function hasUnverified(): boolean {
+  return benchmarks.some((l) => !l.verified) || videos.some((v) => !v.verified)
+}
+
+export function latestCheck(): string {
+  const log = guide.refreshLog
+  return log[log.length - 1].date
+}

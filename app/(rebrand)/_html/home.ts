@@ -343,7 +343,7 @@ export const html = `<style>
   <div class="wrap stats">
     <div><p class="stat-n">120+</p><p class="stat-l">Tools analyzed</p></div>
     <div><p class="stat-n">12</p><p class="stat-l">Software landscapes</p></div>
-    <div><p class="stat-n">Weekly</p><p class="stat-l">Automated score refreshes</p></div>
+    <div><p class="stat-n">Monthly</p><p class="stat-l">Evidence re-checks</p></div>
     <div><p class="stat-n">0</p><p class="stat-l">Paid placements</p></div>
   </div>
 
@@ -376,7 +376,7 @@ export const html = `<style>
       <div class="fcols">
         <div>
           <a href="#" class="logo" style="color:#fff;margin-bottom:14px;"><span class="logo-mark">H</span>Hiring.Productions</a>
-          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, tested, and updated quarterly.</p>
+          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, cited, and re-checked every month.</p>
           <p style="margin-top:14px;font-size:12.5px;">hello@hiring.productions</p>
           <div style="display:flex;gap:12px;margin-top:14px;">
             <a href="#" aria-label="LinkedIn" style="width:30px;height:30px;border-radius:6px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="#C9BFE8"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2-.04-4.65-2.83-4.65-2.83 0-3.27 2.2-3.27 4.5V24H8V8z"/></svg></a>

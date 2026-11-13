@@ -1,0 +1,135 @@
+{
+  "_about": "The foundation source list for the monthly evidence check. status: foundation (used every month) | secondary (supporting only) | permission-pending (used in the demo, needs written permission before public launch) | excluded (never used). Terms notes are research, not legal advice; confirm on the live page.",
+  "reviewedOn": "2026-11-13",
+  "sources": [
+    {
+      "id": "g2",
+      "name": "G2",
+      "role": "users",
+      "status": "foundation",
+      "reads": "Star rating and review count, dated.",
+      "rule": "Counted once for the whole G2 family. G2 announced in January 2026 that it bought Capterra, GetApp and Software Advice, and the four share one review pool, so averaging any two would count the same reviews twice. G2 publishes a citation policy: credit G2 and link back.",
+      "family": ["Capterra", "GetApp", "Software Advice"]
+    },
+    {
+      "id": "chrome-web-store",
+      "name": "Chrome Web Store",
+      "role": "users",
+      "status": "foundation",
+      "reads": "Star rating, rating count and user count, dated.",
+      "rule": "Used for tools that run as browser extensions. The user count is a real usage signal."
+    },
+    {
+      "id": "google-play",
+      "name": "Google Play",
+      "role": "users",
+      "status": "foundation",
+      "reads": "Star rating, review count and download range, dated, with the store country.",
+      "rule": "Ratings differ by country, so the country is logged with every number."
+    },
+    {
+      "id": "app-store",
+      "name": "Apple App Store",
+      "role": "users",
+      "status": "secondary",
+      "reads": "Average rating and rating count through Apple's free search API, with the storefront.",
+      "rule": "Read through Apple's API rather than copied from the page. Developers can reset an app's rating at a release, so a sudden reset is flagged."
+    },
+    {
+      "id": "trustradius",
+      "name": "TrustRadius",
+      "role": "users",
+      "status": "permission-pending",
+      "reads": "trScore (out of 10) and review count.",
+      "rule": "The only large business-software review pool outside the G2 family. Its terms limit commercial use, so we ask in writing before using it."
+    },
+    {
+      "id": "product-hunt",
+      "name": "Product Hunt",
+      "role": "users",
+      "status": "permission-pending",
+      "reads": "Star rating and review count.",
+      "rule": "Its terms limit use to personal, non-commercial purposes. FlowCV's and Resume.io's user scores rest on it today, so we ask in writing; if the answer is no, both drop to 'not enough evidence'."
+    },
+    {
+      "id": "tranco",
+      "name": "Tranco",
+      "role": "market",
+      "status": "foundation",
+      "reads": "Web traffic rank, cited by list ID.",
+      "rule": "A free research ranking of website popularity. Measures reach, not quality."
+    },
+    {
+      "id": "internet-archive",
+      "name": "Internet Archive",
+      "role": "market",
+      "status": "foundation",
+      "reads": "Saved copies of every page we cite, and older copies for growth over time.",
+      "rule": "Our paper trail. Every rating, price and list we cite is saved here the month we read it."
+    },
+    {
+      "id": "pricing-pages",
+      "name": "Vendor pricing pages",
+      "role": "market",
+      "status": "foundation",
+      "reads": "Free-tier limits, trial terms, renewal price and billing cycle.",
+      "rule": "Saved to the Internet Archive each month so a price change is on record."
+    },
+    {
+      "id": "other-reviewers",
+      "name": "Other reviewers' lists",
+      "role": "benchmark",
+      "status": "foundation",
+      "reads": "Which tools each list names, in what order, and when it was last updated.",
+      "rule": "Tracked list by list in benchmarks.json. A list counts only if it is current and its publisher does not own what it ranks."
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "role": "demos",
+      "status": "secondary",
+      "reads": "Demo and review videos, with who made them and when.",
+      "rule": "Embedded and labeled by who made it. A video is evidence of what the product looks like, never proof it is good. View counts are ignored."
+    },
+    {
+      "id": "walkthroughs",
+      "name": "Our walkthroughs",
+      "role": "demos",
+      "status": "foundation",
+      "reads": "A live product walkthrough or a hands-on trial, run with the same questions every time.",
+      "rule": "The strongest evidence on the site. The date and who ran it are shown on the review."
+    },
+    {
+      "id": "trustpilot",
+      "name": "Trustpilot",
+      "role": "users",
+      "status": "excluded",
+      "reads": "",
+      "rule": "Terms bar collecting its content by any means without approval."
+    },
+    {
+      "id": "sitejabber",
+      "name": "Sitejabber",
+      "role": "users",
+      "status": "excluded",
+      "reads": "",
+      "rule": "Excluded by policy."
+    },
+    {
+      "id": "gartner-peer-insights",
+      "name": "Gartner Peer Insights",
+      "role": "users",
+      "status": "excluded",
+      "reads": "",
+      "rule": "Terms bar reproducing its content."
+    },
+    {
+      "id": "reddit",
+      "name": "Reddit",
+      "role": "users",
+      "status": "excluded",
+      "reads": "",
+      "rule": "Useful for spotting complaints to investigate, never a score input."
+    }
+  ]
+}

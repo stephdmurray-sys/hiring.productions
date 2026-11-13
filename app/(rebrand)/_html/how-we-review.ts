@@ -143,10 +143,10 @@ export const html = `<style>
         vendors can and cannot influence.
       </p>
       <div class="byline">
-        <span class="badge-live"><span class="pulse"></span> Live scoring system</span>
-        <span>Last updated August 22, 2026</span>
+        <span class="badge-live"><span class="pulse"></span> Re-checked monthly</span>
+        <span>Last updated November 13, 2026</span>
         <span class="dot">&middot;</span>
-        <span>By the Hiring.Productions editorial team</span>
+        <span>Scored by Stephanie Murray</span>
       </div>
     </div>
   </div>
@@ -156,6 +156,7 @@ export const html = `<style>
       <p class="toc-h">On this page</p>
       <a href="#scores" class="on">The three scores</a>
         <a href="#sources">Where the numbers come from</a>
+      <a href="#agree">Do other reviewers agree?</a>
       <a href="#example">What it looks like</a>
       <a href="#evidence">Evidence levels</a>
       <a href="#refresh">Refresh schedule</a>
@@ -175,7 +176,7 @@ export const html = `<style>
             <p class="pct">25%</p>
             <h3>Market Score</h3>
             <p>Footprint and momentum: web-traffic rank, total review volume, and review velocity, meaning how fast real users are adopting the tool right now, measured against dated archive baselines.</p>
-            <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive baselines. Refreshed weekly.</p>
+            <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive baselines. Re-read monthly.</p>
           </div>
           <div class="scard">
             <p class="pct">35%</p>
@@ -201,9 +202,29 @@ export const html = `<style>
       <section id="sources">
         <h2>Where the numbers come from</h2>
         <p class="lead">Every score on this site is assembled from sources you can check. Here is the supply chain.</p>
-        <div style="margin-top:22px;"><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Third-party reviews</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">We pull ratings from the public platforms where real volume lives. Each rating is count-weighted, so 4,000 reviews outvote 12, and every figure carries the date we read it. Two rules keep this honest: a tool needs at least 25 citable public reviews before we print a User Score at all (below that, the table says &ldquo;not enough evidence&rdquo;), and we never touch platforms whose terms prohibit republishing. We cite numbers as dated facts; we never copy review content.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Market trends</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Traction is measured, not felt: web traffic rank from the Tranco research dataset, total review volume across platforms, and vendor pricing pages checked on a schedule. When Workable retired its $149 tier, the table changed. When 7 of 14 ATS vendors refused to publish a price, that became a column.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Momentum</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">All-time totals reward whoever showed up first, so we also measure direction of travel: each tool&rsquo;s review count today against a dated snapshot of the same public page from the Internet Archive, annualized. A 3-year-old product competes on current trajectory, not accumulated history. Guards keep it fair: growth on fewer than 20 new reviews is capped, windows under 120 days do not count, and suspicious surges get flagged and re-verified before they move a ranking.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">What we will not use</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Platforms whose terms forbid citation, review counts we cannot date, vendor-supplied statistics without a public source, and our own guesses dressed as data.</span></div></div>
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=g2.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">G2</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=capterra.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Capterra</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=apple.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">App Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=play.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Google Play</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=chromewebstore.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Chrome Web Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=producthunt.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Product Hunt</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=tranco-list.eu&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Tranco</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Internet Archive</span></div>
+        <div style="margin-top:22px;"><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Third-party reviews</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">We pull ratings from the public platforms where real volume lives. Each rating is count-weighted, so 4,000 reviews outvote 12, and every figure carries the date we read it. Three rules keep this honest. A tool needs at least 25 citable public reviews before we print a User Score at all (below that, the table says &ldquo;not enough evidence&rdquo;). The G2 family (G2, Capterra, GetApp and Software Advice) shares one review pool, so it counts once, never twice. And we only use platforms whose terms allow it, asking in writing where they don&rsquo;t say. We cite numbers as dated facts; we never copy review content.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Market trends</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Traction is measured, not felt: web traffic rank from the Tranco research dataset, total review volume across platforms, and vendor pricing pages saved to the Internet Archive every month. When Workable retired its $149 tier, the table changed. When 7 of 14 ATS vendors refused to publish a price, that became a column.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Momentum</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">All-time totals reward whoever showed up first, so we also measure direction of travel: each tool&rsquo;s review count today against a dated snapshot of the same public page from the Internet Archive, annualized. A 3-year-old product competes on current trajectory, not accumulated history. Guards keep it fair: growth on fewer than 20 new reviews is capped, windows under 120 days do not count, and suspicious surges get flagged and re-verified before they move a ranking.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Other reviewers</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Every month we re-check the other &ldquo;best of&rdquo; lists a buyer or job seeker is likely to read, and show where each tool lands next to our ranking. A list counts only if it is current and its publisher does not own what it ranks. The rest are shown with the reason they don&rsquo;t count.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Demos</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Demo and review videos are pulled monthly and labeled by who made them: the company, an independent creator, or a side-by-side test. A video shows what a product looks like; it is never proof the product is good. Our own walkthroughs, run with the same questions every time, are the strongest evidence on the site.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">What we will not use</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Platforms whose terms forbid citation, review counts we cannot date, vendor-supplied statistics without a public source, and our own guesses dressed as data.</span></div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=g2.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">G2</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=apple.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">App Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=play.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Google Play</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=chromewebstore.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Chrome Web Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=producthunt.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Product Hunt</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=tranco-list.eu&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Tranco</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Internet Archive</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">YouTube</span></div>
         <p style="font-size:11.5px;color:var(--faint);margin-top:12px;">Named platforms are sources of public data. None are affiliated with or endorse this site.</p>
+      </section>
+
+      <section id="agree">
+        <h2>Do the other reviewers agree?</h2>
+        <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. Agreement is reassuring. Disagreement is the useful part, so we say why.</p>
+        <div class="evidence">
+          <div class="ecard">
+            <span class="etag etag-res">Agrees with the field</span>
+            <p>Current, independent lists land where we land. The evidence and the consensus point the same way.</p>
+          </div>
+          <div class="ecard">
+            <span class="etag etag-sub">Breaks from the pack</span>
+            <p>We rank it somewhere the other lists don&rsquo;t, higher or lower, and the review says exactly why. This is where a practitioner&rsquo;s read earns its keep.</p>
+          </div>
+          <div class="ecard">
+            <span class="etag etag-res">Too little evidence</span>
+            <p>Not enough public reviews or current coverage for anyone to rank it honestly, us included. We say so instead of guessing.</p>
+          </div>
+        </div>
+        <p class="callout"><b>Which lists count.</b> A list counts when it shows an update or a current-year edition within the last 12 months and its publisher does not own what it ranks. Lists that are out of date, built as lead pages, or published by a company that sells the tools at the top are still shown, with the reason they don&rsquo;t count.</p>
       </section>
 
       <section id="example">
@@ -230,7 +251,7 @@ export const html = `<style>
         <p class="lead">We tell you exactly what our verdict rests on. No review pretends to be more than it is.</p>
         <div class="evidence">
           <div class="ecard">
-            <span class="etag etag-res">Research based</span>
+            <span class="etag etag-demo">Vendor demoed</span>
             <p>The vendor walked us through the live product and answered our structured questionnaire. Our strongest evidence level.</p>
           </div>
           <div class="ecard">
@@ -245,29 +266,34 @@ export const html = `<style>
       </section>
 
       <section id="refresh">
-        <h2>A living scoring system</h2>
-        <p class="lead">Reviews rot. Ours are wired to notice, and every review displays when each input was last refreshed.</p>
+        <h2>A monthly evidence check</h2>
+        <p class="lead">Reviews rot. Ours get re-checked on the same schedule every month, and every review shows when each input was last read.</p>
         <table>
           <tr><th>Signal</th><th>Refresh</th><th>How</th></tr>
           <tr>
-            <td><b>Market signals</b></td>
-            <td><span class="pill">Weekly</span></td>
-            <td>Automated pull, every Monday</td>
-          </tr>
-          <tr>
-            <td><b>Pricing and packaging changes</b></td>
-            <td><span class="pill">Weekly</span></td>
-            <td>Automated monitoring of every vendor&rsquo;s pricing page. Changes flag the review for update</td>
-          </tr>
-          <tr>
-            <td><b>User sentiment</b></td>
+            <td><b>Ratings and review counts</b></td>
             <td><span class="pill">Monthly</span></td>
-            <td>Public reviews re-read and re-synthesized</td>
+            <td>Re-read on each platform in the first week of the month, dated, with a saved copy</td>
+          </tr>
+          <tr>
+            <td><b>Other reviewers&rsquo; lists</b></td>
+            <td><span class="pill">Monthly</span></td>
+            <td>Each list re-checked for its date, its picks and who owns it</td>
+          </tr>
+          <tr>
+            <td><b>Pricing and free tiers</b></td>
+            <td><span class="pill">Monthly</span></td>
+            <td>Every vendor pricing page saved to the Internet Archive. A change flags the review for update</td>
+          </tr>
+          <tr>
+            <td><b>Demo videos</b></td>
+            <td><span class="pill">Monthly</span></td>
+            <td>New demos and reviews pulled and labeled by who made them</td>
           </tr>
           <tr>
             <td><b>Practitioner scores and rankings</b></td>
             <td><span class="pill">Quarterly</span></td>
-            <td>Full category re-evaluation, plus immediate review after major vendor changes</td>
+            <td>Full category re-evaluation, plus an immediate look whenever a monthly check moves something</td>
           </tr>
         </table>
         <p class="callout">
@@ -296,7 +322,7 @@ export const html = `<style>
       <div class="fcols">
         <div>
           <a href="#" class="logo" style="color:#fff;margin-bottom:14px;"><span class="logo-mark">H</span>Hiring.Productions</a>
-          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, tested, and updated quarterly.</p>
+          <p class="fabout">Independent reviews of hiring software for companies and job seekers. Researched, cited, and re-checked every month.</p>
           <p style="margin-top:14px;font-size:12.5px;">hello@hiring.productions</p>
         </div>
         <div class="flinks">
