@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Hub } from '@/app/(rebrand)/_components/hub'
+import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
+import { calcTools, money, seekerBoard, shortDate } from '@/app/(rebrand)/_components/data'
 import { benchmarks, formatCount, formatMonth, guide, latestCheck, resumeTools, risingPick, videos } from '@/lib/evidence'
 
 export const metadata: Metadata = {
@@ -15,25 +17,17 @@ const LINES: Record<string, string> = {
   flowcv: 'The only builder here that hands you a clean PDF for nothing.',
 }
 
-function money(n: number) {
-  return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
-}
-
-function shortDate(iso: string) {
-  const [y, m, d] = iso.split('-').map(Number)
-  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
-}
-
 export default function Page() {
   const { all } = resumeTools()
   const byId = Object.fromEntries(all.map((t) => [t.id, t]))
   const top = byId[guide.picks[0].tool]
   const traps = all.filter((t) => t.yearCost?.renewsEvery4Weeks)
   const checked = latestCheck()
+  const resumeIo = byId['resume-io']
 
   const pickRows = [
     ...guide.picks.map((p) => ({ t: byId[p.tool], label: p.label })),
-    { t: byId[risingPick.tool], label: "Stephanie's up-and-coming pick" },
+    { t: byId[risingPick.tool], label: risingPick.label },
   ]
 
   return (
@@ -42,36 +36,15 @@ export default function Page() {
       title="The tools that get you seen, ranked by someone who reads the other side."
       dek="Resume builders and ATS checkers, scored on dated public evidence and judged by a recruiter who knows what happens after you click apply."
       dateline={`Evidence checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
-      receipt={
-        <aside className="receipt" aria-label="Best overall right now">
-          <p className="receipt-h">Best overall right now: {top.name}</p>
-          <dl>
-            <div>
-              <dt>Users</dt>
-              <dd>
-                {top.userScore?.toFixed(1)} from {formatCount(top.citableReviews)} ratings
-              </dd>
-            </div>
-            <div>
-              <dt>Other lists</dt>
-              <dd>{top.counted.map((a) => (a.position ? `${a.list.publication} #${a.position}` : `${a.list.publication} pick`)).join(', ')}</dd>
-            </div>
-            <div>
-              <dt>Free tier</dt>
-              <dd>{top.freeTier}</dd>
-            </div>
-            <div>
-              <dt>A paid year</dt>
-              <dd>{top.yearCost ? `${money(top.yearCost.amount)} (${top.yearCost.how.toLowerCase()})` : 'n/a'}</dd>
-            </div>
-          </dl>
-          <p className="receipt-foot">
-            <a className="tl" href={`/guides/best-resume-tools#evidence-${top.id}`}>
-              Open the evidence file
-            </a>
-          </p>
-        </aside>
-      }
+      logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}` }))}
+      feature={{
+        domain: top.domain,
+        name: top.name,
+        title: 'Best overall right now',
+        line: `${top.userScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free tier is a real product.`,
+        href: `/reviews/${top.id}`,
+        linkText: `Is ${top.name} worth it?`,
+      }}
       situations={[
         {
           q: 'Applying and hearing nothing back?',
@@ -82,37 +55,59 @@ export default function Page() {
         {
           q: 'Rewriting your resume from scratch?',
           a: `FlowCV gives you a clean PDF for free. Kickresume is the paid pick at ${money(byId['kickresume'].yearCost?.amount ?? 96)} a year, flat.`,
-          href: '/guides/best-resume-tools#evidence-flowcv',
-          link: 'Compare the builders',
+          href: '/reviews/flowcv',
+          link: 'Read the FlowCV review',
         },
         {
           q: 'Worried about surprise charges?',
-          a: `${traps.map((t) => t.name).join(' and ')} renew every 4 weeks, which is 13 charges a year. The guide prints what a year of every tool costs.`,
-          href: '/guides/best-resume-tools#cost',
-          link: 'See what a year costs',
+          a: `${traps.map((t) => t.name).join(' and ')} renew every 4 weeks, which is 13 charges a year. Drag the calculator below to your timeline.`,
+          href: '#cost',
+          link: 'See what your search will cost',
         },
         {
           q: 'Losing track of applications?',
           a: `${top.name} keeps every application, contact and follow-up in one pipeline, and its free tier is enough to run a search.`,
-          href: `/guides/best-resume-tools#evidence-${top.id}`,
-          link: `Read ${top.name}'s evidence`,
+          href: `/reviews/${top.id}`,
+          link: `Read the ${top.name} review`,
         },
       ]}
       picks={pickRows.map(({ t, label }) => ({
-        href: `/guides/best-resume-tools#evidence-${t.id}`,
+        href: `/reviews/${t.id}`,
         label,
         name: t.name,
         domain: t.domain,
         line: LINES[t.id] ?? t.bestFor,
-        overall: t.overall?.toFixed(2) ?? 'n/e',
-        users: t.userScore !== null ? `${t.userScore.toFixed(1)} (${formatCount(t.citableReviews)})` : 'n/e',
+        overall: t.overall,
+        users: t.userScore,
+        usersNote: `${formatCount(t.citableReviews)} citable user reviews`,
       }))}
+      board={{
+        title: 'Resume builders and checkers',
+        checked: `checked ${shortDate(checked)}`,
+        rows: seekerBoard(),
+        foot: (
+          <>
+            Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel.
+          </>
+        ),
+      }}
+      extra={
+        <section className="wrap sec" id="cost">
+          <h2>What will your search actually cost?</h2>
+          <p className="lead">Drag to your timeline. Every tool re-sorts by the cheapest way to pay, and shows what happens if you forget to cancel.</p>
+          <div style={{ marginTop: 36 }}>
+            <CostCalculator tools={calcTools()} checked={shortDate(checked)} />
+          </div>
+        </section>
+      }
+      risingPick={{ t: byId[risingPick.tool], line: risingPick.line, confirmed: risingPick.confirmed }}
       guides={[
         {
           href: '/guides/best-resume-tools',
           title: 'The best resume tools of 2026',
-          detail: `${all.length} builders and checkers, ${benchmarks.length} rival lists, ${videos.length} labeled demo videos, and what a year of each costs.`,
+          detail: `${all.length} builders and checkers, ${benchmarks.length} rival lists, ${videos.length} labeled demo videos, and what your search will cost.`,
           meta: `Checked ${shortDate(checked)}`,
+          logos: all.slice(0, 6).map((t) => ({ domain: t.domain, name: t.name })),
         },
       ]}
       inResearch="job search trackers, interview practice, career coaching and LinkedIn profile tools"

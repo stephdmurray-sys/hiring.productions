@@ -1,54 +1,49 @@
 # DESIGN.md: the review site's design system
 
-Applies to the review site (the `app/(rebrand)/` pages). Read it before building or restyling any page. It exists because sites drift back to generic, AI-looking defaults unless the decisions are written down. Tokens and components live in `app/(rebrand)/_components/site-css.ts` and `site-chrome.tsx`.
+Applies to the review site (the `app/(rebrand)/` pages). Read it before building or restyling any page. It exists because sites drift, either back to generic AI-looking defaults or into a bland wall of text, unless the decisions are written down. Tokens live in `app/(rebrand)/_components/site-css.ts`; the shared pieces are in the same folder.
 
-## The idea
+## The idea: the stage
 
-hiring.productions is an evidence desk: it reads public evidence and prints its receipts. So pages look like a well-made report or ledger, not a SaaS template. Paper and ink, hairline rules, real tables, dates and figures set like receipts, and the brand colors used as marks.
+hiring.productions shows both sides of the table, so the page literally does: indigo is the job seeker's side, coral is the hiring team's side, and every tool shows up as its real logo. Color and logos make it feel alive. The evidence stays disciplined: every number is dated, sourced, and set in a real table or scoreboard.
+
+History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), to a gray "evidence desk" (looked dead), to this. Founder direction: "Logos are everything. Make it feel alive, not dead." She chose mockups B (Both sides) and C (Scoreboard).
 
 ## Tokens
 
 | Token | Value | Use |
 |---|---|---|
-| Paper | `#FAF8F3` | Page background everywhere |
-| Surface | `#FFFFFF` | Receipts, form fields, boxed notes |
-| Ink | `#1A1A22` | Text, rules, buttons |
-| Ink 2 / Ink 3 | `#4A4A5A` / `#77778A` | Body copy / captions and footnotes |
-| Rule | `#E3DED2` | Hairlines between rows |
-| Indigo | `#6C47FF` (text `#5432E0`) | Job seeker side: a dot, a link, a "breaks from the pack" call |
-| Coral | `#FF4F6A` (text `#C42E48`) | Hiring side dot, billing traps, warnings |
-| Green | `#1F8A55` | Success states only |
-| Type | Figtree (from the root layout) | Everything. Headlines 800 weight, tracking no tighter than -0.025em |
-| Figures | system monospace | Datelines, "checked" stamps, receipt footers. Small and sparing |
-| Radius | 3px | Buttons and inputs. Everything else is square |
+| Paper | `#FAF8F3` | Page background |
+| Surface | `#FFFFFF` | Cards, scoreboard, calculator, tables |
+| Ink | `#1A1A22` | Text, default buttons, the ticker |
+| Ink 2 / Ink 3 | `#4A4A5A` / `#6E6E80` | Body copy / captions |
+| Indigo | `#6C47FF` (text `#5432E0`) | Job seeker side: nav bar, seeker panel and hub hero, score bars, Stephanie's pick card |
+| Indigo ink | `#211457` | The backstage band (publisher logos) and the footer |
+| Coral | `#FF4F6A` (text `#C42E48`, on-coral text `#2A0B14`) | Hiring side panel and hub hero, hiring score bars, and billing traps |
+| Green | `#1F8A55` / `#5EE6A8` | Semantic only: "Counts", a completed step, success |
+| Type | Figtree, 900 for display | Hero H1 up to 84px, section H2 `clamp(40px,6vw,64px)` minimum |
+| Figures | system monospace | Datelines, "checked" stamps, the ticker |
+| Radius | 8px buttons, 14px cards and panels | |
 
-## Components
+## Components (all in `app/(rebrand)/_components/`)
 
-- **Page header:** breadcrumb, a big headline, a dek, a monospace dateline, and a 2px ink rule under it. No dark band.
-- **Ledger table:** a 2px ink rule on top, a 1px ink rule under the header, hairlines between rows, tabular figures.
-- **Rows:** a hairline-separated list (title on the left, detail on the right) in place of card grids.
-- **Receipt:** a flat white slip with a 1px ink border and dashed separators, used to show real evidence (homepage, hub heroes).
-- **Buttons:** one per moment, rectangular, solid ink. Everything else is an underlined text link.
-- **Stance:** words, not badges. "Agrees with the field" in ink, "Breaks from the pack" in indigo, "Too little evidence" in gray italic.
-- **Side marks:** a 9px dot, indigo for job seekers and coral for hiring teams. Never a fill or a gradient.
+- **Logo** (`logo.tsx`): the real logo on a white tile with a lettermark underneath. Use it everywhere a tool or publisher is named. Logos load in the visitor's browser (in the build sandbox they show as letters).
+- **Both-sides split** (homepage): an indigo half and a coral half, each with logos, one featured pick and one button.
+- **Ticker**: one ink strip of this month's findings, pauses on hover, still for reduced motion.
+- **Scoreboard** (`scoreboard.tsx`): rank, logo, name, publisher logos for the lists that name it, a bar that fills on load, the score. Indigo bars for job seeker tools, coral for hiring tools, a coral bar on the seeker board for 4-week billing.
+- **Cost calculator** (`cost-calculator.tsx`): drag months, tools re-sort by the cheapest way to pay, with the forget-to-cancel year beside it. Numbers come from `plans` in `lib/evidence/resume-guide.json`.
+- **On the rise** (`rising.tsx`): Stephanie's up-and-coming pick (indigo card with her photo) plus honorable mentions for tools too new to score. Each mention shows only evidence it has and a three-step path to a score (independent lists, 25 citable reviews, a recruiter walkthrough). Data: `lib/evidence/rising.json`.
+- **Hub hero** (`hub.tsx`): a full block of the side's color carrying every logo that side covers, and one white feature card.
+- **Review page** (`reviews/[tool]`): one per tool. Answers "is it worth it", "is it free", the real cost, who else names it, videos, alternatives and an FAQ with schema.
+- **Stance**: words in color. "Agrees with the field" green, "Breaks from the pack" indigo, "Too little evidence" gray italic.
 
-## Banned: the common tells of AI-generated sites
+## Rules that keep color from turning into slop
 
-Checked against current practitioner checklists (Nov 2026). Do not add:
-
-- Gradients of any kind, purple-to-pink above all, and gradient text
-- Glows, radial blobs, dark hero bands with neon accents
-- Glass or backdrop blur
-- Small uppercase letter-spaced "eyebrow" labels above headings or cards
-- Pill-shaped badges, chips and buttons
-- Big rounded cards (12px+ radius), drop shadows, cards inside cards
-- Hover lifts, scale-on-hover, pulsing "live" dots
-- Tilted or floating card stacks in a hero
-- A row of big stat numbers; "01 / 02 / 03" step cards
-- Three equal cards in a row as the default layout
-- Icons or logos in rounded tiles above every heading
-- Stock or placeholder people photos
-- The second AI wave too: cream backgrounds with serif display headlines and terracotta accents
+- Color marks a side or a fact. Indigo means job seeker, coral means hiring team or "this costs you". Never decoration.
+- No gradients, glows, glass blur or neon-on-black. Flat color blocks only. The one pattern allowed is the hatched "if you forget to cancel" bar, because it means something.
+- One CTA per section. The split hero is the exception: one per side.
+- No uppercase letter-spaced eyebrow labels, no pill badges, no hover lifts, no pulsing dots, no tilted card stacks, no rows of giant stat numbers.
+- Cards hold real evidence (a logo, a score, a source). Never a card for an icon and a slogan.
+- No stock people. The only face on the site is Stephanie's (`public/stephanie.jpg`).
 
 ## Copy tells to avoid
 

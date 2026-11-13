@@ -4,6 +4,11 @@ import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { HashOpener } from '@/app/(rebrand)/_components/hash-opener'
+import { Logo as BrandLogo } from '@/app/(rebrand)/_components/logo'
+import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
+import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
+import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
+import { calcTools } from '@/app/(rebrand)/_components/data'
 import { guidePageCss } from './guide-page-css'
 import {
   MIN_REVIEWS,
@@ -40,16 +45,15 @@ const ON_THIS_PAGE = [
   ['short', 'Picks'],
   ['agree', 'Do reviewers agree?'],
   ['rankings', 'Rankings'],
-  ['cost', 'What a year costs'],
+  ['cost', 'What it costs'],
+  ['rising', 'On the rise'],
   ['videos', 'Videos'],
   ['evidence', 'Evidence file'],
   ['faq', 'Questions'],
 ] as const
 
-function Logo({ domain, size = 16 }: { domain: string; size?: number }) {
-  return (
-    <img className="logo-img" src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`} width={size} height={size} alt="" />
-  )
+function Logo({ domain, name, size = 28 }: { domain: string; name: string; size?: number }) {
+  return <BrandLogo domain={domain} name={name} size={size} />
 }
 
 function money(n: number) {
@@ -109,8 +113,8 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
             <tr key={t.id}>
               <td className="num">{t.enoughEvidence ? t.rank : '–'}</td>
               <td className="tool-cell">
-                <Logo domain={t.domain} />
-                <a href={`#evidence-${t.id}`}>{t.name}</a>
+                <Logo domain={t.domain} name={t.name} />
+                <a href={`/reviews/${t.id}`}>{t.name}</a>
               </td>
               <td>{t.bestFor}</td>
               <td>{t.freeTier}</td>
@@ -136,7 +140,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
           {t.enoughEvidence ? `#${t.rank}` : '–'} {SEGMENT_LABEL[t.segment]}
         </span>
         <span className="ef-name">
-          <Logo domain={t.domain} size={18} />
+          <Logo domain={t.domain} name={t.name} size={30} />
           {t.name}
         </span>
         <span className="ef-score">{t.overall !== null ? t.overall.toFixed(2) : 'n/e'}</span>
@@ -258,9 +262,15 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
             </div>
           </dl>
         )}
-        <a href={`/go/${t.id}`} className="tl tl-strong ef-visit">
-          Visit {t.name} &#8599;
-        </a>
+        <p className="ef-visit">
+          <a href={`/reviews/${t.id}`} className="tl tl-strong">
+            Read the full {t.name} review &rarr;
+          </a>
+          <span className="faint"> &middot; </span>
+          <a href={`/go/${t.id}`} className="tl">
+            Visit {t.name} &#8599;
+          </a>
+        </p>
       </div>
     </details>
   )
@@ -287,12 +297,10 @@ export default function Page() {
   const ratingPlatforms = Array.from(new Set(all.flatMap((t) => t.ratings.map((r) => r.platform))))
   const ratingsRead = all.flatMap((t) => t.ratings.map((r) => r.asOf)).sort().slice(-1)[0]
   const rising = byId[risingPick.tool]
-  const costRows = all.filter((t) => t.yearCost).sort((a, b) => a.yearCost!.amount - b.yearCost!.amount)
-  const maxCost = Math.max(...costRows.map((t) => t.yearCost!.amount))
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + guidePageCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
       <HashOpener prefix="evidence-" />
       <SiteNav active="seekers" />
 
@@ -350,7 +358,7 @@ export default function Page() {
               <div className="pick" key={p.tool}>
                 <p className="pick-label">{p.label}</p>
                 <h3 className="pick-name">
-                  <Logo domain={t.domain} size={22} />
+                  <Logo domain={t.domain} name={t.name} size={44} />
                   {t.name}
                 </h3>
                 <p className="pick-line">
@@ -370,7 +378,7 @@ export default function Page() {
           <div className="pick pick-rising">
             <p className="pick-label">{risingPick.label}</p>
             <h3 className="pick-name">
-              <Logo domain={rising.domain} size={22} />
+              <Logo domain={rising.domain} name={rising.name} size={44} />
               {rising.name}
             </h3>
             <p className="pick-quote">&ldquo;{risingPick.line}&rdquo;</p>
@@ -416,7 +424,7 @@ export default function Page() {
               {all.map((t) => (
                 <tr key={t.id}>
                   <td className="tool-cell">
-                    <Logo domain={t.domain} />
+                    <Logo domain={t.domain} name={t.name} />
                     <a href={`#evidence-${t.id}`}>{t.name}</a>
                   </td>
                   <td className="nowrap">{rankLabel(t)}</td>
@@ -471,7 +479,7 @@ export default function Page() {
               {breaks.map((t) => (
                 <div className="row" key={t.id}>
                   <span className="row-title">
-                    <Logo domain={t.domain} size={18} /> {t.name}
+                    <Logo domain={t.domain} name={t.name} size={30} /> {t.name}
                   </span>
                   <div>
                     <p>{t.call.line}</p>
@@ -553,45 +561,27 @@ export default function Page() {
       </section>
 
       <section className="wrap sec" id="cost">
-        <h2>What a year really costs</h2>
+        <h2>What will your search actually cost?</h2>
         <p className="lead">
-          The sticker price is the trial. This is the cheapest published way to pay for 12 months of each paid plan. Plans billed every 4
-          weeks charge you 13 times a year.
+          The sticker price is the trial. Drag to your timeline: every tool re-sorts by the cheapest published way to pay for it, and shows
+          what the first year costs if you then forget to cancel.
         </p>
-        <div className="cost-chart" role="list">
-          {costRows.map((t) => {
-            const c = t.yearCost!
-            return (
-              <div className={`cost-row${c.renewsEvery4Weeks ? ' cost-trap' : ''}`} role="listitem" key={t.id}>
-                <span className="cost-name">
-                  <Logo domain={t.domain} />
-                  {t.name}
-                </span>
-                <span className="cost-track" aria-hidden="true">
-                  <i style={{ width: `${Math.max(3, (c.amount / maxCost) * 100)}%` }} />
-                </span>
-                <span className="cost-amt">
-                  {c.approx ? 'about ' : ''}
-                  {money(c.amount)}
-                </span>
-                <span className="cost-how">
-                  {c.how}
-                  {c.renewsEvery4Weeks && <b>. Renews every 4 weeks</b>}
-                  {t.freeTier.startsWith('Yes') && <>. Has a real free tier</>}
-                </span>
-              </div>
-            )
-          })}
+        <div style={{ marginTop: 36 }}>
+          <CostCalculator tools={calcTools()} checked={shortDate(ratingsRead)} />
         </div>
-        <p className="footnote">
-          Worked out from the vendors&rsquo; published prices, read {formatDate(ratingsRead)}. Pricing pages are saved to the Internet Archive
-          every month.
-        </p>
         <p className="boxnote">
           <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
           then only export plain text unless you pay. Resume.io&rsquo;s only citable review base is 1.5 out of 5 across 195 Product Hunt
           reviews, nearly all about exactly this.
         </p>
+      </section>
+
+      <section className="wrap sec" id="rising">
+        <h2>On the rise</h2>
+        <p className="lead">
+          Not resume tools, and too new for a score. These are the job search tools we&rsquo;re watching next.
+        </p>
+        <OnTheRise side="seekers" />
       </section>
 
       <section className="wrap sec" id="videos">
@@ -606,13 +596,18 @@ export default function Page() {
             return (
               <figure className="vid" key={v.youtubeId}>
                 <VideoEmbed youtubeId={v.youtubeId} title={v.title} />
-                <figcaption>
-                  <b>{t.name}</b>
-                  <span className="vid-kind">{VIDEO_KIND_LABEL[v.kind]}</span>
-                  <span className="vid-title">{v.title}</span>
-                  <span className="mono faint">
-                    {v.year && !v.title.includes(String(v.year)) ? `${v.year} · ` : ''}
-                    {v.verified ? 'channel confirmed' : 'label from the title, channel check pending'}
+                <figcaption className="vid-meta">
+                  <Logo domain={t.domain} name={t.name} size={36} />
+                  <span>
+                    <b>
+                      <a href={`/reviews/${t.id}`}>{t.name}</a>
+                    </b>
+                    <span className="vid-title">{v.title}</span>
+                    <span className={`vid-kind k-${v.kind}`}>{VIDEO_KIND_LABEL[v.kind]}</span>
+                    <span className="mono faint vid-check">
+                      {v.year && !v.title.includes(String(v.year)) ? `${v.year} · ` : ''}
+                      {v.verified ? 'channel confirmed' : 'label from the title, channel check pending'}
+                    </span>
                   </span>
                 </figcaption>
               </figure>

@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { CATALOG } from '@/lib/tools-catalog'
 import { RANK_ROLES } from '@/lib/rank-roles'
+import { resumeTools } from '@/lib/evidence'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://hiring.productions'
@@ -113,12 +114,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
     }))
 
+  // The review site: hubs, guides and one review page per tool. The
+  // tool pages answer the searches people make right before they pay
+  // ("is X worth it", "is X free", "X alternatives"), and they change
+  // every month with the evidence refresh.
+  const reviewPages: Entry[] = [
+    { path: '/for-job-seekers', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/for-hiring-teams', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/guides/best-resume-tools', priority: 0.95, changeFrequency: 'monthly' },
+    { path: '/guides/best-ats-for-small-teams', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/guides/best-recruiter-training', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/how-we-review', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/reviews', priority: 0.85, changeFrequency: 'monthly' },
+    ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),
+  ]
+
   // De-dupe: a few catalog hrefs (/resume, /jd-seo-score) collide with
   // staticPages entries, and the homepage already covers root.
   const seen = new Set(staticPages.map((p) => p.path))
   const merged = [
     ...staticPages,
     ...rankPages,
+    ...reviewPages.filter((p) => !seen.has(p.path)),
     ...toolPages.filter((p) => !seen.has(p.path)),
   ]
 

@@ -1,0 +1,59 @@
+{
+  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources, plus a recruiter walkthrough). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check.",
+  "minReviews": 25,
+  "tools": [
+    {
+      "id": "yoodli",
+      "name": "Yoodli",
+      "domain": "yoodli.ai",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "Practice interview answers out loud and get feedback on how they land.",
+      "evidence": [
+        { "publication": "SkillScouter", "domain": "skillscouter.com", "note": "#1 of 5 AI interview prep tools", "date": "2026-06", "url": "https://skillscouter.com/best-ai-interview-prep-tools/" },
+        { "publication": "TechPP", "domain": "techpp.com", "note": "Named in 8 AI interview prep tools", "date": "2026-08", "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/" }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "id": "revarta",
+      "name": "Revarta",
+      "domain": "revarta.com",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "Mock interviews by voice, scored question by question.",
+      "evidence": [
+        { "publication": "Fast Company", "domain": "fastcompany.com", "note": "#3 of 5 AI tools to land a job", "date": "2026", "url": "https://www.fastcompany.com/91514957/ai-job-search-tools" }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "id": "metaview",
+      "name": "Metaview",
+      "domain": "metaview.ai",
+      "side": "hiring",
+      "category": "Interview notes",
+      "what": "Takes structured interview notes so interviewers can listen instead of type.",
+      "evidence": [],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "id": "juicebox",
+      "name": "Juicebox",
+      "domain": "juicebox.ai",
+      "side": "hiring",
+      "category": "Sourcing",
+      "what": "Search for candidates in plain language instead of Boolean strings.",
+      "evidence": [],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    }
+  ]
+}

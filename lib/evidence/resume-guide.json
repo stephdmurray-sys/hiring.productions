@@ -51,7 +51,8 @@
         "amount": 316.0,
         "how": "4 quarters at $79",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Yes. The free tier is a real product, not a teaser. Teal+ is $29 a month or $79 a quarter."
     },
     "jobscan": {
       "bestFor": "Deep per-job match reports",
@@ -66,7 +67,8 @@
         "amount": 359.8,
         "how": "4 quarters at $89.95",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Partly. You get 5 free scans a month. Paid plans are $49.95 a month or $89.95 a quarter."
     },
     "resume-worded": {
       "bestFor": "Instant free score; the fixes cost $49/mo",
@@ -81,7 +83,8 @@
         "amount": 229.0,
         "how": "Annual plan",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Partly. The score is free; the fixes cost $49 a month or $229 a year."
     },
     "kickresume": {
       "bestFor": "Best paid builder. Templates recruiters read",
@@ -101,7 +104,8 @@
         "amount": 96.0,
         "how": "Annual plan",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Yes, with basic templates and real downloads. Premium is $96 a year, $54 a quarter or $24 a month."
     },
     "flowcv": {
       "bestFor": "The genuinely free builder. No watermark",
@@ -116,7 +120,8 @@
         "amount": 60.0,
         "how": "Pro annual plan",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Yes. The free plan gives you a watermark-free PDF. Pro is $60 a year."
     },
     "rezi": {
       "bestFor": "ATS-first formatting; $149 lifetime option",
@@ -131,7 +136,8 @@
         "amount": 149.0,
         "how": "Lifetime plan, paid once",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Partly: one resume and three PDF downloads. After that it's $29 a month, or $149 once for lifetime access."
     },
     "resume-io": {
       "bestFor": "Polished editor behind a billing trap",
@@ -151,7 +157,8 @@
         "amount": 392.3,
         "how": "$2.95 trial, then 13 renewals at $29.95",
         "renewsEvery4Weeks": true
-      }
+      },
+      "freeAnswer": "No. The free download is a .txt file with your formatting stripped. The real product is a $2.95 7-day trial that renews at $29.95 every 4 weeks."
     },
     "enhancv": {
       "bestFor": "Design-forward, trial-only",
@@ -167,7 +174,8 @@
         "how": "Two 6-month terms at about $80 each",
         "renewsEvery4Weeks": false,
         "approx": true
-      }
+      },
+      "freeAnswer": "No. There's a 7-day trial, and its downloads are watermarked. Plans start around $13.33 a month, billed every 6 months."
     },
     "novoresume": {
       "bestFor": "Clean free one-pager",
@@ -182,7 +190,8 @@
         "amount": 239.88,
         "how": "12 months at $19.99",
         "renewsEvery4Weeks": false
-      }
+      },
+      "freeAnswer": "Partly: a one-page PDF is free. Premium is $19.99 a month."
     },
     "zety": {
       "bestFor": "Heavily advertised; free download is .txt",
@@ -197,7 +206,129 @@
         "amount": 339.3,
         "how": "$1.95 trial, then 13 renewals at $25.95",
         "renewsEvery4Weeks": true
-      }
+      },
+      "freeAnswer": "No. The free download is a .txt file. The real product is a $1.95 14-day trial that renews at $25.95 every 4 weeks."
     }
+  },
+  "plans": {
+    "_about": "Paid plans as published on each pricing page (same source and date as the scorecard pricing). days = how long one payment covers. once = paid once, never renews. trial = only at the start, renews into the next plan. Used by the cost calculator.",
+    "teal": [
+      {
+        "label": "Teal+ monthly",
+        "price": 29,
+        "days": 30
+      },
+      {
+        "label": "Teal+ quarterly",
+        "price": 79,
+        "days": 91
+      },
+      {
+        "label": "Teal+ weekly",
+        "price": 13,
+        "days": 7
+      }
+    ],
+    "jobscan": [
+      {
+        "label": "Monthly",
+        "price": 49.95,
+        "days": 30
+      },
+      {
+        "label": "Quarterly",
+        "price": 89.95,
+        "days": 91
+      }
+    ],
+    "resume-worded": [
+      {
+        "label": "Monthly",
+        "price": 49,
+        "days": 30
+      },
+      {
+        "label": "Annual",
+        "price": 229,
+        "days": 365
+      }
+    ],
+    "kickresume": [
+      {
+        "label": "Monthly",
+        "price": 24,
+        "days": 30
+      },
+      {
+        "label": "Quarterly",
+        "price": 54,
+        "days": 91
+      },
+      {
+        "label": "Annual",
+        "price": 96,
+        "days": 365
+      }
+    ],
+    "flowcv": [
+      {
+        "label": "Pro annual",
+        "price": 60,
+        "days": 365
+      }
+    ],
+    "rezi": [
+      {
+        "label": "Monthly",
+        "price": 29,
+        "days": 30
+      },
+      {
+        "label": "Lifetime",
+        "price": 149,
+        "days": 36500,
+        "once": true
+      }
+    ],
+    "resume-io": [
+      {
+        "label": "7-day trial",
+        "price": 2.95,
+        "days": 7,
+        "trial": true
+      },
+      {
+        "label": "4-week renewal",
+        "price": 29.95,
+        "days": 28
+      }
+    ],
+    "enhancv": [
+      {
+        "label": "6-month term (about)",
+        "price": 80,
+        "days": 182
+      }
+    ],
+    "novoresume": [
+      {
+        "label": "Monthly",
+        "price": 19.99,
+        "days": 30
+      }
+    ],
+    "zety": [
+      {
+        "label": "14-day trial",
+        "price": 1.95,
+        "days": 14,
+        "trial": true
+      },
+      {
+        "label": "4-week renewal",
+        "price": 25.95,
+        "days": 28
+      }
+    ]
   }
 }

@@ -77,3 +77,9 @@ Set `nextCheck` to the first day of next month. Commit with a message naming the
 ## House rules for anything a visitor reads
 
 No em dashes. No emojis. No invented numbers: every figure is dated and sourced. Cite ratings as facts, never copy review text.
+
+## On the rise and the cost calculator (added Nov 2026)
+
+- `rising.json`: for each tool on the watchlist, re-check the lists in its `evidence` (still live, still naming it), count citable reviews on foundation sources and write the number to `citableReviews`. A tool with 25 or more citable reviews and a recruiter walkthrough graduates: move it into a scorecard and off this list. Add new names only with a linkable source; never add a line you can't trace. Set `verified: true` once each evidence line is confirmed on the live page.
+- `resume-guide.json` → `plans`: when a pricing page changes, update the plan prices and lengths. The calculator, every review page's cost table and `yearCost` all read from here (keep `yearCost` consistent with the plans).
+- `resume-guide.json` → `freeAnswer`: re-read if the free tier changed.

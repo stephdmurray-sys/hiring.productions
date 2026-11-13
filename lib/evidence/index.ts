@@ -16,6 +16,7 @@ import benchmarksData from './benchmarks.json'
 import videosData from './videos.json'
 import sourcesData from './sources.json'
 import guideData from './resume-guide.json'
+import risingData from './rising.json'
 
 export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
 export type Stance = 'agrees' | 'breaks' | 'thin'
@@ -97,6 +98,8 @@ export interface ToolEvidence {
   pricing: string
   bestFor: string
   pricingLine: string
+  /** Plain answer to "Is it free?", written by the editor. */
+  freeAnswer: string
   call: { stance: Stance; line: string }
   verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
   walkthrough: { date: string; by: string } | null
@@ -260,6 +263,7 @@ type ScorecardTool = (typeof scorecard.tools)[number]
 interface EditorialTool {
   bestFor: string
   pricingLine: string
+  freeAnswer: string
   call: { stance: Stance; line: string }
   verdict: { bestIf: string; skipIf: string; like: string; watch: string } | null
   walkthrough: { date: string; by: string } | null
@@ -294,6 +298,7 @@ function build(tool: ScorecardTool): ToolEvidence {
     pricing: tool.sources.pricing,
     bestFor: editorial.bestFor,
     pricingLine: editorial.pricingLine,
+    freeAnswer: editorial.freeAnswer,
     call: editorial.call as { stance: Stance; line: string },
     verdict: editorial.verdict,
     walkthrough: editorial.walkthrough as { date: string; by: string } | null,
@@ -368,3 +373,100 @@ export interface RisingPick {
 }
 
 export const risingPick = (guide as unknown as { risingPick: RisingPick }).risingPick
+
+export interface RisingEvidence {
+  publication: string
+  domain: string
+  note: string
+  date: string
+  url: string
+}
+
+export interface RisingTool {
+  id: string
+  name: string
+  domain: string
+  side: 'seekers' | 'hiring'
+  category: string
+  what: string
+  evidence: RisingEvidence[]
+  /** Citable reviews counted so far; null until the first full check. */
+  citableReviews: number | null
+  watchingSince: string
+  verified: boolean
+}
+
+/** On the rise: honorable mentions that have no score yet. Never ranked. */
+export const rising = {
+  minReviews: risingData.minReviews,
+  tools: risingData.tools as RisingTool[],
+}
+
+/** A pricing plan, for the cost calculator. days: how long one payment covers; once: never renews. */
+export interface Plan {
+  label: string
+  price: number
+  days: number
+  once?: boolean
+  /** A trial can only be bought once, at the start. */
+  trial?: boolean
+}
+
+const plansById = (guideData as unknown as { plans: Record<string, Plan[]> }).plans
+
+export function plansFor(id: string): Plan[] {
+  return plansById[id] ?? []
+}
+
+/**
+ * The cheapest way to pay for `days` of use, choosing among a tool's plans,
+ * with a trial (if any) used once at the start. Returns null if the tool
+ * has no paid plans on file.
+ */
+export function cheapestCover(id: string, days: number): { total: number; steps: string[] } | null {
+  const plans = plansFor(id)
+  if (!plans.length) return null
+  const repeatable = plans.filter((p) => !p.trial)
+  const trial = plans.find((p) => p.trial)
+  const solve = (need: number): { total: number; steps: string[] } => {
+    // best[d]: the cheapest way to cover d days with plans that can repeat
+    const best: { total: number; steps: string[] }[] = [{ total: 0, steps: [] }]
+    for (let d = 1; d <= need; d++) {
+      let pick = { total: Infinity, steps: [] as string[] }
+      for (const p of repeatable) {
+        const prev = p.once ? best[0] : best[Math.max(0, d - p.days)]
+        const total = prev.total + p.price
+        if (total < pick.total) pick = { total, steps: [...prev.steps, p.label] }
+      }
+      best[d] = pick
+    }
+    return best[need]
+  }
+  if (!trial) {
+    const plain = solve(days)
+    return { total: round(plain.total), steps: plain.steps }
+  }
+  // Sign-up starts with the trial, which renews into the paid plan.
+  const rest = solve(Math.max(0, days - trial.days))
+  return { total: round(trial.price + rest.total), steps: [trial.label, ...rest.steps] }
+}
+
+/** A search year: twelve 30-day months, matching the calculator. */
+export const SEARCH_YEAR_DAYS = 360
+
+/**
+ * What the first year costs if you pay the cheapest way for `days` and
+ * then forget to cancel: the last plan you bought keeps renewing until the
+ * year is covered. A plan paid once never renews.
+ */
+export function forgetCost(id: string, days: number): number | null {
+  const cover = cheapestCover(id, days)
+  if (!cover) return null
+  const plans = plansFor(id)
+  const bought = cover.steps.map((label) => plans.find((p) => p.label === label)!)
+  const last = bought[bought.length - 1]
+  if (!last || last.once) return cover.total
+  const covered = bought.reduce((s, p) => s + p.days, 0)
+  const renewals = Math.max(0, Math.ceil((SEARCH_YEAR_DAYS - covered) / last.days))
+  return round(cover.total + renewals * last.price)
+}
