@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Hub } from '@/app/(rebrand)/_components/hub'
-import { atsAsOf, atsGrowth, atsTools, hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
-import { formatMonth, guide } from '@/lib/evidence'
+import { atsAsOf, atsTools, hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
+import { formatMonth, guide, hiringPick } from '@/lib/evidence'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/for-hiring-teams' },
@@ -17,10 +17,6 @@ const PICKS = [
 ]
 
 export default function Page() {
-  const byName = Object.fromEntries(atsTools.map((t) => [t.name, t]))
-  const top = byName['Manatal']
-  const growth = atsGrowth(top)
-  const fastest = [...atsTools].sort((a, b) => (atsGrowth(b) ?? -1) - (atsGrowth(a) ?? -1))[0]
 
   return (
     <Hub
@@ -30,14 +26,20 @@ export default function Page() {
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: '/guides/best-ats-for-small-teams', tip: `${t.name} · ${t.overall_draft.toFixed(2)}` }))}
       feature={{
-        domain: top.domain,
-        name: top.name,
-        title: 'Small teams pick right now',
-        line: `Users rate it ${top.computed.user_score.toFixed(1)}.${growth !== null ? ` Reviews up ${Math.round(growth * 100)}% in a year${fastest.name === top.name ? `, the fastest of all ${atsTools.length}` : ''}.` : ''} ${top.sources.pricing.replace('/user/mo annual', ' per user a month, billed annually')}.`,
-        href: '/guides/best-ats-for-small-teams',
-        linkText: `See all ${atsTools.length}, ranked by team size`,
+        domain: hiringPick.domain,
+        name: hiringPick.name,
+        title: "Stephanie's top pick",
+        line: `${hiringPick.line} ${hiringPick.facts}.`,
+        href: '#rising',
+        linkText: 'Why it’s her pick, and where its score stands',
       }}
       situations={[
+        {
+          q: 'Sourcing without a dedicated sourcer?',
+          a: `${hiringPick.name} is Stephanie's top pick: search for people in plain language instead of Boolean strings. A sourcing scoreboard is in research now.`,
+          href: '#rising',
+          link: `Why ${hiringPick.name}`,
+        },
         {
           q: 'Hiring under 20 people a year?',
           a: 'Manatal leads the small-team standings at $15 per user. Breezy HR has the best free tier.',

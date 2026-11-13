@@ -10,8 +10,20 @@
       "category": "Interview practice",
       "what": "Practice interview answers out loud and get feedback on how they land.",
       "evidence": [
-        { "publication": "SkillScouter", "domain": "skillscouter.com", "note": "#1 of 5 AI interview prep tools", "date": "2026-06", "url": "https://skillscouter.com/best-ai-interview-prep-tools/" },
-        { "publication": "TechPP", "domain": "techpp.com", "note": "Named in 8 AI interview prep tools", "date": "2026-08", "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/" }
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "note": "#1 of 5 AI interview prep tools",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/"
+        },
+        {
+          "publication": "TechPP",
+          "domain": "techpp.com",
+          "note": "Named in 8 AI interview prep tools",
+          "date": "2026-08",
+          "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/"
+        }
       ],
       "citableReviews": null,
       "watchingSince": "2026-11",
@@ -25,7 +37,13 @@
       "category": "Interview practice",
       "what": "Mock interviews by voice, scored question by question.",
       "evidence": [
-        { "publication": "Fast Company", "domain": "fastcompany.com", "note": "#3 of 5 AI tools to land a job", "date": "2026", "url": "https://www.fastcompany.com/91514957/ai-job-search-tools" }
+        {
+          "publication": "Fast Company",
+          "domain": "fastcompany.com",
+          "note": "#3 of 5 AI tools to land a job",
+          "date": "2026",
+          "url": "https://www.fastcompany.com/91514957/ai-job-search-tools"
+        }
       ],
       "citableReviews": null,
       "watchingSince": "2026-11",
@@ -38,18 +56,6 @@
       "side": "hiring",
       "category": "Interview notes",
       "what": "Takes structured interview notes so interviewers can listen instead of type.",
-      "evidence": [],
-      "citableReviews": null,
-      "watchingSince": "2026-11",
-      "verified": false
-    },
-    {
-      "id": "juicebox",
-      "name": "Juicebox",
-      "domain": "juicebox.ai",
-      "side": "hiring",
-      "category": "Sourcing",
-      "what": "Search for candidates in plain language instead of Boolean strings.",
       "evidence": [],
       "citableReviews": null,
       "watchingSince": "2026-11",

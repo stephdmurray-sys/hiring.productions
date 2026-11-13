@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Logo } from './logo'
-import { formatCount, formatMonth, guide, latestCheck, rising, type RisingTool, type ToolEvidence } from '@/lib/evidence'
+import { formatCount, formatMonth, guide, hiringPick, latestCheck, resumeTools, rising, risingPick, type RisingTool } from '@/lib/evidence'
 
 /**
  * Waiting in the wings: tools too new for a score.
@@ -23,6 +23,12 @@ export const risingCss = `
   .note p{font-size:19px;line-height:1.6;color:var(--ink-2);max-width:520px;}
   .note .note-facts{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-top:16px;}
   .note .tl{display:inline-block;margin-top:14px;}
+  .note-pick + .note-pick{margin-top:36px;padding-top:4px;border-top:1px solid var(--rule);}
+  .note-side{display:flex;align-items:center;font-size:14px;font-weight:800;color:var(--ink-2);margin-top:24px;}
+  .note-side + .note-h{margin-top:10px;}
+  .note .note-status{font-size:15px;color:var(--ink-2);margin-top:12px;}
+  .note-ev{list-style:none;margin-top:10px;display:grid;gap:4px;font-size:13.5px;color:var(--ink-3);}
+  .note-ev a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;}
 
   .wing-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:start;padding:16px 22px;border-bottom:1px solid var(--rule-soft);}
   .wing-row:last-of-type{border-bottom:0;}
@@ -84,19 +90,64 @@ function WingRow({ t }: { t: RisingTool }) {
   )
 }
 
-export function OnTheRise({
-  side,
-  pick,
-}: {
-  side?: 'seekers' | 'hiring'
-  /** Stephanie's up-and-coming pick, when this page shows it. */
-  pick?: { t: ToolEvidence; line: string; confirmed: boolean } | null
-}) {
+interface Pick {
+  side: 'seekers' | 'hiring'
+  name: string
+  domain: string
+  heading: string
+  body: string
+  facts: string
+  status?: string
+  evidence?: { source: string; note: string; url: string }[]
+  href: string
+  external: boolean
+  linkText: string
+}
+
+/** Stephanie's picks, one per side: editorial judgment, labeled as hers, set beside the evidence. */
+function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
+  const seeker = resumeTools().all.find((t) => t.id === risingPick.tool)
+  const picks: Pick[] = []
+  if (seeker) {
+    picks.push({
+      side: 'seekers',
+      name: seeker.name,
+      domain: seeker.domain,
+      heading: 'My up-and-coming pick for job seekers',
+      body: risingPick.line.replace(/^The one I'd tell a friend about first\.\s*/, ''),
+      facts: [
+        seeker.userScore !== null ? `${seeker.userScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} users` : '',
+        seeker.rank ? `#${seeker.rank} ${seeker.segment}` : '',
+      ]
+        .filter(Boolean)
+        .join(' · '),
+      href: `/reviews/${seeker.id}`,
+      external: false,
+      linkText: `Is ${seeker.name} worth it?`,
+    })
+  }
+  picks.push({
+    side: 'hiring',
+    name: hiringPick.name,
+    domain: hiringPick.domain,
+    heading: `${hiringPick.label}`,
+    body: hiringPick.line,
+    facts: hiringPick.facts,
+    status: hiringPick.scoreStatus,
+    evidence: hiringPick.evidence,
+    href: hiringPick.url,
+    external: true,
+    linkText: `Visit ${hiringPick.name}`,
+  })
+  return picks.filter((p) => !side || p.side === side)
+}
+
+export function OnTheRise({ side, showPicks = false }: { side?: 'seekers' | 'hiring'; showPicks?: boolean }) {
   const tools = rising.tools.filter((t) => !side || t.side === side)
-  const body = pick?.line.replace(/^The one I'd tell a friend about first\.\s*/, '') ?? ''
+  const picks = showPicks ? founderPicks(side) : []
   return (
-    <div className={`wings${pick ? '' : ' solo'}`}>
-      {pick && (
+    <div className={`wings${picks.length ? '' : ' solo'}`}>
+      {picks.length > 0 && (
         <div className="note">
           <div className="note-by">
             <Image src="/stephanie.jpg" alt="" width={48} height={48} />
@@ -105,25 +156,46 @@ export function OnTheRise({
               Founder, 20 years in talent
             </span>
           </div>
-          <h3 className="note-h">
-            <Logo domain={pick.t.domain} name={pick.t.name} size={44} />
-            <span>
-              My up-and-coming pick: <a href={`/reviews/${pick.t.id}`}>{pick.t.name}</a>
-            </span>
-          </h3>
-          <p>{body}</p>
-          <p className="note-facts">
-            {pick.t.userScore !== null && `${pick.t.userScore.toFixed(1)} from ${formatCount(pick.t.citableReviews)} users`}
-            {pick.t.rank ? ` · #${pick.t.rank} ${pick.t.segment}` : ''}
-          </p>
-          <a className="tl tl-strong" href={`/reviews/${pick.t.id}`}>
-            Is {pick.t.name} worth it? <span className="arr">&rarr;</span>
-          </a>
+          {picks.map((p) => (
+            <div className="note-pick" key={p.name}>
+              {!side && (
+                <span className="note-side">
+                  <span className={p.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+                  {p.side === 'seekers' ? 'For job seekers' : 'For hiring teams'}
+                </span>
+              )}
+              <h3 className="note-h">
+                <Logo domain={p.domain} name={p.name} size={44} />
+                <span>
+                  {p.heading.replace(/ for (job seekers|hiring teams)$/, '')}:{' '}
+                  {p.external ? p.name : <a href={p.href}>{p.name}</a>}
+                </span>
+              </h3>
+              <p>{p.body}</p>
+              {p.status && <p className="note-status">{p.status}</p>}
+              {p.evidence && (
+                <ul className="note-ev">
+                  {p.evidence.map((e) => (
+                    <li key={e.url}>
+                      <a href={e.url} rel="nofollow noopener" target="_blank">
+                        {e.source}
+                      </a>
+                      : {e.note}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {!p.status && <p className="note-facts">{p.facts}</p>}
+              <a className="tl tl-strong" href={p.href} {...(p.external ? { rel: 'noopener', target: '_blank' } : {})}>
+                {p.linkText} {p.external ? <span className="arr">&#8599;</span> : <span className="arr">&rarr;</span>}
+              </a>
+            </div>
+          ))}
         </div>
       )}
-      <div className="board" aria-label="Not scored yet">
+      <div className="board" aria-label={picks.length ? 'Waiting in the wings' : 'Not scored yet'}>
         <div className="board-head">
-          <b>Not scored yet</b>
+          <b>{picks.length ? 'Waiting in the wings' : 'Not scored yet'}</b>
           <span>checked {shortDate(latestCheck())}</span>
         </div>
         {tools.map((t) => (

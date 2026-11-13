@@ -7,7 +7,6 @@ import { Scoreboard, boardCss, type BoardRow } from '@/app/(rebrand)/_components
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { calcCss } from '@/app/(rebrand)/_components/widgets-css'
 import { homeCss } from '@/app/(rebrand)/home-css'
-import type { ToolEvidence } from '@/lib/evidence'
 
 /**
  * Shared layout for the two audience hubs. The hero is a full block of the
@@ -42,7 +41,6 @@ export interface HubProps {
   board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode }
   /** Extra section after the scoreboard, e.g. the cost calculator. */
   extra?: ReactNode
-  risingPick?: { t: ToolEvidence; line: string; confirmed: boolean } | null
   guides: HubGuide[]
   inResearch: string
 }
@@ -154,9 +152,9 @@ export function Hub(props: HubProps) {
       {props.extra}
 
       <section className="wrap sec" id="rising">
-        <h2>Waiting in the wings</h2>
-        <p className="lead">Too new for a score, worth knowing about anyway.</p>
-        <OnTheRise side={props.side} pick={props.risingPick ?? null} />
+        <h2>Stephanie&rsquo;s pick</h2>
+        <p className="lead">A pick is my judgment. A score is the evidence. You get both, labeled, and one never changes the other.</p>
+        <OnTheRise side={props.side} showPicks />
       </section>
 
       <section className="wrap sec" id="guides">

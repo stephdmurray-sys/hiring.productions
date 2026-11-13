@@ -17,6 +17,7 @@ import videosData from './videos.json'
 import sourcesData from './sources.json'
 import guideData from './resume-guide.json'
 import risingData from './rising.json'
+import founderPicksData from './founder-picks.json'
 
 export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
 export type Stance = 'agrees' | 'breaks' | 'thin'
@@ -470,3 +471,21 @@ export function forgetCost(id: string, days: number): number | null {
   const renewals = Math.max(0, Math.ceil((SEARCH_YEAR_DAYS - covered) / last.days))
   return round(cover.total + renewals * last.price)
 }
+
+export interface HiringPick {
+  id: string
+  name: string
+  domain: string
+  url: string
+  category: string
+  label: string
+  line: string
+  confirmed: boolean
+  scoreStatus: string
+  facts: string
+  evidence: { source: string; note: string; url: string }[]
+  verified: boolean
+}
+
+/** Stephanie's pick for hiring teams: editorial, shown beside the evidence, never changes a score. */
+export const hiringPick = founderPicksData.hiring as HiringPick

@@ -20,6 +20,7 @@ import {
   resumeTools,
   rising,
   risingPick,
+  hiringPick,
   videos,
 } from '@/lib/evidence'
 import { homeCss } from './home-css'
@@ -69,6 +70,9 @@ export default function Home() {
     ),
     <>
       {pick.name}: {pick.userScore?.toFixed(1)} from {formatCount(pick.citableReviews)} users. Stephanie&rsquo;s up-and-coming pick
+    </>,
+    <>
+      Stephanie&rsquo;s top pick for hiring teams: <i>{hiringPick.name}</i>
     </>,
     <>
       {fastest.name} reviews up <b>{fastestPct}%</b> in a year, fastest of {atsTools.length} applicant tracking systems
@@ -237,9 +241,9 @@ export default function Home() {
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>Waiting in the wings</h2>
-        <p className="lead">Too new for a score, worth knowing about anyway. Plus the one Stephanie would tell a friend about first.</p>
-        <OnTheRise pick={{ t: pick, line: risingPick.line, confirmed: risingPick.confirmed }} />
+        <h2>Stephanie&rsquo;s picks</h2>
+        <p className="lead">A pick is my judgment. A score is the evidence. You get both, labeled, and one never changes the other.</p>
+        <OnTheRise showPicks />
       </section>
 
       <section className="band" id="lists">

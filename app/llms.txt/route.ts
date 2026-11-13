@@ -1,4 +1,4 @@
-import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, latestCheck, resumeTools, rising } from '@/lib/evidence'
+import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, hiringPick, latestCheck, resumeTools, rising, risingPick } from '@/lib/evidence'
 
 /**
  * llms.txt: a plain-text map of the review site for AI assistants and
@@ -45,6 +45,11 @@ ${checkers.map(line).join('\n')}
 ## Tool reviews: resume builders
 
 ${builders.map(line).join('\n')}
+
+## Stephanie's picks (editorial; a pick never changes a score)
+
+- For job seekers: ${resumeTools().all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
+- For hiring teams: ${hiringPick.name} (${hiringPick.category}), her top pick. ${hiringPick.scoreStatus}
 
 ## Waiting in the wings (watching, not scored)
 

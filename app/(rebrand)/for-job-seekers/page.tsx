@@ -84,7 +84,6 @@ export default function Page() {
           </div>
         </section>
       }
-      risingPick={{ t: byId[risingPick.tool], line: risingPick.line, confirmed: risingPick.confirmed }}
       guides={[
         {
           href: '/guides/best-resume-tools',
