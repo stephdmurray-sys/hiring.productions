@@ -329,6 +329,23 @@
         "price": 25.95,
         "days": 28
       }
+    ],
+    "huntr": [
+      {
+        "label": "Pro monthly",
+        "price": 40,
+        "days": 30
+      },
+      {
+        "label": "Pro quarterly",
+        "price": 90,
+        "days": 91
+      },
+      {
+        "label": "Pro 6-month",
+        "price": 160,
+        "days": 182
+      }
     ]
   }
 }

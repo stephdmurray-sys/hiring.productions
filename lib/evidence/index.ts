@@ -393,6 +393,8 @@ export interface RisingTool {
   board: string | null
   /** For a tool with enough reviews: what still stands between it and a score. */
   missing?: string
+  /** Partial scoring done so far (live reads), kept until the last input arrives. */
+  scoring?: Record<string, string | number>
   id: string
   name: string
   domain: string

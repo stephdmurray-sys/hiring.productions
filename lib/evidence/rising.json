@@ -13,20 +13,36 @@
         {
           "publication": "Chrome Web Store",
           "domain": "chromewebstore.google.com",
-          "note": "4.8 from about 1,100 ratings",
+          "note": "4.6 from about 1,300 ratings and 90,000 users",
           "date": "2026-11",
-          "url": "https://chromewebstore.google.com/detail/huntr-job-search-tracker/mihdfbecejheednfigjpdacgeilhlmnf/reviews"
+          "url": "https://chromewebstore.google.com/detail/huntr-job-search-tracker/mihdfbecejheednfigjpdacgeilhlmnf"
         }
       ],
-      "citableReviews": 1100,
+      "citableReviews": 1300,
       "watchingSince": "2026-11",
-      "verified": false,
+      "verified": true,
       "trigger": [
         "founder-nomination"
       ],
       "checkDue": "2026-12",
-      "board": "Resume tools (beside Teal)",
-      "missing": "Traffic data, a live read of its pricing (sources disagree), and a recruiter walkthrough."
+      "board": "Resume tools: ATS checkers, beside Teal",
+      "missing": "A recruiter walkthrough, which is 40% of the score. Reviews, traffic and pricing are in.",
+      "scoring": {
+        "readOn": "2026-11-13",
+        "user": 4.6,
+        "userBasis": "Chrome Web Store, about 1,300 ratings (shown as 1.3K), read live. Trustpilot excluded by policy; Product Hunt pending permission; G2 blocks automated reading.",
+        "trancoRank": 181450,
+        "trancoDate": "2026-11-12",
+        "trafficScore": 2.29,
+        "reviewVolumeScore": 4.26,
+        "footprintScore": 3.27,
+        "marketScore": 2.89,
+        "formula": "Same as every resume tool: traffic = 8.5911 - 1.1978 x log10(rank); volume = -0.5847 + 1.5918 x log10(reviews), clamped 1 to 5; footprint = their average; market = half footprint, half the neutral 2.5 momentum prior.",
+        "pricing": "Free: unlimited base resumes, free PDF export, 2 job-tailored resumes, basic matching and scoring, up to 100 tracked jobs. Pro: $40 a month, $90 every 3 months, or $160 every 6 months.",
+        "yearCost": 320,
+        "yearCostHow": "Two 6-month terms at $160",
+        "overallIfPractitioner": "0.25 x 2.89 + 0.35 x 4.6 + 0.40 x (recruiter read) = 2.33 + 0.4 x read"
+      }
     },
     {
       "id": "yoodli",
