@@ -5,7 +5,7 @@
  * from here, so a monthly refresh (see REFRESH.md) updates the JSON and
  * every page that shows the number changes with it.
  *
- *   lib/scorecards/resume-tools.json  ratings, prices, traffic, practitioner drafts
+ *   lib/scorecards/resume-tools.json  ratings, prices, traffic (scores are computed here, data only)
  *   lib/evidence/benchmarks.json      other reviewers' lists
  *   lib/evidence/videos.json          demo and review videos
  *   lib/evidence/sources.json         which sources we use and the rules for each
@@ -94,7 +94,9 @@ export interface ToolEvidence {
   enoughEvidence: boolean
   userScore: number | null
   marketScore: number
-  practitionerScore: number
+  criticsScore: number
+  valueScore: number
+  freeLevel: FreeLevel
   overall: number | null
   freeTier: string
   pricing: string
@@ -127,7 +129,24 @@ export type GridCell =
   | { state: 'unknown' }
   | { state: 'not-covered' }
 
-export const WEIGHTS = { market: 0.25, user: 0.35, practitioner: 0.4 }
+/**
+ * Every score is public data. Nobody's opinion is an input, the founder's
+ * included: her judgment appears only as labeled picks, never in a score.
+ *   users    what real users rate it, count-weighted, foundation sources only
+ *   market   traffic rank, review volume and review growth
+ *   critics  how current, independent best-of lists rank it
+ *   value    what a year costs, whether the free version is usable, billing traps
+ * If a whole category has no data for a component (critics for applicant
+ * tracking systems, for now), the other components share its weight.
+ */
+export const WEIGHTS = { user: 0.4, market: 0.25, critics: 0.2, value: 0.15 }
+export type FreeLevel = 'full' | 'limited' | 'none'
+export const FREE_LEVEL_SCORE: Record<FreeLevel, number> = { full: 5, limited: 3, none: 1 }
+export const FREE_LEVEL_LABEL: Record<FreeLevel, string> = {
+  full: 'A usable resume, free, with no watermark or tiny cap',
+  limited: 'Usable, but capped',
+  none: 'Nothing usable without paying',
+}
 export const MIN_REVIEWS = 25
 
 export const STATUS_LABEL: Record<ListStatus, string> = {
@@ -217,9 +236,37 @@ export function userScoreFrom(ratings: Rating[]): { score: number | null; citabl
   return { score: round(weighted), citable }
 }
 
-export function overallFrom(market: number, user: number | null, practitioner: number): number | null {
-  if (user === null) return null
-  return round(WEIGHTS.market * market + WEIGHTS.user * user + WEIGHTS.practitioner * practitioner)
+export function overallFrom(parts: { user: number | null; market: number; critics?: number | null; value?: number | null }): number | null {
+  if (parts.user === null) return null
+  const entries: [number, number][] = [
+    [WEIGHTS.user, parts.user],
+    [WEIGHTS.market, parts.market],
+  ]
+  if (parts.critics != null) entries.push([WEIGHTS.critics, parts.critics])
+  if (parts.value != null) entries.push([WEIGHTS.value, parts.value])
+  const w = entries.reduce((a, [wt]) => a + wt, 0)
+  return round(entries.reduce((a, [wt, v]) => a + wt * v, 0) / w)
+}
+
+/**
+ * Critics: 2.5 to start (not being named is unknown, not bad, because we
+ * can't read every list in full), +0.75 for each current independent list
+ * that names the tool, +0.5 more when it places in that list's top three.
+ */
+export function criticsFrom(counted: Appearance[]): number {
+  const bonus = counted.reduce((a, c) => a + 0.75 + (c.position !== undefined && c.position <= 3 ? 0.5 : 0), 0)
+  return round(Math.min(5, 2.5 + bonus))
+}
+
+/**
+ * Value: half how usable the free version is, half what a year costs
+ * (5 at $100 or less, 1 at $400 or more, straight line between), minus 1
+ * for a cheap trial that renews every 4 weeks.
+ */
+export function valueFrom(freeLevel: FreeLevel, yearCost: YearCost | null, renews4w: boolean): number {
+  const cost = yearCost ? Math.max(1, Math.min(5, 5 - (4 * (yearCost.amount - 100)) / 300)) : 3
+  const v = 0.5 * FREE_LEVEL_SCORE[freeLevel] + 0.5 * cost - (renews4w ? 1 : 0)
+  return round(Math.max(1, Math.min(5, v)))
 }
 
 export function formatCount(n: number): string {
@@ -263,6 +310,7 @@ function appearancesFor(toolId: string): { counted: Appearance[]; notCounted: Ap
 type ScorecardTool = (typeof scorecard.tools)[number]
 
 interface EditorialTool {
+  freeLevel: FreeLevel
   bestFor: string
   pricingLine: string
   freeAnswer: string
@@ -281,8 +329,10 @@ function build(tool: ScorecardTool): ToolEvidence {
   const ratings = usableRatings(tool.sources.ratings as { platform: string; rating: number; reviews: number; as_of: string }[])
   const { score: userScore, citable } = userScoreFrom(ratings)
   const marketScore = tool.computed.market_traction_score
-  const practitionerScore = tool.product_score_draft
   const { counted, notCounted } = appearancesFor(id)
+  const yearCost = editorial.yearCost ?? null
+  const criticsScore = criticsFrom(counted)
+  const valueScore = valueFrom(editorial.freeLevel, yearCost, !!yearCost?.renewsEvery4Weeks)
   return {
     id,
     name: tool.name,
@@ -294,8 +344,10 @@ function build(tool: ScorecardTool): ToolEvidence {
     enoughEvidence: userScore !== null,
     userScore,
     marketScore,
-    practitionerScore,
-    overall: overallFrom(marketScore, userScore, practitionerScore),
+    criticsScore,
+    valueScore,
+    freeLevel: editorial.freeLevel,
+    overall: overallFrom({ user: userScore, market: marketScore, critics: criticsScore, value: valueScore }),
     freeTier: tool.sources.free_tier,
     pricing: tool.sources.pricing,
     bestFor: editorial.bestFor,
@@ -304,7 +356,7 @@ function build(tool: ScorecardTool): ToolEvidence {
     call: editorial.call as { stance: Stance; line: string },
     verdict: editorial.verdict,
     walkthrough: editorial.walkthrough as { date: string; by: string } | null,
-    yearCost: editorial.yearCost ?? null,
+    yearCost,
     counted,
     notCounted,
     videos: videos.filter((v) => v.tool === id),
@@ -313,13 +365,13 @@ function build(tool: ScorecardTool): ToolEvidence {
   }
 }
 
-/** Rank inside each segment: overall score first, thin-evidence tools last by practitioner score. */
+/** Rank inside each segment: overall score first; tools without enough reviews last, by review count. */
 function rankSegment(tools: ToolEvidence[]): ToolEvidence[] {
   const sorted = [...tools].sort((a, b) => {
     if (a.overall !== null && b.overall !== null) return b.overall - a.overall
     if (a.overall !== null) return -1
     if (b.overall !== null) return 1
-    return b.practitionerScore - a.practitionerScore
+    return b.citableReviews - a.citableReviews
   })
   return sorted.map((t, i) => ({ ...t, rank: i + 1 }))
 }
@@ -576,4 +628,36 @@ export function coverageReport(today = latestCheck()) {
     overdue: queue.filter((q) => q.overdue),
     categoryGaps: [...gaps.entries()].map(([category, tools]) => ({ category, tools })),
   }
+}
+
+import atsData from '@/lib/scorecards/ats-small-teams.json'
+
+/**
+ * Applicant tracking systems: users, market and value. No critics yet,
+ * because we don't track independent ATS lists yet; the other three share
+ * its weight. Value for an ATS is about whether the price is public:
+ * published price and a free tier 5, published price 3.5, quote-only 2.
+ */
+export function atsValueFrom(pricing: string, freeTier: boolean): number {
+  const published = !/quote|custom|contact/i.test(pricing)
+  return published ? (freeTier ? 5 : 3.5) : 2
+}
+
+export type AtsTool = (typeof atsData.tools)[number]
+
+export function atsScores(t: AtsTool) {
+  const user = t.computed.user_score
+  const market = t.computed.market_traction_score
+  const value = atsValueFrom(t.sources.pricing, !!t.sources.free_tier)
+  return { user, market, value, overall: overallFrom({ user, market, value }) as number }
+}
+
+/** The top data score in each team-size tier. */
+export function atsLeaders(): Record<string, string> {
+  const best: Record<string, { name: string; o: number }> = {}
+  for (const t of atsData.tools) {
+    const o = atsScores(t).overall
+    if (!best[t.segment] || o > best[t.segment].o) best[t.segment] = { name: t.name, o }
+  }
+  return Object.fromEntries(Object.entries(best).map(([seg, v]) => [seg, v.name]))
 }

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/for-job-seekers' },
   title: 'For Job Seekers: Resume Tools Ranked on Evidence',
   description:
-    'Resume builders and ATS checkers scored on dated public evidence and judged by a recruiter who knows what happens after you click apply.',
+    'Resume builders and ATS checkers scored on dated public data: what users say, what independent reviewers pick, and what a year really costs.',
 }
 
 export default function Page() {
@@ -27,8 +27,8 @@ export default function Page() {
   return (
     <Hub
       side="seekers"
-      title="The tools that get you seen, ranked by someone who reads the other side."
-      dek="Resume builders and ATS checkers, scored on dated public evidence and judged by a recruiter who knows what happens after you click apply."
+      title="The tools that get you seen, ranked on the evidence."
+      dek="Resume builders and ATS checkers, scored on dated public data: what users say, what independent reviewers pick, and what a year really costs. Picked out by a recruiter who reads the other side."
       dateline={`Evidence checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
       feature={{

@@ -208,7 +208,7 @@ export function OnTheRise({ side, showPicks = false }: { side?: 'seekers' | 'hir
           <WingRow t={t} key={t.id} />
         ))}
         <div className="board-foot">
-          A tool gets a score once it has {rising.minReviews} citable reviews and a recruiter walkthrough.{' '}
+          A tool gets a score once it has {rising.minReviews} reviews on sources we can cite. Every score is public data.{' '}
           <a className="tl" href="/how-we-review#radar">
             How tools get on our radar
           </a>

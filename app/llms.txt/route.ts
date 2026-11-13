@@ -27,7 +27,7 @@ Evidence last checked: ${latestCheck()}. Re-checked monthly.
 
 ## How scores work
 
-- Overall = ${WEIGHTS.market * 100}% market traction + ${WEIGHTS.user * 100}% user ratings + ${WEIGHTS.practitioner * 100}% practitioner (recruiter) read.
+- Overall = ${WEIGHTS.user * 100}% users + ${WEIGHTS.market * 100}% market + ${WEIGHTS.critics * 100}% critics + ${WEIGHTS.value * 100}% value. Every input is public, dated data; no one's personal score is an input. Stephanie's picks are labeled editorial and never change a score.
 - A tool needs at least ${MIN_REVIEWS} citable user reviews from foundation sources to be scored. G2, Capterra, GetApp and Software Advice share one review pool and count once.
 - Each month we re-read the other "best resume tool" lists. ${counting.length} of ${benchmarks.length} currently count; the rest are out of date or published by companies that sell what they rank.
 - Full method: ${BASE}/how-we-review

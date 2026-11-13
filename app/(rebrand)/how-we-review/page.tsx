@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/how-we-review'
-import { discovery } from '@/lib/evidence'
+import { atsScores, discovery } from '@/lib/evidence'
+import ats from '@/lib/scorecards/ats-small-teams.json'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/how-we-review' },
   title: 'How We Review',
-  description: 'Three scores, three sources, refreshed on a schedule. Exactly how our hiring software reviews work, and how a tool gets on our radar.',
+  description: 'Four scores, all public data, re-read every month. Exactly how our reviews work, why no personal opinion is an input, and how a tool gets on our radar.',
 }
 
 function esc(s: string) {
@@ -29,12 +30,19 @@ function radarSection() {
           ${rows}
         </table>
         <p class="callout"><b>Follower counts don&rsquo;t count.</b> ${esc(followers.why)}</p>
-        <p style="margin-top:20px">Getting checked is not the same as getting ranked. Discovery puts a tool in the queue; only citable reviews, market data and a recruiter&rsquo;s read move a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
+        <p style="margin-top:20px">Getting checked is not the same as getting ranked. Discovery puts a tool in the queue; only public data (users, market, critics and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
       </section>
 `
 }
 
 export default function Page() {
-  const withRadar = html.replace('<section id="refresh">', `${radarSection()}\n      <section id="refresh">`)
+  const breezy = ats.tools.find((t) => t.name === 'Breezy HR')!
+  const b = atsScores(breezy)
+  const withRadar = html
+    .replace('<section id="refresh">', `${radarSection()}\n      <section id="refresh">`)
+    .replace(
+      /<div class="rating"><span class="stars">[\s\S]*?Practitioner Score <span class="when">in final review<\/span><\/div>/,
+      `<div class="rating"><span class="stars"><span class="stars-fill" style="width:${(b.value / 5) * 100}%"></span></span><b>${b.value.toFixed(1)}</b> Value Score <span class="when">published price and a free tier</span></div>`,
+    )
   return <MockPage html={withRadar} active="review" />
 }

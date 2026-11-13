@@ -5,7 +5,8 @@ import { WEIGHTS } from '@/lib/evidence'
  * The scoreboard: rank, logo, name, who else names it, a filling bar and
  * the score. Bars take the side's color (indigo for job seekers, coral for
  * hiring teams); a coral bar on the job seeker board marks a tool that
- * renews every 4 weeks.
+ * renews every 4 weeks. Hovering a row splits its bar into the public data
+ * the score is built from: users, market, critics (when tracked) and value.
  */
 
 export interface BoardRow {
@@ -22,7 +23,7 @@ export interface BoardRow {
   /** An editor's label, e.g. "Best overall", set after the name in the side's color. */
   tag?: string
   /** The three scores the overall is built from. Hovering a row splits the bar into them. */
-  parts?: { users: number; market: number; recruiter: number }
+  parts?: { users: number; market: number; critics?: number; value: number }
 }
 
 export const boardCss = `
@@ -54,19 +55,21 @@ export const boardCss = `
   a.board-row:hover .bar-fill,a.board-row:focus-visible .bar-fill{gap:3px;}
   .board-seekers a.board-row:not(.trap):hover .bar-fill i.p-u{background:var(--indigo);}
   .board-seekers a.board-row:not(.trap):hover .bar-fill i.p-m{background:var(--lavender);}
-  .board-seekers a.board-row:not(.trap):hover .bar-fill i.p-r{background:var(--indigo-ink);}
+  .board-seekers a.board-row:not(.trap):hover .bar-fill i.p-c{background:var(--indigo-ink);}
+  .board-seekers a.board-row:not(.trap):hover .bar-fill i.p-v{background:#CFC3FF;}
   .board-hiring a.board-row:hover .bar-fill i.p-u,a.board-row.trap:hover .bar-fill i.p-u{background:var(--coral);}
   .board-hiring a.board-row:hover .bar-fill i.p-m,a.board-row.trap:hover .bar-fill i.p-m{background:#FFB3C0;}
-  .board-hiring a.board-row:hover .bar-fill i.p-r,a.board-row.trap:hover .bar-fill i.p-r{background:#8E1F33;}
+  .board-hiring a.board-row:hover .bar-fill i.p-c,a.board-row.trap:hover .bar-fill i.p-c{background:#8E1F33;}
+  .board-hiring a.board-row:hover .bar-fill i.p-v,a.board-row.trap:hover .bar-fill i.p-v{background:#FFD9E0;}
   .board-sub{display:grid;margin-top:3px;}
   .board-sub > span{grid-area:1 / 1;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .2s ease,transform .2s ease;}
-  .board-sub .sub-parts{opacity:0;transform:translateY(4px);gap:12px;}
+  .board-sub .sub-parts{opacity:0;transform:translateY(4px);gap:10px;}
   .sub-parts b{font-weight:800;color:var(--ink);display:inline;font-size:13px;}
   .sub-parts i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;}
   a.board-row:hover .sub-main,a.board-row:focus-visible .sub-main{opacity:0;transform:translateY(-4px);}
   a.board-row:hover .sub-parts,a.board-row:focus-visible .sub-parts{opacity:1;transform:none;}
-  .board-seekers .sub-parts .k-u{background:var(--indigo);}.board-seekers .sub-parts .k-m{background:var(--lavender);}.board-seekers .sub-parts .k-r{background:var(--indigo-ink);}
-  .board-hiring .sub-parts .k-u,.board-row.trap .sub-parts .k-u{background:var(--coral);}.board-hiring .sub-parts .k-m,.board-row.trap .sub-parts .k-m{background:#FFB3C0;}.board-hiring .sub-parts .k-r,.board-row.trap .sub-parts .k-r{background:#8E1F33;}
+  .board-seekers .sub-parts .k-u{background:var(--indigo);}.board-seekers .sub-parts .k-m{background:var(--lavender);}.board-seekers .sub-parts .k-c{background:var(--indigo-ink);}.board-seekers .sub-parts .k-v{background:#CFC3FF;}
+  .board-hiring .sub-parts .k-u,.board-row.trap .sub-parts .k-u{background:var(--coral);}.board-hiring .sub-parts .k-m,.board-row.trap .sub-parts .k-m{background:#FFB3C0;}.board-hiring .sub-parts .k-c,.board-row.trap .sub-parts .k-c{background:#8E1F33;}.board-hiring .sub-parts .k-v,.board-row.trap .sub-parts .k-v{background:#FFD9E0;}
 
   /* Publisher logos fan out so each list is visible */
   .board-row .lg-stack .lg{transition:margin .25s ease;}
@@ -143,9 +146,15 @@ export function Scoreboard({
                     <i className="k-m" />
                     Market <b>{t.parts.market.toFixed(1)}</b>
                   </span>
+                  {t.parts.critics !== undefined && (
+                    <span>
+                      <i className="k-c" />
+                      Critics <b>{t.parts.critics.toFixed(1)}</b>
+                    </span>
+                  )}
                   <span>
-                    <i className="k-r" />
-                    Recruiter <b>{t.parts.recruiter.toFixed(1)}</b>
+                    <i className="k-v" />
+                    Value <b>{t.parts.value.toFixed(1)}</b>
                   </span>
                 </span>
               )}
@@ -157,7 +166,8 @@ export function Scoreboard({
                 <>
                   <i className="p-u" style={{ flexGrow: WEIGHTS.user * t.parts.users }} />
                   <i className="p-m" style={{ flexGrow: WEIGHTS.market * t.parts.market }} />
-                  <i className="p-r" style={{ flexGrow: WEIGHTS.practitioner * t.parts.recruiter }} />
+                  {t.parts.critics !== undefined && <i className="p-c" style={{ flexGrow: WEIGHTS.critics * t.parts.critics }} />}
+                  <i className="p-v" style={{ flexGrow: WEIGHTS.value * t.parts.value }} />
                 </>
               ) : (
                 <i style={{ flexGrow: 1 }} />

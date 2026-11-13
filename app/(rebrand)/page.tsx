@@ -22,6 +22,8 @@ import {
   risingPick,
   hiringPick,
   videos,
+  atsLeaders,
+  atsScores,
 } from '@/lib/evidence'
 import { homeCss } from './home-css'
 
@@ -33,7 +35,6 @@ export const metadata: Metadata = {
 }
 
 const SEEKER_LOGOS = ['teal', 'kickresume', 'flowcv', 'jobscan', 'rezi', 'resume-worded', 'enhancv', 'novoresume']
-const ATS_TAGS: Record<string, string> = { Manatal: 'Small teams pick', Pinpoint: 'Growing teams pick', Ashby: 'Scaling teams pick' }
 const HIRING_LOGOS = ['Manatal', 'Pinpoint', 'Ashby', 'Greenhouse', 'Teamtailor', 'Workable', 'BambooHR', 'Breezy HR']
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
   const pick = byId[risingPick.tool]
   const resumeIo = byId['resume-io']
   const kick = byId['kickresume']
-  const smallPick = atsByName['Manatal']
+  const smallPick = atsByName[atsLeaders().small]
   const smallPrice = smallPick.sources.pricing.match(/\$\d+/)?.[0]
   const fastest = [...atsTools].sort((a, b) => (atsGrowth(b) ?? -1) - (atsGrowth(a) ?? -1))[0]
   const fastestPct = Math.round((atsGrowth(fastest) ?? 0) * 100)
@@ -90,6 +91,8 @@ export default function Home() {
   ].filter(Boolean)
 
   const featured = videos.filter((v) => v.featured).slice(0, 3)
+  const SEG_LABEL: Record<string, string> = { small: 'Small teams pick', growing: 'Growing teams pick', scaling: 'Scaling teams pick' }
+  const ATS_TAGS: Record<string, string> = Object.fromEntries(Object.entries(atsLeaders()).map(([seg, name]) => [name, SEG_LABEL[seg]]))
   const TAGS: Record<string, string> = Object.fromEntries([
     ...guide.picks.map((p) => [p.tool, p.label]),
     [risingPick.tool, "Stephanie's pick"],
@@ -147,7 +150,7 @@ export default function Home() {
               {HIRING_LOGOS.map((n) => atsByName[n])
                 .filter(Boolean)
                 .map((t) => (
-                  <a key={t.name} href="/guides/best-ats-for-small-teams" aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${t.overall_draft.toFixed(2)}`}>
+                  <a key={t.name} href="/guides/best-ats-for-small-teams" aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
                     <Logo domain={t.domain} name={t.name} size={52} />
                   </a>
                 ))}
@@ -182,7 +185,7 @@ export default function Home() {
         <div className="sec-head">
           <div>
             <h2>This month&rsquo;s scoreboard</h2>
-            <p className="lead">What users say, how the market moves, and a recruiter&rsquo;s read, in one dated score. Open any tool for the full review.</p>
+            <p className="lead">What users say, how the market moves, what independent reviewers pick and what a year really costs, in one dated score. Open any tool for the full review.</p>
           </div>
         </div>
         <div className="boards">
@@ -223,7 +226,7 @@ export default function Home() {
           </div>
         </div>
         <p className="board-note">
-          Scores blend market (25%), users (35%) and a practitioner read (40%). Practitioner scores are in final review.{' '}
+          Every score is public data: users (40%), market (25%), critics (20%) and value (15%). Hover a row to see the parts.{' '}
           <a className="tl" href="/how-we-review">
             How we score
           </a>

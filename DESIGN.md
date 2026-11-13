@@ -29,7 +29,7 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 - **Logo** (`logo.tsx`): the real logo on a white tile with a lettermark underneath. Use it everywhere a tool or publisher is named. Logos load in the visitor's browser (in the build sandbox they show as letters).
 - **Both-sides split** (homepage): an indigo half and a coral half, each with logos, one featured pick and one button.
 - **Ticker**: one ink strip of this month's findings, pauses on hover, still for reduced motion.
-- **Scoreboard** (`scoreboard.tsx`): rank, logo, name, publisher logos for the lists that name it, a bar that fills on load, the score. Indigo bars for job seeker tools, coral for hiring tools, a coral bar on the seeker board for 4-week billing.
+- **Scoreboard** (`scoreboard.tsx`): rank, logo, name, publisher logos for the lists that name it, a bar that fills on load, the score. Every score is public data (users, market, critics, value); hovering splits the bar into those four. Indigo bars for job seeker tools, coral for hiring tools, a coral bar on the seeker board for 4-week billing.
 - **Cost calculator** (`cost-calculator.tsx`): drag months, tools re-sort by the cheapest way to pay, with the forget-to-cancel year beside it. Numbers come from `plans` in `lib/evidence/resume-guide.json`.
 - **Waiting in the wings** (`rising.tsx`): tools too new to score, set as rows on a board titled "Not scored yet" (an extension of the scoreboard, like a chart's "bubbling under"). Each row shows only evidence it has. Beside it, Stephanie's up-and-coming pick is set like a columnist's note: byline with her photo, one sentence, a link. Data: `lib/evidence/rising.json`.
 - **Pick labels** live on the scoreboard rows ("Best overall", "Small teams pick") in the side's color, not on separate pick cards.
@@ -41,7 +41,7 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 
 Every movement on the site reveals evidence. None of it is decoration.
 - Score bars fill when they scroll into view (`motion.tsx`).
-- Hovering a scoreboard row splits its bar into users, market and recruiter, and the line under the name swaps to those three numbers.
+- Hovering a scoreboard row splits its bar into users, market, critics and value, and the line under the name swaps to those numbers.
 - Publisher logos fan out on hover so each list is visible.
 - Logo tiles show the tool's name and score; list tiles show why a list counts or doesn't.
 - In the calculator, rows slide into their new order as you drag.

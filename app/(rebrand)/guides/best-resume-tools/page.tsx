@@ -104,10 +104,11 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
             <th>Best for</th>
             <th>Actually free?</th>
             <th>Price</th>
-            <th className="num">Overall*</th>
-            <th className="num">User</th>
+            <th className="num">Overall</th>
+            <th className="num">Users</th>
             <th className="num">Market</th>
-            <th className="num">Practitioner*</th>
+            <th className="num">Critics</th>
+            <th className="num">Value</th>
           </tr>
         </thead>
         <tbody>
@@ -124,7 +125,8 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
               <td className="num tscore">{t.overall !== null ? t.overall.toFixed(2) : <span className="faint">n/e&dagger;</span>}</td>
               <td className="num">{t.userScore !== null ? t.userScore.toFixed(1) : <span className="faint">n/e&dagger;</span>}</td>
               <td className="num">{t.marketScore.toFixed(2)}</td>
-              <td className="num">{t.practitionerScore.toFixed(1)}</td>
+              <td className="num">{t.criticsScore.toFixed(2)}</td>
+              <td className="num">{t.valueScore.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -156,7 +158,8 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
           <div className="sbars">
             <Bar label="User" value={t.userScore} />
             <Bar label="Market" value={t.marketScore} places={2} />
-            <Bar label="Practitioner*" value={t.practitionerScore} />
+            <Bar label="Critics" value={t.criticsScore} places={2} />
+            <Bar label="Value" value={t.valueScore} places={2} />
           </div>
           <dl className="facts">
             <div>
@@ -562,8 +565,9 @@ export default function Page() {
         <RankTable tools={builders} />
         <p className="footnote">
           Ratings read {formatDate(ratingsRead)} from dated public sources: {ratingPlatforms.join(', ')}. The G2 family (G2, Capterra,
-          GetApp, Software Advice) shares one review pool and counts once. *Practitioner and Overall scores are in final review. &dagger;n/e:
-          fewer than {MIN_REVIEWS} citable public reviews. Methodology on <a href="/how-we-review">How We Review</a>.
+          GetApp, Software Advice) shares one review pool and counts once. Overall blends users (40%), market (25%), critics (20%) and value
+          (15%), all from public data; no one&rsquo;s personal score is an input. &dagger;n/e: fewer than {MIN_REVIEWS} citable public
+          reviews. Methodology on <a href="/how-we-review">How We Review</a>.
         </p>
       </section>
 

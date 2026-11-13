@@ -3,13 +3,14 @@
   "as_of": "2026-08-22",
   "methodology": {
     "weights": {
+      "user": 0.4,
       "market_traction": 0.25,
-      "user": 0.35,
-      "product": 0.4
+      "value": 0.15,
+      "critics": "not tracked yet for ATS; the other three share its weight"
     },
     "market_traction": "Mean of Footprint and Momentum. Footprint: mean of traffic score (5 - 1.2*(log10(Tranco rank)-3), clamped 1-5; suite-level domains use volume only) and review-volume score (1 + 1.6*(log10(total reviews)-1), clamped 1-5). Momentum: annualized review-count growth vs an Internet Archive snapshot of the same public page, scored 2 + 6*growth, clamped 1-5; capped at 3.5 when absolute gain < 20 reviews; requires a >= 120-day window; tools without a usable archive get a neutral 2.5 prior, never their footprint alone.",
     "user": "Average of public G2 and Capterra ratings weighted by review count, cited as dated facts.",
-    "product": "Expert rubric + vendor submittals. DRAFT until founder markup.",
+    "product": "Retired Nov 2026. The expert rubric was a draft awaiting founder markup; scores are now data only (users, market, value).",
     "collection": "Manual, logged-out citation of public pages, search listings, and Internet Archive snapshots. No accounts, no scraping, no bot-defense bypass.",
     "momentum_rationale": "All-time review totals reward incumbency. Momentum measures direction of travel from a dated baseline forward, so a 3-year-old product competes on current trajectory, not accumulated history. Known limitation: velocity partly reflects vendor review campaigns; anomalous spikes are flagged and re-verified at the next refresh.",
     "segments": "Tools are ranked within team-size tiers, not against each other across tiers. Small: under 20 hires a year, no full-time recruiter. Growing: 20 to 50 hires a year, first dedicated recruiter. Scaling: 50+ hires a year, dedicated TA function. Axis is hires per year plus who runs hiring, not company headcount, because hiring volume is what determines tool fit."
@@ -50,8 +51,6 @@
         "market_traction_score": 4.03,
         "user_score": 4.74
       },
-      "product_score_draft": 4.4,
-      "overall_draft": 4.43,
       "data_notes": "",
       "segment": "small"
     },
@@ -90,8 +89,6 @@
         "market_traction_score": 4.35,
         "user_score": 4.6
       },
-      "product_score_draft": 4.2,
-      "overall_draft": 4.38,
       "data_notes": "",
       "segment": "growing"
     },
@@ -130,8 +127,6 @@
         "market_traction_score": 3.49,
         "user_score": 4.76
       },
-      "product_score_draft": 4.3,
-      "overall_draft": 4.26,
       "data_notes": "",
       "segment": "growing"
     },
@@ -170,8 +165,6 @@
         "market_traction_score": 4.05,
         "user_score": 4.48
       },
-      "product_score_draft": 3.9,
-      "overall_draft": 4.14,
       "data_notes": "Full HRIS; review volume reflects whole suite",
       "segment": "growing"
     },
@@ -210,8 +203,6 @@
         "market_traction_score": 3.0,
         "user_score": 4.47
       },
-      "product_score_draft": 4.5,
-      "overall_draft": 4.11,
       "data_notes": "",
       "segment": "small"
     },
@@ -250,8 +241,6 @@
         "market_traction_score": 3.56,
         "user_score": 4.42
       },
-      "product_score_draft": 4.0,
-      "overall_draft": 4.04,
       "data_notes": "",
       "segment": "scaling"
     },
@@ -290,8 +279,6 @@
         "market_traction_score": 3.18,
         "user_score": 4.68
       },
-      "product_score_draft": 4.2,
-      "overall_draft": 4.11,
       "data_notes": "Capterra sample tiny (12 reviews) | Practitioner score set by founder 2026-08-23: startup-native, clearly ahead of Greenhouse/Lever for scaling teams.",
       "segment": "scaling"
     },
@@ -330,8 +317,6 @@
         "market_traction_score": 3.57,
         "user_score": 4.44
       },
-      "product_score_draft": 3.9,
-      "overall_draft": 4.01,
       "data_notes": "Tranco excluded: suite-level domain. G2 count lowest-confidence",
       "segment": "small"
     },
@@ -370,8 +355,6 @@
         "market_traction_score": 2.99,
         "user_score": 4.48
       },
-      "product_score_draft": 4.2,
-      "overall_draft": 4.0,
       "data_notes": "G2 product listing 4.6/443; seller aggregate 4.4/702",
       "segment": "growing"
     },
@@ -410,8 +393,6 @@
         "market_traction_score": 2.77,
         "user_score": 4.36
       },
-      "product_score_draft": 4.4,
-      "overall_draft": 3.98,
       "data_notes": "G2 count varies across snippets (483-843)",
       "segment": "growing"
     },
@@ -450,8 +431,6 @@
         "market_traction_score": 2.84,
         "user_score": 4.47
       },
-      "product_score_draft": 4.1,
-      "overall_draft": 3.91,
       "data_notes": "Now branded Tellent Recruitee",
       "segment": "growing"
     },
@@ -490,8 +469,6 @@
         "market_traction_score": 3.44,
         "user_score": 4.37
       },
-      "product_score_draft": 3.3,
-      "overall_draft": 3.71,
       "data_notes": "Practitioner score set by founder 2026-08-23: ranked below Fountain.",
       "segment": "scaling"
     },
@@ -530,8 +507,6 @@
         "market_traction_score": 2.65,
         "user_score": 4.43
       },
-      "product_score_draft": 4.0,
-      "overall_draft": 3.81,
       "data_notes": "EUR pricing only",
       "segment": "small"
     },
@@ -570,8 +545,6 @@
         "market_traction_score": 2.69,
         "user_score": 4.37
       },
-      "product_score_draft": 3.8,
-      "overall_draft": 3.72,
       "data_notes": "Capterra figure from single snippet",
       "segment": "scaling"
     }

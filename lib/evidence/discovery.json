@@ -1,5 +1,5 @@
 {
-  "_about": "The discovery net: how a tool gets onto our radar, so a good one is never left out because nobody happened to look. Discovery and scoring are separate: these signals put a tool in the check queue; only foundation sources (sources.json) and the practitioner read ever move a score. Rules are enforced by coverageReport() in index.ts and shown on /desk.",
+  "_about": "The discovery net: how a tool gets onto our radar, so a good one is never left out because nobody happened to look. Discovery and scoring are separate: these signals put a tool in the check queue; only public data (users, market, critics and value) ever moves a score. Rules are enforced by coverageReport() in index.ts and shown on /desk.",
   "rules": [
     "One trigger is enough. If a tool trips any trigger below, it enters the check queue.",
     "Every tool in the queue is checked within one monthly cycle: count its citable reviews on foundation sources, read the lists that name it, and record its category. An unchecked entry past its due month shows as overdue on /desk.",

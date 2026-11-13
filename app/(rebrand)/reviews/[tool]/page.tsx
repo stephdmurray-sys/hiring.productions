@@ -9,6 +9,7 @@ import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
 import { money, seekerRow, shortDate } from '@/app/(rebrand)/_components/data'
 import {
+  FREE_LEVEL_LABEL,
   MIN_REVIEWS,
   STANCE_LABEL,
   STATUS_LABEL,
@@ -192,8 +193,13 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                     </span>
                   </div>
                   <Meter label="Users" value={t.userScore} note={`${formatCount(t.citableReviews)} citable reviews`} />
-                  <Meter label="Market" value={t.marketScore} note="traffic and footprint" />
-                  <Meter label="Practitioner" value={t.practitionerScore} note="recruiter read, in final review" />
+                  <Meter label="Market" value={t.marketScore} note="traffic, review volume and growth" />
+                  <Meter
+                    label="Critics"
+                    value={t.criticsScore}
+                    note={t.counted.length ? `named on ${t.counted.length} independent list${t.counted.length === 1 ? '' : 's'}` : 'no independent list names it yet'}
+                  />
+                  <Meter label="Value" value={t.valueScore} note={`${FREE_LEVEL_LABEL[t.freeLevel].toLowerCase()}${t.yearCost ? `; ${money(t.yearCost.amount)} a paid year` : ''}`} />
                 </>
               ) : (
                 <>

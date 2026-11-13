@@ -93,3 +93,7 @@ Why this exists: in Nov 2026 Juicebox, Stephanie's top pick for hiring teams, sa
 3. Write the outcome: scored (move it into a scorecard), in the wings (real counts, what's missing), or dropped (reason, in the log).
 4. Report category gaps to Stephanie with every tool stuck in each one. Building a board is her call; leaving a gap unreported is not an option.
 5. Discovery never moves a score. Follower counts, awards and vendors' own lists are not signals (see `notSignals`).
+
+## Scores are data only (Nov 2026)
+
+Stephanie's direction: her score never goes on the board. Every score is computed from public data: users 40%, market 25%, critics 20%, value 15% (formulas in `lib/evidence/index.ts`; ATS uses users, market and value until independent ATS lists are tracked). Never add a hand-set or rubric score. Her judgment appears only as labeled picks (`founder-picks.json`, `risingPick` in `resume-guide.json`) and as watchlist nominations, and never changes a score. Older notes in this file that mention practitioner scores are superseded.

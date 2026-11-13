@@ -152,7 +152,7 @@ export const html = `<style>
   <div class="wrap layout">
     <aside class="toc">
       <p class="toc-h">On this page</p>
-      <a href="#scores" class="on">The three scores</a>
+      <a href="#scores" class="on">The four scores</a>
         <a href="#sources">Where the numbers come from</a>
       <a href="#agree">Do other reviewers agree?</a>
       <a href="#example">What it looks like</a>
@@ -163,36 +163,45 @@ export const html = `<style>
 
     <div class="content">
       <section id="scores">
-        <h2>Three scores, three different sources</h2>
+        <h2>Four scores, all public data</h2>
         <p class="lead">
-          Every tool carries three scores, calculated independently and always
-          shown separately, because a tool can be popular and still be wrong for
-          you. The weighted blend only sets the order of the list.
+          Every tool is scored on four things anyone could check, each from dated
+          public data. No one&rsquo;s personal opinion is an input, ours included.
+          Stephanie&rsquo;s picks appear separately, labeled as hers, and never
+          change a score.
         </p>
+        <style>@media(min-width:761px){#scores .score-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}</style>
         <div class="score-cards">
+          <div class="scard">
+            <p class="pct">40%</p>
+            <h3>User Score</h3>
+            <p>What the people who use it rate it, weighted by how many reviews each source holds. No score at all below 25 citable reviews.</p>
+            <p class="src"><b>Source:</b> G2 (counted once for its family of sites), the Chrome Web Store and the app stores. Re-read monthly.</p>
+          </div>
           <div class="scard">
             <p class="pct">25%</p>
             <h3>Market Score</h3>
-            <p>Footprint and momentum: web-traffic rank, total review volume, and review velocity, meaning how fast real users are adopting the tool right now, measured against dated archive baselines.</p>
+            <p>Footprint and momentum: web-traffic rank, total review volume, and how fast real users are adopting the tool right now, measured against dated archive baselines.</p>
             <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive baselines. Re-read monthly.</p>
           </div>
           <div class="scard">
-            <p class="pct">35%</p>
-            <h3>User Score</h3>
-            <p>What daily users report: satisfaction, support quality, and the complaints that repeat.</p>
-            <p class="src"><b>Source:</b> synthesized monthly from public user reviews. Our words, never copied.</p>
+            <p class="pct">20%</p>
+            <h3>Critics Score</h3>
+            <p>How current, independent best-of lists rank it. Being named adds; not being named doesn&rsquo;t subtract, because no one can read every list in full. Lists published by companies that sell what they rank never count.</p>
+            <p class="src"><b>Source:</b> every list we track, re-read monthly for its date, its picks and its owner.</p>
           </div>
           <div class="scard">
-            <p class="pct">40%</p>
-            <h3>Practitioner Score</h3>
-            <p>The recruiter&rsquo;s eye: how the tool holds up in real hiring workflows, and what only demos well.</p>
-            <p class="src"><b>Source:</b> 18 years of in-house talent acquisition. Re-scored quarterly.</p>
+            <p class="pct">15%</p>
+            <h3>Value Score</h3>
+            <p>What a year really costs, whether the free version gives you something usable, and whether a cheap trial renews every 4 weeks. For hiring software: whether the price is public at all.</p>
+            <p class="src"><b>Source:</b> vendor pricing pages, saved to the Internet Archive every month.</p>
           </div>
         </div>
         <p class="callout">
-          <b>Weights apply to ranking position only.</b> All three scores are
-          always displayed separately on every review, so you can weigh them
-          your own way.
+          <b>Weights set the order of the list, nothing more.</b> All four scores
+          show separately on every review, so you can weigh them your own way. If
+          a whole category has no data for one score yet (critics, for applicant
+          tracking systems today), the other scores share its weight.
         </p>
       </section>
 
@@ -215,7 +224,7 @@ export const html = `<style>
           </div>
           <div class="ecard">
             <span class="etag etag-sub">Breaks from the pack</span>
-            <p>We rank it somewhere the other lists don&rsquo;t, higher or lower, and the review says exactly why. This is where a practitioner&rsquo;s read earns its keep.</p>
+            <p>We rank it somewhere the other lists don&rsquo;t, higher or lower, and the review says exactly why. Usually it&rsquo;s the users or the price telling a different story than the lists.</p>
           </div>
           <div class="ecard">
             <span class="etag etag-res">Too little evidence</span>
@@ -227,7 +236,7 @@ export const html = `<style>
 
       <section id="example">
         <h2>What it looks like on a review</h2>
-        <p class="lead">Every scorecard shows the three scores, the evidence level, and when each input last refreshed.</p>
+        <p class="lead">Every scorecard shows the four scores, the evidence level, and when each input last refreshed.</p>
         <div class="sample">
           <div class="sample-head">
             <span class="sample-id">
@@ -289,9 +298,9 @@ export const html = `<style>
             <td>New demos and reviews pulled and labeled by who made them</td>
           </tr>
           <tr>
-            <td><b>Practitioner scores and rankings</b></td>
-            <td><span class="pill">Quarterly</span></td>
-            <td>Full category re-evaluation, plus an immediate look whenever a monthly check moves something</td>
+            <td><b>Rankings</b></td>
+            <td><span class="pill">Monthly</span></td>
+            <td>Recomputed from the four scores every time the data is re-read. Nobody adjusts a rank by hand</td>
           </tr>
         </table>
         <p class="callout">

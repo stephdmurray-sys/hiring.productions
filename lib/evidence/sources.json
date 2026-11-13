@@ -9,7 +9,11 @@
       "status": "foundation",
       "reads": "Star rating and review count, dated.",
       "rule": "Counted once for the whole G2 family. G2 announced in January 2026 that it bought Capterra, GetApp and Software Advice, and the four share one review pool, so averaging any two would count the same reviews twice. G2 publishes a citation policy: credit G2 and link back.",
-      "family": ["Capterra", "GetApp", "Software Advice"]
+      "family": [
+        "Capterra",
+        "GetApp",
+        "Software Advice"
+      ]
     },
     {
       "id": "chrome-web-store",
@@ -97,7 +101,7 @@
       "role": "demos",
       "status": "foundation",
       "reads": "A live product walkthrough or a hands-on trial, run with the same questions every time.",
-      "rule": "The strongest evidence on the site. The date and who ran it are shown on the review."
+      "rule": "Confirms what a review says about features and pricing, with the date and who ran it shown. Never an input to a score: scores are public data only."
     },
     {
       "id": "trustpilot",

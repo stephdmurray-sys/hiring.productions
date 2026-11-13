@@ -1,50 +1,7 @@
 {
-  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources, plus a recruiter walkthrough). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check. Each tool records why it is here (trigger, see discovery.json), the month its check is due (checkDue), and the scoreboard it would rank on (board; null means its category has no board yet, a category gap).",
+  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources; every score is public data). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check. Each tool records why it is here (trigger, see discovery.json), the month its check is due (checkDue), and the scoreboard it would rank on (board; null means its category has no board yet, a category gap).",
   "minReviews": 25,
   "tools": [
-    {
-      "id": "huntr",
-      "name": "Huntr",
-      "domain": "huntr.co",
-      "side": "seekers",
-      "category": "Job tracker and resume builder",
-      "what": "Tracks every application on one board, saves jobs from any site, and builds and tailors your resume for each one.",
-      "evidence": [
-        {
-          "publication": "Chrome Web Store",
-          "domain": "chromewebstore.google.com",
-          "note": "4.6 from about 1,300 ratings and 90,000 users",
-          "date": "2026-11",
-          "url": "https://chromewebstore.google.com/detail/huntr-job-search-tracker/mihdfbecejheednfigjpdacgeilhlmnf"
-        }
-      ],
-      "citableReviews": 1300,
-      "watchingSince": "2026-11",
-      "verified": true,
-      "trigger": [
-        "founder-nomination"
-      ],
-      "checkDue": "2026-12",
-      "board": "Resume tools: ATS checkers, beside Teal",
-      "missing": "A recruiter walkthrough, which is 40% of the score. Reviews, traffic and pricing are in.",
-      "scoring": {
-        "readOn": "2026-11-13",
-        "user": 4.6,
-        "userBasis": "Chrome Web Store, about 1,300 ratings (shown as 1.3K), read live. Trustpilot excluded by policy; Product Hunt pending permission; G2 blocks automated reading.",
-        "trancoRank": 181450,
-        "trancoDate": "2026-11-12",
-        "trafficScore": 2.29,
-        "reviewVolumeScore": 4.38,
-        "footprintScore": 3.34,
-        "marketScore": 2.92,
-        "formula": "Same rules as every tool: traffic = 5 - 1.2 x (log10(rank) - 3); review volume = 1 + 1.6 x (log10(reviews) - 1), both clamped 1 to 5; footprint = their average; market = average of footprint and momentum, with momentum held at the neutral 2.5 until an Internet Archive snapshot at least 120 days old confirms growth.",
-        "pricing": "Free: unlimited base resumes, free PDF export, 2 job-tailored resumes, basic matching and scoring, up to 100 tracked jobs. Pro: $40 a month, $90 every 3 months, or $160 every 6 months.",
-        "yearCost": 320,
-        "yearCostHow": "Two 6-month terms at $160",
-        "overallIfPractitioner": "0.25 x 2.92 + 0.35 x 4.6 + 0.40 x (recruiter read) = 2.34 + 0.4 x read",
-        "g2": "G2 listing exists but has 0 reviews; it is filed under Academic Advising for Huntr's career-center product. Read by Stephanie on the live page, Nov 13 2026."
-      }
-    },
     {
       "id": "yoodli",
       "name": "Yoodli",
@@ -118,6 +75,15 @@
       ],
       "checkDue": "2026-12",
       "board": null
+    }
+  ],
+  "graduated": [
+    {
+      "id": "huntr",
+      "name": "Huntr",
+      "date": "2026-11-13",
+      "to": "Resume tools: ATS checkers",
+      "note": "Nominated Nov 13, checked the same day: 1,300 citable ratings, traffic and pricing read live."
     }
   ]
 }

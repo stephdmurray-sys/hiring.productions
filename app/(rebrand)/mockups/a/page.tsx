@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { atsScores } from '@/lib/evidence'
 import { Logo, MOCK_LINES, MockBanner, bannerCss, logoCss, mockData, money, PUBLISHER_DOMAINS } from '../mock-kit'
 import { formatCount } from '@/lib/evidence'
 
@@ -276,9 +277,9 @@ export default function MockA() {
                 <b>{t.name}</b>
               </span>
               <span className="a-score">
-                <b>{t.overall_draft.toFixed(2)}</b>
+                <b>{atsScores(t).overall.toFixed(2)}</b>
                 <span className="a-bar">
-                  <i style={{ width: `${(t.overall_draft / 5) * 100}%` }} />
+                  <i style={{ width: `${(atsScores(t).overall / 5) * 100}%` }} />
                 </span>
               </span>
               <p>{line}</p>

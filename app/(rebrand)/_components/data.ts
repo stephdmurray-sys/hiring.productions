@@ -3,7 +3,7 @@
  * the guide and the review pages.
  */
 import ats from '@/lib/scorecards/ats-small-teams.json'
-import { cheapestCover, forgetCost, formatCount, resumeTools, type ToolEvidence } from '@/lib/evidence'
+import { cheapestCover, forgetCost, formatCount, resumeTools, type ToolEvidence, atsScores } from '@/lib/evidence'
 import { PUBLISHER_DOMAINS } from './logo'
 import type { BoardRow } from './scoreboard'
 import type { CalcTool } from './cost-calculator'
@@ -32,7 +32,7 @@ export function seekerRow(t: ToolEvidence): BoardRow {
     lists: t.counted.map((a) => ({ publication: a.list.publication, domain: PUBLISHER_DOMAINS[a.list.publication] ?? '' })),
     sub: t.userScore !== null ? `${t.userScore.toFixed(1)} from ${formatCount(t.citableReviews)} users` : 'Too few reviews to score users',
     trap: !!t.yearCost?.renewsEvery4Weeks,
-    parts: t.userScore !== null ? { users: t.userScore, market: t.marketScore, recruiter: t.practitionerScore } : undefined,
+    parts: t.userScore !== null ? { users: t.userScore, market: t.marketScore, critics: t.criticsScore, value: t.valueScore } : undefined,
   }
 }
 
@@ -56,8 +56,9 @@ export function atsGrowth(t: AtsTool): number | null {
 /** Applicant tracking systems, best first. Fast-growing review counts are called out. */
 export function hiringBoard(limit?: number): BoardRow[] {
   const rows = [...ats.tools]
-    .sort((a, b) => b.overall_draft - a.overall_draft)
+    .sort((a, b) => atsScores(b).overall - atsScores(a).overall)
     .map((t) => {
+      const sc = atsScores(t)
       const g = atsGrowth(t)
       const sub =
         g !== null && g >= 0.3
@@ -68,9 +69,9 @@ export function hiringBoard(limit?: number): BoardRow[] {
         name: t.name,
         domain: t.domain,
         href: '/guides/best-ats-for-small-teams',
-        score: t.overall_draft,
+        score: sc.overall,
         sub,
-        parts: { users: t.computed.user_score, market: t.computed.market_traction_score, recruiter: t.product_score_draft },
+        parts: { users: sc.user, market: sc.market, value: sc.value },
       } satisfies BoardRow
     })
   return limit ? rows.slice(0, limit) : rows
