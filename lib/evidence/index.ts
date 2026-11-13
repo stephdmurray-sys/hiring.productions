@@ -391,6 +391,8 @@ export interface RisingTool {
   checkDue: string
   /** The scoreboard it would rank on; null means its category has no board yet. */
   board: string | null
+  /** For a tool with enough reviews: what still stands between it and a score. */
+  missing?: string
   id: string
   name: string
   domain: string

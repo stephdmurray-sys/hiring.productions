@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { Logo } from '@/app/(rebrand)/_components/logo'
-import { coverageReport, discovery, formatMonth } from '@/lib/evidence'
+import { coverageReport, discovery, formatCount, formatMonth } from '@/lib/evidence'
 
 /**
  * The monthly desk: an internal checklist, not linked from the site and not
@@ -75,7 +75,7 @@ export default function Desk() {
                     {q.category}
                   </td>
                   <td>{q.triggers.map((t) => t.label).join('; ')}</td>
-                  <td>{q.citableReviews === null ? <span className="desk-flag">Not counted yet</span> : q.citableReviews}</td>
+                  <td>{q.citableReviews === null ? <span className="desk-flag">Not counted yet</span> : formatCount(q.citableReviews)}</td>
                   <td>{q.overdue ? <span className="desk-flag">Overdue: {formatMonth(q.checkDue)}</span> : formatMonth(q.checkDue)}</td>
                   <td>{q.board ?? <span className="desk-flag">No board</span>}</td>
                 </tr>

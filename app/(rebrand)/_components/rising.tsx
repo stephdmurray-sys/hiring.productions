@@ -39,6 +39,7 @@ export const risingCss = `
   .wing-e{display:inline-flex;align-items:center;gap:7px;}
   .wing-ev a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;}
   .wing-ev a:hover{text-decoration-color:var(--ink);}
+  .wing-ready{display:block;font-size:13.5px;font-weight:700;color:var(--ok);margin-top:6px;}
   .wing-side{font-size:13.5px;font-weight:700;color:var(--ink-2);white-space:nowrap;padding-top:3px;}
   @media(max-width:960px){.wings{grid-template-columns:1fr;gap:48px;}}
   @media(max-width:640px){.wing-row{grid-template-columns:40px minmax(0,1fr);padding:14px 16px;}.wing-side{grid-column:2;padding-top:0;}}
@@ -75,12 +76,17 @@ function WingRow({ t }: { t: RisingTool }) {
           ) : (
             <>Lists and reviews get their first check in {formatMonth(guide.nextCheck)}.</>
           )}
-          {t.citableReviews !== null && (
+          {t.citableReviews !== null && t.citableReviews < rising.minReviews && (
             <span>
               {formatCount(t.citableReviews)} of {rising.minReviews} reviews
             </span>
           )}
         </span>
+        {t.citableReviews !== null && t.citableReviews >= rising.minReviews && (
+          <span className="wing-ready">
+            Enough reviews to score. {t.missing ? `Still needed: ${t.missing.charAt(0).toLowerCase()}${t.missing.slice(1)}` : 'Score in progress.'}
+          </span>
+        )}
       </div>
       <span className="wing-side">
         <span className={t.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />

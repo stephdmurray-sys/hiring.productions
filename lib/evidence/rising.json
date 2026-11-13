@@ -3,6 +3,32 @@
   "minReviews": 25,
   "tools": [
     {
+      "id": "huntr",
+      "name": "Huntr",
+      "domain": "huntr.co",
+      "side": "seekers",
+      "category": "Job tracker and resume builder",
+      "what": "Tracks every application on one board, saves jobs from any site, and builds and tailors your resume for each one.",
+      "evidence": [
+        {
+          "publication": "Chrome Web Store",
+          "domain": "chromewebstore.google.com",
+          "note": "4.8 from about 1,100 ratings",
+          "date": "2026-11",
+          "url": "https://chromewebstore.google.com/detail/huntr-job-search-tracker/mihdfbecejheednfigjpdacgeilhlmnf/reviews"
+        }
+      ],
+      "citableReviews": 1100,
+      "watchingSince": "2026-11",
+      "verified": false,
+      "trigger": [
+        "founder-nomination"
+      ],
+      "checkDue": "2026-12",
+      "board": "Resume tools (beside Teal)",
+      "missing": "Traffic data, a live read of its pricing (sources disagree), and a recruiter walkthrough."
+    },
+    {
       "id": "yoodli",
       "name": "Yoodli",
       "domain": "yoodli.ai",
