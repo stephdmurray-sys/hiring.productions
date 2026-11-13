@@ -25,11 +25,11 @@ const FOOTER_RE = /<footer[\s\S]*?<\/footer>/
 
 const GLOBAL_FIXES = `
   :root{
-    --paper:#FAF8F3;--paper-2:#F2EEE4;--surface:#FFFFFF;--ink:#1A1A22;--ink-2:#4A4A5A;--ink-3:#77778A;
-    --rule:#E3DED2;--rule-2:#CFC8B8;--indigo:#6C47FF;--indigo-text:#5432E0;--coral:#FF4F6A;--coral-text:#C42E48;--ok:#1F8A55;
+    --paper:#FAF8F3;--paper-2:#F2EEE4;--surface:#FFFFFF;--ink:#1A1A22;--ink-2:#4A4A5A;--ink-3:#62627A;
+    --rule:#E3DED2;--rule-2:#CFC8B8;--indigo:#6C47FF;--indigo-text:#5432E0;--coral:#FF4F6A;--coral-text:#C42E48;--ok:#157347;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
     --purple:#5432E0;--purple-dark:#3F22B8;--purple-chip:#6C47FF;--hero:#1A1A22;--hero-2:#1A1A22;
-    --card:#FFFFFF;--border:#E3DED2;--gray:#4A4A5A;--gray-lt:#77778A;--faint:#77778A;--gold:#1A1A22;
+    --card:#FFFFFF;--border:#E3DED2;--gray:#4A4A5A;--gray-lt:#62627A;--faint:#62627A;--gold:#1A1A22;
   }
   body{background:var(--paper) !important;color:var(--ink);font-family:inherit;-webkit-font-smoothing:antialiased;font-size:17px;}
   .wrap,section.wrap{padding-left:32px;padding-right:32px;}

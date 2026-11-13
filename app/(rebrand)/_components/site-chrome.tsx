@@ -7,14 +7,14 @@ import { WEIGHTS, framework } from '@/lib/evidence'
  */
 
 export const chromeCss = `
-  .site-nav{background:var(--indigo);color:#fff;position:relative;z-index:30;}
+  .site-nav{background:var(--indigo,#6C47FF);color:#fff;position:relative;z-index:30;}
   .site-nav nav{display:flex;align-items:center;gap:28px;min-height:66px;}
-  .wordmark{font-weight:800;font-size:21px;letter-spacing:-0.01em;color:var(--ink);white-space:nowrap;}
-  .wordmark i{font-style:normal;color:var(--coral);}
+  .wordmark{font-weight:800;font-size:21px;letter-spacing:-0.01em;color:var(--ink,#1A1A22);white-space:nowrap;}
+  .wordmark i{font-style:normal;color:var(--coral,#FF4F6A);}
   .site-nav .wordmark{color:#fff;}
   .site-nav .wordmark i{color:#FFB3C0;}
   .site-nav .links{display:flex;gap:26px;align-items:center;margin-left:auto;}
-  .site-nav .links a{font-size:15px;font-weight:700;color:#E4DDFF;padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap;}
+  .site-nav .links a{font-size:15px;font-weight:700;color:#fff;padding:6px 0;border-bottom:2px solid transparent;white-space:nowrap;}
   .site-nav .links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,0.5);}
   .site-nav .links a.on{color:#fff;border-bottom-color:#fff;}
   .site-nav :focus-visible{outline-color:#fff;}
@@ -25,7 +25,7 @@ export const chromeCss = `
     .site-nav .links a{padding:10px 0;}
   }
 
-  .site-footer{margin-top:clamp(96px,12vw,150px);background:var(--indigo-ink);color:#CFC6F2;padding:56px 0 36px;font-size:15px;text-align:left;}
+  .site-footer{margin-top:clamp(96px,12vw,150px);background:var(--indigo-ink,#211457);color:#CFC6F2;padding:56px 0 36px;font-size:15px;text-align:left;}
   .site-footer .wordmark{color:#fff;}
   .site-footer .wordmark i{color:#FF8DA0;}
   .site-footer .fgrid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;}
@@ -38,7 +38,7 @@ export const chromeCss = `
   .frate{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;padding:0 0 40px;margin-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.14);}
   .frate h2{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.01em;margin:0 0 10px;}
   .frate p{line-height:1.6;max-width:520px;}
-  .frate-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+  .frate-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start;}
   .frate-part{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.06);}
   .frate-part b{display:block;font-size:22px;font-weight:900;color:#fff;line-height:1.1;}
   .frate-part span{display:block;font-weight:800;color:#fff;font-size:14px;margin-top:2px;}

@@ -39,7 +39,7 @@ export const headerHtml = `<style>
   .hdoor-btn-line{background:#fff;color:var(--hero);}
   .hdoor-btn-line:hover{background:#EDE9FE;}
   .featured{display:flex;align-items:center;gap:22px;margin-top:38px;flex-wrap:wrap;}
-  .featured-label{font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#8B7FBF;}
+  .featured-label{font-size:10.5px;font-weight:700;letter-spacing:0.12em;color:#62627A;}
   .press{font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:#B3A8DE;opacity:0.85;}
   .press.serif{font-family:Georgia,serif;font-style:italic;}
 
@@ -138,7 +138,7 @@ export const headerHtml = `<style>
   body{padding-bottom:0;}
   .rec-hero{background:linear-gradient(160deg,var(--hero) 55%,var(--hero-2));color:#fff;padding:46px 0 50px;}
   .rec-hero h1{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(30px,3.8vw,44px);margin-bottom:12px;}
-  .rec-sub{font-size:14.5px;color:#C9BFE8;max-width:640px;line-height:1.7;}
+  .rec-sub{font-size:14.5px;color:#4A4A5A;max-width:640px;line-height:1.7;}
   .rec-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;padding:52px 0 72px;align-items:start;}
   .rec-form{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(20,20,32,0.06);}
   .rec-form label{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:12.5px;margin:16px 0 6px;}
@@ -174,7 +174,7 @@ export const headerHtml = `<style>
   
   <div class="rec-hero">
     <div class="wrap">
-      <p style="font-size:12.5px;color:#8B7FBF;margin-bottom:14px;"><a href="/" style="color:#B3A8DE;">Home</a> &rsaquo; Get a recommendation</p>
+      <p style="font-size:12.5px;color:#62627A;margin-bottom:14px;"><a href="/" style="color:#5432E0;">Home</a> &rsaquo; Get a recommendation</p>
       <h1>Get a stack recommendation. Free.</h1>
       <p class="rec-sub">Tell us how you hire. You get back the exact tools we would run for your team, built with the same scoring you see on the guides. No charge, no sales call, and no vendor can pay their way into the answer.</p>
     </div>

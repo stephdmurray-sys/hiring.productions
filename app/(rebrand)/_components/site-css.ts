@@ -13,11 +13,11 @@
 export const siteCss = `
   :root{
     --paper:#FAF8F3; --paper-2:#F2EEE4; --surface:#FFFFFF; --surface-2:#FCFBFF;
-    --ink:#1A1A22; --ink-2:#4A4A5A; --ink-3:#6E6E80;
+    --ink:#1A1A22; --ink-2:#4A4A5A; --ink-3:#62627A;
     --rule:#E6E2D8; --rule-2:#D3CDBF; --rule-soft:#F1EFE8;
     --indigo:#6C47FF; --indigo-text:#5432E0; --indigo-deep:#4B2BD6; --indigo-ink:#211457; --indigo-tint:#EEEAFF; --lavender:#A78BFA;
     --coral:#FF4F6A; --coral-text:#C42E48; --coral-deep:#2A0B14; --coral-tint:#FFE8EC;
-    --ok:#1F8A55; --ok-bright:#5EE6A8;
+    --ok:#157347; --ok-bright:#5EE6A8;
     --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
     --r:8px; --r-lg:14px;
     --shadow:0 1px 0 rgba(0,0,0,0.03),0 12px 32px rgba(30,20,80,0.08);

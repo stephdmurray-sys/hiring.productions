@@ -50,11 +50,11 @@ const hubCss = `
   .hub-hero{padding:clamp(40px,5.5vw,72px) 0 clamp(40px,5vw,64px);}
   .hub-seekers .hub-hero{background:var(--indigo);color:#fff;}
   .hub-hiring .hub-hero{background:var(--coral);color:var(--coral-deep);}
-  .hub-hero .crumbs{color:inherit;opacity:0.85;}
+  .hub-hero .crumbs{color:inherit;}
   .hub-hero .crumbs a{text-decoration-color:currentColor;}
   .hub-hero h1{color:inherit;font-size:clamp(40px,5.4vw,68px);line-height:1.04;}
-  .hub-hero .dek{color:inherit;opacity:0.94;}
-  .hub-hero .dateline{color:inherit;opacity:0.8;}
+  .hub-hero .dek{color:inherit;}
+  .hub-hero .dateline{color:inherit;}
   .hub-hero :focus-visible{outline-color:currentColor;}
   .hub-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,0.9fr);gap:56px;align-items:center;}
   .hub-logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;}

@@ -103,3 +103,7 @@ Stephanie's direction: her score never goes on the board. Every score is compute
 - Run `pnpm check:videos` every month and before every deploy. A video passes only if YouTube's embed check returns 200 (it exists and its owner lets it play on other sites), so it plays on our page instead of sending people to YouTube. Replace any that fail; the player also shows a short "no longer available" note if one disappears between checks.
 - `follow.json` (who to follow) is Stephanie's editorial list. Re-check each link monthly. Add people only from verified profile links; never use follower counts to choose.
 - `framework.json` holds the research behind the rating framework, shown on How we review and summarized in the footer. If a weight or formula changes, update it there in the same commit.
+
+## Contrast (Nov 2026)
+
+Every page passed an automated WCAG AA contrast check (axe-core, color-contrast rule: 4.5:1 for normal text, 3:1 for large) on Nov 13, 2026, after fixing the nav links, the success green (now #157347), the older pages' gray (now #62627A), faded text on the colored hub headers, and the free stack recommendation page. The footer and nav carry their own color fallbacks so they render on the older page designs too. Re-run the check after any color change.
