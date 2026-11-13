@@ -18,6 +18,7 @@ import sourcesData from './sources.json'
 import guideData from './resume-guide.json'
 import risingData from './rising.json'
 import founderPicksData from './founder-picks.json'
+import discoveryData from './discovery.json'
 
 export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
 export type Stance = 'agrees' | 'breaks' | 'thin'
@@ -384,6 +385,12 @@ export interface RisingEvidence {
 }
 
 export interface RisingTool {
+  /** Why it is on our radar: trigger ids from discovery.json. */
+  trigger: string[]
+  /** The month its next check is due, YYYY-MM. */
+  checkDue: string
+  /** The scoreboard it would rank on; null means its category has no board yet. */
+  board: string | null
   id: string
   name: string
   domain: string
@@ -473,6 +480,9 @@ export function forgetCost(id: string, days: number): number | null {
 }
 
 export interface HiringPick {
+  trigger: string[]
+  checkDue: string
+  board: string | null
   id: string
   name: string
   domain: string
@@ -489,3 +499,75 @@ export interface HiringPick {
 
 /** Stephanie's pick for hiring teams: editorial, shown beside the evidence, never changes a score. */
 export const hiringPick = founderPicksData.hiring as HiringPick
+
+export interface DiscoveryTrigger {
+  id: string
+  label: string
+  note: string
+}
+
+export const discovery = discoveryData as {
+  rules: string[]
+  triggers: DiscoveryTrigger[]
+  notSignals: { label: string; why: string }[]
+}
+
+export interface QueueItem {
+  id: string
+  name: string
+  domain: string
+  side: 'seekers' | 'hiring'
+  category: string
+  triggers: DiscoveryTrigger[]
+  checkDue: string
+  board: string | null
+  citableReviews: number | null
+  overdue: boolean
+  founderPick: boolean
+}
+
+/**
+ * The coverage check behind /desk: every tool on the radar, why it's there,
+ * whether its check is overdue, and which categories have no board.
+ * "Overdue" means its due month has passed and it still has no review count.
+ */
+export function coverageReport(today = latestCheck()) {
+  const month = today.slice(0, 7)
+  const trig = (ids: string[]) => ids.map((id) => discovery.triggers.find((t) => t.id === id)).filter(Boolean) as DiscoveryTrigger[]
+  const queue: QueueItem[] = [
+    {
+      id: hiringPick.id,
+      name: hiringPick.name,
+      domain: hiringPick.domain,
+      side: 'hiring' as const,
+      category: hiringPick.category,
+      triggers: trig(hiringPick.trigger),
+      checkDue: hiringPick.checkDue,
+      board: hiringPick.board,
+      citableReviews: null,
+      overdue: hiringPick.checkDue < month && !hiringPick.verified,
+      founderPick: true,
+    },
+    ...rising.tools.map((t) => ({
+      id: t.id,
+      name: t.name,
+      domain: t.domain,
+      side: t.side,
+      category: t.category,
+      triggers: trig(t.trigger),
+      checkDue: t.checkDue,
+      board: t.board,
+      citableReviews: t.citableReviews,
+      overdue: t.checkDue < month && t.citableReviews === null,
+      founderPick: false,
+    })),
+  ]
+  const gaps = new Map<string, QueueItem[]>()
+  for (const q of queue) if (q.board === null) gaps.set(q.category, [...(gaps.get(q.category) ?? []), q])
+  return {
+    month,
+    queue,
+    overdue: queue.filter((q) => q.overdue),
+    categoryGaps: [...gaps.entries()].map(([category, tools]) => ({ category, tools })),
+  }
+}

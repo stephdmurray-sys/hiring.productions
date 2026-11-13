@@ -1,5 +1,5 @@
 {
-  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources, plus a recruiter walkthrough). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check.",
+  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources, plus a recruiter walkthrough). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check. Each tool records why it is here (trigger, see discovery.json), the month its check is due (checkDue), and the scoreboard it would rank on (board; null means its category has no board yet, a category gap).",
   "minReviews": 25,
   "tools": [
     {
@@ -27,7 +27,12 @@
       ],
       "citableReviews": null,
       "watchingSince": "2026-11",
-      "verified": false
+      "verified": false,
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null
     },
     {
       "id": "revarta",
@@ -47,7 +52,12 @@
       ],
       "citableReviews": null,
       "watchingSince": "2026-11",
-      "verified": false
+      "verified": false,
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null
     },
     {
       "id": "metaview",
@@ -59,7 +69,12 @@
       "evidence": [],
       "citableReviews": null,
       "watchingSince": "2026-11",
-      "verified": false
+      "verified": false,
+      "trigger": [
+        "editor-added"
+      ],
+      "checkDue": "2026-12",
+      "board": null
     }
   ]
 }

@@ -202,9 +202,13 @@ export function OnTheRise({ side, showPicks = false }: { side?: 'seekers' | 'hir
           <WingRow t={t} key={t.id} />
         ))}
         <div className="board-foot">
-          A tool gets a score once it has {rising.minReviews} citable reviews and a recruiter walkthrough. Building one?{' '}
-          <a className="tl" href="/for-vendors">
-            Listing is free
+          A tool gets a score once it has {rising.minReviews} citable reviews and a recruiter walkthrough.{' '}
+          <a className="tl" href="/how-we-review#radar">
+            How tools get on our radar
+          </a>
+          . Know one we missed?{' '}
+          <a className="tl" href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed">
+            Tell us
           </a>
           .
         </div>

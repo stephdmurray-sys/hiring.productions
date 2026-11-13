@@ -83,3 +83,13 @@ No em dashes. No emojis. No invented numbers: every figure is dated and sourced.
 - `rising.json`: for each tool on the watchlist, re-check the lists in its `evidence` (still live, still naming it), count citable reviews on foundation sources and write the number to `citableReviews`. A tool with 25 or more citable reviews and a recruiter walkthrough graduates: move it into a scorecard and off this list. Add new names only with a linkable source; never add a line you can't trace. Set `verified: true` once each evidence line is confirmed on the live page.
 - `resume-guide.json` → `plans`: when a pricing page changes, update the plan prices and lengths. The calculator, every review page's cost table and `yearCost` all read from here (keep `yearCost` consistent with the plans).
 - `resume-guide.json` → `freeAnswer`: re-read if the free tier changed.
+
+## Step 0, every month: run the discovery net (added Nov 2026)
+
+Why this exists: in Nov 2026 Juicebox, Stephanie's top pick for hiring teams, sat on the watchlist as "not scored" only because nobody had counted its reviews, and because there was no sourcing board for it to rank on. The net below makes that impossible to repeat.
+
+1. Sweep every trigger in `discovery.json` for each category we cover and each category in research. Anything that trips one trigger goes into `rising.json` with its `trigger`, a `checkDue` month (next month at the latest) and its `board` (null if its category has no scoreboard).
+2. Check everything due this month: count citable reviews on foundation sources, read the lists that name it. Record the number. No entry keeps `citableReviews: null` past its due month: `/desk` shows it as overdue.
+3. Write the outcome: scored (move it into a scorecard), in the wings (real counts, what's missing), or dropped (reason, in the log).
+4. Report category gaps to Stephanie with every tool stuck in each one. Building a board is her call; leaving a gap unreported is not an option.
+5. Discovery never moves a score. Follower counts, awards and vendors' own lists are not signals (see `notSignals`).

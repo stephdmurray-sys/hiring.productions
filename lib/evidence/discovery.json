@@ -1,0 +1,28 @@
+{
+  "_about": "The discovery net: how a tool gets onto our radar, so a good one is never left out because nobody happened to look. Discovery and scoring are separate: these signals put a tool in the check queue; only foundation sources (sources.json) and the practitioner read ever move a score. Rules are enforced by coverageReport() in index.ts and shown on /desk.",
+  "rules": [
+    "One trigger is enough. If a tool trips any trigger below, it enters the check queue.",
+    "Every tool in the queue is checked within one monthly cycle: count its citable reviews on foundation sources, read the lists that name it, and record its category. An unchecked entry past its due month shows as overdue on /desk.",
+    "Every check ends in one of three outcomes, written down: scored, in the wings (with the real counts and what's missing), or dropped (with the reason, kept in the log).",
+    "If a tool's category has no scoreboard, that is a category gap. It goes to Stephanie the same month with every tool stuck in it, so the decision to build a board is made on purpose.",
+    "Discovery never moves a score. A nomination, a follower spike or a vendor submission gets a tool checked; it never gets a tool ranked higher."
+  ],
+  "triggers": [
+    { "id": "independent-list", "label": "Named on a current, independent best-of list", "note": "One list puts it in the queue. Two make it a contender." },
+    { "id": "category-leader", "label": "Top 10 by review count in its G2 category, or by users in its Chrome Web Store category", "note": "Checked for every category we cover and every category in research." },
+    { "id": "review-momentum", "label": "Review count up 50% or more in a year", "note": "Measured from Internet Archive snapshots, the same way we caught Manatal's rise." },
+    { "id": "founder-nomination", "label": "Stephanie nominates it", "note": "Twenty years of hiring is a discovery source. It gets the tool checked; it never moves the score." },
+    { "id": "practitioner-communities", "label": "Recruiters recommend it in the communities we read", "note": "Recruiting Brainfood, RecruitingDaily, SourceCon and r/recruiting. Discovery only: none of these feed a score." },
+    { "id": "search-demand", "label": "People search for it", "note": "If people are searching \"is X worth it\" or \"X vs Y\", we owe them a check." },
+    { "id": "job-postings", "label": "Employers ask for it by name in job postings", "note": "Hiring tools only. \"Experience with X\" in a posting means real teams run it." },
+    { "id": "integration-marketplaces", "label": "Listed in the integration marketplace of an ATS we rank", "note": "Teams don't integrate tools they don't use." },
+    { "id": "reader-request", "label": "Readers ask for it", "note": "Anyone can nominate a tool. Every request is logged." },
+    { "id": "vendor-submission", "label": "The vendor submits it", "note": "Listing is free. Submitting gets a tool checked, never scored higher." },
+    { "id": "editor-added", "label": "Added by the editors", "note": "Used only for entries from before Nov 2026, when the trigger wasn't recorded." }
+  ],
+  "notSignals": [
+    { "label": "LinkedIn and social follower counts", "why": "They measure marketing reach, not whether the product works. Followers can be bought, they swell with job posts and founders' personal brands, and LinkedIn's terms bar collecting them at scale. A sudden jump can prompt a check. It never moves a score." },
+    { "label": "Awards and badges", "why": "Many are tied to entry fees or sponsorship. They count only when the judging is independent and published." },
+    { "label": "A vendor's own best-tools list", "why": "It ranks itself first. We show those lists and never count them." }
+  ]
+}
