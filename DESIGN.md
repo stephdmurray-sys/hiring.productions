@@ -31,7 +31,8 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 - **Ticker**: one ink strip of this month's findings, pauses on hover, still for reduced motion.
 - **Scoreboard** (`scoreboard.tsx`): rank, logo, name, publisher logos for the lists that name it, a bar that fills on load, the score. Indigo bars for job seeker tools, coral for hiring tools, a coral bar on the seeker board for 4-week billing.
 - **Cost calculator** (`cost-calculator.tsx`): drag months, tools re-sort by the cheapest way to pay, with the forget-to-cancel year beside it. Numbers come from `plans` in `lib/evidence/resume-guide.json`.
-- **On the rise** (`rising.tsx`): Stephanie's up-and-coming pick (indigo card with her photo) plus honorable mentions for tools too new to score. Each mention shows only evidence it has and a three-step path to a score (independent lists, 25 citable reviews, a recruiter walkthrough). Data: `lib/evidence/rising.json`.
+- **Waiting in the wings** (`rising.tsx`): tools too new to score, set as rows on a board titled "Not scored yet" (an extension of the scoreboard, like a chart's "bubbling under"). Each row shows only evidence it has. Beside it, Stephanie's up-and-coming pick is set like a columnist's note: byline with her photo, one sentence, a link. Data: `lib/evidence/rising.json`.
+- **Pick labels** live on the scoreboard rows ("Best overall", "Small teams pick") in the side's color, not on separate pick cards.
 - **Hub hero** (`hub.tsx`): a full block of the side's color carrying every logo that side covers, and one white feature card.
 - **Review page** (`reviews/[tool]`): one per tool. Answers "is it worth it", "is it free", the real cost, who else names it, videos, alternatives and an FAQ with schema.
 - **Stance**: words in color. "Agrees with the field" green, "Breaks from the pack" indigo, "Too little evidence" gray italic.
@@ -43,6 +44,11 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 - One CTA per section. The split hero is the exception: one per side.
 - No uppercase letter-spaced eyebrow labels, no pill badges, no hover lifts, no pulsing dots, no tilted card stacks, no rows of giant stat numbers.
 - Cards hold real evidence (a logo, a score, a source). Never a card for an icon and a slogan.
+- A list is rows on a ruled board, never a grid of identical cards (2x2, 3-up). If the content would read fine as a table, it's rows.
+- No accent-trimmed cards: no colored strip along the top or left edge of a box.
+- No testimonial cards: no round avatar plus quote in curly marks plus name and title in a colored box. Stephanie speaks in bylined notes.
+- No tinted callout boxes (lavender or pink panels behind a paragraph). Use a rule and plain type.
+- No app widgets on a reading page: no stepper progress bars, no segmented-control toggles. Tabs are underlined words.
 - No stock people. The only face on the site is Stephanie's (`public/stephanie.jpg`).
 
 ## Copy tells to avoid

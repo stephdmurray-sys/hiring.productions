@@ -46,7 +46,7 @@ ${checkers.map(line).join('\n')}
 
 ${builders.map(line).join('\n')}
 
-## On the rise (watching, not scored)
+## Waiting in the wings (watching, not scored)
 
 ${rising.tools.map((t) => `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => e.publication).join(' and ')}.` : ''}`).join('\n')}
 `

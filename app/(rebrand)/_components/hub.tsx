@@ -15,17 +15,6 @@ import type { ToolEvidence } from '@/lib/evidence'
  * logos of every tool that side's guides cover.
  */
 
-export interface HubPick {
-  href: string
-  label: string
-  name: string
-  domain: string
-  line: string
-  overall: number | null
-  users: number | null
-  usersNote: string
-}
-
 export interface HubSituation {
   q: string
   a: string
@@ -50,7 +39,6 @@ export interface HubProps {
   feature: { domain: string; name: string; title: string; line: string; href: string; linkText: string }
   situations: HubSituation[]
   situationsCta?: { text: string; href: string; label: string }
-  picks: HubPick[]
   board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode }
   /** Extra section after the scoreboard, e.g. the cost calculator. */
   extra?: ReactNode
@@ -81,25 +69,11 @@ const hubCss = `
   .hub-feature p{color:var(--ink-2);font-size:16px;}
   .hub-feature .tl{font-weight:800;}
 
-  .sit-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:32px;padding:26px 28px;background:var(--coral-tint);border-radius:var(--r-lg);}
+  .sit-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:40px;}
   .sit-cta p{font-size:19px;color:var(--ink);max-width:640px;line-height:1.5;font-weight:600;}
 
-  .pick-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px;}
-  .pc{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:14px;border-top:4px solid var(--indigo);}
-  .hub-hiring .pc{border-top-color:var(--coral);}
-  .pc-label{font-size:14px;font-weight:800;color:var(--indigo-text);}
-  .hub-hiring .pc-label{color:var(--coral-text);}
-  .pc-id{display:flex;align-items:center;gap:14px;}
-  .pc-id b{font-size:24px;font-weight:900;letter-spacing:-0.01em;}
-  .pc p{font-size:15.5px;color:var(--ink-2);}
-  .pc-m{display:grid;grid-template-columns:62px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:13.5px;color:var(--ink-3);}
-  .pc-m i{display:block;height:8px;border-radius:4px;background:#EFEDF6;overflow:hidden;}
-  .pc-m i::after{content:"";display:block;height:100%;width:var(--w);background:var(--indigo);border-radius:4px;}
-  .hub-hiring .pc-m i::after{background:var(--coral);}
-  .pc-m b{color:var(--ink);font-weight:900;text-align:right;font-variant-numeric:tabular-nums;}
-  .pc .tl{margin-top:auto;font-weight:800;}
 
-  @media(max-width:960px){.hub-grid,.pick-cards{grid-template-columns:1fr;gap:28px;}}
+  @media(max-width:960px){.hub-grid{grid-template-columns:1fr;gap:28px;}}
 `
 
 export function Hub(props: HubProps) {
@@ -169,38 +143,9 @@ export function Hub(props: HubProps) {
         )}
       </section>
 
-      <section className="wrap sec" id="picks">
-        <h2>This month&rsquo;s picks</h2>
-        <div className="pick-cards">
-          {props.picks.map((p) => (
-            <article className="pc" key={p.name}>
-              <span className="pc-label">{p.label}</span>
-              <span className="pc-id">
-                <Logo domain={p.domain} name={p.name} size={48} />
-                <b>{p.name}</b>
-              </span>
-              <p>{p.line}</p>
-              <span className="pc-m">
-                Overall
-                <i style={{ ['--w' as string]: `${((p.overall ?? 0) / 5) * 100}%` }} />
-                <b>{p.overall?.toFixed(2) ?? 'n/e'}</b>
-              </span>
-              <span className="pc-m">
-                Users
-                <i style={{ ['--w' as string]: `${((p.users ?? 0) / 5) * 100}%` }} />
-                <b>{p.users?.toFixed(1) ?? 'n/e'}</b>
-              </span>
-              <span className="muted">{p.usersNote}</span>
-              <a className="tl" href={p.href}>
-                Read the review &rarr;
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="wrap sec" id="scoreboard">
-        <h2>The full scoreboard</h2>
+        <h2>This month&rsquo;s scoreboard</h2>
+        <p className="lead">Our picks are marked. Open any tool for the full review.</p>
         <div style={{ marginTop: 32 }}>
           <Scoreboard side={props.side} title={props.board.title} checked={props.board.checked} rows={props.board.rows} foot={props.board.foot} />
         </div>
@@ -209,7 +154,7 @@ export function Hub(props: HubProps) {
       {props.extra}
 
       <section className="wrap sec" id="rising">
-        <h2>On the rise</h2>
+        <h2>Waiting in the wings</h2>
         <p className="lead">Too new for a score, worth knowing about anyway.</p>
         <OnTheRise side={props.side} pick={props.risingPick ?? null} />
       </section>
@@ -218,19 +163,23 @@ export function Hub(props: HubProps) {
         <h2>The guides</h2>
         <div className="guides">
           {props.guides.map((g) => (
-            <a className={`guide${props.side === 'hiring' ? ' hiring' : ''}`} href={g.href} key={g.href}>
+            <a className="guide" href={g.href} key={g.href}>
               <span className="guide-side">
                 <span className={props.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
-                Live guide
+                <span>
+                  Live guide
+                  <span className="mono">{g.meta}</span>
+                </span>
               </span>
-              <b>{g.title}</b>
-              <p>{g.detail}</p>
+              <span>
+                <b>{g.title}</b>
+                <span className="guide-d">{g.detail}</span>
+              </span>
               <span className="lg-stack">
                 {g.logos.map((l) => (
-                  <Logo key={l.name} domain={l.domain} name={l.name} size={30} round />
+                  <Logo key={l.name} domain={l.domain} name={l.name} size={34} round />
                 ))}
               </span>
-              <span className="mono">{g.meta}</span>
             </a>
           ))}
         </div>

@@ -18,6 +18,8 @@ export interface BoardRow {
   /** Shown when no counting list names it, e.g. "4.9 from 83 users". */
   sub: string
   trap?: boolean
+  /** An editor's label, e.g. "Best overall", set after the name in the side's color. */
+  tag?: string
 }
 
 export const boardCss = `
@@ -32,6 +34,9 @@ export const boardCss = `
   .board-rank{font-weight:900;font-size:16px;color:var(--ink-3);text-align:right;font-variant-numeric:tabular-nums;}
   .board-name{min-width:0;}
   .board-name b{display:block;font-size:17px;font-weight:800;line-height:1.25;}
+  .board-tag{font-style:normal;font-size:13.5px;font-weight:800;margin-left:10px;}
+  .board-seekers .board-tag{color:var(--indigo-text);}
+  .board-hiring .board-tag{color:var(--coral-text);}
   .board-name > span{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .board-bar{height:10px;background:#F0EEF7;border-radius:5px;overflow:hidden;}
   .board-bar i{display:block;height:100%;border-radius:5px;transform-origin:left;animation:bfill 1.1s cubic-bezier(.2,.7,.2,1) both;}
@@ -79,7 +84,10 @@ export function Scoreboard({
           <span className="board-rank">{i + 1}</span>
           <Logo domain={t.domain} name={t.name} size={44} />
           <span className="board-name">
-            <b>{t.name}</b>
+            <b>
+              {t.name}
+              {t.tag && <em className="board-tag">{t.tag}</em>}
+            </b>
             <span>
               {t.lists && t.lists.length > 0 ? (
                 <>

@@ -11,12 +11,6 @@ export const metadata: Metadata = {
     'Resume builders and ATS checkers scored on dated public evidence and judged by a recruiter who knows what happens after you click apply.',
 }
 
-const LINES: Record<string, string> = {
-  teal: 'Checker, builder and job tracker in one, on a free tier that is a real product.',
-  kickresume: '$96 a year is the whole price, and students get six months free.',
-  flowcv: 'The only builder here that hands you a clean PDF for nothing.',
-}
-
 export default function Page() {
   const { all } = resumeTools()
   const byId = Object.fromEntries(all.map((t) => [t.id, t]))
@@ -27,7 +21,7 @@ export default function Page() {
 
   const pickRows = [
     ...guide.picks.map((p) => ({ t: byId[p.tool], label: p.label })),
-    { t: byId[risingPick.tool], label: risingPick.label },
+    { t: byId[risingPick.tool], label: "Stephanie's pick" },
   ]
 
   return (
@@ -71,20 +65,10 @@ export default function Page() {
           link: `Read the ${top.name} review`,
         },
       ]}
-      picks={pickRows.map(({ t, label }) => ({
-        href: `/reviews/${t.id}`,
-        label,
-        name: t.name,
-        domain: t.domain,
-        line: LINES[t.id] ?? t.bestFor,
-        overall: t.overall,
-        users: t.userScore,
-        usersNote: `${formatCount(t.citableReviews)} citable user reviews`,
-      }))}
       board={{
         title: 'Resume builders and checkers',
         checked: `checked ${shortDate(checked)}`,
-        rows: seekerBoard(),
+        rows: seekerBoard().map((r) => ({ ...r, tag: pickRows.find((x) => x.t.id === r.id)?.label })),
         foot: (
           <>
             Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel.

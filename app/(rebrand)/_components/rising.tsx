@@ -1,163 +1,142 @@
 import Image from 'next/image'
 import { Logo } from './logo'
-import { formatCount, formatMonth, guide, rising, type RisingTool, type ToolEvidence } from '@/lib/evidence'
+import { formatCount, formatMonth, guide, latestCheck, rising, type RisingTool, type ToolEvidence } from '@/lib/evidence'
 
 /**
- * On the rise. Two kinds of mention, never ranked:
- *  - Stephanie's up-and-coming pick: a scored tool she'd point a friend to.
- *  - Honorable mentions: tools too new for a score. Each card shows the
- *    evidence it already has and its path to a score (independent lists,
- *    25 citable reviews, a recruiter walkthrough), so "no score" reads as
- *    "not yet" instead of "not good".
+ * Waiting in the wings: tools too new for a score.
+ *
+ * Built as an extension of the scoreboard, not as cards: same white board,
+ * same ruled rows, with the score column replaced by who the tool is for.
+ * Each row shows only evidence it has. Beside it, Stephanie's pick is set
+ * like a columnist's note (byline, a sentence, a link), never as a
+ * testimonial card.
  */
 
 export const risingCss = `
-  .rise-grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.6fr);gap:28px;margin-top:40px;align-items:start;}
-  .rise-grid.solo{grid-template-columns:1fr;}
-  .pick-card{background:var(--indigo);color:#fff;border-radius:var(--r-lg);padding:30px;display:flex;flex-direction:column;gap:18px;}
-  .pick-who{display:flex;align-items:center;gap:14px;}
-  .pick-who img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.35);}
-  .pick-who b{display:block;font-size:17px;font-weight:800;}
-  .pick-who span{font-size:14px;color:#DCD3FF;}
-  .pick-tool{display:flex;align-items:center;gap:14px;}
-  .pick-tool b{font-size:30px;font-weight:900;letter-spacing:-0.02em;line-height:1.1;}
-  .pick-quote{font-size:19px;line-height:1.55;color:#fff;}
-  .pick-facts{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14.5px;color:#DCD3FF;border-top:1px solid rgba(255,255,255,0.2);padding-top:14px;}
-  .pick-facts b{color:#fff;font-weight:800;}
-  .pick-card .tl{color:#fff;}
+  .wings{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:64px;align-items:start;margin-top:40px;}
+  .wings.solo{grid-template-columns:minmax(0,1fr);max-width:960px;}
+  .note-by{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-3);line-height:1.35;}
+  .note-by img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+  .note-by b{display:block;color:var(--ink);font-weight:800;}
+  .note-h{display:flex;align-items:center;gap:14px;font-size:clamp(26px,2.8vw,34px);font-weight:900;letter-spacing:-0.02em;line-height:1.15;margin:28px 0 14px;}
+  .note-h a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;}
+  .note p{font-size:19px;line-height:1.6;color:var(--ink-2);max-width:520px;}
+  .note .note-facts{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-top:16px;}
+  .note .tl{display:inline-block;margin-top:14px;}
 
-  .hm-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-  .hm{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:22px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--indigo);}
-  .hm.hiring{border-top-color:var(--coral);}
-  .hm-id{display:flex;align-items:center;gap:12px;}
-  .hm-id b{display:block;font-size:19px;font-weight:800;line-height:1.2;}
-  .hm-id span{font-size:13.5px;color:var(--ink-3);}
-  .hm-id b{color:var(--ink);}
-  .hm p{font-size:15px;color:var(--ink-2);line-height:1.5;}
-  .hm-ev{list-style:none;display:grid;gap:7px;}
-  .hm-ev li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink);}
-  .hm-ev a{text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;}
-  .hm-ev a:hover{text-decoration-color:var(--ink);}
-  .hm-ev em{font-style:normal;color:var(--ink-3);}
-  .hm-path{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto;padding-top:12px;border-top:1px solid var(--rule-soft);}
-  .hm-step{font-size:12.5px;line-height:1.35;color:var(--ink-3);}
-  .hm-step i{display:block;height:5px;border-radius:3px;background:#ECE9F2;margin-bottom:7px;}
-  .hm-step.done{color:var(--ink);font-weight:700;}
-  .hm-step.done i{background:var(--ok);}
-  .hm-score{font-size:13.5px;color:var(--ink-3);}
-  .hm-score b{color:var(--ink);}
-  .rise-note{font-size:15px;color:var(--ink-2);margin-top:22px;max-width:760px;}
-  .rise-note a{color:var(--indigo-text);font-weight:700;text-decoration:underline;text-underline-offset:3px;}
-  @media(max-width:960px){.rise-grid{grid-template-columns:1fr;}}
-  @media(max-width:640px){.hm-list{grid-template-columns:1fr;}.pick-card{padding:24px;}}
+  .wing-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:start;padding:16px 22px;border-bottom:1px solid var(--rule-soft);}
+  .wing-row:last-of-type{border-bottom:0;}
+  .wing-name{font-size:17px;font-weight:800;line-height:1.3;}
+  .wing-name span{font-weight:400;color:var(--ink-3);font-size:14.5px;}
+  .wing-what{display:block;font-size:14.5px;color:var(--ink-2);margin-top:2px;}
+  .wing-ev{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;font-size:13.5px;color:var(--ink-3);margin-top:6px;}
+  .wing-e{display:inline-flex;align-items:center;gap:7px;}
+  .wing-ev a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;}
+  .wing-ev a:hover{text-decoration-color:var(--ink);}
+  .wing-side{font-size:13.5px;font-weight:700;color:var(--ink-2);white-space:nowrap;padding-top:3px;}
+  @media(max-width:960px){.wings{grid-template-columns:1fr;gap:48px;}}
+  @media(max-width:640px){.wing-row{grid-template-columns:40px minmax(0,1fr);padding:14px 16px;}.wing-side{grid-column:2;padding-top:0;}}
 `
 
-function HonorableMention({ t }: { t: RisingTool }) {
-  const lists = t.evidence.length
-  const reviews = t.citableReviews
+function shortDate(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number)
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+}
+
+function WingRow({ t }: { t: RisingTool }) {
   return (
-    <article className={`hm ${t.side}`}>
-      <div className="hm-id">
-        <Logo domain={t.domain} name={t.name} size={44} />
-        <span>
-          <b>{t.name}</b>
-          <span>
-            {t.category} &middot; for {t.side === 'seekers' ? 'job seekers' : 'hiring teams'}
-          </span>
-        </span>
-      </div>
-      <p>{t.what}</p>
-      {lists > 0 && (
-        <ul className="hm-ev" aria-label="Evidence so far">
-          {t.evidence.map((e) => (
-            <li key={e.url}>
-              <Logo domain={e.domain} name={e.publication} size={20} round />
-              <span>
-                <a href={e.url} rel="nofollow noopener" target="_blank">
-                  {e.publication}
-                </a>
-                : {e.note} <em>({e.date.length > 4 ? formatMonth(e.date) : e.date})</em>
+    <div className="wing-row">
+      <Logo domain={t.domain} name={t.name} size={44} />
+      <div>
+        <div className="wing-name">
+          {t.name} <span>{t.category.toLowerCase()}</span>
+        </div>
+        <span className="wing-what">{t.what}</span>
+        <span className="wing-ev">
+          {t.evidence.length > 0 ? (
+            t.evidence.map((e, i) => (
+              <span key={e.url} className="wing-e">
+                <Logo domain={e.domain} name={e.publication} size={18} round />
+                <span>
+                  <a href={e.url} rel="nofollow noopener" target="_blank">
+                    {e.publication}
+                  </a>
+                  : {e.note.charAt(0).toLowerCase() + e.note.slice(1)} ({e.date.length > 4 ? formatMonth(e.date) : e.date})
+                  {i < t.evidence.length - 1 ? ';' : ''}
+                </span>
               </span>
-            </li>
-          ))}
-        </ul>
-      )}
-      <div className="hm-path" aria-label="Path to a score">
-        <span className={`hm-step${lists ? ' done' : ''}`}>
-          <i />
-          {lists ? `On ${lists} independent list${lists === 1 ? '' : 's'}` : 'Lists checked next month'}
-        </span>
-        <span className={`hm-step${reviews !== null && reviews >= rising.minReviews ? ' done' : ''}`}>
-          <i />
-          {reviews === null ? `Reviews counted next month` : `${formatCount(reviews)} of ${rising.minReviews} reviews`}
-        </span>
-        <span className="hm-step">
-          <i />
-          Recruiter walkthrough
+            ))
+          ) : (
+            <>Lists and reviews get their first check in {formatMonth(guide.nextCheck)}.</>
+          )}
+          {t.citableReviews !== null && (
+            <span>
+              {formatCount(t.citableReviews)} of {rising.minReviews} reviews
+            </span>
+          )}
         </span>
       </div>
-      <span className="hm-score">
-        <b>Score: not yet.</b> Watching since {formatMonth(t.watchingSince)}.
+      <span className="wing-side">
+        <span className={t.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+        {t.side === 'seekers' ? 'Job seekers' : 'Hiring teams'}
       </span>
-    </article>
+    </div>
   )
 }
 
 export function OnTheRise({
   side,
   pick,
-  showNote = true,
 }: {
   side?: 'seekers' | 'hiring'
   /** Stephanie's up-and-coming pick, when this page shows it. */
   pick?: { t: ToolEvidence; line: string; confirmed: boolean } | null
-  showNote?: boolean
 }) {
   const tools = rising.tools.filter((t) => !side || t.side === side)
+  const body = pick?.line.replace(/^The one I'd tell a friend about first\.\s*/, '') ?? ''
   return (
-    <>
-      <div className={`rise-grid${pick ? '' : ' solo'}`}>
-        {pick && (
-          <aside className="pick-card" aria-label="Stephanie's up-and-coming pick">
-            <div className="pick-who">
-              <Image src="/stephanie.jpg" alt="Stephanie Murray" width={64} height={64} />
-              <span>
-                <b>Stephanie&rsquo;s up-and-coming pick</b>
-                <span>20 years in talent</span>
-              </span>
-            </div>
-            <div className="pick-tool">
-              <Logo domain={pick.t.domain} name={pick.t.name} size={52} />
-              <b>{pick.t.name}</b>
-            </div>
-            <p className="pick-quote">&ldquo;{pick.line}&rdquo;</p>
-            <div className="pick-facts">
-              {pick.t.userScore !== null && (
-                <span>
-                  <b>{pick.t.userScore.toFixed(1)}</b> from {formatCount(pick.t.citableReviews)} users
-                </span>
-              )}
-              <span>
-                Free tier: <b>{pick.t.freeTier.replace(/^Yes, /, '')}</b>
-              </span>
-            </div>
-            <a className="tl tl-strong" href={`/reviews/${pick.t.id}`}>
-              Is {pick.t.name} worth it? Read the review &rarr;
-            </a>
-          </aside>
-        )}
-        <div className="hm-list">
-          {tools.map((t) => (
-            <HonorableMention t={t} key={t.id} />
-          ))}
+    <div className={`wings${pick ? '' : ' solo'}`}>
+      {pick && (
+        <div className="note">
+          <div className="note-by">
+            <Image src="/stephanie.jpg" alt="" width={48} height={48} />
+            <span>
+              <b>Stephanie Murray</b>
+              Founder, 20 years in talent
+            </span>
+          </div>
+          <h3 className="note-h">
+            <Logo domain={pick.t.domain} name={pick.t.name} size={44} />
+            <span>
+              My up-and-coming pick: <a href={`/reviews/${pick.t.id}`}>{pick.t.name}</a>
+            </span>
+          </h3>
+          <p>{body}</p>
+          <p className="note-facts">
+            {pick.t.userScore !== null && `${pick.t.userScore.toFixed(1)} from ${formatCount(pick.t.citableReviews)} users`}
+            {pick.t.rank ? ` · #${pick.t.rank} ${pick.t.segment}` : ''}
+          </p>
+          <a className="tl tl-strong" href={`/reviews/${pick.t.id}`}>
+            Is {pick.t.name} worth it? &rarr;
+          </a>
+        </div>
+      )}
+      <div className="board" aria-label="Not scored yet">
+        <div className="board-head">
+          <b>Not scored yet</b>
+          <span>checked {shortDate(latestCheck())}</span>
+        </div>
+        {tools.map((t) => (
+          <WingRow t={t} key={t.id} />
+        ))}
+        <div className="board-foot">
+          A tool gets a score once it has {rising.minReviews} citable reviews and a recruiter walkthrough. Building one?{' '}
+          <a className="tl" href="/for-vendors">
+            Listing is free
+          </a>
+          .
         </div>
       </div>
-      {showNote && (
-        <p className="rise-note">
-          No score until a tool has {rising.minReviews} citable reviews and a recruiter walkthrough. Next check:{' '}
-          {formatMonth(guide.nextCheck)}. Building one? <a href="/for-vendors">Listing is free</a>.
-        </p>
-      )}
-    </>
+    </div>
   )
 }

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 }
 
 const css = `
-  .ix-unscored{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:28px;}
-  .ix-u{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:16px 18px;}
+  .ix-unscored{border-top:1px solid var(--ink);margin-top:28px;max-width:960px;}
+  .ix-u{display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule);}
   .ix-u b{display:block;font-size:17px;font-weight:800;}
   .ix-u span span{font-size:13.5px;color:var(--ink-3);}
   .ix-u:hover b{text-decoration:underline;text-underline-offset:3px;}
@@ -74,7 +74,7 @@ export default function ReviewsIndex() {
       )}
 
       <section className="wrap sec">
-        <h2>On the rise</h2>
+        <h2>Waiting in the wings</h2>
         <p className="lead">Too new for a review page. These are the ones we&rsquo;re watching.</p>
         <OnTheRise />
       </section>

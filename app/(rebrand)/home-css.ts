@@ -37,14 +37,16 @@ export const homeCss = `
   .sec-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;}
   .sec-head .lead{margin-top:4px;}
 
-  /* Scoreboard tabs: two boards, one visible */
+  /* Scoreboard tabs: plain text tabs, one board visible */
   .boards{margin-top:36px;}
-  .board-tabs{display:inline-flex;gap:4px;padding:4px;background:#EEEBE3;border-radius:10px;margin-bottom:16px;}
-  .board-tabs label{font-weight:800;font-size:15px;padding:10px 16px;border-radius:7px;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;gap:8px;}
+  .board-tabs{display:flex;gap:28px;border-bottom:1px solid var(--rule);margin-bottom:20px;}
+  .board-tabs label{font-weight:800;font-size:17px;padding:10px 0 12px;color:var(--ink-3);cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:3px solid transparent;margin-bottom:-1px;}
+  .board-tabs label:hover{color:var(--ink);}
   .board-tabs label i{width:9px;height:9px;border-radius:50%;}
   .board-tabs label[for=b-seek] i{background:var(--indigo);}
   .board-tabs label[for=b-hire] i{background:var(--coral);}
-  #b-seek:checked ~ .board-tabs label[for=b-seek],#b-hire:checked ~ .board-tabs label[for=b-hire]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+  #b-seek:checked ~ .board-tabs label[for=b-seek]{color:var(--ink);border-bottom-color:var(--indigo);}
+  #b-hire:checked ~ .board-tabs label[for=b-hire]{color:var(--ink);border-bottom-color:var(--coral);}
   #b-seek:focus-visible ~ .board-tabs label[for=b-seek],#b-hire:focus-visible ~ .board-tabs label[for=b-hire]{outline:2px solid var(--indigo);outline-offset:2px;}
   #b-seek:checked ~ .p-hire,#b-hire:checked ~ .p-seek{display:none;}
   .board-note{font-size:14px;color:var(--ink-3);margin-top:14px;max-width:860px;}
@@ -63,25 +65,26 @@ export const homeCss = `
   .pub.counts{background:rgba(94,230,168,0.12);box-shadow:inset 0 0 0 1px rgba(94,230,168,0.55);}
   .pub.counts span{color:var(--ok-bright);font-weight:700;}
 
-  /* Guides */
-  .guides{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px;}
-  .guide{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--indigo);}
-  .guide.hiring{border-top-color:var(--coral);}
-  .guide-side{font-size:14px;font-weight:800;color:var(--ink-2);display:flex;align-items:center;}
-  .guide b{font-size:22px;font-weight:900;line-height:1.2;letter-spacing:-0.01em;}
-  .guide:hover b{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px;}
-  .guide p{font-size:15px;color:var(--ink-2);}
-  .guide .lg-stack{margin-top:auto;padding-top:6px;}
-  .guide .mono{color:var(--ink-3);}
+  /* Guides: ruled rows, not cards */
+  .guides{border-top:1px solid var(--ink);margin-top:36px;}
+  .guide{display:grid;grid-template-columns:minmax(0,0.7fr) minmax(0,1.6fr) 170px;gap:32px;align-items:center;padding:28px 0;border-bottom:1px solid var(--rule);}
+  .guide-side{font-size:15px;font-weight:800;color:var(--ink-2);display:flex;align-items:baseline;}
+  .guide-side .mono{display:block;font-weight:400;color:var(--ink-3);margin-top:4px;}
+  .guide b{display:block;font-size:clamp(22px,2.2vw,28px);font-weight:900;line-height:1.2;letter-spacing:-0.015em;}
+  .guide:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;}
+  .guide-d{display:block;font-size:16px;color:var(--ink-2);margin-top:6px;}
+  .guide-side .dot-seekers,.guide-side .dot-hiring{flex-shrink:0;}
   .research{font-size:15px;color:var(--ink-3);margin-top:20px;max-width:860px;}
+  .guide .lg-stack{justify-self:end;}
+  @media(max-width:760px){.guide .lg-stack{justify-self:start;}}
+  @media(max-width:760px){.guide{grid-template-columns:1fr;gap:10px;}}
 
   /* Signup */
-  .signup-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;background:var(--indigo-tint);border-radius:var(--r-lg);padding:clamp(28px,4vw,48px);}
+  .signup-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;border-top:1px solid var(--ink);padding-top:40px;}
   .signup-card h2{font-size:clamp(32px,4vw,44px);margin-bottom:8px;}
 
   @media(max-width:960px){
     .sides,.band-grid,.signup-card{grid-template-columns:1fr;}
-    .guides{grid-template-columns:1fr;}
     .side{min-height:0;}
   }
   @media(max-width:640px){

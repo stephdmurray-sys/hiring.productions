@@ -1,19 +1,16 @@
 /** Resume guide layer on the stage system. */
 export const guidePageCss = `
-  /* Picks: cards with the side's color on top; Stephanie's pick in indigo */
-  .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px;}
-  .pick{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--indigo);border-radius:var(--r-lg);padding:24px;}
-  .pick-label{font-weight:800;font-size:14.5px;color:var(--indigo-text);margin-bottom:12px;}
-  .pick-name{display:flex;align-items:center;gap:12px;font-weight:900;font-size:clamp(26px,2.6vw,32px);letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
-  .pick-line{color:var(--ink-2);margin-bottom:14px;}
+  /* Picks: three columns divided by rules, no boxes */
+  .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;border-top:1px solid var(--ink);}
+  .pick{display:flex;flex-direction:column;padding:26px 28px 6px 0;}
+  .pick + .pick{padding-left:28px;border-left:1px solid var(--rule);}
+  .pick-label{font-weight:800;font-size:15px;color:var(--indigo-text);margin-bottom:14px;}
+  .pick-name{display:flex;align-items:center;gap:12px;font-weight:900;font-size:clamp(26px,2.6vw,32px);letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;}
+  .pick-line{color:var(--ink-2);margin-bottom:16px;}
+  .pick-by{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-3);line-height:1.35;margin-bottom:16px;}
+  .pick-by img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+  .pick-by b{display:block;color:var(--ink);}
   .pick-facts{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin:auto 0 12px;padding-top:6px;}
-  .pick-rising{background:var(--indigo);border-color:var(--indigo);color:#fff;}
-  .pick-rising .pick-label{color:#DCD3FF;}
-  .pick-rising .pick-name{color:#fff;}
-  .pick-rising .pick-facts{color:#DCD3FF;}
-  .pick-rising .tl{color:#fff;}
-  .pick-quote{font-size:18.5px;line-height:1.5;color:#fff;margin-bottom:10px;}
-  .pick-sig{font-size:14px;color:#DCD3FF;font-weight:600;margin-bottom:14px;}
 
   /* Agreement table */
   .agree-grid th.col-list,.agree-grid td.cell{text-align:center;}
@@ -28,7 +25,7 @@ export const guidePageCss = `
   .lists-details .tscroll{margin-top:0;}
   .lists-details .footnote{margin-bottom:22px;}
 
-  .boxnote{margin-top:28px;background:var(--coral-tint);border-radius:var(--r-lg);padding:20px 24px;color:var(--ink-2);max-width:900px;}
+  .boxnote{margin-top:28px;color:var(--ink-2);max-width:860px;font-size:18px;line-height:1.6;}
   .boxnote b{color:var(--coral-text);}
 
   .vid-check{display:block;font-size:12px;margin-top:4px;}
@@ -73,6 +70,7 @@ export const guidePageCss = `
 
   @media(max-width:900px){
     .picks{grid-template-columns:1fr;}
+    .pick,.pick + .pick{padding:24px 0;border-left:0;border-bottom:1px solid var(--rule);}
     .ef-grid,.facts{grid-template-columns:1fr;gap:20px;}
   }
   @media(max-width:760px){

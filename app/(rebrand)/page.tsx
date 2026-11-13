@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 }
 
 const SEEKER_LOGOS = ['teal', 'kickresume', 'flowcv', 'jobscan', 'rezi', 'resume-worded', 'enhancv', 'novoresume']
+const ATS_TAGS: Record<string, string> = { Manatal: 'Small teams pick', Pinpoint: 'Growing teams pick', Ashby: 'Scaling teams pick' }
 const HIRING_LOGOS = ['Manatal', 'Pinpoint', 'Ashby', 'Greenhouse', 'Teamtailor', 'Workable', 'BambooHR', 'Breezy HR']
 
 export default function Home() {
@@ -79,12 +80,16 @@ export default function Home() {
     ),
     firstRiser && (
       <>
-        On the rise: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.toLowerCase()} ({firstRiser.evidence[0].publication})
+        In the wings: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.toLowerCase()} ({firstRiser.evidence[0].publication})
       </>
     ),
   ].filter(Boolean)
 
   const featured = videos.filter((v) => v.featured).slice(0, 3)
+  const TAGS: Record<string, string> = Object.fromEntries([
+    ...guide.picks.map((p) => [p.tool, p.label]),
+    [risingPick.tool, "Stephanie's pick"],
+  ])
   const counting = benchmarks.filter((l) => l.status === 'counts')
 
   return (
@@ -194,7 +199,7 @@ export default function Home() {
               side="seekers"
               title="Resume builders and checkers"
               checked={`checked ${shortDate(checked)}`}
-              rows={seekerBoard()}
+              rows={seekerBoard().map((r) => ({ ...r, tag: TAGS[r.id] }))}
               foot={
                 <>
                   Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to
@@ -208,7 +213,7 @@ export default function Home() {
               side="hiring"
               title="Applicant tracking systems"
               checked={`data as of ${shortDate(atsAsOf)}`}
-              rows={hiringBoard(8)}
+              rows={hiringBoard(8).map((r) => ({ ...r, tag: ATS_TAGS[r.id] }))}
               foot={<>Top 8 of {atsTools.length}. The guide ranks all of them by team size: small, growing and scaling.</>}
             />
           </div>
@@ -232,10 +237,8 @@ export default function Home() {
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>On the rise</h2>
-        <p className="lead">
-          Too new for a score, worth knowing about anyway. Plus the one Stephanie would tell a friend about first.
-        </p>
+        <h2>Waiting in the wings</h2>
+        <p className="lead">Too new for a score, worth knowing about anyway. Plus the one Stephanie would tell a friend about first.</p>
         <OnTheRise pick={{ t: pick, line: risingPick.line, confirmed: risingPick.confirmed }} />
       </section>
 
@@ -296,47 +299,56 @@ export default function Home() {
           <a className="guide" href="/guides/best-resume-tools">
             <span className="guide-side">
               <span className="dot-seekers" />
-              Job seekers
+              <span>
+                Job seekers
+                <span className="mono">{`Checked ${shortDate(checked)}`}</span>
+              </span>
             </span>
-            <b>The best resume tools of 2026</b>
-            <p>
-              {all.length} builders and checkers, {benchmarks.length} rival lists, {videos.length} labeled demo videos, and what your search
-              will cost.
-            </p>
+            <span>
+              <b>The best resume tools of 2026</b>
+              <span className="guide-d">{all.length} builders and checkers, {benchmarks.length} rival lists, {videos.length} labeled demo videos, and what your search will cost.</span>
+            </span>
             <span className="lg-stack">
-              {all.slice(0, 6).map((t) => (
-                <Logo key={t.id} domain={t.domain} name={t.name} size={30} round />
+              {all.slice(0, 5).map((t) => (
+                <Logo key={t.id} domain={t.domain} name={t.name} size={34} round />
               ))}
             </span>
-            <span className="mono">Checked {shortDate(checked)}</span>
           </a>
-          <a className="guide hiring" href="/guides/best-ats-for-small-teams">
+          <a className="guide" href="/guides/best-ats-for-small-teams">
             <span className="guide-side">
               <span className="dot-hiring" />
-              Hiring teams
+              <span>
+                Hiring teams
+                <span className="mono">{`Data as of ${shortDate(atsAsOf)}`}</span>
+              </span>
             </span>
-            <b>The {atsTools.length} best applicant tracking systems, by team size</b>
-            <p>Small, growing and scaling teams each get their own standings and their own pick.</p>
+            <span>
+              <b>The {atsTools.length} best applicant tracking systems, by team size</b>
+              <span className="guide-d">Small, growing and scaling teams each get their own standings and their own pick.</span>
+            </span>
             <span className="lg-stack">
-              {atsTools.slice(0, 6).map((t) => (
-                <Logo key={t.name} domain={t.domain} name={t.name} size={30} round />
+              {atsTools.slice(0, 5).map((t) => (
+                <Logo key={t.name} domain={t.domain} name={t.name} size={34} round />
               ))}
             </span>
-            <span className="mono">Data as of {shortDate(atsAsOf)}</span>
           </a>
-          <a className="guide hiring" href="/guides/best-recruiter-training">
+          <a className="guide" href="/guides/best-recruiter-training">
             <span className="guide-side">
               <span className="dot-hiring" />
-              Hiring teams
+              <span>
+                Hiring teams
+                <span className="mono">{'Updated 23 Aug 2026'}</span>
+              </span>
             </span>
-            <b>Recruiter training and certifications</b>
-            <p>19 programs, from sourcing and closing craft to SHRM and HRCI exam prep.</p>
+            <span>
+              <b>Recruiter training and certifications</b>
+              <span className="guide-d">19 programs, from sourcing and closing craft to SHRM and HRCI exam prep.</span>
+            </span>
             <span className="lg-stack">
-              <Logo domain="shrm.org" name="SHRM" size={30} round />
-              <Logo domain="hrci.org" name="HRCI" size={30} round />
-              <Logo domain="aihr.com" name="AIHR" size={30} round />
+              <Logo domain="shrm.org" name="SHRM" size={34} round />
+              <Logo domain="hrci.org" name="HRCI" size={34} round />
+              <Logo domain="aihr.com" name="AIHR" size={34} round />
             </span>
-            <span className="mono">Updated 23 Aug 2026</span>
           </a>
         </div>
         <p className="research">

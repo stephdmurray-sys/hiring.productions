@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import Image from 'next/image'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { HashOpener } from '@/app/(rebrand)/_components/hash-opener'
 import { Logo as BrandLogo } from '@/app/(rebrand)/_components/logo'
+import { boardCss } from '@/app/(rebrand)/_components/scoreboard'
 import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
@@ -46,7 +48,7 @@ const ON_THIS_PAGE = [
   ['agree', 'Do reviewers agree?'],
   ['rankings', 'Rankings'],
   ['cost', 'What it costs'],
-  ['rising', 'On the rise'],
+  ['rising', 'In the wings'],
   ['videos', 'Videos'],
   ['evidence', 'Evidence file'],
   ['faq', 'Questions'],
@@ -300,7 +302,7 @@ export default function Page() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
       <HashOpener prefix="evidence-" />
       <SiteNav active="seekers" />
 
@@ -381,8 +383,13 @@ export default function Page() {
               <Logo domain={rising.domain} name={rising.name} size={44} />
               {rising.name}
             </h3>
-            <p className="pick-quote">&ldquo;{risingPick.line}&rdquo;</p>
-            <p className="pick-sig">Stephanie Murray, 2025 Transform Award, Talent Strategy of the Year</p>
+            <p className="pick-line">{risingPick.line}</p>
+            <p className="pick-by">
+              <Image src="/stephanie.jpg" alt="" width={36} height={36} />
+              <span>
+                <b>Stephanie Murray</b> 2025 Transform Award, Talent Strategy of the Year
+              </span>
+            </p>
             <p className="pick-facts">
               {rising.userScore?.toFixed(1)} from {formatCount(rising.citableReviews)} users &middot; #{rising.rank}{' '}
               {SEGMENT_SINGULAR[rising.segment]} &middot; $0 for a clean PDF
@@ -577,10 +584,8 @@ export default function Page() {
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>On the rise</h2>
-        <p className="lead">
-          Not resume tools, and too new for a score. These are the job search tools we&rsquo;re watching next.
-        </p>
+        <h2>Waiting in the wings</h2>
+        <p className="lead">Not resume tools, and too new for a score. These are the job search tools we&rsquo;re watching next.</p>
         <OnTheRise side="seekers" />
       </section>
 

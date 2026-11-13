@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Hub } from '@/app/(rebrand)/_components/hub'
 import { atsAsOf, atsGrowth, atsTools, hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
-import { formatCount, formatMonth, guide } from '@/lib/evidence'
+import { formatMonth, guide } from '@/lib/evidence'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/for-hiring-teams' },
@@ -68,23 +68,10 @@ export default function Page() {
         href: '/consulting',
         label: 'Get a recommendation',
       }}
-      picks={PICKS.map((p) => {
-        const t = byName[p.name]
-        return {
-          href: '/guides/best-ats-for-small-teams',
-          label: p.label,
-          name: p.name,
-          domain: t.domain,
-          line: p.line,
-          overall: t.overall_draft,
-          users: t.computed.user_score,
-          usersNote: `${formatCount(t.sources.g2.reviews)} G2 reviews`,
-        }
-      })}
       board={{
         title: 'Applicant tracking systems',
         checked: `data as of ${shortDate(atsAsOf)}`,
-        rows: hiringBoard(),
+        rows: hiringBoard().map((r) => ({ ...r, tag: PICKS.find((x) => x.name === r.id)?.label })),
         foot: <>Ranked here on one board. The guide splits them by team size: small, growing and scaling.</>,
       }}
       guides={[
