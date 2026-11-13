@@ -9,26 +9,21 @@
     "label": "My top pick for hiring teams",
     "line": "Search for the person you need the way you'd describe them to a colleague, in plain language instead of Boolean strings.",
     "confirmed": false,
-    "scoreStatus": "Not scored yet. G2 shows about 4.8, but G2 blocks automated reading, so its review count (snapshots range from 19 to 62) needs a person to read the live page. Above 25 it gets a score on a sourcing board.",
-    "facts": "About 4.8 on G2 · review count being confirmed",
+    "scoreStatus": "Enough reviews to score: 4.8 from 103 on G2. Still needed: a sourcing scoreboard to rank it against its real competitors, and a recruiter walkthrough.",
+    "facts": "4.8 from 103 G2 reviews",
     "evidence": [
       {
         "source": "G2",
-        "note": "About 4.8 out of 5; snapshots show 19 to 62 reviews",
-        "url": "https://www.g2.com/products/juicebox/reviews"
-      },
-      {
-        "source": "Chrome Web Store",
-        "note": "Extension with 2,000 to 3,000 users and about 10 ratings",
-        "url": "https://chromewebstore.google.com/detail/juicebox-ai-powered-sourc/iejdbgkemppncmaimjcgelcpmlkogmmf"
+        "note": "4.8 from 103 reviews (96 five-star, 5 four-star, 1 three-star, 1 two-star), read on the live page Nov 13, 2026",
+        "url": "https://www.g2.com/products/juicebox-ai/reviews"
       },
       {
         "source": "Dupple",
-        "note": "First in a 10-tool roundup of AI tools for recruiters (2026)",
+        "note": "First in a 10-tool roundup of AI tools for recruiters (2026); not yet confirmed on the live page",
         "url": "https://dupple.com/learn/best-ai-tools-for-recruiters"
       }
     ],
-    "verified": false,
+    "verified": true,
     "trigger": [
       "founder-nomination",
       "independent-list"
@@ -38,6 +33,21 @@
     "traffic": {
       "trancoRank": 169996,
       "trancoDate": "2026-11-12"
+    },
+    "citableReviews": 103,
+    "scoring": {
+      "readOn": "2026-11-13",
+      "user": 4.8,
+      "userBasis": "G2, 103 reviews, read by Stephanie on the live page.",
+      "trancoRank": 169996,
+      "trancoDate": "2026-11-12",
+      "trafficScore": 2.32,
+      "reviewVolumeScore": 2.62,
+      "footprintScore": 2.47,
+      "marketScore": 2.49,
+      "formula": "Same rules as every tool: traffic = 5 - 1.2 x (log10(rank) - 3); review volume = 1 + 1.6 x (log10(reviews) - 1), both clamped 1 to 5; footprint = their average; market = average of footprint and momentum, with momentum held at the neutral 2.5 until an Internet Archive snapshot at least 120 days old confirms growth.",
+      "momentumNote": "Third-party captures put Juicebox's G2 count near 12 in July 2026 and 62 in September. If an Internet Archive snapshot confirms that growth, momentum scores at the 5.0 cap and the market score rises to about 3.7. One competitor (Pin) claims most early reviews came from seller invites; G2 labels those, and the share should be counted and shown.",
+      "overallIfPractitioner": "0.25 x 2.49 + 0.35 x 4.8 + 0.40 x (recruiter read) = 2.3 + 0.4 x read"
     }
   }
 }

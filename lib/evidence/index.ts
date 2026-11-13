@@ -484,6 +484,8 @@ export function forgetCost(id: string, days: number): number | null {
 }
 
 export interface HiringPick {
+  citableReviews: number | null
+  scoring?: Record<string, string | number>
   trigger: string[]
   checkDue: string
   board: string | null
@@ -548,8 +550,8 @@ export function coverageReport(today = latestCheck()) {
       triggers: trig(hiringPick.trigger),
       checkDue: hiringPick.checkDue,
       board: hiringPick.board,
-      citableReviews: null,
-      overdue: hiringPick.checkDue < month && !hiringPick.verified,
+      citableReviews: hiringPick.citableReviews,
+      overdue: hiringPick.checkDue < month && hiringPick.citableReviews === null,
       founderPick: true,
     },
     ...rising.tools.map((t) => ({

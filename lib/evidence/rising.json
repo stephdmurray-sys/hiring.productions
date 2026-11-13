@@ -34,14 +34,15 @@
         "trancoRank": 181450,
         "trancoDate": "2026-11-12",
         "trafficScore": 2.29,
-        "reviewVolumeScore": 4.26,
-        "footprintScore": 3.27,
-        "marketScore": 2.89,
-        "formula": "Same as every resume tool: traffic = 8.5911 - 1.1978 x log10(rank); volume = -0.5847 + 1.5918 x log10(reviews), clamped 1 to 5; footprint = their average; market = half footprint, half the neutral 2.5 momentum prior.",
+        "reviewVolumeScore": 4.38,
+        "footprintScore": 3.34,
+        "marketScore": 2.92,
+        "formula": "Same rules as every tool: traffic = 5 - 1.2 x (log10(rank) - 3); review volume = 1 + 1.6 x (log10(reviews) - 1), both clamped 1 to 5; footprint = their average; market = average of footprint and momentum, with momentum held at the neutral 2.5 until an Internet Archive snapshot at least 120 days old confirms growth.",
         "pricing": "Free: unlimited base resumes, free PDF export, 2 job-tailored resumes, basic matching and scoring, up to 100 tracked jobs. Pro: $40 a month, $90 every 3 months, or $160 every 6 months.",
         "yearCost": 320,
         "yearCostHow": "Two 6-month terms at $160",
-        "overallIfPractitioner": "0.25 x 2.89 + 0.35 x 4.6 + 0.40 x (recruiter read) = 2.33 + 0.4 x read"
+        "overallIfPractitioner": "0.25 x 2.92 + 0.35 x 4.6 + 0.40 x (recruiter read) = 2.34 + 0.4 x read",
+        "g2": "G2 listing exists but has 0 reviews; it is filed under Academic Advising for Huntr's career-center product. Read by Stephanie on the live page, Nov 13 2026."
       }
     },
     {
