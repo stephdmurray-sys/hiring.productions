@@ -1,46 +1,54 @@
 {
-  "_about": "Demo and review videos per tool, pulled monthly (see lib/evidence/REFRESH.md). kind: vendor (made by the company) | independent (a creator with no visible tie to the company) | comparison (a side-by-side test). verified=false means the label comes from the title or playlist and the channel has not yet been confirmed. year is the year the title or listing states, null if unknown. featured=true puts it in the guide's 'Watch before you pay' row.",
+  "_about": "Demo and review videos per tool, pulled monthly (see lib/evidence/REFRESH.md). kind: vendor (made by the company) | independent (a creator with no visible tie to the company) | comparison (a side-by-side test). verified=false means the label comes from the title or playlist and the channel has not yet been confirmed. year is the year the title or listing states, null if unknown. featured=true puts it in the guide's 'Watch before you pay' row. Every video is checked against YouTube's embed endpoint (scripts/check-videos.mjs): it must exist and allow playback on other sites, so it plays here instead of sending people to YouTube. channel is the uploader as YouTube reports it; kind is checked against it. Removed Nov 13, 2026: WBCl67xaX1I (Kickresume review), no longer on YouTube.",
   "checked": "2026-11-13",
   "videos": [
     {
       "tool": "teal",
       "youtubeId": "iXtP_-7Ha70",
-      "title": "How to Use the Teal Resume Builder",
+      "title": "How to Use the Teal Resume Builder | Teal (free) vs. Teal+ (premium)",
       "kind": "vendor",
       "basis": "Listed in Teal's own Tutorials & Demos playlist.",
       "year": null,
       "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "Teal",
+      "checked": "2026-11-13"
     },
     {
       "tool": "jobscan",
       "youtubeId": "RLN1VUevFAA",
-      "title": "Jobscan Tutorial + Review (2024)",
+      "title": "Jobscan Tutorial + Review (2026) | How to Use Jobscan",
       "kind": "independent",
       "basis": "Creator review and walkthrough.",
       "year": 2024,
       "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "Dani's Tutorials",
+      "checked": "2026-11-13"
     },
     {
       "tool": "jobscan",
       "youtubeId": "NxXCvEfWkPw",
-      "title": "Jobscan Power Edit Tool Overview",
+      "title": "Jobscan Power Edit Tool Overview | Resume Scanner Feature",
       "kind": "vendor",
       "basis": "Product feature overview.",
       "year": null,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "Jobscan",
+      "checked": "2026-11-13"
     },
     {
       "tool": "resume-worded",
       "youtubeId": "1rDiza9cgLw",
-      "title": "Resume Worded vs Jobscan",
+      "title": "Resume Worded vs Jobscan | Which is Best for You? 2026",
       "kind": "comparison",
       "basis": "Side-by-side comparison.",
       "year": null,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "HowToHarbor",
+      "checked": "2026-11-13"
     },
     {
       "tool": "resume-worded",
@@ -50,47 +58,45 @@
       "basis": "Creator walkthrough.",
       "year": null,
       "featured": false,
-      "verified": false
-    },
-    {
-      "tool": "kickresume",
-      "youtubeId": "WBCl67xaX1I",
-      "title": "Kickresume Resume Builder Honest Review 2026: Is It Worth It?",
-      "kind": "independent",
-      "basis": "Creator review.",
-      "year": 2026,
-      "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "Tutorials By David ",
+      "checked": "2026-11-13"
     },
     {
       "tool": "kickresume",
       "youtubeId": "sIhtzJQtkrU",
-      "title": "How to Create Resume in Kickresume (2026) AI Resume Builder Tutorial for Beginners",
+      "title": "How to Create Resume in Kickresume (2026) Ai Resume Builder Tutorial for Beginners",
       "kind": "independent",
       "basis": "Creator tutorial.",
       "year": 2026,
-      "featured": false,
-      "verified": false
+      "featured": true,
+      "verified": true,
+      "channel": "Web Whizz",
+      "checked": "2026-11-13"
     },
     {
       "tool": "flowcv",
       "youtubeId": "x9lYlGPP5Mo",
-      "title": "FlowCV Resume Builder Review 2025",
+      "title": "FlowCV Resume Builder Review 2025 | Is this CV Builder Worth It? [HONEST GUIDE]",
       "kind": "independent",
       "basis": "Creator review.",
       "year": 2025,
       "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "TERMS & CONDITONS GURU",
+      "checked": "2026-11-13"
     },
     {
       "tool": "flowcv",
       "youtubeId": "yGSa81FV7f8",
-      "title": "How to Create a Professional CV/Resume for Free Using FlowCV",
+      "title": "How to Create a Professional CV/Resume for Free Using FlowCV  | Step-by-Step Tutorial.",
       "kind": "independent",
       "basis": "Creator tutorial.",
       "year": null,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "KhanPedia (KP)",
+      "checked": "2026-11-13"
     },
     {
       "tool": "rezi",
@@ -100,7 +106,9 @@
       "basis": "Creator review.",
       "year": 2025,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "Jim Carter III",
+      "checked": "2026-11-13"
     },
     {
       "tool": "rezi",
@@ -110,57 +118,69 @@
       "basis": "Same resume run through four tools, Rezi among them.",
       "year": null,
       "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "Ai Tool Lab",
+      "checked": "2026-11-13"
     },
     {
       "tool": "resume-io",
       "youtubeId": "_yJ_VeVuVh4",
-      "title": "How to Cancel Resume io Subscription Before They Charge You Again (2026 Warning)",
+      "title": "How to Cancel Resume.io Subscription Before They Charge You Again (2026 Warning)",
       "kind": "independent",
       "basis": "Creator walkthrough of the cancellation steps.",
       "year": 2026,
       "featured": true,
-      "verified": false
+      "verified": true,
+      "channel": "How To Rocket",
+      "checked": "2026-11-13"
     },
     {
       "tool": "resume-io",
       "youtubeId": "9pLWYswbcDc",
-      "title": "Resume.io: How it works",
+      "title": "Resume.io - How it works",
       "kind": "vendor",
       "basis": "Product walkthrough.",
       "year": null,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "Resume․io",
+      "checked": "2026-11-13"
     },
     {
       "tool": "enhancv",
       "youtubeId": "BUWeDzhOdP0",
-      "title": "Enhancv: Best ATS-Friendly Resume Builder In 2026? (Honest Review)",
+      "title": "Enhancv - Best ATS-Friendly Resume Builder In 2026? (Honest Review)",
       "kind": "independent",
       "basis": "Creator review.",
       "year": 2026,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "WebCraft",
+      "checked": "2026-11-13"
     },
     {
       "tool": "novoresume",
       "youtubeId": "4NYkF7uh6XE",
-      "title": "Novorésumé Tutorial",
+      "title": "Novorésumé Tutorial | How to Use Novorésumé Resume Builder & Resume Templates",
       "kind": "vendor",
       "basis": "The company's own tutorial.",
       "year": null,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "Novoresume - Career Tips",
+      "checked": "2026-11-13"
     },
     {
       "tool": "zety",
       "youtubeId": "M7gr3dyqUdU",
-      "title": "Zety Resume Builder Review In 2025 (Is It Good?)",
+      "title": "Zety Resume Builder Review In 2026 (Is It Good?)",
       "kind": "independent",
       "basis": "Creator review.",
       "year": 2025,
       "featured": false,
-      "verified": false
+      "verified": true,
+      "channel": "Tutorials By David ",
+      "checked": "2026-11-13"
     }
   ]
 }

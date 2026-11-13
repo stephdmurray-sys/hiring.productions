@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:videos": "NODE_USE_ENV_PROXY=1 node scripts/check-videos.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

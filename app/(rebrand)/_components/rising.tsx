@@ -122,7 +122,7 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
       heading: 'My up-and-coming pick for job seekers',
       body: risingPick.line.replace(/^The one I'd tell a friend about first\.\s*/, ''),
       facts: [
-        seeker.userScore !== null ? `${seeker.userScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} users` : '',
+        seeker.rawUserScore !== null ? `${seeker.rawUserScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} users` : '',
         seeker.rank ? `#${seeker.rank} ${seeker.segment}` : '',
       ]
         .filter(Boolean)

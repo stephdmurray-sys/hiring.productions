@@ -97,3 +97,9 @@ Why this exists: in Nov 2026 Juicebox, Stephanie's top pick for hiring teams, sa
 ## Scores are data only (Nov 2026)
 
 Stephanie's direction: her score never goes on the board. Every score is computed from public data: users 40%, market 25%, critics 20%, value 15% (formulas in `lib/evidence/index.ts`; ATS uses users, market and value until independent ATS lists are tracked). Never add a hand-set or rubric score. Her judgment appears only as labeled picks (`founder-picks.json`, `risingPick` in `resume-guide.json`) and as watchlist nominations, and never changes a score. Older notes in this file that mention practitioner scores are superseded.
+
+## Videos and who to follow (Nov 2026)
+
+- Run `pnpm check:videos` every month and before every deploy. A video passes only if YouTube's embed check returns 200 (it exists and its owner lets it play on other sites), so it plays on our page instead of sending people to YouTube. Replace any that fail; the player also shows a short "no longer available" note if one disappears between checks.
+- `follow.json` (who to follow) is Stephanie's editorial list. Re-check each link monthly. Add people only from verified profile links; never use follower counts to choose.
+- `framework.json` holds the research behind the rating framework, shown on How we review and summarized in the footer. If a weight or formula changes, update it there in the same commit.

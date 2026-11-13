@@ -6,6 +6,7 @@ import { Logo } from '@/app/(rebrand)/_components/logo'
 import { Scoreboard, boardCss, type BoardRow } from '@/app/(rebrand)/_components/scoreboard'
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { calcCss } from '@/app/(rebrand)/_components/widgets-css'
+import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
 import { homeCss } from '@/app/(rebrand)/home-css'
 
 /**
@@ -78,7 +79,7 @@ export function Hub(props: HubProps) {
   const sideName = props.side === 'seekers' ? 'For job seekers' : 'For hiring teams'
   return (
     <div className={`hub-${props.side}`}>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + homeCss + hubCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + followCss + homeCss + hubCss }} />
       <SiteNav active={props.side} />
 
       <header className="hub-hero">
@@ -155,6 +156,16 @@ export function Hub(props: HubProps) {
         <h2>Stephanie&rsquo;s pick</h2>
         <p className="lead">A pick is my judgment. A score is the evidence. You get both, labeled, and one never changes the other.</p>
         <OnTheRise side={props.side} showPicks />
+      </section>
+
+      <section className="wrap sec" id="follow">
+        <h2>Who to follow</h2>
+        <p className="lead">
+          {props.side === 'seekers'
+            ? 'The people worth your feed while you search: one to keep you laughing, the rest to get you hired.'
+            : 'The voices recruiting leaders actually read and listen to, plus one to keep the team laughing.'}
+        </p>
+        <WhoToFollow side={props.side} />
       </section>
 
       <section className="wrap sec" id="guides">

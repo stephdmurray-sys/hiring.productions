@@ -126,6 +126,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/guides/best-recruiter-training', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/how-we-review', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/reviews', priority: 0.85, changeFrequency: 'monthly' },
+    { path: '/who-to-follow', priority: 0.8, changeFrequency: 'monthly' },
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),
   ]
 

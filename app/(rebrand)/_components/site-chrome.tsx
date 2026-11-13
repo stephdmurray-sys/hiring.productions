@@ -1,4 +1,5 @@
 import { Motion } from './motion'
+import { WEIGHTS, framework } from '@/lib/evidence'
 
 /**
  * Shared navigation and footer. The nav is a solid indigo bar (the brand
@@ -34,6 +35,17 @@ export const chromeCss = `
   .site-footer .flinks a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px;}
   .site-footer .fbase{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:44px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.14);font-size:13.5px;color:#A99CDB;}
   .site-footer :focus-visible{outline-color:#fff;}
+  .frate{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;padding:0 0 40px;margin-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.14);}
+  .frate h2{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.01em;margin:0 0 10px;}
+  .frate p{line-height:1.6;max-width:520px;}
+  .frate-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+  .frate-part{padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.06);}
+  .frate-part b{display:block;font-size:22px;font-weight:900;color:#fff;line-height:1.1;}
+  .frate-part span{display:block;font-weight:800;color:#fff;font-size:14px;margin-top:2px;}
+  .frate-part small{display:block;font-size:12.5px;color:#B9ABF5;line-height:1.4;margin-top:4px;}
+  .frate-links{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:14px;font-size:14px;}
+  .frate-links a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px;}
+  @media(max-width:900px){.frate{grid-template-columns:1fr;gap:20px;}.frate-parts{grid-template-columns:repeat(2,minmax(0,1fr));}}
   @media(max-width:760px){.site-footer .fgrid{grid-template-columns:1fr 1fr;}.site-footer .fgrid > div:first-child{grid-column:1 / -1;}}
 `
 
@@ -78,6 +90,31 @@ export function SiteFooter() {
     <footer className="site-footer">
       <Motion />
       <div className="wrap">
+        <section className="frate" aria-labelledby="frate-h">
+          <div>
+            <h2 id="frate-h">How ratings work</h2>
+            <p>{framework.summary}</p>
+            <p className="frate-links">
+              <a href="/how-we-review#scores">How each score is built</a>
+              <a href="/how-we-review#research">The research behind it</a>
+              <a href="/how-we-review#judgment">Where Stephanie comes in</a>
+            </p>
+          </div>
+          <div className="frate-parts">
+            {[
+              { k: 'Users', w: WEIGHTS.user, d: 'What real users rate it, on sources we can cite' },
+              { k: 'Market', w: WEIGHTS.market, d: 'Traffic, review volume and growth' },
+              { k: 'Critics', w: WEIGHTS.critics, d: 'Independent best-of lists that name it' },
+              { k: 'Value', w: WEIGHTS.value, d: 'What a year costs, and the free version' },
+            ].map((p) => (
+              <div className="frate-part" key={p.k}>
+                <b>{Math.round(p.w * 100)}%</b>
+                <span>{p.k}</span>
+                <small>{p.d}</small>
+              </div>
+            ))}
+          </div>
+        </section>
         <div className="fgrid">
           <div>
             <Wordmark />
@@ -101,6 +138,7 @@ export function SiteFooter() {
           <div className="flinks">
             <p className="fh">About</p>
             <a href="/how-we-review">How we review</a>
+            <a href="/who-to-follow">Who to follow</a>
             <a href="/advertiser-disclosure">Advertiser disclosure</a>
             <a href="/for-vendors">For vendors</a>
             <a href="mailto:hello@hiring.productions">hello@hiring.productions</a>

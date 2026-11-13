@@ -8,6 +8,7 @@ import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
+import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
 import { atsAsOf, atsGrowth, atsTools, calcTools, hiringBoard, money, seekerBoard, shortDate } from '@/app/(rebrand)/_components/data'
 import {
   STATUS_LABEL,
@@ -70,7 +71,7 @@ export default function Home() {
       </>
     ),
     <>
-      {pick.name}: {pick.userScore?.toFixed(1)} from {formatCount(pick.citableReviews)} users. Stephanie&rsquo;s up-and-coming pick
+      {pick.name}: {pick.rawUserScore?.toFixed(1)} from {formatCount(pick.citableReviews)} users. Stephanie&rsquo;s up-and-coming pick
     </>,
     <>
       Stephanie&rsquo;s top pick for hiring teams: <i>{hiringPick.name}</i>
@@ -101,7 +102,7 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + homeCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + followCss + homeCss }} />
       <SiteNav />
 
       <header className="wrap hero">
@@ -131,7 +132,7 @@ export default function Home() {
               <div>
                 <b>Best overall: {top.name}</b>
                 <span>
-                  {top.userScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, on a free tier that is a real product
+                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, on a free tier that is a real product
                 </span>
               </div>
             </div>
@@ -298,6 +299,12 @@ export default function Home() {
             )
           })}
         </div>
+      </section>
+
+      <section className="wrap sec" id="follow">
+        <h2>Who to follow</h2>
+        <p className="lead">The people worth your feed. Some will make you laugh about work. Some will get you hired, or help you hire better.</p>
+        <WhoToFollow />
       </section>
 
       <section className="wrap sec" id="guides">

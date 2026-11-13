@@ -1,0 +1,104 @@
+{
+  "_about": "Who to follow: Stephanie's list of people who are funny or seriously helpful for job seekers and hiring teams. Editorial, like her picks: never scored, never paid for, and no follower counts (they measure reach, not help, and go stale). Every link was taken from research results, not guessed. approved=false: draft until Stephanie signs off; she can add, cut or reword any line. Candidates held back: Mike Peditto (The Realistic Recruiter) because a source says he works at Teal, which we rank; Adam Karpiak because no source confirmed the humor.",
+  "approved": false,
+  "checked": "2026-11-13",
+  "people": [
+    {
+      "name": "Madeline Mann",
+      "known": "Self Made Millennial",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former head of HR who walks through interview questions and offers like someone who has sat on the other side of the table, because she has.",
+      "links": [
+        { "label": "YouTube", "url": "https://www.youtube.com/selfmademillennial" },
+        { "label": "Website", "url": "https://madelinemann.com" }
+      ]
+    },
+    {
+      "name": "Erin McGoff",
+      "known": "Advice With Erin",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Short, practical answers to the work questions nobody teaches you, from networking to delivering bad news.",
+      "links": [
+        { "label": "TikTok", "url": "https://www.tiktok.com/@advicewitherin" },
+        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/no-one-knows-what-theyre-doing/id1729849219" }
+      ]
+    },
+    {
+      "name": "Austin Belcak",
+      "known": "Cultivated Culture",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "How to get hired through referrals and direct outreach instead of another online application.",
+      "links": [{ "label": "Website", "url": "https://cultivatedculture.com" }]
+    },
+    {
+      "name": "Andrew LaCivita",
+      "known": "milewalk Academy",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Interview prep in depth: the hard questions, the stories to tell, and the questions to ask back.",
+      "links": [
+        { "label": "YouTube", "url": "https://www.youtube.com/andylacivita" },
+        { "label": "Podcast", "url": "https://andrewlacivita.libsyn.com" }
+      ]
+    },
+    {
+      "name": "J.T. O'Donnell",
+      "known": "Work It Daily",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former recruiter's straight talk on why resumes go unanswered, with live Q&A for job seekers.",
+      "links": [{ "label": "Website", "url": "https://www.workitdaily.com" }]
+    },
+    {
+      "name": "Corporate Natalie",
+      "known": "Natalie Marshall",
+      "side": "both",
+      "vibe": "funny",
+      "why": "Office-life comedy for anyone who has survived a reply-all. Both sides of the table will recognize themselves.",
+      "links": [{ "label": "Instagram", "url": "https://www.instagram.com/corporatenatalie" }]
+    },
+    {
+      "name": "Hung Lee",
+      "known": "Recruiting Brainfood",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "The weekly newsletter and podcast recruiting leaders actually read: what's changing in hiring, AI included.",
+      "links": [{ "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155" }]
+    },
+    {
+      "name": "Chad Sowash and Joel Cheesman",
+      "known": "The Chad & Cheese Podcast",
+      "side": "hiring",
+      "vibe": "funny",
+      "why": "Irreverent weekly take on HR tech and hiring news from two industry veterans. Explicit language, honest opinions.",
+      "links": [{ "label": "Website", "url": "https://www.chadcheese.com" }]
+    },
+    {
+      "name": "Tim Sackett",
+      "known": "The Tim Sackett Project",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "A staffing firm president who writes about recruiting with jokes and sports analogies, and real advice under them.",
+      "links": [{ "label": "Blog", "url": "https://timsackett.com" }]
+    },
+    {
+      "name": "Katrina Collier",
+      "known": "The Robot-Proof Recruiter",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "How to keep the human part of recruiting, from candidate experience to working with hiring managers.",
+      "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/katrinacollier" }]
+    },
+    {
+      "name": "Glen Cathey",
+      "known": "Boolean Black Belt",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "The deepest free writing on sourcing there is, from Boolean search to AI in recruiting.",
+      "links": [{ "label": "Blog", "url": "https://booleanblackbelt.com" }]
+    }
+  ]
+}

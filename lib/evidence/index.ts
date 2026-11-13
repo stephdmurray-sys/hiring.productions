@@ -19,6 +19,7 @@ import guideData from './resume-guide.json'
 import risingData from './rising.json'
 import founderPicksData from './founder-picks.json'
 import discoveryData from './discovery.json'
+import frameworkData from './framework.json'
 
 export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
 export type Stance = 'agrees' | 'breaks' | 'thin'
@@ -92,7 +93,10 @@ export interface ToolEvidence {
   ratings: Rating[]
   citableReviews: number
   enoughEvidence: boolean
+  /** Count-weighted rating, adjusted toward the category average for small samples. */
   userScore: number | null
+  /** The plain count-weighted rating before the small-sample adjustment. */
+  rawUserScore: number | null
   marketScore: number
   criticsScore: number
   valueScore: number
@@ -228,12 +232,23 @@ function round(n: number, places = 2): number {
   return Math.round(n * f) / f
 }
 
-export function userScoreFrom(ratings: Rating[]): { score: number | null; citable: number } {
+export function userScoreFrom(ratings: Rating[]): { score: number | null; citable: number; raw: number | null } {
   const used = ratings.filter((r) => !r.droppedBecause)
   const citable = used.reduce((s, r) => s + r.reviews, 0)
-  if (citable < MIN_REVIEWS) return { score: null, citable }
+  if (citable < MIN_REVIEWS) return { score: null, citable, raw: null }
   const weighted = used.reduce((s, r) => s + r.rating * r.reviews, 0) / citable
-  return { score: round(weighted), citable }
+  return { score: round(weighted), citable, raw: weighted }
+}
+
+/**
+ * Small samples are pulled toward the category average, the way IMDb's
+ * published weighted rating works: score = (v / (v + m)) x R + (m / (v + m)) x C,
+ * where R is the tool's count-weighted rating, v its citable reviews, m our
+ * 25-review minimum and C the average across the category. 3,200 reviews barely
+ * move; 37 reviews move a little toward the middle.
+ */
+export function shrinkToward(raw: number, reviews: number, categoryMean: number, m = MIN_REVIEWS): number {
+  return round((reviews / (reviews + m)) * raw + (m / (reviews + m)) * categoryMean)
 }
 
 export function overallFrom(parts: { user: number | null; market: number; critics?: number | null; value?: number | null }): number | null {
@@ -327,7 +342,7 @@ function build(tool: ScorecardTool): ToolEvidence {
   const editorial = editorialTools[id]
   if (!editorial) throw new Error(`resume-guide.json has no entry for ${id}`)
   const ratings = usableRatings(tool.sources.ratings as { platform: string; rating: number; reviews: number; as_of: string }[])
-  const { score: userScore, citable } = userScoreFrom(ratings)
+  const { score: userScore, citable, raw: rawUser } = userScoreFrom(ratings)
   const marketScore = tool.computed.market_traction_score
   const { counted, notCounted } = appearancesFor(id)
   const yearCost = editorial.yearCost ?? null
@@ -343,6 +358,7 @@ function build(tool: ScorecardTool): ToolEvidence {
     citableReviews: citable,
     enoughEvidence: userScore !== null,
     userScore,
+    rawUserScore: rawUser === null ? null : round(rawUser),
     marketScore,
     criticsScore,
     valueScore,
@@ -378,8 +394,16 @@ function rankSegment(tools: ToolEvidence[]): ToolEvidence[] {
 
 export function resumeTools(): { checkers: ToolEvidence[]; builders: ToolEvidence[]; all: ToolEvidence[] } {
   const built = scorecard.tools.map(build)
-  const checkers = rankSegment(built.filter((t) => t.segment === 'checker'))
-  const builders = rankSegment(built.filter((t) => t.segment === 'builder'))
+  // Category average of the plain ratings, weighted by review count, for the small-sample adjustment.
+  const rated = built.filter((t) => t.rawUserScore !== null)
+  const mean = rated.reduce((a, t) => a + (t.rawUserScore as number) * t.citableReviews, 0) / rated.reduce((a, t) => a + t.citableReviews, 0)
+  const adjusted = built.map((t) => {
+    if (t.rawUserScore === null) return t
+    const userScore = shrinkToward(t.rawUserScore, t.citableReviews, mean)
+    return { ...t, userScore, overall: overallFrom({ user: userScore, market: t.marketScore, critics: t.criticsScore, value: t.valueScore }) }
+  })
+  const checkers = rankSegment(adjusted.filter((t) => t.segment === 'checker'))
+  const builders = rankSegment(adjusted.filter((t) => t.segment === 'builder'))
   return { checkers, builders, all: [...checkers, ...builders] }
 }
 
@@ -645,8 +669,13 @@ export function atsValueFrom(pricing: string, freeTier: boolean): number {
 
 export type AtsTool = (typeof atsData.tools)[number]
 
+const atsMean = (() => {
+  const rows = atsData.tools.map((t) => ({ r: t.computed.user_score, n: (t.sources.g2?.reviews ?? 0) }))
+  return rows.reduce((a, x) => a + x.r * x.n, 0) / rows.reduce((a, x) => a + x.n, 0)
+})()
+
 export function atsScores(t: AtsTool) {
-  const user = t.computed.user_score
+  const user = shrinkToward(t.computed.user_score, t.sources.g2?.reviews ?? MIN_REVIEWS, atsMean)
   const market = t.computed.market_traction_score
   const value = atsValueFrom(t.sources.pricing, !!t.sources.free_tier)
   return { user, market, value, overall: overallFrom({ user, market, value }) as number }
@@ -660,4 +689,12 @@ export function atsLeaders(): Record<string, string> {
     if (!best[t.segment] || o > best[t.segment].o) best[t.segment] = { name: t.name, o }
   }
   return Object.fromEntries(Object.entries(best).map(([seg, v]) => [seg, v.name]))
+}
+
+/** The research behind the rating framework and where editorial judgment sits (framework.json). */
+export const framework = frameworkData as {
+  summary: string
+  research: { finding: string; usedFor: string; source: string; url: string }[]
+  judgment: { does: string[]; never: string[] }
+  limits: string[]
 }

@@ -42,6 +42,10 @@ export const videoCardCss = `
   .vid-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px;}
   .vid{margin:0;}
   .vid iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:10px;}
+  .vplayer{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000;}
+  .vplayer iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:0;}
+  .vgone{display:flex;flex-direction:column;justify-content:center;gap:6px;width:100%;aspect-ratio:16/9;border-radius:10px;background:var(--paper-2);padding:20px;font-size:14.5px;color:var(--ink-2);text-align:left;}
+  .vgone b{color:var(--ink);font-size:16px;}
   .vfacade{position:relative;display:block;width:100%;aspect-ratio:16/9;border:0;padding:0;cursor:pointer;background-color:#24194F;background-size:cover;background-position:center;border-radius:10px;}
   .vplay{position:absolute;left:14px;bottom:14px;width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.25);}
   .vfacade:hover .vplay{background:var(--ok-bright);}

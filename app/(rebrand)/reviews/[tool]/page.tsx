@@ -192,7 +192,11 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                       <br />#{t.rank} of {peers.length} {SEGMENT_PLURAL[t.segment]}
                     </span>
                   </div>
-                  <Meter label="Users" value={t.userScore} note={`${formatCount(t.citableReviews)} citable reviews`} />
+                  <Meter
+                    label="Users"
+                    value={t.userScore}
+                    note={`users say ${t.rawUserScore?.toFixed(1)} across ${formatCount(t.citableReviews)} reviews${t.rawUserScore !== null && t.userScore !== null && Math.abs(t.rawUserScore - t.userScore) >= 0.05 ? '; adjusted for sample size' : ''}`}
+                  />
                   <Meter label="Market" value={t.marketScore} note="traffic, review volume and growth" />
                   <Meter
                     label="Critics"

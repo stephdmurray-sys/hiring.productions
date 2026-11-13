@@ -167,7 +167,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
               <dd>
                 {t.enoughEvidence ? (
                   <p>
-                    {t.userScore?.toFixed(1)} from {formatCount(t.citableReviews)} citable reviews.
+                    {t.rawUserScore?.toFixed(1)} from {formatCount(t.citableReviews)} citable reviews.
                   </p>
                 ) : (
                   <p>
@@ -394,7 +394,7 @@ export default function Page() {
               </span>
             </p>
             <p className="pick-facts">
-              {rising.userScore?.toFixed(1)} from {formatCount(rising.citableReviews)} users &middot; #{rising.rank}{' '}
+              {rising.rawUserScore?.toFixed(1)} from {formatCount(rising.citableReviews)} users &middot; #{rising.rank}{' '}
               {SEGMENT_SINGULAR[rising.segment]} &middot; $0 for a clean PDF
             </p>
             <a href={`/go/${rising.id}`} className="tl tl-strong">

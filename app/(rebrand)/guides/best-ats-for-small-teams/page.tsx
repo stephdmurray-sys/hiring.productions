@@ -106,7 +106,16 @@ function rebuildFootnote(src: string): string {
   )
 }
 
+/** Videos play inline on this page: no related videos from other channels, no redirect. */
+function inlineVideos(src: string): string {
+  return src.replace(
+    /<iframe src="https:\/\/www\.youtube-nocookie\.com\/embed\/([A-Za-z0-9_-]{11})"([^>]*)><\/iframe>/g,
+    (_m, id: string, rest: string) =>
+      `<iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1&modestbranding=1"${rest.replace(' allowfullscreen', '')} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+  )
+}
+
 export default function Page() {
-  const out = rebuildFootnote(rebuildReviews(rebuildPicks(rebuildTables(html))))
+  const out = inlineVideos(rebuildFootnote(rebuildReviews(rebuildPicks(rebuildTables(html)))))
   return <MockPage html={out} active="hiring" />
 }

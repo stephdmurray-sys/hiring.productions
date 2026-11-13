@@ -35,7 +35,7 @@ export default function Page() {
         domain: top.domain,
         name: top.name,
         title: 'Best overall right now',
-        line: `${top.userScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free tier is a real product.`,
+        line: `${top.rawUserScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free tier is a real product.`,
         href: `/reviews/${top.id}`,
         linkText: `Is ${top.name} worth it?`,
       }}
