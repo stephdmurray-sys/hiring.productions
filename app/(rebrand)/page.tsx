@@ -120,7 +120,7 @@ export default function Home() {
           <section className="side side-seekers" aria-labelledby="side-seekers-h">
             <span className="side-k">
               <i />
-              I&rsquo;m getting hired
+              I&rsquo;m a job seeker
             </span>
             <h2 id="side-seekers-h">Resume builders and ATS checkers, ranked on evidence</h2>
             <div className="side-logos">
@@ -196,7 +196,7 @@ export default function Home() {
             <div key={side}>
               <span className="rec-sits-k">
                 <span className={side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
-                {side === 'seekers' ? 'I’m getting hired' : 'I’m hiring'}
+                {side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}
               </span>
               {problemsFor(side).map((p) => (
                 <a className="rec-sit" href={`/what-should-i-use?side=${side}&problem=${p.id}#questions`} key={p.id}>

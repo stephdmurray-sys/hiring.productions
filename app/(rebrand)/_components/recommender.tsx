@@ -62,7 +62,7 @@ export function RecQuestions({ state }: { state: AskState }) {
         <legend>Which side of the table are you on?</legend>
         <div className="rec-side-opts">
           <Radio name="side" value="seekers" checked={side === 'seekers'} className="opt-side opt-seekers">
-            <b>I&rsquo;m getting hired</b>
+            <b>I&rsquo;m a job seeker</b>
             Resume tools, trackers, interview practice
           </Radio>
           <Radio name="side" value="hiring" checked={side === 'hiring'} className="opt-side opt-hiring">
