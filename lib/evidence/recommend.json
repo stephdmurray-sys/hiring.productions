@@ -1,12 +1,12 @@
 {
   "_about": "The recommendation framework: how a visitor’s situation and limits turn into one pick. Read by lib/evidence/recommend.ts and rendered on /what-should-i-use. The rules here are the public promise; keep them in plain English. Every otherSide line states a published finding and links to it: no unsourced numbers, no first-person quotes.",
-  "promise": "Tell us what’s going wrong and what you need. We cross off every tool that doesn’t fit, show you why, and give you one pick and a backup. Your answers decide which tools fit. They never change a rating.",
+  "promise": "Tell us what’s going wrong and what you need. We cross off every tool that doesn’t fit, show you why, and recommend one tool and a backup that costs less when there is one. Your answers decide which tools fit, and they never change a rating.",
   "rules": [
-    "Start with what’s going wrong. The right tool depends on the problem, not on the kind of tool you searched for.",
+    "Start with what’s going wrong. The right tool depends on the problem you’re trying to fix.",
     "Sometimes the answer is no tool. When software won’t fix it, we say so and point you to what will.",
-    "Your answers cross tools off. They never change a rating. A tool fits everything you asked for or it’s out, and we show you why. The tools that fit stay in rating order, the same for everyone.",
+    "Your answers cross tools off, and they never change a rating. A tool fits everything you asked for or it’s out, and we show you why. The tools that fit stay in rating order, the same for everyone.",
     "If we can’t confirm it, we don’t recommend it. A tool we can’t confirm meets your needs can’t be the pick. It’s listed under “Couldn’t confirm.”",
-    "One pick and a backup, not a list. The backup is the top-rated tool that costs you less. If none does, it’s the next-highest rated.",
+    "One tool and a backup. The backup is the top-rated tool that costs you less. If none does, it’s the next-highest rated.",
     "Only rated tools can be the pick. Tools too new to rate show up as worth watching, labeled that way.",
     "Show what you’ll really pay: the cheapest way to pay for your timeline, and what it costs if you forget to cancel.",
     "If nothing fits, say so, and show the closest tool and what’s in the way.",
@@ -23,9 +23,9 @@
       "url": "https://doi.org/10.1037/h0032955"
     },
     {
-      "title": "Why one pick, not ten",
+      "title": "Why you get one tool and a backup",
       "finding": "Pooling 99 results from earlier studies, researchers found that more options leave people less satisfied and less sure of their choice when the choice is complicated, the decision is hard, they aren’t sure what they want, and they want it done quickly.",
-      "usedFor": "A job search or a hiring crunch hits all four, so the answer is one pick and a backup, never a ranked list of ten.",
+      "usedFor": "A job search or a hiring crunch hits all four, so the answer is one tool and a backup instead of a ranked list of ten.",
       "source": "Chernev, A., Bockenholt, U., and Goodman, J. (2015). Choice overload: A conceptual review and meta-analysis. Journal of Consumer Psychology, 25(2), 333-358.",
       "url": "https://www.kellogg.northwestern.edu/faculty/research/detail/2015/when-product-assortment-leads-to-choice-overload-a-conceptual"
     }
@@ -82,7 +82,7 @@
         "categories": [
           "Interview practice"
         ],
-        "why": "Practice the questions structured interviews actually use, out loud, before the real one. None of the practice apps has enough public reviews to rate yet.",
+        "why": "Practice the questions structured interviews use, out loud, before the real one. None of the practice apps has enough public reviews to rate yet.",
         "guidance": {
           "text": "Practice the questions interviewers are told to ask, free",
           "href": "/interview-practice"

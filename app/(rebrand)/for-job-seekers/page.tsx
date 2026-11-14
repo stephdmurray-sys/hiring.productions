@@ -31,43 +31,6 @@ export default function Page() {
       dek="Resume builders and ATS checkers, scored on dated public data: what users say, what independent reviewers pick, and what a year really costs. Picked out by a recruiter who reads the other side."
       dateline={`Checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
-      situations={[
-        {
-          q: 'Applying and hearing nothing back?',
-          a: "Often no person has read it yet: 88% of employers in a Harvard Business School study agreed their systems filter out qualified people who don\u2019t match the posting\u2019s exact criteria. Use the posting\u2019s words, then run a checker.",
-          href: '/guides/best-resume-tools#rankings',
-          link: 'See the ATS checkers',
-        },
-        {
-          q: 'Rewriting your resume from scratch?',
-          a: `FlowCV gives you a clean PDF for free. Kickresume is the paid pick at ${money(byId['kickresume'].yearCost?.amount ?? 96)} a year, flat.`,
-          href: '/reviews/flowcv',
-          link: 'Read the FlowCV review',
-        },
-        {
-          q: 'Worried about surprise charges?',
-          a: `${traps.map((t) => t.name).join(' and ')} renew every 4 weeks, which is 13 charges a year. Drag the calculator below to your timeline.`,
-          href: '#cost',
-          link: 'See what your search will cost',
-        },
-        {
-          q: 'Interview coming up?',
-          a: 'Practice the questions structured interviews actually use, the follow-ups you will hear, and what a strong answer shows. Free.',
-          href: '/interview-practice',
-          link: 'Practice for your interview',
-        },
-        {
-          q: 'Losing track of applications?',
-          a: `${top.name} keeps every application, contact and follow-up in one pipeline, and its free version is enough to run a whole search.`,
-          href: `/reviews/${top.id}`,
-          link: `Read the ${top.name} review`,
-        },
-      ]}
-      situationsCta={{
-        text: 'Tell us what\u2019s going wrong and what you can spend. We cross off every tool that doesn\u2019t fit and give you one pick, with the real cost.',
-        href: '/what-should-i-use?side=seekers#questions',
-        label: 'What should I use?',
-      }}
       board={{
         title: 'Resume builders and checkers',
         checked: `checked ${shortDate(checked)}`,
@@ -78,15 +41,6 @@ export default function Page() {
           </>
         ),
       }}
-      extra={
-        <section className="wrap sec" id="cost">
-          <h2>What will your search actually cost?</h2>
-          <p className="lead">Drag to your timeline. Every tool re-sorts by the cheapest way to pay, and shows what happens if you forget to cancel.</p>
-          <div style={{ marginTop: 36 }}>
-            <CostCalculator tools={calcTools()} checked={shortDate(checked)} />
-          </div>
-        </section>
-      }
       guides={[
         {
           href: '/guides/best-resume-tools',
@@ -94,6 +48,27 @@ export default function Page() {
           detail: `${all.length} builders and checkers, ${benchmarks.length} rival lists, ${videos.length} labeled demo videos, and what your search will cost.`,
           meta: `Checked ${shortDate(checked)}`,
           logos: all.slice(0, 6).map((t) => ({ domain: t.domain, name: t.name })),
+        },
+        {
+          href: '/guides/best-resume-tools#cost',
+          title: 'What will your search cost?',
+          detail: 'Drag to your timeline and every tool re-sorts by the cheapest way to pay, with what happens if you forget to cancel.',
+          meta: 'Free calculator',
+          logos: [],
+        },
+        {
+          href: '/interview-practice',
+          title: 'What will they ask me in the interview?',
+          detail: 'The questions structured interviews use, the follow-ups you will hear, and what a strong answer shows.',
+          meta: 'Free practice',
+          logos: [],
+        },
+        {
+          href: '/compare',
+          title: 'Down to two tools?',
+          detail: 'Any two resume tools side by side: the scores, what each costs, the free versions and a video of each.',
+          meta: 'Comparisons',
+          logos: [],
         },
       ]}
       inResearch="job search trackers, interview practice, career coaching and LinkedIn profile tools"

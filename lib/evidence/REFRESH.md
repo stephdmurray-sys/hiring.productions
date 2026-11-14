@@ -143,3 +143,11 @@ The Nov 14 read found Zapier, Geekflare and SkillScouter name more of our tools 
 ## Comparison pages
 
 Nothing to edit. `/compare/*` pages are computed from the scores, prices and free levels on every build (`lib/compare.ts`), so they update with the refresh. After a refresh, open two or three and read the verdict line: if a tool changed category or tier, its comparisons move with it.
+
+## Affiliate links and money lines
+
+Nothing to refresh while no affiliate deal is live. When one is approved: add the partner id to `PAYS_US` in `lib/money.ts` the same day the `/go` destination swaps to the tracked link, and change the two static lines in `_html/guide-ats.ts` and `_html/guide-training.ts` that say no link on the page earns anything.
+
+## Applicant tracking data (the December check)
+
+G2 blocks automated reads, so the applicant tracking ratings in `lib/scorecards/ats-small-teams.json` need a person in a normal browser: read each system's G2 and Capterra rating and review count, update the file with the date read, and run the build. The hiring pages show the date of the last read.

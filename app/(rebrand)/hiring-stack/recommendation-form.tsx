@@ -93,17 +93,17 @@ export function RecommendationForm() {
         <h2>What comes back</h2>
         <ul>
           <li>
-            <b>A named stack, not a list of options.</b>
-            The applicant tracking system, the job boards and the screening setup she would run for your hiring volume.
+            <b>The tools she would run.</b>
+            The applicant tracking system, the job boards and the screening setup she would use for your hiring volume, named.
           </li>
           <li>
-            <b>The reasoning, with receipts.</b>
+            <b>Why she picked each one.</b>
             Every pick traces to the scores you can read on <a href="/how-we-review">How we review</a>. Vendors can&rsquo;t pay for placement,
             rankings or scores.
           </li>
           <li>
-            <b>A straight answer on whether you need more than tools.</b>
-            Most teams just need the right tools. If yours needs more, she&rsquo;ll say so, and you decide from there.
+            <b>Whether you need more than tools.</b>
+            Most teams need the right tools and nothing else. If yours needs more, she&rsquo;ll say so, and you decide from there.
           </li>
           <li>
             <b>From a practitioner.</b>

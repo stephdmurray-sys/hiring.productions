@@ -11,6 +11,7 @@
  * lifts, pulsing dots, tilted card stacks, stat-number rows.
  */
 export const siteCss = `
+  .money{display:block;font-size:12.5px;line-height:1.4;font-weight:600;color:var(--ink-3);margin-top:6px;letter-spacing:0;text-transform:none;}
   :root{
     --paper:#FAF8F3; --paper-2:#F2EEE4; --surface:#FFFFFF; --surface-2:#FCFBFF;
     --ink:#1A1A22; --ink-2:#4A4A5A; --ink-3:#62627A;

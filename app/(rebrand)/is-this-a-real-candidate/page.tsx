@@ -7,7 +7,7 @@ import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
 import { JsonLd, graph, SITE } from '@/app/(rebrand)/_components/structured'
 import { atsCapability } from '@/lib/evidence/recommend'
 import ats from '@/lib/scorecards/ats-small-teams.json'
-import { REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 
 /**
  * "Is this even a real candidate?": the FBI's red flags for fake
@@ -210,8 +210,8 @@ export default function RealCandidatePage() {
       </section>
 
       <section className="wrap sec" id="repvera">
-        <aside className="ours" aria-label="From the team behind hiring.productions">
-          <span className="ours-k">From the team behind hiring.productions</span>
+        <aside className="ours" aria-label={REPVERA_NOTE_LABEL}>
+          <span className="ours-k">{REPVERA_NOTE_LABEL}</span>
           <p>{REPVERA_WHAT}</p>
           <a className="tl tl-strong" href={repveraLink('real-candidate')} rel="noopener">
             See how RepVera works <span className="arr">&#8599;</span>

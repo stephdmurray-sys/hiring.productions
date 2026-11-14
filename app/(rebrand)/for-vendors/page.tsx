@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { PAYS_US } from '@/lib/money'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { homeCss } from '@/app/(rebrand)/home-css'
@@ -18,12 +19,12 @@ const LADDER = [
     changes: 'Built from your help pages, pricing pages, public reviews and traffic data.',
   },
   {
-    level: 'Vendor answered our questions',
+    level: 'Vendor answered Stephanie\u2019s questions',
     takes: 'Written answers: pricing, features, who it’s for and product materials.',
     changes: 'The review says so, and gets more specific about who the product suits.',
   },
   {
-    level: 'We saw a live demo',
+    level: 'Stephanie saw a live demo',
     takes: 'A live demo, answering the same questions every vendor gets.',
     changes: 'The most complete kind of review, shown on the review with the date.',
   },
@@ -65,7 +66,8 @@ export default function Page() {
             Listing is free. Your score comes from public reviews and data.
           </h1>
           <p className="dek">
-            We review the tools job seekers and hiring teams use. The more we know about your product, the more complete its review.
+            Stephanie Murray reviews the tools job seekers and hiring teams use. The more she knows about your product, the more complete its
+            review.
           </p>
         </div>
       </header>
@@ -102,10 +104,11 @@ export default function Page() {
         <div className="split">
           <h2>What money can&rsquo;t buy</h2>
           <div className="prose">
-            <p>No vendor can pay for a score or for a place in a ranking.</p>
+            <p>No vendor can pay for a score or for a place in a ranking, and getting in touch doesn&rsquo;t change a ranking.</p>
             <p>
-              Some links on the site can be affiliate links, and they never touch the scores. Several of our top picks pay us nothing at all.
-              New products can go on our watch list before they have enough reviews to rank.
+              {PAYS_US.size === 0 ? 'Right now, no link on this site earns us anything.' : 'A few vendor links earn us a commission.'} The
+              line under every button to a vendor&rsquo;s site says whether we earn anything from it, and a commission never touches a score.
+              New products can go on the watch list before they have enough reviews to rank.
             </p>
             <p>
               <a className="tl tl-strong" href="/how-we-review">
@@ -119,8 +122,8 @@ export default function Page() {
       <section className="wrap sec" id="submit">
         <div className="split">
           <div>
-            <h2>Send us your product</h2>
-            <p className="sublead">It takes two minutes. You get a confirmation right away and a reply about next steps within five business days.</p>
+            <h2>Send Stephanie your product</h2>
+            <p className="sublead">It takes two minutes. You get a confirmation right away, and you&rsquo;ll hear back from Stephanie within five business days.</p>
           </div>
           <VendorForm />
         </div>

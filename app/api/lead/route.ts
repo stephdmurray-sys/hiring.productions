@@ -171,7 +171,7 @@ function welcomeForSource(
   }
 
   // Monthly evidence check signup from the review site (rebrand pages and the recommender).
-  if (source === 'evidence_report' || source === 'recommender') {
+  if (source === 'evidence_report' || source === 'recommender' || source === 'resume_guide') {
     return {
       subject: "You're on the list for the monthly email",
       text: [

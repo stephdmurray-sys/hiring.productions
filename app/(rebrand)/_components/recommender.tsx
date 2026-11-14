@@ -269,7 +269,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
 
       {r.watching.length > 0 && (
         <div className="rec-watch">
-          <span className="rec-alt-k">New and worth watching, not rated yet</span>
+          <span className="rec-alt-k">New and worth watching (too new to rate)</span>
           {r.watching.map((w) => (
             <div className="rec-watch-row" key={w.name}>
               <Logo domain={w.domain} name={w.name} size={40} />
@@ -283,7 +283,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
 
       {r.stephanie && (
         <div className="rec-watch">
-          <span className="rec-alt-k">Stephanie&rsquo;s pick: her opinion, not a rating</span>
+          <span className="rec-alt-k">Stephanie&rsquo;s pick (her opinion, with no effect on any score)</span>
           <div className="rec-watch-row">
             <Logo domain={r.stephanie.domain} name={r.stephanie.name} size={40} />
             <p>
@@ -517,6 +517,7 @@ export const recCss = captureCss + `
 `
 
 /** The rules and the research, in rows. The full list is on How we review. */
+/** The rules only. The research behind them lives on How we review (#recommend), not on the tool's own pages. */
 export function RecHow({ all = false }: { all?: boolean }) {
   const rules = all ? data.rules : [0, 1, 2, 3, 4, 9].map((i) => data.rules[i])
   const split = (r: string) => {
@@ -534,17 +535,6 @@ export function RecHow({ all = false }: { all?: boolean }) {
           </div>
         )
       })}
-      {data.research.map((x) => (
-        <div className="rec-rule" key={x.url}>
-          <b>{x.title}</b>
-          <p>
-            {x.finding} {x.usedFor}{' '}
-            <a href={x.url} rel="nofollow noopener" target="_blank">
-              {x.source}
-            </a>
-          </p>
-        </div>
-      ))}
     </div>
   )
 }

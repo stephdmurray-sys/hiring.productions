@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { REPVERA_CATEGORY, repveraLink } from '@/lib/repvera'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/how-we-review'
 import { atsScores, discovery, framework } from '@/lib/evidence'
@@ -27,7 +28,7 @@ function researchSections() {
   return `
       <section id="research">
         <h2>The research behind it</h2>
-        <p class="lead">We didn&rsquo;t invent a scoring system. We took what the most trusted review sites and researchers already do, kept the parts that hold up, and fixed the parts that let vendors in.</p>
+        <p class="lead">Our scoring copies what the most trusted review sites and researchers already do. We kept the parts that hold up and fixed the parts that let vendors in.</p>
         <table>
           <tr><th>What the research shows</th><th>How we use it</th></tr>
           ${rows}
@@ -37,12 +38,13 @@ function researchSections() {
 
       <section id="judgment">
         <h2>Where Stephanie&rsquo;s judgment comes in</h2>
-        <p class="lead">Twenty years in talent is worth a lot. It&rsquo;s worth the most where it&rsquo;s labeled and kept away from the numbers.</p>
+        <p class="lead">In Stephanie&rsquo;s words: &ldquo;When something on this site is my opinion, it&rsquo;s labeled as mine, and it has no effect on any score.&rdquo;</p>
         <style>@media(min-width:761px){#judgment .score-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}</style>
         <div class="score-cards">
-          <div class="scard"><h3>What she does</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.does)}</ul></div>
-          <div class="scard"><h3>What she never does</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.never)}</ul></div>
+          <div class="scard"><h3>What I do</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.does)}</ul></div>
+          <div class="scard"><h3>What I never do</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.never)}</ul></div>
         </div>
+        <p style="margin-top:24px;max-width:820px;">&ldquo;I also built <a href="${repveraLink('how-we-review')}" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">RepVera</a>. It&rsquo;s listed here in its own category, ${REPVERA_CATEGORY.toLowerCase()}, with no score, and nothing in that category is scored or ranked.&rdquo; <a href="/advertiser-disclosure" style="text-decoration:underline;text-underline-offset:3px;">Who pays for this site</a></p>
       </section>
 `
 }
@@ -94,7 +96,7 @@ function radarSection() {
           ${rows}
         </table>
         <p class="callout"><b>Follower counts don&rsquo;t count.</b> ${esc(followers.why)}</p>
-        <p style="margin-top:20px">Getting checked is not the same as getting ranked. Discovery puts a tool in the queue; only public data (user ratings, popularity, best-of lists and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
+        <p style="margin-top:20px">Discovery puts a tool in the queue. Only public data (user ratings, popularity, best-of lists and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
       </section>
 `
 }
@@ -120,5 +122,5 @@ export default function Page() {
     .replace('<section id="sources">', `${researchSections()}${recommendSection()}\n      <section id="sources">`)
     .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How we pick a tool for you</a>')
     .replace('<!--SAMPLE_RATINGS-->', sampleRatings(b, breezy.sources.g2?.as_of ?? ats.as_of))
-  return <MockPage html={withRadar} active="review" />
+  return <MockPage html={withRadar} active="review" ratings="full" />
 }

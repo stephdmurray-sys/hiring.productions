@@ -7,7 +7,6 @@ import { Logo } from '@/app/(rebrand)/_components/logo'
 import { Scoreboard, boardCss, type BoardRow } from '@/app/(rebrand)/_components/scoreboard'
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { calcCss } from '@/app/(rebrand)/_components/widgets-css'
-import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
 import { homeCss } from '@/app/(rebrand)/home-css'
 import { JsonLd, graph, rankingLd, SITE } from '@/app/(rebrand)/_components/structured'
 import { problemsFor } from '@/lib/evidence/recommend'
@@ -16,14 +15,11 @@ import { problemsFor } from '@/lib/evidence/recommend'
  * Shared layout for the two audience hubs. The hero is a full block of the
  * side's color (indigo for job seekers, coral for hiring teams) carrying the
  * logos of every tool that side's guides cover.
+ *
+ * Six sections, no more (review of Nov 14, 2026): headline, "Where are you
+ * stuck?", the scoreboard, Stephanie's picks, the guides and the email.
+ * Everything else lives on its own page and is reached from the guides.
  */
-
-export interface HubSituation {
-  q: string
-  a: string
-  href: string
-  link: string
-}
 
 export interface HubGuide {
   href: string
@@ -39,11 +35,7 @@ export interface HubProps {
   dek: string
   dateline: string
   logos: { domain: string; name: string; href: string; tip?: string }[]
-  situations: HubSituation[]
-  situationsCta?: { text: string; href: string; label: string }
   board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode; heading?: string; lead?: string }
-  /** Extra section after the scoreboard, e.g. the cost calculator. */
-  extra?: ReactNode
   guides: HubGuide[]
   inResearch: string
 }
@@ -92,7 +84,7 @@ export function Hub(props: HubProps) {
   const sideName = props.side === 'seekers' ? 'For job seekers' : 'For hiring teams'
   return (
     <div className={`hub-${props.side}`}>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + followCss + homeCss + hubCss + retroCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + homeCss + hubCss + retroCss }} />
       <JsonLd
         data={graph(
           rankingLd(
@@ -136,23 +128,6 @@ export function Hub(props: HubProps) {
         </div>
       </header>
 
-      <section className="wrap sec" id="start">
-        <h2>Quick answers</h2>
-        <div className="rows">
-          {props.situations.map((s) => (
-            <div className="row" key={s.q}>
-              <span className="row-title">{s.q}</span>
-              <div>
-                <p>{s.a}</p>
-                <a className="tl tl-strong" href={s.href}>
-                  {s.link} <span className="arr">&rarr;</span>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section className="wrap sec" id="scoreboard">
         <h2>{props.board.heading ?? 'This month\u2019s scoreboard'}</h2>
         <p className="lead">{props.board.lead ?? 'Our picks are marked. Open any tool for the full review.'}</p>
@@ -161,17 +136,10 @@ export function Hub(props: HubProps) {
         </div>
       </section>
 
-      {props.extra}
-
       <section className="wrap sec" id="rising">
-        <h2>Stephanie&rsquo;s pick</h2>
-        <p className="lead">Her opinion, labeled as hers. It never changes a score.</p>
+        <h2>Stephanie&rsquo;s picks</h2>
+        <p className="lead">These are Stephanie&rsquo;s opinions, and they have no effect on any score.</p>
         <OnTheRise side={props.side} showPicks />
-      </section>
-
-      <section className="wrap sec" id="follow">
-        <h2>Who to follow</h2>
-        <WhoToFollow side={props.side} />
       </section>
 
       <section className="wrap sec" id="guides">

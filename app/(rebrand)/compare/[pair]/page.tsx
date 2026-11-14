@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { moneyLine } from '@/lib/money'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -46,7 +47,7 @@ function Meter({ label, value }: { label: string; value: number | null }) {
       <span className="meter-bar" aria-hidden="true">
         <i style={{ width: `${((value ?? 0) / 5) * 100}%` }} />
       </span>
-      <b>{value === null ? 'n/a' : value.toFixed(1)}</b>
+      <b>{value === null ? 'n/a' : value.toFixed(2)}</b>
     </div>
   )
 }
@@ -61,7 +62,7 @@ const css = `
   .vs-big span{font-size:15px;color:var(--ink-3);font-weight:700;}
   .k-resume .vs-win .vs-big b{color:var(--indigo-text);}
   .k-ats .vs-win .vs-big b{color:var(--coral-text);}
-  .meter{display:grid;grid-template-columns:96px minmax(0,1fr) 40px;gap:4px 12px;align-items:center;padding:4px 0;}
+  .meter{display:grid;grid-template-columns:96px minmax(0,1fr) 46px;gap:4px 12px;align-items:center;padding:4px 0;}
   .meter-l{font-weight:700;font-size:14.5px;}
   .meter-bar{height:8px;background:#F0EEF7;border-radius:4px;overflow:hidden;}
   .meter-bar i{display:block;height:100%;background:var(--indigo);border-radius:4px;}
@@ -109,8 +110,8 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
   const hub = resume ? { href: '/for-job-seekers', label: 'For job seekers' } : { href: '/for-hiring-teams', label: 'For hiring teams' }
   const guide = resume ? { href: '/guides/best-resume-tools', label: 'Resume tools' } : { href: '/guides/best-ats-for-small-teams', label: 'Applicant tracking' }
   const cta = resume
-    ? { href: '/what-should-i-use?side=seekers#questions', text: 'Not sure either one fits? Tell us where your search is stuck and get one pick with the real price.', button: 'What should I use?' }
-    : { href: '/what-should-i-use?side=hiring&problem=spreadsheets#questions', text: 'Not sure either one fits? Tell us your team size and budget and get one pick with the real price.', button: 'What should we use?' }
+    ? { href: '/what-should-i-use?side=seekers#questions', text: 'If neither one fits, tell us where your search is stuck. We’ll recommend one tool and a backup, with the real price.', button: 'What should I use?' }
+    : { href: '/what-should-i-use?side=hiring&problem=spreadsheets#questions', text: 'If neither one fits, tell us your team size and budget. We’ll recommend one tool and a backup, with the real price.', button: 'What should we use?' }
   const more = comparePairs()
     .filter((p) => p.kind === c.pair.kind && p.slug !== pair)
     .map((p) => ({ slug: p.slug, c: buildComparison(p.slug)! }))
@@ -180,6 +181,9 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
         <a className="tl" href={`/go/${s.goId}`} rel="nofollow">
           {s.name}&rsquo;s site <span className="arr">&#8599;</span>
         </a>
+      </p>
+      <p className="money" style={{ marginTop: -14 }}>
+        {s.name}&rsquo;s site: {moneyLine(s.goId).charAt(0).toLowerCase() + moneyLine(s.goId).slice(1)}
       </p>
     </article>
   )

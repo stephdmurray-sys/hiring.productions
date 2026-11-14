@@ -81,8 +81,19 @@ Homepage (same layer, `retro.tsx`): the two lanes are separate cards with a gap,
 - No app widgets on a reading page: no stepper progress bars, no segmented-control toggles. Tabs are underlined words.
 - No stock people. The only face on the site is Stephanie's (`public/stephanie.jpg`).
 
+## Navigation, hubs and money lines (review of Nov 14, 2026)
+
+- The top menu runs by topic: What should I use?, Resume tools, Applicant tracking systems, Guides (`/guides`), How we review. Audience pages light up their topic. The homepage doors lead to the audience pages.
+- Each hub has six sections and no more: headline, "Where are you stuck?", the scoreboard, Stephanie's picks (RepVera listed there without a score), the guides and the email.
+- Every button or link to a vendor's site has one line under it from `lib/money.ts`: "We earn nothing from this link." or "We earn a commission if you buy through this link." Never a vendor link without it.
+- The footer's ratings summary is one sentence and a link everywhere except How we review, which keeps the full block (`SiteFooter ratings="full"`).
+- The one-sentence description of the site lives in `lib/site-line.ts` and feeds search results, link previews, the share image and the footer.
+
 ## Copy tells to avoid
 
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").
+- Two-beat slogans ("Her opinion, labeled as hers. It never changes a score."). Say it in one plain sentence: "This is Stephanie's opinion, and it has no effect on the score."
+- Filler: actually, genuinely, real talk, finally, quietly. And the words quiet and gap, anywhere.
+- "One pick". Say "one tool and a backup". "Receipts" belongs to RepVera only.
 - Lists of three by default. Use two or four, or a sentence.
 - Plus the house rules in CLAUDE.md: no em dashes, no emojis, no unsourced numbers.

@@ -5,7 +5,7 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { AutoForm, PrintButton } from '@/app/(rebrand)/_components/tool-forms'
 import { Capture } from '@/app/(rebrand)/_components/capture'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
-import { REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { SCORECARD_MAX, SCORECARD_PATH, cleanRole, pickCompetencies, scorecardUrl } from '@/lib/scorecard'
 
 /**
@@ -333,8 +333,8 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
       </section>
 
       <section className="wrap sec no-print" id="repvera">
-        <aside className="ours" aria-label="From the team behind hiring.productions">
-          <span className="ours-k">From the team behind hiring.productions</span>
+        <aside className="ours" aria-label={REPVERA_NOTE_LABEL}>
+          <span className="ours-k">{REPVERA_NOTE_LABEL}</span>
           <p>{REPVERA_WHAT}</p>
           <a className="tl tl-strong" href={repveraLink('interview-scorecard')} rel="noopener">
             See how RepVera works <span className="arr">&#8599;</span>

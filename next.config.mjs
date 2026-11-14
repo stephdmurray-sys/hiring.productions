@@ -81,6 +81,8 @@ const map = {
   '/q/what-does-culture-fit-actually-mean': '/interview-practice',
 }
 const RETIRED = Object.entries(map).map(([source, destination]) => ({ source, destination, permanent: false }))
+// Renamed pages keep their old address working for good (308).
+const RENAMED = [{ source: '/consulting', destination: '/hiring-stack', permanent: true }]
 // Whole sections: anything left under these goes to the closest hub.
 const RETIRED_PREFIXES = [
   { source: '/membership/:path*', destination: '/', permanent: false },
@@ -110,7 +112,7 @@ const nextConfig = {
   // anywhere (search results, old emails, bookmarks, Stripe legacy
   // sessions, social posts) lands on /pro instead of 404'ing.
   async redirects() {
-    return [...RETIRED, ...RETIRED_PREFIXES]
+    return [...RENAMED, ...RETIRED, ...RETIRED_PREFIXES]
   },
 }
 

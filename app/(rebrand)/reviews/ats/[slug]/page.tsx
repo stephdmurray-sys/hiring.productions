@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { moneyLine } from '@/lib/money'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -50,7 +51,7 @@ function Meter({ label, value, note }: { label: string; value: number; note: str
       <span className="meter-bar" aria-hidden="true">
         <i style={{ width: `${(value / 5) * 100}%` }} />
       </span>
-      <b>{value.toFixed(1)}</b>
+      <b>{value.toFixed(2)}</b>
       <span className="meter-n">{note}</span>
     </div>
   )
@@ -169,6 +170,7 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
                 <a className="tl tl-strong" href={`/go/${p.slug}`} rel="nofollow">
                   Go to {name}&rsquo;s site <span className="arr">&#8599;</span>
                 </a>
+                <span className="money">{moneyLine(p.slug)}</span>
               </p>
             </div>
             <aside className="rv-score card card-lift" aria-label={`${name} score`}>
@@ -319,7 +321,7 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
 
       <section className="wrap sec" id="fit">
         <div className="ats-cta">
-          <p>Not sure it fits? Tell us your team size, your hires and your budget, and get one pick with the real price.</p>
+          <p>If you&rsquo;re not sure it fits, tell us your team size, your hires and your budget. We&rsquo;ll recommend one tool and a backup, with the real price.</p>
           <a className="btn btn-coral" href="/what-should-i-use?side=hiring&problem=spreadsheets#questions">
             What should we use?
           </a>

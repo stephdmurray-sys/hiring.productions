@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
+import { PAYS_US, moneyLine } from '@/lib/money'
 import { JsonLd, graph, resumeRankingLd, toolReviewLd } from '@/app/(rebrand)/_components/structured'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
@@ -103,7 +105,7 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
             <th className="num">#</th>
             <th>Tool</th>
             <th>Best for</th>
-            <th>Actually free?</th>
+            <th>Free for real?</th>
             <th>Price</th>
             <th className="num">Overall</th>
             <th className="num">Users</th>
@@ -276,6 +278,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
           <a href={`/go/${t.id}`} className="tl">
             Visit {t.name} &#8599;
           </a>
+          <span className="money">{moneyLine(t.id)}</span>
         </p>
       </div>
     </details>
@@ -326,8 +329,9 @@ export default function Page() {
             {formatMonth(guide.nextCheck)} &middot; <a href="/how-we-review">how we review</a>
           </p>
           <p className="disclosure">
-            Some links below can be affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
-            can&rsquo;t be bought.{' '}
+            {PAYS_US.size === 0
+              ? 'No link on this page earns us anything right now, and nobody can pay for placement, rankings or scores.'
+              : 'Some links below earn us a commission, and the line under each one says so. Nobody can pay for placement, rankings or scores.'}{' '}
             <a href="/advertiser-disclosure">Full disclosure</a>
           </p>
         </div>
@@ -355,7 +359,7 @@ export default function Page() {
       <section className="wrap sec" id="short">
         <h2>Our picks</h2>
         <p className="lead">
-          Resume tools are where job seekers get burned: builders that are free until you try to download, and $2 trials that quietly renew
+          Resume tools are where job seekers get burned: builders that are free until you try to download, and $2 trials that renew
           every 4 weeks. So this guide ranks on public reviews and real prices and prints every renewal price.
         </p>
         <div className="picks">
@@ -379,6 +383,7 @@ export default function Page() {
                 <a href={`/go/${t.id}`} className="tl tl-strong">
                   Visit {t.name} &#8599;
                 </a>
+                <span className="money">{moneyLine(t.id)}</span>
               </div>
             )
           })}
@@ -405,6 +410,7 @@ export default function Page() {
             <a href={`/go/${rising.id}`} className="tl tl-strong">
               Visit {rising.name} &#8599;
             </a>
+            <span className="money">{moneyLine(rising.id)}</span>
           </div>
         </div>
       </section>
@@ -512,7 +518,7 @@ export default function Page() {
           <h3 className="h3">Who owns the list you&rsquo;re reading?</h3>
           <p className="lead">
             BOLD owns MyPerfectResume, LiveCareer and Zety. It also owns FlexJobs and Monster, and both of their &ldquo;best resume
-            builder&rdquo; lists put BOLD brands on top. We show those lists. We don&rsquo;t count them.
+            builder&rdquo; lists put BOLD brands on top. We show those lists but don&rsquo;t count them.
           </p>
         </div>
 
@@ -566,7 +572,7 @@ export default function Page() {
         <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
         <RankTable tools={checkers} />
         <h3 className="h3">Resume builders</h3>
-        <p className="sublead">Where you write the thing. Read the &ldquo;Actually free?&rdquo; column first.</p>
+        <p className="sublead">Where you write the thing. Read the &ldquo;Free for real?&rdquo; column first.</p>
         <RankTable tools={builders} />
         <p className="footnote">
           Ratings read {formatDate(ratingsRead)} from dated public sources: {ratingPlatforms.join(', ')}. The G2 family (G2, Capterra,
@@ -576,8 +582,18 @@ export default function Page() {
         </p>
       </section>
 
+      <section className="wrap sec" id="signup">
+        <div className="g-signup">
+          <div>
+            <h2>Get an email when these rankings change</h2>
+            <p className="sublead">One email a month: tools that moved, prices that went up, and new tools worth watching.</p>
+          </div>
+          <EvidenceSignup source="resume_guide" />
+        </div>
+      </section>
+
       <section className="wrap sec" id="cost">
-        <h2>What will your search actually cost?</h2>
+        <h2>What will your search cost?</h2>
         <p className="lead">
           The sticker price is the trial. Drag to your timeline: every tool re-sorts by the cheapest published way to pay for it, and shows
           what the first year costs if you then forget to cancel.
@@ -649,7 +665,7 @@ export default function Page() {
       <section className="wrap narrow sec" id="faq">
         <h2>Questions job seekers ask</h2>
         <div className="faq">
-          <Faq q="Are free resume builders actually free?">
+          <Faq q="Are free resume builders really free?">
             Usually not. The common pattern is free to build and paid to download anything usable. Here, only FlowCV gives you a
             watermark-free PDF for nothing, and Teal and Kickresume have free tiers that produce real documents. Everyone else charges at
             the exit.

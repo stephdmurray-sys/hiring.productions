@@ -64,8 +64,8 @@ export default function PrivacyPage() {
             <b>Leaving:</b> every email has a one-click unsubscribe.
           </li>
           <li>
-            <b>Who we are:</b> hiring.productions is made by the team behind RepVera. Some emails to hiring teams include a labeled note about
-            RepVera.
+            <b>Who we are:</b> hiring.productions is made by Stephanie Murray, who also built RepVera. Some emails include a note about
+            RepVera, labeled as hers.
           </li>
         </ul>
 

@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { REPVERA_CATEGORY, REPVERA_FOR, REPVERA_NO_SCORE, repveraLink } from '@/lib/repvera'
+import { moneyLine } from '@/lib/money'
 import { Logo } from './logo'
 import { formatCount, formatMonth, guide, hiringPick, latestCheck, resumeTools, rising, risingPick, type RisingTool } from '@/lib/evidence'
 
@@ -108,6 +110,8 @@ interface Pick {
   href: string
   external: boolean
   linkText: string
+  /** Set for outbound vendor links: shows what we earn from the click. */
+  moneyId?: string
 }
 
 /** Stephanie's picks, one per side: editorial judgment, labeled as hers, set beside the evidence. */
@@ -144,7 +148,21 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
     href: hiringPick.url,
     external: true,
     linkText: `Visit ${hiringPick.name}`,
+    moneyId: hiringPick.id,
   })
+  for (const s of ['seekers', 'hiring'] as const) {
+    picks.push({
+      side: s,
+      name: 'RepVera',
+      domain: 'repvera.com',
+      heading: 'I built this one',
+      body: REPVERA_FOR[s],
+      facts: `${REPVERA_CATEGORY}, a category with no scores. ${REPVERA_NO_SCORE}`,
+      href: repveraLink(`pick-${s}`),
+      external: true,
+      linkText: 'See how RepVera works',
+    })
+  }
   return picks.filter((p) => !side || p.side === side)
 }
 
@@ -205,6 +223,7 @@ export function OnTheRise({
               <a className="tl tl-strong" href={p.href} {...(p.external ? { rel: 'noopener', target: '_blank' } : {})}>
                 {p.linkText} {p.external ? <span className="arr">&#8599;</span> : <span className="arr">&rarr;</span>}
               </a>
+              {p.external && p.moneyId && <span className="money">{moneyLine(p.moneyId)}</span>}
             </div>
           ))}
         </div>

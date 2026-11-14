@@ -17,12 +17,12 @@
   "picks": [
     {
       "tool": "teal",
-      "label": "Best overall",
+      "label": "Top-rated checker",
       "line": "Checker, builder, and job tracker in one, with a real free tier."
     },
     {
       "tool": "kickresume",
-      "label": "Best paid builder",
+      "label": "Top-rated builder",
       "line": "$96 a year with no surprise renewals, and students get six months free."
     }
   ],
@@ -37,10 +37,10 @@
       "bestFor": "Checker, builder, and tracker in one. Real free tier",
       "call": {
         "stance": "agrees",
-        "line": "Three current lists name Teal, and we rank it first too. Its free version is actually useful."
+        "line": "Three current lists name Teal, and we rank it first too. Its free version is useful on its own."
       },
       "verdict": {
-        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free version is actually useful, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
+        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. It rates 4.9 from 3,200 Chrome Web Store ratings.",
         "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
         "like": "The free version lets you download your resume. If you pay, $79 a quarter is the best deal.",
         "watch": "The $13 weekly plan looks cheap but adds up fast. Pay monthly or quarterly instead."
@@ -52,7 +52,7 @@
         "how": "4 quarters at $79",
         "renewsEvery4Weeks": false
       },
-      "freeAnswer": "Yes, and the free version is actually useful. Teal+ is $29 a month or $79 a quarter.",
+      "freeAnswer": "Yes. The free version lets you build and download your resume. Teal+ is $29 a month or $79 a quarter.",
       "freeLevel": "full"
     },
     "jobscan": {
@@ -112,7 +112,7 @@
       "freeLevel": "full"
     },
     "flowcv": {
-      "bestFor": "The genuinely free builder. No watermark",
+      "bestFor": "Free builder with no watermark on the PDF",
       "call": {
         "stance": "breaks",
         "line": "None of the current lists we've checked names FlowCV. It’s here because of its users: 4.9 from 83 public ratings, and a free plan that gives you a watermark-free PDF."
@@ -154,7 +154,7 @@
       "verdict": {
         "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you only need it for a week at $2.95.",
         "skipIf": "You might forget to cancel. The trial renews at $29.95 every 4 weeks, 13 times a year, and the free download is plain text with your formatting stripped.",
-        "like": "The editor itself is genuinely good.",
+        "like": "The editor itself is good.",
         "watch": "The only public reviews we can use average 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewals. The App Store apps under this name are third-party lookalikes, not Resume.io."
       },
       "pricingLine": "$2.95 7-day trial, renews $29.95 every 4 weeks · free download is .txt only",
@@ -164,7 +164,7 @@
         "how": "$2.95 trial, then 13 renewals at $29.95",
         "renewsEvery4Weeks": true
       },
-      "freeAnswer": "No. The free download is a .txt file with your formatting stripped. What you actually get is a $2.95 7-day trial that renews at $29.95 every 4 weeks.",
+      "freeAnswer": "No. The free download is a .txt file with your formatting stripped. What you get is a $2.95 7-day trial that renews at $29.95 every 4 weeks.",
       "freeLevel": "none"
     },
     "enhancv": {
@@ -216,7 +216,7 @@
         "how": "$1.95 trial, then 13 renewals at $25.95",
         "renewsEvery4Weeks": true
       },
-      "freeAnswer": "No. The free download is a .txt file. What you actually get is a $1.95 14-day trial that renews at $25.95 every 4 weeks.",
+      "freeAnswer": "No. The free download is a .txt file. What you get is a $1.95 14-day trial that renews at $25.95 every 4 weeks.",
       "freeLevel": "none"
     },
     "huntr": {

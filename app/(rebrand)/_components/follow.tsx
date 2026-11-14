@@ -126,7 +126,7 @@ export function WhoToFollow({ side }: { side?: Side }) {
           </div>
         ))}
       <p className="follow-note">
-        Stephanie&rsquo;s picks: never paid for, and chosen for being funny or genuinely useful, not for follower counts. Following someone
+        Stephanie picks these people because they&rsquo;re useful or funny. Nobody paid to be here, and follower counts don&rsquo;t matter. Following someone
         doesn&rsquo;t change any tool&rsquo;s score. Know someone who belongs here?{' '}
         <a href="mailto:hello@hiring.productions?subject=Who%20to%20follow">Tell us</a>.
       </p>

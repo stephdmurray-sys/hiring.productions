@@ -28,7 +28,7 @@
     },
     {
       "finding": "Northwestern's Spiegel Research Center found purchase likelihood peaks at 4.2 to 4.5 stars and falls as ratings near a perfect 5, and that five reviews make a purchase 270% more likely than none.",
-      "usedFor": "We always print the review count next to a rating, and we treat a wall of perfect scores as a reason to look closer, not a reason to celebrate.",
+      "usedFor": "We always print the review count next to a rating, and when a tool has nothing but perfect scores, we look closer.",
       "source": "Spiegel Research Center, Northwestern University",
       "url": "https://spiegel.medill.northwestern.edu/wp-content/uploads/sites/2/2021/04/Online-Reviews-Whitepaper.pdf"
     },
@@ -40,7 +40,7 @@
     },
     {
       "finding": "Consumer Reports builds its overall scores from tests and owner surveys, and a product earns its Recommended label through those scores.",
-      "usedFor": "Our labels like Best overall and Small teams pick are earned the same way: they go to the top data score, automatically.",
+      "usedFor": "Our labels like Top-rated checker and Small teams pick are earned the same way: they go to the top data score in their group, automatically.",
       "source": "Consumer Reports",
       "url": "https://www.consumerreports.org/cars-what-goes-into-consumer-reports-overall-score-for-cars/"
     },
@@ -53,16 +53,16 @@
   ],
   "judgment": {
     "does": [
-      "Names her picks: an up-and-coming pick for job seekers and a top pick for hiring teams, labeled as hers.",
-      "Nominates tools to check, so a good one never waits for a marketing budget to get noticed.",
-      "Writes the guidance: what a recruiter sees when your resume lands, how to use a tool, what to watch out for.",
-      "Chooses the people worth following."
+      "Name my picks: an up-and-coming pick for job seekers and a top pick for hiring teams, labeled as mine.",
+      "Nominate tools to check, so a good one doesn't have to wait for a marketing budget to get noticed.",
+      "Write the guidance: what a recruiter sees when your resume lands, how to use a tool and what to watch out for.",
+      "Choose the people worth following."
     ],
     "never": [
-      "Sets or edits a score.",
-      "Moves a tool up or down a ranking.",
-      "Changes a weight for one tool or one category.",
-      "Accepts money, gifts or deals for any of the above."
+      "Set or edit a score.",
+      "Move a tool up or down a ranking.",
+      "Change a weight for one tool or one category.",
+      "Accept money, gifts or deals for any of the above."
     ]
   },
   "limits": [

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { SITE_LINE } from '@/lib/site-line'
 import Script from 'next/script'
 import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     default: 'hiring.productions',
     template: '%s | hiring.productions',
   },
-  description: 'Reviews of the tools on both sides of hiring: resume tools for job seekers, applicant tracking systems for hiring teams. Every score is dated, the method is published, and no vendor can pay for a place. Free.',
+  description: `${SITE_LINE} Resume tools for job seekers, applicant tracking systems for hiring teams. Every score is dated and the method is published.`,
   keywords: ['hiring', 'job search', 'recruiting', 'ATS screening', 'resume tips', 'interview prep', 'talent acquisition', 'candidate experience', 'job description SEO', 'employer branding'],
   authors: [{ name: 'Stephanie Murray', url: 'https://www.linkedin.com/in/stephaniemurray11/' }],
   creator: 'Stephanie Murray',
@@ -51,14 +52,14 @@ export const metadata: Metadata = {
     url: 'https://hiring.productions',
     siteName: 'hiring.productions',
     title: 'hiring.productions',
-    description: 'Both sides of hiring. Finally in the open.',
+    description: SITE_LINE,
     // OG image is generated dynamically from app/opengraph-image.tsx —
     // Next.js auto-includes it, no manual `images` reference needed.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'hiring.productions',
-    description: 'Both sides of hiring. Finally in the open.',
+    description: SITE_LINE,
     // twitter-image inherits from opengraph-image when not specified.
     creator: '@stephaniemurray',
   },
@@ -94,7 +95,7 @@ const jsonLd = {
       sameAs: [
         'https://www.linkedin.com/in/stephaniemurray11/',
       ],
-      description: 'Independent reviews of the tools on both sides of hiring: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Every score is built from dated public data, re-read monthly, and no vendor can pay for a place.',
+      description: 'Hiring tools ranked for job seekers and hiring teams: resume builders and ATS checkers, applicant tracking systems and recruiter training. Every score is built from dated public data and re-read monthly, and nobody pays to be featured. Made by Stephanie Murray, who also built RepVera.',
     },
     {
       '@type': 'Person',
@@ -127,7 +128,7 @@ const jsonLd = {
       publisher: {
         '@id': 'https://hiring.productions/#organization',
       },
-      description: 'Independent, data-driven reviews of hiring tools for job seekers and hiring teams, with guides, cost comparisons and the people worth following in talent acquisition.',
+      description: 'Hiring tools ranked for job seekers and hiring teams, with guides, cost comparisons and the people worth following in talent acquisition. Nobody pays to be featured.',
     },
     {
       '@type': 'ProfessionalService',

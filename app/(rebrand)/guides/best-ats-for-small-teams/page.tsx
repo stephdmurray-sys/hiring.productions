@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { labelGoLinks, moneyLine } from '@/lib/money'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-ats'
 import ats from '@/lib/scorecards/ats-small-teams.json'
@@ -54,7 +55,7 @@ function rebuildTables(src: string): string {
     const body = parsed
       .map((r, i) => {
         const s = atsScores(r.t)
-        return `<tr id="ats-${slugOf(r.name)}"><td>${i + 1}</td><td>${r.cells[1].replace(/<b>([\s\S]*?)<\/b>/, `<a href="/reviews/ats/${slugOf(r.name)}" style="color:inherit;text-decoration:underline;text-underline-offset:3px;"><b>$1</b></a>`)}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(1)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
+        return `<tr id="ats-${slugOf(r.name)}"><td>${i + 1}</td><td>${r.cells[1].replace(/<b>([\s\S]*?)<\/b>/, `<a href="/reviews/ats/${slugOf(r.name)}" style="color:inherit;text-decoration:underline;text-underline-offset:3px;"><b>$1</b></a>`)}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(2)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
       })
       .join('\n      ')
     return `<div class="tscroll"><table>\n      ${head}\n      ${body}\n    </table>`
@@ -76,7 +77,7 @@ function rebuildPicks(src: string): string {
           <span class="pick-name">${leader.name}</span>
         </div>
         <p class="pick-best">Top score for ${SEG_NAME[SEG_OF[flag]].toLowerCase()} on the data: users ${s.user.toFixed(2)}, and a published price (${leader.sources.pricing}).</p>
-        <a href="/go/${slugOf(leader.name)}" class="visit">Visit ${leader.name} &#8599;</a>
+        <a href="/go/${slugOf(leader.name)}" class="visit">Visit ${leader.name} &#8599;</a><span class="money" style="display:block;font-size:12.5px;line-height:1.4;font-weight:600;color:#62627A;margin-top:6px;">${moneyLine(slugOf(leader.name))}</span>
       </div>`
     },
   )
@@ -93,7 +94,7 @@ function rebuildReviews(src: string): string {
       .replace(/<span class="review-rank">#\d+ &middot; ([^<]+)<\/span>/, `<span class="review-rank">#${rank} &middot; $1</span>`)
       .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Market<\/span>/, `<span class="sc"><b>${s.market.toFixed(2)}</b> Popularity</span>`)
       .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> User<\/span>/, `<span class="sc"><b>${s.user.toFixed(2)}</b> Users</span>`)
-      .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Practitioner<\/span>/, `<span class="sc"><b>${s.value.toFixed(1)}</b> Value</span><span class="sc"><b>${s.overall.toFixed(2)}</b> Overall</span>`)
+      .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Practitioner<\/span>/, `<span class="sc"><b>${s.value.toFixed(2)}</b> Value</span><span class="sc"><b>${s.overall.toFixed(2)}</b> Overall</span>`)
   })
 }
 
@@ -129,7 +130,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={graph(atsRankingLd(), ...atsToolsLd())} />
-      <MockPage html={out} active="hiring" />
+      <MockPage html={labelGoLinks(out)} active="hiring" />
     </>
   )
 }

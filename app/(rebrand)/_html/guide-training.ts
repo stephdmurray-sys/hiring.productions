@@ -123,7 +123,7 @@ export const html = `<style>
           <a href="/for-job-seekers">For Job Seekers <span class="chev">&#9660;</span></a>
           <a href="/how-we-review">How We Review</a>
           <a href="/for-vendors">For Vendors <span class="chev">&#9660;</span></a>
-          <a href="/consulting">Get a Recommendation<span class="free-chip">FREE</span></a>
+          <a href="/hiring-stack">Get a Recommendation<span class="free-chip">FREE</span></a>
         </span>
               </nav>
     </div>
@@ -135,13 +135,13 @@ export const html = `<style>
       <p class="crumbs" style="font-size:12.5px;color:#8B7FBF;margin-bottom:16px;"><a href="/" style="color:#B3A8DE;">Home</a> &rsaquo; <a href="/for-hiring-teams" style="color:#B3A8DE;">For hiring teams</a> &rsaquo; Recruiter training</p>
       <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);line-height:1.2;margin-bottom:12px;max-width:840px;">The Best Recruiter Training and Certifications of 2026</h1>
       <p class="byline" style="font-size:12.5px;color:#B3A8DE;">Updated August 23, 2026 &middot; 19 programs researched &middot; <a href="/how-we-review" style="color:#D6CCF5;">How we review</a></p>
-      <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">Some links below can be affiliate links: if you buy through one, the provider pays us a commission. Our three top picks currently pay us nothing. Placement, rankings, and scores cannot be bought. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
+      <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">No link on this page earns us anything right now, and nobody can pay for placement, rankings or scores. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
     </div>
   </div>
 
   <section class="wrap narrow">
     <h2>The short version</h2>
-    <p class="lead">Training is where hiring quality actually changes, and it is also where public review data is thinnest. So this guide leans hardest on the Practitioner side of our scoring: 18 years of watching which programs make recruiters better and which just print certificates. Two lists below: recruiter and sourcing craft first, then HR certification prep and the recertification credits certified people must buy every three years.</p>
+    <p class="lead">Training is where hiring quality changes, and it is also where public review data is thinnest. So this guide leans hardest on the Practitioner side of our scoring: 18 years of watching which programs make recruiters better and which just print certificates. Two lists below: recruiter and sourcing craft first, then HR certification prep and the recertification credits certified people must buy every three years.</p>
     <div class="picks">
       <div class="pick winner">
         <span class="pick-flag">Recruiter training pick</span>
@@ -215,7 +215,7 @@ export const html = `<style>
       </div>
       <p class="review-updated">Updated August 23, 2026</p>
       <div class="verdict">
-        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You want the credential hiring leaders actually recognize. Sixteen certifications, a curriculum refined since 1997, ADP behind it, and SHRM plus HRCI recertification credits built in.</span></div>
+        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You want the credential hiring leaders recognize. Sixteen certifications, a curriculum refined since 1997, ADP behind it, and SHRM plus HRCI recertification credits built in.</span></div>
         <div class="v-row"><span class="v-key">Skip it if</span><span class="v-val">You need sourcing depth specifically. AIRS covers it, but SourceCon Academy goes deeper for half the price.</span></div>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Premium tier adds live instruction and coaching. Two-year access. The Coursera entry-level version of their curriculum rates 4.7 from real students.</span></div>
         <div class="v-row"><span class="v-key">Watch for</span><span class="v-val">Certification-collecting. One earned credential beats three logos in an email signature.</span></div>
@@ -255,8 +255,8 @@ export const html = `<style>
     </div>
   </section>
   <section class="wrap narrow" style="padding-bottom:64px;">
-    <h2>Questions recruiters actually ask</h2>
-    <details style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-top:14px;"><summary style="font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">Do SHRM or HRCI credits actually matter?</summary><p style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-top:10px;">If you hold a SHRM or HRCI certification, yes, mechanically: 60 recertification credits every three years or you retake the exam. Training that carries credits pays for itself twice. If you are not certified, ignore credits and buy for skills.</p></details>
+    <h2>Questions recruiters ask</h2>
+    <details style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-top:14px;"><summary style="font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">Do SHRM or HRCI credits matter?</summary><p style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-top:10px;">If you hold a SHRM or HRCI certification, yes, mechanically: 60 recertification credits every three years or you retake the exam. Training that carries credits pays for itself twice. If you are not certified, ignore credits and buy for skills.</p></details>
     <details style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-top:14px;"><summary style="font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">Certification or training: which first?</summary><p style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-top:10px;">Training first. A certification proves you studied; the craft is what gets candidates hired. The exception is agency compliance roles, where ASA or NAPS credentials are table stakes with clients.</p></details>
     <details style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-top:14px;"><summary style="font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;cursor:pointer;">What should good recruiter training cost?</summary><p style="font-size:13.5px;color:var(--gray);line-height:1.7;margin-top:10px;">$400 to $1,000 a year per recruiter buys serious self-paced training with a credential. Under that, expect single-topic courses. Past $2,000, you should be getting live instruction or a team program, and past $10,000 you are buying custom consulting, which is a different purchase.</p></details>
   </section>

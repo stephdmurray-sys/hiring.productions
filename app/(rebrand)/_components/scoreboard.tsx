@@ -140,21 +140,21 @@ export function Scoreboard({
                 <span className="sub-parts" aria-hidden="true">
                   <span>
                     <i className="k-u" />
-                    Users <b>{t.parts.users.toFixed(1)}</b>
+                    Users <b>{t.parts.users.toFixed(2)}</b>
                   </span>
                   <span>
                     <i className="k-m" />
-                    Popularity <b>{t.parts.market.toFixed(1)}</b>
+                    Popularity <b>{t.parts.market.toFixed(2)}</b>
                   </span>
                   {t.parts.critics !== undefined && (
                     <span>
                       <i className="k-c" />
-                      Best-of lists <b>{t.parts.critics.toFixed(1)}</b>
+                      Best-of lists <b>{t.parts.critics.toFixed(2)}</b>
                     </span>
                   )}
                   <span>
                     <i className="k-v" />
-                    Value <b>{t.parts.value.toFixed(1)}</b>
+                    Value <b>{t.parts.value.toFixed(2)}</b>
                   </span>
                 </span>
               )}

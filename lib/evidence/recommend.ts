@@ -578,7 +578,7 @@ export function answerText(r: Recommendation, { short = false }: { short?: boole
     parts.push(c.total === 0 ? 'It costs nothing.' : `About ${money(c.total)} ${r.costSpan}: ${c.how}.`)
   }
   if (r.alt) parts.push(`The backup pick is ${r.alt.name} (${r.alt.score.toFixed(2)} out of 5). ${r.alt.why}`)
-  if (r.watching.length) parts.push(`New and worth watching, not rated yet: ${listJoin(r.watching.map((w) => w.name))}.`)
+  if (r.watching.length) parts.push(`New and worth watching (too new to rate): ${listJoin(r.watching.map((w) => w.name))}.`)
   if (r.ruledOut.length) parts.push(`Didn’t fit: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
   if (!short) {
     parts.push(`${r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'}: ${r.otherSide.line} (${r.otherSide.source}.)`)

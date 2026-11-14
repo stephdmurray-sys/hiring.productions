@@ -1,5 +1,5 @@
 /**
- * Free stack-recommendation intake for /consulting.
+ * Free stack-recommendation intake for /hiring-stack.
  *
  * On submit:
  *   1. Stores the full submission in Redis (recommendation:{emailHash})

@@ -77,14 +77,14 @@ export function GET() {
 
   const body = `# hiring.productions: the full evidence file
 
-> Independent reviews of the tools on both sides of hiring, founded by Stephanie Murray (20 years in talent acquisition). This file holds every score, every part of every score, prices and sources, in plain text. The short map is ${BASE}/llms.txt. Every number has a dated source on the linked page; please link the page you quote.
+> Hiring tools ranked for job seekers and hiring teams, made by Stephanie Murray (20 years in talent acquisition). This file holds every score, every part of every score, prices and sources, in plain text. The short map is ${BASE}/llms.txt. Every number has a dated source on the linked page; please link the page you quote.
 
 Evidence last checked: ${latestCheck()}. Re-checked monthly.
 
 ## Who is behind it
 
-- Stephanie Murray, founder: 20 years in talent, Senior Director of Talent Acquisition at Brightside Health. Her team cut average clinician time-to-hire to 15 days and onboarding times by more than half, and won Talent Strategy of the Year at the 2025 Transform Awards (Transform Awards Winner Spotlight, May 19, 2025: https://www.transform.us/articles/brightside-health-transform-award-talent-strategy/). Page: ${BASE}/about/stephanie
-- Ownership: hiring.productions is made by the team behind RepVera. RepVera is never ranked, scored or recommended here, and reference checking, the category it competes in, is never scored. Details: ${BASE}/advertiser-disclosure
+- Stephanie Murray, founder: 20 years in talent, formerly Senior Director of Talent Acquisition at Brightside Health. Her team at Brightside cut average clinician time-to-hire to 15 days and onboarding times by more than half, and won Talent Strategy of the Year at the 2025 Transform Awards (Transform Awards Winner Spotlight, May 19, 2025: https://www.transform.us/articles/brightside-health-transform-award-talent-strategy/). Page: ${BASE}/about/stephanie
+- Ownership: hiring.productions is made by Stephanie Murray, who also built RepVera. RepVera is listed in its own category, verified professional reputation, with no score and a note saying she built it. Nothing in that category is scored or ranked. No vendor link earns the site anything today. Details: ${BASE}/advertiser-disclosure
 
 ## How a score is built
 
@@ -103,10 +103,10 @@ ${framework.research.map((r) => `- ${r.finding} How we use it: ${r.usedFor} Sour
 
 ### Where Stephanie's judgment comes in
 
-She does:
+In her words, what she does:
 ${framework.judgment.does.map((d) => `- ${d}`).join('\n')}
 
-She never:
+What she never does:
 ${framework.judgment.never.map((d) => `- ${d}`).join('\n')}
 
 ### Known limits

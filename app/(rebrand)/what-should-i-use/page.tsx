@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
-import { RecQuestions, RecAnswer, RecSituations, RecHow, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
+import { RecQuestions, RecAnswer, RecSituations, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
 import { ScrollToAnswer } from '@/app/(rebrand)/_components/rec-form'
 import { askFromState, recFramework, recommend, situationFor, stateFromParams } from '@/lib/evidence/recommend'
 import { latestCheck } from '@/lib/evidence'
@@ -46,7 +46,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
           <h1 className="display">What should I use?</h1>
           <p className="dek">{recFramework.promise}</p>
           <p className="dateline">
-            Ratings and prices checked {shortDate(latestCheck())}. No vendor can pay for a place, and commissions never change an answer.
+            Ratings and prices checked {shortDate(latestCheck())}. Nobody pays to be featured in an answer.
           </p>
         </div>
       </header>
@@ -69,17 +69,12 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
       <section className="wrap sec" id="common">
         <h2>Common questions, answered</h2>
         <RecSituations />
-      </section>
-
-      <section className="wrap sec" id="how">
-        <h2>How we pick</h2>
-        <p className="lead">
-          The same rules for every visitor, and none of them can be bought.{' '}
+        <p className="lead" style={{ marginTop: 28 }}>
+          Every answer follows the same rules, and nobody can pay to be in one.{' '}
           <a className="tl" href="/how-we-review#recommend">
-            Every rule, in full
+            The rules, and the research behind them
           </a>
         </p>
-        <RecHow />
       </section>
 
       <section className="wrap sec" id="signup">

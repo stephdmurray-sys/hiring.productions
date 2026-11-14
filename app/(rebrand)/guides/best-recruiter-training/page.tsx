@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-training'
+import { labelGoLinks } from '@/lib/money'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-recruiter-training' },
@@ -44,7 +45,7 @@ function evidenceOnly(src: string): string {
   )
   s = rep(s, 'Updated August 23, 2026 &middot; 19 programs researched &middot;', 'Data as of August 23, 2026, from each provider&rsquo;s own pages &middot;')
   s = s.replace(
-    /<p class="lead">Training is where hiring quality actually changes,[\s\S]*?every three years\.<\/p>/,
+    /<p class="lead">Training is where hiring quality changes,[\s\S]*?every three years\.<\/p>/,
     '<p class="lead">Public review data for training programs is too thin to score, so nothing on this page is ranked or scored. The tables compare what each provider publishes: price, format and the SHRM and HRCI recertification credits certified people must earn every three years. The three below are Stephanie&rsquo;s picks, labeled as her judgment.</p>',
   )
   s = rep(s, '<span class="pick-flag">Recruiter training pick</span>', '<span class="pick-flag">Stephanie&rsquo;s pick: recruiter training</span>')
@@ -60,5 +61,5 @@ function evidenceOnly(src: string): string {
 }
 
 export default function Page() {
-  return <MockPage html={evidenceOnly(html)} active="hiring" />
+  return <MockPage html={labelGoLinks(evidenceOnly(html))} active="hiring" />
 }

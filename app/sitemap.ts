@@ -17,7 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // retired (see next.config.mjs redirects) and left out of the sitemap.
   const staticPages: Entry[] = [
     { path: '', priority: 1, changeFrequency: 'weekly' },
-    { path: '/consulting', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/hiring-stack', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/guides', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/about/stephanie', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/advertiser-disclosure', priority: 0.5, changeFrequency: 'monthly' },
     { path: '/for-vendors', priority: 0.6, changeFrequency: 'monthly' },

@@ -1,10 +1,12 @@
 /**
- * RepVera links and the shared-ownership disclosure, in one place.
+ * RepVera links, lines and the shared-ownership disclosure, in one place.
  *
- * hiring.productions and RepVera share an owner. RepVera never appears in a
- * score, ranking, recommendation or "best" list (GROWTH.md, and the FTC's
- * rule at 16 CFR 465.6). Where it may appear, every link is tagged with the
- * page it came from, so RepVera can see which pages start relationships.
+ * Stephanie Murray makes hiring.productions and also built RepVera. Since
+ * Nov 14, 2026 RepVera is listed in its own category, verified professional
+ * reputation, with no score and a note in her voice saying she built it.
+ * It is never scored or ranked, and neither is any tool it competes with
+ * (the FTC's rule at 16 CFR 465.6). Every link is tagged with the page it
+ * came from, so RepVera can see which pages start relationships.
  */
 
 export const REPVERA_URL = 'https://www.repvera.com'
@@ -16,7 +18,7 @@ export function repveraLink(campaign: string): string {
 }
 
 /** Shown at every email ask and in the footer. */
-export const OWNERSHIP_DISCLOSURE = 'hiring.productions is made by the team behind RepVera. We never share your email with any vendor.'
+export const OWNERSHIP_DISCLOSURE = 'Made by Stephanie Murray, who also built RepVera. We never share your email with any vendor.'
 
 /**
  * What RepVera is, in Stephanie's words (Nov 14, 2026): hiring teams ask for a candidate's RepVera early in the
@@ -29,3 +31,20 @@ export const REPVERA_WHAT =
 /** The closing line from RepVera's own approved copy (mis-hire calculator spec), used verbatim. */
 export const REPVERA_TEAMS_LINE =
   'You can verify what someone can do. The harder question is how they actually show up, and that is where mis-hires are made.'
+
+/** RepVera's category on this site. It has no scores and no rankings. */
+export const REPVERA_CATEGORY = 'Verified professional reputation'
+
+/** The label on every RepVera note and listing, in Stephanie's voice. */
+export const REPVERA_NOTE_LABEL = 'From Stephanie, who built RepVera'
+
+/** Why RepVera has no score, said wherever it is listed. */
+export const REPVERA_NO_SCORE = "Because I built it, I don't score it or rank anything it competes with."
+
+/** The listing line for each side (Stephanie's pitch, website selling framework). */
+export const REPVERA_FOR = {
+  seekers:
+    "Your proven reputation shows up before you do. RepVera is a record of what you're like to work with, in the words of people who have worked with you.",
+  hiring:
+    "Ask a candidate for their RepVera to see how they work sooner, save time and money finding out, and get more out of your interviews.",
+} as const

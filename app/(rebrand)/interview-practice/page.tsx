@@ -4,7 +4,7 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { AutoForm, PrintButton } from '@/app/(rebrand)/_components/tool-forms'
 import { Capture } from '@/app/(rebrand)/_components/capture'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
-import { REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { SCORECARD_MAX, cleanRole, pickCompetencies, scorecardData as data } from '@/lib/scorecard'
 
 /**
@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   return {
     title: 'What Will They Ask Me in the Interview? Free Interview Practice',
     description:
-      'Practice the questions structured interviews actually use, the follow-ups you will hear, and what a strong answer shows. Built on the US Office of Personnel Management’s interview method, the same one hiring teams use. Free.',
+      'Practice the questions structured interviews use, the follow-ups you will hear, and what a strong answer shows. Built on the US Office of Personnel Management’s interview method, the same one hiring teams use. Free.',
     alternates: { canonical: PATH },
     robots: Object.keys(sp).length > 0 ? { index: false, follow: true } : undefined,
   }
@@ -276,7 +276,7 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
       <section className="wrap sec no-print" id="other-side">
         <aside className="other" aria-label="What the hiring side sees">
           <span className="other-k">What the hiring side sees</span>
-          <p>These are the same questions hiring teams get when they build a scorecard here. They rate your answer, not you.</p>
+          <p>These are the same questions hiring teams get when they build a scorecard here, and they score each answer on the same 1 to 5 scale.</p>
           <a className="tl" href="/interview-scorecard">
             See the interviewer&rsquo;s scorecard <span className="arr">&rarr;</span>
           </a>
@@ -284,8 +284,8 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
       </section>
 
       <section className="wrap sec no-print" id="repvera">
-        <aside className="ours" aria-label="From the team behind hiring.productions">
-          <span className="ours-k">From the team behind hiring.productions</span>
+        <aside className="ours" aria-label={REPVERA_NOTE_LABEL}>
+          <span className="ours-k">{REPVERA_NOTE_LABEL}</span>
           <p>{REPVERA_WHAT}</p>
           <a className="tl tl-strong" href={repveraLink('interview-practice')} rel="noopener">
             See how RepVera works <span className="arr">&#8599;</span>

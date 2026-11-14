@@ -1,5 +1,7 @@
 /** Resume guide layer on the stage system. */
 export const guidePageCss = `
+  .g-signup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;border-top:1px solid var(--ink);padding-top:40px;}
+  @media(max-width:960px){.g-signup{grid-template-columns:1fr;}}
   /* Picks: three columns divided by rules, no boxes */
   .picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;border-top:1px solid var(--ink);}
   .pick{display:flex;flex-direction:column;padding:26px 28px 6px 0;}

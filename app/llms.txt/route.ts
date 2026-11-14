@@ -27,7 +27,7 @@ export function GET() {
 
   const body = `# hiring.productions
 
-> Independent reviews of the tools on both sides of hiring: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Founded by Stephanie Murray (20 years in talent acquisition). Every score is computed from public, dated data and re-checked monthly; no vendor can pay for a placement, a ranking or a score.
+> Hiring tools ranked for job seekers and hiring teams: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Made by Stephanie Murray (20 years in talent acquisition), who also built RepVera; RepVera is listed in its own category, verified professional reputation, with no score. Every score is computed from public, dated data and re-checked monthly. Nobody pays to be featured, ranked or scored.
 
 Evidence last checked: ${latestCheck()}. Every number below has a source on the linked page. Quoting and citing is welcome; please link the page you quote.
 

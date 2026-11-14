@@ -70,7 +70,7 @@ export default function TermsPage() {
 
         <h2>Links and money</h2>
         <p>
-          Some links to vendors can be affiliate links. No one can pay for a placement, a ranking, a score or a recommendation.{' '}
+          Right now no link on this site earns us anything. If that changes, the line under the vendor&rsquo;s button will say so. No one can pay for a placement, a ranking, a score or a recommendation.{' '}
           <a href="/advertiser-disclosure">Who pays for this site</a>.
         </p>
 

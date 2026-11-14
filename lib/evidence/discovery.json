@@ -4,7 +4,7 @@
     "One trigger is enough. If a tool trips any trigger below, it enters the check queue.",
     "Every tool in the queue is checked within one monthly cycle: count its citable reviews on foundation sources, read the lists that name it, and record its category. An unchecked entry past its due month shows as overdue on /desk.",
     "Every check ends in one of three outcomes, written down: scored, in the wings (with the real counts and what's missing), or dropped (with the reason, kept in the log).",
-    "If a tool's category has no scoreboard, that is a category gap. It goes to Stephanie the same month with every tool stuck in it, so the decision to build a board is made on purpose.",
+    "If a tool's category has no scoreboard yet, it goes to Stephanie the same month with every tool stuck in it, so the decision to build a board is made on purpose.",
     "Discovery never moves a score. A nomination, a follower spike or a vendor submission gets a tool checked; it never gets a tool ranked higher.",
     "Never put a reference-checking tool on a scored board or in the recommender: reference checking is the category RepVera competes in, and hiring.productions shares RepVera's owner (16 CFR 465.6; GROWTH.md). Cover it only without scores, with the relationship disclosed."
   ],
@@ -27,7 +27,7 @@
     {
       "id": "founder-nomination",
       "label": "Stephanie nominates it",
-      "note": "Twenty years of hiring is a discovery source. It gets the tool checked; it never moves the score."
+      "note": "Her 20 years in hiring help find tools worth checking. A nomination gets a tool checked and has no effect on its score."
     },
     {
       "id": "practitioner-communities",
@@ -68,7 +68,7 @@
   "notSignals": [
     {
       "label": "LinkedIn and social follower counts",
-      "why": "They measure marketing reach, not whether the product works. Followers can be bought, they swell with job posts and founders' personal brands, and LinkedIn's terms bar collecting them at scale. A sudden jump can prompt a check. It never moves a score."
+      "why": "They measure marketing reach and tell you nothing about whether the product works. Followers can be bought, they swell with job posts and founders' personal brands, and LinkedIn's terms bar collecting them at scale. A sudden jump can prompt a check. It never moves a score."
     },
     {
       "label": "Awards and badges",

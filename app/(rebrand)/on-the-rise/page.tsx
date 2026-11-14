@@ -124,8 +124,7 @@ export default function OnTheRisePage() {
           ))}
         </ul>
         <p className="footnote">
-          Getting checked is free, and no one can pay for a place. Follower counts don&rsquo;t count: they measure marketing reach, not
-          whether a tool works.
+          Getting checked is free, and no one can pay for a place. Follower counts don&rsquo;t count, because they measure marketing reach and tell you nothing about whether a tool works.
         </p>
       </section>
 

@@ -127,7 +127,7 @@ export const html = `<style>
           <a href="/for-job-seekers">For Job Seekers <span class="chev">&#9660;</span></a>
           <a href="/how-we-review" class="active">How We Review</a>
           <a href="/for-vendors">For Vendors <span class="chev">&#9660;</span></a>
-          <a href="/consulting">Get a Recommendation<span class="free-chip">FREE</span></a>
+          <a href="/hiring-stack">Get a Recommendation<span class="free-chip">FREE</span></a>
         </span>
               </nav>
     </div>
@@ -167,8 +167,8 @@ export const html = `<style>
         <p class="lead">
           Every tool is scored on four things anyone could check, each from dated
           public data. No one&rsquo;s opinion goes into a score, ours included.
-          Stephanie&rsquo;s picks appear separately, labeled as hers, and never
-          change a score.
+          Stephanie&rsquo;s picks appear separately, labeled as hers, and have no
+          effect on any score.
         </p>
         <style>@media(min-width:761px){#scores .score-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}</style>
         <div class="score-cards">
@@ -198,7 +198,7 @@ export const html = `<style>
           </div>
         </div>
         <p class="callout">
-          <b>Weights set the order of the list, nothing more.</b> All four scores
+          <b>The weights only set the order of the list.</b> All four scores
           show separately on every review, so you can weigh them your own way. If
           a whole category has no data for one score yet (best-of lists, for
           applicant tracking systems today), the other scores share its weight.
@@ -216,7 +216,7 @@ export const html = `<style>
 
       <section id="agree">
         <h2>Do the other reviewers agree?</h2>
-        <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. Agreement is reassuring. Disagreement is the useful part, so we say why.</p>
+        <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. When we disagree with the other lists, the review says why.</p>
         <div class="evidence">
           <div class="ecard">
             <span class="etag etag-res">Other lists agree</span>
@@ -228,7 +228,7 @@ export const html = `<style>
           </div>
           <div class="ecard">
             <span class="etag etag-res">Not enough reviews yet</span>
-            <p>Not enough public reviews or current coverage for anyone to rank it honestly, us included. We say so instead of guessing.</p>
+            <p>There aren&rsquo;t enough public reviews or current lists for anyone to rank it, including us, so it stays unranked.</p>
           </div>
         </div>
         <p class="callout"><b>Which lists count.</b> A list counts when it shows an update or a current-year edition within the last 12 months and its publisher does not own what it ranks. Lists that are out of date, built to collect sign-ups, or published by a company that sells the tools at the top are still shown, with the reason they don&rsquo;t count.</p>
@@ -253,7 +253,6 @@ export const html = `<style>
 
       <section id="evidence">
         <h2>Every review says what it&rsquo;s based on</h2>
-        <p class="lead">No review pretends to be more than it is.</p>
         <div class="evidence">
           <div class="ecard">
             <span class="etag etag-demo">We saw a live demo</span>
@@ -308,7 +307,7 @@ export const html = `<style>
         </p>
       </section>
 
-      <p style="font-size:12.5px;color:var(--gray-lt);line-height:1.7;max-width:720px;margin-top:8px;">Some links on this site can be affiliate links: vendors pay us a commission when readers buy, never for placement, rankings, or scores. Details in the <a href="/advertiser-disclosure" style="color:var(--purple);font-weight:600;">advertiser disclosure</a>.</p>
+      <p style="font-size:12.5px;color:var(--gray-lt);line-height:1.7;max-width:720px;margin-top:8px;">Right now no link on this site earns us anything. The line under every button to a vendor&rsquo;s site says whether we earn from it, and nobody can pay for placement, rankings or scores. Details in the <a href="/advertiser-disclosure" style="color:var(--purple);font-weight:600;">advertiser disclosure</a>.</p>
 
       <section id="vendors">
         <div class="vendor-cta">

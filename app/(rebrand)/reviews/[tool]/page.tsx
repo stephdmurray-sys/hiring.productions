@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { moneyLine } from '@/lib/money'
 import { toolReviewLd, SITE } from '@/app/(rebrand)/_components/structured'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
@@ -10,6 +11,7 @@ import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
 import { money, seekerRow, shortDate } from '@/app/(rebrand)/_components/data'
 import {
+  WEIGHTS,
   FREE_LEVEL_LABEL,
   MIN_REVIEWS,
   STANCE_LABEL,
@@ -69,7 +71,7 @@ function Meter({ label, value, note }: { label: string; value: number | null; no
       <span className="meter-bar" aria-hidden="true">
         <i style={{ width: `${((value ?? 0) / 5) * 100}%` }} />
       </span>
-      <b>{value !== null ? value.toFixed(1) : 'n/e'}</b>
+      <b>{value !== null ? value.toFixed(2) : 'n/e'}</b>
       <span className="meter-n">{note}</span>
     </div>
   )
@@ -84,6 +86,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
   const peers = t.segment === 'checker' ? checkers : builders
   const checked = latestCheck()
   const isPick = guide.picks.find((p) => p.tool === t.id)
+  const ratedPeers = peers.filter((x) => x.overall !== null).length
   const isRising = risingPick.tool === t.id
 
   const alternatives = peers.filter((x) => x.id !== t.id && x.overall !== null).sort((a, b) => (b.overall ?? 0) - (a.overall ?? 0))
@@ -99,7 +102,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       : undefined
 
   const verdictLine = t.enoughEvidence
-    ? `${t.name} ranks #${t.rank} of ${peers.length} ${SEGMENT_PLURAL[t.segment]} we track, with an overall score of ${t.overall?.toFixed(2)} out of 5.`
+    ? `${t.name} ranks #${t.rank} of the ${ratedPeers} ${SEGMENT_PLURAL[t.segment]} with enough reviews for a score, at ${t.overall?.toFixed(2)} out of 5.`
     : `${t.name} doesn't have enough public reviews for a score yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} we require).`
 
   const faqs: { q: string; a: string }[] = [
@@ -188,6 +191,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                 <a className="tl tl-strong" href={`/go/${t.id}`} rel="nofollow">
                   Go to {t.name}&rsquo;s site <span className="arr">&#8599;</span>
                 </a>
+                <span className="money">{moneyLine(t.id)}</span>
               </p>
             </div>
 
@@ -198,7 +202,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                     <b>{t.overall?.toFixed(2)}</b>
                     <span>
                       out of 5
-                      <br />#{t.rank} of {peers.length} {SEGMENT_PLURAL[t.segment]}
+                      <br />#{t.rank} of {ratedPeers} rated {SEGMENT_PLURAL[t.segment]}
                     </span>
                   </div>
                   <Meter
@@ -213,6 +217,10 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                     note={t.counted.length ? `named on ${t.counted.length} independent list${t.counted.length === 1 ? '' : 's'}` : 'no independent list names it yet'}
                   />
                   <Meter label="Value" value={t.valueScore} note={`${FREE_LEVEL_LABEL[t.freeLevel].toLowerCase()}${t.yearCost ? `; ${money(t.yearCost.amount)} a paid year` : ''}`} />
+                  <p className="rv-math">
+                    Overall = users {Math.round(WEIGHTS.user * 100)}% + popularity {Math.round(WEIGHTS.market * 100)}% + best-of lists{' '}
+                    {Math.round(WEIGHTS.critics * 100)}% + value {Math.round(WEIGHTS.value * 100)}%
+                  </p>
                 </>
               ) : (
                 <>

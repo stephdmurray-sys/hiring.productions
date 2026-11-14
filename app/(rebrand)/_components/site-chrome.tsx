@@ -1,10 +1,14 @@
 import { Motion } from './motion'
 import { WEIGHTS, framework } from '@/lib/evidence'
 import { repveraLink } from '@/lib/repvera'
+import { SITE_LINE } from '@/lib/site-line'
 
 /**
  * Shared navigation and footer. The nav is a solid indigo bar (the brand
- * color, on every page); the footer is the dark backstage band.
+ * color, on every page) and runs by topic, not by audience: the homepage
+ * doors ("I'm a job seeker", "I'm hiring") lead to the audience pages.
+ * The footer is the dark backstage band; its ratings summary is one
+ * sentence everywhere except How we review, which keeps the full block.
  */
 
 export const chromeCss = `
@@ -38,6 +42,8 @@ export const chromeCss = `
   .site-footer .flinks a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px;}
   .site-footer .fbase{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:44px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.14);font-size:13.5px;color:#A99CDB;}
   .site-footer :focus-visible{outline-color:#fff;}
+  .frate-one{padding:0 0 32px;margin-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.14);line-height:1.6;max-width:820px;}
+  .frate-one a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px;}
   .frate{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:40px;padding:0 0 40px;margin-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.14);}
   .frate h2{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.01em;margin:0 0 10px;}
   .frate p{line-height:1.6;max-width:520px;}
@@ -52,7 +58,7 @@ export const chromeCss = `
   @media(max-width:760px){.site-footer .fgrid{grid-template-columns:1fr 1fr;}.site-footer .fgrid > div:first-child{grid-column:1 / -1;}}
 `
 
-type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | 'recommend' | null
+type NavKey = 'hiring' | 'seekers' | 'resume' | 'ats' | 'guides' | 'review' | 'vendors' | 'consulting' | 'recommend' | null
 
 export function Wordmark() {
   return (
@@ -63,8 +69,10 @@ export function Wordmark() {
 }
 
 export function SiteNav({ active = null }: { active?: NavKey }) {
+  // Pages for one audience light up that audience's topic.
+  const on = active === 'seekers' ? 'resume' : active === 'hiring' ? 'ats' : active
   const link = (key: NavKey, href: string, label: string) => (
-    <a href={href} className={active === key ? 'on' : undefined} aria-current={active === key ? 'page' : undefined}>
+    <a href={href} className={on === key ? 'on' : undefined} aria-current={on === key ? 'page' : undefined}>
       {label}
     </a>
   )
@@ -77,10 +85,10 @@ export function SiteNav({ active = null }: { active?: NavKey }) {
           </a>
           <span className="links">
             {link('recommend', '/what-should-i-use', 'What should I use?')}
-            {link('seekers', '/for-job-seekers', 'For job seekers')}
-            {link('hiring', '/for-hiring-teams', 'For hiring teams')}
+            {link('resume', '/guides/best-resume-tools', 'Resume tools')}
+            {link('ats', '/guides/best-ats-for-small-teams', 'Applicant tracking systems')}
+            {link('guides', '/guides', 'Guides')}
             {link('review', '/how-we-review', 'How we review')}
-            {link('vendors', '/for-vendors', 'For vendors')}
           </span>
         </nav>
       </div>
@@ -88,11 +96,18 @@ export function SiteNav({ active = null }: { active?: NavKey }) {
   )
 }
 
-export function SiteFooter() {
+export function SiteFooter({ ratings = 'short' }: { ratings?: 'short' | 'full' }) {
   return (
     <footer className="site-footer">
       <Motion />
       <div className="wrap">
+        {ratings === 'short' ? (
+          <p className="frate-one">
+            Every score is built from dated public data: users {Math.round(WEIGHTS.user * 100)}%, popularity{' '}
+            {Math.round(WEIGHTS.market * 100)}%, best-of lists {Math.round(WEIGHTS.critics * 100)}% and value {Math.round(WEIGHTS.value * 100)}
+            %. <a href="/how-we-review">How we review</a>
+          </p>
+        ) : (
         <section className="frate" aria-labelledby="frate-h">
           <div>
             <h2 id="frate-h">How ratings work</h2>
@@ -119,10 +134,11 @@ export function SiteFooter() {
             ))}
           </div>
         </section>
+        )}
         <div className="fgrid">
           <div>
             <Wordmark />
-            <p className="fabout">Independent reviews of the tools on both sides of hiring. Every score carries the date we checked it.</p>
+            <p className="fabout">{SITE_LINE} Every score carries the date we checked it.</p>
           </div>
           <div className="flinks">
             <p className="fh">Job seekers</p>
@@ -131,7 +147,7 @@ export function SiteFooter() {
             <a href="/guides/best-resume-tools#cost">What your search will cost</a>
             <a href="/interview-practice">Interview practice</a>
             <a href="/reviews">Every resume tool review</a>
-            <a href="/for-job-seekers">All job seeker guides</a>
+            <a href="/for-job-seekers">Everything for job seekers</a>
           </div>
           <div className="flinks">
             <p className="fh">Hiring teams</p>
@@ -140,8 +156,8 @@ export function SiteFooter() {
             <a href="/interview-scorecard">Interview scorecard builder</a>
             <a href="/hiring-costs">What a hire costs</a>
             <a href="/is-this-a-real-candidate">Spotting fake candidates</a>
-            <a href="/consulting">Free stack recommendation</a>
-            <a href="/for-hiring-teams">All hiring team guides</a>
+            <a href="/hiring-stack">Free stack recommendation</a>
+            <a href="/for-hiring-teams">Everything for hiring teams</a>
           </div>
           <div className="flinks">
             <p className="fh">About</p>
@@ -160,8 +176,8 @@ export function SiteFooter() {
             &copy; 2026 hiring.productions &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a>
           </span>
           <span>
-            No vendor can pay for a placement, a ranking or a score. hiring.productions is made by the team behind{' '}
-            <a href={repveraLink('footer')} rel="noopener">RepVera</a>, which is never ranked or reviewed here.
+            Nobody pays to be featured, ranked or scored. Made by <a href="/about/stephanie">Stephanie Murray</a>, who also built{' '}
+            <a href={repveraLink('footer')} rel="noopener">RepVera</a>. It&rsquo;s listed here without a score.
           </span>
         </div>
       </div>

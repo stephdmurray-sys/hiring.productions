@@ -3,7 +3,7 @@ import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { CostPerHire } from '@/app/(rebrand)/_components/cost-per-hire'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
-import { REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { REPVERA_NOTE_LABEL, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 
 /**
  * "What does a hire really cost?": cost per hire on SHRM's own definition,
@@ -112,8 +112,8 @@ export default function HiringCostsPage() {
       </section>
 
       <section className="wrap sec" id="repvera">
-        <aside className="ours" aria-label="From the team behind hiring.productions">
-          <span className="ours-k">From the team behind hiring.productions</span>
+        <aside className="ours" aria-label={REPVERA_NOTE_LABEL}>
+          <span className="ours-k">{REPVERA_NOTE_LABEL}</span>
           <p>
             {REPVERA_TEAMS_LINE} {REPVERA_WHAT}
           </p>

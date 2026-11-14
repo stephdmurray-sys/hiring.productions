@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import { EARN_COMMISSION, EARN_NOTHING, PAYS_US } from '@/lib/money'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
-import { repveraLink } from '@/lib/repvera'
+import { REPVERA_CATEGORY, repveraLink } from '@/lib/repvera'
 
 /**
  * Advertiser disclosure: who owns the site, how affiliate links work, and
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/advertiser-disclosure' },
   title: 'Advertiser Disclosure: Who Pays for hiring.productions, and What It Never Buys',
   description:
-    'hiring.productions is made by the team behind RepVera, which is never ranked or reviewed here. Some vendor links can be affiliate links. No one can pay for a placement, a ranking, a score or a recommendation.',
+    'hiring.productions is made by Stephanie Murray, who also built RepVera. RepVera is listed in its own category with no score. No vendor link earns us anything today, and no one can pay for a placement, a ranking, a score or a recommendation.',
 }
 
 const css = `
@@ -43,29 +44,32 @@ export default function Page() {
             <a href="/">Home</a> / Advertiser disclosure
           </p>
           <h1 className="display">Who pays for this site?</h1>
-          <p className="dek">Two sources, and neither one changes a score.</p>
+          <p className="dek">Stephanie Murray does. No vendor link earns us anything today, and no money can change a score.</p>
         </div>
       </header>
 
       <section className="wrap sec-tight" id="owner">
-        <h2>The team behind RepVera</h2>
+        <h2>Stephanie Murray, who also built RepVera</h2>
         <div className="dc">
           <p>
-            hiring.productions is made by the team behind{' '}
+            hiring.productions is made by Stephanie Murray. She also built{' '}
             <a className="tl" href={repveraLink('disclosure')} rel="noopener">
               RepVera
             </a>
-            , where hiring teams see verified experiences of what a candidate is like to work with. That&rsquo;s the business this site
-            supports.
+            , a record of what someone is like to work with, in the words of people who have worked with them. That&rsquo;s the business
+            this site supports.
           </p>
           <p>
-            <b>So RepVera is never ranked, scored or recommended here, and we never score reference checking, the category it competes
-            in.</b> Where RepVera appears at all, it sits in a note labeled &ldquo;From the team behind hiring.productions,&rdquo; away from
-            every score.
+            <b>
+              RepVera is listed here in its own category, {REPVERA_CATEGORY.toLowerCase()}, with no score and a note saying Stephanie built
+              it.
+            </b>{' '}
+            It can come up when it fits what you&rsquo;re trying to do, always with that note. We never score or rank RepVera, or any tool
+            it competes with.
           </p>
           <p>
             The FTC&rsquo;s rule on reviews bars a company from presenting a site it controls as an independent reviewer of a category that
-            includes its own product. We go further and leave the category off the scoreboards entirely.
+            includes its own product. That&rsquo;s why the {REPVERA_CATEGORY.toLowerCase()} category has no scores or rankings at all.
           </p>
           <a className="dc-src" href={FTC_RULE.url} rel="nofollow noopener" target="_blank">
             Source: {FTC_RULE.name}, 16 CFR 465.6
@@ -77,11 +81,16 @@ export default function Page() {
         <h2>Affiliate links</h2>
         <div className="dc">
           <p>
-            Some vendor links can be affiliate links. If you click one and buy, the vendor pays us a commission. It costs you nothing extra.
+            {PAYS_US.size === 0
+              ? 'Right now, no link on this site earns us anything.'
+              : `These vendors pay us a commission if you buy through our link: ${[...PAYS_US].join(', ')}. Every other link earns us nothing.`}{' '}
+            Under every button to a vendor&rsquo;s site, one line tells you which it is: &ldquo;{EARN_NOTHING}&rdquo; or &ldquo;
+            {EARN_COMMISSION}&rdquo;
           </p>
           <p>
-            Every vendor link goes through hiring.productions/go/ so we can count clicks and change a link in one place. Several of our top
-            picks pay us nothing at all.
+            If we ever join a vendor&rsquo;s affiliate program, the line under its button changes the same day, and it&rsquo;s added to
+            this page. A commission costs you nothing extra, and it never changes a score. Every vendor link goes through
+            hiring.productions/go/ so we can count clicks and change a link in one place.
           </p>
         </div>
       </section>

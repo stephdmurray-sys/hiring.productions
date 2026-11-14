@@ -5,7 +5,7 @@
  * costs, labeled as ours (GROWTH.md).
  */
 import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
-import { OWNERSHIP_DISCLOSURE, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { OWNERSHIP_DISCLOSURE, REPVERA_NOTE_LABEL, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { cleanRole, pickCompetencies, scorecardData, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
 
 const SITE = 'https://hiring.productions'
@@ -14,7 +14,7 @@ const SIGN_OFF = ['', OWNERSHIP_DISCLOSURE, "You're getting this because you ask
 
 /** A labeled RepVera note for hiring-team emails about screening, interviewing or what a hire costs (GROWTH.md). */
 function repveraNote(campaign: string, lead?: string): string[] {
-  return ['', 'From the team behind hiring.productions:', ...(lead ? [lead] : []), REPVERA_WHAT, `See how it works: ${repveraLink(campaign)}`]
+  return ['', `${REPVERA_NOTE_LABEL}:`, ...(lead ? [lead] : []), REPVERA_WHAT, `See how it works: ${repveraLink(campaign)}`]
 }
 
 /**

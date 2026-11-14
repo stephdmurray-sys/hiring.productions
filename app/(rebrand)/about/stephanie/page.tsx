@@ -16,6 +16,10 @@ import { repveraLink } from '@/lib/repvera'
  *
  * Her voice rule from the first version still holds: Brightside gets one
  * credential-level mention, never in a title, never as a named method.
+ *
+ * First person since Nov 14, 2026 (she is the face of the site). The
+ * "why I built it" paragraph is a draft for Stephanie to edit; it states
+ * no fact beyond what the site itself does.
  */
 
 const CANONICAL = `${SITE}/about/stephanie`
@@ -79,8 +83,8 @@ export default function AboutStephaniePage() {
       name: 'Stephanie Murray',
       url: CANONICAL,
       image: `${SITE}/images/stephanie-murray.jpg`,
-      jobTitle: 'Senior Director of Talent Acquisition',
-      worksFor: { '@type': 'Organization', name: 'Brightside Health' },
+      jobTitle: 'Founder, hiring.productions',
+      worksFor: { '@id': `${SITE}/#organization` },
       founder: { '@id': `${SITE}/#organization` },
       description:
         'Founder of hiring.productions, 20 years in talent. Her talent team cut clinician time-to-hire to 15 days and onboarding times by more than half, and won Talent Strategy of the Year at the 2025 Transform Awards.',
@@ -106,12 +110,12 @@ export default function AboutStephaniePage() {
             </div>
             <div>
               <h1 className="display">
-                Stephanie Murray.
+                I&rsquo;m Stephanie Murray.{' '}
                 <span>20 years inside hiring.</span>
               </h1>
               <p className="dek">
-                She founded hiring.productions to show both sides of the table what the other side actually sees. By day she&rsquo;s Senior
-                Director of Talent Acquisition at Brightside Health.
+                I built hiring.productions so job seekers and hiring teams can see which tools are worth paying for. Before this, I was Senior
+                Director of Talent Acquisition at Brightside Health. I also built RepVera, which you&rsquo;ll find listed here without a score.
               </p>
               <p className="dateline">
                 <a href={LINKEDIN} rel="noopener" target="_blank">
@@ -123,20 +127,31 @@ export default function AboutStephaniePage() {
         </div>
       </header>
 
+      <section className="wrap sec" id="why">
+        <h2>Why I built it</h2>
+        <div className="ab-story" style={{ maxWidth: 760, marginTop: 24 }}>
+          <p>
+            People on both sides of hiring kept asking me the same question: which of these tools is worth paying for? Too many of the answers
+            online were rankings someone had paid to be in. So I built a place that scores the tools on public data, puts a date on every
+            score, and doesn&rsquo;t let anyone pay to be featured.
+          </p>
+        </div>
+      </section>
+
       <section className="wrap sec" id="results">
-        <h2>She hires before the job opens.</h2>
+        <h2>We hired before the job opened.</h2>
         <div className="ab-result">
           <p className="ab-big">
             15 days
-            <small>Average clinician time-to-hire, after her team cut 4 days in one quarter.</small>
+            <small>Average clinician time-to-hire, after my team cut 4 days in one quarter.</small>
           </p>
           <div className="ab-story">
             <p>
-              Demand for clinicians was high, and hiring and credentialing took too long. So her team stopped waiting for openings: they
-              built a community of clinicians before roles opened, with meet-and-greets, curated content and steady follow-up.
+              Demand for clinicians was high, and hiring and credentialing took too long. So my team stopped waiting for openings. We built a
+              community of clinicians before roles opened, with meet-and-greets, useful content and steady follow-up.
             </p>
             <p>
-              <b>Onboarding times fell by more than half.</b> In 2025 her team won Talent Strategy of the Year at the Transform Awards.
+              <b>Onboarding times fell by more than half.</b> In 2025 my team won Talent Strategy of the Year at the Transform Awards.
             </p>
             <a className="ab-src" href={TRANSFORM.url} rel="nofollow noopener" target="_blank">
               Source: {TRANSFORM.name}
@@ -149,7 +164,7 @@ export default function AboutStephaniePage() {
         <blockquote className="ab-quote">
           <p>&ldquo;Don&rsquo;t wait until you have a job opening to start building relationships.&rdquo;</p>
           <p className="ab-cite">
-            Stephanie, to{' '}
+            From my interview with{' '}
             <a href={TRANSFORM.url} rel="nofollow noopener" target="_blank">
               Transform
             </a>
@@ -159,14 +174,14 @@ export default function AboutStephaniePage() {
       </section>
 
       <section className="wrap sec" id="judgment">
-        <h2>Her judgment, kept apart from the scores.</h2>
+        <h2>My opinions stay out of the scores.</h2>
         <p className="lead">
-          Twenty years is worth a lot. It&rsquo;s worth the most when it&rsquo;s labeled, and nowhere near a number. Every score on this
-          site is built from dated public data.
+          When something on this site is my opinion, it&rsquo;s labeled as mine, and it has no effect on any score. Every score is built
+          from dated public data.
         </p>
         <div className="ab-rules">
           <div>
-            <h3>What she does</h3>
+            <h3>What I do</h3>
             <ul>
               {framework.judgment.does.map((d) => (
                 <li key={d}>{d}</li>
@@ -174,7 +189,7 @@ export default function AboutStephaniePage() {
             </ul>
           </div>
           <div>
-            <h3>What she never does</h3>
+            <h3>What I never do</h3>
             <ul>
               {framework.judgment.never.map((d) => (
                 <li key={d}>{d}</li>
@@ -183,18 +198,20 @@ export default function AboutStephaniePage() {
           </div>
         </div>
         <p className="footnote">
-          hiring.productions is made by the team behind{' '}
+          I also built{' '}
           <a href={repveraLink('about')} rel="noopener">
             RepVera
           </a>
-          , which is never ranked or reviewed here.{' '}
-          <a href="/how-we-review#judgment">How the line is drawn</a>
+          , a record of what someone is like to work with, in the words of people who have worked with them. It&rsquo;s listed on this site
+          without a score, because I don&rsquo;t score my own tool. <a href="/how-we-review#judgment">How I keep them apart</a>
         </p>
       </section>
 
       <section className="wrap sec ab-close" id="start">
         <h2>Start with the question you already have.</h2>
-        <p className="lead">Tell it what&rsquo;s going wrong and what you can spend. You get one pick, a backup and the reason, whether you&rsquo;re job hunting or hiring.</p>
+        <p className="lead">
+          Tell me what&rsquo;s going wrong and what you can spend, and I&rsquo;ll recommend one tool and a backup and show you why.
+        </p>
         <a className="btn btn-indigo" href="/what-should-i-use">
           What should I use?
         </a>

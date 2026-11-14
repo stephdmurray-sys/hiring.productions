@@ -4,14 +4,14 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { RecommendationForm } from './recommendation-form'
 
 /**
- * /consulting: the human answer. The recommender picks one tool for one
+ * /hiring-stack (was /consulting until Nov 14, 2026): the human answer. The recommender picks one tool for one
  * problem; this is for a team that wants its whole setup looked at. It is
  * also where the recommender sends a team when nothing on file fits.
  * Free, no sales call, no vendor in the answer.
  */
 
 export const metadata: Metadata = {
-  alternates: { canonical: '/consulting' },
+  alternates: { canonical: '/hiring-stack' },
   title: 'What Should Our Hiring Stack Be? A Free Recommendation From Stephanie Murray',
   description:
     'Send how you hire and get back the applicant tracking system, job boards and screening setup Stephanie Murray would run for your team, with the reasoning. Free, no sales call, and no vendor can pay their way into the answer.',
@@ -51,13 +51,13 @@ export default function Page() {
       <header className="ph">
         <div className="wrap">
           <p className="crumbs">
-            <a href="/">Home</a> / <a href="/for-hiring-teams">For hiring teams</a> / Stack recommendation
+            <a href="/">Home</a> / <a href="/guides">Guides</a> / Hiring stack
           </p>
           <h1 className="display">What should our whole hiring stack be?</h1>
           <p className="dek">
             The <a className="tl" href="/what-should-i-use?side=hiring">recommender</a> picks one tool for one problem. For the whole setup,
-            send your situation: Stephanie sends back the stack she would run for your team, with the reasoning. Free, no sales call, and no
-            vendor can pay their way into the answer.
+            tell Stephanie how you hire, and she&rsquo;ll email you the tools she would run for your team and why. It&rsquo;s free, there&rsquo;s
+            no sales call, and no vendor can pay to be in the answer.
           </p>
         </div>
       </header>

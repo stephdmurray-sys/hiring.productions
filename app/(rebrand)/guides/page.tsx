@@ -1,0 +1,109 @@
+import type { Metadata } from 'next'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+import { homeCss } from '@/app/(rebrand)/home-css'
+
+/**
+ * /guides: every guide and free tool on one page, for the "Guides" link in
+ * the topic navigation. Grouped by who it's for, so either side finds its
+ * own list in one look.
+ */
+
+export const metadata: Metadata = {
+  title: 'Guides and Free Tools for Job Seekers and Hiring Teams',
+  description:
+    'Every guide and free tool on hiring.productions: resume tools, interview practice, applicant tracking systems, recruiter training, interview scorecards, cost per hire and spotting fake candidates.',
+  alternates: { canonical: '/guides' },
+}
+
+type Item = { href: string; title: string; detail: string; kind: string }
+
+const SEEKERS: Item[] = [
+  { href: '/guides/best-resume-tools', kind: 'Guide', title: 'The best resume tools', detail: 'Builders and ATS checkers ranked on public reviews and real prices.' },
+  { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: 'Tell us where your search is stuck and get a tool and a backup, with the real cost.' },
+  { href: '/interview-practice', kind: 'Free tool', title: 'What will they ask me in the interview?', detail: 'Practice the questions structured interviews use, and what a strong answer shows.' },
+  { href: '/guides/best-resume-tools#cost', kind: 'Free tool', title: 'What will your search cost?', detail: 'Every resume tool sorted by the cheapest way to pay for your timeline.' },
+  { href: '/compare', kind: 'Comparisons', title: 'Down to two?', detail: 'Any two resume tools side by side.' },
+]
+
+const HIRING: Item[] = [
+  { href: '/guides/best-ats-for-small-teams', kind: 'Guide', title: 'Applicant tracking systems by team size', detail: 'Small, growing and scaling teams, each with their own rankings.' },
+  { href: '/guides/best-recruiter-training', kind: 'Guide', title: 'Recruiter training and certifications', detail: 'From sourcing and closing to SHRM and HRCI exam prep.' },
+  { href: '/what-should-i-use?side=hiring#questions', kind: 'Free tool', title: 'What should we use?', detail: 'Tell us your team size and what is going wrong, and get a tool and a backup.' },
+  { href: '/interview-scorecard', kind: 'Free tool', title: 'Interview scorecard builder', detail: 'The same questions for every candidate, sent as a PDF and a spreadsheet.' },
+  { href: '/hiring-costs', kind: 'Free tool', title: 'What does a hire cost?', detail: 'Cost per hire the way SHRM counts it, next to SHRM’s 2025 medians.' },
+  { href: '/is-this-a-real-candidate', kind: 'Free checklist', title: 'Is this even a real candidate?', detail: 'The FBI’s red flags for fake candidates, as a checklist for interviewers.' },
+  { href: '/hiring-stack', kind: 'Free, from Stephanie', title: 'What should our whole hiring stack be?', detail: 'Tell Stephanie about your team and get a named set of tools back by email.' },
+  { href: '/compare', kind: 'Comparisons', title: 'Down to two?', detail: 'Any two applicant tracking systems for the same team size, side by side.' },
+]
+
+const ALSO: Item[] = [
+  { href: '/reviews', kind: 'Reviews', title: 'Every tool, reviewed', detail: 'One page per tool: is it worth it, what it costs, and what to use instead.' },
+  { href: '/on-the-rise', kind: 'Watch list', title: 'On the rise', detail: 'New tools we’re watching until they have enough reviews for a score.' },
+  { href: '/who-to-follow', kind: 'People', title: 'Who to follow', detail: 'The people worth following in recruiting, HR and the job search.' },
+]
+
+function List({ items, side }: { items: Item[]; side?: 'seekers' | 'hiring' }) {
+  return (
+    <div className="guides">
+      {items.map((g) => (
+        <a className="guide" href={g.href} key={g.href + g.title}>
+          <span className="guide-side">
+            <span>
+              {side ? <span className={`pill pill-sm pill-${side}`}>{g.kind}</span> : <span className="mono">{g.kind}</span>}
+            </span>
+          </span>
+          <span>
+            <b>{g.title}</b>
+            <span className="guide-d">{g.detail}</span>
+          </span>
+          <span />
+        </a>
+      ))}
+    </div>
+  )
+}
+
+export default function GuidesIndex() {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + homeCss }} />
+      <SiteNav active="guides" />
+      <header className="ph">
+        <div className="wrap">
+          <p className="crumbs">
+            <a href="/">Home</a> / Guides
+          </p>
+          <h1 className="display">Guides and free tools</h1>
+          <p className="dek">Everything on the site, sorted by who it&rsquo;s for. Every tool here is free, and nothing you type is kept unless you ask us to email it.</p>
+        </div>
+      </header>
+
+      <section className="wrap sec-tight" id="job-seekers">
+        <h2>For job seekers</h2>
+        <List items={SEEKERS} side="seekers" />
+        <p style={{ marginTop: 20, fontSize: 17 }}>
+          <a className="tl" href="/for-job-seekers">
+            Everything for job seekers on one page
+          </a>
+        </p>
+      </section>
+
+      <section className="wrap sec" id="hiring-teams">
+        <h2>For hiring teams</h2>
+        <List items={HIRING} side="hiring" />
+        <p style={{ marginTop: 20, fontSize: 17 }}>
+          <a className="tl" href="/for-hiring-teams">
+            Everything for hiring teams on one page
+          </a>
+        </p>
+      </section>
+
+      <section className="wrap sec" id="also" style={{ paddingBottom: 'clamp(96px,11vw,150px)' }}>
+        <h2>For both</h2>
+        <List items={ALSO} />
+      </section>
+      <SiteFooter />
+    </>
+  )
+}

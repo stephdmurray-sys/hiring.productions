@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
   title: 'Hiring Is a Production. We Are Here for Everyone in It.',
   description:
-    'Independent reviews of the tools on both sides of hiring: resume builders, ATS checkers and applicant tracking systems. Every score is dated, and no vendor can pay for a place.',
+    'Hiring tools ranked for job seekers and hiring teams: resume builders, ATS checkers and applicant tracking systems. Every score is dated, the method is published, and nobody pays to be featured.',
 }
 
 const SEEKER_LOGOS = ['teal', 'kickresume', 'flowcv', 'jobscan', 'rezi', 'resume-worded', 'enhancv', 'novoresume']
@@ -114,7 +114,7 @@ export default function Home() {
           Hiring is a production. We&rsquo;re here for <Swash><span>everyone</span></Swash> in&nbsp;it.
         </h1>
         <p className="dek">
-          Independent reviews of the tools on both sides of the table. Every score is dated, and no vendor can pay for a place.
+          Hiring tools ranked for job seekers and hiring teams. Every score is dated, the method is published, and nobody pays to be featured.
         </p>
 
         <div className="sides">
@@ -137,9 +137,11 @@ export default function Home() {
             <div className="side-feature">
               <Logo domain={top.domain} name={top.name} size={56} />
               <div>
-                <b>Best overall: {top.name}</b>
+                <b>
+                  {guide.picks[0].label}: {top.name}
+                </b>
                 <span>
-                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, and the free version is actually useful
+                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, with a free version that&rsquo;s useful on its own
                 </span>
               </div>
             </div>
@@ -197,8 +199,8 @@ export default function Home() {
       <section className="wrap sec" id="what-to-use">
         <h2>What should I use?</h2>
         <p className="lead">
-          Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and give you
-          one pick. If no tool fixes it, we&rsquo;ll say so.
+          Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and
+          recommend one tool and a backup. If no tool fixes it, we&rsquo;ll say so.
         </p>
         <div className="rec-sits">
           {(['seekers', 'hiring'] as const).map((side) => (
@@ -269,7 +271,7 @@ export default function Home() {
       </section>
 
       <section className="wrap sec" id="cost">
-        <h2>What will your search actually cost?</h2>
+        <h2>What will your search cost?</h2>
         <p className="lead">
           Drag to your timeline. Every tool re-sorts by the cheapest way to pay for it, and shows what happens if you forget to cancel.
         </p>

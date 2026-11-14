@@ -125,7 +125,7 @@ export const html = `<style>
           <a href="/for-job-seekers">For Job Seekers <span class="chev">&#9660;</span></a>
           <a href="/how-we-review">How We Review</a>
           <a href="/for-vendors">For Vendors <span class="chev">&#9660;</span></a>
-          <a href="/consulting">Get a Recommendation<span class="free-chip">FREE</span></a>
+          <a href="/hiring-stack">Get a Recommendation<span class="free-chip">FREE</span></a>
         </span>
               </nav>
     </div>
@@ -143,9 +143,8 @@ export const html = `<style>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>
       <p class="disclosure">
-        Some links below can be affiliate links: if you buy through one, the
-        vendor pays us a commission. Vendors cannot pay for placement, rankings,
-        or scores. <a href="/advertiser-disclosure" style="color:#fff;text-decoration:underline;">Full disclosure</a>
+        No link on this page earns us anything right now, and nobody can pay
+        for placement, rankings or scores. <a href="/advertiser-disclosure" style="color:#fff;text-decoration:underline;">Full disclosure</a>
       </p>
     </div>
   </div>
@@ -153,7 +152,7 @@ export const html = `<style>
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">
-      Pick the ATS for your hiring volume first. The feature list comes second. Under 20 hires a year with no recruiter, you need simple and cheap. From 20 to 50, your first recruiter needs workflow control. Past 50, depth stops being overkill. One pick per tier below, then the full standings for each.</p>
+      Pick an ATS for your hiring volume before you compare features. Under 20 hires a year with no recruiter, you need simple and cheap. From 20 to 50, your first recruiter needs workflow control. Past 50, the deeper systems earn their price. Below is the top-rated system for each team size, then the full standings.</p>
     <div class="picks">
       <div class="pick winner">
         <span class="pick-flag">Small teams pick</span>
@@ -272,7 +271,7 @@ export const html = `<style>
         <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> Practitioner</span>
       </div>
       <div class="verdict">
-        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the free Bootstrap plan is actually usable.</span></div>
+        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the free Bootstrap plan is usable on its own.</span></div>
         <div class="v-row"><span class="v-key v-bad">Skip it if</span><span class="v-val">You need serious reporting, multi-entity compliance, or agency workflows. It will frustrate you within a quarter.</span></div>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Fastest setup in the category. Position posting to 50+ boards in one step. Pricing that scales with postings, not seats.</span></div>
         <div class="v-row"><span class="v-key v-watch">Watch for</span><span class="v-val">The automation templates tempt you to over-automate candidate email. Keep a human in the thread.</span></div>
@@ -297,7 +296,7 @@ export const html = `<style>
         <span class="sc"><span class="st">★★★★☆</span> <b>4.4</b> Practitioner</span>
       </div>
       <div class="verdict">
-        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You outgrew a free tier and need real workflow control: custom stages, approvals, and reporting a small team can actually run.</span></div>
+        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You outgrew a free tier and need real workflow control: custom stages, approvals, and reporting a small team can run.</span></div>
         <div class="v-row"><span class="v-key v-bad">Skip it if</span><span class="v-val">You are under 10 hires a year. You will pay for structure you do not need yet.</span></div>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Unlimited users on every plan, so hiring managers cost nothing to add. Clean upgrade path from scrappy to structured.</span></div>
         <div class="v-row"><span class="v-key v-watch">Watch for</span><span class="v-val">Per-job pricing on the entry plan adds up fast if you post many short-lived roles.</span></div>
@@ -310,9 +309,9 @@ export const html = `<style>
   </section>
 
   <section class="wrap narrow faq">
-    <h2>Questions small teams actually ask</h2>
+    <h2>Questions small teams ask</h2>
     <details><summary>Do I even need an ATS under 10 hires a year?</summary><p>Usually not a paid one. Breezy&rsquo;s free tier or a shared inbox with discipline covers you until scheduling and candidate volume start costing you real hours. The switch point is when candidates start falling through cracks you cannot see.</p></details>
-    <details><summary>What does an ATS actually cost for a small team?</summary><p>Between $0 and $300 a month for the tools on this list. Anyone quoting you five figures a year is selling enterprise software to the wrong buyer.</p></details>
+    <details><summary>What does an ATS cost for a small team?</summary><p>Between $0 and $300 a month for the tools on this list. Anyone quoting you five figures a year is selling enterprise software to the wrong buyer.</p></details>
     <details><summary>How long does setup take?</summary><p>For every tool in our top 5: a few days. If a vendor proposes an implementation project, that is a signal the product is built for a bigger company than yours.</p></details>
   </section>
 

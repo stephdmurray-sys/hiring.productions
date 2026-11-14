@@ -38,7 +38,7 @@ export function VendorForm() {
     return (
       <div className="vf-done" role="status">
         <b>{product ? `${product} is on file.` : 'You are on file.'}</b>
-        <p>Check your inbox for a confirmation. We reply about next steps within five business days.</p>
+        <p>Check your inbox for a confirmation. You&rsquo;ll hear back from Stephanie within five business days.</p>
       </div>
     )
   }

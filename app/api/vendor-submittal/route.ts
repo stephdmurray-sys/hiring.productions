@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
           from: fromAddress,
           to: [email],
           subject: `We have ${product} on file`,
-          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Thanks for sending ${esc(product)}. We read every submission against the same public evidence we use for every tool, and we'll reply about next steps within five business days.</p><p>A written submittal moves a review to the Vendor Submitted evidence level. A product walkthrough moves it to Vendor Demoed, our strongest. Neither one buys a score, a ranking, or a recommendation.</p><p>Stephanie Murray<br>Founder, hiring.productions</p></div>`,
+          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Thanks for sending ${esc(product)}. I read every submission against the same public evidence I use for every tool, and you'll hear back from me within five business days.</p><p>Written answers make the review more specific about who your product suits. A live demo makes it the most complete kind of review. Neither one changes a score, a ranking or a recommendation.</p><p>Stephanie Murray<br>Founder, hiring.productions</p></div>`,
         }),
       }).catch(() => undefined)
     }
