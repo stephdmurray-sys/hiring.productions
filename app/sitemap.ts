@@ -128,6 +128,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/how-we-review', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/reviews', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/who-to-follow', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/on-the-rise', priority: 0.8, changeFrequency: 'monthly' },
     // The recommender and the permanent answer pages for common situations
     { path: '/what-should-i-use', priority: 0.95, changeFrequency: 'monthly' },
     // Free tools for hiring teams, built on published standards (OPM, SHRM, FBI)

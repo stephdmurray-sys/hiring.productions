@@ -81,9 +81,13 @@ ${hiringBoard()
 - For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}), her top pick. ${hiringPick.scoreStatus}
 
-## Waiting in the wings (watching, not scored yet)
+## On the rise: waiting in the wings (watching, not scored yet)
 
-${rising.tools.map((t) => `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => e.publication).join(' and ')}.` : ''}`).join('\n')}
+Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} citable reviews. Never ranked, never paid for.
+
+${rising.tools.map((t) => `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => `${e.publication}${e.confirmed === false ? ' (not yet confirmed)' : ''}`).join(' and ')}.` : ''}`).join('\n')}
+
+Graduated to a score: ${rising.graduated.map((g) => `${g.name} (${g.to}, ${g.date})`).join('; ') || 'none yet'}.
 
 ## Who to follow (${BASE}/who-to-follow)
 

@@ -190,14 +190,20 @@ ${atsRanked
 - For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick. ${risingPick.line}
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}, ${hiringPick.url}), her top pick. ${hiringPick.line} ${hiringPick.scoreStatus}
 
-## Waiting in the wings (watching, not scored yet)
+## On the rise: waiting in the wings (watching, not scored yet)
+
+Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} citable reviews. Never ranked, never paid for.
 
 ${rising.tools
   .map(
     (t) =>
-      `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => `${e.publication} (${e.url})`).join(' and ')}.` : ''}`,
+      `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => `${e.publication} (${e.url})${e.confirmed === false ? ', not yet confirmed on the page' : ''}`).join(' and ')}.` : ''}`,
   )
   .join('\n')}
+
+### Graduated to a score
+
+${rising.graduated.map((g) => `- ${g.name}, ${g.date}: ${g.to}. ${g.note}`).join('\n') || '- None yet.'}
 
 ## Who to follow
 

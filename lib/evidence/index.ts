@@ -493,9 +493,19 @@ export interface RisingTool {
 }
 
 /** On the rise: honorable mentions that have no score yet. Never ranked. */
+/** A tool that left the wings for a scoreboard, kept as a public log. */
+export interface Graduated {
+  id: string
+  name: string
+  date: string
+  to: string
+  note: string
+}
+
 export const rising = {
   minReviews: risingData.minReviews,
   tools: risingData.tools as RisingTool[],
+  graduated: ((risingData as { graduated?: Graduated[] }).graduated ?? []) as Graduated[],
 }
 
 /** A pricing plan, for the cost calculator. days: how long one payment covers; once: never renews. */

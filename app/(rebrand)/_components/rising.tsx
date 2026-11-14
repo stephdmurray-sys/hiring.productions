@@ -149,7 +149,16 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
   return picks.filter((p) => !side || p.side === side)
 }
 
-export function OnTheRise({ side, showPicks = false }: { side?: 'seekers' | 'hiring'; showPicks?: boolean }) {
+export function OnTheRise({
+  side,
+  showPicks = false,
+  linkAll = true,
+}: {
+  side?: 'seekers' | 'hiring'
+  showPicks?: boolean
+  /** Link to the full On the rise page; off on that page itself. */
+  linkAll?: boolean
+}) {
   const tools = rising.tools.filter((t) => !side || t.side === side)
   const picks = showPicks ? founderPicks(side) : []
   return (
@@ -210,9 +219,15 @@ export function OnTheRise({ side, showPicks = false }: { side?: 'seekers' | 'hir
         ))}
         <div className="board-foot">
           A tool gets a score once it has {rising.minReviews} reviews on sources we can cite. Every score is public data.{' '}
-          <a className="tl" href="/how-we-review#radar">
-            How tools get on our radar
-          </a>
+          {linkAll ? (
+            <a className="tl" href="/on-the-rise">
+              Everyone we&rsquo;re watching, and who graduated
+            </a>
+          ) : (
+            <a className="tl" href="/how-we-review#radar">
+              How tools get on our radar
+            </a>
+          )}
           . Know one we missed?{' '}
           <a className="tl" href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed">
             Tell us

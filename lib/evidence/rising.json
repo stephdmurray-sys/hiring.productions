@@ -79,6 +79,87 @@
       ],
       "checkDue": "2026-12",
       "board": null
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null,
+      "id": "final-round-ai",
+      "name": "Final Round AI",
+      "domain": "finalroundai.com",
+      "side": "seekers",
+      "category": "Live interview co-pilot",
+      "what": "An AI co-pilot that runs during live interviews. SkillScouter calls it the best live interview co-pilot; its own FAQ asks whether using AI in a live interview is ethical.",
+      "evidence": [
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14",
+          "note": "#2 of 5 AI interview prep tools"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null,
+      "id": "interview-sidekick",
+      "name": "Interview Sidekick",
+      "domain": "interviewsidekick.com",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "AI interview practice; SkillScouter's budget option.",
+      "evidence": [
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14",
+          "note": "#3 of 5 AI interview prep tools"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": "Resume tools: builders",
+      "id": "visualcv",
+      "name": "VisualCV",
+      "domain": "visualcv.com",
+      "side": "seekers",
+      "category": "Resume builder",
+      "what": "A resume and CV builder; listed first on Geekflare's current list.",
+      "evidence": [
+        {
+          "publication": "Geekflare",
+          "domain": "geekflare.com",
+          "note": "Listed first of 12 resume builders",
+          "date": "2026-10",
+          "url": "https://geekflare.com/guides/best-resume-builders/",
+          "confirmed": true,
+          "checked": "2026-11-14"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
     }
   ],
   "graduated": [

@@ -145,6 +145,7 @@ export function SiteFooter() {
           <div className="flinks">
             <p className="fh">About</p>
             <a href="/how-we-review">How we review</a>
+            <a href="/on-the-rise">On the rise</a>
             <a href="/who-to-follow">Who to follow</a>
             <a href="/advertiser-disclosure">Advertiser disclosure</a>
             <a href="/for-vendors">For vendors</a>
