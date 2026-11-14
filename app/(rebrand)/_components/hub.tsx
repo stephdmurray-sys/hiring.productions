@@ -9,6 +9,7 @@ import { calcCss } from '@/app/(rebrand)/_components/widgets-css'
 import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
 import { homeCss } from '@/app/(rebrand)/home-css'
 import { JsonLd, graph, rankingLd, SITE } from '@/app/(rebrand)/_components/structured'
+import { problemsFor } from '@/lib/evidence/recommend'
 
 /**
  * Shared layout for the two audience hubs. The hero is a full block of the
@@ -37,7 +38,6 @@ export interface HubProps {
   dek: string
   dateline: string
   logos: { domain: string; name: string; href: string; tip?: string }[]
-  feature: { domain: string; name: string; title: string; line: string; href: string; linkText: string }
   situations: HubSituation[]
   situationsCta?: { text: string; href: string; label: string }
   board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode; heading?: string; lead?: string }
@@ -62,12 +62,13 @@ const hubCss = `
   .hub-logos a{display:inline-flex;border-radius:12px;}
   .hub-logos .lg{border:0;box-shadow:0 2px 0 rgba(0,0,0,0.14);border-radius:12px;}
   .hub-logos a:hover .lg{box-shadow:0 0 0 3px rgba(255,255,255,0.7);}
-  .hub-feature{background:#fff;color:var(--ink);border-radius:var(--r-lg);padding:24px;display:grid;gap:14px;box-shadow:0 18px 40px rgba(20,10,60,0.18);}
-  .hub-feature-id{display:flex;align-items:center;gap:14px;}
-  .hub-feature-id span{font-size:14px;font-weight:800;color:var(--ink-2);}
-  .hub-feature-id b{display:block;font-size:26px;font-weight:900;letter-spacing:-0.02em;color:var(--ink);line-height:1.1;}
-  .hub-feature p{color:var(--ink-2);font-size:16px;}
-  .hub-feature .tl{font-weight:800;}
+  .hub-start{background:#fff;color:var(--ink);border-radius:var(--r-lg);padding:26px 26px 12px;box-shadow:0 18px 40px rgba(20,10,60,0.18);}
+  .hub-start h2{font-size:clamp(24px,2.4vw,30px);font-weight:900;letter-spacing:-0.02em;line-height:1.15;margin:0 0 8px;color:var(--ink);}
+  .hub-start a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px solid var(--rule);font-weight:800;font-size:16.5px;color:var(--ink);}
+  .hub-start a .arr{color:var(--ink-3);transition:transform .15s ease;}
+  .hub-start a:hover{color:var(--indigo-text);}
+  .hub-hiring .hub-start a:hover{color:var(--coral-text);}
+  .hub-start a:hover .arr{transform:translateX(3px);}
 
   .sit-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:40px;}
   .sit-cta p{font-size:19px;color:var(--ink);max-width:640px;line-height:1.5;font-weight:600;}
@@ -110,25 +111,20 @@ export function Hub(props: HubProps) {
               </div>
               <p className="dateline">{props.dateline}</p>
             </div>
-            <aside className="hub-feature" aria-label={props.feature.title}>
-              <div className="hub-feature-id">
-                <Logo domain={props.feature.domain} name={props.feature.name} size={56} />
-                <span>
-                  {props.feature.title}
-                  <b>{props.feature.name}</b>
-                </span>
-              </div>
-              <p>{props.feature.line}</p>
-              <a className="tl" href={props.feature.href}>
-                {props.feature.linkText} <span className="arr">&rarr;</span>
-              </a>
+            <aside className="hub-start" aria-labelledby="hub-start-h">
+              <h2 id="hub-start-h">Where are you stuck?</h2>
+              {problemsFor(props.side).map((p) => (
+                <a key={p.id} href={`/what-should-i-use?side=${props.side}&problem=${p.id}#questions`}>
+                  {p.label} <span className="arr">&rarr;</span>
+                </a>
+              ))}
             </aside>
           </div>
         </div>
       </header>
 
       <section className="wrap sec" id="start">
-        <h2>Where is it going wrong?</h2>
+        <h2>Quick answers</h2>
         <div className="rows">
           {props.situations.map((s) => (
             <div className="row" key={s.q}>
@@ -142,14 +138,6 @@ export function Hub(props: HubProps) {
             </div>
           ))}
         </div>
-        {props.situationsCta && (
-          <div className="sit-cta">
-            <p>{props.situationsCta.text}</p>
-            <a className="btn" href={props.situationsCta.href}>
-              {props.situationsCta.label}
-            </a>
-          </div>
-        )}
       </section>
 
       <section className="wrap sec" id="scoreboard">

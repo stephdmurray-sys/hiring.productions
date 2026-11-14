@@ -4,13 +4,13 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { Logo } from '@/app/(rebrand)/_components/logo'
 import { Scoreboard, boardCss } from '@/app/(rebrand)/_components/scoreboard'
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
-import { seekerRow, shortDate } from '@/app/(rebrand)/_components/data'
+import { atsAsOf, hiringBoard, seekerRow, shortDate } from '@/app/(rebrand)/_components/data'
 import { MIN_REVIEWS, formatCount, latestCheck, resumeTools } from '@/lib/evidence'
 import { JsonLd, graph, resumeRankingLd } from '@/app/(rebrand)/_components/structured'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/reviews' },
-  title: 'Resume Tool Reviews: Builders and ATS Checkers, Scored on Real Reviews and Prices',
+  title: 'Hiring Tool Reviews: Resume Builders, ATS Checkers and Applicant Tracking Systems',
   description:
     'One review per tool: is it worth it, what it really costs, who else names it, and the best alternatives. Checked every month.',
 }
@@ -40,8 +40,8 @@ export default function ReviewsIndex() {
           <p className="crumbs">
             <a href="/">Home</a> / Reviews
           </p>
-          <h1 className="display">Every resume tool, reviewed</h1>
-          <p className="dek">Is it worth it, what it really costs, who else names it, and what to use instead. One page per tool.</p>
+          <h1 className="display">Every tool, reviewed</h1>
+          <p className="dek">Resume tools for job seekers and applicant tracking systems for hiring teams. Is it worth it, what it really costs, and what to use instead. One page per tool.</p>
           <p className="dateline">Checked {shortDate(checked)}</p>
         </div>
       </header>
@@ -50,6 +50,14 @@ export default function ReviewsIndex() {
         <div className="ix-boards">
           <Scoreboard side="seekers" title="ATS resume checkers" checked={`checked ${shortDate(checked)}`} rows={scored(checkers)} />
           <Scoreboard side="seekers" title="Resume builders" checked={`checked ${shortDate(checked)}`} rows={scored(builders)} />
+        </div>
+      </section>
+
+      <section className="wrap sec" id="ats">
+        <h2>Applicant tracking systems</h2>
+        <p className="lead">For hiring teams. Each has its own page with what a year costs for your seats, what users say and a demo video.</p>
+        <div style={{ marginTop: 32 }}>
+          <Scoreboard side="hiring" title="Applicant tracking systems" checked={`data as of ${shortDate(atsAsOf)}`} rows={hiringBoard()} />
         </div>
       </section>
 

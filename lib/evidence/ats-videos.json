@@ -1,0 +1,23 @@
+{
+  "_about": "Demo and review videos for each applicant tracking system, shown on its review page. kind: vendor (made by the company, on its own channel) | independent (made by someone else). Each was found on YouTube and checked as embeddable (oEmbed 200) on the date below. A video shows what a product looks like; it never moves a score.",
+  "checked": "2026-11-14",
+  "videos": [
+    { "tool": "Manatal", "youtubeId": "T0R1N2IAVeU", "title": "Manatal Demo for HR Departments", "kind": "vendor", "channel": "Manatal" },
+    { "tool": "Manatal", "youtubeId": "DxS220ZTfII", "title": "Manatal Review: Top Features, Pros and Cons", "kind": "independent", "channel": "TechnologyAdvice" },
+    { "tool": "Zoho Recruit", "youtubeId": "ofXh55E8E04", "title": "Zoho Recruit Tutorial for Beginners: How to Use Zoho Recruit", "kind": "independent", "channel": "Shax Finds" },
+    { "tool": "BambooHR", "youtubeId": "9APSguvdlMY", "title": "Get the Most Out of the BambooHR Hiring Tab", "kind": "independent", "channel": "TechnologyAdvice" },
+    { "tool": "Breezy HR", "youtubeId": "-uy3BA3cLUQ", "title": "Intro to Breezy HR: Short Demo", "kind": "vendor", "channel": "Breezy HR" },
+    { "tool": "Breezy HR", "youtubeId": "1zcPr_py6g4", "title": "Intro to Breezy HR: Full Demo", "kind": "vendor", "channel": "Breezy HR" },
+    { "tool": "Teamtailor", "youtubeId": "T5JE4U-bR_w", "title": "Teamtailor Tutorial: How to Use Teamtailor for Recruitment", "kind": "independent", "channel": "Phylux Express" },
+    { "tool": "Ashby", "youtubeId": "ucYI7Vm7GUo", "title": "Ashby: What an ATS Should Be", "kind": "vendor", "channel": "Ashby" },
+    { "tool": "Ashby", "youtubeId": "S1jXswzAhjY", "title": "Ashby: the All-in-One Recruiting Platform", "kind": "independent", "channel": "TA Tech Unboxed" },
+    { "tool": "Workable", "youtubeId": "TKZvRFlkKsU", "title": "Workable ATS: Product Walkthrough", "kind": "vendor", "channel": "Workable" },
+    { "tool": "Pinpoint", "youtubeId": "54I-MIZaHOo", "title": "Pinpoint Full ATS Platform Walkthrough", "kind": "vendor", "channel": "Pinpoint" },
+    { "tool": "Greenhouse", "youtubeId": "funC3ksWPUU", "title": "Is Greenhouse Right for Your Business? Full Review", "kind": "independent", "channel": "Paired Recruiting" },
+    { "tool": "JazzHR", "youtubeId": "jqXpwmMfV_Y", "title": "2 Minute JazzHR Overview", "kind": "vendor", "channel": "JazzHR" },
+    { "tool": "Lever", "youtubeId": "s4jnLOM4C30", "title": "Lever Review and Walkthrough: Is It the Right ATS for You?", "kind": "independent", "channel": "People Managing People" },
+    { "tool": "Recruitee", "youtubeId": "GTjKXVyr4lY", "title": "Welcome to Recruitee", "kind": "vendor", "channel": "Tellent (Recruitee)" },
+    { "tool": "Homerun", "youtubeId": "rOJc0fEzR-0", "title": "How to Create a Job Post in Homerun", "kind": "vendor", "channel": "Homerun" },
+    { "tool": "Fountain", "youtubeId": "iVOnPHuM1RM", "title": "How UPS Uses Fountain to Transform Hiring", "kind": "vendor", "channel": "Fountain" }
+  ]
+}

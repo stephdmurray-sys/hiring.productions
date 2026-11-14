@@ -272,7 +272,7 @@ export const html = `<style>
         <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> Practitioner</span>
       </div>
       <div class="verdict">
-        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the Bootstrap tier is a real product.</span></div>
+        <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You hire under 50 people a year and the hiring managers do most of the work. The pipeline view needs no training, and the free Bootstrap plan is actually usable.</span></div>
         <div class="v-row"><span class="v-key v-bad">Skip it if</span><span class="v-val">You need serious reporting, multi-entity compliance, or agency workflows. It will frustrate you within a quarter.</span></div>
         <div class="v-row"><span class="v-key">What we like</span><span class="v-val">Fastest setup in the category. Position posting to 50+ boards in one step. Pricing that scales with postings, not seats.</span></div>
         <div class="v-row"><span class="v-key v-watch">Watch for</span><span class="v-val">The automation templates tempt you to over-automate candidate email. Keep a human in the thread.</span></div>

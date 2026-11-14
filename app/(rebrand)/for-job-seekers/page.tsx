@@ -31,14 +31,6 @@ export default function Page() {
       dek="Resume builders and ATS checkers, scored on dated public data: what users say, what independent reviewers pick, and what a year really costs. Picked out by a recruiter who reads the other side."
       dateline={`Checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
-      feature={{
-        domain: top.domain,
-        name: top.name,
-        title: 'Best overall right now',
-        line: `${top.rawUserScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free version is actually useful.`,
-        href: `/reviews/${top.id}`,
-        linkText: `Is ${top.name} worth it?`,
-      }}
       situations={[
         {
           q: 'Applying and hearing nothing back?',

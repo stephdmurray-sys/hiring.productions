@@ -1,196 +1,118 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+
+/**
+ * Privacy, in plain words. Every line here describes what the code does
+ * today (lead capture in app/api/lead, lib/submit-lead.ts; analytics in
+ * app/layout.tsx). If either changes, this page changes with it. A formal,
+ * lawyer-reviewed policy replaces it before paid advertising.
+ */
 
 export const metadata: Metadata = {
-  title: 'Privacy',
+  title: 'Privacy: What We Collect and What We Do With It',
   description:
-    'How hiring.productions handles your data — the short version while our formal policy is in review.',
+    'What hiring.productions collects, where it is kept, which analytics run on the site, and how to see or delete your data. Plain words, kept current.',
   alternates: { canonical: 'https://hiring.productions/privacy' },
   robots: { index: false, follow: true },
 }
 
+const UPDATED = '14 Nov 2026'
+
+const css = `
+  .pv{max-width:820px;}
+  .pv h2{font-size:clamp(26px,3vw,34px);margin-top:clamp(48px,6vw,72px);}
+  .pv p,.pv li{font-size:18px;line-height:1.65;color:var(--ink-2);}
+  .pv p{margin-top:14px;}
+  .pv ul{margin-top:14px;padding-left:20px;display:grid;gap:8px;}
+  .pv b{color:var(--ink);}
+  .pv a{color:var(--indigo-text);text-decoration:underline;text-underline-offset:3px;}
+  .pv-end{padding-bottom:clamp(96px,11vw,150px);}
+`
+
 export default function PrivacyPage() {
   return (
-    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="light" />
-
-      <section
-        style={{
-          maxWidth: '720px',
-          margin: '0 auto',
-          padding: '80px 24px 100px',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '11px',
-            fontWeight: 800,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: '#A78BFA',
-            marginBottom: '16px',
-          }}
-        >
-          ◆ PRIVACY
+    <>
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + css }} />
+      <SiteNav />
+      <header className="ph">
+        <div className="wrap">
+          <p className="crumbs">
+            <a href="/">Home</a> / Privacy
+          </p>
+          <h1 className="display">What we collect, and what we do with it</h1>
+          <p className="dek">The short version, in plain words, while a formal policy is reviewed by a lawyer. It goes up before we run paid advertising.</p>
+          <p className="dateline">Last updated {UPDATED}</p>
         </div>
-        <h1
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(36px, 5vw, 56px)',
-            fontWeight: 900,
-            letterSpacing: '-0.025em',
-            lineHeight: 1.05,
-            color: '#1A1A22',
-            margin: '0 0 24px',
-          }}
-        >
-          The short version, while the formal policy is in review.
-        </h1>
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '17px',
-            color: '#5A5A6E',
-            lineHeight: 1.7,
-            marginBottom: '28px',
-          }}
-        >
-          A formal, lawyer-reviewed privacy policy will live on this page before
-          hiring.productions runs paid advertising. Until then, here is plainly
-          how your data is handled today — written in the same voice as the rest
-          of the site.
+      </header>
+
+      <section className="wrap sec-tight pv pv-end">
+        <h2>When you ask us to email you something</h2>
+        <p>
+          We keep your email address, the page you signed up on, and what you asked for, so the email fits. That can include the job title on a
+          scorecard, the numbers you put in the cost per hire calculator, your situation in &ldquo;What should I use?&rdquo;, and your company size if
+          you chose to give it.
+        </p>
+        <ul>
+          <li>
+            <b>Where it&rsquo;s kept:</b> our database (Upstash), our email service (Resend), and a private Google Sheet we use as a backup.
+          </li>
+          <li>
+            <b>What we never do:</b> sell your email, or share it with any company we review.
+          </li>
+          <li>
+            <b>Leaving:</b> every email has a one-click unsubscribe.
+          </li>
+          <li>
+            <b>Who we are:</b> hiring.productions is made by the team behind RepVera. Some emails to hiring teams include a labeled note about
+            RepVera.
+          </li>
+        </ul>
+
+        <h2>Forms you send us</h2>
+        <p>
+          A stack recommendation request or a vendor submission is emailed to Stephanie and kept in the same database, so we can reply.
         </p>
 
-        <Section title="What we collect">
-          <p>
-            When you use the free tools, we collect only the inputs you paste —
-            your resume, the job description, the questions you ask. Each
-            request goes to our AI provider to generate the response, then we
-            forget it. Inputs aren&apos;t logged to our database for later use
-            unless you become a member and explicitly save them.
-          </p>
-          <p>
-            When you become a member, Stripe handles the payment — we never see
-            or store your card number. Stripe gives us your email, first name,
-            last name, and the role you selected at checkout. That&apos;s the
-            account.
-          </p>
-        </Section>
-
-        <Section title="What we use it for">
-          <p>
-            Your name and email exist so we can verify your membership when you
-            sign in from another device, send you renewal receipts via Stripe,
-            and (someday, with explicit opt-in) tell you about new tools. We do
-            not sell or rent your data. We do not share it with advertisers. We
-            do not track you across the internet.
-          </p>
-        </Section>
-
-        <Section title="Cookies / tracking">
-          <p>
-            The site uses Vercel Analytics for first-party pageview counts — no
-            cookies, no cross-site tracking. Vercel Speed Insights captures
-            anonymous performance metrics (page load time, layout shift) so we
-            can make the site fast. That&apos;s it. There&apos;s no Google
-            Analytics, no Meta pixel, no LinkedIn tag.
-          </p>
-        </Section>
-
-        <Section title="Your rights">
-          <p>
-            Email{' '}
-            <a
-              href="https://www.linkedin.com/in/stephaniemurray11/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#A78BFA' }}
-            >
-              Stephanie on LinkedIn
-            </a>{' '}
-            and ask: to see what we have on you, to delete it, to export it, or
-            to correct it. We will, within seven days.
-          </p>
-        </Section>
-
-        <Section title="When this changes">
-          <p>
-            Before any paid advertising launches and before we add tracking that
-            does require disclosure, this page will be replaced with the formal
-            policy. We&apos;ll update the &quot;Last updated&quot; date below
-            and link to a diff. We will not quietly broaden what we collect.
-          </p>
-        </Section>
-
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '13px',
-            color: '#6B6A82',
-            marginTop: '48px',
-          }}
-        >
-          Last updated 2026-05-12. Questions?{' '}
-          <a
-            href="https://www.linkedin.com/in/stephaniemurray11/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#A78BFA' }}
-          >
-            Reach out via LinkedIn
-          </a>
-          .
+        <h2>The free tools</h2>
+        <p>
+          The interview scorecard, interview practice and cost per hire calculator run in your browser. Nothing you type in them is kept unless
+          you ask us to email it. The AI tools send what you paste to our AI provider to write the answer, and we don&rsquo;t store it unless you
+          are a member and choose to save it.
         </p>
 
-        <div style={{ marginTop: '40px' }}>
-          <Link
-            href="/"
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 700,
-              color: '#A78BFA',
-              textDecoration: 'none',
-            }}
-          >
-            ← Back to hiring.productions
-          </Link>
-        </div>
+        <h2>Members</h2>
+        <p>
+          Stripe handles payment. We never see or store your card number. Stripe gives us your email, name and the role you chose, which is
+          your account.
+        </p>
+
+        <h2>Analytics and cookies</h2>
+        <ul>
+          <li>
+            <b>Vercel Analytics:</b> counts page views, without cookies.
+          </li>
+          <li>
+            <b>Vercel Speed Insights:</b> measures how fast pages load, anonymously.
+          </li>
+          <li>
+            <b>Microsoft Clarity:</b> records how visitors move through pages (clicks, scrolling, where people stop) as anonymized session
+            recordings and heatmaps, so we can fix what&rsquo;s confusing. It hides what you type into forms, and it uses cookies.
+          </li>
+          <li>
+            <b>Our own cookie:</b> once you give us your email, a cookie remembers it, which unlocks more free uses of the AI tools.
+          </li>
+        </ul>
+        <p>No Google Analytics, no Meta pixel, no LinkedIn tag, no selling data to advertisers.</p>
+
+        <h2>Your data, your call</h2>
+        <p>
+          Email <a href="mailto:hello@hiring.productions?subject=My%20data">hello@hiring.productions</a> to see what we have on you, export it,
+          correct it or delete it. We&rsquo;ll do it within seven days. If what we collect ever grows, this page changes first, with a new date
+          at the top.
+        </p>
       </section>
-
-      <Footer />
-    </main>
-  )
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: '32px' }}>
-      <h2
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '20px',
-          fontWeight: 800,
-          letterSpacing: '-0.015em',
-          color: '#1A1A22',
-          margin: '0 0 12px',
-        }}
-      >
-        {title}
-      </h2>
-      <div
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '15px',
-          color: '#5A5A6E',
-          lineHeight: 1.7,
-        }}
-      >
-        {children}
-      </div>
-    </div>
+      <SiteFooter />
+    </>
   )
 }

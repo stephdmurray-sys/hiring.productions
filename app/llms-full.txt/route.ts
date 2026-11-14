@@ -186,6 +186,7 @@ ${atsRanked
       .join('; ')
     return `### ${i + 1}. ${t.name}
 
+- Review: ${BASE}/reviews/ats/${t.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}
 - Website: https://${t.domain}
 - Best for: ${TEAM[t.segment] ?? 'All teams'}
 - Overall: ${f2(s.overall)} out of 5. Parts: user ratings ${f2(s.user)}, popularity ${f2(s.market)}, value ${f2(s.value)}

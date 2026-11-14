@@ -9,8 +9,9 @@ import type { BoardRow } from './scoreboard'
 import type { CalcTool } from './cost-calculator'
 
 /** The anchor of a system's row in the ATS guide, e.g. /guides/best-ats-for-small-teams#ats-zoho-recruit */
+/** Each applicant tracking system's own review page. */
 export function atsHref(name: string) {
-  return `/guides/best-ats-for-small-teams#ats-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`
+  return `/reviews/ats/${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`
 }
 
 export function money(n: number) {

@@ -1,3 +1,4 @@
+import { atsProfiles } from '@/lib/ats-profiles'
 import { MetadataRoute } from 'next'
 import { CATALOG } from '@/lib/tools-catalog'
 import { RANK_ROLES } from '@/lib/rank-roles'
@@ -138,6 +139,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/is-this-a-real-candidate', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),
+    ...atsProfiles().map((p) => ({ path: `/reviews/ats/${p.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
   ]
 
   // De-dupe: a few catalog hrefs (/resume, /jd-seo-score) collide with

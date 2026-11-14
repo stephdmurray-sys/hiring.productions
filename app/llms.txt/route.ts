@@ -77,7 +77,7 @@ ${builders.map(line).join('\n')}
 ## Applicant tracking systems (data as of ${atsAsOf})
 
 ${hiringBoard()
-  .map((r, i) => `- ${r.name} (${r.domain}): ${r.score.toFixed(2)}/5, #${i + 1} overall. ${r.sub}.`)
+  .map((r, i) => `- [${r.name}](${BASE}${r.href}) (${r.domain}): ${r.score.toFixed(2)}/5, #${i + 1} overall. ${r.sub}.`)
   .join('\n')}
 
 ## Stephanie's picks (editorial; a pick never changes a score)

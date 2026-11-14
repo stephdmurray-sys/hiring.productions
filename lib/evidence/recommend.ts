@@ -398,8 +398,8 @@ function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean, prob
   return {
     name: j.name,
     domain: j.tool.domain,
-    href: `/guides/best-ats-for-small-teams#ats-${j.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
-    linkText: `See how ${j.name} ranks`,
+    href: `/reviews/ats/${j.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+    linkText: `Is ${j.name} worth it?`,
     score: s.overall,
     reasons,
     cost: j.cost,

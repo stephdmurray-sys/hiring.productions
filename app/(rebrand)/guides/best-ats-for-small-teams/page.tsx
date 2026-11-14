@@ -54,7 +54,7 @@ function rebuildTables(src: string): string {
     const body = parsed
       .map((r, i) => {
         const s = atsScores(r.t)
-        return `<tr id="ats-${slugOf(r.name)}"><td>${i + 1}</td><td>${r.cells[1]}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(1)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
+        return `<tr id="ats-${slugOf(r.name)}"><td>${i + 1}</td><td>${r.cells[1].replace(/<b>([\s\S]*?)<\/b>/, `<a href="/reviews/ats/${slugOf(r.name)}" style="color:inherit;text-decoration:underline;text-underline-offset:3px;"><b>$1</b></a>`)}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(1)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
       })
       .join('\n      ')
     return `<div class="tscroll"><table>\n      ${head}\n      ${body}\n    </table>`

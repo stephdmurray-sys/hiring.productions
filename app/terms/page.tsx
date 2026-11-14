@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 
 export const metadata: Metadata = {
   title: 'Terms',
@@ -14,7 +14,8 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="light" />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss }} />
+      <SiteNav />
 
       <section
         style={{
@@ -30,7 +31,7 @@ export default function TermsPage() {
             fontWeight: 800,
             letterSpacing: '0.22em',
             textTransform: 'uppercase',
-            color: '#A78BFA',
+            color: '#5432E0',
             marginBottom: '16px',
           }}
         >
@@ -65,7 +66,7 @@ export default function TermsPage() {
 
         <Section title="What we promise">
           <p>
-            The free tools stay free. The Pro tools cost $14.99/month or $99/year — billed
+            The free tools stay free. The Pro tools cost $14.99/month or $99/year, billed
             once, cancel anytime through the Stripe portal, and the access
             stops at the end of your current term. We will not raise the price
             on existing members without 60 days&apos; notice.
@@ -82,13 +83,13 @@ export default function TermsPage() {
           <p>
             Don&apos;t scrape or resell the outputs. Don&apos;t use the tools
             to generate content that misrepresents who you are or what
-            you&apos;ve done — the tools are sharpest when they&apos;re working
-            on real material. Don&apos;t try to break the gates programmatically
-            — if a tool says Pro, it&apos;s Pro.
+            you&apos;ve done. The tools are sharpest when they&apos;re working
+            on real material. Don&apos;t try to break the gates programmatically:
+            if a tool says Pro, it&apos;s Pro.
           </p>
           <p>
             Be honest in the inputs. The career-change tool, the gap explainer,
-            the visibility simulator — all of them produce sharper output when
+            the visibility simulator: all of them produce sharper output when
             you put your real situation in. Fabricated inputs give you AI-flavored
             outputs that won&apos;t survive a real interview.
           </p>
@@ -101,20 +102,20 @@ export default function TermsPage() {
               href="https://www.linkedin.com/in/stephaniemurray11/"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#A78BFA' }}
+              style={{ color: '#5432E0' }}
             >
               Stephanie on LinkedIn
             </a>{' '}
             within 14 days of purchase and you&apos;ll get a refund, no
             questions asked. After 14 days, we&apos;ll work with you in good
-            faith — most refund requests are because something didn&apos;t
+            faith. Most refund requests are because something didn&apos;t
             work, which we want to fix.
           </p>
         </Section>
 
         <Section title="The fine print, briefly">
           <p>
-            We can update these terms — when we do, the &quot;Last updated&quot;
+            We can update these terms. When we do, the &quot;Last updated&quot;
             date below changes and material changes get an email to members.
             The site is provided as-is; we&apos;re a small team and can&apos;t
             promise zero downtime. Any disputes get handled in good faith
@@ -135,7 +136,7 @@ export default function TermsPage() {
             href="https://www.linkedin.com/in/stephaniemurray11/"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#A78BFA' }}
+            style={{ color: '#5432E0' }}
           >
             Reach out via LinkedIn
           </a>
@@ -149,7 +150,7 @@ export default function TermsPage() {
               fontFamily: "'Figtree', sans-serif",
               fontSize: '14px',
               fontWeight: 700,
-              color: '#A78BFA',
+              color: '#5432E0',
               textDecoration: 'none',
             }}
           >
@@ -158,7 +159,7 @@ export default function TermsPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </main>
   )
 }

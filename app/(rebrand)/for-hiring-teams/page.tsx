@@ -28,14 +28,6 @@ export default function Page() {
       dek="Applicant tracking systems ranked by team size on dated public data: what users say, how the market is moving, and whether the price is public. Every number has a date and a source."
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: atsHref(t.name), tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
-      feature={{
-        domain: hiringPick.domain,
-        name: hiringPick.name,
-        title: "Stephanie's top pick",
-        line: `${hiringPick.line} ${hiringPick.facts}.`,
-        href: '#rising',
-        linkText: 'Why it’s her pick',
-      }}
       situations={[
         {
           q: 'Need to find people who aren’t applying?',

@@ -43,7 +43,8 @@ History: Nov 2026 moved from a gradient-heavy first redesign (looked AI-made), t
 - **Stack request** (`/consulting`) and **Advertiser disclosure**: rebuilt in the site system (no MockPage). The stack form is one white card beside a ruled "What comes back" list; the ownership disclosure sits under the button.
 - **Footer: How ratings work**: the four parts with weights and a one-paragraph summary from `framework.json`, on every page.
 - **Pick labels** live on the scoreboard rows ("Best overall", "Small teams pick") in the side's color, not on separate pick cards.
-- **Hub hero** (`hub.tsx`): a full block of the side's color carrying every logo that side covers, and one white feature card.
+- **Hub hero** (`hub.tsx`): a full block of the side's color carrying every logo that side covers, and one white card titled "Where are you stuck?" listing that side's problems, each linking straight into the recommender. Never a single tool or a personal pick in the hero: picks live lower on the page, labeled.
+- **ATS review page** (`/reviews/ats/[slug]`): same layout as a resume tool review, in coral. Score card with the three parts and their sources, what a year costs for 1, 3, 5 and 10 users, G2 and Capterra ratings, the guide's verdict where one exists, labeled videos (`ats-videos.json`), built-in checks on file, one "What should we use?" ask, then the alternatives in the same team-size tier. Data from `lib/ats-profiles.ts`.
 - **Review page** (`reviews/[tool]`): one per tool. Answers "is it worth it", "is it free", the real cost, who else names it, videos, alternatives and an FAQ with schema.
 - **Stance**: words in color. "Agrees with the field" green, "Breaks from the pack" indigo, "Too little evidence" gray italic.
 
