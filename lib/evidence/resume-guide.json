@@ -37,10 +37,10 @@
       "bestFor": "Checker, builder, and tracker in one. Real free tier",
       "call": {
         "stance": "agrees",
-        "line": "Three current lists name Teal, and we rank it first too. The reason is boring and rare: the free tier is a real product."
+        "line": "Three current lists name Teal, and we rank it first too. The reason is boring and rare: the free version is actually useful."
       },
       "verdict": {
-        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free tier is a real product, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
+        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free version is actually useful, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
         "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
         "like": "Free tier that does not hold your resume hostage. Quarterly billing at $79 is the sane paid option.",
         "watch": "The $13 weekly plan reads cheap and compounds fast. Pick monthly or quarterly, never weekly."
@@ -52,7 +52,7 @@
         "how": "4 quarters at $79",
         "renewsEvery4Weeks": false
       },
-      "freeAnswer": "Yes. The free tier is a real product, not a teaser. Teal+ is $29 a month or $79 a quarter.",
+      "freeAnswer": "Yes. The free version is actually useful, not a teaser. Teal+ is $29 a month or $79 a quarter.",
       "freeLevel": "full"
     },
     "jobscan": {
@@ -76,7 +76,7 @@
       "bestFor": "Instant free score; the fixes cost $49/mo",
       "call": {
         "stance": "thin",
-        "line": "Zapier and SkillScouter (#7) both name it, but with 9 citable reviews there isn't enough user evidence to score it, here or anywhere."
+        "line": "Zapier and SkillScouter (#7) both name it, but with 9 public reviews there isn't enough to rate it, here or anywhere."
       },
       "verdict": null,
       "pricingLine": "Free score only · $49/mo or $229/yr",
@@ -115,7 +115,7 @@
       "bestFor": "The genuinely free builder. No watermark",
       "call": {
         "stance": "breaks",
-        "line": "None of the current lists we've checked names FlowCV. It earns its place on its users: 4.9 from 83 citable ratings, and a free plan that gives you a watermark-free PDF."
+        "line": "None of the current lists we've checked names FlowCV. It earns its place on its users: 4.9 from 83 public ratings, and a free plan that gives you a watermark-free PDF."
       },
       "verdict": null,
       "pricingLine": "Free · Pro $60/yr",
@@ -155,7 +155,7 @@
         "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you treat it as a $2.95 one-week rental.",
         "skipIf": "You might forget to cancel. The trial renews at $29.95 every 4 weeks, 13 times a year, and the free download is plain text with your formatting stripped.",
         "like": "The editor itself is genuinely good, which is what makes the billing model such a shame.",
-        "watch": "Its only citable public review base is 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewal pattern. The App Store apps under this name are third-party lookalikes, not Resume.io."
+        "watch": "Its only public reviews we can use come to 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewal pattern. The App Store apps under this name are third-party lookalikes, not Resume.io."
       },
       "pricingLine": "$2.95 7-day trial, renews $29.95 every 4 weeks · free download is .txt only",
       "walkthrough": null,
@@ -164,14 +164,14 @@
         "how": "$2.95 trial, then 13 renewals at $29.95",
         "renewsEvery4Weeks": true
       },
-      "freeAnswer": "No. The free download is a .txt file with your formatting stripped. The real product is a $2.95 7-day trial that renews at $29.95 every 4 weeks.",
+      "freeAnswer": "No. The free download is a .txt file with your formatting stripped. What you actually get is a $2.95 7-day trial that renews at $29.95 every 4 weeks.",
       "freeLevel": "none"
     },
     "enhancv": {
       "bestFor": "Design-forward, trial-only",
       "call": {
         "stance": "thin",
-        "line": "Geekflare names it, but it has 1 citable review, too few to score. No free plan, and the trial watermarks your download."
+        "line": "Geekflare names it, but it has 1 public review, too few to rate. No free plan, and the trial watermarks your download."
       },
       "verdict": null,
       "pricingLine": "7-day watermarked trial · from about $13.33/mo on 6-month billing",
@@ -189,7 +189,7 @@
       "bestFor": "Clean free one-pager",
       "call": {
         "stance": "thin",
-        "line": "Geekflare names it, but there are no citable reviews to score yet."
+        "line": "Geekflare names it, but there are no public reviews to rate yet."
       },
       "verdict": null,
       "pricingLine": "Free 1-page PDF · $19.99/mo",
@@ -206,7 +206,7 @@
       "bestFor": "Heavily advertised; free download is .txt",
       "call": {
         "stance": "breaks",
-        "line": "Zety's strongest placements are on lists owned by its own parent company, BOLD. We show those lists and don't count them. On the evidence we do count, it doesn't earn a rank."
+        "line": "Zety's strongest placements are on lists owned by its own parent company, BOLD. We show those lists and don't count them. On the lists and reviews we do count, it doesn't earn a rank."
       },
       "verdict": null,
       "pricingLine": "$1.95 trial, renews $25.95 every 4 weeks · free download is .txt only",
@@ -216,7 +216,7 @@
         "how": "$1.95 trial, then 13 renewals at $25.95",
         "renewsEvery4Weeks": true
       },
-      "freeAnswer": "No. The free download is a .txt file. The real product is a $1.95 14-day trial that renews at $25.95 every 4 weeks.",
+      "freeAnswer": "No. The free download is a .txt file. What you actually get is a $1.95 14-day trial that renews at $25.95 every 4 weeks.",
       "freeLevel": "none"
     },
     "huntr": {

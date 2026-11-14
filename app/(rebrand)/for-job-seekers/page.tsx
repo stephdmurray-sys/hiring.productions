@@ -6,7 +6,7 @@ import { benchmarks, formatCount, formatMonth, guide, latestCheck, resumeTools, 
 
 export const metadata: Metadata = {
   alternates: { canonical: '/for-job-seekers' },
-  title: 'For Job Seekers: Resume Tools Ranked on Evidence',
+  title: 'For Job Seekers: Resume Tools, Ranked on Real Reviews and Prices',
   description:
     'Resume builders and ATS checkers scored on dated public data: what users say, what independent reviewers pick, and what a year really costs.',
 }
@@ -27,22 +27,22 @@ export default function Page() {
   return (
     <Hub
       side="seekers"
-      title="The tools that get you seen, ranked on the evidence."
+      title="The tools that get you seen, and which ones are worth paying for."
       dek="Resume builders and ATS checkers, scored on dated public data: what users say, what independent reviewers pick, and what a year really costs. Picked out by a recruiter who reads the other side."
-      dateline={`Evidence checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
+      dateline={`Checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
       feature={{
         domain: top.domain,
         name: top.name,
         title: 'Best overall right now',
-        line: `${top.rawUserScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free tier is a real product.`,
+        line: `${top.rawUserScore?.toFixed(1)} from ${formatCount(top.citableReviews)} users, named by ${top.counted.length} independent lists, and first on our scoreboard too. The free version is actually useful.`,
         href: `/reviews/${top.id}`,
         linkText: `Is ${top.name} worth it?`,
       }}
       situations={[
         {
           q: 'Applying and hearing nothing back?',
-          a: "Silence often starts with the screen, not the reader: 88% of employers in a Harvard Business School study agreed their systems filter out qualified people who don\u2019t match the posting\u2019s exact criteria. Use the posting\u2019s words, then run a checker.",
+          a: "Often no person has read it yet: 88% of employers in a Harvard Business School study agreed their systems filter out qualified people who don\u2019t match the posting\u2019s exact criteria. Use the posting\u2019s words, then run a checker.",
           href: '/guides/best-resume-tools#rankings',
           link: 'See the ATS checkers',
         },
@@ -60,13 +60,13 @@ export default function Page() {
         },
         {
           q: 'Losing track of applications?',
-          a: `${top.name} keeps every application, contact and follow-up in one pipeline, and its free tier is enough to run a search.`,
+          a: `${top.name} keeps every application, contact and follow-up in one pipeline, and its free version is enough to run a whole search.`,
           href: `/reviews/${top.id}`,
           link: `Read the ${top.name} review`,
         },
       ]}
       situationsCta={{
-        text: 'Tell us what\u2019s going wrong and what you can spend. We rule out every tool that doesn\u2019t fit and give you one pick, with the real cost.',
+        text: 'Tell us what\u2019s going wrong and what you can spend. We cross off every tool that doesn\u2019t fit and give you one pick, with the real cost.',
         href: '/what-should-i-use?side=seekers#questions',
         label: 'What should I use?',
       }}

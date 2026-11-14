@@ -144,12 +144,12 @@ export function Scoreboard({
                   </span>
                   <span>
                     <i className="k-m" />
-                    Market <b>{t.parts.market.toFixed(1)}</b>
+                    Popularity <b>{t.parts.market.toFixed(1)}</b>
                   </span>
                   {t.parts.critics !== undefined && (
                     <span>
                       <i className="k-c" />
-                      Critics <b>{t.parts.critics.toFixed(1)}</b>
+                      Best-of lists <b>{t.parts.critics.toFixed(1)}</b>
                     </span>
                   )}
                   <span>

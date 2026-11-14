@@ -11,7 +11,7 @@ import { shortDate } from '@/app/(rebrand)/_components/data'
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
 const DESCRIPTION =
-  "Tell us what's going wrong and what you can live with. We rule out every tool that breaks one of your limits, show you why, and give you one pick from independent, dated evidence."
+  "Tell us what's going wrong and what you need. We cross off every tool that doesn't fit, show you why, and give you one pick, based on public reviews and real prices."
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
   const sp = await searchParams
@@ -19,7 +19,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   const sit = ask ? situationFor(ask) : null
   const hasParams = Object.keys(sp).length > 0
   return {
-    title: 'What Should I Use? The Right Hiring Tool for Your Situation, on Evidence',
+    title: 'What Should I Use? The Right Hiring Tool for Your Situation',
     description: DESCRIPTION,
     // Every answer has a link; the common ones have a permanent page, which is the one to index.
     alternates: { canonical: sit ? `${REC_PATH}/${sit.slug}` : REC_PATH },
@@ -46,7 +46,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
           <h1 className="display">What should I use?</h1>
           <p className="dek">{recFramework.promise}</p>
           <p className="dateline">
-            Scores and prices checked {shortDate(latestCheck())}. No vendor can pay for a place, and commissions never touch an answer.
+            Ratings and prices checked {shortDate(latestCheck())}. No vendor can pay for a place, and commissions never change an answer.
           </p>
         </div>
       </header>
@@ -68,12 +68,12 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
 
       <section className="wrap sec" id="common">
         <h2>Common questions, answered</h2>
-        <p className="lead">Each one has its own page, built by the same rules from the same evidence.</p>
+        <p className="lead">Each one has its own page, answered the same way as yours.</p>
         <RecSituations />
       </section>
 
       <section className="wrap sec" id="how">
-        <h2>How an answer is made</h2>
+        <h2>How we pick</h2>
         <p className="lead">
           The same rules for every visitor, and none of them can be bought.{' '}
           <a className="tl" href="/how-we-review#recommend">

@@ -194,7 +194,7 @@ export default function AboutStephaniePage() {
 
       <section className="wrap sec ab-close" id="start">
         <h2>Start with the question you already have.</h2>
-        <p className="lead">Tell it your situation and your limits. You get one pick, one alternative and the reason, on either side of the table.</p>
+        <p className="lead">Tell it what&rsquo;s going wrong and what you can spend. You get one pick, a backup and the reason, whether you&rsquo;re job hunting or hiring.</p>
         <a className="btn btn-indigo" href="/what-should-i-use">
           What should I use?
         </a>

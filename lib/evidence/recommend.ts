@@ -97,6 +97,11 @@ const inCurrency = (n: number, currency: string) => (currency === 'USD' ? money(
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
 const monthsText = (m: number) => (m === 12 ? 'a year' : plural(m, 'month'))
 
+/** "Partly. You get 5 free scans a month. ..." becomes "You get 5 free scans a month. ...": the why, without the yes/no. */
+function freeGap(answer: string): string {
+  return answer.replace(/^(Partly|No|Not really|Yes)[.,:]?\s*/i, '').trim()
+}
+
 /** "Yes, with basic templates and real downloads. Premium is..." becomes "basic templates and real downloads". */
 function freeDetail(answer: string): string {
   const sentences = answer.split('. ')
@@ -168,7 +173,7 @@ function watchingFor(side: 'seekers' | 'hiring', problem: Problem, r: Recommenda
     .map((t) => ({ name: t.name, domain: t.domain, what: t.what }))
   if (problem.showFounderPick && problem.categories?.includes(hiringPick.category))
     r.stephanie = { name: hiringPick.name, domain: hiringPick.domain, line: hiringPick.line, href: hiringPick.url }
-  r.headline = `Nothing we can score fixes this yet. ${problem.why}`
+  r.headline = `We don’t rate a tool for this yet. ${problem.why}`
 }
 
 /** Pick and alternative from the tools that fit: best score first; the alternative is the best cheaper one, else the next best. */
@@ -179,9 +184,9 @@ function choose<T>(fits: Judged<T>[]): { pick: Judged<T> | null; alt: Judged<T> 
   const rest = ranked.slice(1)
   const pickCost = pick.cost?.total
   const cheaper = pickCost !== undefined ? rest.find((t) => t.cost && t.cost.total < pickCost) : undefined
-  if (cheaper) return { pick, alt: cheaper, altWhy: `The cheaper route: ${money(cheaper.cost!.total)} instead of ${money(pickCost!)}.` }
+  if (cheaper) return { pick, alt: cheaper, altWhy: `Costs less: ${money(cheaper.cost!.total)} instead of ${money(pickCost!)}.` }
   const next = rest[0] ?? null
-  return { pick, alt: next, altWhy: next ? 'The next best score among the tools that fit.' : '' }
+  return { pick, alt: next, altWhy: next ? 'The next-highest rated of the tools that fit.' : '' }
 }
 
 /** The scored tool closest to fitting: fewest broken limits, then the best score. */
@@ -195,7 +200,7 @@ function closest<T>(all: Judged<T>[]): { name: string; gap: string } | null {
 function firstReason(name: string, fitCount: number, noun: string, score: number) {
   return fitCount === 1
     ? `The only ${noun} that fits everything you asked for (${score.toFixed(2)} out of 5).`
-    : `Highest score of the ${fitCount} ${noun}s that fit everything you asked for (${score.toFixed(2)} out of 5).`
+    : `Top-rated of the ${fitCount} ${noun}s that fit everything you asked for (${score.toFixed(2)} out of 5).`
 }
 
 // ---------------------------------------------------------------- job seekers
@@ -214,14 +219,14 @@ function judgeSeekerTool(t: ToolEvidence, ask: SeekerAsk): Judged<ToolEvidence> 
   const cost: Cost | null = free ? { total: 0, how: 'The free version', ifYouForget: 0, upgrade: paid ?? undefined } : paid
 
   if (ask.budget !== null && !free) {
-    if (ask.budget === 0) fails.push(`No free version you can rely on. ${t.freeAnswer}`)
-    else if (!paid) unknown.push('No published price on file.')
-    else if (paid.total > ask.budget) fails.push(`Costs ${money(paid.total)} for ${monthsText(ask.months)}, over your ${money(ask.budget)}.`)
+    if (ask.budget === 0) fails.push(`The free version is too limited. ${freeGap(t.freeAnswer)}`)
+    else if (!paid) unknown.push('No price listed on their website.')
+    else if (paid.total > ask.budget) fails.push(`Costs ${money(paid.total)} for ${monthsText(ask.months)}, more than your ${money(ask.budget)} budget.`)
   }
-  if (ask.must.includes('free-usable') && !free && ask.budget !== 0) fails.push(`The free version is capped or missing. ${t.freeAnswer}`)
+  if (ask.must.includes('free-usable') && !free && ask.budget !== 0) fails.push(`The free version is too limited, or there isn’t one. ${freeGap(t.freeAnswer)}`)
   if (ask.must.includes('no-4-week') && t.yearCost?.renewsEvery4Weeks) fails.push('Renews every 4 weeks: 13 charges a year.')
-  if (ask.must.includes('tracker') && !capabilities.tracker.includes(t.id)) unknown.push('No job tracker on file.')
-  if (t.overall === null) unknown.push(`Not scored yet: ${t.citableReviews} of the 25 citable reviews needed.`)
+  if (ask.must.includes('tracker') && !capabilities.tracker.includes(t.id)) unknown.push('We couldn’t confirm a job tracker.')
+  if (t.overall === null) unknown.push(`Not rated yet: ${t.citableReviews} of the 25 public reviews we need.`)
 
   return { tool: t, name: t.name, fails, unknown, score: t.overall, cost }
 }
@@ -235,7 +240,7 @@ function seekerCandidate(j: Judged<ToolEvidence>, ask: SeekerAsk, fitCount: numb
     const u = c.upgrade
     if (u) {
       const forget = u.ifYouForget && u.ifYouForget > u.total * 1.5 ? `, or ${money(u.ifYouForget)} for the year if you forget to cancel` : ''
-      reasons.push(`Paying for more: ${money(u.total)} for ${monthsText(ask.months)}${forget}.`)
+      reasons.push(`If you upgrade: ${money(u.total)} for ${monthsText(ask.months)}${forget}.`)
     }
   } else if (c) {
     reasons.push(`Costs ${money(c.total)} for ${monthsText(ask.months)}.`)
@@ -276,8 +281,8 @@ export function recommendSeeker(ask: SeekerAsk): Recommendation {
     r.verdict = 'nothing-fits'
     r.nearMiss = closest(judged)
     r.headline = r.nearMiss
-      ? `Nothing we’ve scored fits every limit you set. The closest is ${r.nearMiss.name}. ${r.nearMiss.gap}`
-      : "Nothing we’ve scored fits every limit you set."
+      ? `Nothing we rate fits everything you asked for. The closest is ${r.nearMiss.name}. ${r.nearMiss.gap}`
+      : 'Nothing we rate fits everything you asked for.'
     return r
   }
   r.pick = seekerCandidate(pick, ask, fits.length, true)
@@ -333,8 +338,8 @@ interface Capability {
 const atsCapabilities = (data.hiring as unknown as { capabilities: Record<string, Record<string, Capability>> }).capabilities
 
 const CAPABILITY_MISSING: Record<string, string> = {
-  'fraud-detection': 'No built-in fraud detection on file.',
-  'ai-matching': 'No AI-assisted matching on file.',
+  'fraud-detection': 'We couldn’t confirm built-in fraud detection.',
+  'ai-matching': 'We couldn’t confirm AI candidate matching.',
 }
 
 /** A system's capability, from its own dated product page; undefined means not on file. */
@@ -354,15 +359,15 @@ function judgeAts(t: AtsTool, ask: HiringAsk, problem?: Problem): Judged<AtsTool
   const year = quoteOnly ? null : atsYear(t.name, ask.seats)
   const usd = year && year.currency === 'USD' ? year.amount : null
   const quoteWhy = tooBig
-    ? `Its published price covers up to ${price!.maxEmployees} employees; above that it’s a quote.`
-    : 'Quote only: no published price.'
+    ? `Its listed price covers up to ${price!.maxEmployees} employees. Above that, you have to ask for a quote.`
+    : 'No listed price: you have to ask for a quote.'
 
   if (ask.must.includes('published-price') && quoteOnly) fails.push(quoteWhy)
-  if ((ask.must.includes('free-start') || ask.budget === 0) && !price?.free) fails.push('No free plan on file.')
+  if ((ask.must.includes('free-start') || ask.budget === 0) && !price?.free) fails.push('We couldn’t find a free plan.')
   if (ask.budget !== null && ask.budget > 0 && !(ask.must.includes('published-price') && quoteOnly)) {
     if (quoteOnly) unknown.push(`${quoteWhy} We can’t check it against your budget.`)
     else if (year && year.currency !== 'USD') unknown.push(`Priced in ${year.currency} (${year.how}); we don’t convert currencies.`)
-    else if (usd !== null && usd > ask.budget) fails.push(`About ${money(usd)} a year (${year!.how}), over your ${money(ask.budget)}.`)
+    else if (usd !== null && usd > ask.budget) fails.push(`About ${money(usd)} a year (${year!.how}), more than your ${money(ask.budget)} budget.`)
   }
   const cost: Cost | null =
     ask.budget === 0 && price?.free
@@ -392,7 +397,7 @@ function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean, prob
     name: j.name,
     domain: j.tool.domain,
     href: `/guides/best-ats-for-small-teams#ats-${j.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
-    linkText: `See ${j.name} in the standings`,
+    linkText: `See how ${j.name} ranks`,
     score: s.overall,
     reasons,
     cost: j.cost,
@@ -434,11 +439,11 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
       .filter((j) => !j.fails.length && !j.unknown.length)
       .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0]
     r.nearMiss = elsewhere
-      ? { name: elsewhere.name, gap: `It fits every limit you set, but it’s ranked for ${TIER_NAME[elsewhere.tool.segment]}.` }
+      ? { name: elsewhere.name, gap: `It fits everything you asked for, but we rank it for ${TIER_NAME[elsewhere.tool.segment]}.` }
       : closest(judged)
     r.headline = r.nearMiss
-      ? `Nothing ranked for ${TIER_NAME[seg]} fits every limit you set. The closest is ${r.nearMiss.name}. ${r.nearMiss.gap}`
-      : `Nothing ranked for ${TIER_NAME[seg]} fits every limit you set.`
+      ? `Nothing we rank for ${TIER_NAME[seg]} fits everything you asked for. The closest is ${r.nearMiss.name}. ${r.nearMiss.gap}`
+      : `Nothing we rank for ${TIER_NAME[seg]} fits everything you asked for.`
     // A problem with its own free guidance (the fraud checklist) points there; otherwise, to a person.
     r.guidance = problem.guidance ?? data.hiring.fallback
     return r
@@ -570,9 +575,9 @@ export function answerText(r: Recommendation, { short = false }: { short?: boole
     const c = r.pick.cost
     parts.push(c.total === 0 ? 'It costs nothing.' : `About ${money(c.total)} ${r.costSpan}: ${c.how}.`)
   }
-  if (r.alt) parts.push(`The alternative is ${r.alt.name} (${r.alt.score.toFixed(2)} out of 5). ${r.alt.why}`)
-  if (r.watching.length) parts.push(`Worth watching, not scored yet: ${r.watching.map((w) => w.name).join(' and ')}.`)
-  if (r.ruledOut.length) parts.push(`Ruled out: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
+  if (r.alt) parts.push(`The backup pick is ${r.alt.name} (${r.alt.score.toFixed(2)} out of 5). ${r.alt.why}`)
+  if (r.watching.length) parts.push(`New and worth watching, not rated yet: ${r.watching.map((w) => w.name).join(' and ')}.`)
+  if (r.ruledOut.length) parts.push(`Didn’t fit: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
   if (!short) {
     parts.push(`${r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'}: ${r.otherSide.line} (${r.otherSide.source}.)`)
     parts.push(`Checked ${r.checked} by hiring.productions.`)

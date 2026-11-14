@@ -10,7 +10,7 @@ import { JsonLd, graph, resumeRankingLd } from '@/app/(rebrand)/_components/stru
 
 export const metadata: Metadata = {
   alternates: { canonical: '/reviews' },
-  title: 'Resume Tool Reviews: Builders and ATS Checkers, Scored on Evidence',
+  title: 'Resume Tool Reviews: Builders and ATS Checkers, Scored on Real Reviews and Prices',
   description:
     'One review per tool: is it worth it, what it really costs, who else names it, and the best alternatives. Checked every month.',
 }
@@ -40,7 +40,7 @@ export default function ReviewsIndex() {
           <p className="crumbs">
             <a href="/">Home</a> / Reviews
           </p>
-          <h1 className="display">Every resume tool, reviewed on the evidence</h1>
+          <h1 className="display">Every resume tool, reviewed</h1>
           <p className="dek">Is it worth it, what it really costs, who else names it, and what to use instead. One page per tool.</p>
           <p className="dateline">Checked {shortDate(checked)}</p>
         </div>
@@ -55,9 +55,9 @@ export default function ReviewsIndex() {
 
       {unscored.length > 0 && (
         <section className="wrap sec">
-          <h2>Reviewed, not scored</h2>
+          <h2>Reviewed, not rated yet</h2>
           <p className="lead">
-            These have reviews here, but fewer than {MIN_REVIEWS} citable user reviews, so they don&rsquo;t get a score.
+            These have reviews here, but fewer than {MIN_REVIEWS} public user reviews, so they don&rsquo;t get a score.
           </p>
           <div className="ix-unscored">
             {unscored.map((t) => (
@@ -76,7 +76,7 @@ export default function ReviewsIndex() {
       )}
 
       <section className="wrap sec">
-        <h2>Waiting in the wings</h2>
+        <h2>New tools to watch</h2>
         <p className="lead">Too new for a review page. These are the ones we&rsquo;re watching.</p>
         <OnTheRise />
       </section>

@@ -8,7 +8,7 @@ import { recFramework } from '@/lib/evidence/recommend'
 export const metadata: Metadata = {
   alternates: { canonical: '/how-we-review' },
   title: 'How We Review',
-  description: 'Four scores, all public data, re-read every month. Exactly how our reviews work, why no personal opinion is an input, and how a tool gets on our radar.',
+  description: 'Four scores, all from public data, checked every month. Exactly how our reviews work, why no one’s opinion goes into a score, and how we find new tools.',
 }
 
 function esc(s: string) {
@@ -64,7 +64,7 @@ function recommendSection() {
     .join('')
   return `
       <section id="recommend">
-        <h2>How a recommendation is made</h2>
+        <h2>How we pick a tool for you</h2>
         <p class="lead">${esc(recFramework.promise)} <a href="/what-should-i-use" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Try it</a>.</p>
         <table>
           <tr><th>The rule</th><th>What it means</th></tr>
@@ -87,16 +87,29 @@ function radarSection() {
   const followers = discovery.notSignals[0]
   return `
       <section id="radar">
-        <h2>How a tool gets on our radar</h2>
+        <h2>How we find new tools</h2>
         <p class="lead">A great tool shouldn&rsquo;t need a marketing budget to get noticed. If it shows up in any one of these places, we check it within a month: reviews counted, lists read, category recorded.</p>
         <table>
           <tr><th>If a tool is&hellip;</th><th>What happens</th></tr>
           ${rows}
         </table>
         <p class="callout"><b>Follower counts don&rsquo;t count.</b> ${esc(followers.why)}</p>
-        <p style="margin-top:20px">Getting checked is not the same as getting ranked. Discovery puts a tool in the queue; only public data (users, market, critics and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
+        <p style="margin-top:20px">Getting checked is not the same as getting ranked. Discovery puts a tool in the queue; only public data (user ratings, popularity, best-of lists and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
       </section>
 `
+}
+
+/** The sample review's rows: the same parts a real ATS review shows, from the live data. */
+function sampleRatings(b: { user: number; market: number; value: number; overall: number }, asOf: string) {
+  const row = (v: number, label: string, when: string) =>
+    `<div class="rating"><span class="stars"><span class="stars-fill" style="width:${(v / 5) * 100}%"></span></span><b>${v.toFixed(v === b.value ? 1 : 2)}</b> ${label} <span class="when">${when}</span></div>`
+  const d = new Date(asOf + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  return [
+    row(b.user, 'User ratings', `checked ${d}`),
+    row(b.market, 'Popularity', `checked ${d}`),
+    row(b.value, 'Value', 'listed price and a free plan'),
+    row(b.overall, 'Overall', 'ranked within small teams'),
+  ].join('\n          ')
 }
 
 export default function Page() {
@@ -105,10 +118,7 @@ export default function Page() {
   const withRadar = html
     .replace('<section id="refresh">', `${radarSection()}\n      <section id="refresh">`)
     .replace('<section id="sources">', `${researchSections()}${recommendSection()}\n      <section id="sources">`)
-    .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How a recommendation is made</a>')
-    .replace(
-      /<div class="rating"><span class="stars">[\s\S]*?Practitioner Score <span class="when">in final review<\/span><\/div>/,
-      `<div class="rating"><span class="stars"><span class="stars-fill" style="width:${(b.value / 5) * 100}%"></span></span><b>${b.value.toFixed(1)}</b> Value Score <span class="when">published price and a free tier</span></div>`,
-    )
+    .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How we pick a tool for you</a>')
+    .replace('<!--SAMPLE_RATINGS-->', sampleRatings(b, breezy.sources.g2?.as_of ?? ats.as_of))
   return <MockPage html={withRadar} active="review" />
 }

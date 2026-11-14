@@ -69,7 +69,7 @@ export default function Home() {
     ),
     flexjobs && (
       <>
-        <i>{flexjobs.publication}</i>&rsquo;s top picks are owned by its parent company: shown, not counted
+        <i>{flexjobs.publication}</i>&rsquo;s list picks tools its parent company owns, so we don&rsquo;t count it
       </>
     ),
     <>
@@ -88,7 +88,7 @@ export default function Home() {
     ),
     firstRiser && (
       <>
-        In the wings: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.replace(/^\w/, (c) => c.toLowerCase())} ({firstRiser.evidence[0].publication})
+        One to watch: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.replace(/^\w/, (c) => c.toLowerCase())} ({firstRiser.evidence[0].publication})
       </>
     ),
   ].filter(Boolean)
@@ -122,7 +122,7 @@ export default function Home() {
               <i />
               I&rsquo;m a job seeker
             </span>
-            <h2 id="side-seekers-h">Resume builders and ATS checkers, ranked on evidence</h2>
+            <h2 id="side-seekers-h">Resume builders and ATS checkers, ranked on real reviews and real prices</h2>
             <div className="side-logos">
               {SEEKER_LOGOS.map((id) => byId[id]).map((t) => (
                 <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`} data-tip={`${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}`}>
@@ -135,7 +135,7 @@ export default function Home() {
               <div>
                 <b>Best overall: {top.name}</b>
                 <span>
-                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, on a free tier that is a real product
+                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, and the free version is actually useful
                 </span>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default function Home() {
           </section>
         </div>
 
-        <div className="ticker" aria-label="This month in the evidence file">
+        <div className="ticker" aria-label="What changed this month">
           <div className="ticker-track">
             {[...ticker, ...ticker].map((node, i) => (
               <span key={i} aria-hidden={i >= ticker.length ? true : undefined}>
@@ -188,8 +188,8 @@ export default function Home() {
       <section className="wrap sec" id="what-to-use">
         <h2>What should I use?</h2>
         <p className="lead">
-          Tell us what&rsquo;s going wrong. We rule out every tool that doesn&rsquo;t fit your limits, show you why, and give you one pick.
-          Sometimes the honest answer is that no tool fixes it.
+          Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and give you
+          one pick. Sometimes the honest answer is that no tool fixes it.
         </p>
         <div className="rec-sits">
           {(['seekers', 'hiring'] as const).map((side) => (
@@ -212,7 +212,7 @@ export default function Home() {
         <div className="sec-head">
           <div>
             <h2>This month&rsquo;s scoreboard</h2>
-            <p className="lead">What users say, how the market moves, what independent reviewers pick and what a year really costs, in one dated score. Open any tool for the full review.</p>
+            <p className="lead">User ratings, popularity, best-of lists and what a year really costs, rolled into one score with the date we checked. Open any tool for the full review.</p>
           </div>
         </div>
         <div className="boards">
@@ -253,7 +253,7 @@ export default function Home() {
           </div>
         </div>
         <p className="board-note">
-          Every score is public data: users (40%), market (25%), critics (20%) and value (15%). Hover a row to see the parts.{' '}
+          Every score is public data: user ratings (40%), popularity (25%), best-of lists (20%) and value (15%). Hover a row to see the parts.{' '}
           <a className="tl" href="/how-we-review">
             How we score
           </a>
@@ -276,7 +276,7 @@ export default function Home() {
           <div>
             <h2>We check the other lists so you don&rsquo;t have to</h2>
             <p>
-              {benchmarks.length} &ldquo;best resume tool&rdquo; lists, re-read every month. {counting.length} are current and
+              {benchmarks.length} &ldquo;best resume tool&rdquo; lists, checked every month. {counting.length} are current and
               independent, so they count. The rest are out of date, or published by companies that sell what they rank.
             </p>
             <a className="tl tl-strong" href="/guides/best-resume-tools#agree">
@@ -359,7 +359,7 @@ export default function Home() {
             </span>
             <span>
               <b>The {atsTools.length} best applicant tracking systems, by team size</b>
-              <span className="guide-d">Small, growing and scaling teams each get their own standings and their own pick.</span>
+              <span className="guide-d">Small, growing and scaling teams each get their own rankings and their own pick.</span>
             </span>
             <span className="lg-stack">
               {atsTools.slice(0, 5).map((t) => (
@@ -387,7 +387,7 @@ export default function Home() {
           </a>
         </div>
         <p className="research">
-          In research now: job search trackers, interview practice, career coaching, LinkedIn profile tools, recruiting software for startups,
+          Coming next: job search trackers, interview practice, career coaching, LinkedIn profile tools, recruiting software for startups,
           candidate assessments and high-volume hiring. Next check: {formatMonth(guide.nextCheck)}.
         </p>
       </section>
@@ -395,7 +395,7 @@ export default function Home() {
       <section className="wrap sec" id="signup">
         <div className="signup-card">
           <div>
-            <h2>The monthly evidence check</h2>
+            <h2>One email a month</h2>
             <p className="sublead">One email a month with what changed: rankings that moved, prices that went up, and who&rsquo;s on the rise.</p>
           </div>
           <EvidenceSignup />

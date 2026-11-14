@@ -5,7 +5,7 @@ import { atsLeaders, atsScores, formatMonth, guide, hiringPick } from '@/lib/evi
 
 export const metadata: Metadata = {
   alternates: { canonical: '/for-hiring-teams' },
-  title: 'For Hiring Teams: Software and Training Ranked on Evidence',
+  title: 'For Hiring Teams: Software and Training, Ranked on Real Reviews and Prices',
   description:
     'Applicant tracking systems ranked by team size on dated public data: what users say, how the market is moving, and whether the price is public. Plus recruiter training ranked for how you recruit.',
 }
@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <Hub
       side="hiring"
-      title="The software behind well-run hiring, ranked on the evidence."
+      title="The software behind well-run hiring, and which ones are worth paying for."
       dek="Applicant tracking systems ranked by team size on dated public data: what users say, how the market is moving, and whether the price is public. Every number has a date and a source."
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: atsHref(t.name), tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
@@ -34,41 +34,41 @@ export default function Page() {
         title: "Stephanie's top pick",
         line: `${hiringPick.line} ${hiringPick.facts}.`,
         href: '#rising',
-        linkText: 'Why it’s her pick, and where its score stands',
+        linkText: 'Why it’s her pick',
       }}
       situations={[
         {
-          q: 'Sourcing without a dedicated sourcer?',
-          a: `${hiringPick.name} is Stephanie's top pick: search for people in plain language instead of Boolean strings. A sourcing scoreboard is in research now.`,
+          q: 'Need to find people who aren’t applying?',
+          a: `${hiringPick.name} is Stephanie's top pick: search for people in plain language instead of Boolean strings. We’re building a ranking of sourcing tools next.`,
           href: '#rising',
           link: `Why ${hiringPick.name}`,
         },
         {
           q: 'Hiring under 20 people a year?',
-          a: `${small.name} leads the small-team standings on the data (${atsScores(small).overall.toFixed(2)}). ${atsTools
+          a: `${small.name} is top-rated for small teams (${atsScores(small).overall.toFixed(2)}). ${atsTools
             .filter((t) => t.segment === 'small' && t.sources.free_tier)
             .map((t) => t.name)
             .join(' and ')} have free tiers.`,
           href: '/guides/best-ats-for-small-teams#tier-small',
-          link: 'See the small-team standings',
+          link: 'See the small-team rankings',
         },
         {
           q: 'Bringing on your first recruiter?',
           a:
             topUsers.name === growing.name
-              ? `${growing.name} leads the growing-team standings and has the highest user ratings of all ${atsTools.length}.`
-              : `${growing.name} leads the growing-team standings on the data. ${topUsers.name} has the highest user ratings of all ${atsTools.length} (${topUsers.computed.user_score.toFixed(2)})${atsScores(topUsers).value <= 2 ? ', but its price is quote-only' : ''}.`,
+              ? `${growing.name} is top-rated for growing teams and has the highest user ratings of all ${atsTools.length}.`
+              : `${growing.name} is top-rated for growing teams. ${topUsers.name} has the highest user ratings of all ${atsTools.length} (${topUsers.computed.user_score.toFixed(2)})${atsScores(topUsers).value <= 2 ? ', but you have to ask for its price' : ''}.`,
           href: '/guides/best-ats-for-small-teams#tier-growing',
-          link: 'See the growing-team standings',
+          link: 'See the growing-team rankings',
         },
         {
           q: 'Scaling past 50 hires a year?',
-          a: `${scaling.name} leads the scaling-team standings on the data${atsScores(scaling).value > 2 ? ' and publishes its price' : ''}. ${atsTools
+          a: `${scaling.name} is top-rated for scaling teams${atsScores(scaling).value > 2 ? ' and lists its price' : ''}. ${atsTools
             .filter((t) => t.segment === 'scaling' && atsScores(t).value <= 2)
             .map((t) => t.name)
-            .join(', ')} are quote-only.`,
+            .join(', ')} make you ask for a quote.`,
           href: '/guides/best-ats-for-small-teams#tier-scaling',
-          link: 'See the scaling-team standings',
+          link: 'See the scaling-team rankings',
         },
         {
           q: 'Training a recruiting team?',
@@ -78,15 +78,15 @@ export default function Page() {
         },
       ]}
       situationsCta={{
-        text: 'Tell us how many people you hire, how big you are and what you can spend. We rule out every system that doesn\u2019t fit and give you one pick, with the real price.',
+        text: 'Tell us how many people you hire, how big you are and what you can spend. We cross off every system that doesn\u2019t fit and give you one pick, with the real price.',
         href: '/what-should-i-use?side=hiring#questions',
         label: 'What should I use?',
       }}
       board={{
         title: 'Applicant tracking systems',
         checked: `data as of ${shortDate(atsAsOf)}`,
-        heading: 'Where the systems stand',
-        lead: `Ratings and prices as of ${shortDate(atsAsOf)}. The next full re-read is at the December check.`,
+        heading: 'How the systems rank',
+        lead: `Ratings and prices as of ${shortDate(atsAsOf)}. We check them all again in December.`,
         rows: hiringBoard().map((r) => ({ ...r, tag: tagFor[r.id] })),
         foot: <>Ranked here on one board. The guide splits them by team size: small, growing and scaling.</>,
       }}
@@ -132,7 +132,7 @@ export default function Page() {
         {
           href: '/guides/best-ats-for-small-teams',
           title: `The ${atsTools.length} best applicant tracking systems, ranked by team size`,
-          detail: 'Small, growing and scaling teams each get their own standings and their own pick.',
+          detail: 'Small, growing and scaling teams each get their own rankings and their own pick.',
           meta: `Data as of ${shortDate(atsAsOf)}`,
           logos: atsTools.slice(0, 6).map((t) => ({ domain: t.domain, name: t.name })),
         },

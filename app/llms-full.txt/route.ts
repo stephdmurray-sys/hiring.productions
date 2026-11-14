@@ -45,11 +45,11 @@ function tool(t: ToolEvidence): string {
     `- Type: ${t.segment === 'checker' ? 'ATS resume checker' : 'Resume builder'}`,
     t.overall !== null
       ? `- Overall: ${f2(t.overall)} out of 5, #${t.rank} of the ${t.segment === 'checker' ? 'checkers' : 'builders'}`
-      : `- Overall: not scored yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} citable reviews needed)`,
+      : `- Overall: not scored yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} public reviews needed)`,
     t.userScore !== null
-      ? `- Parts: users ${f2(t.userScore)}, market ${f2(t.marketScore)}, critics ${f2(t.criticsScore)}, value ${f2(t.valueScore)}`
-      : `- Parts: market ${f2(t.marketScore)}, critics ${f2(t.criticsScore)}, value ${f2(t.valueScore)}`,
-    t.rawUserScore !== null ? `- Users' plain average: ${t.rawUserScore.toFixed(1)} from ${formatCount(t.citableReviews)} citable reviews` : null,
+      ? `- Parts: user ratings ${f2(t.userScore)}, popularity ${f2(t.marketScore)}, best-of lists ${f2(t.criticsScore)}, value ${f2(t.valueScore)}`
+      : `- Parts: popularity ${f2(t.marketScore)}, best-of lists ${f2(t.criticsScore)}, value ${f2(t.valueScore)}`,
+    t.rawUserScore !== null ? `- Users' plain average: ${t.rawUserScore.toFixed(1)} from ${formatCount(t.citableReviews)} public reviews` : null,
     ratings ? `- Ratings read: ${ratings}` : null,
     `- Best for: ${t.bestFor}`,
     `- Free version: ${FREE_LEVEL_LABEL[t.freeLevel]}. ${t.freeAnswer}`,
@@ -89,12 +89,12 @@ Evidence last checked: ${latestCheck()}. Re-checked monthly.
 
 ${framework.summary}
 
-- Overall = ${WEIGHTS.user * 100}% users + ${WEIGHTS.market * 100}% market + ${WEIGHTS.critics * 100}% critics + ${WEIGHTS.value * 100}% value. Each part is out of 5. When a part has no data, the others share its weight.
-- Users: review-site ratings. Tools with few reviews are pulled toward the category average (the IMDb weighted-rating method), so a handful of reviews can't outrank thousands. Fewer than ${MIN_REVIEWS} citable reviews means no score. G2, Capterra, GetApp and Software Advice share one review pool and count once.
-- Market: how many people use it, from web traffic rank (Tranco) and review volume, plus review growth when an archived snapshot exists.
-- Critics: how many independent "best of" lists name it. A list counts only if it is current and not published by a company that sells what it ranks.
+- Overall = ${WEIGHTS.user * 100}% user ratings + ${WEIGHTS.market * 100}% popularity + ${WEIGHTS.critics * 100}% best-of lists + ${WEIGHTS.value * 100}% value. Each part is out of 5. When a part has no data, the others share its weight.
+- Users: review-site ratings. Tools with few reviews are pulled toward the category average (the IMDb weighted-rating method), so a handful of reviews can't outrank thousands. Fewer than ${MIN_REVIEWS} public reviews means no score. G2, Capterra, GetApp and Software Advice share one review pool and count once.
+- Popularity: how many people use it, from web traffic rank (Tranco) and review volume, plus review growth when an archived snapshot exists.
+- Best-of lists: how many independent "best of" lists name it. A list counts only if it is current and not published by a company that sells what it ranks.
 - Value: half how much the free version does, half the real cost of a paid year. A point off for plans that renew every 4 weeks.
-- Applicant tracking systems: users, market and value only for now (independent ATS lists aren't tracked yet).
+- Applicant tracking systems: user ratings, popularity and value only for now (independent ATS lists aren't tracked yet).
 
 ### The research behind it
 
@@ -184,7 +184,7 @@ ${atsRanked
 
 - Website: https://${t.domain}
 - Best for: ${TEAM[t.segment] ?? 'All teams'}
-- Overall: ${f2(s.overall)} out of 5. Parts: users ${f2(s.user)}, market ${f2(s.market)}, value ${f2(s.value)}
+- Overall: ${f2(s.overall)} out of 5. Parts: user ratings ${f2(s.user)}, popularity ${f2(s.market)}, value ${f2(s.value)}
 - Ratings read: ${reads || 'none on file'}
 - Pricing: ${t.sources.pricing}${t.sources.free_tier ? ' (has a free tier)' : ''}${t.data_notes ? `\n- Data notes: ${t.data_notes}` : ''}`
   })
@@ -195,9 +195,9 @@ ${atsRanked
 - For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick. ${risingPick.line}
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}, ${hiringPick.url}), her top pick. ${hiringPick.line} ${hiringPick.scoreStatus}
 
-## On the rise: waiting in the wings (watching, not scored yet)
+## On the rise: new tools to watch (not rated yet)
 
-Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} citable reviews. Never ranked, never paid for.
+Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} public reviews. Never ranked, never paid for.
 
 ${rising.tools
   .map(

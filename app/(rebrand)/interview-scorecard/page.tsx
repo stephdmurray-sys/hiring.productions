@@ -38,7 +38,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
   return {
     title: 'What Should We Ask in the Interview? A Free Structured Interview Scorecard',
     description:
-      "Pick 4 to 6 competencies and get the same questions for every candidate, probes and a 1 to 5 rating scale with benchmarks, built on the US Office of Personnel Management's structured interview method. Free, printable.",
+      "Pick 4 to 6 skills and get the same questions for every candidate, probes and a 1 to 5 rating scale with benchmarks, built on the US Office of Personnel Management's structured interview method. Free, printable.",
     alternates: { canonical: PATH },
     robots: hasParams ? { index: false, follow: true } : undefined,
   }
@@ -132,7 +132,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
           </p>
           <h1 className="display">What should we ask in the interview?</h1>
           <p className="dek">
-            Pick the competencies the job needs. You get the same questions for every candidate, the follow-up probes, and a 1 to 5 scale
+            Pick the skills the job needs. You get the same questions for every candidate, the follow-up probes, and a 1 to 5 scale
             with benchmarks, built on the US Office of Personnel Management&rsquo;s structured interview method. Print it, or send it to
             your panel.
           </p>
@@ -150,7 +150,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
             <input id="sc-role" className="sc-role" type="text" name="role" maxLength={80} placeholder="For example, Account Executive" defaultValue={role} />
           </fieldset>
           <fieldset className="sc-q">
-            <legend>Which competencies does it need?</legend>
+            <legend>Which skills does the job need?</legend>
             <p className="sc-hint">
               {m.competencyCount} Pick up to {MAX}.{chosen.length > 0 ? ` ${chosen.length} chosen.` : ''}
               {tooMany ? ` Only the first ${MAX} are used.` : ''}

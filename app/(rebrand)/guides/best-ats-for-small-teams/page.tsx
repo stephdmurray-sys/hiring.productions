@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-ats-for-small-teams' },
   title: 'The Best Applicant Tracking Systems of 2026, Ranked by Team Size',
   description:
-    'The best ATS for small, growing, and scaling teams, ranked within each tier on dated public data: user ratings, market traction and whether the price is public.',
+    'The best ATS for small, growing, and scaling teams, ranked by team size on public data: user ratings, popularity and whether the price is listed.',
 }
 
 /**
@@ -50,7 +50,7 @@ function rebuildTables(src: string): string {
       .filter((r) => r.t)
       .sort((a, b) => atsScores(b.t).overall - atsScores(a.t).overall)
     const head =
-      '<tr><th>#</th><th>Tool</th><th>Best for</th><th>Starting price</th><th>Free option</th><th>Review growth /yr</th><th>Market</th><th>Users</th><th>Value</th><th>Overall</th></tr>'
+      '<tr><th>#</th><th>Tool</th><th>Best for</th><th>Starting price</th><th>Free option</th><th>Review growth /yr</th><th>Popularity</th><th>Users</th><th>Value</th><th>Overall</th></tr>'
     const body = parsed
       .map((r, i) => {
         const s = atsScores(r.t)
@@ -91,7 +91,7 @@ function rebuildReviews(src: string): string {
     const rank = rankIn(t.segment).findIndex((x) => x.name === t.name) + 1
     return block
       .replace(/<span class="review-rank">#\d+ &middot; ([^<]+)<\/span>/, `<span class="review-rank">#${rank} &middot; $1</span>`)
-      .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Market<\/span>/, `<span class="sc"><b>${s.market.toFixed(2)}</b> Market</span>`)
+      .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Market<\/span>/, `<span class="sc"><b>${s.market.toFixed(2)}</b> Popularity</span>`)
       .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> User<\/span>/, `<span class="sc"><b>${s.user.toFixed(2)}</b> Users</span>`)
       .replace(/<span class="sc"><span class="st">[^<]*<\/span> <b>[\d.]+<\/b> Practitioner<\/span>/, `<span class="sc"><b>${s.value.toFixed(1)}</b> Value</span><span class="sc"><b>${s.overall.toFixed(2)}</b> Overall</span>`)
   })
@@ -103,7 +103,7 @@ function rebuildFootnote(src: string): string {
     'Every score is computed from sourced public data',
   ).replace(
     '*Practitioner and Overall scores are in final review.',
-    'Overall blends users (50%), market (about 31%) and value (about 19%; a published price scores higher than quote-only). Independent ATS lists aren&rsquo;t tracked yet, so users, market and value share that weight. No one&rsquo;s personal score is an input.',
+    'Overall blends user ratings (50%), popularity (about 31%) and value (about 19%; a listed price scores higher than quote-only). We don&rsquo;t track independent ATS best-of lists yet, so those three share that weight. No one&rsquo;s opinion goes into a score.',
   )
 }
 

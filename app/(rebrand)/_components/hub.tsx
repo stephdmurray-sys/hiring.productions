@@ -164,7 +164,7 @@ export function Hub(props: HubProps) {
 
       <section className="wrap sec" id="rising">
         <h2>Stephanie&rsquo;s pick</h2>
-        <p className="lead">A pick is my judgment. A score is the evidence. You get both, labeled, and one never changes the other.</p>
+        <p className="lead">A pick is my opinion. A score is the numbers. You get both, labeled, and one never changes the other.</p>
         <OnTheRise side={props.side} showPicks />
       </section>
 
@@ -197,13 +197,13 @@ export function Hub(props: HubProps) {
             </a>
           ))}
         </div>
-        <p className="research">In research now: {props.inResearch}.</p>
+        <p className="research">Coming next: {props.inResearch}.</p>
       </section>
 
       <section className="wrap sec" id="signup">
         <div className="signup-card">
           <div>
-            <h2>The monthly evidence check</h2>
+            <h2>One email a month</h2>
             <p className="sublead">One email a month with what changed: rankings that moved, prices that went up, and who&rsquo;s on the rise.</p>
           </div>
           <EvidenceSignup />

@@ -11,7 +11,7 @@
       "A panel of trained interviewers takes detailed notes on each answer.",
       "Every answer is rated on the same scale, against the same standards for an acceptable answer."
     ],
-    "competencyCount": "Structured interviews typically assess 4 to 6 competencies.",
+    "competencyCount": "Most structured interviews cover 4 to 6 skills (OPM calls them competencies).",
     "why": "OPM: structure and standardization give the interview validity, reliability, fairness and practicality, and let it meet legal and professional standards for an assessment method.",
     "probes": [
       { "kind": "Situation or task", "items": ["Who was involved?", "What factors led up to this situation?"] },

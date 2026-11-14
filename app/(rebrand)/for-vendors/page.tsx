@@ -6,26 +6,26 @@ import { VendorForm } from './vendor-form'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/for-vendors' },
-  title: 'For Vendors: Get Reviewed on the Evidence',
+  title: 'For Vendors: Get Your Tool Reviewed, Free',
   description:
-    'Submit your hiring or job-search product for review. Listing is free, a submittal or walkthrough raises your evidence level, and no payment changes a score or a ranking.',
+    'Submit your hiring or job-search product for review. Listing is free, answering our questions or giving us a demo makes your review more complete, and no payment changes a score or a ranking.',
 }
 
 const LADDER = [
   {
-    level: 'Research based',
+    level: 'Public info only',
     takes: 'Nothing. Every tool starts here.',
-    changes: 'Built from public documentation, pricing pages, public reviews and market data.',
+    changes: 'Built from your help pages, pricing pages, public reviews and traffic data.',
   },
   {
-    level: 'Vendor submitted',
-    takes: 'A written submittal: pricing, features, ideal customer and product materials.',
+    level: 'Vendor answered our questions',
+    takes: 'Written answers: pricing, features, who it’s for and product materials.',
     changes: 'The review says so, and gets more specific about who the product suits.',
   },
   {
-    level: 'Vendor demoed',
-    takes: 'A live walkthrough, answering the same structured questions every vendor gets.',
-    changes: 'Our strongest evidence level, shown on the review with the date.',
+    level: 'We saw a live demo',
+    takes: 'A live demo, answering the same questions every vendor gets.',
+    changes: 'The most complete kind of review, shown on the review with the date.',
   },
 ]
 
@@ -62,7 +62,7 @@ export default function Page() {
             <a href="/">Home</a> / For vendors
           </p>
           <h1 className="display" style={{ maxWidth: 980 }}>
-            Listing is free. Your score comes from the evidence.
+            Listing is free. Your score comes from public reviews and data.
           </h1>
           <p className="dek">
             We review the tools job seekers and hiring teams use. The more we know about your product, the more complete its review.
@@ -71,8 +71,8 @@ export default function Page() {
       </header>
 
       <section className="wrap sec" id="ladder">
-        <h2>Three levels of evidence</h2>
-        <p className="lead">Every review shows which level it rests on. Moving up makes a review more complete. It never moves a score by itself.</p>
+        <h2>Three kinds of review</h2>
+        <p className="lead">Every review says which kind it is. Telling us more makes a review more complete. It never moves a score by itself.</p>
         <div className="tscroll">
           <table className="ledger ladder">
             <thead>
@@ -105,7 +105,7 @@ export default function Page() {
             <p>No vendor can pay for a score or for a place in a ranking.</p>
             <p>
               Some links on the site can be affiliate links, and they never touch the scores. Several of our top picks pay us nothing at all.
-              Early-stage products can go on our radar before they enter the rankings.
+              New products can go on our watch list before they have enough reviews to rank.
             </p>
             <p>
               <a className="tl tl-strong" href="/how-we-review">

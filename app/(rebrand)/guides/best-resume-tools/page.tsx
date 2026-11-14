@@ -36,9 +36,9 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-resume-tools' },
-  title: 'The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Evidence',
+  title: 'The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Real Reviews and Prices',
   description:
-    'Resume builders and ATS checkers ranked on citable public evidence, checked every month against the other lists you are likely to read, with labeled demo videos and what a year of each tool costs.',
+    'Resume builders and ATS checkers ranked on public reviews and real prices, checked every month against the other lists you are likely to read, with labeled demo videos and what a year of each tool costs.',
 }
 
 const SEGMENT_LABEL = { checker: 'Checker', builder: 'Builder' } as const
@@ -49,9 +49,9 @@ const ON_THIS_PAGE = [
   ['agree', 'Do reviewers agree?'],
   ['rankings', 'Rankings'],
   ['cost', 'What it costs'],
-  ['rising', 'In the wings'],
+  ['rising', 'New tools to watch'],
   ['videos', 'Videos'],
-  ['evidence', 'Evidence file'],
+  ['evidence', 'Every tool in detail'],
   ['faq', 'Questions'],
 ] as const
 
@@ -107,8 +107,8 @@ function RankTable({ tools }: { tools: ToolEvidence[] }) {
             <th>Price</th>
             <th className="num">Overall</th>
             <th className="num">Users</th>
-            <th className="num">Market</th>
-            <th className="num">Critics</th>
+            <th className="num">Popularity</th>
+            <th className="num">Best-of lists</th>
             <th className="num">Value</th>
           </tr>
         </thead>
@@ -158,8 +158,8 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
         <div className="ef-grid">
           <div className="sbars">
             <Bar label="User" value={t.userScore} />
-            <Bar label="Market" value={t.marketScore} places={2} />
-            <Bar label="Critics" value={t.criticsScore} places={2} />
+            <Bar label="Popularity" value={t.marketScore} places={2} />
+            <Bar label="Best-of lists" value={t.criticsScore} places={2} />
             <Bar label="Value" value={t.valueScore} places={2} />
           </div>
           <dl className="facts">
@@ -168,16 +168,16 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
               <dd>
                 {t.enoughEvidence ? (
                   <p>
-                    {t.rawUserScore?.toFixed(1)} from {formatCount(t.citableReviews)} citable reviews.
+                    {t.rawUserScore?.toFixed(1)} from {formatCount(t.citableReviews)} public reviews.
                   </p>
                 ) : (
                   <p>
-                    Not enough evidence: {formatCount(t.citableReviews)} citable review{t.citableReviews === 1 ? '' : 's'}, and we need{' '}
+                    Not enough reviews yet: {formatCount(t.citableReviews)} public review{t.citableReviews === 1 ? '' : 's'}, and we need{' '}
                     {MIN_REVIEWS}.
                   </p>
                 )}
                 <ul>
-                  {t.ratings.length === 0 && <li>No citable review listings found.</li>}
+                  {t.ratings.length === 0 && <li>No public reviews found.</li>}
                   {t.ratings.map((r) => (
                     <li key={r.platform} className={r.droppedBecause ? 'faint' : undefined}>
                       {r.rating} from {formatCount(r.reviews)} on {r.platform}
@@ -318,7 +318,7 @@ export default function Page() {
           </p>
           <h1>The best resume tools of 2026</h1>
           <p className="dek">
-            {all.length} builders and ATS checkers, ranked on dated evidence and checked every month against the {lists.length} other lists
+            {all.length} builders and ATS checkers, ranked on public reviews and real prices and checked every month against the {lists.length} other lists
             you&rsquo;re likely to read.
           </p>
           <p className="dateline">
@@ -327,7 +327,7 @@ export default function Page() {
           </p>
           <p className="disclosure">
             Some links below can be affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
-            can&rsquo;t be bought, which is why the category&rsquo;s biggest advertiser ranks where the evidence puts it.{' '}
+            can&rsquo;t be bought, which is why the category&rsquo;s biggest advertiser ranks where the numbers put it.{' '}
             <a href="/advertiser-disclosure">Full disclosure</a>
           </p>
         </div>
@@ -356,7 +356,7 @@ export default function Page() {
         <h2>Our picks</h2>
         <p className="lead">
           Resume tools are where job seekers get burned: builders that are free until you try to download, and $2 trials that quietly renew
-          every 4 weeks. So this guide ranks on citable evidence and prints every renewal price.
+          every 4 weeks. So this guide ranks on public reviews and real prices and prints every renewal price.
         </p>
         <div className="picks">
           {guide.picks.map((p) => {
@@ -489,7 +489,7 @@ export default function Page() {
 
         {breaks.length > 0 && (
           <>
-            <h3 className="h3">Where we break from the pack</h3>
+            <h3 className="h3">Where we disagree with other lists</h3>
             <div className="rows">
               {breaks.map((t) => (
                 <div className="row" key={t.id}>
@@ -499,7 +499,7 @@ export default function Page() {
                   <div>
                     <p>{t.call.line}</p>
                     <a className="tl" href={`#evidence-${t.id}`}>
-                      Open the evidence file
+                      See the details
                     </a>
                   </div>
                 </div>
@@ -558,9 +558,9 @@ export default function Page() {
       </section>
 
       <section className="wrap sec" id="rankings">
-        <h2>Ranked on evidence</h2>
+        <h2>How we ranked them</h2>
         <p className="lead">
-          Where a tool has fewer than {MIN_REVIEWS} citable public reviews, we say so instead of inventing stars.
+          Where a tool has fewer than {MIN_REVIEWS} public reviews, we say so instead of inventing stars.
         </p>
         <h3 className="h3">ATS resume checkers</h3>
         <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
@@ -570,9 +570,9 @@ export default function Page() {
         <RankTable tools={builders} />
         <p className="footnote">
           Ratings read {formatDate(ratingsRead)} from dated public sources: {ratingPlatforms.join(', ')}. The G2 family (G2, Capterra,
-          GetApp, Software Advice) shares one review pool and counts once. Overall blends users (40%), market (25%), critics (20%) and value
-          (15%), all from public data; no one&rsquo;s personal score is an input. &dagger;n/e: fewer than {MIN_REVIEWS} citable public
-          reviews. Methodology on <a href="/how-we-review">How We Review</a>.
+          GetApp, Software Advice) shares one review pool and counts once. Overall blends user ratings (40%), popularity (25%), best-of lists (20%)
+          and value (15%), all from public data; no one&rsquo;s opinion goes into a score. &dagger;n/e: not enough reviews yet (fewer than{' '}
+          {MIN_REVIEWS} public reviews). Methodology on <a href="/how-we-review">How We Review</a>.
         </p>
       </section>
 
@@ -587,14 +587,14 @@ export default function Page() {
         </div>
         <p className="boxnote">
           <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
-          then only export plain text unless you pay. Resume.io&rsquo;s only citable review base is 1.5 out of 5 across 195 Product Hunt
+          then only export plain text unless you pay. The only public reviews of Resume.io we can use average 1.5 out of 5 across 195 Product Hunt
           reviews, nearly all about exactly this.
         </p>
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>Waiting in the wings</h2>
-        <p className="lead">Not resume tools, and too new for a score. These are the job search tools we&rsquo;re watching next.</p>
+        <h2>New tools to watch</h2>
+        <p className="lead">Not resume tools, and too new for a rating. These are the job search tools we&rsquo;re watching next.</p>
         <OnTheRise side="seekers" />
       </section>
 
@@ -631,7 +631,7 @@ export default function Page() {
       </section>
 
       <section className="wrap sec" id="evidence">
-        <h2>The evidence file</h2>
+        <h2>Every tool, in detail</h2>
         <p className="lead">Each tool&rsquo;s sources, with the date we read them. Open a tool to see what its ranking rests on.</p>
         <div className="efiles">
           {all.map((t) => (
@@ -669,8 +669,8 @@ export default function Page() {
             at the top of it, that list is advertising. We still show every list we checked and say why it does or doesn&rsquo;t count.
           </Faq>
           <Faq q="How often does this page change?">
-            Every month. In the first week of each month we re-read every rating, re-check every list, pull new demo videos and save each
-            vendor&rsquo;s pricing page to the Internet Archive. If a ranking moves, the evidence file says why.
+            Every month. In the first week of each month we check every rating and every list again, pull new demo videos and save each
+            vendor&rsquo;s pricing page to the Internet Archive. If a ranking moves, the details here say why.
           </Faq>
         </div>
       </section>

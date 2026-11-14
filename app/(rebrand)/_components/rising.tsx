@@ -75,7 +75,7 @@ function WingRow({ t }: { t: RisingTool }) {
               </span>
             ))
           ) : (
-            <>Lists and reviews get their first check in {formatMonth(guide.nextCheck)}.</>
+            <>We check its reviews and best-of lists for the first time in {formatMonth(guide.nextCheck)}.</>
           )}
           {t.citableReviews !== null && t.citableReviews < rising.minReviews && (
             <span>
@@ -85,7 +85,7 @@ function WingRow({ t }: { t: RisingTool }) {
         </span>
         {t.citableReviews !== null && t.citableReviews >= rising.minReviews && (
           <span className="wing-ready">
-            Enough reviews to score. {t.missing ? `Still needed: ${t.missing.charAt(0).toLowerCase()}${t.missing.slice(1)}` : 'Score in progress.'}
+            Enough reviews to rate. {t.missing ? `What’s missing: ${t.missing.charAt(0).toLowerCase()}${t.missing.slice(1)}` : 'Rating coming soon.'}
           </span>
         )}
       </div>
@@ -211,23 +211,23 @@ export function OnTheRise({
           ))}
         </div>
       )}
-      <div className="board" aria-label={picks.length ? 'Waiting in the wings' : 'Not scored yet'}>
+      <div className="board" aria-label={picks.length ? 'New tools to watch' : 'Not rated yet'}>
         <div className="board-head">
-          <b>{picks.length ? 'Waiting in the wings' : 'Not scored yet'}</b>
+          <b>{picks.length ? 'New tools to watch' : 'Not rated yet'}</b>
           <span>checked {shortDate(latestCheck())}</span>
         </div>
         {tools.map((t) => (
           <WingRow t={t} key={t.id} />
         ))}
         <div className="board-foot">
-          A tool gets a score once it has {rising.minReviews} reviews on sources we can cite. Every score is public data.{' '}
+          A tool gets a rating once it has {rising.minReviews} public reviews on sites like G2 or the Chrome Web Store.{' '}
           {linkAll ? (
             <a className="tl" href="/on-the-rise">
-              Everyone we&rsquo;re watching, and who graduated
+              Every tool we&rsquo;re watching
             </a>
           ) : (
             <a className="tl" href="/how-we-review#radar">
-              How tools get on our radar
+              How we find new tools
             </a>
           )}
           . Know one we missed?{' '}

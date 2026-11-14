@@ -31,7 +31,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
   if (state === 'done') {
     return (
       <p className="signup-done" role="status">
-        You&rsquo;re on the list. The next evidence check lands in your inbox the first week of the month.
+        You&rsquo;re on the list. The next one lands in your inbox the first week of the month.
       </p>
     )
   }
@@ -51,7 +51,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
         onChange={(e) => setEmail(e.target.value)}
       />
       <button type="submit" className="btn" disabled={state === 'sending'}>
-        {state === 'sending' ? 'Adding you…' : 'Send me the monthly check'}
+        {state === 'sending' ? 'Adding you…' : 'Send me the monthly email'}
       </button>
       {state === 'error' && (
         <p className="signup-error" role="alert">

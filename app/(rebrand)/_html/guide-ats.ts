@@ -138,7 +138,7 @@ export const html = `<style>
       <div class="byline">
         <span>Data as of August 22, 2026</span>
         <span class="dot">&middot;</span>
-        <span>Next full re-read: December 2026</span>
+        <span>Next full check: December 2026</span>
         <span class="dot">&middot;</span>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>
@@ -263,7 +263,7 @@ export const html = `<style>
           <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
           <span class="review-name">Breezy HR</span>
         </span>
-        <span class="etag etag-res">Research based</span>
+        <span class="etag etag-res">Public info only</span>
       </div>
       <p class="review-updated">Ratings and pricing as of August 22, 2026</p>
       <div class="scores-row">
@@ -288,7 +288,7 @@ export const html = `<style>
           <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=jazzhr.com&sz=64" width="22" height="22" alt=""></span>
           <span class="review-name">JazzHR</span>
         </span>
-        <span class="etag etag-res">Research based</span>
+        <span class="etag etag-res">Public info only</span>
       </div>
       <p class="review-updated">Ratings and pricing as of August 22, 2026</p>
       <div class="scores-row">
@@ -306,7 +306,7 @@ export const html = `<style>
       <a href="/go/jazzhr" class="visit">Visit JazzHR &#8599;</a>
     </div>
 
-    <p class="callout"><b>Full write-ups for the other systems are in progress.</b> The standings above already cover every one, with every score sourced and dated.</p>
+    <p class="callout"><b>Full write-ups for the other systems are in progress.</b> The rankings above already cover every one, with every score sourced and dated.</p>
   </section>
 
   <section class="wrap narrow faq">

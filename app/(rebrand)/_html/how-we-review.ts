@@ -138,9 +138,9 @@ export const html = `<style>
       <p class="crumbs"><a href="/">Home</a> &rsaquo; How We Review</p>
       <h1>How we review hiring software</h1>
       <p class="sub">
-        Every score on this site can be traced to its inputs. This page explains
-        exactly where our numbers come from, how often they refresh, and what
-        vendors can and cannot influence.
+        You can trace every score on this site back to where it came from. This
+        page shows exactly where our numbers come from, how often we update them,
+        and what vendors can and can&rsquo;t influence.
       </p>
       <div class="byline">
         <span class="badge-live"><span class="pulse"></span> Re-checked monthly</span>
@@ -156,8 +156,8 @@ export const html = `<style>
         <a href="#sources">Where the numbers come from</a>
       <a href="#agree">Do other reviewers agree?</a>
       <a href="#example">What it looks like</a>
-      <a href="#evidence">Evidence levels</a>
-      <a href="#refresh">Refresh schedule</a>
+      <a href="#evidence">What a review is based on</a>
+      <a href="#refresh">How often we check</a>
       <a href="#vendors">For vendors</a>
     </aside>
 
@@ -166,7 +166,7 @@ export const html = `<style>
         <h2>Four scores, all public data</h2>
         <p class="lead">
           Every tool is scored on four things anyone could check, each from dated
-          public data. No one&rsquo;s personal opinion is an input, ours included.
+          public data. No one&rsquo;s opinion goes into a score, ours included.
           Stephanie&rsquo;s picks appear separately, labeled as hers, and never
           change a score.
         </p>
@@ -174,25 +174,25 @@ export const html = `<style>
         <div class="score-cards">
           <div class="scard">
             <p class="pct">40%</p>
-            <h3>User Score</h3>
-            <p>What the people who use it rate it, weighted by how many reviews each source holds. No score at all below 25 citable reviews.</p>
-            <p class="src"><b>Source:</b> G2 (counted once for its family of sites), the Chrome Web Store and the app stores. Re-read monthly.</p>
+            <h3>User ratings</h3>
+            <p>What people who use it rate it, weighted by how many reviews each site has. Under 25 public reviews, there&rsquo;s no score at all.</p>
+            <p class="src"><b>Source:</b> G2 (counted once for its family of sites), the Chrome Web Store and the app stores. Checked monthly.</p>
           </div>
           <div class="scard">
             <p class="pct">25%</p>
-            <h3>Market Score</h3>
-            <p>Footprint and momentum: web-traffic rank, total review volume, and how fast real users are adopting the tool right now, measured against dated archive baselines.</p>
-            <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive baselines. Re-read monthly.</p>
+            <h3>Popularity</h3>
+            <p>How many people use it, and how fast that&rsquo;s growing: website traffic, total reviews, and how fast new reviews are coming in compared with a dated snapshot.</p>
+            <p class="src"><b>Source:</b> Tranco traffic rank, public review counts, and Internet Archive snapshots. Checked monthly.</p>
           </div>
           <div class="scard">
             <p class="pct">20%</p>
-            <h3>Critics Score</h3>
+            <h3>Best-of lists</h3>
             <p>How current, independent best-of lists rank it. Being named adds; not being named doesn&rsquo;t subtract, because no one can read every list in full. Lists published by companies that sell what they rank never count.</p>
-            <p class="src"><b>Source:</b> every list we track, re-read monthly for its date, its picks and its owner.</p>
+            <p class="src"><b>Source:</b> every list we track, checked monthly for its date, its picks and its owner.</p>
           </div>
           <div class="scard">
             <p class="pct">15%</p>
-            <h3>Value Score</h3>
+            <h3>Value</h3>
             <p>What a year really costs, whether the free version gives you something usable, and whether a cheap trial renews every 4 weeks. For hiring software: whether the price is public at all.</p>
             <p class="src"><b>Source:</b> vendor pricing pages, saved to the Internet Archive every month.</p>
           </div>
@@ -200,16 +200,16 @@ export const html = `<style>
         <p class="callout">
           <b>Weights set the order of the list, nothing more.</b> All four scores
           show separately on every review, so you can weigh them your own way. If
-          a whole category has no data for one score yet (critics, for applicant
-          tracking systems today), the other scores share its weight.
+          a whole category has no data for one score yet (best-of lists, for
+          applicant tracking systems today), the other scores share its weight.
         </p>
       </section>
 
       
       <section id="sources">
         <h2>Where the numbers come from</h2>
-        <p class="lead">Every score on this site is assembled from sources you can check. Here is the supply chain.</p>
-        <div style="margin-top:22px;"><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Third-party reviews</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">We pull ratings from the public platforms where real volume lives. Each rating is count-weighted, so 4,000 reviews outvote 12, and every figure carries the date we read it. Three rules keep this honest. A tool needs at least 25 citable public reviews before we print a User Score at all (below that, the table says &ldquo;not enough evidence&rdquo;). The G2 family (G2, Capterra, GetApp and Software Advice) shares one review pool, so it counts once, never twice. And we only use platforms whose terms allow it, asking in writing where they don&rsquo;t say. We cite numbers as dated facts; we never copy review content.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Market trends</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Traction comes from data: web traffic rank from the Tranco research dataset, total review volume across platforms, and vendor pricing pages saved to the Internet Archive every month. When Workable retired its $149 tier, the table changed. When 7 of 14 ATS vendors refused to publish a price, that became a column.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Momentum</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">All-time totals reward whoever showed up first, so we also measure direction of travel: each tool&rsquo;s review count today against a dated snapshot of the same public page from the Internet Archive, annualized. A 3-year-old product competes on where it is heading now. Guards keep it fair: growth on fewer than 20 new reviews is capped, windows under 120 days do not count, and suspicious surges get flagged and re-verified before they move a ranking.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Other reviewers</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Every month we re-check the other &ldquo;best of&rdquo; lists a buyer or job seeker is likely to read, and show where each tool lands next to our ranking. A list counts only if it is current and its publisher does not own what it ranks. The rest are shown with the reason they don&rsquo;t count.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Demos</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Demo and review videos are pulled monthly and labeled by who made them: the company, an independent creator, or a side-by-side test. A video shows what a product looks like; it is never proof the product is good. Our own walkthroughs, run with the same questions every time, are the strongest evidence on the site.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">What we will not use</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Platforms whose terms forbid citation, review counts we cannot date, vendor-supplied statistics without a public source, and our own guesses dressed as data.</span></div></div>
+        <p class="lead">Every score on this site is assembled from sources you can check. Here&rsquo;s where each one comes from.</p>
+        <div style="margin-top:22px;"><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Review sites</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">We pull ratings from the public platforms where real volume lives. Each rating is count-weighted, so 4,000 reviews outvote 12, and every figure carries the date we read it. Three rules keep this honest. A tool needs at least 25 public reviews before we show a user rating at all. Below that, we say it&rsquo;s not rated yet. The G2 family (G2, Capterra, GetApp and Software Advice) shares one review pool, so it counts once, never twice. And we only use platforms whose terms allow it, asking in writing where they don&rsquo;t say. We cite numbers as dated facts; we never copy review content.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Popularity</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Popularity comes from data: web traffic rank from the Tranco research dataset, total review volume across platforms, and vendor pricing pages saved to the Internet Archive every month. When Workable retired its $149 tier, the table changed. When 7 of 14 ATS vendors didn&rsquo;t list a price, that became a column.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Momentum</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">All-time totals reward whoever showed up first, so we also measure which way it&rsquo;s heading: each tool&rsquo;s review count today against a dated snapshot of the same public page from the Internet Archive, annualized. A 3-year-old product competes on where it is heading now. Guards keep it fair: growth on fewer than 20 new reviews is capped, windows under 120 days do not count, and suspicious surges get flagged and re-verified before they move a ranking.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Other reviewers</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Every month we re-check the other &ldquo;best of&rdquo; lists a buyer or job seeker is likely to read, and show where each tool lands next to our ranking. A list counts only if it is current and its publisher does not own what it ranks. The rest are shown with the reason they don&rsquo;t count.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">Demos</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Demo and review videos are pulled monthly and labeled by who made them: the company, an independent creator, or a side-by-side test. A video shows what a product looks like; it is never proof the product is good. When we run our own demo, with the same questions every time, that counts for the most.</span></div><div style="display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;"><span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);flex-shrink:0;width:150px;padding-top:3px;">What we will not use</span><span style="font-size:14px;color:var(--gray);line-height:1.7;">Platforms whose terms forbid citation, review counts we cannot date, vendor-supplied statistics without a public source, and our own guesses dressed as data.</span></div></div>
         <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;"><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=g2.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">G2</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=apple.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">App Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=play.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Google Play</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=chromewebstore.google.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Chrome Web Store</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=producthunt.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Product Hunt</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=tranco-list.eu&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Tranco</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=archive.org&sz=64" width="16" height="16" alt="" style="border-radius:4px;">Internet Archive</span><span style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;color:var(--ink);"><img src="https://www.google.com/s2/favicons?domain=youtube.com&sz=64" width="16" height="16" alt="" style="border-radius:4px;">YouTube</span></div>
         <p style="font-size:11.5px;color:var(--faint);margin-top:12px;">Named platforms are sources of public data. None are affiliated with or endorse this site.</p>
       </section>
@@ -219,68 +219,66 @@ export const html = `<style>
         <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. Agreement is reassuring. Disagreement is the useful part, so we say why.</p>
         <div class="evidence">
           <div class="ecard">
-            <span class="etag etag-res">Agrees with the field</span>
-            <p>Current, independent lists land where we land. The evidence and the consensus point the same way.</p>
+            <span class="etag etag-res">Other lists agree</span>
+            <p>Current, independent lists land where we land. Our numbers and the other reviewers point the same way.</p>
           </div>
           <div class="ecard">
-            <span class="etag etag-sub">Breaks from the pack</span>
+            <span class="etag etag-sub">We disagree with other lists</span>
             <p>We rank it somewhere the other lists don&rsquo;t, higher or lower, and the review says exactly why. Usually it&rsquo;s the users or the price telling a different story than the lists.</p>
           </div>
           <div class="ecard">
-            <span class="etag etag-res">Too little evidence</span>
+            <span class="etag etag-res">Not enough reviews yet</span>
             <p>Not enough public reviews or current coverage for anyone to rank it honestly, us included. We say so instead of guessing.</p>
           </div>
         </div>
-        <p class="callout"><b>Which lists count.</b> A list counts when it shows an update or a current-year edition within the last 12 months and its publisher does not own what it ranks. Lists that are out of date, built as lead pages, or published by a company that sells the tools at the top are still shown, with the reason they don&rsquo;t count.</p>
+        <p class="callout"><b>Which lists count.</b> A list counts when it shows an update or a current-year edition within the last 12 months and its publisher does not own what it ranks. Lists that are out of date, built to collect sign-ups, or published by a company that sells the tools at the top are still shown, with the reason they don&rsquo;t count.</p>
       </section>
 
       <section id="example">
         <h2>What it looks like on a review</h2>
-        <p class="lead">Every scorecard shows the four scores, the evidence level, and when each input last refreshed.</p>
+        <p class="lead">Every review shows the scores, what the review is based on, and when we last checked each number.</p>
         <div class="sample">
           <div class="sample-head">
             <span class="sample-id">
               <span class="favicon"><img src="https://www.google.com/s2/favicons?domain=breezy.hr&sz=64" width="22" height="22" alt=""></span>
               <span class="sample-name">Breezy HR</span>
             </span>
-            <span class="etag etag-res">Research based</span>
+            <span class="etag etag-res">Public info only</span>
           </div>
           <p class="sample-note">Best for teams hiring under 50 people a year</p>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:60%"></span></span><b>3.0</b> Market Score <span class="when">refreshed Aug 22, 2026</span></div>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:89%"></span></span><b>4.5</b> User Score <span class="when">synthesized Aug 2026</span></div>
-          <div class="rating"><span class="stars"><span class="stars-fill" style="width:90%"></span></span><b>4.5</b> Practitioner Score <span class="when">in final review</span></div>
+          <!--SAMPLE_RATINGS-->
           <a href="#scores" class="sample-link">How these scores are calculated &#8599;</a>
         </div>
       </section>
 
       <section id="evidence">
-        <h2>Every review states its evidence level</h2>
-        <p class="lead">We tell you exactly what our verdict rests on. No review pretends to be more than it is.</p>
+        <h2>Every review says what it&rsquo;s based on</h2>
+        <p class="lead">No review pretends to be more than it is.</p>
         <div class="evidence">
           <div class="ecard">
-            <span class="etag etag-demo">Vendor demoed</span>
-            <p>The vendor walked us through the live product and answered our structured questionnaire. Our strongest evidence level.</p>
+            <span class="etag etag-demo">We saw a live demo</span>
+            <p>The vendor walked us through the live product and answered our standard questions. The most complete kind of review.</p>
           </div>
           <div class="ecard">
-            <span class="etag etag-sub">Vendor submitted</span>
-            <p>The vendor completed our written submittal: pricing, features, ideal customer, product materials.</p>
+            <span class="etag etag-sub">Vendor answered our questions</span>
+            <p>The vendor filled in our written questions: pricing, features, who it&rsquo;s for, product materials.</p>
           </div>
           <div class="ecard">
-            <span class="etag etag-res">Research based</span>
-            <p>Built from documentation, pricing pages, public user reviews, and market data. The vendor has not yet engaged.</p>
+            <span class="etag etag-res">Public info only</span>
+            <p>Built from the vendor&rsquo;s help pages, pricing pages, public reviews and traffic data. The vendor hasn&rsquo;t talked to us yet.</p>
           </div>
         </div>
       </section>
 
       <section id="refresh">
-        <h2>A monthly evidence check</h2>
-        <p class="lead">Reviews rot. Ours get re-checked on the same schedule every month, and every review shows when each input was last read.</p>
+        <h2>We check everything monthly</h2>
+        <p class="lead">Reviews go stale. Ours get checked on the same schedule every month, and every review shows when we last checked each number.</p>
         <table>
           <tr><th>Signal</th><th>Refresh</th><th>How</th></tr>
           <tr>
             <td><b>Ratings and review counts</b></td>
             <td><span class="pill">Monthly</span></td>
-            <td>Re-read on each platform in the first week of the month, dated, with a saved copy</td>
+            <td>Checked on each site in the first week of the month, dated, with a saved copy</td>
           </tr>
           <tr>
             <td><b>Other reviewers&rsquo; lists</b></td>
@@ -300,7 +298,7 @@ export const html = `<style>
           <tr>
             <td><b>Rankings</b></td>
             <td><span class="pill">Monthly</span></td>
-            <td>Recomputed from the four scores every time the data is re-read. Nobody adjusts a rank by hand</td>
+            <td>Recalculated from the four scores every time we check the data. Nobody adjusts a rank by hand</td>
           </tr>
         </table>
         <p class="callout">
@@ -315,7 +313,7 @@ export const html = `<style>
       <section id="vendors">
         <div class="vendor-cta">
           <div>
-            <h2>Vendors: get your evidence level up</h2>
+            <h2>Vendors: help us get your review right</h2>
             <p>Submit your product or book a demo walkthrough. Both are free, and both make your review more complete.</p>
           </div>
           <a href="/for-vendors" class="vbtn">Submit your product</a>

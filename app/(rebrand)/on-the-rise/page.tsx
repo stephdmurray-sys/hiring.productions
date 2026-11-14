@@ -16,9 +16,9 @@ import { shortDate } from '@/app/(rebrand)/_components/data'
  */
 
 export const metadata: Metadata = {
-  title: 'On the Rise: The Hiring Tools About to Break Out, and the Evidence So Far',
+  title: 'On the Rise: The Hiring Tools About to Break Out, and What We Know So Far',
   description:
-    'Up-and-coming tools for job seekers and hiring teams that don’t have enough public reviews to score yet. Each shows only the evidence it has, dated. When one earns a score, it moves onto the scoreboard.',
+    'Up-and-coming tools for job seekers and hiring teams that don’t have enough public reviews for a rating yet. Each shows only what we can back up, with dates.',
   alternates: { canonical: '/on-the-rise' },
 }
 
@@ -53,8 +53,8 @@ export default function OnTheRisePage() {
           </p>
           <h1 className="display">Which tools are about to break out?</h1>
           <p className="dek">
-            The tools we&rsquo;re watching on both sides of the table. They don&rsquo;t have enough public reviews to score yet, so each one
-            shows only the evidence it has, dated. When one earns a score, it moves onto the scoreboard.
+            New tools for job seekers and hiring teams that people are starting to talk about. None has enough public reviews for a rating
+            yet, so each one shows only what we can back up, with dates. When one gets enough reviews, it gets rated.
           </p>
           <p className="dateline">
             Checked {shortDate(latestCheck())}. Next check {formatMonth(guide.nextCheck)}. Never ranked, never paid for.
@@ -63,14 +63,14 @@ export default function OnTheRisePage() {
       </header>
 
       <section className="wrap sec-tight" id="watching">
-        <h2>Who we&rsquo;re watching</h2>
+        <h2>Tools we&rsquo;re watching</h2>
         <OnTheRise showPicks linkAll={false} />
       </section>
 
       <section className="wrap sec-tight" id="alerts">
         <Capture
           source="on_the_rise"
-          promise="Tell me when one of these earns a score, or a new tool shows up on the lists we check."
+          promise="Tell me when one of these gets rated, or a new tool starts showing up on best-of lists."
           cta="Tell me when one breaks out"
           done="You're on the list. One short note when it happens."
         />
@@ -78,8 +78,8 @@ export default function OnTheRisePage() {
 
       {rising.graduated.length > 0 && (
         <section className="wrap sec" id="graduated">
-          <h2>Graduated to a score</h2>
-          <p className="lead">Tools that started here and earned a place on a scoreboard.</p>
+          <h2>Now rated</h2>
+          <p className="lead">Tools that started on this page and now have enough reviews for a rating.</p>
           <div className="grad">
             {rising.graduated.map((g) => {
               const t = scored[g.id]
@@ -92,7 +92,7 @@ export default function OnTheRisePage() {
                   <div>
                     <p>
                       {t && t.overall !== null
-                        ? `Now scored ${t.overall.toFixed(2)} out of 5, #${t.rank} of the ${t.segment === 'checker' ? 'ATS resume checkers' : 'resume builders'}.`
+                        ? `Rated ${t.overall.toFixed(2)} out of 5, #${t.rank} of the ${t.segment === 'checker' ? 'ATS resume checkers' : 'resume builders'}.`
                         : `Moved to ${g.to}.`}{' '}
                       {g.note}
                     </p>
@@ -110,7 +110,7 @@ export default function OnTheRisePage() {
       )}
 
       <section className="wrap sec" id="radar">
-        <h2>How a tool gets here</h2>
+        <h2>How we find new tools</h2>
         <p className="lead">
           A good tool shouldn&rsquo;t need a marketing budget to get noticed. If it shows up in any one of these places, we check it within a
           month.

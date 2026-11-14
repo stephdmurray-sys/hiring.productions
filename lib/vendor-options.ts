@@ -1,5 +1,5 @@
 /** Options for the /for-vendors intake form, shared by the form and its API route. */
-export const VENDOR_ASKS = ['Send a written submittal', 'Book a product walkthrough', 'Put us on your radar (early stage)'] as const
+export const VENDOR_ASKS = ['Answer your questions in writing', 'Give you a live demo', 'Get on your watch list (new product)'] as const
 
 export const VENDOR_CATEGORIES = [
   'Applicant tracking system',

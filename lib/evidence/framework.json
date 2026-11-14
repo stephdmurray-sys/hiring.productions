@@ -1,10 +1,10 @@
 {
   "_about": "The research behind the rating framework, and where Stephanie's judgment comes in. Rendered on /how-we-review (#research, #judgment) and summarized in the site footer. Every finding links to its source; keep it that way.",
-  "summary": "Every score is built from public data, re-read monthly: users 40%, market 25%, critics 20% and value 15%. No one's opinion is an input, ours included, and no vendor can pay for a place. Stephanie's picks sit beside the scores, labeled as hers, and never change one.",
+  "summary": "Every score is built from public data and checked every month: user ratings 40%, popularity 25%, best-of lists 20% and value 15%. No one's opinion goes into a score, ours included, and no vendor can pay for a place. Stephanie's picks sit beside the scores, labeled as hers, and never change one.",
   "research": [
     {
       "finding": "G2 places software on two measures, user satisfaction and market presence, and its Grid placement can't be changed by hand.",
-      "usedFor": "Our users and market scores mirror those two measures, and no one can adjust a score or a rank by hand.",
+      "usedFor": "Our user and popularity scores mirror those two measures, and no one can adjust a score or a rank by hand.",
       "source": "G2 research scoring methodologies",
       "url": "https://research.g2.com/research-guidelines"
     },
@@ -16,7 +16,7 @@
     },
     {
       "finding": "G2 counts a review about 3% less for every month it ages, and TrustRadius weights newer reviews more and gives extra weight to reviews collected independently of vendors.",
-      "usedFor": "We re-read every rating monthly and score review growth in the market score. Lists published by companies that sell what they rank never count.",
+      "usedFor": "We re-check every rating monthly and count review growth in the popularity score. Lists published by companies that sell what they rank never count.",
       "source": "G2 research guidelines; TrustRadius scoring FAQ",
       "url": "https://trustradius.com/static/about-trustradius-scoring"
     },
@@ -67,6 +67,6 @@
   },
   "limits": [
     "Most sources publish an average rating, not each review's date, so we can't yet discount older reviews the way G2 does. Where a source offers a last-12-months rating, we use it.",
-    "Independent lists for applicant tracking systems aren't tracked yet, so those scores use users, market and value, which share the critics weight."
+    "Independent lists for applicant tracking systems aren't tracked yet, so those scores use user ratings, popularity and value, which share the best-of lists weight."
   ]
 }

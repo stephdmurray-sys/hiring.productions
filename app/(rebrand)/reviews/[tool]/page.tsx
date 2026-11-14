@@ -98,7 +98,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
 
   const verdictLine = t.enoughEvidence
     ? `${t.name} ranks #${t.rank} of ${peers.length} ${SEGMENT_PLURAL[t.segment]} we track, with an overall score of ${t.overall?.toFixed(2)} out of 5.`
-    : `${t.name} doesn't have enough citable reviews for a score yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} we require).`
+    : `${t.name} doesn't have enough public reviews for a score yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} we require).`
 
   const faqs: { q: string; a: string }[] = [
     { q: `Is ${t.name} worth it?`, a: `${verdictLine} ${t.call.line}` },
@@ -180,7 +180,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
               <p className="dek">{t.call.line}</p>
               <p className="dateline">
                 Checked {shortDate(checked)} &middot; next check {formatMonth(guide.nextCheck)} &middot;{' '}
-                <a href={`/guides/best-resume-tools#evidence-${t.id}`}>full evidence file</a>
+                <a href={`/guides/best-resume-tools#evidence-${t.id}`}>every detail</a>
               </p>
               <p className="rv-visit">
                 <a className="tl tl-strong" href={`/go/${t.id}`} rel="nofollow">
@@ -204,9 +204,9 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                     value={t.userScore}
                     note={`users say ${t.rawUserScore?.toFixed(1)} across ${formatCount(t.citableReviews)} reviews${t.rawUserScore !== null && t.userScore !== null && Math.abs(t.rawUserScore - t.userScore) >= 0.05 ? '; adjusted for sample size' : ''}`}
                   />
-                  <Meter label="Market" value={t.marketScore} note="traffic, review volume and growth" />
+                  <Meter label="Popularity" value={t.marketScore} note="how many people use it, and how fast that’s growing" />
                   <Meter
-                    label="Critics"
+                    label="Best-of lists"
                     value={t.criticsScore}
                     note={t.counted.length ? `named on ${t.counted.length} independent list${t.counted.length === 1 ? '' : 's'}` : 'no independent list names it yet'}
                   />
@@ -217,7 +217,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                   <div className="rv-big rv-none">
                     <b>Not scored</b>
                     <span>
-                      {formatCount(t.citableReviews)} of {MIN_REVIEWS} citable reviews
+                      {formatCount(t.citableReviews)} of {MIN_REVIEWS} public reviews
                     </span>
                   </div>
                   <span className="rv-progress" aria-hidden="true">
@@ -313,7 +313,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       <section className="wrap sec" id="lists">
         <h2>Who else names {t.name}?</h2>
         <p className="lead">
-          We re-read the &ldquo;best resume tool&rdquo; lists every month and count only the current, independent ones.
+          We check the &ldquo;best resume tool&rdquo; lists every month and count only current, independent ones.
         </p>
         <div className="rv-lists">
           {t.counted.length === 0 && (
@@ -361,11 +361,11 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       {alternatives.length > 0 && (
         <section className="wrap sec" id="alternatives">
           <h2>Alternatives to {t.name}</h2>
-          <p className="lead">The other {SEGMENT_PLURAL[t.segment]} with enough evidence for a score, best first.</p>
+          <p className="lead">The other {SEGMENT_PLURAL[t.segment]} with enough reviews for a score, best first.</p>
           <div style={{ marginTop: 32 }}>
             <Scoreboard
               side="seekers"
-              title={`Scored ${SEGMENT_PLURAL[t.segment]}, excluding ${t.name}`}
+              title={`Other rated ${SEGMENT_PLURAL[t.segment]}`}
               checked={`checked ${shortDate(checked)}`}
               rows={alternatives.map(seekerRow)}
             />

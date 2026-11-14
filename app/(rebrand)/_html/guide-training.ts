@@ -211,7 +211,7 @@ export const html = `<style>
     <div class="review">
       <div class="review-head">
         <div class="review-id"><span class="review-rank">#1 &middot; Recruiter training</span><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=airsdirectory.com&sz=64" width="20" height="20" alt=""></span><span class="review-name">AIRS Recruiter Academy</span></div>
-        <span class="etag etag-res">Research based</span>
+        <span class="etag etag-res">Public info only</span>
       </div>
       <p class="review-updated">Updated August 23, 2026</p>
       <div class="verdict">
@@ -226,7 +226,7 @@ export const html = `<style>
     <div class="review">
       <div class="review-head">
         <div class="review-id"><span class="review-rank">#2 &middot; Recruiter training</span><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=eretraining.com&sz=64" width="20" height="20" alt=""></span><span class="review-name">SourceCon Academy</span></div>
-        <span class="etag etag-res">Research based</span>
+        <span class="etag etag-res">Public info only</span>
       </div>
       <p class="review-updated">Updated August 23, 2026</p>
       <div class="verdict">
@@ -241,7 +241,7 @@ export const html = `<style>
     <div class="review">
       <div class="review-head">
         <div class="review-id"><span class="review-rank">#3 &middot; Cert prep</span><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=aihr.com&sz=64" width="20" height="20" alt=""></span><span class="review-name">AIHR</span></div>
-        <span class="etag etag-res">Research based</span>
+        <span class="etag etag-res">Public info only</span>
       </div>
       <p class="review-updated">Updated August 23, 2026 &middot; Affiliate partner: AIHR pays us a commission; the score was set before the partnership and does not change because of it</p>
       <div class="verdict">

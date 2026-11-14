@@ -35,7 +35,7 @@ export function seekerRow(t: ToolEvidence): BoardRow {
     href: `/reviews/${t.id}`,
     score: t.overall ?? 0,
     lists: t.counted.map((a) => ({ publication: a.list.publication, domain: PUBLISHER_DOMAINS[a.list.publication] ?? '' })),
-    sub: t.rawUserScore !== null ? `${t.rawUserScore.toFixed(1)} from ${formatCount(t.citableReviews)} users` : 'Too few reviews to score users',
+    sub: t.rawUserScore !== null ? `${t.rawUserScore.toFixed(1)} from ${formatCount(t.citableReviews)} users` : 'Not enough reviews yet',
     trap: !!t.yearCost?.renewsEvery4Weeks,
     parts: t.userScore !== null ? { users: t.userScore, market: t.marketScore, critics: t.criticsScore, value: t.valueScore } : undefined,
   }

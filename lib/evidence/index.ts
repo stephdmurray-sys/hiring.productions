@@ -159,15 +159,15 @@ export const STATUS_LABEL: Record<ListStatus, string> = {
   counts: 'Counts',
   unconfirmed: 'Not yet confirmed',
   stale: 'Out of date',
-  'owner-conflict': 'Owner conflict',
+  'owner-conflict': 'Owner sells tools',
   'ranks-itself': 'Ranks itself',
-  'lead-page': 'Lead page',
+  'lead-page': 'Sign-up page',
 }
 
 export const STANCE_LABEL: Record<Stance, string> = {
-  agrees: 'Agrees with the field',
-  breaks: 'Breaks from the pack',
-  thin: 'Too little evidence',
+  agrees: 'Other lists agree',
+  breaks: 'We disagree with other lists',
+  thin: 'Not enough reviews yet',
 }
 
 export const VIDEO_KIND_LABEL: Record<VideoKind, string> = {
@@ -311,7 +311,7 @@ function headline(ratings: Rating[], raw: number | null, citable: number): strin
   const used = ratings.filter((r) => !r.droppedBecause)
   if (!used.length || raw === null || citable < MIN_REVIEWS) return null
   const top = [...used].sort((a, b) => b.reviews - a.reviews)[0]
-  const base = `${raw.toFixed(1)} across ${formatCount(citable)} citable ratings`
+  const base = `${raw.toFixed(1)} across ${formatCount(citable)} public ratings`
   return used.length > 1 ? `${base}, most of them on ${top.platform}` : `${base} on ${top.platform}`
 }
 

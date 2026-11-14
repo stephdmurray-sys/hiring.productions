@@ -101,14 +101,14 @@ export function SiteFooter() {
               <a href="/how-we-review#scores">How each score is built</a>
               <a href="/how-we-review#research">The research behind it</a>
               <a href="/how-we-review#judgment">Where Stephanie comes in</a>
-              <a href="/how-we-review#recommend">How a recommendation is made</a>
+              <a href="/how-we-review#recommend">How we pick a tool for you</a>
             </p>
           </div>
           <div className="frate-parts">
             {[
-              { k: 'Users', w: WEIGHTS.user, d: 'What real users rate it, on sources we can cite' },
-              { k: 'Market', w: WEIGHTS.market, d: 'Traffic, review volume and growth' },
-              { k: 'Critics', w: WEIGHTS.critics, d: 'Independent best-of lists that name it' },
+              { k: 'Users', w: WEIGHTS.user, d: 'What people who use it rate it, on public review sites' },
+              { k: 'Popularity', w: WEIGHTS.market, d: 'How many people use it, and how fast that’s growing' },
+              { k: 'Best-of lists', w: WEIGHTS.critics, d: 'Independent best-of lists that name it' },
               { k: 'Value', w: WEIGHTS.value, d: 'What a year costs, and the free version' },
             ].map((p) => (
               <div className="frate-part" key={p.k}>

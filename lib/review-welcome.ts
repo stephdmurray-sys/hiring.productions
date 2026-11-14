@@ -32,9 +32,9 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         '',
         answerText(r),
         '',
-        `See it with everything we ruled out: ${url}`,
+        `See it, with why the other tools didn't fit: ${url}`,
         '',
-        "We re-check every price, rating and list each month. If this answer changes, we'll email you once to say what changed.",
+        "We check every price, rating and list each month. If this answer changes, we'll email you once to say what changed.",
         ...SIGN_OFF,
       ].join('\n'),
     }

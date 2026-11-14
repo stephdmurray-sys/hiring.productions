@@ -32,12 +32,12 @@ export function askSummary(ask: Ask): string {
   const must = ask.must.map((m) => data[ask.side].mustHaves.find((x) => x.id === m)?.label.toLowerCase()).filter(Boolean)
   const parts =
     ask.side === 'seekers'
-      ? [p.label, `a search of ${limitLabel('seekers', 'months', ask.months).toLowerCase()}`, `budget: ${limitLabel('seekers', 'budget', ask.budget).toLowerCase()}`]
+      ? [p.label, `looking for ${limitLabel('seekers', 'months', ask.months).toLowerCase()}`, `budget: ${limitLabel('seekers', 'budget', ask.budget).toLowerCase()}`]
       : [
           p.label,
           `${limitLabel('hiring', 'hires', ask.hiresPerYear).toLowerCase()} hires a year`,
           `${limitLabel('hiring', 'employees', ask.employees).toLowerCase()} employees`,
-          `${limitLabel('hiring', 'seats', ask.seats).toLowerCase()} logging in`,
+          `${limitLabel('hiring', 'seats', ask.seats).toLowerCase()} using it`,
           `budget: ${limitLabel('hiring', 'budget', ask.budget).toLowerCase()}`,
         ]
   return [...parts, ...must.map((m) => `must have ${m}`)].join(' · ')
@@ -61,15 +61,15 @@ export function RecQuestions({ state }: { state: AskState }) {
   return (
     <RecForm action={REC_PATH}>
       <fieldset className="rec-q rec-sides">
-        <legend>Which side of the table are you on?</legend>
+        <legend>Are you looking for a job, or hiring?</legend>
         <div className="rec-side-opts">
           <Radio name="side" value="seekers" checked={side === 'seekers'} className="opt-side opt-seekers">
             <b>I&rsquo;m a job seeker</b>
-            Resume tools, trackers, interview practice
+            Resumes, job trackers, interview practice
           </Radio>
           <Radio name="side" value="hiring" checked={side === 'hiring'} className="opt-side opt-hiring">
             <b>I&rsquo;m hiring</b>
-            Applicant tracking, sourcing, interviews
+            Applicant tracking, finding candidates, interviews
           </Radio>
         </div>
       </fieldset>
@@ -89,7 +89,7 @@ export function RecQuestions({ state }: { state: AskState }) {
 
       {side && problem?.kind === 'tool' && (
         <fieldset className="rec-q">
-          <legend>What can you live with?</legend>
+          <legend>{side === 'seekers' ? 'What’s your budget and timeline?' : 'Tell us about your team'}</legend>
           <div className="rec-limits">
             {data[side].limits.map((l) => {
               const current = l.id === 'months' ? state.months : l.id === 'hires' ? state.hires : l.id === 'employees' ? state.employees : l.id === 'seats' ? state.seats : state.budget
@@ -109,7 +109,7 @@ export function RecQuestions({ state }: { state: AskState }) {
               )
             })}
             <div className="rec-limit">
-              <span className="rec-limit-k">Anything you won&rsquo;t do without?</span>
+              <span className="rec-limit-k">Any must-haves?</span>
               <span className="rec-words">
                 {data[side].mustHaves.map((m) => (
                   <label className="opt opt-word opt-check" key={m.id}>
@@ -153,18 +153,18 @@ function CostLine({ r, ask }: { r: Recommendation; ask: Ask }) {
   if (c.total === 0)
     return (
       <p className="rec-cost">
-        <span>What it costs you</span>
+        <span>What you&rsquo;ll pay</span>
         <b>Free</b>
         {c.upgrade && (
           <em>
-            Paying for more: {money(c.upgrade.total)} {span}.{forget(c.upgrade.total, c.upgrade.ifYouForget)}
+            If you upgrade: {money(c.upgrade.total)} {span}.{forget(c.upgrade.total, c.upgrade.ifYouForget)}
           </em>
         )}
       </p>
     )
   return (
     <p className="rec-cost">
-      <span>What it costs you</span>
+      <span>What you&rsquo;ll pay</span>
       <b>
         {money(c.total)} {span}
       </b>
@@ -210,7 +210,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
             </div>
           </div>
           {(() => {
-            const why = r.pick.reasons.slice(1).filter((x) => !/^Free:|^Paying for more|^Costs |^If you forget|^About \$|^Starts free|^Price by quote/.test(x))
+            const why = r.pick.reasons.slice(1).filter((x) => !/^Free:|^If you upgrade|^Costs |^If you forget|^About \$|^Starts free|^Price by quote/.test(x))
             return why.length > 0 ? (
               <ul className="rec-why">
                 {why.map((x) => (
@@ -228,7 +228,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
 
       {r.alt && (
         <div className="rec-alt">
-          <span className="rec-alt-k">The alternative</span>
+          <span className="rec-alt-k">Backup pick</span>
           <div className="rec-alt-body">
             <Logo domain={r.alt.domain} name={r.alt.name} size={44} />
             <div>
@@ -240,7 +240,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
                   r.alt.why,
                   ...r.alt.reasons
                     .slice(1)
-                    .filter((x) => !/^Paying for more|^If you forget|^There’s also|^Free: /.test(x)),
+                    .filter((x) => !/^If you upgrade|^If you forget|^There’s also|^Free: /.test(x)),
                 ].join(' ')}
               </p>
               <a className="tl" href={r.alt.href}>
@@ -269,7 +269,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
 
       {r.watching.length > 0 && (
         <div className="rec-watch">
-          <span className="rec-alt-k">Worth watching, not scored yet</span>
+          <span className="rec-alt-k">New and worth watching, not rated yet</span>
           {r.watching.map((w) => (
             <div className="rec-watch-row" key={w.name}>
               <Logo domain={w.domain} name={w.name} size={40} />
@@ -283,7 +283,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
 
       {r.stephanie && (
         <div className="rec-watch">
-          <span className="rec-alt-k">Stephanie&rsquo;s pick: her judgment, not a score</span>
+          <span className="rec-alt-k">Stephanie&rsquo;s pick: her opinion, not a rating</span>
           <div className="rec-watch-row">
             <Logo domain={r.stephanie.domain} name={r.stephanie.name} size={40} />
             <p>
@@ -315,7 +315,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
       {others > 0 && (
         <details className="rec-more">
           <summary>
-            Why not the others? {r.ruledOut.length > 0 && <span>{r.ruledOut.length} ruled out</span>}
+            Why not the others? {r.ruledOut.length > 0 && <span>{r.ruledOut.length} didn&rsquo;t fit</span>}
             {r.couldNotCheck.length > 0 && <span>{r.couldNotCheck.length} we couldn&rsquo;t check</span>}
           </summary>
           {r.ruledOut.length > 0 && (
@@ -329,7 +329,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
           )}
           {r.couldNotCheck.length > 0 && (
             <>
-              <p className="rec-out-k">Couldn&rsquo;t check, so it can&rsquo;t be the pick</p>
+              <p className="rec-out-k">Couldn&rsquo;t confirm, so we won&rsquo;t recommend it</p>
               <ul className="rec-out">
                 {r.couldNotCheck.map((o) => (
                   <li key={o.name}>
@@ -350,9 +350,9 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
         <Capture
           source="recommender"
           audience={r.side === 'seekers' ? 'candidate' : 'hiring'}
-          promise="Get this answer by email, and one note if a monthly check ever changes it."
+          promise="Get this answer by email. If a price or rating changes it, we’ll tell you once."
           cta="Email me this answer"
-          done="Sent. If a monthly check changes this answer, you'll hear from us once."
+          done="Sent. If this answer ever changes, you'll hear from us once."
           extras={{ ask: askToQuery(ask), answer_title: title }}
           askCompanySize={r.side === 'hiring'}
         />

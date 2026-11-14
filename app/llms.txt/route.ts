@@ -20,7 +20,7 @@ function money(n: number) {
 export function GET() {
   const { checkers, builders, all } = resumeTools()
   const line = (t: (typeof checkers)[number]) =>
-    `- [${t.name}](${BASE}/reviews/${t.id}): ${t.overall !== null ? `${t.overall.toFixed(2)}/5, #${t.rank}` : `not scored (${formatCount(t.citableReviews)} of ${MIN_REVIEWS} citable reviews)`}. ${t.bestFor}. ${t.yearCost ? `A paid year: ${t.yearCost.approx ? 'about ' : ''}${money(t.yearCost.amount)}${t.yearCost.renewsEvery4Weeks ? ' (renews every 4 weeks)' : ''}.` : ''}`
+    `- [${t.name}](${BASE}/reviews/${t.id}): ${t.overall !== null ? `${t.overall.toFixed(2)}/5, #${t.rank}` : `not scored (${formatCount(t.citableReviews)} of ${MIN_REVIEWS} public reviews)`}. ${t.bestFor}. ${t.yearCost ? `A paid year: ${t.yearCost.approx ? 'about ' : ''}${money(t.yearCost.amount)}${t.yearCost.renewsEvery4Weeks ? ' (renews every 4 weeks)' : ''}.` : ''}`
   const counting = benchmarks.filter((l) => l.status === 'counts')
   const people = followData.people as { name: string; known: string; side: string; links: { url: string }[] }[]
   const person = (p: (typeof people)[number]) => `- [${p.name}](${p.links[0]?.url}): ${p.known}`
@@ -33,15 +33,15 @@ Evidence last checked: ${latestCheck()}. Every number below has a source on the 
 
 ## How scores work
 
-- Overall = ${WEIGHTS.user * 100}% users + ${WEIGHTS.market * 100}% market + ${WEIGHTS.critics * 100}% critics + ${WEIGHTS.value * 100}% value, each out of 5. Every input is public data; no one's personal score is an input, Stephanie's included.
-- Users: review-site ratings, adjusted toward the category average when a tool has few reviews (the IMDb weighted-rating method). A tool needs at least ${MIN_REVIEWS} citable user reviews to be scored. G2, Capterra, GetApp and Software Advice share one review pool and count once.
-- Market: web traffic rank and review volume. Critics: how many independent "best of" lists name it (${counting.length} of ${benchmarks.length} lists currently count; vendor-published lists never do). Value: the free version and the real cost of a paid year, minus a point for 4-week billing.
+- Overall = ${WEIGHTS.user * 100}% user ratings + ${WEIGHTS.market * 100}% popularity + ${WEIGHTS.critics * 100}% best-of lists + ${WEIGHTS.value * 100}% value, each out of 5. Every input is public data; no one's personal score is an input, Stephanie's included.
+- Users: review-site ratings, adjusted toward the category average when a tool has few reviews (the IMDb weighted-rating method). A tool needs at least ${MIN_REVIEWS} public user reviews to be scored. G2, Capterra, GetApp and Software Advice share one review pool and count once.
+- Popularity: web traffic rank and review volume. Best-of lists: how many independent "best of" lists name it (${counting.length} of ${benchmarks.length} lists currently count; vendor-published lists never do). Value: the free version and the real cost of a paid year, minus a point for 4-week billing.
 - Stephanie's picks are editorial, labeled as hers, and never change a score.
 - Full method and the research behind it: ${BASE}/how-we-review
 
 ## Guides
 
-- [The best resume tools of 2026](${BASE}/guides/best-resume-tools): builders and ATS checkers ranked on evidence, the agreement grid against other lists, demo videos and what a search really costs.
+- [The best resume tools of 2026](${BASE}/guides/best-resume-tools): builders and ATS checkers ranked on public reviews and real prices, the agreement grid against other lists, demo videos and what a search really costs.
 - [Applicant tracking systems by team size](${BASE}/guides/best-ats-for-small-teams): small, growing and scaling teams, ranked within each tier.
 - [Recruiter training and certifications](${BASE}/guides/best-recruiter-training)
 - [For job seekers](${BASE}/for-job-seekers): where a search goes wrong and the tools that fix it.
@@ -81,9 +81,9 @@ ${hiringBoard()
 - For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}), her top pick. ${hiringPick.scoreStatus}
 
-## On the rise: waiting in the wings (watching, not scored yet)
+## On the rise: new tools to watch (not rated yet)
 
-Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} citable reviews. Never ranked, never paid for.
+Page: ${BASE}/on-the-rise. Tools here have no score until they reach ${rising.minReviews} public reviews. Never ranked, never paid for.
 
 ${rising.tools.map((t) => `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => `${e.publication}${e.confirmed === false ? ' (not yet confirmed)' : ''}`).join(' and ')}.` : ''}`).join('\n')}
 

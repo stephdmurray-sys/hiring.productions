@@ -170,9 +170,9 @@ function welcomeForSource(
   // Monthly evidence check signup from the review site (rebrand pages and the recommender).
   if (source === 'evidence_report' || source === 'recommender') {
     return {
-      subject: "You're on the list for the monthly evidence check",
+      subject: "You're on the list for the monthly email",
       text: [
-        'Thanks for signing up. Once a month, after we re-check every rating, list and price, you get one short email: what moved, what changed price, and which tools broke from the pack.',
+        'Thanks for signing up. Once a month, after we check every rating, list and price again, you get one short email: rankings that moved, prices that changed, and new tools worth watching.',
         '',
         'While you wait, start with the resume tools guide, including what a year of each tool really costs:',
         'https://hiring.productions/guides/best-resume-tools',
