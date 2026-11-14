@@ -20,7 +20,10 @@ import { Redis } from '@upstash/redis'
 import { hash } from '@/lib/usage'
 import { COOKIE_NAMES } from '@/lib/identity'
 import { logEvent } from '@/lib/event-log'
-import { reviewSiteWelcome } from '@/lib/review-welcome'
+import { reviewSiteAttachments, reviewSiteWelcome } from '@/lib/review-welcome'
+
+// The scorecard PDF and Excel files are built with Node libraries.
+export const runtime = 'nodejs'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -224,41 +227,55 @@ function welcomeForSource(
 
 async function addToResendAudience(input: LeadInput): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) return
   const audienceId = process.env.RESEND_AUDIENCE_ID
-  if (!apiKey || !audienceId) return
 
-  try {
-    await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: input.email,
-        unsubscribed: false,
-        first_name: input.firstName ?? '',
-        last_name: input.lastName ?? '',
-      }),
-    })
-
-    const from = process.env.RESEND_FROM_EMAIL
-    const welcome = welcomeForSource(input.source, input.extras)
-    if (from && welcome) {
-      await fetch('https://api.resend.com/emails', {
+  // The audience is for later emails; the welcome below is what they asked
+  // for, so it goes out whether or not an audience is configured.
+  if (audienceId) {
+    try {
+      await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from,
-          to: input.email,
-          subject: welcome.subject,
-          text: welcome.text,
+          email: input.email,
+          unsubscribed: false,
+          first_name: input.firstName ?? '',
+          last_name: input.lastName ?? '',
         }),
       })
+    } catch (err) {
+      console.error('[api/lead] resend audience error', err)
     }
+  }
+
+  const from = process.env.RESEND_FROM_EMAIL
+  const welcome = welcomeForSource(input.source, input.extras)
+  if (!from || !welcome) return
+  try {
+    // Files the visitor asked for (the interview scorecard as PDF and Excel).
+    const attachments = await reviewSiteAttachments(input.source, input.extras).catch((err) => {
+      console.error('[api/lead] attachment error', err)
+      return []
+    })
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: input.email,
+        subject: welcome.subject,
+        text: welcome.text,
+        ...(attachments.length ? { attachments } : {}),
+      }),
+    })
+    if (!res.ok) console.error('[api/lead] resend send failed', res.status, await res.text().catch(() => ''))
   } catch (err) {
     console.error('[api/lead] resend error', err)
   }

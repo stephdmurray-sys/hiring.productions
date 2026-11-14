@@ -6,6 +6,7 @@ import { AutoForm, PrintButton } from '@/app/(rebrand)/_components/tool-forms'
 import { Capture } from '@/app/(rebrand)/_components/capture'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
 import { REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { SCORECARD_MAX, SCORECARD_PATH, cleanRole, pickCompetencies, scorecardUrl } from '@/lib/scorecard'
 
 /**
  * "What should we ask in the interview?": a structured interview scorecard
@@ -14,22 +15,16 @@ import { REPVERA_WHAT, repveraLink } from '@/lib/repvera'
  * follow OPM's worked example and are labeled as a starting point.
  */
 
-const PATH = '/interview-scorecard'
-const SITE = 'https://hiring.productions'
-const MAX = 6
+const PATH = SCORECARD_PATH
+const MAX = SCORECARD_MAX
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
-type Competency = (typeof data.competencies)[number]
 
+/** What the address asks for, cleaned by the same rules the email and the files use. */
 function read(sp: Record<string, string | string[] | undefined>) {
-  const one = (k: string) => {
-    const v = sp[k]
-    return (Array.isArray(v) ? v[0] : v) ?? ''
-  }
-  const raw = (Array.isArray(sp.c) ? sp.c.join(',') : sp.c ?? '').split(',').filter(Boolean)
-  const ids = Array.from(new Set(raw)).filter((id) => data.competencies.some((c) => c.id === id))
-  const chosen = ids.slice(0, MAX).map((id) => data.competencies.find((c) => c.id === id) as Competency)
-  return { role: one('role').trim().slice(0, 80), chosen, tooMany: ids.length > MAX }
+  const role = Array.isArray(sp.role) ? sp.role[0] : sp.role
+  const { chosen, tooMany } = pickCompetencies(sp.c)
+  return { role: cleanRole(role), chosen, tooMany }
 }
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
@@ -57,6 +52,8 @@ const css = `
   .sc-opt b{display:block;font-size:18px;font-weight:800;color:var(--ink);}
   .sc-opt span{display:block;font-size:15px;color:var(--ink-2);line-height:1.5;margin-top:2px;}
   .sc-opt:has(input:checked) b{color:var(--coral-text);}
+  .sc-opt.sc-off{cursor:not-allowed;}
+  .sc-opt.sc-off b,.sc-opt.sc-off span{color:var(--ink-3);}
   .sc-opt:has(input:focus-visible){outline:2px solid var(--coral);outline-offset:2px;border-radius:6px;}
   .sc-build[data-js] .sc-submit{display:none;}
   body:has(.sc-build[data-pending]) #scorecard{opacity:.55;transition:opacity .2s ease;}
@@ -117,7 +114,8 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
   const sp = await searchParams
   const { role, chosen, tooMany } = read(sp)
   const ids = chosen.map((c) => c.id)
-  const share = `${SITE}${PATH}?${new URLSearchParams({ ...(role ? { role } : {}), c: ids.join(',') }).toString()}`
+  const share = scorecardUrl(role, chosen)
+  const full = chosen.length >= MAX
   const m = data.method
 
   return (
@@ -141,7 +139,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
       </header>
 
       <section className="wrap sec-tight" id="build" aria-label="Build your scorecard">
-        <AutoForm action={PATH} multi={['c']} className="sc-build">
+        <AutoForm action={PATH} multi={['c']} limits={{ c: MAX }} className="sc-build">
           <fieldset className="sc-q">
             <legend>What&rsquo;s the role?</legend>
             <label className="sr-only" htmlFor="sc-role">
@@ -152,13 +150,14 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
           <fieldset className="sc-q">
             <legend>Which skills does the job need?</legend>
             <p className="sc-hint">
-              {m.competencyCount} Pick up to {MAX}.{chosen.length > 0 ? ` ${chosen.length} chosen.` : ''}
+              {m.competencyCount} Pick up to {MAX}.{chosen.length > 0 ? ` ${chosen.length} of ${MAX} chosen.` : ''}
+              {full ? ' To swap one, untick it first.' : ''}
               {tooMany ? ` Only the first ${MAX} are used.` : ''}
             </p>
             <div className="sc-list">
               {data.competencies.map((c) => (
-                <label className="sc-opt" key={c.id}>
-                  <input type="checkbox" name="c" value={c.id} defaultChecked={ids.includes(c.id)} />
+                <label className={`sc-opt${full && !ids.includes(c.id) ? ' sc-off' : ''}`} key={c.id}>
+                  <input type="checkbox" name="c" value={c.id} defaultChecked={ids.includes(c.id)} disabled={full && !ids.includes(c.id)} />
                   <span>
                     <b>{c.name}</b>
                     {c.definition.split(';')[0].replace(/\.$/, '')}.
@@ -177,7 +176,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
 
       <section className="wrap sec" id="scorecard" aria-label="Your scorecard">
         {chosen.length === 0 ? (
-          <p className="sc-empty">Pick at least one competency above and your scorecard appears here.</p>
+          <p className="sc-empty">Pick at least one skill above and your scorecard appears here.</p>
         ) : (
           <>
             <div className="sc-top">
@@ -309,10 +308,10 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
           <Capture
             source="scorecard"
             audience="hiring"
-            promise="Email me the printable scorecard, to share with the panel."
+            promise="Email me this scorecard as a PDF to print and an Excel sheet to score candidates side by side."
             cta="Email me the scorecard"
-            done="Sent. Check your inbox for the link."
-            extras={{ url: share, role, competencies: chosen.map((c) => c.name).join(', ') }}
+            done="Sent. The PDF and the Excel sheet are in your inbox."
+            extras={{ role, ids: ids.join(','), url: share, competencies: chosen.map((c) => c.name).join(', ') }}
             askCompanySize
           />
         </section>

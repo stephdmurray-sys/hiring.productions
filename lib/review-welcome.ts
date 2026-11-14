@@ -6,6 +6,7 @@
  */
 import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
 import { OWNERSHIP_DISCLOSURE, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { cleanRole, pickCompetencies, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
 
 const SITE = 'https://hiring.productions'
 
@@ -14,6 +15,41 @@ const SIGN_OFF = ['', OWNERSHIP_DISCLOSURE, "You're getting this because you ask
 /** A labeled RepVera note for hiring-team emails about screening, interviewing or what a hire costs (GROWTH.md). */
 function repveraNote(campaign: string, lead?: string): string[] {
   return ['', 'From the team behind hiring.productions:', ...(lead ? [lead] : []), REPVERA_WHAT, `See how it works: ${repveraLink(campaign)}`]
+}
+
+/**
+ * The scorecard a visitor built, rebuilt from its role and skill ids. Older
+ * asks only sent the page link, so that is read as a fallback.
+ */
+function scorecardFromExtras(x: Record<string, string>) {
+  let role = x.role ?? ''
+  let ids = x.ids ?? ''
+  if (!ids && x.url) {
+    try {
+      const u = new URL(x.url)
+      ids = u.searchParams.get('c') ?? ''
+      role = role || (u.searchParams.get('role') ?? '')
+    } catch {
+      return null
+    }
+  }
+  const { chosen } = pickCompetencies(ids)
+  if (!chosen.length) return null
+  return { role: cleanRole(role), chosen }
+}
+
+/** Files to attach to a welcome email: the interview scorecard as a PDF and an Excel workbook. */
+export async function reviewSiteAttachments(source: string, extras?: Record<string, string>): Promise<{ filename: string; content: string }[]> {
+  if (source !== 'scorecard') return []
+  const sc = scorecardFromExtras(extras ?? {})
+  if (!sc) return []
+  // Loaded only when a scorecard is emailed, so other sign-ups don't pay for it.
+  const { scorecardPdf, scorecardXlsx } = await import('@/lib/scorecard-files')
+  const [pdf, xlsx] = await Promise.all([scorecardPdf(sc.role, sc.chosen), scorecardXlsx(sc.role, sc.chosen)])
+  return [
+    { filename: scorecardFileName(sc.role, 'pdf'), content: Buffer.from(pdf).toString('base64') },
+    { filename: scorecardFileName(sc.role, 'xlsx'), content: xlsx.toString('base64') },
+  ]
 }
 
 export function reviewSiteWelcome(source: string, extras?: Record<string, string>): { subject: string; text: string } | null {
@@ -64,14 +100,18 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
     }
   }
 
-  if (source === 'scorecard' && x.url) {
+  if (source === 'scorecard') {
+    const sc = scorecardFromExtras(x)
+    if (!sc) return null
     return {
-      subject: `Your interview scorecard${x.role ? `: ${x.role}` : ''}`,
+      subject: `Your interview scorecard${sc.role ? `: ${sc.role}` : ''}`,
       text: [
-        'Your structured interview scorecard is ready to print and share with your panel:',
-        x.url,
+        'Your interview scorecard is attached two ways:',
+        `- ${scorecardFileName(sc.role, 'pdf')}: print one for each interviewer, for each candidate.`,
+        `- ${scorecardFileName(sc.role, 'xlsx')}: score up to five candidates side by side. The averages fill in as you rate.`,
         '',
-        x.competencies ? `It covers: ${x.competencies}.` : '',
+        `It covers: ${sc.chosen.map((c) => c.name).join(', ')}.`,
+        `Open or change it on the site: ${scorecardUrl(sc.role, sc.chosen)}`,
         '',
         "How to run it, from the US Office of Personnel Management's guide to structured interviews:",
         '1. Ask every candidate the same questions, in the same order.',

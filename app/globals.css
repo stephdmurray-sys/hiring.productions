@@ -157,6 +157,13 @@
     overflow-x: hidden;
   }
 
+  /* Jumping to a section shouldn't glide for people who asked for less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    html, body {
+      scroll-behavior: auto;
+    }
+  }
+
   a {
     -webkit-tap-highlight-color: transparent;
   }
