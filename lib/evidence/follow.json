@@ -1,10 +1,18 @@
 {
-  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Held back: Mike Peditto (The Realistic Recruiter), because a source says he works at Teal, which we rank; Adam Karpiak, because no source confirmed the humor.",
+  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Held back: Adam Karpiak, because no source confirmed the humor.",
   "approved": false,
   "checked": "2026-11-14",
   "rows": [
-    { "side": "hiring", "title": "The best in talent acquisition", "lead": "The voices recruiting leaders actually read, watch and listen to." },
-    { "side": "seekers", "title": "For job seekers", "lead": "One to keep you laughing, the rest to get you hired." }
+    {
+      "side": "hiring",
+      "title": "The best in talent acquisition",
+      "lead": "The voices recruiting leaders actually read, watch and listen to."
+    },
+    {
+      "side": "seekers",
+      "title": "For job seekers",
+      "lead": "One to keep you laughing, the rest to get you hired."
+    }
   ],
   "people": [
     {
@@ -17,8 +25,26 @@
       "photo": "/people/hung-lee.jpg",
       "photoSource": "YouTube @hunglee3069 (Brainfood Live On Air)",
       "links": [
-        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@hunglee3069" }
+        {
+          "label": "Newsletter",
+          "url": "https://recruitingbrainfood.substack.com"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/hunglee/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@hunglee3069"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.recruitingbrainfood.com"
+        }
       ]
     },
     {
@@ -31,8 +57,22 @@
       "photo": null,
       "photoSource": "No confirmed personal photo found yet",
       "links": [
-        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/id963756980" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@recruitingfuturepod" }
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id963756980"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/mattalder/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@recruitingfuturepod"
+        },
+        {
+          "label": "Website",
+          "url": "https://recruitingfuture.com"
+        }
       ]
     },
     {
@@ -44,7 +84,16 @@
       "why": "Founder and chief analyst at Aptitude Research, covering talent acquisition and hiring tech for over 18 years.",
       "photo": "/people/madeline-laurano.jpg",
       "photoSource": "aptituderesearch.com team page",
-      "links": [{ "label": "Research", "url": "https://www.aptituderesearch.com/about-aptitude-research/" }]
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/madelinelaurano/"
+        },
+        {
+          "label": "Research",
+          "url": "https://www.aptituderesearch.com/about-aptitude-research/"
+        }
+      ]
     },
     {
       "id": "adam-posner",
@@ -56,8 +105,22 @@
       "photo": "/people/adam-posner.jpg",
       "photoSource": "YouTube @ThePOZcast (cropped from the show art)",
       "links": [
-        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/pozcast-career-journeys-with-adam-posner/id1452900760" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@ThePOZcast" }
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id1452900760"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@ThePOZcast"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/adamjposner/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.thepozcast.com"
+        }
       ]
     },
     {
@@ -70,8 +133,30 @@
       "photo": "/people/maureen-clough.jpg",
       "photoSource": "YouTube @itgetslateearly",
       "links": [
-        { "label": "YouTube", "url": "https://www.youtube.com/@itgetslateearly" },
-        { "label": "Podcast", "url": "https://podbay.fm/p/it-gets-late-early" }
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@itgetslateearly"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/gb/podcast/it-gets-late-early-career-tips-for-tech-employees-in/id1676637848"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/maureenwclough/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/maureenwclough/"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://maureenclough.substack.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://itgetslateearly.com"
+        }
       ]
     },
     {
@@ -83,7 +168,16 @@
       "why": "The deepest free writing on sourcing there is, from Boolean search to AI in recruiting.",
       "photo": "/people/glen-cathey.jpg",
       "photoSource": "YouTube @GlenCathey (sourcing demos, Talent42)",
-      "links": [{ "label": "Blog", "url": "https://booleanblackbelt.com" }]
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/glencathey/"
+        },
+        {
+          "label": "Blog",
+          "url": "https://booleanblackbelt.com"
+        }
+      ]
     },
     {
       "id": "katrina-collier",
@@ -94,7 +188,24 @@
       "why": "How to keep the human part of recruiting, from candidate experience to working with hiring managers.",
       "photo": "/people/katrina-collier.jpg",
       "photoSource": "YouTube @KatrinaMCollier",
-      "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/katrinacollier" }]
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/katrinacollier/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/katrinamcollier/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@KatrinaMCollier"
+        },
+        {
+          "label": "Website",
+          "url": "https://katrinacollier.com"
+        }
+      ]
     },
     {
       "id": "tim-sackett",
@@ -105,7 +216,24 @@
       "why": "A staffing firm president who writes about recruiting with jokes and sports analogies, and real advice under them.",
       "photo": "/people/tim-sackett.jpg",
       "photoSource": "timsackett.com headshot",
-      "links": [{ "label": "Blog", "url": "https://timsackett.com" }]
+      "links": [
+        {
+          "label": "Blog",
+          "url": "https://timsackett.com"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/timsackett/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/hr-famous/id1497749456"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/timsackett/"
+        }
+      ]
     },
     {
       "id": "chad-cheese",
@@ -116,7 +244,28 @@
       "why": "Irreverent weekly take on HR tech and hiring news from two industry veterans. Explicit language, honest opinions.",
       "photo": "/people/chad-cheese.jpg",
       "photoSource": "YouTube @chadcheese",
-      "links": [{ "label": "Website", "url": "https://www.chadcheese.com" }]
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/the-chad-cheese-podcast/id1211760335"
+        },
+        {
+          "label": "Spotify",
+          "url": "https://open.spotify.com/show/7o010HWTkmlPL0EGe54wT9"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@chadcheese"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/company/the-chad-&-cheese-podcast/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.chadcheese.com"
+        }
+      ]
     },
     {
       "id": "madeline-mann",
@@ -128,8 +277,26 @@
       "photo": "/people/madeline-mann.jpg",
       "photoSource": "YouTube @SelfMadeMillennial",
       "links": [
-        { "label": "YouTube", "url": "https://www.youtube.com/@SelfMadeMillennial" },
-        { "label": "Website", "url": "https://madelinemann.com" }
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@SelfMadeMillennial"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@selfmademillennial"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/madelinemann/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/self.made.millennial/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.madelinemann.com"
+        }
       ]
     },
     {
@@ -142,8 +309,22 @@
       "photo": "/people/erin-mcgoff.jpg",
       "photoSource": "YouTube @AdviceWithErin",
       "links": [
-        { "label": "TikTok", "url": "https://www.tiktok.com/@advicewitherin" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@AdviceWithErin" }
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@AdviceWithErin"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@erinmcgoff"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/advicewitherin/"
+        },
+        {
+          "label": "Website",
+          "url": "https://advicewitherin.com"
+        }
       ]
     },
     {
@@ -156,8 +337,30 @@
       "photo": "/people/andrew-lacivita.jpg",
       "photoSource": "YouTube @andylacivita",
       "links": [
-        { "label": "YouTube", "url": "https://www.youtube.com/@andylacivita" },
-        { "label": "Podcast", "url": "https://andrewlacivita.libsyn.com" }
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@andylacivita"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/tips-for-work-and-life-with-andrew-lacivita/id1120387046"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/andrewlacivita/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@andrewlacivita"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/andrewlacivita/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.milewalkacademy.com"
+        }
       ]
     },
     {
@@ -169,7 +372,20 @@
       "why": "How to get hired through referrals and direct outreach instead of another online application.",
       "photo": "/people/austin-belcak.jpg",
       "photoSource": "YouTube @austin-belcak",
-      "links": [{ "label": "Website", "url": "https://cultivatedculture.com" }]
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/abelcak/"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://cultivatedculture.com/newsletter"
+        },
+        {
+          "label": "Website",
+          "url": "https://cultivatedculture.com"
+        }
+      ]
     },
     {
       "id": "jt-odonnell",
@@ -177,12 +393,67 @@
       "known": "Work It Daily",
       "side": "seekers",
       "vibe": "helpful",
-      "why": "A former recruiter's straight talk on why resumes go unanswered, with live Q&A for job seekers.",
+      "why": "A former recruiter whose Work It Daily videos explain why resumes go unanswered, and what to do instead.",
       "photo": null,
       "photoSource": "No confirmed personal photo found yet",
       "links": [
-        { "label": "Website", "url": "https://www.workitdaily.com" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@Workitdaily" }
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@Workitdaily"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/jtodonnell/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@j.t.odonnell"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://newsletter.workitdaily.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.workitdaily.com"
+        }
+      ]
+    },
+    {
+      "id": "mike-peditto",
+      "name": "Mike Peditto",
+      "known": "Realistic Recruiting",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A recruiter who tells job seekers what's really happening on the hiring side, with realistic advice instead of scare tactics.",
+      "note": "Former director of talent at Teal, one of the tools we rate.",
+      "photo": "/people/mike-peditto.jpg",
+      "photoSource": "YouTube @RealisticRecruiting (his own channel avatar), cropped to his face",
+      "links": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@realisticrecruiting"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/realisticrecruiting/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/mpeditto/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id1841552118"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@RealisticRecruiting"
+        },
+        {
+          "label": "Website",
+          "url": "https://mikepeditto.com"
+        }
       ]
     },
     {
@@ -195,8 +466,22 @@
       "photo": "/people/corporate-natalie.jpg",
       "photoSource": "YouTube @corporatenatalie",
       "links": [
-        { "label": "Instagram", "url": "https://www.instagram.com/corporatenatalie" },
-        { "label": "YouTube", "url": "https://www.youtube.com/@corporatenatalie" }
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/corporatenatalie/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@corporatenatalie"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/natalie-corporate-natalie-0b634a231/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@corporatenatalie"
+        }
       ]
     }
   ]
