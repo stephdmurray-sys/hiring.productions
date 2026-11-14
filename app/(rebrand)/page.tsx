@@ -11,7 +11,7 @@ import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
 import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
-import { atsAsOf, atsGrowth, atsTools, calcTools, hiringBoard, money, seekerBoard, shortDate } from '@/app/(rebrand)/_components/data'
+import { atsAsOf, atsGrowth, atsHref, atsTools, calcTools, hiringBoard, money, seekerBoard, shortDate } from '@/app/(rebrand)/_components/data'
 import {
   STATUS_LABEL,
   VIDEO_KIND_LABEL,
@@ -55,16 +55,16 @@ export default function Home() {
   const fastest = [...atsTools].sort((a, b) => (atsGrowth(b) ?? -1) - (atsGrowth(a) ?? -1))[0]
   const fastestPct = Math.round((atsGrowth(fastest) ?? 0) * 100)
   const flexjobs = benchmarks.find((l) => l.status === 'owner-conflict')
-  const topFirst = benchmarks.find((l) => l.status === 'counts' && l.picks.some((p) => p.tool === top.id && p.position === 1))
+  const topLists = top.counted.length
   const firstRiser = rising.tools.find((t) => t.evidence.length > 0)
 
   const ticker = [
     <>
       <b>{resumeIo.name}</b> renews every 4 weeks: <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel
     </>,
-    topFirst && (
+    topLists >= 2 && (
       <>
-        <i>{topFirst.publication}</i> ranks {top.name} first. So do we
+        <i>{topLists} current, independent lists</i> name {top.name}. We rank it first too
       </>
     ),
     flexjobs && (
@@ -79,7 +79,7 @@ export default function Home() {
       Stephanie&rsquo;s top pick for hiring teams: <i>{hiringPick.name}</i>
     </>,
     <>
-      {fastest.name} reviews up <b>{fastestPct}%</b> in a year, fastest of {atsTools.length} applicant tracking systems
+      {fastest.name} reviews up <b>{fastestPct}%</b> in a year, fastest of {atsTools.length} applicant tracking systems (data as of {shortDate(atsAsOf)})
     </>,
     kick.yearCost && (
       <>
@@ -88,7 +88,7 @@ export default function Home() {
     ),
     firstRiser && (
       <>
-        In the wings: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.toLowerCase()} ({firstRiser.evidence[0].publication})
+        In the wings: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.replace(/^\w/, (c) => c.toLowerCase())} ({firstRiser.evidence[0].publication})
       </>
     ),
   ].filter(Boolean)
@@ -154,7 +154,7 @@ export default function Home() {
               {HIRING_LOGOS.map((n) => atsByName[n])
                 .filter(Boolean)
                 .map((t) => (
-                  <a key={t.name} href="/guides/best-ats-for-small-teams" aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
+                  <a key={t.name} href={atsHref(t.name)} aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
                     <Logo domain={t.domain} name={t.name} size={52} />
                   </a>
                 ))}
@@ -186,7 +186,7 @@ export default function Home() {
       </header>
 
       <section className="wrap sec" id="what-to-use">
-        <h2>What should you use?</h2>
+        <h2>What should I use?</h2>
         <p className="lead">
           Tell us what&rsquo;s going wrong. We rule out every tool that doesn&rsquo;t fit your limits, show you why, and give you one pick.
           Sometimes the honest answer is that no tool fixes it.

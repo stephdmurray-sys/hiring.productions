@@ -134,11 +134,11 @@ export const html = `<style>
   <div class="page-hero">
     <div class="wrap">
       <p class="crumbs"><a href="/">Home</a> &rsaquo; <a href="/for-hiring-teams">For Hiring Teams</a> &rsaquo; Applicant Tracking Systems</p>
-      <h1>The 14 Best Applicant Tracking Systems of 2026, Ranked by Team Size</h1>
+      <h1>The best applicant tracking systems of 2026, ranked by team size</h1>
       <div class="byline">
-        <span>Updated August 22, 2026</span>
+        <span>Data as of August 22, 2026</span>
         <span class="dot">&middot;</span>
-        <span>Evidence re-checked monthly</span>
+        <span>Next full re-read: December 2026</span>
         <span class="dot">&middot;</span>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>
@@ -186,7 +186,7 @@ export const html = `<style>
   </section>
 
   <section class="wrap">
-    <h2>All 14, ranked for your team size</h2>
+    <h2>Every system, ranked for your team size</h2>
     <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:19px;margin:34px 0 6px;">Small teams: under 20 hires a year</h3>
     <p style="font-size:13.5px;color:var(--gray);max-width:760px;line-height:1.65;">Nobody is a full-time recruiter. Hiring managers work the pipeline between meetings. You need simple, cheap, and fast to set up.</p>
     <div class="tscroll"><table>
@@ -265,7 +265,7 @@ export const html = `<style>
         </span>
         <span class="etag etag-res">Research based</span>
       </div>
-      <p class="review-updated">Updated August 22, 2026 &middot; Pricing verified this week</p>
+      <p class="review-updated">Ratings and pricing as of August 22, 2026</p>
       <div class="scores-row">
         <span class="sc"><span class="st">★★★☆☆</span> <b>3.0</b> Market</span>
         <span class="sc"><span class="st">★★★★★</span> <b>4.5</b> User</span>
@@ -290,7 +290,7 @@ export const html = `<style>
         </span>
         <span class="etag etag-res">Research based</span>
       </div>
-      <p class="review-updated">Updated August 22, 2026</p>
+      <p class="review-updated">Ratings and pricing as of August 22, 2026</p>
       <div class="scores-row">
         <span class="sc"><span class="st">★★★☆☆</span> <b>2.8</b> Market</span>
         <span class="sc"><span class="st">★★★★☆</span> <b>4.4</b> User</span>
@@ -306,7 +306,7 @@ export const html = `<style>
       <a href="/go/jazzhr" class="visit">Visit JazzHR &#8599;</a>
     </div>
 
-    <p class="callout"><b>Full write-ups for the other 12 systems are in progress.</b> The standings above already cover all 14, with every score sourced and dated.</p>
+    <p class="callout"><b>Full write-ups for the other systems are in progress.</b> The standings above already cover every one, with every score sourced and dated.</p>
   </section>
 
   <section class="wrap narrow faq">

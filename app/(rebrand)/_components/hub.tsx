@@ -40,7 +40,7 @@ export interface HubProps {
   feature: { domain: string; name: string; title: string; line: string; href: string; linkText: string }
   situations: HubSituation[]
   situationsCta?: { text: string; href: string; label: string }
-  board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode }
+  board: { title: string; checked: string; rows: BoardRow[]; foot?: ReactNode; heading?: string; lead?: string }
   /** Extra section after the scoreboard, e.g. the cost calculator. */
   extra?: ReactNode
   guides: HubGuide[]
@@ -153,8 +153,8 @@ export function Hub(props: HubProps) {
       </section>
 
       <section className="wrap sec" id="scoreboard">
-        <h2>This month&rsquo;s scoreboard</h2>
-        <p className="lead">Our picks are marked. Open any tool for the full review.</p>
+        <h2>{props.board.heading ?? 'This month\u2019s scoreboard'}</h2>
+        <p className="lead">{props.board.lead ?? 'Our picks are marked. Open any tool for the full review.'}</p>
         <div style={{ marginTop: 32 }}>
           <Scoreboard side={props.side} title={props.board.title} checked={props.board.checked} rows={props.board.rows} foot={props.board.foot} />
         </div>

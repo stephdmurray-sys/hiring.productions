@@ -238,8 +238,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
                   r.alt.why,
                   ...r.alt.reasons
                     .slice(1)
-                    .filter((x) => !/^Paying for more|^If you forget|^There’s also/.test(x))
-                    .map((x) => (x.startsWith('Free: ') ? 'Has a real free version.' : x)),
+                    .filter((x) => !/^Paying for more|^If you forget|^There’s also|^Free: /.test(x)),
                 ].join(' ')}
               </p>
               <a className="tl" href={r.alt.href}>

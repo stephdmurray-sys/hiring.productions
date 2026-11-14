@@ -10,7 +10,7 @@ import { JsonLd, graph, resumeRankingLd } from '@/app/(rebrand)/_components/stru
 
 export const metadata: Metadata = {
   alternates: { canonical: '/reviews' },
-  title: 'Every Tool Review: Resume Builders and ATS Checkers, Scored on Evidence',
+  title: 'Resume Tool Reviews: Builders and ATS Checkers, Scored on Evidence',
   description:
     'One review per tool: is it worth it, what it really costs, who else names it, and the best alternatives. Checked every month.',
 }
@@ -21,8 +21,8 @@ const css = `
   .ix-u b{display:block;font-size:17px;font-weight:800;}
   .ix-u span span{font-size:13.5px;color:var(--ink-3);}
   .ix-u:hover b{text-decoration:underline;text-underline-offset:3px;}
-  .ix-boards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:36px;align-items:start;}
-  @media(max-width:1000px){.ix-boards{grid-template-columns:1fr;}}
+  /* One board per row: side by side, the name, lists and bar don't fit and the text gets cut off. */
+  .ix-boards{display:grid;grid-template-columns:1fr;gap:32px;margin-top:36px;}
 `
 
 export default function ReviewsIndex() {
@@ -40,7 +40,7 @@ export default function ReviewsIndex() {
           <p className="crumbs">
             <a href="/">Home</a> / Reviews
           </p>
-          <h1 className="display">Every tool, reviewed on the evidence</h1>
+          <h1 className="display">Every resume tool, reviewed on the evidence</h1>
           <p className="dek">Is it worth it, what it really costs, who else names it, and what to use instead. One page per tool.</p>
           <p className="dateline">Checked {shortDate(checked)}</p>
         </div>

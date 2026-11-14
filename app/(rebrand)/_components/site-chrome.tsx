@@ -18,6 +18,8 @@ export const chromeCss = `
   .site-nav .links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,0.5);}
   .site-nav .links a.on{color:#fff;border-bottom-color:#fff;}
   .site-nav :focus-visible{outline-color:#fff;}
+  /* Older page templates set nav{height:62px}; the bar must grow to hold the wrapped links row. */
+  .site-nav nav{height:auto;}
   @media(max-width:900px){
     .site-nav nav{flex-wrap:wrap;gap:4px 0;padding:14px 0 4px;}
     .site-nav .links{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none;gap:22px;}
@@ -126,7 +128,7 @@ export function SiteFooter() {
             <a href="/guides/best-resume-tools">Resume builders</a>
             <a href="/guides/best-resume-tools#rankings">ATS resume checkers</a>
             <a href="/guides/best-resume-tools#cost">What your search will cost</a>
-            <a href="/reviews">Every tool review</a>
+            <a href="/reviews">Every resume tool review</a>
             <a href="/for-job-seekers">All job seeker guides</a>
           </div>
           <div className="flinks">

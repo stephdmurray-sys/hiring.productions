@@ -129,3 +129,13 @@ Vercel preview links are marked noindex and may sit behind Vercel's login, so AI
 - Every `otherSide` line states a published finding and links to it. Re-check the links each quarter; if a source moves or a newer study replaces it, update the line and the source together. No line without a source, and no line in Stephanie's first person.
 - Every situation in `situations.list` must use option values that exist in `limits` (the test in the recommender check enforces it): change both together.
 - After any change, run every combination through the engine (each side's problems x limits x must-haves) and confirm nothing throws, nothing reads `undefined`, no em dashes, and each situation's link opens its own answer.
+
+## Confirming list placements (Nov 14, 2026)
+
+Every placement that counts toward a score is read on the live page, never from a search listing. Record every pick the list makes (`picksComplete: true`), not only the tools we track, so the agreement grid can say "not named" with confidence.
+
+- A page that blocks automated readers (Fast Company today) gets status `unconfirmed`: shown, labeled "Not yet confirmed", and excluded from scores. A person opens it in a normal browser, confirms each placement, and flips it back to `counts` with `verified: true`. Never work around a site's bot protection.
+- When placements change, check every `call.line` in `resume-guide.json` that names lists: the copy must match the data.
+- The "Still being confirmed" note appears only while a counted list or a shown video rests on a search listing.
+
+The Nov 14 read found Zapier, Geekflare and SkillScouter name more of our tools than we'd recorded; scores rose for Huntr, Kickresume, Jobscan, Rezi and Resume.io, ranks held.

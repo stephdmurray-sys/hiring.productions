@@ -76,7 +76,7 @@ export default async function SituationPage({ params }: { params: Promise<Params
           </p>
           <h1 className="display">{s.question}</h1>
           <p className="dek">
-            Answered from independent, dated evidence, for this situation: {askSummary(s.ask).toLowerCase()}.{' '}
+            Answered from independent, dated evidence, for this situation: {askSummary(s.ask).replace(/^(?!I[ \u2019'])\w/, (c) => c.toLowerCase())}.{' '}
             <a className="tl" href={`${REC_PATH}?${askToQuery(s.ask)}`}>
               Change the details
             </a>

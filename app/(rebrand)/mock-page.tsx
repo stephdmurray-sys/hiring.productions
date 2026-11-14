@@ -50,7 +50,7 @@ const GLOBAL_FIXES = `
   .pulse{display:none !important;}
 
   /* Type: big section titles, sentence-case labels */
-  section.wrap > h2,.content section > h2,.page-hero ~ * h2:not([style*="font-size:2"]){font-weight:800;font-size:clamp(32px,4.6vw,52px);line-height:1.06;letter-spacing:-0.02em;}
+  section.wrap > h2,.content section > h2,.page-hero ~ * h2:not([style*="font-size:2"]){font-weight:900;font-size:clamp(40px,6vw,64px);line-height:1.04;letter-spacing:-0.025em;}
   th,.v-key,.toc-h,.fh,.hdoor-label,.side-label,.pct{text-transform:none !important;letter-spacing:0 !important;}
   th{font-size:13px !important;color:var(--ink-2) !important;border-bottom:1px solid var(--ink) !important;}
   table{border-top:2px solid var(--ink);}

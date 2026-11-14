@@ -21,7 +21,7 @@ import founderPicksData from './founder-picks.json'
 import discoveryData from './discovery.json'
 import frameworkData from './framework.json'
 
-export type ListStatus = 'counts' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
+export type ListStatus = 'counts' | 'unconfirmed' | 'stale' | 'owner-conflict' | 'ranks-itself' | 'lead-page'
 export type Stance = 'agrees' | 'breaks' | 'thin'
 export type VideoKind = 'vendor' | 'independent' | 'comparison'
 export type SourceStatus = 'foundation' | 'secondary' | 'permission-pending' | 'excluded'
@@ -157,6 +157,7 @@ export const MIN_REVIEWS = 25
 
 export const STATUS_LABEL: Record<ListStatus, string> = {
   counts: 'Counts',
+  unconfirmed: 'Not yet confirmed',
   stale: 'Out of date',
   'owner-conflict': 'Owner conflict',
   'ranks-itself': 'Ranks itself',
@@ -302,13 +303,16 @@ export function formatMonth(iso: string): string {
   return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
 }
 
-/** "4.9 across 3,200 Chrome Web Store ratings": the largest usable source. */
-function headline(ratings: Rating[]): string | null {
+/**
+ * The same combined figure the scoreboard shows ("4.6 across 6,433 citable ratings"), naming the largest source when
+ * there are several, so a review never shows one number and the board another.
+ */
+function headline(ratings: Rating[], raw: number | null, citable: number): string | null {
   const used = ratings.filter((r) => !r.droppedBecause)
-  if (!used.length) return null
+  if (!used.length || raw === null || citable < MIN_REVIEWS) return null
   const top = [...used].sort((a, b) => b.reviews - a.reviews)[0]
-  if (top.reviews < MIN_REVIEWS) return null
-  return `${top.rating} across ${formatCount(top.reviews)} ${top.platform} ratings`
+  const base = `${raw.toFixed(1)} across ${formatCount(citable)} citable ratings`
+  return used.length > 1 ? `${base}, most of them on ${top.platform}` : `${base} on ${top.platform}`
 }
 
 function appearancesFor(toolId: string): { counted: Appearance[]; notCounted: Appearance[] } {
@@ -378,7 +382,7 @@ function build(tool: ScorecardTool): ToolEvidence {
     counted,
     notCounted,
     videos: videos.filter((v) => v.tool === id),
-    headlineRating: headline(ratings),
+    headlineRating: headline(ratings, rawUser, citable),
     dataNotes: tool.data_notes,
   }
 }
@@ -410,13 +414,13 @@ export function resumeTools(): { checkers: ToolEvidence[]; builders: ToolEvidenc
 }
 
 export function resumeLists(): BenchmarkList[] {
-  const order: ListStatus[] = ['counts', 'stale', 'lead-page', 'owner-conflict', 'ranks-itself']
+  const order: ListStatus[] = ['counts', 'unconfirmed', 'stale', 'lead-page', 'owner-conflict', 'ranks-itself']
   return [...benchmarks].sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status))
 }
 
-/** True while any list or video on the page still rests on search listings rather than the live page. */
+/** True while any list that counts, or any video shown, still rests on search listings rather than the live page. */
 export function hasUnverified(): boolean {
-  return benchmarks.some((l) => !l.verified) || videos.some((v) => !v.verified)
+  return benchmarks.some((l) => l.status === 'counts' && !l.verified) || videos.some((v) => !v.verified)
 }
 
 export function latestCheck(): string {
@@ -460,6 +464,8 @@ export interface RisingEvidence {
   note: string
   date: string
   url: string
+  /** False when the placement was read from a search listing and not yet confirmed on the live page. */
+  confirmed?: boolean
 }
 
 export interface RisingTool {

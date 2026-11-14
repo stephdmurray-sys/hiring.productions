@@ -1,4 +1,5 @@
 export const reviewCss = `
+  .rv-visit{margin-top:14px;font-size:16px;}
   .rv-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,0.9fr);gap:56px;align-items:start;}
   .rv-id{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
   .rv-seg{display:flex;align-items:center;font-weight:800;font-size:15px;color:var(--ink-2);}

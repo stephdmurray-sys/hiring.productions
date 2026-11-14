@@ -8,6 +8,11 @@ import { PUBLISHER_DOMAINS } from './logo'
 import type { BoardRow } from './scoreboard'
 import type { CalcTool } from './cost-calculator'
 
+/** The anchor of a system's row in the ATS guide, e.g. /guides/best-ats-for-small-teams#ats-zoho-recruit */
+export function atsHref(name: string) {
+  return `/guides/best-ats-for-small-teams#ats-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`
+}
+
 export function money(n: number) {
   return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
 }
@@ -68,7 +73,7 @@ export function hiringBoard(limit?: number): BoardRow[] {
         id: t.name,
         name: t.name,
         domain: t.domain,
-        href: '/guides/best-ats-for-small-teams',
+        href: atsHref(t.name),
         score: sc.overall,
         sub,
         parts: { users: sc.user, market: sc.market, value: sc.value },

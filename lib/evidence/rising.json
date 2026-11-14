@@ -15,14 +15,17 @@
           "domain": "skillscouter.com",
           "note": "#1 of 5 AI interview prep tools",
           "date": "2026-06",
-          "url": "https://skillscouter.com/best-ai-interview-prep-tools/"
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14"
         },
         {
           "publication": "TechPP",
           "domain": "techpp.com",
           "note": "Named in 8 AI interview prep tools",
           "date": "2026-08",
-          "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/"
+          "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/",
+          "confirmed": false
         }
       ],
       "citableReviews": null,
@@ -47,7 +50,8 @@
           "domain": "fastcompany.com",
           "note": "#3 of 5 AI tools to land a job",
           "date": "2026",
-          "url": "https://www.fastcompany.com/91514957/ai-job-search-tools"
+          "url": "https://www.fastcompany.com/91514957/ai-job-search-tools",
+          "confirmed": false
         }
       ],
       "citableReviews": null,

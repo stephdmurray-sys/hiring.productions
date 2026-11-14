@@ -154,7 +154,8 @@ function base(side: 'seekers' | 'hiring', problem: Problem): Recommendation {
     guidance: problem.guidance ?? null,
     considered: 0,
     costSpan: '',
-    checked: latestCheck(),
+    // Hiring answers rest on the applicant tracking data, which has its own check date.
+    checked: side === 'hiring' ? ats.as_of : latestCheck(),
   }
 }
 
@@ -363,7 +364,7 @@ function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean): Can
   return {
     name: j.name,
     domain: j.tool.domain,
-    href: '/guides/best-ats-for-small-teams',
+    href: `/guides/best-ats-for-small-teams#ats-${j.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
     linkText: `See ${j.name} in the standings`,
     score: s.overall,
     reasons,

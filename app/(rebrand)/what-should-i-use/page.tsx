@@ -43,7 +43,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
           <p className="crumbs">
             <a href="/">Home</a> / What should I use?
           </p>
-          <h1 className="display">What should you use?</h1>
+          <h1 className="display">What should I use?</h1>
           <p className="dek">{recFramework.promise}</p>
           <p className="dateline">
             Scores and prices checked {shortDate(latestCheck())}. No vendor can pay for a place, and commissions never touch an answer.

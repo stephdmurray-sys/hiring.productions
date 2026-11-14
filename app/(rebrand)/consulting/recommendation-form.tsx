@@ -123,7 +123,7 @@ export function RecommendationForm() {
           <span className="rec-n">4</span>
           <span>
             <b>From a practitioner, not a portal.</b> Written by Stephanie
-            Murray: 18 years in-house, scaled a healthcare company from 19
+            Murray: 20 years in talent, scaled a healthcare company from 19
             employees to 1,500 clinicians.
           </span>
         </div>

@@ -153,8 +153,8 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       {hasUnverified() && (
         <div className="demo-note">
           <div className="wrap">
-            <b>Demo build.</b> Some list placements and videos were read from search listings and are confirmed on the live page at the next
-            monthly check.
+            <b>Still being confirmed.</b> A list placement or video on this page was read from a search listing and is confirmed on the live
+            page at the next monthly check.
           </div>
         </div>
       )}
@@ -181,6 +181,11 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
               <p className="dateline">
                 Checked {shortDate(checked)} &middot; next check {formatMonth(guide.nextCheck)} &middot;{' '}
                 <a href={`/guides/best-resume-tools#evidence-${t.id}`}>full evidence file</a>
+              </p>
+              <p className="rv-visit">
+                <a className="tl tl-strong" href={`/go/${t.id}`} rel="nofollow">
+                  Go to {t.name}&rsquo;s site <span className="arr">&#8599;</span>
+                </a>
               </p>
             </div>
 

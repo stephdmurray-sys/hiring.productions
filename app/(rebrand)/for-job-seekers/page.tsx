@@ -42,7 +42,7 @@ export default function Page() {
       situations={[
         {
           q: 'Applying and hearing nothing back?',
-          a: "Silence usually means the applicant tracking system can't read your resume. Run it through a checker before the next application goes out.",
+          a: "Silence often starts with the screen, not the reader: 88% of employers in a Harvard Business School study agreed their systems filter out qualified people who don\u2019t match the posting\u2019s exact criteria. Use the posting\u2019s words, then run a checker.",
           href: '/guides/best-resume-tools#rankings',
           link: 'See the ATS checkers',
         },

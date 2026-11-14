@@ -68,7 +68,8 @@ function WingRow({ t }: { t: RisingTool }) {
                   <a href={e.url} rel="nofollow noopener" target="_blank">
                     {e.publication}
                   </a>
-                  : {e.note.charAt(0).toLowerCase() + e.note.slice(1)} ({e.date.length > 4 ? formatMonth(e.date) : e.date})
+                  : {e.note.charAt(0).toLowerCase() + e.note.slice(1)} ({e.date.length > 4 ? formatMonth(e.date) : e.date}
+                  {e.confirmed === false ? ', not yet confirmed on the page' : ''})
                   {i < t.evidence.length - 1 ? ';' : ''}
                 </span>
               </span>

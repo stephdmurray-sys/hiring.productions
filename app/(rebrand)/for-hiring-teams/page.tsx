@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Hub } from '@/app/(rebrand)/_components/hub'
-import { atsAsOf, atsTools, hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
+import { atsAsOf, atsHref, atsTools, hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
 import { atsLeaders, atsScores, formatMonth, guide, hiringPick } from '@/lib/evidence'
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default function Page() {
       title="The software behind well-run hiring, ranked on the evidence."
       dek="Applicant tracking systems ranked by team size on dated public data: what users say, how the market is moving, and whether the price is public. Every number has a date and a source."
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
-      logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: '/guides/best-ats-for-small-teams', tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
+      logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: atsHref(t.name), tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
       feature={{
         domain: hiringPick.domain,
         name: hiringPick.name,
@@ -49,7 +49,7 @@ export default function Page() {
             .filter((t) => t.segment === 'small' && t.sources.free_tier)
             .map((t) => t.name)
             .join(' and ')} have free tiers.`,
-          href: '/guides/best-ats-for-small-teams',
+          href: '/guides/best-ats-for-small-teams#tier-small',
           link: 'See the small-team standings',
         },
         {
@@ -58,7 +58,7 @@ export default function Page() {
             topUsers.name === growing.name
               ? `${growing.name} leads the growing-team standings and has the highest user ratings of all ${atsTools.length}.`
               : `${growing.name} leads the growing-team standings on the data. ${topUsers.name} has the highest user ratings of all ${atsTools.length} (${topUsers.computed.user_score.toFixed(2)})${atsScores(topUsers).value <= 2 ? ', but its price is quote-only' : ''}.`,
-          href: '/guides/best-ats-for-small-teams',
+          href: '/guides/best-ats-for-small-teams#tier-growing',
           link: 'See the growing-team standings',
         },
         {
@@ -67,7 +67,7 @@ export default function Page() {
             .filter((t) => t.segment === 'scaling' && atsScores(t).value <= 2)
             .map((t) => t.name)
             .join(', ')} are quote-only.`,
-          href: '/guides/best-ats-for-small-teams',
+          href: '/guides/best-ats-for-small-teams#tier-scaling',
           link: 'See the scaling-team standings',
         },
         {
@@ -80,11 +80,13 @@ export default function Page() {
       situationsCta={{
         text: 'Tell us how many people you hire, how big you are and what you can spend. We rule out every system that doesn\u2019t fit and give you one pick, with the real price.',
         href: '/what-should-i-use?side=hiring#questions',
-        label: 'What should we use?',
+        label: 'What should I use?',
       }}
       board={{
         title: 'Applicant tracking systems',
         checked: `data as of ${shortDate(atsAsOf)}`,
+        heading: 'Where the systems stand',
+        lead: `Ratings and prices as of ${shortDate(atsAsOf)}. The next full re-read is at the December check.`,
         rows: hiringBoard().map((r) => ({ ...r, tag: tagFor[r.id] })),
         foot: <>Ranked here on one board. The guide splits them by team size: small, growing and scaling.</>,
       }}

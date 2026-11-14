@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-resume-tools' },
   title: 'The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Evidence',
   description:
-    'Ten resume builders and ATS checkers ranked on citable public evidence, checked every month against the other lists you are likely to read, with labeled demo videos and what a year of each tool costs.',
+    'Resume builders and ATS checkers ranked on citable public evidence, checked every month against the other lists you are likely to read, with labeled demo videos and what a year of each tool costs.',
 }
 
 const SEGMENT_LABEL = { checker: 'Checker', builder: 'Builder' } as const
@@ -336,8 +336,8 @@ export default function Page() {
       {hasUnverified() && (
         <div className="demo-note">
           <div className="wrap">
-            <b>Demo build.</b> Other reviewers&rsquo; lists and video labels on this page came from search listings on {formatDate(checked)}.
-            Each one is confirmed on the live page at the {formatMonth(guide.nextCheck)} check.
+            <b>Still being confirmed.</b> A list placement or video on this page was read from a search listing and is confirmed on the live
+            page at the next monthly check.
           </div>
         </div>
       )}

@@ -13,53 +13,125 @@
       "publication": "Zapier",
       "title": "The 6 best AI resume builders in 2026",
       "url": "https://zapier.com/blog/best-resume-builder/",
-      "covers": ["builders"],
+      "covers": [
+        "builders",
+        "checkers"
+      ],
       "format": "picks",
       "picks": [
-        { "tool": "resume-io" },
-        { "tool": "kickresume" },
-        { "tool": "teal" }
+        {
+          "tool": "teal"
+        },
+        {
+          "tool": "resume-io"
+        },
+        {
+          "tool": "kickresume"
+        },
+        {
+          "tool": "resume-worded"
+        },
+        {
+          "name": "ResumeNerd"
+        },
+        {
+          "tool": "jobscan"
+        }
       ],
-      "picksComplete": false,
+      "picksComplete": true,
       "edition": "2026",
       "status": "counts",
-      "reason": "2026 edition. No ownership conflict found.",
-      "checked": "2026-11-13",
-      "verified": false
+      "reason": "2026 edition, all six picks read on the live page on November 14, 2026. Each pick is \"best for\" a use, not a rank. No ownership conflict found.",
+      "checked": "2026-11-14",
+      "verified": true
     },
     {
       "id": "geekflare-resume-builders",
       "publication": "Geekflare",
       "title": "12 Best Resume Builders of 2026",
       "url": "https://geekflare.com/guides/best-resume-builders/",
-      "covers": ["builders"],
+      "covers": [
+        "builders",
+        "checkers"
+      ],
       "format": "ranked",
-      "picks": [{ "name": "VisualCV" }],
-      "picksComplete": false,
+      "picks": [
+        {
+          "name": "VisualCV"
+        },
+        {
+          "tool": "kickresume"
+        },
+        {
+          "name": "Toptal Resume"
+        },
+        {
+          "tool": "resume-io"
+        },
+        {
+          "tool": "huntr"
+        },
+        {
+          "name": "Canva"
+        },
+        {
+          "tool": "novoresume"
+        },
+        {
+          "tool": "enhancv"
+        },
+        {
+          "tool": "teal"
+        },
+        {
+          "tool": "jobscan"
+        },
+        {
+          "name": "ResumeGenius"
+        },
+        {
+          "name": "Resume.com (by Indeed)"
+        }
+      ],
+      "picksComplete": true,
       "edition": "2026",
       "status": "counts",
-      "reason": "2026 edition. No ownership conflict found. Only its first pick was visible; the full order is confirmed at the live check.",
-      "checked": "2026-11-13",
-      "verified": false
+      "reason": "Updated October 26, 2026. All twelve picks read on the live page on November 14, 2026; listed, not ranked. No ownership conflict found.",
+      "checked": "2026-11-14",
+      "verified": true
     },
     {
       "id": "fastcompany-ai-job-tools",
       "publication": "Fast Company",
       "title": "Use these 5 great AI-powered tools to land a new job this year",
       "url": "https://www.fastcompany.com/91514957/ai-job-search-tools",
-      "covers": ["checkers"],
+      "covers": [
+        "checkers"
+      ],
       "format": "ranked",
       "picks": [
-        { "tool": "teal", "position": 1 },
-        { "name": "JobCopilot", "position": 2 },
-        { "name": "Revarta", "position": 3 },
-        { "tool": "jobscan", "position": 5 }
+        {
+          "tool": "teal",
+          "position": 1
+        },
+        {
+          "name": "JobCopilot",
+          "position": 2
+        },
+        {
+          "name": "Revarta",
+          "position": 3
+        },
+        {
+          "tool": "jobscan",
+          "position": 5
+        }
       ],
       "picksComplete": false,
       "edition": "2026",
-      "status": "counts",
-      "reason": "Published in 2026. No ownership conflict found.",
-      "checked": "2026-11-13",
+      "status": "unconfirmed",
+      "reason": "Fast Company's page blocks automated readers, so these placements (read from search listings on November 13, 2026) are not yet confirmed on the page. They don't count until a person confirms them.",
+      "checked": "2026-11-14",
       "verified": false
     },
     {
@@ -67,34 +139,88 @@
       "publication": "SkillScouter",
       "title": "Best AI Tools for Job Seekers in 2026 (Tested & Ranked)",
       "url": "https://skillscouter.com/best-ai-tools-for-job-seekers/",
-      "covers": ["checkers"],
+      "covers": [
+        "builders",
+        "checkers"
+      ],
       "format": "ranked",
       "picks": [
-        { "name": "ChatGPT", "position": 1 },
-        { "name": "Claude", "position": 2 },
-        { "tool": "teal", "position": 3 },
-        { "tool": "jobscan", "position": 4 }
+        {
+          "name": "ChatGPT",
+          "position": 1
+        },
+        {
+          "name": "Claude",
+          "position": 2
+        },
+        {
+          "tool": "teal",
+          "position": 3
+        },
+        {
+          "tool": "jobscan",
+          "position": 4
+        },
+        {
+          "tool": "kickresume",
+          "position": 5
+        },
+        {
+          "tool": "rezi",
+          "position": 6
+        },
+        {
+          "tool": "resume-worded",
+          "position": 7
+        },
+        {
+          "name": "LinkedIn AI Features",
+          "position": 8
+        },
+        {
+          "name": "Interview Warmup by Google",
+          "position": 9
+        },
+        {
+          "tool": "huntr",
+          "position": 10
+        }
       ],
-      "picksComplete": false,
+      "picksComplete": true,
       "edition": "2026",
       "status": "counts",
-      "reason": "2026 edition. No ownership conflict found.",
-      "checked": "2026-11-13",
-      "verified": false
+      "reason": "Updated June 26, 2026. Ranked 1 to 10, all read on the live page on November 14, 2026. No ownership conflict found.",
+      "checked": "2026-11-14",
+      "verified": true
     },
     {
       "id": "forbes-vetted-resume-builders",
       "publication": "Forbes Vetted",
       "title": "The 6 Best Resume Builders",
       "url": "https://www.forbes.com/sites/forbes-personal-shopper/article/best-resume-builders/",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "ranked",
       "picks": [
-        { "tool": "kickresume", "position": 1 },
-        { "name": "Resume.com", "position": 2 },
-        { "name": "Resume Now", "position": 3 },
-        { "tool": "zety" },
-        { "name": "MyPerfectResume" }
+        {
+          "tool": "kickresume",
+          "position": 1
+        },
+        {
+          "name": "Resume.com",
+          "position": 2
+        },
+        {
+          "name": "Resume Now",
+          "position": 3
+        },
+        {
+          "tool": "zety"
+        },
+        {
+          "name": "MyPerfectResume"
+        }
       ],
       "picksComplete": false,
       "edition": "2024",
@@ -108,9 +234,16 @@
       "publication": "TechRadar",
       "title": "Best resume builder of 2025",
       "url": "https://www.techradar.com/best/best-resume-builder",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "ranked",
-      "picks": [{ "name": "Indeed", "position": 1 }],
+      "picks": [
+        {
+          "name": "Indeed",
+          "position": 1
+        }
+      ],
       "picksComplete": false,
       "edition": "2025",
       "status": "stale",
@@ -123,12 +256,20 @@
       "publication": "The Muse",
       "title": "5 Best AI Resume Builders to Consider in 2024",
       "url": "https://www.themuse.com/advice/best-ai-resume-builders",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "picks",
       "picks": [
-        { "tool": "resume-io" },
-        { "tool": "zety" },
-        { "tool": "rezi" }
+        {
+          "tool": "resume-io"
+        },
+        {
+          "tool": "zety"
+        },
+        {
+          "tool": "rezi"
+        }
       ],
       "picksComplete": false,
       "edition": "2024",
@@ -142,12 +283,20 @@
       "publication": "Money",
       "title": "10 Best Resume Builders",
       "url": "https://money.com/best-resume-builder/",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "picks",
       "picks": [
-        { "name": "Resume Genius" },
-        { "name": "Canva" },
-        { "tool": "resume-io" }
+        {
+          "name": "Resume Genius"
+        },
+        {
+          "name": "Canva"
+        },
+        {
+          "tool": "resume-io"
+        }
       ],
       "picksComplete": false,
       "edition": "2023",
@@ -161,12 +310,23 @@
       "publication": "MakeUseOf",
       "title": "5 Resume Scanners You Can Use to Develop an ATS-Friendly Resume",
       "url": "https://www.makeuseof.com/ats-friendly-resume-scanners-to-help/",
-      "covers": ["checkers"],
+      "covers": [
+        "checkers"
+      ],
       "format": "ranked",
       "picks": [
-        { "tool": "resume-worded", "position": 1 },
-        { "tool": "jobscan", "position": 2 },
-        { "name": "SkillSyncer", "position": 3 }
+        {
+          "tool": "resume-worded",
+          "position": 1
+        },
+        {
+          "tool": "jobscan",
+          "position": 2
+        },
+        {
+          "name": "SkillSyncer",
+          "position": 3
+        }
       ],
       "picksComplete": false,
       "edition": "2023",
@@ -180,13 +340,27 @@
       "publication": "Forbes Advisor",
       "title": "Best Resume Builders for 2026",
       "url": "https://www.forbes.com/advisor/l/resume-builder/",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "ranked",
       "picks": [
-        { "name": "Resume Now", "position": 1 },
-        { "name": "MyPerfectResume", "position": 2 },
-        { "tool": "zety", "position": 3 },
-        { "name": "LiveCareer", "position": 4 }
+        {
+          "name": "Resume Now",
+          "position": 1
+        },
+        {
+          "name": "MyPerfectResume",
+          "position": 2
+        },
+        {
+          "tool": "zety",
+          "position": 3
+        },
+        {
+          "name": "LiveCareer",
+          "position": 4
+        }
       ],
       "picksComplete": false,
       "edition": "2026",
@@ -200,13 +374,27 @@
       "publication": "FlexJobs",
       "title": "7 Best Resume Builders in 2026",
       "url": "https://www.flexjobs.com/blog/post/best-resume-builders-today-ranked",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "ranked",
       "picks": [
-        { "name": "MyPerfectResume", "position": 1 },
-        { "name": "Monster", "position": 2 },
-        { "name": "LiveCareer", "position": 3 },
-        { "tool": "zety", "position": 4 }
+        {
+          "name": "MyPerfectResume",
+          "position": 1
+        },
+        {
+          "name": "Monster",
+          "position": 2
+        },
+        {
+          "name": "LiveCareer",
+          "position": 3
+        },
+        {
+          "tool": "zety",
+          "position": 4
+        }
       ],
       "picksComplete": true,
       "edition": "2026",
@@ -220,15 +408,30 @@
       "publication": "Monster",
       "title": "10 Best Resume Builders in 2026",
       "url": "https://www.monster.com/career-advice/resume/best-resume-builders-today",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "ranked",
       "picks": [
-        { "name": "Monster", "position": 1 },
-        { "name": "MyPerfectResume" },
-        { "tool": "zety" },
-        { "name": "LiveCareer" },
-        { "tool": "teal" },
-        { "tool": "kickresume" }
+        {
+          "name": "Monster",
+          "position": 1
+        },
+        {
+          "name": "MyPerfectResume"
+        },
+        {
+          "tool": "zety"
+        },
+        {
+          "name": "LiveCareer"
+        },
+        {
+          "tool": "teal"
+        },
+        {
+          "tool": "kickresume"
+        }
       ],
       "picksComplete": false,
       "edition": "2026",
@@ -242,12 +445,20 @@
       "publication": "Indeed",
       "title": "15 Popular Resume Programs To Consider for Your Job Search",
       "url": "https://www.indeed.com/career-advice/resumes-cover-letters/resume-programs",
-      "covers": ["builders"],
+      "covers": [
+        "builders"
+      ],
       "format": "picks",
       "picks": [
-        { "name": "Indeed" },
-        { "tool": "zety" },
-        { "name": "VisualCV" }
+        {
+          "name": "Indeed"
+        },
+        {
+          "tool": "zety"
+        },
+        {
+          "name": "VisualCV"
+        }
       ],
       "picksComplete": false,
       "edition": "2026",

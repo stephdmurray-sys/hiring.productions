@@ -7,7 +7,7 @@ import { JsonLd, graph, atsRankingLd, atsToolsLd } from '@/app/(rebrand)/_compon
 
 export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-ats-for-small-teams' },
-  title: 'The 14 Best Applicant Tracking Systems of 2026, Ranked by Team Size',
+  title: 'The Best Applicant Tracking Systems of 2026, Ranked by Team Size',
   description:
     'The best ATS for small, growing, and scaling teams, ranked within each tier on dated public data: user ratings, market traction and whether the price is public.',
 }
@@ -54,7 +54,7 @@ function rebuildTables(src: string): string {
     const body = parsed
       .map((r, i) => {
         const s = atsScores(r.t)
-        return `<tr><td>${i + 1}</td><td>${r.cells[1]}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(1)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
+        return `<tr id="ats-${slugOf(r.name)}"><td>${i + 1}</td><td>${r.cells[1]}</td><td>${r.cells[2]}</td><td>${r.cells[3]}</td><td>${r.cells[4]}</td><td>${r.cells[5]}</td><td>${s.market.toFixed(2)}</td><td>${s.user.toFixed(2)}</td><td>${s.value.toFixed(1)}</td><td><span class="tscore">${s.overall.toFixed(2)}</span></td></tr>`
       })
       .join('\n      ')
     return `<div class="tscroll"><table>\n      ${head}\n      ${body}\n    </table>`
@@ -107,6 +107,14 @@ function rebuildFootnote(src: string): string {
   )
 }
 
+/** Each team-size tier gets an anchor, so links can land on the right standings. */
+function tierAnchors(src: string): string {
+  return src
+    .replace(';">Small teams: under 20 hires a year</h3>', ';" id="tier-small">Small teams: under 20 hires a year</h3>')
+    .replace(';">Growing teams: 20 to 50 hires a year</h3>', ';" id="tier-growing">Growing teams: 20 to 50 hires a year</h3>')
+    .replace(';">Scaling teams: 50+ hires a year</h3>', ';" id="tier-scaling">Scaling teams: 50+ hires a year</h3>')
+}
+
 /** Videos play inline on this page: no related videos from other channels, no redirect. */
 function inlineVideos(src: string): string {
   return src.replace(
@@ -117,7 +125,7 @@ function inlineVideos(src: string): string {
 }
 
 export default function Page() {
-  const out = inlineVideos(rebuildFootnote(rebuildReviews(rebuildPicks(rebuildTables(html)))))
+  const out = tierAnchors(inlineVideos(rebuildFootnote(rebuildReviews(rebuildPicks(rebuildTables(html))))))
   return (
     <>
       <JsonLd data={graph(atsRankingLd(), ...atsToolsLd())} />

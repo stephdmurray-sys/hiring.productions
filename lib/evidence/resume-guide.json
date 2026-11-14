@@ -29,7 +29,7 @@
   "risingPick": {
     "tool": "flowcv",
     "label": "Stephanie's up-and-coming pick",
-    "line": "The one I'd tell a friend about first. It's the only builder here that hands you a clean, watermark-free PDF for nothing, and the people using it rate it as high as anything in the category.",
+    "line": "The one I'd tell a friend about first. It hands you a clean, watermark-free PDF for nothing, and the people using it rate it as high as anything in the category.",
     "confirmed": false
   },
   "tools": {
@@ -40,7 +40,7 @@
         "line": "Three current lists name Teal, and we rank it first too. The reason is boring and rare: the free tier is a real product."
       },
       "verdict": {
-        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free tier is a real product, and 200,000 Chrome users rate it 4.9.",
+        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free tier is a real product, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
         "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
         "like": "Free tier that does not hold your resume hostage. Quarterly billing at $79 is the sane paid option.",
         "watch": "The $13 weekly plan reads cheap and compounds fast. Pick monthly or quarterly, never weekly."
@@ -59,7 +59,7 @@
       "bestFor": "Deep per-job match reports",
       "call": {
         "stance": "agrees",
-        "line": "Two current lists name Jobscan for per-job matching. It ranks third of the checkers we can score here: its users rate it below Teal's and Huntr's, and a year costs $359.80."
+        "line": "Three current lists name Jobscan. It ranks third of the checkers we can score here: its users rate it below Teal's and Huntr's, and a year costs $359.80."
       },
       "verdict": null,
       "pricingLine": "5 free scans a month · $49.95/mo or $89.95/quarter",
@@ -76,7 +76,7 @@
       "bestFor": "Instant free score; the fixes cost $49/mo",
       "call": {
         "stance": "thin",
-        "line": "One list names it, and that list is about three years old. With 9 citable reviews, nobody has enough evidence to rank it, us included."
+        "line": "Zapier and SkillScouter (#7) both name it, but with 9 citable reviews there isn't enough user evidence to score it, here or anywhere."
       },
       "verdict": null,
       "pricingLine": "Free score only · $49/mo or $229/yr",
@@ -93,7 +93,7 @@
       "bestFor": "Best paid builder. Templates recruiters read",
       "call": {
         "stance": "agrees",
-        "line": "Zapier picks it and so do we. $96 a year is the whole price, which in this category counts as a feature."
+        "line": "Zapier, Geekflare and SkillScouter (#5) all name it, and it tops our builders too. $96 a year is the whole price, which in this category counts as a feature."
       },
       "verdict": {
         "bestIf": "You want a polished paid builder without billing games: $96 a year, flat, with 6,400 mobile ratings averaging 4.6 to back it up.",
@@ -115,7 +115,7 @@
       "bestFor": "The genuinely free builder. No watermark",
       "call": {
         "stance": "breaks",
-        "line": "None of the current lists we've checked so far names FlowCV. We rank it the best free builder anyway: it's the only one here that hands you a clean PDF for nothing."
+        "line": "None of the current lists we've checked names FlowCV. It earns its place on its users: 4.9 from 83 citable ratings, and a free plan that gives you a watermark-free PDF."
       },
       "verdict": null,
       "pricingLine": "Free · Pro $60/yr",
@@ -131,8 +131,8 @@
     "rezi": {
       "bestFor": "ATS-first formatting; $149 lifetime option",
       "call": {
-        "stance": "breaks",
-        "line": "So far only a 2024 list mentions Rezi. We rank it third of seven builders for ATS-first formatting and a $149 lifetime plan that never renews."
+        "stance": "agrees",
+        "line": "SkillScouter ranks Rezi sixth, and we rank it third of the builders we can score: ATS-first formatting and a $149 lifetime plan that never renews."
       },
       "verdict": null,
       "pricingLine": "1 resume and 3 PDFs free · $29/mo or $149 lifetime",
@@ -149,7 +149,7 @@
       "bestFor": "Polished editor behind a billing trap",
       "call": {
         "stance": "breaks",
-        "line": "Zapier picks Resume.io. We rank it fourth of seven: the $2.95 trial renews at $29.95 every 4 weeks, and creators are now posting how-to-cancel videos."
+        "line": "Zapier and Geekflare both name Resume.io. We rank it last of the builders we can score: the $2.95 trial renews at $29.95 every 4 weeks, and creators are now posting how-to-cancel videos."
       },
       "verdict": {
         "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you treat it as a $2.95 one-week rental.",
@@ -171,7 +171,7 @@
       "bestFor": "Design-forward, trial-only",
       "call": {
         "stance": "thin",
-        "line": "Not on the current lists we've checked so far, and it has 1 citable review. No free plan, and the trial watermarks your download."
+        "line": "Geekflare names it, but it has 1 citable review, too few to score. No free plan, and the trial watermarks your download."
       },
       "verdict": null,
       "pricingLine": "7-day watermarked trial · from about $13.33/mo on 6-month billing",
@@ -189,7 +189,7 @@
       "bestFor": "Clean free one-pager",
       "call": {
         "stance": "thin",
-        "line": "Not on the current lists we've checked so far, and there are no citable reviews to score yet."
+        "line": "Geekflare names it, but there are no citable reviews to score yet."
       },
       "verdict": null,
       "pricingLine": "Free 1-page PDF · $19.99/mo",
@@ -222,8 +222,8 @@
     "huntr": {
       "bestFor": "Job tracker, resume builder and autofill in one. Real free plan",
       "call": {
-        "stance": "breaks",
-        "line": "None of the current independent lists we've checked names Huntr yet. It earns its place on its users: 4.6 from about 1,300 Chrome Web Store ratings, and a free plan that exports a real PDF."
+        "stance": "agrees",
+        "line": "Geekflare and SkillScouter (#10) both name Huntr, and its users back them: 4.6 from about 1,300 Chrome Web Store ratings, and a free plan that exports a real PDF."
       },
       "verdict": null,
       "pricingLine": "Free plan with PDF export · Pro $40/mo, $90/quarter or $160 per 6 months",

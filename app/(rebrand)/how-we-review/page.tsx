@@ -51,7 +51,10 @@ function researchSections() {
 function recommendSection() {
   const rule = (r: string) => {
     const i = r.indexOf('. ')
-    return i === -1 ? `<tr><td><b>${esc(r)}</b></td><td></td></tr>` : `<tr><td><b>${esc(r.slice(0, i + 1))}</b></td><td>${esc(r.slice(i + 2))}</td></tr>`
+    if (i !== -1) return `<tr><td><b>${esc(r.slice(0, i + 1))}</b></td><td>${esc(r.slice(i + 2))}</td></tr>`
+    const c = r.indexOf(': ')
+    if (c !== -1) return `<tr><td><b>${esc(r.slice(0, c))}.</b></td><td>${esc(r.charAt(c + 2).toUpperCase() + r.slice(c + 3))}</td></tr>`
+    return `<tr><td colspan="2"><b>${esc(r)}</b></td></tr>`
   }
   const research = recFramework.research
     .map(
