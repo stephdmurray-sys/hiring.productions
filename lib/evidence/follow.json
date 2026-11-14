@@ -1,5 +1,5 @@
 {
-  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Held back: Adam Karpiak, because no source confirmed the humor.",
+  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Added Nov 14, 2026 (hiring side): Laurie Ruettimann, Kat Kibben, Ashley Herd, Josh Bersin and HR Besties, each confirmed through their own YouTube channel (links and photo). Josh Bersin's card discloses Galileo, which is in our recruiter training guide. Next, once their links can be confirmed from their own pages: Steve Browne (SHRM, May 2026, calls him a SHRM conference favorite; CPO at LaRosa's), Jennifer McClure (DisruptHR), Ben Eubanks (Lighthouse Research), Adam Karpiak (LinkedIn's own Talent Blog profiled his humor), Bonnie Dilber (reviews resumes for Resume Genius, a resume builder; disclose if added), Johnny Campbell (SocialTalent is in our training guide; disclose if added).",
   "approved": false,
   "checked": "2026-11-14",
   "rows": [
@@ -208,6 +208,119 @@
       ]
     },
     {
+      "id": "kat-kibben",
+      "name": "Kat Kibben",
+      "known": "Three Ears Media",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "How to write job posts the right candidates actually answer.",
+      "photo": "/people/kat-kibben.jpg",
+      "photoSource": "YouTube @KatrinaKibben (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/katrinakibben/"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/katrinakibben"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@KatrinaKibben"
+        },
+        {
+          "label": "Website",
+          "url": "https://threeearsmedia.com"
+        }
+      ]
+    },
+    {
+      "id": "ashley-herd",
+      "name": "Ashley Herd",
+      "known": "Manager Method",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Plain, practical training for managers, the people who make most hiring decisions.",
+      "photo": "/people/ashley-herd.jpg",
+      "photoSource": "YouTube Manager Method channel avatar, cropped",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/channel/UC61BD2RSgpaO1t-V16wEYdA"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://www.managermethod.com/newsletter"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.managermethod.com"
+        }
+      ]
+    },
+    {
+      "id": "josh-bersin",
+      "name": "Josh Bersin",
+      "known": "The Josh Bersin Company",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "An HR industry analyst who tracks where HR and HR technology are heading.",
+      "note": "The Josh Bersin Company sells Galileo, which appears in our recruiter training guide.",
+      "photo": "/people/josh-bersin.jpg",
+      "photoSource": "YouTube @JoshBersinCompany channel avatar, cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/bersin"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@JoshBersinCompany"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/Josh_Bersin"
+        },
+        {
+          "label": "Website",
+          "url": "https://joshbersin.com"
+        }
+      ]
+    },
+    {
+      "id": "laurie-ruettimann",
+      "name": "Laurie Ruettimann",
+      "known": "Punk Rock HR",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "Two decades in HR, now telling the truth about what HR and hiring teams get wrong.",
+      "photo": "/people/laurie-ruettimann.jpg",
+      "photoSource": "YouTube @laurieruettimann (her own channel avatar), cropped",
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://laurieruettimann.com/podcast/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/laurieruettimann"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/lruettimann"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@laurieruettimann"
+        },
+        {
+          "label": "Website",
+          "url": "https://laurieruettimann.com"
+        }
+      ]
+    },
+    {
       "id": "tim-sackett",
       "name": "Tim Sackett",
       "known": "The Tim Sackett Project",
@@ -232,6 +345,22 @@
         {
           "label": "Instagram",
           "url": "https://www.instagram.com/timsackett/"
+        }
+      ]
+    },
+    {
+      "id": "hr-besties",
+      "name": "Jamie Jackson, Ashley Herd and Leigh Elena Henderson",
+      "known": "HR Besties",
+      "side": "hiring",
+      "vibe": "funny",
+      "why": "Three HR pros talking honestly about work, with plenty of jokes.",
+      "photo": "/people/hr-besties.jpg",
+      "photoSource": "YouTube @hrbestiespod channel avatar (the three hosts)",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@hrbestiespod"
         }
       ]
     },
