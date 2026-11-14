@@ -135,7 +135,7 @@ export const html = `<style>
       <p class="crumbs" style="font-size:12.5px;color:#8B7FBF;margin-bottom:16px;"><a href="/" style="color:#B3A8DE;">Home</a> &rsaquo; <a href="/for-hiring-teams" style="color:#B3A8DE;">For hiring teams</a> &rsaquo; Recruiter training</p>
       <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);line-height:1.2;margin-bottom:12px;max-width:840px;">The Best Recruiter Training and Certifications of 2026</h1>
       <p class="byline" style="font-size:12.5px;color:#B3A8DE;">Updated August 23, 2026 &middot; 19 programs researched &middot; <a href="/how-we-review" style="color:#D6CCF5;">How we review</a></p>
-      <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">Some links below are affiliate links: if you buy through them, the provider pays us a commission. Our three top picks currently pay us nothing. Placement, rankings, and scores cannot be bought. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
+      <div class="disclosure" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:10px 16px;font-size:12.5px;color:#C9BFE8;margin-top:16px;max-width:840px;">Some links below can be affiliate links: if you buy through one, the provider pays us a commission. Our three top picks currently pay us nothing. Placement, rankings, and scores cannot be bought. <a href="/advertiser-disclosure" style="color:#fff;">Full disclosure</a></div>
     </div>
   </div>
 

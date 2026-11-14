@@ -80,6 +80,11 @@ export function GET() {
 
 Evidence last checked: ${latestCheck()}. Re-checked monthly.
 
+## Who is behind it
+
+- Stephanie Murray, founder: 20 years in talent, Senior Director of Talent Acquisition at Brightside Health. Her team cut average clinician time-to-hire to 15 days and onboarding times by more than half, and won Talent Strategy of the Year at the 2025 Transform Awards (Transform Awards Winner Spotlight, May 19, 2025: https://www.transform.us/articles/brightside-health-transform-award-talent-strategy/). Page: ${BASE}/about/stephanie
+- Ownership: hiring.productions is made by the team behind RepVera. RepVera is never ranked, scored or recommended here, and reference checking, the category it competes in, is never scored. Details: ${BASE}/advertiser-disclosure
+
 ## How a score is built
 
 ${framework.summary}

@@ -13,8 +13,9 @@ hiring.productions and RepVera share an owner. The FTC's rule on reviews, 16 CFR
 - RepVera never appears in a score, ranking, scoreboard, recommender pick or alternative, "best" list, On the rise entry or comparison table.
 - We never score reference checking, the category RepVera competes in (Stephanie, Nov 14, 2026). If it ever needs covering, it is coverage without scores, with the relationship disclosed at the top.
 - What RepVera is: hiring teams ask for a candidate's RepVera early in the process, from application through interviews depending on the team, to see verified experiences of what someone is like to work with; candidates share theirs too. It is not a late-stage reference check: never describe it as one, or as the last step.
-- RepVera may appear only: in the footer disclosure; in a labeled note ("From the team behind hiring.productions") beside our screening and interview tools (the fraud checklist, the scorecard builder, interview prep) and the cost of a mis-hire; in a hiring-team welcome email from those tools, labeled; in a conversation someone asked for. Every link goes to repvera.com, tagged.
+- RepVera may appear only: in the footer disclosure; as a plain ownership statement on the advertiser disclosure and About pages (what it is and why it is never ranked, no pitch); in a labeled note ("From the team behind hiring.productions") beside our screening and interview tools (the fraud checklist, the scorecard builder, interview prep) and the cost of a mis-hire; in a hiring-team welcome email from those tools, labeled; in a conversation someone asked for. Every link goes to repvera.com, tagged.
 - Commissions and the RepVera relationship are never inputs to anything in `lib/evidence`.
+- Stack requests from /consulting join the same lead record (`lead:{emailHash}`, source `stack_request`, audience `hiring`) and the Resend audience, so a team that asked for a stack and later used the scorecard is one relationship, not two.
 
 ## Asking for an email
 

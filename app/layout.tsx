@@ -104,11 +104,11 @@ const jsonLd = {
       worksFor: {
         '@id': 'https://hiring.productions/#organization',
       },
-      url: 'https://hiring.productions',
+      url: 'https://hiring.productions/about/stephanie',
       sameAs: [
         'https://www.linkedin.com/in/stephaniemurray11/',
       ],
-      description: '18+ years of talent acquisition experience. Transform Award Winner, Talent Strategy of the Year 2025.',
+      description: 'Founder of hiring.productions, 20 years in talent acquisition. Her talent team won Talent Strategy of the Year at the 2025 Transform Awards.',
       knowsAbout: [
         'Recruitment Marketing',
         'Employer Branding',

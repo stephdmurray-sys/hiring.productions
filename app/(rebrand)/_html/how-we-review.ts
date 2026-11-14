@@ -310,7 +310,7 @@ export const html = `<style>
         </p>
       </section>
 
-      <p style="font-size:12.5px;color:var(--gray-lt);line-height:1.7;max-width:720px;margin-top:8px;">Some links on this site are affiliate links: vendors pay us a commission when readers buy, never for placement, rankings, or scores. Details in the <a href="/advertiser-disclosure" style="color:var(--purple);font-weight:600;">advertiser disclosure</a>.</p>
+      <p style="font-size:12.5px;color:var(--gray-lt);line-height:1.7;max-width:720px;margin-top:8px;">Some links on this site can be affiliate links: vendors pay us a commission when readers buy, never for placement, rankings, or scores. Details in the <a href="/advertiser-disclosure" style="color:var(--purple);font-weight:600;">advertiser disclosure</a>.</p>
 
       <section id="vendors">
         <div class="vendor-cta">

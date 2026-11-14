@@ -104,7 +104,7 @@ export default function Page() {
           <div className="prose">
             <p>No vendor can pay for a score or for a place in a ranking.</p>
             <p>
-              Some links on the site are affiliate links, and they never touch the scores. Several of our top picks pay us nothing at all.
+              Some links on the site can be affiliate links, and they never touch the scores. Several of our top picks pay us nothing at all.
               Early-stage products can go on our radar before they enter the rankings.
             </p>
             <p>

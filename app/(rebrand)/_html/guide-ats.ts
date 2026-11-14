@@ -143,7 +143,7 @@ export const html = `<style>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>
       <p class="disclosure">
-        Some links below are affiliate links: if you buy through them, the
+        Some links below can be affiliate links: if you buy through one, the
         vendor pays us a commission. Vendors cannot pay for placement, rankings,
         or scores. <a href="/advertiser-disclosure" style="color:#fff;text-decoration:underline;">Full disclosure</a>
       </p>

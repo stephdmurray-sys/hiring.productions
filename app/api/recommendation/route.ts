@@ -6,6 +6,9 @@
  *   2. Emails Stephanie a notification with every field
  *   3. Emails the requester a short confirmation
  *   4. Logs an email_capture event with source get_recommendation
+ *   5. Merges the person into the shared lead record (lead:{emailHash},
+ *      source stack_request, audience hiring) and the Resend audience,
+ *      so the relationship has one history (GROWTH.md)
  *
  * Mirrors the consider-me route's tolerance: Redis and Resend are each
  * optional so a missing env var degrades to the next step instead of
@@ -15,6 +18,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Redis } from '@upstash/redis'
 import { hash } from '@/lib/usage'
 import { logEvent } from '@/lib/event-log'
+import { OWNERSHIP_DISCLOSURE } from '@/lib/repvera'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -67,15 +71,42 @@ export async function POST(request: NextRequest) {
 
     const submission = { name, email, company, hires, roles, stack, pain, submittedAt: new Date().toISOString() }
 
+    const emailHash = await hash(email)
     const redis = getRedis()
     if (redis) {
+      await redis.set(`recommendation:${emailHash}`, JSON.stringify(submission)).catch(() => undefined)
+      // One relationship, one record: the same lead:{hash} the email asks write to.
+      const key = `lead:${emailHash}`
+      const prev = (await redis.get<Record<string, unknown>>(key).catch(() => null)) ?? {}
+      const prevSources = Array.isArray(prev.sources) ? (prev.sources as string[]) : prev.source ? [String(prev.source)] : []
       await redis
-        .set(`recommendation:${hash(email)}`, JSON.stringify(submission))
+        .set(
+          key,
+          JSON.stringify({
+            ...prev,
+            email,
+            source: 'stack_request',
+            sources: Array.from(new Set([...prevSources, 'stack_request'])).slice(-50),
+            firstName: name.split(' ')[0] || prev.firstName || '',
+            audience: 'hiring',
+            extras: { ...((prev.extras as Record<string, string>) ?? {}), company, hires, roles: roles.slice(0, 280) },
+            firstSeen: prev.firstSeen ?? prev.ts ?? Date.now(),
+            ts: Date.now(),
+          }),
+        )
         .catch(() => undefined)
     }
 
     const resendApiKey = process.env.RESEND_API_KEY
     const fromAddress = process.env.RESEND_FROM_EMAIL
+    const audienceId = process.env.RESEND_AUDIENCE_ID
+    if (resendApiKey && audienceId) {
+      await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${resendApiKey}` },
+        body: JSON.stringify({ email, unsubscribed: false, first_name: name.split(' ')[0] ?? '' }),
+      }).catch(() => undefined)
+    }
     if (resendApiKey && fromAddress) {
       const rows = [
         ['Name', name],
@@ -110,7 +141,7 @@ export async function POST(request: NextRequest) {
           from: fromAddress,
           to: [email],
           subject: 'Your hiring stack recommendation is in the works',
-          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Got your request. Your recommendation lands within two business days: a named stack for ${esc(company)}, the reasoning behind each pick, and a straight answer on whether you need anything beyond the tools.</p><p>Every pick comes from the same scoring we publish on the site. Vendors cannot pay for placement, rankings, or scores.</p><p>Stephanie Murray<br>Founder, hiring.productions</p></div>`,
+          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Got your request. Your recommendation lands within two business days: a named stack for ${esc(company)}, the reasoning behind each pick, and a straight answer on whether you need anything beyond the tools.</p><p>Every pick comes from the same scoring we publish on the site. Vendors cannot pay for placement, rankings, or scores.</p><p>Stephanie Murray<br>Founder, hiring.productions</p><p style="font-size:12px;color:#6B7280;">${esc(OWNERSHIP_DISCLOSURE)}</p></div>`,
         }),
       }).catch(() => undefined)
     }

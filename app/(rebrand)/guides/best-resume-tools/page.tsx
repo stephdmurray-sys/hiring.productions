@@ -326,7 +326,7 @@ export default function Page() {
             {formatMonth(guide.nextCheck)} &middot; <a href="/how-we-review">how we review</a>
           </p>
           <p className="disclosure">
-            Some links below are affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
+            Some links below can be affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
             can&rsquo;t be bought, which is why the category&rsquo;s biggest advertiser ranks where the evidence puts it.{' '}
             <a href="/advertiser-disclosure">Full disclosure</a>
           </p>
@@ -392,7 +392,10 @@ export default function Page() {
             <p className="pick-by">
               <Image src="/stephanie.jpg" alt="" width={36} height={36} />
               <span>
-                <b>Stephanie Murray</b> 2025 Transform Award, Talent Strategy of the Year
+                <b>
+                  <a href="/about/stephanie">Stephanie Murray</a>
+                </b>{' '}
+                2025 Transform Award, Talent Strategy of the Year
               </span>
             </p>
             <p className="pick-facts">

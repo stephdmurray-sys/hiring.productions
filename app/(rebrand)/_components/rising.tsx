@@ -168,7 +168,9 @@ export function OnTheRise({
           <div className="note-by">
             <Image src="/stephanie.jpg" alt="" width={48} height={48} />
             <span>
-              <b>Stephanie Murray</b>
+              <b>
+                <a href="/about/stephanie">Stephanie Murray</a>
+              </b>
               Founder, 20 years in talent
             </span>
           </div>
