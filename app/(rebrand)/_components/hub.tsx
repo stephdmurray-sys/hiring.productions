@@ -160,11 +160,6 @@ export function Hub(props: HubProps) {
 
       <section className="wrap sec" id="follow">
         <h2>Who to follow</h2>
-        <p className="lead">
-          {props.side === 'seekers'
-            ? 'The people worth your feed while you search: one to keep you laughing, the rest to get you hired.'
-            : 'The voices recruiting leaders actually read and listen to, plus one to keep the team laughing.'}
-        </p>
         <WhoToFollow side={props.side} />
       </section>
 

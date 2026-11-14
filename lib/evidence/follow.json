@@ -1,104 +1,203 @@
 {
-  "_about": "Who to follow: Stephanie's list of people who are funny or seriously helpful for job seekers and hiring teams. Editorial, like her picks: never scored, never paid for, and no follower counts (they measure reach, not help, and go stale). Every link was taken from research results, not guessed. approved=false: draft until Stephanie signs off; she can add, cut or reword any line. Candidates held back: Mike Peditto (The Realistic Recruiter) because a source says he works at Teal, which we rank; Adam Karpiak because no source confirmed the humor.",
+  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Held back: Mike Peditto (The Realistic Recruiter), because a source says he works at Teal, which we rank; Adam Karpiak, because no source confirmed the humor.",
   "approved": false,
-  "checked": "2026-11-13",
+  "checked": "2026-11-14",
+  "rows": [
+    { "side": "hiring", "title": "The best in talent acquisition", "lead": "The voices recruiting leaders actually read, watch and listen to." },
+    { "side": "seekers", "title": "For job seekers", "lead": "One to keep you laughing, the rest to get you hired." }
+  ],
   "people": [
     {
-      "name": "Madeline Mann",
-      "known": "Self Made Millennial",
-      "side": "seekers",
-      "vibe": "helpful",
-      "why": "A former head of HR who walks through interview questions and offers like someone who has sat on the other side of the table, because she has.",
-      "links": [
-        { "label": "YouTube", "url": "https://www.youtube.com/selfmademillennial" },
-        { "label": "Website", "url": "https://madelinemann.com" }
-      ]
-    },
-    {
-      "name": "Erin McGoff",
-      "known": "Advice With Erin",
-      "side": "seekers",
-      "vibe": "helpful",
-      "why": "Short, practical answers to the work questions nobody teaches you, from networking to delivering bad news.",
-      "links": [
-        { "label": "TikTok", "url": "https://www.tiktok.com/@advicewitherin" },
-        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/no-one-knows-what-theyre-doing/id1729849219" }
-      ]
-    },
-    {
-      "name": "Austin Belcak",
-      "known": "Cultivated Culture",
-      "side": "seekers",
-      "vibe": "helpful",
-      "why": "How to get hired through referrals and direct outreach instead of another online application.",
-      "links": [{ "label": "Website", "url": "https://cultivatedculture.com" }]
-    },
-    {
-      "name": "Andrew LaCivita",
-      "known": "milewalk Academy",
-      "side": "seekers",
-      "vibe": "helpful",
-      "why": "Interview prep in depth: the hard questions, the stories to tell, and the questions to ask back.",
-      "links": [
-        { "label": "YouTube", "url": "https://www.youtube.com/andylacivita" },
-        { "label": "Podcast", "url": "https://andrewlacivita.libsyn.com" }
-      ]
-    },
-    {
-      "name": "J.T. O'Donnell",
-      "known": "Work It Daily",
-      "side": "seekers",
-      "vibe": "helpful",
-      "why": "A former recruiter's straight talk on why resumes go unanswered, with live Q&A for job seekers.",
-      "links": [{ "label": "Website", "url": "https://www.workitdaily.com" }]
-    },
-    {
-      "name": "Corporate Natalie",
-      "known": "Natalie Marshall",
-      "side": "both",
-      "vibe": "funny",
-      "why": "Office-life comedy for anyone who has survived a reply-all. Both sides of the table will recognize themselves.",
-      "links": [{ "label": "Instagram", "url": "https://www.instagram.com/corporatenatalie" }]
-    },
-    {
+      "id": "hung-lee",
       "name": "Hung Lee",
       "known": "Recruiting Brainfood",
       "side": "hiring",
       "vibe": "helpful",
-      "why": "The weekly newsletter and podcast recruiting leaders actually read: what's changing in hiring, AI included.",
-      "links": [{ "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155" }]
+      "why": "The weekly newsletter and live show TA leaders actually read and watch: what's changing in hiring, AI included.",
+      "photo": "/people/hung-lee.jpg",
+      "photoSource": "YouTube @hunglee3069 (Brainfood Live On Air)",
+      "links": [
+        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@hunglee3069" }
+      ]
     },
     {
-      "name": "Chad Sowash and Joel Cheesman",
-      "known": "The Chad & Cheese Podcast",
-      "side": "hiring",
-      "vibe": "funny",
-      "why": "Irreverent weekly take on HR tech and hiring news from two industry veterans. Explicit language, honest opinions.",
-      "links": [{ "label": "Website", "url": "https://www.chadcheese.com" }]
-    },
-    {
-      "name": "Tim Sackett",
-      "known": "The Tim Sackett Project",
-      "side": "hiring",
-      "vibe": "both",
-      "why": "A staffing firm president who writes about recruiting with jokes and sports analogies, and real advice under them.",
-      "links": [{ "label": "Blog", "url": "https://timsackett.com" }]
-    },
-    {
-      "name": "Katrina Collier",
-      "known": "The Robot-Proof Recruiter",
+      "id": "matt-alder",
+      "name": "Matt Alder",
+      "known": "Recruiting Future",
       "side": "hiring",
       "vibe": "helpful",
-      "why": "How to keep the human part of recruiting, from candidate experience to working with hiring managers.",
-      "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/katrinacollier" }]
+      "why": "A talent acquisition futurist with over 25 years in the field, interviewing the TA leaders who are changing how hiring works.",
+      "photo": null,
+      "photoSource": "No confirmed personal photo found yet",
+      "links": [
+        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/id963756980" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@recruitingfuturepod" }
+      ]
     },
     {
+      "id": "madeline-laurano",
+      "name": "Madeline Laurano",
+      "known": "Aptitude Research",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder and chief analyst at Aptitude Research, covering talent acquisition and hiring tech for over 18 years.",
+      "photo": "/people/madeline-laurano.jpg",
+      "photoSource": "aptituderesearch.com team page",
+      "links": [{ "label": "Research", "url": "https://www.aptituderesearch.com/about-aptitude-research/" }]
+    },
+    {
+      "id": "adam-posner",
+      "name": "Adam Posner",
+      "known": "The POZCAST",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder of NHP Talent Group, recording live with the TA leaders running hiring at companies like NBCUniversal and Toshiba.",
+      "photo": "/people/adam-posner.jpg",
+      "photoSource": "YouTube @ThePOZcast (cropped from the show art)",
+      "links": [
+        { "label": "Podcast", "url": "https://podcasts.apple.com/us/podcast/pozcast-career-journeys-with-adam-posner/id1452900760" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@ThePOZcast" }
+      ]
+    },
+    {
+      "id": "maureen-clough",
+      "name": "Maureen Wiley Clough",
+      "known": "It Gets Late Early",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Real talk about what's happening to mid-career workers, from fake job postings to age bias, with the recruiting leaders who can fix it.",
+      "photo": "/people/maureen-clough.jpg",
+      "photoSource": "YouTube @itgetslateearly",
+      "links": [
+        { "label": "YouTube", "url": "https://www.youtube.com/@itgetslateearly" },
+        { "label": "Podcast", "url": "https://podbay.fm/p/it-gets-late-early" }
+      ]
+    },
+    {
+      "id": "glen-cathey",
       "name": "Glen Cathey",
       "known": "Boolean Black Belt",
       "side": "hiring",
       "vibe": "helpful",
       "why": "The deepest free writing on sourcing there is, from Boolean search to AI in recruiting.",
+      "photo": "/people/glen-cathey.jpg",
+      "photoSource": "YouTube @GlenCathey (sourcing demos, Talent42)",
       "links": [{ "label": "Blog", "url": "https://booleanblackbelt.com" }]
+    },
+    {
+      "id": "katrina-collier",
+      "name": "Katrina Collier",
+      "known": "The Robot-Proof Recruiter",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "How to keep the human part of recruiting, from candidate experience to working with hiring managers.",
+      "photo": "/people/katrina-collier.jpg",
+      "photoSource": "YouTube @KatrinaMCollier",
+      "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/katrinacollier" }]
+    },
+    {
+      "id": "tim-sackett",
+      "name": "Tim Sackett",
+      "known": "The Tim Sackett Project",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "A staffing firm president who writes about recruiting with jokes and sports analogies, and real advice under them.",
+      "photo": "/people/tim-sackett.jpg",
+      "photoSource": "timsackett.com headshot",
+      "links": [{ "label": "Blog", "url": "https://timsackett.com" }]
+    },
+    {
+      "id": "chad-cheese",
+      "name": "Chad Sowash and Joel Cheesman",
+      "known": "The Chad & Cheese Podcast",
+      "side": "hiring",
+      "vibe": "funny",
+      "why": "Irreverent weekly take on HR tech and hiring news from two industry veterans. Explicit language, honest opinions.",
+      "photo": "/people/chad-cheese.jpg",
+      "photoSource": "YouTube @chadcheese",
+      "links": [{ "label": "Website", "url": "https://www.chadcheese.com" }]
+    },
+    {
+      "id": "madeline-mann",
+      "name": "Madeline Mann",
+      "known": "Self Made Millennial",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former head of HR who walks through interview questions and offers like someone who has sat on the other side of the table, because she has.",
+      "photo": "/people/madeline-mann.jpg",
+      "photoSource": "YouTube @SelfMadeMillennial",
+      "links": [
+        { "label": "YouTube", "url": "https://www.youtube.com/@SelfMadeMillennial" },
+        { "label": "Website", "url": "https://madelinemann.com" }
+      ]
+    },
+    {
+      "id": "erin-mcgoff",
+      "name": "Erin McGoff",
+      "known": "Advice With Erin",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Short, practical answers to the work questions nobody teaches you, from networking to delivering bad news.",
+      "photo": "/people/erin-mcgoff.jpg",
+      "photoSource": "YouTube @AdviceWithErin",
+      "links": [
+        { "label": "TikTok", "url": "https://www.tiktok.com/@advicewitherin" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@AdviceWithErin" }
+      ]
+    },
+    {
+      "id": "andrew-lacivita",
+      "name": "Andrew LaCivita",
+      "known": "milewalk Academy",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Interview prep in depth: the hard questions, the stories to tell, and the questions to ask back.",
+      "photo": "/people/andrew-lacivita.jpg",
+      "photoSource": "YouTube @andylacivita",
+      "links": [
+        { "label": "YouTube", "url": "https://www.youtube.com/@andylacivita" },
+        { "label": "Podcast", "url": "https://andrewlacivita.libsyn.com" }
+      ]
+    },
+    {
+      "id": "austin-belcak",
+      "name": "Austin Belcak",
+      "known": "Cultivated Culture",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "How to get hired through referrals and direct outreach instead of another online application.",
+      "photo": "/people/austin-belcak.jpg",
+      "photoSource": "YouTube @austin-belcak",
+      "links": [{ "label": "Website", "url": "https://cultivatedculture.com" }]
+    },
+    {
+      "id": "jt-odonnell",
+      "name": "J.T. O'Donnell",
+      "known": "Work It Daily",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former recruiter's straight talk on why resumes go unanswered, with live Q&A for job seekers.",
+      "photo": null,
+      "photoSource": "No confirmed personal photo found yet",
+      "links": [
+        { "label": "Website", "url": "https://www.workitdaily.com" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@Workitdaily" }
+      ]
+    },
+    {
+      "id": "corporate-natalie",
+      "name": "Corporate Natalie",
+      "known": "Natalie Marshall",
+      "side": "seekers",
+      "vibe": "funny",
+      "why": "Office-life comedy for anyone who has survived a reply-all. Both sides of the table will recognize themselves.",
+      "photo": "/people/corporate-natalie.jpg",
+      "photoSource": "YouTube @corporatenatalie",
+      "links": [
+        { "label": "Instagram", "url": "https://www.instagram.com/corporatenatalie" },
+        { "label": "YouTube", "url": "https://www.youtube.com/@corporatenatalie" }
+      ]
     }
   ]
 }

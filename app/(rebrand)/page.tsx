@@ -303,7 +303,7 @@ export default function Home() {
 
       <section className="wrap sec" id="follow">
         <h2>Who to follow</h2>
-        <p className="lead">The people worth your feed. Some will make you laugh about work. Some will get you hired, or help you hire better.</p>
+        <p className="lead">The best voices in talent acquisition, and the people who make a job search easier to survive.</p>
         <WhoToFollow />
       </section>
 
