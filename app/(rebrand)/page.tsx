@@ -33,7 +33,7 @@ import { homeCss } from './home-css'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  title: 'Hiring Is a Production. We Are Here for Everyone in It.',
+  title: 'Hiring Is a Production: Straight Answers on Which Hiring Tools Are Worth It',
   description:
     'Hiring tools ranked for job seekers and hiring teams: resume builders, ATS checkers and applicant tracking systems. Every score is dated, the method is published, and nobody pays to be featured.',
 }
@@ -110,89 +110,82 @@ export default function Home() {
       <SiteNav />
 
       <header className="wrap hero">
-        <h1 className="display">
-          Hiring is a production. We&rsquo;re here for <Swash><span>everyone</span></Swash> in&nbsp;it.
+        <p className="hero-tag">Hiring is a production.</p>
+        <h1 className="display hero-h1">
+          <span className="hero-l1">Tell us what&rsquo;s going wrong.</span>{' '}
+          <span className="hero-l2">
+            We&rsquo;ll{' '}
+            <Swash>
+              <span className="hero-hl">recommend</span>
+            </Swash>{' '}
+            what to use.
+          </span>
         </h1>
-        <p className="dek">
-          Hiring tools ranked for job seekers and hiring teams. Every score is dated, the method is published, and nobody pays to be featured.
-        </p>
+        <p className="dek">Straight answers on which hiring tools are worth it, for job seekers and hiring&nbsp;teams.</p>
 
         <div className="sides">
           <div className="lane lane-seekers">
-          <Dots className="lane-tl" />
-          <Zigzag className="lane-bl" />
-          <section className="side side-seekers" aria-labelledby="side-seekers-h">
-            <span className="side-k">
-              <i />
-              I&rsquo;m a job seeker
-            </span>
-            <h2 id="side-seekers-h">Resume builders and ATS checkers, ranked on real reviews and real prices</h2>
-            <div className="side-logos">
-              {SEEKER_LOGOS.map((id) => byId[id]).map((t) => (
-                <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`} data-tip={`${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}`}>
-                  <Logo domain={t.domain} name={t.name} size={52} />
-                </a>
-              ))}
-            </div>
-            <div className="side-feature">
-              <Logo domain={top.domain} name={top.name} size={56} />
-              <div>
-                <b>
-                  {guide.picks[0].label}: {top.name}
-                </b>
-                <span>
-                  {top.rawUserScore?.toFixed(1)} from {formatCount(top.citableReviews)} users, with a free version that&rsquo;s useful on its own
-                </span>
-              </div>
-            </div>
-            <a className="side-go" href="/guides/best-resume-tools">
-              Open the resume tools guide <span className="arr">&rarr;</span>
-            </a>
-          </section>
-          </div>
-
-          <div className="lane lane-hiring">
-          <Squiggle className="lane-tr" />
-          <Dots className="lane-br" />
-          <section className="side side-hiring" aria-labelledby="side-hiring-h">
-            <span className="side-k">
-              <i />
-              I&rsquo;m hiring
-            </span>
-            <h2 id="side-hiring-h">Applicant tracking systems, ranked by team size</h2>
-            <div className="side-logos">
-              {HIRING_LOGOS.map((n) => atsByName[n])
-                .filter(Boolean)
-                .map((t) => (
-                  <a key={t.name} href={atsHref(t.name)} aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
+            <Dots className="lane-tl" />
+            <Zigzag className="lane-bl" />
+            <section className="side side-seekers" aria-labelledby="side-seekers-h">
+              <span className="side-k">
+                <i />
+                I&rsquo;m a job seeker
+              </span>
+              <h2 id="side-seekers-h">Resume tools,&nbsp;ranked</h2>
+              <div className="side-logos">
+                {SEEKER_LOGOS.map((id) => byId[id]).map((t) => (
+                  <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`} data-tip={`${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}`}>
                     <Logo domain={t.domain} name={t.name} size={52} />
                   </a>
                 ))}
-            </div>
-            <div className="side-feature">
-              <Logo domain={smallPick.domain} name={smallPick.name} size={56} />
-              <div>
-                <b>Small teams pick: {smallPick.name}</b>
-                <span>
-                  Reviews up {Math.round((atsGrowth(smallPick) ?? 0) * 100)}% in a year{smallPrice ? `, at ${smallPrice} per user` : ''}
-                </span>
               </div>
-            </div>
-            <a className="side-go" href="/guides/best-ats-for-small-teams">
-              Open the ATS guide <span className="arr">&rarr;</span>
-            </a>
-          </section>
+              <div className="side-act">
+                <a className="side-go" href="/what-should-i-use?side=seekers#questions">
+                  Help me choose <span className="arr">&rarr;</span>
+                </a>
+                <a className="side-all" href="/guides/best-resume-tools">
+                  See all resume tools
+                </a>
+              </div>
+            </section>
+          </div>
+
+          <div className="lane lane-hiring">
+            <Squiggle className="lane-tr" />
+            <Dots className="lane-br" />
+            <section className="side side-hiring" aria-labelledby="side-hiring-h">
+              <span className="side-k">
+                <i />
+                I&rsquo;m hiring
+              </span>
+              <h2 id="side-hiring-h">Hiring software,&nbsp;ranked</h2>
+              <div className="side-logos">
+                {HIRING_LOGOS.map((n) => atsByName[n])
+                  .filter(Boolean)
+                  .map((t) => (
+                    <a key={t.name} href={atsHref(t.name)} aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
+                      <Logo domain={t.domain} name={t.name} size={52} />
+                    </a>
+                  ))}
+              </div>
+              <div className="side-act">
+                <a className="side-go" href="/what-should-i-use?side=hiring#questions">
+                  Help me choose <span className="arr">&rarr;</span>
+                </a>
+                <a className="side-all" href="/guides/best-ats-for-small-teams">
+                  See all applicant tracking&nbsp;systems
+                </a>
+              </div>
+            </section>
           </div>
         </div>
 
-        <div className="ticker" aria-label="What changed this month">
-          <div className="ticker-track">
-            {[...ticker, ...ticker].map((node, i) => (
-              <span key={i} aria-hidden={i >= ticker.length ? true : undefined}>
-                {node}
-              </span>
-            ))}
-          </div>
+        <div className="hero-fine">
+          <p>Nobody pays to be featured. Every score is&nbsp;dated.</p>
+          <p>
+            <a href="/about/stephanie">Made by Stephanie Murray after twenty years in&nbsp;recruiting.</a>
+          </p>
         </div>
       </header>
 
