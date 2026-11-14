@@ -133,6 +133,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/what-should-i-use', priority: 0.95, changeFrequency: 'monthly' },
     // Free tools for hiring teams, built on published standards (OPM, SHRM, FBI)
     { path: '/interview-scorecard', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/interview-practice', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/hiring-costs', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/is-this-a-real-candidate', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),

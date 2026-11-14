@@ -129,6 +129,7 @@ export function SiteFooter() {
             <a href="/guides/best-resume-tools">Resume builders</a>
             <a href="/guides/best-resume-tools#rankings">ATS resume checkers</a>
             <a href="/guides/best-resume-tools#cost">What your search will cost</a>
+            <a href="/interview-practice">Interview practice</a>
             <a href="/reviews">Every resume tool review</a>
             <a href="/for-job-seekers">All job seeker guides</a>
           </div>

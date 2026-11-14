@@ -92,6 +92,8 @@ export interface Recommendation {
   checked: string
 }
 
+/** "A, B and C": a list the way people say it. */
+const listJoin = (xs: string[]) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`)
 const money = (n: number) => (n % 1 === 0 ? `$${n.toLocaleString('en-US')}` : `$${n.toFixed(2)}`)
 const inCurrency = (n: number, currency: string) => (currency === 'USD' ? money(n) : `${currency} ${n.toLocaleString('en-US')}`)
 const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? one : many}`
@@ -576,7 +578,7 @@ export function answerText(r: Recommendation, { short = false }: { short?: boole
     parts.push(c.total === 0 ? 'It costs nothing.' : `About ${money(c.total)} ${r.costSpan}: ${c.how}.`)
   }
   if (r.alt) parts.push(`The backup pick is ${r.alt.name} (${r.alt.score.toFixed(2)} out of 5). ${r.alt.why}`)
-  if (r.watching.length) parts.push(`New and worth watching, not rated yet: ${r.watching.map((w) => w.name).join(' and ')}.`)
+  if (r.watching.length) parts.push(`New and worth watching, not rated yet: ${listJoin(r.watching.map((w) => w.name))}.`)
   if (r.ruledOut.length) parts.push(`Didn’t fit: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
   if (!short) {
     parts.push(`${r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'}: ${r.otherSide.line} (${r.otherSide.source}.)`)

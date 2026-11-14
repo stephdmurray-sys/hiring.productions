@@ -56,6 +56,10 @@ ${situations()
   .map((x) => `- [${x.question}](${BASE}/what-should-i-use/${x.slug}): ${answerText(recommend(x.ask), { short: true })}`)
   .join('\n')}
 
+## Free tool for job seekers
+
+- [What will they ask me in the interview?](${BASE}/interview-practice): practice the questions structured interviews use, the follow-ups you will hear, and what a strong answer shows, from the US Office of Personnel Management's method (the same content hiring teams get from the interview scorecard).
+
 ## Free tools for hiring teams
 
 - [What should we ask in the interview?](${BASE}/interview-scorecard): a structured interview scorecard for any role, with the same questions for every candidate, probes and a 1 to 5 scale. Definitions are the US Office of Personnel Management's (MOSAIC competencies, January 2013); the method follows OPM's structured interview guide.

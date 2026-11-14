@@ -59,6 +59,12 @@ export default function Page() {
           link: 'See what your search will cost',
         },
         {
+          q: 'Interview coming up?',
+          a: 'Practice the questions structured interviews actually use, the follow-ups you will hear, and what a strong answer shows. Free.',
+          href: '/interview-practice',
+          link: 'Practice for your interview',
+        },
+        {
           q: 'Losing track of applications?',
           a: `${top.name} keeps every application, contact and follow-up in one pipeline, and its free version is enough to run a whole search.`,
           href: `/reviews/${top.id}`,

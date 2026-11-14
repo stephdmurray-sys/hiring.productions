@@ -1,5 +1,5 @@
 {
-  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Added Nov 14, 2026 (hiring side): Laurie Ruettimann, Kat Kibben, Ashley Herd, Josh Bersin and HR Besties, each confirmed through their own YouTube channel (links and photo). Josh Bersin's card discloses Galileo, which is in our recruiter training guide. Next, once their links can be confirmed from their own pages: Steve Browne (SHRM, May 2026, calls him a SHRM conference favorite; CPO at LaRosa's), Jennifer McClure (DisruptHR), Ben Eubanks (Lighthouse Research), Adam Karpiak (LinkedIn's own Talent Blog profiled his humor), Bonnie Dilber (reviews resumes for Resume Genius, a resume builder; disclose if added), Johnny Campbell (SocialTalent is in our training guide; disclose if added).",
+  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Added Nov 14, 2026 (hiring side): Laurie Ruettimann, Kat Kibben, Ashley Herd, Josh Bersin and HR Besties, each confirmed through their own YouTube channel (links and photo). Josh Bersin's card discloses Galileo, which is in our recruiter training guide. Added Nov 14, 2026 at Stephanie's request: Jennifer McClure and Ben Eubanks (links from their own YouTube channels), Adam Karpiak (links from karpiakconsulting.com), Bonnie Dilber (links from her Linktree), Steve Browne (his own blog, sbrownehr.com, which links no LinkedIn; SHRM, May 2026, confirms his role at LaRosa's) and Johnny Campbell (socialtalent.com About page; SocialTalent is in our training guide, disclosed). Steve's and Johnny's LinkedIn addresses aren't linked from their own pages, so they're left off until confirmed.",
   "approved": false,
   "checked": "2026-11-14",
   "rows": [
@@ -289,6 +289,107 @@
       ]
     },
     {
+      "id": "ben-eubanks",
+      "name": "Ben Eubanks",
+      "known": "Lighthouse Research & Advisory",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Research on what employers and candidates actually do, written for the people who run hiring.",
+      "photo": "/people/ben-eubanks.jpg",
+      "photoSource": "YouTube @ben.eubanks (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/beneubanks"
+        },
+        {
+          "label": "Research",
+          "url": "https://lhra.io"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@ben.eubanks"
+        },
+        {
+          "label": "Community",
+          "url": "https://upstarthr.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://thebeneubanks.com"
+        }
+      ]
+    },
+    {
+      "id": "jennifer-mcclure",
+      "name": "Jennifer McClure",
+      "known": "DisruptHR",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder of DisruptHR, and a coach to HR leaders on influence and impact.",
+      "photo": "/people/jennifer-mcclure.jpg",
+      "photoSource": "YouTube @JenniferMcClure (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/jennifermcclure"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/jennifermcclure"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@JenniferMcClure"
+        },
+        {
+          "label": "DisruptHR",
+          "url": "https://disrupthr.co"
+        },
+        {
+          "label": "Website",
+          "url": "https://jennifermcclure.net"
+        }
+      ]
+    },
+    {
+      "id": "steve-browne",
+      "name": "Steve Browne",
+      "known": "Chief People Officer, LaRosa's",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "A working chief people officer on getting HR into business decisions early, not after the fact.",
+      "photo": null,
+      "photoSource": "No confirmed personal photo found yet",
+      "links": [
+        {
+          "label": "Blog",
+          "url": "https://www.sbrownehr.com"
+        }
+      ]
+    },
+    {
+      "id": "johnny-campbell",
+      "name": "Johnny Campbell",
+      "known": "SocialTalent",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Co-founder of SocialTalent, teaching recruiters and hiring managers how to hire well.",
+      "note": "SocialTalent sells recruiter training and appears in our recruiter training guide.",
+      "photo": "/people/johnny-campbell.jpg",
+      "photoSource": "socialtalent.com About page (labeled Johnny Campbell, CEO and co-founder), cropped",
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://www.socialtalent.com/about-us"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@SocialTalent"
+        }
+      ]
+    },
+    {
       "id": "laurie-ruettimann",
       "name": "Laurie Ruettimann",
       "known": "Punk Rock HR",
@@ -345,6 +446,30 @@
         {
           "label": "Instagram",
           "url": "https://www.instagram.com/timsackett/"
+        }
+      ]
+    },
+    {
+      "id": "adam-karpiak",
+      "name": "Adam Karpiak",
+      "known": "Karpiak Consulting",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "A recruiter whose short, sarcastic posts call out the hiring habits candidates hate.",
+      "photo": null,
+      "photoSource": "No confirmed personal photo reachable yet",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/akarpiak"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/Adam_Karpiak"
+        },
+        {
+          "label": "Website",
+          "url": "https://karpiakconsulting.com"
         }
       ]
     },
@@ -582,6 +707,34 @@
         {
           "label": "Website",
           "url": "https://mikepeditto.com"
+        }
+      ]
+    },
+    {
+      "id": "bonnie-dilber",
+      "name": "Bonnie Dilber",
+      "known": "Recruiting at Zapier",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A working recruiter showing exactly how applications get screened, so yours gets through.",
+      "photo": "/people/bonnie-dilber.jpg",
+      "photoSource": "Her Linktree profile picture (linktr.ee/bonniedilber), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/bonnie-dilber"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://tiktok.com/@bonniedilber"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://instagram.com/bonniedilber"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://bonniedilber.substack.com"
         }
       ]
     },

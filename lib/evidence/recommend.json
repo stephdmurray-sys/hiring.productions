@@ -76,6 +76,24 @@
         }
       },
       {
+        "id": "interview-practice",
+        "label": "I want to practice for interviews",
+        "kind": "watching",
+        "categories": [
+          "Interview practice"
+        ],
+        "why": "Practice the questions structured interviews actually use, out loud, before the real one. None of the practice apps has enough public reviews to rate yet.",
+        "guidance": {
+          "text": "Practice the questions interviewers are told to ask, free",
+          "href": "/interview-practice"
+        },
+        "otherSide": {
+          "line": "In a structured interview, every candidate gets the same questions, and when you say “we did,” interviewers are told to ask what you did. Say “I.”",
+          "source": "US Office of Personnel Management, Structured Interviews",
+          "url": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/structured-interviews/structured-interviews.pdf"
+        }
+      },
+      {
         "id": "interviews-stall",
         "label": "I get interviews, but no offers",
         "kind": "watching",
@@ -87,6 +105,10 @@
           "line": "Interview performance is coachable. In a study of 144 people taking structured interviews, those given more thorough coaching earned higher interview ratings. Rehearse out loud, with someone scoring your answers.",
           "source": "Tross, S. A., and Maurer, T. J. (2008). Journal of Occupational and Organizational Psychology",
           "url": "https://doi.org/10.1348/096317907X248653"
+        },
+        "guidance": {
+          "text": "Practice the questions interviewers are told to ask, free",
+          "href": "/interview-practice"
         }
       },
       {
@@ -569,6 +591,17 @@
           "problem": "losing-track",
           "months": 6,
           "budget": 0,
+          "must": []
+        }
+      },
+      {
+        "slug": "how-to-practice-for-an-interview",
+        "question": "How do I practice for a job interview?",
+        "ask": {
+          "side": "seekers",
+          "problem": "interview-practice",
+          "months": 3,
+          "budget": null,
           "must": []
         }
       },

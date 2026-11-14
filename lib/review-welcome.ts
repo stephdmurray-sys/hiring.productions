@@ -6,7 +6,7 @@
  */
 import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
 import { OWNERSHIP_DISCLOSURE, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
-import { cleanRole, pickCompetencies, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
+import { cleanRole, pickCompetencies, scorecardData, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
 
 const SITE = 'https://hiring.productions'
 
@@ -119,6 +119,33 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         '3. Rate each answer on the scale before anyone discusses it.',
         '4. Decide before the first interview how final ratings are set: consensus or average.',
         ...repveraNote('scorecard-email'),
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'interview_practice') {
+    const sc = scorecardFromExtras(x)
+    if (!sc) return null
+    const follow = scorecardData.method.probes.flatMap((p) => p.items).join(' ')
+    const q = new URLSearchParams()
+    if (sc.role) q.set('role', sc.role)
+    q.set('c', sc.chosen.map((c) => c.id).join(','))
+    return {
+      subject: `Your interview practice questions${sc.role ? `: ${sc.role}` : ''}`,
+      text: [
+        "Here are the questions to practice, out loud, before the interview. They're the ones structured interviews use, from the US Office of Personnel Management's method.",
+        '',
+        ...sc.chosen.flatMap((c, i) => [
+          `${i + 1}. ${c.name}`,
+          `They'll ask: ${c.question}`,
+          `A strong answer: ${c.outstanding}`,
+          '',
+        ]),
+        `Expect follow-ups on every answer: ${follow}`,
+        'Say "I", not "we". When you say "we did", interviewers are told to ask what you did.',
+        '',
+        `Your practice sheet, to plan each answer: ${SITE}/interview-practice?${q.toString()}`,
         ...SIGN_OFF,
       ].join('\n'),
     }
