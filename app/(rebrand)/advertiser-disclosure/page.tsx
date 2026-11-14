@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/advertiser-disclosure' },
   title: 'Advertiser Disclosure: Who Pays for hiring.productions, and What It Never Buys',
   description:
-    'hiring.productions is made by Stephanie Murray, who also built RepVera. RepVera is listed in its own category with no score. No vendor link earns us anything today, and no one can pay for a placement, a ranking, a score or a recommendation.',
+    'hiring.productions is made by Stephanie Murray, who also built RepVera. RepVera is listed in its own category with no score and no rank. No vendor link earns us anything today, and no one can pay for a placement, a ranking, a score or a recommendation.',
 }
 
 const css = `
@@ -61,11 +61,10 @@ export default function Page() {
           </p>
           <p>
             <b>
-              RepVera is listed here in its own category, {REPVERA_CATEGORY.toLowerCase()}, with no score and a note saying Stephanie built
-              it.
+              RepVera is listed in its own category, {REPVERA_CATEGORY.toLowerCase()}, with no score and no rank, and it is the
+              recommendation for one situation on each side of the picker, always with Stephanie&rsquo;s note that she built it.
             </b>{' '}
-            It can come up when it fits what you&rsquo;re trying to do, always with that note. We never score or rank RepVera, or any tool
-            it competes with.
+            This site does not score that category, and doesn&rsquo;t rank anything in it.
           </p>
           <p>
             The FTC&rsquo;s rule on reviews bars a company from presenting a site it controls as an independent reviewer of a category that

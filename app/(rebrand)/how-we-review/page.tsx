@@ -38,13 +38,13 @@ function researchSections() {
 
       <section id="judgment">
         <h2>Where Stephanie&rsquo;s judgment comes in</h2>
-        <p class="lead">In Stephanie&rsquo;s words: &ldquo;When something on this site is my opinion, it&rsquo;s labeled as mine, and it has no effect on any score.&rdquo;</p>
+        <p class="lead">Stephanie has twenty years in talent acquisition. Her opinion is always labeled and never changes a score.</p>
         <style>@media(min-width:761px){#judgment .score-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}</style>
         <div class="score-cards">
-          <div class="scard"><h3>What I do</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.does)}</ul></div>
-          <div class="scard"><h3>What I never do</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.never)}</ul></div>
+          <div class="scard"><h3>What she does</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.does)}</ul></div>
+          <div class="scard"><h3>What she never does</h3><ul style="list-style:disc;margin-top:10px;">${li(framework.judgment.never)}</ul></div>
         </div>
-        <p style="margin-top:24px;max-width:820px;">&ldquo;I also built <a href="${repveraLink('how-we-review')}" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">RepVera</a>. It&rsquo;s listed here in its own category, ${REPVERA_CATEGORY.toLowerCase()}, with no score, and nothing in that category is scored or ranked.&rdquo; <a href="/advertiser-disclosure" style="text-decoration:underline;text-underline-offset:3px;">Who pays for this site</a></p>
+        <p style="margin-top:24px;max-width:820px;">Stephanie also built <a href="${repveraLink('how-we-review')}" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">RepVera</a>. It&rsquo;s listed on this site in its own category, ${REPVERA_CATEGORY.toLowerCase()}, with no score and no rank, and nothing in that category is scored or ranked. <a href="/advertiser-disclosure" style="text-decoration:underline;text-underline-offset:3px;">Who pays for this site</a></p>
       </section>
 `
 }

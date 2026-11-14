@@ -103,7 +103,7 @@ ${framework.research.map((r) => `- ${r.finding} How we use it: ${r.usedFor} Sour
 
 ### Where Stephanie's judgment comes in
 
-In her words, what she does:
+What she does:
 ${framework.judgment.does.map((d) => `- ${d}`).join('\n')}
 
 What she never does:
@@ -209,7 +209,7 @@ ${comparePairs()
 
 ## Stephanie's picks (editorial, labeled as hers, never change a score)
 
-- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick. ${risingPick.line}
+- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, Stephanie's pick. ${risingPick.line}
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}, ${hiringPick.url}), her top pick. ${hiringPick.line} ${hiringPick.scoreStatus}
 
 ## On the rise: new tools to watch (not rated yet)

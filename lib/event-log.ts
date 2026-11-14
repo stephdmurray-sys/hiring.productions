@@ -38,6 +38,13 @@ export type EventType =
   | 'payment_success'
   | 'pdf_rejected'
   | 'error'
+  // The picker and RepVera (Stephanie's measurement list, Nov 14, 2026)
+  | 'picker_start'
+  | 'picker_finish'
+  | 'picker_feedback'
+  | 'repvera_answer_view'
+  | 'repvera_profile_click'
+  | 'vendor_submit'
 
 export interface EventPayload {
   /** Tool involved, if any (e.g. "recruiter-search-rank"). */

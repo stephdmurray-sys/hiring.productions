@@ -333,7 +333,7 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
           <h2>Alternatives to {name}</h2>
           <p className="lead">The other systems we rank for {tier.toLowerCase()}, best first.</p>
           <div style={{ marginTop: 32, paddingBottom: 'clamp(96px,11vw,150px)' }}>
-            <Scoreboard side="hiring" title={`${tier}: ${ATS_TIER_DETAIL[p.tier]}`} checked={`data as of ${asOf}`} rows={alternatives} />
+            <Scoreboard side="hiring" title={`${tier}: ${ATS_TIER_DETAIL[p.tier]}`} checked={`data as of ${asOf} · next check ${formatMonth(guide.nextCheck)}`} rows={alternatives} />
             {versus.length > 0 && (
               <p className="rv-versus">
                 <b>Side by side:</b>{' '}

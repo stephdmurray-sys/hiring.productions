@@ -28,7 +28,7 @@
     },
     {
       "finding": "Northwestern's Spiegel Research Center found purchase likelihood peaks at 4.2 to 4.5 stars and falls as ratings near a perfect 5, and that five reviews make a purchase 270% more likely than none.",
-      "usedFor": "We always print the review count next to a rating, and when a tool has nothing but perfect scores, we look closer.",
+      "usedFor": "We always print the review count next to a rating. A wall of perfect scores makes us look closer.",
       "source": "Spiegel Research Center, Northwestern University",
       "url": "https://spiegel.medill.northwestern.edu/wp-content/uploads/sites/2/2021/04/Online-Reviews-Whitepaper.pdf"
     },
@@ -53,16 +53,16 @@
   ],
   "judgment": {
     "does": [
-      "Name my picks: an up-and-coming pick for job seekers and a top pick for hiring teams, labeled as mine.",
-      "Nominate tools to check, so a good one doesn't have to wait for a marketing budget to get noticed.",
-      "Write the guidance: what a recruiter sees when your resume lands, how to use a tool and what to watch out for.",
-      "Choose the people worth following."
+      "Names her picks, one for job seekers and one for hiring teams, labeled as hers.",
+      "Nominates tools to check, so a good one doesn't have to wait for a marketing budget to get noticed.",
+      "Writes the guidance: what a recruiter sees when your resume lands, how to use a tool and what to watch out for.",
+      "Chooses the people worth following."
     ],
     "never": [
-      "Set or edit a score.",
-      "Move a tool up or down a ranking.",
-      "Change a weight for one tool or one category.",
-      "Accept money, gifts or deals for any of the above."
+      "Sets or edits a score.",
+      "Moves a tool up or down a ranking.",
+      "Changes a weight for one tool or one category.",
+      "Accepts money, gifts or deals for any of the above."
     ]
   },
   "limits": [

@@ -7,7 +7,7 @@ import { Logo } from '@/app/(rebrand)/_components/logo'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
 import { shortDate } from '@/app/(rebrand)/_components/data'
-import { VIDEO_KIND_LABEL } from '@/lib/evidence'
+import { VIDEO_KIND_LABEL, formatMonth, guide as evidenceGuide } from '@/lib/evidence'
 import { buildComparison, compareHref, comparePairs, type Side } from '@/lib/compare'
 
 /**
@@ -204,7 +204,7 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
           </h1>
           <p className="dek">{verdict}</p>
           <p className="dateline">
-            Two of the {c.group} we rate &middot; ratings and prices as of {asOf}
+            Two of the {c.group} we rate &middot; ratings and prices as of {asOf} &middot; next check {formatMonth(evidenceGuide.nextCheck)}
           </p>
         </div>
       </header>

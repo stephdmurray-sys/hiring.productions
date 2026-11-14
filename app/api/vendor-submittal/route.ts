@@ -103,12 +103,13 @@ export async function POST(request: NextRequest) {
           from: fromAddress,
           to: [email],
           subject: `We have ${product} on file`,
-          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Thanks for sending ${esc(product)}. I read every submission against the same public evidence I use for every tool, and you'll hear back from me within five business days.</p><p>Written answers make the review more specific about who your product suits. A live demo makes it the most complete kind of review. Neither one changes a score, a ranking or a recommendation.</p><p>Stephanie Murray<br>Founder, hiring.productions</p></div>`,
+          html: `<div style="font-family:sans-serif;font-size:14px;color:#1A1A22;line-height:1.7;"><p>Hi ${esc(name)},</p><p>Thanks for sending ${esc(product)}. We read every submission against the same public evidence we use for every tool, and you'll hear back from Stephanie within five business days.</p><p>Written answers make the review more specific about who your product suits. A live demo makes it the most complete kind of review. Neither one changes a score, a ranking or a recommendation.</p><p>Stephanie Murray<br>Founder, hiring.productions</p></div>`,
         }),
       }).catch(() => undefined)
     }
 
     await logEvent('email_capture', { meta: { source: 'vendor_submittal', product, ask } }).catch(() => undefined)
+    await logEvent('vendor_submit', { source: 'for-vendors', meta: { ask } }).catch(() => undefined)
 
     return NextResponse.json({ ok: true })
   } catch {

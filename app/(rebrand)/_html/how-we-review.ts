@@ -216,7 +216,7 @@ export const html = `<style>
 
       <section id="agree">
         <h2>Do the other reviewers agree?</h2>
-        <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. When we disagree with the other lists, the review says why.</p>
+        <p class="lead">Every guide shows where each tool lands on the other lists you are likely to read, next to where we land. When we disagree with another list, we explain why.</p>
         <div class="evidence">
           <div class="ecard">
             <span class="etag etag-res">Other lists agree</span>

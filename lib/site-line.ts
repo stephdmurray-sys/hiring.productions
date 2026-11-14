@@ -5,3 +5,6 @@
  * Nov 14, 2026: a slogan doesn't tell a stranger what the site is.
  */
 export const SITE_LINE = 'Hiring tools ranked for job seekers and hiring teams. Nobody pays to be featured.'
+
+/** Joins the last two words with a no-break space, so a block never ends on one word alone (Stephanie's rule). */
+export const keepLast = (s: string) => s.replace(/ (\S+)\s*$/, ' $1')

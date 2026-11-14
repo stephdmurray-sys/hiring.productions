@@ -113,6 +113,14 @@ export const homeCss = `
   @media(max-width:760px){.guide .lg-stack{justify-self:start;}}
   @media(max-width:760px){.guide{grid-template-columns:1fr;gap:10px;}}
 
+  /* Who makes this */
+  .who{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;max-width:880px;}
+  .who-photo{width:clamp(88px,10vw,120px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);}
+  .who p{font-size:clamp(18px,1.7vw,20px);line-height:1.6;color:var(--ink-2);margin-top:14px;max-width:680px;text-wrap:pretty;}
+  .who p.who-later{margin-top:clamp(40px,5vw,56px);}
+  .who .tl{display:inline-block;margin-top:22px;font-size:17px;}
+  @media(max-width:640px){.who{grid-template-columns:1fr;gap:18px;}}
+
   /* Signup */
   .signup-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;border-top:1px solid var(--ink);padding-top:40px;}
   .signup-card h2{font-size:clamp(32px,4vw,44px);margin-bottom:8px;}

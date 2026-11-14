@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import { wholeList } from '@/lib/evidence/guided'
 import { Dots, Squiggle, Swash, Zigzag, retroCss } from '@/app/(rebrand)/_components/retro'
 import { JsonLd, graph, resumeRankingLd, atsRankingLd } from '@/app/(rebrand)/_components/structured'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
@@ -50,51 +52,10 @@ export default function Home() {
   const top = byId[guide.picks[0].tool]
   const pick = byId[risingPick.tool]
   const resumeIo = byId['resume-io']
-  const kick = byId['kickresume']
   const smallPick = atsByName[atsLeaders().small]
-  const smallPrice = smallPick.sources.pricing.match(/\$\d+/)?.[0]
   const fastest = [...atsTools].sort((a, b) => (atsGrowth(b) ?? -1) - (atsGrowth(a) ?? -1))[0]
-  const fastestPct = Math.round((atsGrowth(fastest) ?? 0) * 100)
-  const flexjobs = benchmarks.find((l) => l.status === 'owner-conflict')
-  const topLists = top.counted.length
-  const firstRiser = rising.tools.find((t) => t.evidence.length > 0)
 
-  const ticker = [
-    <>
-      <b>{resumeIo.name}</b> renews every 4 weeks: <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel
-    </>,
-    topLists >= 2 && (
-      <>
-        <i>{topLists} current, independent lists</i> name {top.name}. We rank it first too
-      </>
-    ),
-    flexjobs && (
-      <>
-        <i>{flexjobs.publication}</i>&rsquo;s list picks tools its parent company owns, so we don&rsquo;t count it
-      </>
-    ),
-    <>
-      {pick.name}: {pick.rawUserScore?.toFixed(1)} from {formatCount(pick.citableReviews)} users. Stephanie&rsquo;s up-and-coming pick
-    </>,
-    <>
-      Stephanie&rsquo;s top pick for hiring teams: <i>{hiringPick.name}</i>
-    </>,
-    <>
-      {fastest.name} reviews up <b>{fastestPct}%</b> in a year, fastest of {atsTools.length} applicant tracking systems (data as of {shortDate(atsAsOf)})
-    </>,
-    kick.yearCost && (
-      <>
-        {kick.name}: <b>{money(kick.yearCost.amount)}</b> a year, flat
-      </>
-    ),
-    firstRiser && (
-      <>
-        One to watch: <i>{firstRiser.name}</i>, {firstRiser.evidence[0].note.replace(/^\w/, (c) => c.toLowerCase())} ({firstRiser.evidence[0].publication})
-      </>
-    ),
-  ].filter(Boolean)
 
-  const featured = videos.filter((v) => v.featured).slice(0, 3)
   const SEG_LABEL: Record<string, string> = { small: 'Small teams pick', growing: 'Growing teams pick', scaling: 'Scaling teams pick' }
   const ATS_TAGS: Record<string, string> = Object.fromEntries(Object.entries(atsLeaders()).map(([seg, name]) => [name, SEG_LABEL[seg]]))
   const TAGS: Record<string, string> = Object.fromEntries([
@@ -184,7 +145,7 @@ export default function Home() {
         <div className="hero-fine">
           <p>Nobody pays to be featured. Every score is&nbsp;dated.</p>
           <p>
-            <a href="/about/stephanie">Made by Stephanie Murray after twenty years in&nbsp;recruiting.</a>
+            <a href="#who-makes-this">Made by Stephanie Murray after twenty years in&nbsp;recruiting.</a>
           </p>
         </div>
       </header>
@@ -193,7 +154,7 @@ export default function Home() {
         <h2>What should I use?</h2>
         <p className="lead">
           Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and
-          recommend one tool and a backup. If no tool fixes it, we&rsquo;ll say so.
+          recommend one tool and a cheaper backup. If no tool fixes it, we&rsquo;ll say so.
         </p>
         <div className="rec-sits">
           {(['seekers', 'hiring'] as const).map((side) => (
@@ -201,7 +162,7 @@ export default function Home() {
               <span className="rec-sits-k">
                 <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}</span>
               </span>
-              {problemsFor(side).map((p) => (
+              {wholeList(side).map((p) => (
                 <a className="rec-sit" href={`/what-should-i-use?side=${side}&problem=${p.id}#questions`} key={p.id}>
                   {p.label} <span className="arr">&rarr;</span>
                 </a>
@@ -214,7 +175,7 @@ export default function Home() {
       <section className="wrap sec" id="scoreboard">
         <div className="sec-head">
           <div>
-            <h2>This month&rsquo;s scoreboard</h2>
+            <h2>This month&rsquo;s&nbsp;scoreboard</h2>
             <p className="lead">Scored on user ratings, popularity, best-of lists and price. Open any tool for the full review.</p>
           </div>
         </div>
@@ -249,7 +210,7 @@ export default function Home() {
             <Scoreboard
               side="hiring"
               title="Applicant tracking systems"
-              checked={`data as of ${shortDate(atsAsOf)}`}
+              checked={`data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
               rows={hiringBoard(8).map((r) => ({ ...r, tag: ATS_TAGS[r.id] }))}
               foot={<>Top 8 of {atsTools.length}. The guide ranks all of them by team size: small, growing and scaling.</>}
             />
@@ -314,7 +275,7 @@ export default function Home() {
             <span className="guide-side">
               <span>
                 <span className="pill pill-sm pill-hiring">Hiring teams</span>
-                <span className="mono">{`Data as of ${shortDate(atsAsOf)}`}</span>
+                <span className="mono">{`Data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}</span>
               </span>
             </span>
             <span>
@@ -349,6 +310,23 @@ export default function Home() {
           Coming next: job search trackers, interview practice, career coaching, LinkedIn profile tools, recruiting software for startups,
           candidate assessments and high-volume hiring. Next check: {formatMonth(guide.nextCheck)}.
         </p>
+      </section>
+
+      <section className="wrap sec" id="who-makes-this">
+        <div className="who">
+          <Image className="who-photo" src="/stephanie.jpg" alt="Stephanie Murray" width={120} height={120} />
+          <div>
+            <h2>Who makes this</h2>
+            <p>
+              I&rsquo;m Stephanie Murray. I&rsquo;ve spent twenty years in talent acquisition, most of it on the hiring side, picking and using
+              tools like the ones on this&nbsp;site.
+            </p>
+            <p className="who-later">I also built RepVera. It&rsquo;s listed here, and it&rsquo;s the only tool I don&rsquo;t&nbsp;score.</p>
+            <a className="tl tl-strong" href="/about/stephanie">
+              More about Stephanie <span className="arr">&rarr;</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <section className="wrap sec" id="signup">

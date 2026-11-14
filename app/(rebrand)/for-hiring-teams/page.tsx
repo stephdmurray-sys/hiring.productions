@@ -30,7 +30,7 @@ export default function Page() {
       logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: atsHref(t.name), tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
       board={{
         title: 'Applicant tracking systems',
-        checked: `data as of ${shortDate(atsAsOf)}`,
+        checked: `data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`,
         heading: 'How the systems rank',
         lead: `Ratings and prices as of ${shortDate(atsAsOf)}. We check them all again in December.`,
         rows: hiringBoard().map((r) => ({ ...r, tag: tagFor[r.id] })),
@@ -41,7 +41,7 @@ export default function Page() {
           href: '/guides/best-ats-for-small-teams',
           title: `The ${atsTools.length} best applicant tracking systems, ranked by team size`,
           detail: 'Small, growing and scaling teams each get their own rankings and their own pick.',
-          meta: `Data as of ${shortDate(atsAsOf)}`,
+          meta: `Data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`,
           logos: atsTools.slice(0, 6).map((t) => ({ domain: t.domain, name: t.name })),
         },
         {

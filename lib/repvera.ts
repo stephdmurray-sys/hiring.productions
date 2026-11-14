@@ -3,7 +3,8 @@
  *
  * Stephanie Murray makes hiring.productions and also built RepVera. Since
  * Nov 14, 2026 RepVera is listed in its own category, verified professional
- * reputation, with no score and a note in her voice saying she built it.
+ * reputation, with no score and no rank, and Stephanie's note that she
+ * built it (copy in lib/evidence/guided.ts, from her handoff).
  * It is never scored or ranked, and neither is any tool it competes with
  * (the FTC's rule at 16 CFR 465.6). Every link is tagged with the page it
  * came from, so RepVera can see which pages start relationships.
@@ -30,7 +31,7 @@ export const REPVERA_WHAT =
 
 /** The closing line from RepVera's own approved copy (mis-hire calculator spec), used verbatim. */
 export const REPVERA_TEAMS_LINE =
-  'You can verify what someone can do. The harder question is how they actually show up, and that is where mis-hires are made.'
+  'You can verify what someone can do. The harder question is how they show up, and that is where mis-hires are made.'
 
 /** RepVera's category on this site. It has no scores and no rankings. */
 export const REPVERA_CATEGORY = 'Verified professional reputation'
@@ -38,13 +39,3 @@ export const REPVERA_CATEGORY = 'Verified professional reputation'
 /** The label on every RepVera note and listing, in Stephanie's voice. */
 export const REPVERA_NOTE_LABEL = 'From Stephanie, who built RepVera'
 
-/** Why RepVera has no score, said wherever it is listed. */
-export const REPVERA_NO_SCORE = "Because I built it, I don't score it or rank anything it competes with."
-
-/** The listing line for each side (Stephanie's pitch, website selling framework). */
-export const REPVERA_FOR = {
-  seekers:
-    "Your proven reputation shows up before you do. RepVera is a record of what you're like to work with, in the words of people who have worked with you.",
-  hiring:
-    "Ask a candidate for their RepVera to see how they work sooner, save time and money finding out, and get more out of your interviews.",
-} as const

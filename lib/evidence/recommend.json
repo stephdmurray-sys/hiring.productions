@@ -1,12 +1,12 @@
 {
   "_about": "The recommendation framework: how a visitor’s situation and limits turn into one pick. Read by lib/evidence/recommend.ts and rendered on /what-should-i-use. The rules here are the public promise; keep them in plain English. Every otherSide line states a published finding and links to it: no unsourced numbers, no first-person quotes.",
-  "promise": "Tell us what’s going wrong and what you need. We cross off every tool that doesn’t fit, show you why, and recommend one tool and a backup that costs less when there is one. Your answers decide which tools fit, and they never change a rating.",
+  "promise": "Tell us what’s going wrong and what you need. We cross off every tool that doesn’t fit, show you why, and recommend one tool and a cheaper backup. Your answers decide which tools fit, and they never change a rating.",
   "rules": [
     "Start with what’s going wrong. The right tool depends on the problem you’re trying to fix.",
     "Sometimes the answer is no tool. When software won’t fix it, we say so and point you to what will.",
     "Your answers cross tools off, and they never change a rating. A tool fits everything you asked for or it’s out, and we show you why. The tools that fit stay in rating order, the same for everyone.",
     "If we can’t confirm it, we don’t recommend it. A tool we can’t confirm meets your needs can’t be the pick. It’s listed under “Couldn’t confirm.”",
-    "One tool and a backup. The backup is the top-rated tool that costs you less. If none does, it’s the next-highest rated.",
+    "We recommend one tool and a cheaper backup. The backup is the top-rated tool that costs you less. If none does, it’s the next-highest rated.",
     "Only rated tools can be the pick. Tools too new to rate show up as worth watching, labeled that way.",
     "Show what you’ll really pay: the cheapest way to pay for your timeline, and what it costs if you forget to cancel.",
     "If nothing fits, say so, and show the closest tool and what’s in the way.",

@@ -11,6 +11,9 @@
  * lifts, pulsing dots, tilted card stacks, stat-number rows.
  */
 export const siteCss = `
+  /* Stephanie's rule: no single word alone on the last line of any block. */
+  h1,h2,h3,h4,.display{text-wrap:balance;}
+  p,li,dd,dt,summary,label,blockquote,figcaption,a.rec-sit,a.g-card,.g-card span,a.row-title,.rec-sit{text-wrap:pretty;}
   .money{display:block;font-size:12.5px;line-height:1.4;font-weight:600;color:var(--ink-3);margin-top:6px;letter-spacing:0;text-transform:none;}
   :root{
     --paper:#FAF8F3; --paper-2:#F2EEE4; --surface:#FFFFFF; --surface-2:#FCFBFF;

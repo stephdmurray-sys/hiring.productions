@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { wholeList } from '@/lib/evidence/guided'
 import { StartHere, retroCss } from './retro'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -117,7 +118,7 @@ export function Hub(props: HubProps) {
             <StartHere side={props.side}>
               <aside className="hub-start" aria-labelledby="hub-start-h">
                 <h2 id="hub-start-h">Where are you stuck?</h2>
-                {problemsFor(props.side).map((p) => (
+                {wholeList(props.side).map((p) => (
                   <a key={p.id} href={`/what-should-i-use?side=${props.side}&problem=${p.id}#questions`}>
                     {p.label} <span className="arr">&rarr;</span>
                   </a>
@@ -137,8 +138,8 @@ export function Hub(props: HubProps) {
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>Stephanie&rsquo;s picks</h2>
-        <p className="lead">These are Stephanie&rsquo;s opinions, and they have no effect on any score.</p>
+        <h2>Stephanie&rsquo;s pick</h2>
+        <p className="lead">This is Stephanie&rsquo;s opinion, and it has no effect on the score.</p>
         <OnTheRise side={props.side} showPicks />
       </section>
 

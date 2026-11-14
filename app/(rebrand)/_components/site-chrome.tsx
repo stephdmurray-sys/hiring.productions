@@ -103,9 +103,7 @@ export function SiteFooter({ ratings = 'short' }: { ratings?: 'short' | 'full' }
       <div className="wrap">
         {ratings === 'short' ? (
           <p className="frate-one">
-            Every score is built from dated public data: users {Math.round(WEIGHTS.user * 100)}%, popularity{' '}
-            {Math.round(WEIGHTS.market * 100)}%, best-of lists {Math.round(WEIGHTS.critics * 100)}% and value {Math.round(WEIGHTS.value * 100)}
-            %. <a href="/how-we-review">How we review</a>
+            Scores come from public data and are checked every month. <a href="/how-we-review">See how ratings work.</a>
           </p>
         ) : (
         <section className="frate" aria-labelledby="frate-h">

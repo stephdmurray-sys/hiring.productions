@@ -102,7 +102,7 @@ function welcomeForSource(
         annual,
         `Assuming ${hires} hires like this a year and a ${rate}% mis-hire rate.`,
         '',
-        'You can verify what someone can do. The harder question is how they actually show up, and that is where mis-hires are made.',
+        'You can verify what someone can do. The harder question is how they show up, and that is where mis-hires are made.',
         '',
         'See how RepVera helps:',
         'https://repvera.com',

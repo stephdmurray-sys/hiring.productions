@@ -24,6 +24,8 @@ const FOOTER_RE = /<footer[\s\S]*?<\/footer>/
 
 
 const GLOBAL_FIXES = `
+  h1,h2,h3,h4{text-wrap:balance;}
+  p,li,dd,dt,summary,label,blockquote,figcaption{text-wrap:pretty;}
   :root{
     --paper:#FAF8F3;--paper-2:#F2EEE4;--surface:#FFFFFF;--ink:#1A1A22;--ink-2:#4A4A5A;--ink-3:#62627A;
     --rule:#E3DED2;--rule-2:#CFC8B8;--indigo:#6C47FF;--indigo-text:#5432E0;--coral:#FF4F6A;--coral-text:#C42E48;--ok:#157347;

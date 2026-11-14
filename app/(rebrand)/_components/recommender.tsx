@@ -1,4 +1,7 @@
 import { Logo } from './logo'
+import { keepLast } from '@/lib/site-line'
+import { PickerFeedback, TrackOnce } from './picker-track'
+import { REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
 import { Capture } from './capture'
 import { captureCss } from './widgets-css'
 import { RecForm, CopyLink } from './rec-form'
@@ -54,9 +57,15 @@ function Radio({ name, value, checked, children, className }: { name: string; va
   )
 }
 
-export function RecQuestions({ state }: { state: AskState }) {
+/**
+ * The picker form. With only="side" it shows just the side choice (the guided
+ * questions take over below it). `from` keeps the guided step a visitor came
+ * from, so "Back" can return to it after they change a limit.
+ */
+export function RecQuestions({ state, only, from, repveraProblem }: { state: AskState; only?: 'side'; from?: string; repveraProblem?: string }) {
   const side = state.side
   const problem = state.problem
+  const problemId = problem?.id ?? repveraProblem
   const v = (x: number | null) => (x === null ? 'any' : String(x))
   return (
     <RecForm action={REC_PATH}>
@@ -74,20 +83,21 @@ export function RecQuestions({ state }: { state: AskState }) {
         </div>
       </fieldset>
 
-      {side && (
+      {side && only !== 'side' && (
         <fieldset className="rec-q">
           <legend>{data[side].title}</legend>
           <div className="rec-rows">
-            {problemsFor(side).map((p) => (
-              <Radio key={p.id} name="problem" value={p.id} checked={problem?.id === p.id} className="opt-row">
+            {wholeList(side).map((p) => (
+              <Radio key={p.id} name="problem" value={p.id} checked={problemId === p.id} className="opt-row">
                 {p.label}
               </Radio>
             ))}
           </div>
         </fieldset>
       )}
+      {from && <input type="hidden" name="from" value={from} />}
 
-      {side && problem?.kind === 'tool' && (
+      {side && only !== 'side' && problem?.kind === 'tool' && (
         <fieldset className="rec-q">
           <legend>{side === 'seekers' ? 'What’s your budget and timeline?' : 'Tell us about your team'}</legend>
           <div className="rec-limits">
@@ -144,10 +154,10 @@ function CostLine({ r, ask }: { r: Recommendation; ask: Ask }) {
   if (!c) return <p className="rec-cost">Price by quote. Ask for it in writing before you book a demo.</p>
   const span = ask.side === 'seekers' ? `for ${monthsText(ask.months)}` : 'a year'
   const forget = (total: number, f: number | null) =>
-    f && f > total * 1.5 ? (
+    f && f > total + 0.005 ? (
       <>
         {' '}
-        Forget to cancel and the year is <strong>{money(f)}</strong>.
+        If you forget to cancel, the first year costs <strong>{money(f)}</strong>.
       </>
     ) : null
   if (c.total === 0)
@@ -342,6 +352,8 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
         </details>
       )}
 
+      <p className="rec-fine">Nobody pays to be featured.</p>
+
       <p className="rec-share">
         <CopyLink url={url} title={title} />
       </p>
@@ -357,6 +369,9 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
           askCompanySize={r.side === 'hiring'}
         />
       </div>
+
+      <TrackOnce event="picker_finish" side={r.side} problem={r.problem.id} />
+      <PickerFeedback side={r.side} problem={r.problem.id} />
     </div>
   )
 }
@@ -375,9 +390,12 @@ export function RecSituations({ exclude }: { exclude?: string }) {
             .filter((s) => s.ask.side === side)
             .map((s) => (
               <a className="rec-sit" href={`${REC_PATH}/${s.slug}`} key={s.slug}>
-                {s.question} <span className="arr">&rarr;</span>
+                {keepLast(s.question)} <span className="arr">&rarr;</span>
               </a>
             ))}
+          <a className="rec-sit" href={`${REC_PATH}?side=${side}&problem=${REPVERA_PROBLEM[side].id}#questions`}>
+            {keepLast(REPVERA_QUESTIONS[side])} <span className="arr">&rarr;</span>
+          </a>
         </div>
       ))}
     </div>

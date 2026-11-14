@@ -83,7 +83,7 @@ ${hiringBoard()
 
 ## Stephanie's picks (editorial; a pick never changes a score)
 
-- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
+- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, Stephanie's pick.
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}), her top pick. ${hiringPick.scoreStatus}
 
 ## On the rise: new tools to watch (not rated yet)

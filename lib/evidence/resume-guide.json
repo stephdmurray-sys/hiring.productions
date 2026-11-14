@@ -28,8 +28,8 @@
   ],
   "risingPick": {
     "tool": "flowcv",
-    "label": "Stephanie's up-and-coming pick",
-    "line": "The one I'd tell a friend about first. It hands you a clean, watermark-free PDF for nothing, and the people using it rate it as high as anything in the category.",
+    "label": "Stephanie's pick",
+    "line": "It hands you a clean, watermark-free PDF for nothing, and the people using it rate it as high as anything in the category.",
     "confirmed": false
   },
   "tools": {
@@ -37,10 +37,10 @@
       "bestFor": "Checker, builder, and tracker in one. Real free tier",
       "call": {
         "stance": "agrees",
-        "line": "Three current lists name Teal, and we rank it first too. Its free version is useful on its own."
+        "line": "Three current lists name Teal, and we rank it first too."
       },
       "verdict": {
-        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. It rates 4.9 from 3,200 Chrome Web Store ratings.",
+        "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free version is useful, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
         "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
         "like": "The free version lets you download your resume. If you pay, $79 a quarter is the best deal.",
         "watch": "The $13 weekly plan looks cheap but adds up fast. Pay monthly or quarterly instead."

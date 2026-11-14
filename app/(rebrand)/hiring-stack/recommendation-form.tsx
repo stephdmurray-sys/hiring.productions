@@ -93,11 +93,11 @@ export function RecommendationForm() {
         <h2>What comes back</h2>
         <ul>
           <li>
-            <b>The tools she would run.</b>
-            The applicant tracking system, the job boards and the screening setup she would use for your hiring volume, named.
+            <b>The specific tools Stephanie would use for your team.</b>
+            The applicant tracking system, the job boards and the screening setup she would run for your hiring volume.
           </li>
           <li>
-            <b>Why she picked each one.</b>
+            <b>The reasoning, with links to the scores.</b>
             Every pick traces to the scores you can read on <a href="/how-we-review">How we review</a>. Vendors can&rsquo;t pay for placement,
             rankings or scores.
           </li>

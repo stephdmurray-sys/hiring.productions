@@ -151,3 +151,7 @@ Nothing to refresh while no affiliate deal is live. When one is approved: add th
 ## Applicant tracking data (the December check)
 
 G2 blocks automated reads, so the applicant tracking ratings in `lib/scorecards/ats-small-teams.json` need a person in a normal browser: read each system's G2 and Capterra rating and review count, update the file with the date read, and run the build. The hiring pages show the date of the last read.
+
+## The guided picker and what it counts
+
+The questions and the RepVera answers live in `lib/evidence/guided.ts`, word for word from Stephanie's handoff; change them only with her. If a problem id in `recommend.json` changes, update the paths there too (the guided test walks every path). The picker records starts, finishes, RepVera answer visits, profile clicks and "Did this help you decide?" answers through `/api/track`; vendor form submissions are recorded in `/api/vendor-submittal`. Counts appear by type on /admin.

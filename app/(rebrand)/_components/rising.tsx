@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { REPVERA_CATEGORY, REPVERA_FOR, REPVERA_NO_SCORE, repveraLink } from '@/lib/repvera'
 import { moneyLine } from '@/lib/money'
 import { Logo } from './logo'
 import { formatCount, formatMonth, guide, hiringPick, latestCheck, resumeTools, rising, risingPick, type RisingTool } from '@/lib/evidence'
@@ -123,7 +122,7 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
       side: 'seekers',
       name: seeker.name,
       domain: seeker.domain,
-      heading: 'My up-and-coming pick for job seekers',
+      heading: "Stephanie's pick",
       body: risingPick.line.replace(/^The one I'd tell a friend about first\.\s*/, ''),
       facts: [
         seeker.rawUserScore !== null ? `${seeker.rawUserScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} users` : '',
@@ -150,19 +149,6 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
     linkText: `Visit ${hiringPick.name}`,
     moneyId: hiringPick.id,
   })
-  for (const s of ['seekers', 'hiring'] as const) {
-    picks.push({
-      side: s,
-      name: 'RepVera',
-      domain: 'repvera.com',
-      heading: 'I built this one',
-      body: REPVERA_FOR[s],
-      facts: `${REPVERA_CATEGORY}, a category with no scores. ${REPVERA_NO_SCORE}`,
-      href: repveraLink(`pick-${s}`),
-      external: true,
-      linkText: 'See how RepVera works',
-    })
-  }
   return picks.filter((p) => !side || p.side === side)
 }
 

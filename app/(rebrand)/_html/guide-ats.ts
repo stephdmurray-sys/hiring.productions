@@ -136,7 +136,7 @@ export const html = `<style>
       <p class="crumbs"><a href="/">Home</a> &rsaquo; <a href="/for-hiring-teams">For Hiring Teams</a> &rsaquo; Applicant Tracking Systems</p>
       <h1>The best applicant tracking systems of 2026, ranked by team size</h1>
       <div class="byline">
-        <span>Data as of August 22, 2026</span>
+        <span>Data as of August 22, 2026 &middot; next check December 2026</span>
         <span class="dot">&middot;</span>
         <span>Next full check: December 2026</span>
         <span class="dot">&middot;</span>
@@ -215,7 +215,7 @@ export const html = `<style>
       <tr><td>3</td><td><img src="https://www.google.com/s2/favicons?domain=fountain.com&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Fountain</b></td><td>High-volume hourly hiring. See our high-volume guide</td><td>Custom</td><td>Demo</td><td><span class="chip chip-na">n/a</span></td><td>2.69</td><td>4.37</td><td>3.8</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.72</span></td></tr>
       <tr><td>4</td><td><img src="https://www.google.com/s2/favicons?domain=lever.co&sz=64" width="16" height="16" alt="" style="vertical-align:-3px;border-radius:4px;margin-right:6px;"><b>Lever</b></td><td>CRM-first recruiting</td><td>Custom</td><td>Demo</td><td><span class="chip chip-na">n/a</span></td><td>3.44</td><td>4.37</td><td>3.3</td><td><span class="tstars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> <span class="tscore">3.71</span></td></tr>
     </table></div>
-    <p style="text-align:center;color:var(--gray-lt);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 22, 2026. Rankings are within each tier; tiers are set by hires per year and who runs hiring, not company headcount. Market and User scores are computed from sourced public data (methodology on <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How We Review</a>). *Practitioner and Overall scores are in final review. &dagger;Review-volume surge under verification at next refresh.</p>
+    <p style="text-align:center;color:var(--gray-lt);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 22, 2026, next check December 2026. Rankings are within each tier; tiers are set by hires per year and who runs hiring, not company headcount. Market and User scores are computed from sourced public data (methodology on <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How We Review</a>). *Practitioner and Overall scores are in final review. &dagger;Review-volume surge under verification at next refresh.</p>
     <p class="callout"><b>Skip the enterprise suites</b> (Greenhouse, Lever, Workday) until you pass 50 hires a year or add a dedicated recruiter. You will pay for depth you cannot use and setup you cannot staff.</p>
   </section>
 
