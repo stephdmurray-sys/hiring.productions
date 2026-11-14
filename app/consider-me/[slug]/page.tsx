@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+
+/** The page keeps its own inline styles; the site menu and footer only need the page-width rule. */
+const CHROME_WRAP = '.site-nav .wrap,.site-footer .wrap{max-width:1200px;margin:0 auto;padding-left:32px;padding-right:32px;}@media(max-width:760px){.site-nav .wrap,.site-footer .wrap{padding-left:18px;padding-right:18px;}}'
 import { ConsiderMeForm } from '@/components/consider-me-form'
 import { OPPORTUNITIES, getOpportunity } from '@/lib/opportunities'
 
@@ -53,7 +55,8 @@ export default async function OpportunityPage({
 
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="light" />
+      <style dangerouslySetInnerHTML={{ __html: chromeCss + CHROME_WRAP }} />
+      <SiteNav />
 
       {/* Posting */}
       <section style={{ padding: 'clamp(56px, 8vw, 96px) 24px clamp(40px, 5vw, 64px)' }}>
@@ -197,7 +200,7 @@ export default async function OpportunityPage({
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

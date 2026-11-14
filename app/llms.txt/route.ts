@@ -46,7 +46,8 @@ Evidence last checked: ${latestCheck()}. Every number below has a source on the 
 - [Recruiter training and certifications](${BASE}/guides/best-recruiter-training)
 - [For job seekers](${BASE}/for-job-seekers): where a search goes wrong and the tools that fix it.
 - [For hiring teams](${BASE}/for-hiring-teams): applicant tracking, sourcing and strategic guidance.
-- [All resume tool reviews](${BASE}/reviews)
+- [All tool reviews](${BASE}/reviews)
+- [Two tools side by side](${BASE}/compare): every rated tool against the ones it competes with, with who wins on rating, price and free version.
 
 ## What should I use? (${BASE}/what-should-i-use)
 

@@ -6,7 +6,7 @@ import { ImageResponse } from 'next/og'
 // no longer needed once this exists.
 
 export const runtime = 'edge'
-export const alt = 'hiring.productions — Both sides of hiring. Finally in the open.'
+export const alt = 'hiring.productions: both sides of hiring, finally in the open.'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -119,7 +119,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          Free tools and the Recruiter Insights every recruiter wishes you knew.
+          Independent reviews of the tools on both sides of hiring.
         </div>
       </div>
     ),

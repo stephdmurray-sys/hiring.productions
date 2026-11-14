@@ -10,6 +10,7 @@ import { hiringBoard, shortDate } from '@/app/(rebrand)/_components/data'
 import { reviewCss } from '@/app/(rebrand)/reviews/[tool]/review-css'
 import { VIDEO_KIND_LABEL, formatCount, formatMonth, guide } from '@/lib/evidence'
 import { atsCapability, atsYear } from '@/lib/evidence/recommend'
+import { compareHref, comparisonsFor } from '@/lib/compare'
 import { ATS_TIER, ATS_TIER_DETAIL, atsAsOfDate, atsInTier, atsProfile, atsProfiles, atsReviewHref } from '@/lib/ats-profiles'
 
 /**
@@ -97,6 +98,7 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
   const sameTier = new Set(atsInTier(p.tier).map((x) => x.name))
   const alternatives = hiringBoard().filter((r) => r.id !== name && sameTier.has(r.id))
   const best = alternatives[0]
+  const versus = comparisonsFor('ats', p.slug)
   const growthPct = p.growth !== null ? Math.round(p.growth * 100) : null
   const verdictLine = `${name} is rated ${s.overall.toFixed(2)} out of 5, #${p.rank} of ${p.tierCount} systems we rank for ${tier.toLowerCase()} (${ATS_TIER_DETAIL[p.tier]}).`
 
@@ -330,6 +332,19 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
           <p className="lead">The other systems we rank for {tier.toLowerCase()}, best first.</p>
           <div style={{ marginTop: 32, paddingBottom: 'clamp(96px,11vw,150px)' }}>
             <Scoreboard side="hiring" title={`${tier}: ${ATS_TIER_DETAIL[p.tier]}`} checked={`data as of ${asOf}`} rows={alternatives} />
+            {versus.length > 0 && (
+              <p className="rv-versus">
+                <b>Side by side:</b>{' '}
+                {versus.map((v, i) => (
+                  <span key={v.slug}>
+                    {i > 0 && ' · '}
+                    <a className="tl" href={compareHref(v.slug)}>
+                      {v.label}
+                    </a>
+                  </span>
+                ))}
+              </p>
+            )}
           </div>
         </section>
       )}

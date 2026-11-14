@@ -59,6 +59,13 @@ export default function ReviewsIndex() {
         <div style={{ marginTop: 32 }}>
           <Scoreboard side="hiring" title="Applicant tracking systems" checked={`data as of ${shortDate(atsAsOf)}`} rows={hiringBoard()} />
         </div>
+        <p style={{ marginTop: 28, fontSize: 17 }}>
+          Down to two?{' '}
+          <a className="tl" href="/compare">
+            See any two side by side
+          </a>
+          .
+        </p>
       </section>
 
       {unscored.length > 0 && (

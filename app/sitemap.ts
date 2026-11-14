@@ -2,6 +2,7 @@ import { atsProfiles } from '@/lib/ats-profiles'
 import { MetadataRoute } from 'next'
 import { resumeTools } from '@/lib/evidence'
 import { situations } from '@/lib/evidence/recommend'
+import { comparePairs } from '@/lib/compare'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://hiring.productions'
@@ -45,6 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...atsProfiles().map((p) => ({ path: `/reviews/ats/${p.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
+    { path: '/compare', priority: 0.8, changeFrequency: 'monthly' },
+    ...comparePairs().map((p) => ({ path: `/compare/${p.slug}`, priority: 0.8, changeFrequency: 'monthly' as const })),
   ]
 
   const seen = new Set(staticPages.map((p) => p.path))

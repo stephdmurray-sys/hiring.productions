@@ -139,3 +139,7 @@ Every placement that counts toward a score is read on the live page, never from 
 - The "Still being confirmed" note appears only while a counted list or a shown video rests on a search listing.
 
 The Nov 14 read found Zapier, Geekflare and SkillScouter name more of our tools than we'd recorded; scores rose for Huntr, Kickresume, Jobscan, Rezi and Resume.io, ranks held.
+
+## Comparison pages
+
+Nothing to edit. `/compare/*` pages are computed from the scores, prices and free levels on every build (`lib/compare.ts`), so they update with the refresh. After a refresh, open two or three and read the verdict line: if a tool changed category or tier, its comparisons move with it.

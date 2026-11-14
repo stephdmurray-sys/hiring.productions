@@ -18,6 +18,8 @@ export const reviewCss = `
   .meter-bar i{display:block;height:100%;background:var(--indigo);border-radius:4px;}
   .meter b{font-weight:900;text-align:right;font-variant-numeric:tabular-nums;}
   .meter-n{grid-column:2 / -1;font-size:12.5px;color:var(--ink-3);margin-top:-2px;}
+  .rv-versus{margin-top:28px;font-size:17px;line-height:1.9;color:var(--ink-2);max-width:960px;}
+  .rv-versus b{color:var(--ink);}
   .rv-stance{padding-top:12px;border-top:1px solid var(--rule-soft);}
 
   .rv-verdict{border-top:1px solid var(--ink);}

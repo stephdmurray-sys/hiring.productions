@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     default: 'hiring.productions',
     template: '%s | hiring.productions',
   },
-  description: 'The only place where candidates see how they\'re actually evaluated. Recruiter Insights built from real recruiting practice. Free to start.',
+  description: 'Independent reviews of the tools on both sides of hiring: resume tools for job seekers, applicant tracking systems for hiring teams. Every score built from public data, with the date we checked it. Free.',
   keywords: ['hiring', 'job search', 'recruiting', 'ATS screening', 'resume tips', 'interview prep', 'talent acquisition', 'candidate experience', 'job description SEO', 'employer branding'],
   authors: [{ name: 'Stephanie Murray', url: 'https://www.linkedin.com/in/stephaniemurray11/' }],
   creator: 'Stephanie Murray',

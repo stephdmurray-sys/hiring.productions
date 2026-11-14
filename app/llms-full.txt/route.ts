@@ -16,6 +16,7 @@ import {
   type ToolEvidence,
 } from '@/lib/evidence'
 import { answerText, recFramework, recommend, situations } from '@/lib/evidence/recommend'
+import { buildComparison, comparePairs } from '@/lib/compare'
 
 /**
  * llms-full.txt: the whole review site as one plain-text file, for AI
@@ -194,6 +195,17 @@ ${atsRanked
 - Pricing: ${t.sources.pricing}${t.sources.free_tier ? ' (has a free tier)' : ''}${t.data_notes ? `\n- Data notes: ${t.data_notes}` : ''}`
   })
   .join('\n\n')}
+
+## Two at a time: head-to-head comparisons
+
+Computed from the same data as the scores above. A score gap under 0.05 counts as a tie.
+
+${comparePairs()
+  .map((p) => {
+    const c = buildComparison(p.slug)!
+    return `- [${c.a.name} vs ${c.b.name}](${BASE}/compare/${p.slug}): ${c.verdict}`
+  })
+  .join('\n')}
 
 ## Stephanie's picks (editorial, labeled as hers, never change a score)
 

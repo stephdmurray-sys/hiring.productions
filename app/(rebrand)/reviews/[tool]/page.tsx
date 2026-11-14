@@ -27,6 +27,7 @@ import {
   type ToolEvidence,
 } from '@/lib/evidence'
 import { reviewCss } from './review-css'
+import { compareHref, comparisonsFor } from '@/lib/compare'
 
 /**
  * One page per tool, answering what people actually search before they pay:
@@ -87,6 +88,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
 
   const alternatives = peers.filter((x) => x.id !== t.id && x.overall !== null).sort((a, b) => (b.overall ?? 0) - (a.overall ?? 0))
   const bestAlt = alternatives[0]
+  const versus = comparisonsFor('resume', t.id)
   const months = [1, 3, 6, 12]
   const costRows = months.map((m) => ({ m, on: cheapestCover(t.id, m * 30), forget: forgetCost(t.id, m * 30) }))
   const cheaperAlt =
@@ -370,6 +372,19 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
               rows={alternatives.map(seekerRow)}
             />
           </div>
+          {versus.length > 0 && (
+            <p className="rv-versus">
+              <b>Side by side:</b>{' '}
+              {versus.map((v, i) => (
+                <span key={v.slug}>
+                  {i > 0 && ' · '}
+                  <a className="tl" href={compareHref(v.slug)}>
+                    {v.label}
+                  </a>
+                </span>
+              ))}
+            </p>
+          )}
         </section>
       )}
 
