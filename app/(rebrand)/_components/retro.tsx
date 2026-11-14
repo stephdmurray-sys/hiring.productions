@@ -3,9 +3,11 @@ import type { ReactNode } from 'react'
 /**
  * The 80s layer (Stephanie, Nov 14, 2026): a "Start here" sticker, a
  * hand-drawn arrow that draws itself and keeps nudging toward the box it
- * points at, and Memphis shapes (squiggle, zigzag, ring, dot grid) peeking
- * out from behind it. Hard ink outlines and shadows instead of soft blurs,
- * so it reads as made by a person, not generated.
+ * points at, and Memphis shapes (squiggle, zigzag, dot grid) peeking
+ * out from behind its right-hand corners. Every shape is anchored to a
+ * corner of the box it frames; nothing floats loose (Stephanie: "on
+ * purpose, not random"). Hard ink outlines and shadows instead of soft
+ * blurs, so it reads as made by a person, not generated.
  *
  * Colors stay inside the palette: on indigo the sticker is coral and the
  * arrow white; on coral the sticker is indigo and the arrow ink. Every
@@ -21,9 +23,6 @@ export function StartHere({ side, children }: { side: 'seekers' | 'hiring'; chil
       <span className="memphis m-dots" aria-hidden="true" />
       <svg className="memphis m-zig" viewBox="0 0 112 30" aria-hidden="true">
         <polyline points="4,24 20,6 36,24 52,6 68,24 84,6 100,24" />
-      </svg>
-      <svg className="memphis m-ring" viewBox="0 0 60 60" aria-hidden="true">
-        <circle cx="30" cy="30" r="22" />
       </svg>
       <p className="start-sticker">Start here</p>
       <svg className="start-arrow" viewBox="0 0 170 96" aria-hidden="true">
@@ -62,26 +61,22 @@ export const retroCss = `
   @keyframes sa-nudge{0%,100%{transform:translate(0,0);}50%{transform:translate(2px,5px);}}
 
   .memphis{position:absolute;z-index:1;pointer-events:none;overflow:visible;}
-  .memphis path,.memphis polyline,.memphis circle{fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .memphis path,.memphis polyline{fill:none;stroke-linecap:round;stroke-linejoin:round;}
   .m-squig{top:30px;right:28px;width:92px;height:28px;animation:m-float 6s ease-in-out infinite;}
   .m-squig path{stroke-width:5;}
   .m-dots{top:62px;right:-30px;width:126px;height:96px;background-size:14px 14px;animation:m-drift 9s ease-in-out infinite;}
   .m-zig{bottom:-34px;right:-26px;width:112px;height:30px;animation:m-float 7s ease-in-out .8s infinite;}
   .m-zig polyline{stroke-width:5.5;}
-  .m-ring{bottom:36px;left:-34px;width:60px;height:60px;animation:m-drift 8s ease-in-out .4s infinite;}
-  .m-ring circle{stroke-width:6;}
   .start-seekers .m-squig path{stroke:var(--lavender);}
   .start-seekers .m-dots{background-image:radial-gradient(circle,var(--lavender) 2.6px,transparent 3.1px);}
   .start-seekers .m-zig polyline{stroke:var(--coral);}
-  .start-seekers .m-ring circle{stroke:#fff;}
   .start-hiring .m-squig path{stroke:#fff;}
   .start-hiring .m-dots{background-image:radial-gradient(circle,var(--ink) 2.4px,transparent 2.9px);opacity:.55;}
   .start-hiring .m-zig polyline{stroke:var(--indigo);}
-  .start-hiring .m-ring circle{stroke:#fff;}
   @keyframes m-float{0%,100%{transform:translate(0,0) rotate(0deg);}50%{transform:translate(0,-9px) rotate(5deg);}}
   @keyframes m-drift{0%,100%{transform:translate(0,0);}50%{transform:translate(-7px,6px);}}
 
-  @media(max-width:960px){.start-sticker{left:0;}.start-arrow{left:156px;}.m-ring{left:-22px;}}
+  @media(max-width:960px){.start-sticker{left:0;}.start-arrow{left:156px;}}
   @media(max-width:700px){.m-squig{display:none;}.m-dots{right:-46px;}}
   @media (prefers-reduced-motion: reduce){
     .start-sticker,.start-arrow g,.memphis{animation:none;}
