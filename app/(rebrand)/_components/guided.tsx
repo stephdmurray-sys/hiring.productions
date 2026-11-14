@@ -75,6 +75,27 @@ export function GuidedStepView({ side, stepId }: { side: Side; stepId?: string }
   )
 }
 
+/** The first guided question, for the homepage: one tap starts the picker. */
+export function GuidedFirst({ side }: { side: Side }) {
+  const step = guidedStep(side, 'q1')
+  return (
+    <div className={`g-first g-${side}`}>
+      <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I\u2019m a job seeker' : 'I\u2019m hiring'}</span>
+      <h3 className="g-first-q">{keepLast(step.question)}</h3>
+      <div className="g-cards">
+        {step.options.map((o) => (
+          <a className="g-card" href={targetHref(side, o.to, step.id)} key={o.label}>
+            <span>{keepLast(o.label)}</span>
+            <span className="arr" aria-hidden="true">
+              &rarr;
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function WholeList({ side }: { side: Side }) {
   return (
     <div className={`g g-${side}`}>
@@ -148,6 +169,11 @@ export const guidedCss = `
   .g-seekers .g-progress i.on{background:var(--indigo);}
   .g-hiring .g-progress i.on{background:var(--coral);}
   .g-q{margin:0;text-wrap:balance;}
+  .g-start{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,48px);margin-top:36px;}
+  .g-first-q{font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.015em;line-height:1.15;margin:16px 0 0;}
+  .g-first .g-cards{margin-top:18px;gap:12px;}
+  .g-first .g-card{min-height:64px;padding:16px 20px;font-size:18px;}
+  @media(max-width:860px){.g-start{grid-template-columns:1fr;}}
   .g-cards{display:grid;gap:14px;margin-top:28px;}
   .g-card{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:76px;padding:20px 24px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);font-size:clamp(18px,2vw,21px);font-weight:800;line-height:1.35;text-wrap:pretty;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
   .g-card .arr{flex-shrink:0;font-size:22px;}
@@ -173,5 +199,13 @@ export const guidedCss = `
   .rec-help-btn:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink);}
   .rec-help-done{margin-top:12px;font-size:16px;font-weight:700;color:var(--ink-2);}
   @media(max-width:560px){.g-card{min-height:68px;padding:18px 18px;}.g-links{justify-content:flex-start;}}
-  @media (prefers-reduced-motion: reduce){.g-card{transition:none;}}
+  .g .g-q,.g .g-card{animation:g-in .5s cubic-bezier(.2,.7,.2,1) both;}
+  .g .g-card:nth-child(1){animation-delay:.08s;}
+  .g .g-card:nth-child(2){animation-delay:.16s;}
+  .g .g-card:nth-child(3){animation-delay:.24s;}
+  .g .g-card:nth-child(n+4){animation-delay:.3s;}
+  @keyframes g-in{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  .g-card .arr{transition:transform .15s ease;}
+  .g-card:hover .arr{transform:translateX(4px);}
+  @media (prefers-reduced-motion: reduce){.g-card{transition:none;}.g .g-q,.g .g-card{animation:none;}}
 `

@@ -29,11 +29,11 @@ function researchSections() {
       <section id="research">
         <h2>The research behind it</h2>
         <p class="lead">Our scoring copies what the most trusted review sites and researchers already do. We kept the parts that hold up and fixed the parts that let vendors in.</p>
-        <table>
+        ${fold('See the research, source by source', `<table>
           <tr><th>What the research shows</th><th>How we use it</th></tr>
           ${rows}
         </table>
-        <p class="callout"><b>What we can&rsquo;t do yet.</b> ${framework.limits.map(esc).join(' ')}</p>
+        <p class="callout"><b>What we can&rsquo;t do yet.</b> ${framework.limits.map(esc).join(' ')}</p>`)}
       </section>
 
       <section id="judgment">
@@ -48,6 +48,11 @@ function researchSections() {
       </section>
 `
 }
+
+/** Long detail folds behind one tap: the essentials stay open, depth is there for anyone who wants it. */
+const fold = (label: string, inner: string) => `<details class="hwr-fold"><summary>${label}</summary>${inner}</details>`
+
+const FOLD_CSS = `<style>.hwr-fold{margin-top:20px;}.hwr-fold>summary{display:inline-block;cursor:pointer;font-weight:800;font-size:15.5px;padding:11px 16px;border:2px solid #1A1A22;border-radius:10px;box-shadow:3px 3px 0 #1A1A22;background:#fff;color:#1A1A22;list-style:none;}.hwr-fold>summary::-webkit-details-marker{display:none;}.hwr-fold>summary:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 #1A1A22;}.hwr-fold[open]>summary{margin-bottom:14px;}</style>`
 
 /** How a recommendation is made, from lib/evidence/recommend.json, the same rules /what-should-i-use runs on. */
 function recommendSection() {
@@ -72,10 +77,10 @@ function recommendSection() {
           <tr><th>The rule</th><th>What it means</th></tr>
           ${recFramework.rules.map(rule).join('')}
         </table>
-        <table style="margin-top:24px">
+        ${fold('See the research behind these rules', `<table>
           <tr><th>The research</th><th>What it shows, and how we use it</th></tr>
           ${research}
-        </table>
+        </table>`)}
       </section>
 `
 }
@@ -91,11 +96,11 @@ function radarSection() {
       <section id="radar">
         <h2>How we find new tools</h2>
         <p class="lead">A great tool shouldn&rsquo;t need a marketing budget to get noticed. If it shows up in any one of these places, we check it within a month: reviews counted, lists read, category recorded.</p>
-        <table>
+        ${fold('See every way a tool gets checked', `<table>
           <tr><th>If a tool is&hellip;</th><th>What happens</th></tr>
           ${rows}
         </table>
-        <p class="callout"><b>Follower counts don&rsquo;t count.</b> ${esc(followers.why)}</p>
+        <p class="callout"><b>Follower counts don&rsquo;t count.</b> ${esc(followers.why)}</p>`)}
         <p style="margin-top:20px">Discovery puts a tool in the queue. Only public data (user ratings, popularity, best-of lists and value) moves a score. Know a tool we missed? <a href="mailto:hello@hiring.productions?subject=A%20tool%20you%20missed" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Tell us</a>.</p>
       </section>
 `
@@ -122,5 +127,9 @@ export default function Page() {
     .replace('<section id="sources">', `${researchSections()}${recommendSection()}\n      <section id="sources">`)
     .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How we pick a tool for you</a>')
     .replace('<!--SAMPLE_RATINGS-->', sampleRatings(b, breezy.sources.g2?.as_of ?? ats.as_of))
-  return <MockPage html={withRadar} active="review" ratings="full" />
+    // Where the numbers come from: keep the lead, fold the source-by-source detail
+    .replace(/(<section id="sources">\s*<h2>[^<]*<\/h2>\s*<p class="lead">[\s\S]*?<\/p>)([\s\S]*?)(\s*<\/section>)/, (_m, head, body, end) => `${head}${fold('See each source', body)}${end}`)
+    // The monthly schedule: keep the lead and the stale-review promise, fold the table
+    .replace(/(<section id="refresh">[\s\S]*?<p class="lead">[\s\S]*?<\/p>)(\s*<table>[\s\S]*?<\/table>)/, (_m, head, table) => `${head}${fold('See the schedule', table)}`)
+  return <MockPage html={withRadar + FOLD_CSS} active="review" ratings="full" />
 }

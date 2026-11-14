@@ -165,10 +165,9 @@ export const html = `<style>
       <section id="scores">
         <h2>Four scores, all public data</h2>
         <p class="lead">
-          Every tool is scored on four things anyone could check, each from dated
-          public data. No one&rsquo;s opinion goes into a score, ours included.
-          Stephanie&rsquo;s picks appear separately, labeled as hers, and have no
-          effect on any score.
+          Every tool is scored on four things anyone can check, from dated public
+          data. Stephanie&rsquo;s picks appear separately and have no effect on any
+          score.
         </p>
         <style>@media(min-width:761px){#scores .score-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}</style>
         <div class="score-cards">
@@ -198,10 +197,9 @@ export const html = `<style>
           </div>
         </div>
         <p class="callout">
-          <b>The weights only set the order of the list.</b> All four scores
-          show separately on every review, so you can weigh them your own way. If
-          a whole category has no data for one score yet (best-of lists, for
-          applicant tracking systems today), the other scores share its weight.
+          <b>The weights only set the order of the list.</b> Every review shows
+          all four scores, so you can weigh them your own way. When a category has
+          no data for one score yet, the others share its&nbsp;weight.
         </p>
       </section>
 
@@ -231,7 +229,7 @@ export const html = `<style>
             <p>There aren&rsquo;t enough public reviews or current lists for anyone to rank it, including us, so it stays unranked.</p>
           </div>
         </div>
-        <p class="callout"><b>Which lists count.</b> A list counts when it shows an update or a current-year edition within the last 12 months and its publisher does not own what it ranks. Lists that are out of date, built to collect sign-ups, or published by a company that sells the tools at the top are still shown, with the reason they don&rsquo;t count.</p>
+        <p class="callout"><b>Which lists count.</b> A list counts when it was updated in the last 12 months and its publisher doesn&rsquo;t sell what it ranks. We still show the rest, with the&nbsp;reason.</p>
       </section>
 
       <section id="example">

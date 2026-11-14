@@ -28,7 +28,7 @@ export default function Page() {
     <Hub
       side="seekers"
       title="The tools that get you seen, and which ones are worth paying for."
-      dek="Resume builders and ATS checkers, scored on dated public data: what users say, what independent reviewers pick, and what a year really costs. Picked out by a recruiter who reads the other side."
+      dek="Resume builders and ATS checkers, scored on public reviews and real prices."
       dateline={`Checked ${shortDate(checked)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={all.map((t) => ({ domain: t.domain, name: t.name, href: `/reviews/${t.id}`, tip: `${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}` }))}
       board={{

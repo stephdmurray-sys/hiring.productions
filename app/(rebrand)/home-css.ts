@@ -51,6 +51,9 @@ export const homeCss = `
   .side-feature span{font-size:15px;line-height:1.45;}
   .side-go{display:inline-flex;align-self:flex-start;font-weight:800;font-size:16px;padding:14px 20px;border-radius:var(--r);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}
   .side-go:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);}
+  .side-go .arr{display:inline-block;margin-left:4px;animation:go-nudge 2.6s ease-in-out 1.8s infinite;}
+  @keyframes go-nudge{0%,70%,100%{transform:translateX(0);}80%{transform:translateX(5px);}90%{transform:translateX(1px);}}
+  @media (prefers-reduced-motion: reduce){.side-go .arr{animation:none;}}
   .side-seekers .side-go{background:#fff;color:var(--indigo-deep);}
   .side-seekers .side-go:hover{background:#F1EDFF;}
   .side-hiring .side-go{background:var(--coral-deep);color:#fff;}

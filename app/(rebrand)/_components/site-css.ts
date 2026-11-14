@@ -101,6 +101,7 @@ export const siteCss = `
 
   /* Sections */
   .sec{padding-top:clamp(96px,11vw,150px);scroll-margin-top:64px;}
+  @media(max-width:640px){.sec{padding-top:72px;}}
   .sec-tight{padding-top:clamp(56px,7vw,88px);}
 
   /* Sticky in-page index */

@@ -174,8 +174,7 @@ export function Hub(props: HubProps) {
           <div>
             <h2>Get an email when these rankings change</h2>
             <p className="sublead">
-              Once a month, after we re-check every rating, list and price: the tools that moved, the prices that went up, and new tools
-              worth watching.
+              One email a month: the tools that moved and the prices that went&nbsp;up.
             </p>
           </div>
           <EvidenceSignup />

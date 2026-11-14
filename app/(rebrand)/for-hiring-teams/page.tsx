@@ -25,7 +25,7 @@ export default function Page() {
     <Hub
       side="hiring"
       title="The tools hiring teams run on, and which are worth paying for."
-      dek="Applicant tracking systems ranked by team size on dated public data: what users say, how the market is moving, and whether the price is public. Every number has a date and a source."
+      dek="Applicant tracking systems, ranked by team size on public reviews and real prices."
       dateline={`ATS data as of ${shortDate(atsAsOf)} · next check ${formatMonth(guide.nextCheck)}`}
       logos={atsTools.map((t) => ({ domain: t.domain, name: t.name, href: atsHref(t.name), tip: `${t.name} · ${atsScores(t).overall.toFixed(2)}` }))}
       board={{

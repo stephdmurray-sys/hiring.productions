@@ -152,7 +152,7 @@ export const html = `<style>
   <section class="wrap narrow">
     <h2>The short version</h2>
     <p class="lead">
-      Pick an ATS for your hiring volume before you compare features. Under 20 hires a year with no recruiter, you need simple and cheap. From 20 to 50, your first recruiter needs workflow control. Past 50, the deeper systems earn their price. Below is the top-rated system for each team size, then the full standings.</p>
+      Pick for your hiring volume first. Under 20 hires a year, simple and cheap wins. From 20 to 50, your first recruiter needs workflow control. Past 50, the deeper systems earn their&nbsp;price.</p>
     <div class="picks">
       <div class="pick winner">
         <span class="pick-flag">Small teams pick</span>
@@ -221,7 +221,7 @@ export const html = `<style>
 
   <section class="wrap narrow">
     <h2>Watch them in action</h2>
-    <p class="lead">Reading about software is not the same as watching someone click through it. Every video is labeled by who made it, because a vendor demo and an independent review are not the same kind of evidence.</p>
+    <p class="lead">Every video is labeled by who made it: the vendor or someone&nbsp;independent.</p>
     <div class="vid-grid">
       <div class="vid-card">
         <iframe src="https://www.youtube-nocookie.com/embed/DxS220ZTfII" title="Manatal Review - Top Features, Pros and Cons" loading="lazy" allowfullscreen></iframe>

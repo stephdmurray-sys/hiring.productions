@@ -32,6 +32,10 @@ export const chromeCss = `
     .site-nav .links a{padding:10px 0;}
   }
 
+  /* Scroll-in motion (motion.tsx). Only elements below the first screen are ever hidden, and only with scripts on. */
+  .rv-hide{opacity:0;transform:translateY(22px);}
+  .rv-show{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+  @media (prefers-reduced-motion: reduce){.rv-hide{opacity:1;transform:none;}.rv-show{transition:none;}}
   .site-footer{margin-top:clamp(96px,12vw,150px);background:var(--indigo-ink,#211457);color:#CFC6F2;padding:56px 0 36px;font-size:15px;text-align:left;}
   .site-footer .wordmark{color:#fff;}
   .site-footer .wordmark i{color:#FF8DA0;}

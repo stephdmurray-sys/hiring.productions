@@ -99,7 +99,11 @@ function rebuildReviews(src: string): string {
 }
 
 function rebuildFootnote(src: string): string {
+  // One short line under the tables; the method lives on How we review.
   return src.replace(
+    /<p style="text-align:center;color:var\(--gray-lt\);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 22, 2026, next check December 2026\.[\s\S]*?<\/p>/,
+    '<p style="text-align:center;color:var(--gray-lt);font-size:12px;line-height:1.6;margin-top:16px;">Data as of August 22, 2026, next check December 2026. Ranked within each team size. <a href="/how-we-review" style="color:var(--purple);font-weight:600;">How scores work</a></p>',
+  ).replace(
     'Market and User scores are computed from sourced public data',
     'Every score is computed from sourced public data',
   ).replace(

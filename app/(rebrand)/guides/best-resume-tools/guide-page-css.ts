@@ -1,5 +1,11 @@
 /** Resume guide layer on the stage system. */
 export const guidePageCss = `
+  /* Phones: the ranking table keeps rank, tool, free version, overall and users; the rest is one tap away on each review. */
+  @media(max-width:640px){.rank-table th:nth-child(3),.rank-table td:nth-child(3),.rank-table th:nth-child(5),.rank-table td:nth-child(5),.rank-table th:nth-child(8),.rank-table td:nth-child(8),.rank-table th:nth-child(9),.rank-table td:nth-child(9),.rank-table th:nth-child(10),.rank-table td:nth-child(10){display:none;}}
+  .vid-more{margin-top:28px;}
+  .vid-more summary{display:inline-block;cursor:pointer;font-weight:800;font-size:16px;padding:12px 18px;border:2px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);background:#fff;list-style:none;}
+  .vid-more summary::-webkit-details-marker{display:none;}
+  .vid-more[open] summary{margin-bottom:8px;}
   .g-signup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;border-top:1px solid var(--ink);padding-top:40px;}
   @media(max-width:960px){.g-signup{grid-template-columns:1fr;}}
   /* Picks: three columns divided by rules, no boxes */

@@ -69,6 +69,15 @@ export function RecQuestions({ state, only, from, repveraProblem }: { state: Ask
   const v = (x: number | null) => (x === null ? 'any' : String(x))
   return (
     <RecForm action={REC_PATH}>
+      {side && problem && only !== 'side' ? (
+        // After the guided questions: one line for what they chose, then only the next question.
+        <p className="rec-chosen">
+          <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}</span>
+          <span>{problem.label}</span>
+          <input type="hidden" name="side" value={side} />
+          <input type="hidden" name="problem" value={problem.id} />
+        </p>
+      ) : (
       <fieldset className="rec-q rec-sides">
         <legend>Are you looking for a job, or hiring?</legend>
         <div className="rec-side-opts">
@@ -82,8 +91,9 @@ export function RecQuestions({ state, only, from, repveraProblem }: { state: Ask
           </Radio>
         </div>
       </fieldset>
+      )}
 
-      {side && only !== 'side' && (
+      {side && only !== 'side' && !problem && (
         <fieldset className="rec-q">
           <legend>{data[side].title}</legend>
           <div className="rec-rows">
@@ -403,6 +413,7 @@ export function RecSituations({ exclude }: { exclude?: string }) {
 }
 
 export const recCss = captureCss + `
+  .rec-chosen{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);}
   .rec-keep{margin-top:40px;}
   /* Questions */
   .rec-form{display:grid;gap:clamp(40px,5vw,56px);}

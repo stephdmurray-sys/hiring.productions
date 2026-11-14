@@ -67,6 +67,19 @@ The one place motion is allowed to be playful: the "Where are you stuck?" box on
 
 Homepage (same layer, `retro.tsx`): the two lanes are separate cards with a gap, each with the thick ink outline and hard shadow. Shapes sit only at each lane's outer corners and mirror each other: dot grid top-left and zigzag bottom-left on the job seeker lane, squiggle top-right and dot grid bottom-right on the hiring lane. On phones the zigzag and squiggle meet in the gap between the stacked lanes. "everyone" in the headline gets a coral hand-drawn underline that draws once. Buttons, side labels and logo tiles use the same ink outline and offset shadow; buttons press in on hover.
 
+### Movement that pulls a visitor forward (engagement review, Nov 14, 2026)
+
+- Sections and cards below the first screen ease in as they scroll into view, a few at a time (`motion.tsx`, `.rv-hide` and `.rv-show` in `chromeCss`). Nothing on the first screen is ever hidden, nothing is hidden without scripts, and reduced motion shows everything still.
+- Each picker question brings its answer cards in one after another, and a card's arrow slides toward the next step on hover.
+- The arrow on the hero "Help me choose" buttons nudges every few seconds, the only repeating motion on the homepage.
+
+### Length and words (engagement review, Nov 14, 2026)
+
+- One idea per section and one short lead line under each heading. If a lead runs past about 25 words, cut it.
+- Long reference material (research tables, source lists, schedules, extra videos) goes behind a "See ..." fold, open on one tap. The essentials stay open.
+- The picker never repeats what a visitor has just answered: after the guided questions it shows one summary line and only the next question; under an answer, nothing but the answer.
+- Phones get 72px between sections instead of 96px.
+
 ## Rules that keep color from turning into slop
 
 - Color marks a side or a fact. Indigo means job seeker, coral means hiring team or "this costs you". Never decoration.

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { GuidedFirst, guidedCss } from '@/app/(rebrand)/_components/guided'
 import Image from 'next/image'
 import { wholeList } from '@/lib/evidence/guided'
 import { Dots, Squiggle, Swash, Zigzag, retroCss } from '@/app/(rebrand)/_components/retro'
@@ -63,10 +64,12 @@ export default function Home() {
     [risingPick.tool, "Stephanie's pick"],
   ])
   const counting = benchmarks.filter((l) => l.status === 'counts')
+  // The band shows every list that counts and one example of each reason a list doesn't; the guide shows all of them.
+  const bandLists = [...counting, ...benchmarks.filter((l, i, all) => l.status !== 'counts' && all.findIndex((x) => x.status === l.status) === i)]
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
@@ -152,23 +155,10 @@ export default function Home() {
 
       <section className="wrap sec" id="what-to-use">
         <h2>What should I use?</h2>
-        <p className="lead">
-          Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and
-          recommend one tool and a cheaper backup. If no tool fixes it, we&rsquo;ll say so.
-        </p>
-        <div className="rec-sits">
-          {(['seekers', 'hiring'] as const).map((side) => (
-            <div key={side}>
-              <span className="rec-sits-k">
-                <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}</span>
-              </span>
-              {wholeList(side).map((p) => (
-                <a className="rec-sit" href={`/what-should-i-use?side=${side}&problem=${p.id}#questions`} key={p.id}>
-                  {p.label} <span className="arr">&rarr;</span>
-                </a>
-              ))}
-            </div>
-          ))}
+        <p className="lead">Start with one question. We recommend one tool and a cheaper backup.</p>
+        <div className="g-start">
+          <GuidedFirst side="seekers" />
+          <GuidedFirst side="hiring" />
         </div>
       </section>
 
@@ -176,7 +166,7 @@ export default function Home() {
         <div className="sec-head">
           <div>
             <h2>This month&rsquo;s&nbsp;scoreboard</h2>
-            <p className="lead">Scored on user ratings, popularity, best-of lists and price. Open any tool for the full review.</p>
+            <p className="lead">Open any tool for the full review.</p>
           </div>
         </div>
         <div className="boards">
@@ -216,12 +206,6 @@ export default function Home() {
             />
           </div>
         </div>
-        <p className="board-note">
-          Every score is public data: user ratings (40%), popularity (25%), best-of lists (20%) and value (15%). Hover a row to see the parts.{' '}
-          <a className="tl" href="/how-we-review">
-            How we score
-          </a>
-        </p>
       </section>
 
       <section className="band" id="lists">
@@ -229,16 +213,15 @@ export default function Home() {
           <div>
             <h2>We check the other lists so you don&rsquo;t have to</h2>
             <p>
-              {benchmarks.length} &ldquo;best resume tool&rdquo; lists, checked every month. {counting.length} are current and come from
-              publishers that don&rsquo;t sell what they rank, so they count. The rest are out of date, or published by companies that sell
-              what they rank.
+              We read {benchmarks.length} &ldquo;best resume tool&rdquo; lists every month. Only {counting.length} count: they&rsquo;re
+              current, and their publishers don&rsquo;t sell what they&nbsp;rank.
             </p>
             <a className="tl tl-strong" href="/guides/best-resume-tools#agree">
-              See where every list lands <span className="arr">&rarr;</span>
+              See all {benchmarks.length} lists <span className="arr">&rarr;</span>
             </a>
           </div>
           <div className="pubs">
-            {benchmarks.map((l) => (
+            {bandLists.map((l) => (
               <div key={l.id} className={`pub${l.status === 'counts' ? ' counts' : ''}`} data-tip={l.reason} tabIndex={0}>
                 <Logo domain={PUBLISHER_DOMAINS[l.publication]} name={l.publication} size={36} round />
                 <span>
@@ -306,10 +289,6 @@ export default function Home() {
             </span>
           </a>
         </div>
-        <p className="research">
-          Coming next: job search trackers, interview practice, career coaching, LinkedIn profile tools, recruiting software for startups,
-          candidate assessments and high-volume hiring. Next check: {formatMonth(guide.nextCheck)}.
-        </p>
       </section>
 
       <section className="wrap sec" id="who-makes-this">
@@ -334,8 +313,7 @@ export default function Home() {
           <div>
             <h2>Get an email when these rankings change</h2>
             <p className="sublead">
-              Once a month, after we re-check every rating, list and price: the tools that moved, the prices that went up, and new tools
-              worth watching.
+              One email a month: the tools that moved and the prices that went&nbsp;up.
             </p>
           </div>
           <EvidenceSignup />

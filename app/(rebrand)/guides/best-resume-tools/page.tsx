@@ -51,7 +51,6 @@ const ON_THIS_PAGE = [
   ['agree', 'Do reviewers agree?'],
   ['rankings', 'Rankings'],
   ['cost', 'What it costs'],
-  ['rising', 'New tools to watch'],
   ['videos', 'Videos'],
   ['evidence', 'Every tool in detail'],
   ['faq', 'Questions'],
@@ -99,7 +98,7 @@ function Bar({ label, value, places = 1 }: { label: string; value: number | null
 function RankTable({ tools }: { tools: ToolEvidence[] }) {
   return (
     <div className="tscroll">
-      <table className="ledger">
+      <table className="ledger rank-table">
         <thead>
           <tr>
             <th className="num">#</th>
@@ -359,8 +358,8 @@ export default function Page() {
       <section className="wrap sec" id="short">
         <h2>Our picks</h2>
         <p className="lead">
-          Resume tools are where job seekers get burned: builders that are free until you try to download, and $2 trials that renew
-          every 4 weeks. So this guide ranks on public reviews and real prices and prints every renewal price.
+          Some builders are free until you download, and some $2 trials renew every 4 weeks. These picks rank on public reviews and real
+          prices.
         </p>
         <div className="picks">
           {guide.picks.map((p) => {
@@ -418,8 +417,8 @@ export default function Page() {
       <section className="wrap sec" id="agree">
         <h2>Do the other reviewers agree?</h2>
         <p className="lead">
-          We track {lists.length} other &ldquo;best resume tool&rdquo; lists and re-check them every month. {counting.length} of them count:
-          they&rsquo;re current, and their publishers don&rsquo;t sell what they rank. Here is where those {counting.length} land next to us.
+          We read {lists.length} other &ldquo;best resume tool&rdquo; lists every month. Only {counting.length} count. Here is where they
+          land next to&nbsp;us.
         </p>
         <div className="tscroll">
           <table className="ledger agree-grid">
@@ -575,10 +574,8 @@ export default function Page() {
         <p className="sublead">Where you write the thing. Read the &ldquo;Free for real?&rdquo; column first.</p>
         <RankTable tools={builders} />
         <p className="footnote">
-          Ratings read {formatDate(ratingsRead)} from dated public sources: {ratingPlatforms.join(', ')}. The G2 family (G2, Capterra,
-          GetApp, Software Advice) shares one review pool and counts once. Overall blends user ratings (40%), popularity (25%), best-of lists (20%)
-          and value (15%), all from public data; no one&rsquo;s opinion goes into a score. &dagger;n/e: not enough reviews yet (fewer than{' '}
-          {MIN_REVIEWS} public reviews). Methodology on <a href="/how-we-review">How We Review</a>.
+          Ratings read {formatDate(ratingsRead)}. &dagger;n/e: fewer than {MIN_REVIEWS} public reviews, so no score yet.{' '}
+          <a href="/how-we-review">How scores work</a>
         </p>
       </section>
 
@@ -586,7 +583,7 @@ export default function Page() {
         <div className="g-signup">
           <div>
             <h2>Get an email when these rankings change</h2>
-            <p className="sublead">One email a month: tools that moved, prices that went up, and new tools worth watching.</p>
+            <p className="sublead">One email a month: the tools that moved and the prices that went&nbsp;up.</p>
           </div>
           <EvidenceSignup source="resume_guide" />
         </div>
@@ -603,15 +600,8 @@ export default function Page() {
         </div>
         <p className="boxnote">
           <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
-          then only export plain text unless you pay. The only public reviews of Resume.io we can use average 1.5 out of 5 across 195 Product Hunt
-          reviews, nearly all about exactly this.
+          then charge to download anything but plain&nbsp;text.
         </p>
-      </section>
-
-      <section className="wrap sec" id="rising">
-        <h2>New tools to watch</h2>
-        <p className="lead">Not resume tools, and too new for a rating. These are the job search tools we&rsquo;re watching next.</p>
-        <OnTheRise side="seekers" />
       </section>
 
       <section className="wrap sec" id="videos">
@@ -620,7 +610,7 @@ export default function Page() {
           Each video is labeled: made by the company, or by an independent creator. We add new ones every month.
         </p>
         <div className="vid-grid">
-          {featured.map((v) => {
+          {featured.slice(0, 3).map((v) => {
             const t = byId[v.tool]
             return (
               <figure className="vid" key={v.youtubeId}>
@@ -643,6 +633,31 @@ export default function Page() {
             )
           })}
         </div>
+        {featured.length > 3 && (
+          <details className="vid-more">
+            <summary>See {featured.length - 3} more videos</summary>
+            <div className="vid-grid">
+              {featured.slice(3).map((v) => {
+                const t = byId[v.tool]
+                return (
+                  <figure className="vid" key={v.youtubeId}>
+                    <VideoEmbed youtubeId={v.youtubeId} title={v.title} />
+                    <figcaption className="vid-meta">
+                      <Logo domain={t.domain} name={t.name} size={36} />
+                      <span>
+                        <b>
+                          <a href={`/reviews/${t.id}`}>{t.name}</a>
+                        </b>
+                        <span className="vid-title">{v.title}</span>
+                        <span className={`vid-kind k-${v.kind}`}>{VIDEO_KIND_LABEL[v.kind]}</span>
+                      </span>
+                    </figcaption>
+                  </figure>
+                )
+              })}
+            </div>
+          </details>
+        )}
       </section>
 
       <section className="wrap sec" id="evidence">

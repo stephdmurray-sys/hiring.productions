@@ -56,7 +56,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <a href="/">Home</a> / What should I use?
           </p>
           <h1 className="display">What should I use?</h1>
-          <p className="dek">{recFramework.promise}</p>
+          <p className="dek">Answer a few quick questions. We recommend one tool and a cheaper backup, with the real&nbsp;price.</p>
           <p className="dateline">
             Ratings and prices checked {shortDate(latestCheck())}. Nobody pays to be featured in an answer.
           </p>
@@ -104,6 +104,8 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
         )}
       </div>
 
+      {!(r && ask) && !repvera && (
+      <>
       <section className="wrap sec" id="common">
         <h2>Common questions,&nbsp;answered</h2>
         <RecSituations />
@@ -124,6 +126,8 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
           <EvidenceSignup source="recommender" />
         </div>
       </section>
+      </>
+      )}
 
       <SiteFooter />
     </>

@@ -137,8 +137,7 @@ export function CostCalculator({ tools, checked, initial = 3 }: { tools: CalcToo
         })}
       </div>
       <p className="calc-foot">
-        Paid plans only, from each pricing page as of {checked}. A month is 30 days, so 4-week plans bill 13 times a year. Several tools have a
-        free tier that may be all you need.
+        Paid plans only, from each pricing page as of {checked}. Plans billed every 4 weeks charge 13 times a&nbsp;year.
       </p>
     </div>
   )
