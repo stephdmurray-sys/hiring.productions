@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     default: 'hiring.productions',
     template: '%s | hiring.productions',
   },
-  description: 'Independent reviews of the tools on both sides of hiring: resume tools for job seekers, applicant tracking systems for hiring teams. Every score built from public data, with the date we checked it. Free.',
+  description: 'Reviews of the tools on both sides of hiring: resume tools for job seekers, applicant tracking systems for hiring teams. Every score is dated, the method is published, and no vendor can pay for a place. Free.',
   keywords: ['hiring', 'job search', 'recruiting', 'ATS screening', 'resume tips', 'interview prep', 'talent acquisition', 'candidate experience', 'job description SEO', 'employer branding'],
   authors: [{ name: 'Stephanie Murray', url: 'https://www.linkedin.com/in/stephaniemurray11/' }],
   creator: 'Stephanie Murray',

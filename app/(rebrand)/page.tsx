@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Dots, Squiggle, Swash, Zigzag, retroCss } from '@/app/(rebrand)/_components/retro'
 import { JsonLd, graph, resumeRankingLd, atsRankingLd } from '@/app/(rebrand)/_components/structured'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -104,19 +105,22 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
       <header className="wrap hero">
         <h1 className="display">
-          Hiring is a production. We&rsquo;re here for <span>everyone</span> in&nbsp;it.
+          Hiring is a production. We&rsquo;re here for <Swash><span>everyone</span></Swash> in&nbsp;it.
         </h1>
         <p className="dek">
           Independent reviews of the tools on both sides of the table. Every score is dated, and no vendor can pay for a place.
         </p>
 
         <div className="sides">
+          <div className="lane lane-seekers">
+          <Dots className="lane-tl" />
+          <Zigzag className="lane-bl" />
           <section className="side side-seekers" aria-labelledby="side-seekers-h">
             <span className="side-k">
               <i />
@@ -143,7 +147,11 @@ export default function Home() {
               Open the resume tools guide <span className="arr">&rarr;</span>
             </a>
           </section>
+          </div>
 
+          <div className="lane lane-hiring">
+          <Squiggle className="lane-tr" />
+          <Dots className="lane-br" />
           <section className="side side-hiring" aria-labelledby="side-hiring-h">
             <span className="side-k">
               <i />
@@ -172,6 +180,7 @@ export default function Home() {
               Open the ATS guide <span className="arr">&rarr;</span>
             </a>
           </section>
+          </div>
         </div>
 
         <div className="ticker" aria-label="What changed this month">

@@ -65,6 +65,8 @@ Every movement on the site reveals evidence. None of it is decoration.
 
 The one place motion is allowed to be playful: the "Where are you stuck?" box on both hubs (`_components/retro.tsx`). A tilted "Start here" sticker pops in, a hand-drawn arrow draws itself to the box and keeps nudging toward it, and Memphis shapes (squiggle and dot grid at the top-right corner, zigzag at the bottom-right) peek out from behind the box and drift. Every shape is anchored to a corner of the box; nothing floats loose. Hard ink outlines and offset shadows, never soft blurs or glows. Palette only: coral sticker and white arrow on indigo, indigo sticker and ink arrow on coral. On phones the box moves up to sit right after the intro. Reduced motion: everything holds still, arrow fully drawn.
 
+Homepage (same layer, `retro.tsx`): the two lanes are separate cards with a gap, each with the thick ink outline and hard shadow. Shapes sit only at each lane's outer corners and mirror each other: dot grid top-left and zigzag bottom-left on the job seeker lane, squiggle top-right and dot grid bottom-right on the hiring lane. On phones the zigzag and squiggle meet in the gap between the stacked lanes. "everyone" in the headline gets a coral hand-drawn underline that draws once. Buttons, side labels and logo tiles use the same ink outline and offset shadow; buttons press in on hover.
+
 ## Rules that keep color from turning into slop
 
 - Color marks a side or a fact. Indigo means job seeker, coral means hiring team or "this costs you". Never decoration.

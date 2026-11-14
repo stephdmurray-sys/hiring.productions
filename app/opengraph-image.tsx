@@ -119,7 +119,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          Independent reviews of the tools on both sides of hiring.
+          Dated reviews of the tools on both sides of hiring. No vendor pays for a place.
         </div>
       </div>
     ),
