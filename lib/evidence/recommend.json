@@ -1,30 +1,32 @@
 {
-  "_about": "The recommendation framework: how a visitor's situation and limits turn into one pick. Read by lib/evidence/recommend.ts. The rules here are the public promise; keep them in plain English, and change a rule only with Stephanie's sign-off. Drafts (confirmed: false) are never shown to visitors.",
+  "_about": "The recommendation framework: how a visitor’s situation and limits turn into one pick. Read by lib/evidence/recommend.ts and rendered on /what-should-i-use. The rules here are the public promise; keep them in plain English. Every otherSide line states a published finding and links to it: no unsourced numbers, no first-person quotes.",
 
-  "promise": "Tell us what's going wrong and what you can live with. We rule out every tool that breaks one of your limits, show you why, and give you one pick and one alternative from what's left. Your situation decides what's eligible. It never changes a score.",
+  "promise": "Tell us what’s going wrong and what you can live with. We rule out every tool that breaks one of your limits, show you why, and give you one pick and one alternative from what’s left. Your situation decides what’s eligible. It never changes a score.",
 
   "rules": [
-    "Diagnose before recommending. The first question is what's going wrong, because the right tool depends on the problem, not the category someone typed.",
-    "No tool is a real answer. When the problem isn't one a tool fixes, we say so and point to the guidance instead.",
-    "Limits rule tools out; they never re-score them. A tool either fits every limit you set or it's out, with the reason shown. The order among the tools that fit is the public score, the same for everyone.",
-    "Unknown is not yes. If we have no dated evidence that a tool meets a limit, it can't be the pick. It's listed as couldn't check.",
-    "One pick and one alternative, never a list. The alternative is the best-scoring tool that's cheaper for your situation; if none is cheaper, the next best score.",
+    "Diagnose before recommending. The first question is what’s going wrong, because the right tool depends on the problem, not the category someone typed.",
+    "No tool is a real answer. When the problem isn’t one a tool fixes, we say so and point to the guidance instead.",
+    "Limits rule tools out; they never re-score them. A tool either fits every limit you set or it’s out, with the reason shown. The order among the tools that fit is the public score, the same for everyone.",
+    "Unknown is not yes. If we have no dated evidence that a tool meets a limit, it can’t be the pick. It’s listed under couldn’t check.",
+    "One pick and one alternative, never a list. The alternative is the best-scoring tool that’s cheaper for your situation; if none is cheaper, the next best score.",
     "Only scored tools can be the pick. Tools too new to score appear as worth watching, labeled.",
-    "Stephanie's picks sit beside the answer, labeled as hers, and only when they fit your limits. They never move the pick.",
     "Show the real cost for your situation: the cheapest way to pay for your timeline, and what it costs if you forget to cancel.",
     "If nothing fits, say so, and show the closest tool and exactly what it would take.",
+    "Every answer includes what the other side of the table sees, from published research, with the source.",
     "Commissions never touch the answer. Whether we earn anything from a tool has no input anywhere in this framework.",
-    "Same situation, same answer. Every answer can be linked, dated and quoted."
+    "Same situation, same answer. Every answer has its own link, a date, and can be quoted."
   ],
 
   "research": [
     {
-      "finding": "Elimination by aspects: people choose by picking an attribute that matters, dropping every option that fails it, and repeating until one is left. A strength on one attribute can't make up for a failure on another.",
+      "title": "Why a broken limit is a hard no",
+      "finding": "Elimination by aspects: people choose by picking an attribute that matters, dropping every option that fails it, and repeating until one is left. A strength on one attribute can’t make up for a failure on another.",
       "usedFor": "Your limits work the same way: a tool that breaks one is out, however good it is at something else.",
       "source": "Tversky, A. (1972). Elimination by aspects: A theory of choice. Psychological Review, 79, 281-299.",
       "url": "https://doi.org/10.1037/h0032955"
     },
     {
+      "title": "Why one pick, not ten",
       "finding": "A meta-analysis of 99 observations found that more options lower satisfaction and confidence when the choice is complex, the decision is hard, preferences are uncertain, and people want to minimize effort.",
       "usedFor": "A job search or a hiring crunch hits all four, so the answer is one pick and one alternative, never a ranked list of ten.",
       "source": "Chernev, A., Bockenholt, U., and Goodman, J. (2015). Choice overload: A conceptual review and meta-analysis. Journal of Consumer Psychology, 25(2), 333-358.",
@@ -33,17 +35,18 @@
   ],
 
   "seekers": {
-    "title": "What's breaking your search?",
+    "title": "What’s breaking your search?",
     "problems": [
       {
         "id": "no-callbacks",
         "label": "I apply and hear nothing back",
         "kind": "tool",
         "segments": ["checker"],
-        "why": "Silence usually starts with how your resume reads after an applicant tracking system parses it. A checker shows you that copy.",
+        "why": "Silence usually starts before a person reads anything: an applicant tracking system screens your resume against the posting first. A checker shows you what it sees.",
         "otherSide": {
-          "line": "On my side of the table, the first version of you I see is often the parsed text, not the PDF you designed. If the parse is scrambled, so is my first impression.",
-          "confirmed": false
+          "line": "Hiring teams know their systems screen out good people. In a Harvard Business School and Accenture study, 88% of employers agreed that qualified, high-skilled candidates get screened out for not matching a job description’s exact criteria. Use the posting’s own words.",
+          "source": "Hidden Workers: Untapped Talent, Harvard Business School and Accenture, 2021",
+          "url": "https://www.hrdive.com/news/report-applicant-tracking-systems-may-exclude-whole-segments-of-candidates/606614/"
         }
       },
       {
@@ -51,21 +54,23 @@
         "label": "I need to rebuild my resume",
         "kind": "tool",
         "segments": ["builder"],
-        "why": "A builder gets you a clean, readable layout. The words are still yours to get right.",
+        "why": "A builder gets you a clean, readable layout fast. The words are still yours to get right.",
         "otherSide": {
-          "line": "Recruiters don't hire templates. A plain layout with clear titles and dates reads faster than a designed one, every time.",
-          "confirmed": false
+          "line": "In Ladders’ 2018 eye-tracking study, a recruiter’s first pass on a resume averaged 7.4 seconds, and the resumes that held attention had simple layouts with clear section headings. Pick the plainest template the builder offers.",
+          "source": "Ladders eye-tracking study, 2018, reported by HR Dive",
+          "url": "https://www.hrdive.com/news/eye-tracking-study-shows-recruiters-look-at-resumes-for-7-seconds/541582/"
         }
       },
       {
         "id": "losing-track",
-        "label": "I'm losing track of applications",
+        "label": "I’m losing track of applications",
         "kind": "tool",
         "needs": ["tracker"],
         "why": "A tracker keeps every application, contact and follow-up in one place, so nothing goes quiet without you noticing.",
         "otherSide": {
-          "line": "A short, specific follow-up after an interview gets read. The candidate who loses track is the one who never sends it.",
-          "confirmed": false
+          "line": "Follow-ups count, and almost nobody sends them. In a 2017 Accountemps survey of more than 300 HR managers, 80% said they consider thank-you notes when choosing a candidate, yet they received notes from only 24% of applicants. Track the follow-up, not just the application.",
+          "source": "Accountemps survey of US HR managers, 2017, reported by HR Dive",
+          "url": "https://www.hrdive.com/news/hr-says-thank-you-notes-can-still-win-candidates-the-job/511393/"
         }
       },
       {
@@ -73,32 +78,53 @@
         "label": "I get interviews, but no offers",
         "kind": "watching",
         "categories": ["Interview practice"],
-        "why": "This one isn't your resume, so a resume tool won't fix it. Practicing out loud will. None of the practice tools has enough public reviews to score yet.",
+        "why": "This one isn’t your resume, so a resume tool won’t fix it. Practice will. None of the practice tools has enough public reviews to score yet.",
         "otherSide": {
-          "line": "When a strong resume stalls after the first call, I'm usually not hearing the job in your answers. I'm hearing your history.",
-          "confirmed": false
+          "line": "Interview performance is coachable. In a study of 144 people taking structured interviews, those given more thorough coaching earned higher interview ratings. Rehearse out loud, with someone scoring your answers.",
+          "source": "Tross, S. A., and Maurer, T. J. (2008). Journal of Occupational and Organizational Psychology",
+          "url": "https://doi.org/10.1348/096317907X248653"
         }
       },
       {
         "id": "what-to-apply-for",
-        "label": "I don't know what to apply for",
+        "label": "I don’t know what to apply for",
         "kind": "no-tool",
-        "why": "No tool fixes this one, and anyone selling you one is guessing. Start with the roles, then come back for the tools.",
+        "why": "No tool fixes this one, and anyone selling you one is guessing. Pick the roles first, then come back for the tools.",
         "guidance": { "text": "Start with the job seeker guides", "href": "/for-job-seekers" },
         "otherSide": {
-          "line": "Recruiters can tell a targeted application from a hopeful one in a few lines. Pick the role first; the resume follows.",
-          "confirmed": false
+          "line": "A recruiter reads your resume against one job, fast: 7.4 seconds on the first pass in Ladders’ 2018 eye-tracking study, starting with your current title and company. A resume written for no job in particular doesn’t survive that read.",
+          "source": "Ladders eye-tracking study, 2018, reported by HR Dive",
+          "url": "https://www.hrdive.com/news/eye-tracking-study-shows-recruiters-look-at-resumes-for-7-seconds/541582/"
         }
       }
     ],
     "limits": [
-      { "id": "budget", "label": "What can you spend on the whole search?", "kind": "money", "options": [0, 50, 100, 200, null] },
-      { "id": "months", "label": "How long do you expect the search to take?", "kind": "months", "options": [1, 3, 6, 12] }
+      {
+        "id": "budget",
+        "label": "What can you spend on the whole search?",
+        "options": [
+          { "value": 0, "label": "Nothing" },
+          { "value": 50, "label": "Up to $50" },
+          { "value": 100, "label": "Up to $100" },
+          { "value": 200, "label": "Up to $200" },
+          { "value": null, "label": "Whatever works" }
+        ]
+      },
+      {
+        "id": "months",
+        "label": "How long do you expect it to take?",
+        "options": [
+          { "value": 1, "label": "About a month" },
+          { "value": 3, "label": "3 months" },
+          { "value": 6, "label": "6 months" },
+          { "value": 12, "label": "A year" }
+        ]
+      }
     ],
     "mustHaves": [
-      { "id": "free-usable", "label": "A free version I can actually use", "test": "freeLevel is full" },
-      { "id": "no-4-week", "label": "No plan that renews every 4 weeks", "test": "no 4-week billing" },
-      { "id": "tracker", "label": "A job tracker built in", "test": "capability tracker on file" }
+      { "id": "free-usable", "label": "A free version I can keep using" },
+      { "id": "no-4-week", "label": "No plan that renews every 4 weeks" },
+      { "id": "tracker", "label": "A job tracker built in" }
     ],
     "capabilities": {
       "_about": "What each tool does, from the dated copy in resume-guide.json (bestFor, freeAnswer) and the scorecard segment. Unknown means not on file, never yes.",
@@ -109,29 +135,30 @@
   },
 
   "hiring": {
-    "title": "What should you run hiring on?",
+    "title": "Where is hiring going wrong?",
     "problems": [
       {
         "id": "spreadsheets",
-        "label": "We're running hiring on spreadsheets and inboxes",
+        "label": "We’re running hiring on spreadsheets and inboxes",
         "kind": "tool",
-        "category": "ats",
         "why": "An applicant tracking system puts every candidate, stage and conversation in one place your whole team can see.",
         "otherSide": {
-          "line": "Your applicant tracking system is also your candidates' first impression of you. Every extra field on the application is a reason a strong candidate closes the tab.",
-          "confirmed": false
+          "line": "Your applicant tracking system is also your candidates’ first impression of you. In a CareerBuilder study, 60% of job seekers said they had quit an online application partway through because of its length or complexity. Whatever you choose, keep the application short.",
+          "source": "CareerBuilder candidate study, reported by SHRM",
+          "url": "https://www.shrm.org/topics-tools/news/technology/study-job-seekers-abandon-online-job-applications"
         }
       },
       {
         "id": "cant-find-people",
-        "label": "We can't find people to reach out to",
+        "label": "We can’t find people to reach out to",
         "kind": "watching",
         "categories": ["AI sourcing"],
-        "why": "This is sourcing, not tracking. There's no sourcing scoreboard yet, so nothing here is scored.",
-        "guidance": { "text": "Stephanie's top pick for sourcing", "href": "/for-hiring-teams#rising" },
+        "why": "This is sourcing, not tracking. There’s no sourcing scoreboard yet, so nothing here is scored.",
+        "showFounderPick": true,
         "otherSide": {
-          "line": "People who aren't looking can tell a mass message from a real one in the first line. Lead with why them, not why you.",
-          "confirmed": false
+          "line": "People who aren’t looking can tell a mass message from a real one. LinkedIn’s data shows messages sent one at a time get about 15% more responses than messages sent in bulk.",
+          "source": "LinkedIn Talent Solutions, InMail response data",
+          "url": "https://business.linkedin.com/talent-solutions/blog/trends-and-research/2021/these-inmails-get-best-response-rates"
         }
       },
       {
@@ -142,53 +169,112 @@
         "why": "Consistency comes from structure first: the same questions, scored the same way. A notes tool helps once the structure exists.",
         "guidance": { "text": "Recruiter and interviewer training", "href": "/guides/best-recruiter-training" },
         "otherSide": {
-          "line": "Candidates compare notes. When two interviewers ask the same thing and a third asks nothing useful, they notice, and they talk.",
-          "confirmed": false
+          "line": "Structure is the best-supported fix in hiring research. A 2022 re-analysis of selection research ranked structured interviews, the same questions scored the same way, first among common hiring methods for predicting job performance.",
+          "source": "Sackett, P. R., Zhang, C., Berry, C. M., and Lievens, F. (2022). Journal of Applied Psychology, 107(11), 2040-2068",
+          "url": "https://doi.org/10.1037/apl0000994"
         }
       },
       {
         "id": "training",
         "label": "Our team needs better recruiting skills",
         "kind": "no-tool",
-        "why": "Software won't train a team. Training will, and the credentials worth paying for are short.",
+        "why": "Software won’t train a team. Training will.",
         "guidance": { "text": "The recruiter training guide", "href": "/guides/best-recruiter-training" },
         "otherSide": {
-          "line": "Candidates can tell a trained recruiter from an untrained one in the first call. So can the hiring managers.",
-          "confirmed": false
+          "line": "Candidates judge the company by the person interviewing them. In LinkedIn’s candidate research, 83% of candidates said a negative interview experience can change their mind about a role or company they once liked.",
+          "source": "LinkedIn Talent Solutions, candidate experience research",
+          "url": "https://business.linkedin.com/talent-solutions/webinars/19/08/webcast-how-to-win-talent-with-a-great-candidate-experience"
         }
       }
     ],
     "limits": [
-      { "id": "hires", "label": "How many people will you hire this year?", "kind": "hires", "options": [5, 15, 30, 60] },
-      { "id": "seats", "label": "How many people will log in?", "kind": "seats", "options": [1, 3, 5, 10] },
-      { "id": "budget", "label": "What can you spend a year?", "kind": "money", "options": [0, 1000, 3000, 6000, null] }
+      {
+        "id": "hires",
+        "label": "How many people will you hire this year?",
+        "options": [
+          { "value": 10, "label": "Fewer than 20" },
+          { "value": 35, "label": "20 to 50" },
+          { "value": 75, "label": "More than 50" }
+        ]
+      },
+      {
+        "id": "employees",
+        "label": "How many people work at the company?",
+        "options": [
+          { "value": 20, "label": "Up to 20" },
+          { "value": 50, "label": "21 to 50" },
+          { "value": 100, "label": "51 to 100" },
+          { "value": 250, "label": "101 to 250" },
+          { "value": 1000, "label": "More than 250" }
+        ]
+      },
+      {
+        "id": "seats",
+        "label": "How many people will log in?",
+        "options": [
+          { "value": 1, "label": "Just me" },
+          { "value": 3, "label": "2 or 3" },
+          { "value": 5, "label": "4 or 5" },
+          { "value": 10, "label": "Up to 10" }
+        ]
+      },
+      {
+        "id": "budget",
+        "label": "What can you spend a year?",
+        "options": [
+          { "value": 0, "label": "Nothing yet" },
+          { "value": 1000, "label": "Up to $1,000" },
+          { "value": 2000, "label": "Up to $2,000" },
+          { "value": 5000, "label": "Up to $5,000" },
+          { "value": null, "label": "Whatever works" }
+        ]
+      }
     ],
     "segments": {
-      "_about": "From the ATS guide's methodology: hires per year decides the tier, because hiring volume is what decides tool fit.",
+      "_about": "From the ATS guide’s methodology: hires per year decides the tier, because hiring volume is what decides tool fit.",
       "small": { "maxHires": 19, "label": "Small teams: under 20 hires a year, no full-time recruiter" },
       "growing": { "maxHires": 50, "label": "Growing teams: 20 to 50 hires a year, a first dedicated recruiter" },
       "scaling": { "maxHires": null, "label": "Scaling teams: 50+ hires a year, a dedicated TA function" }
     },
     "mustHaves": [
-      { "id": "published-price", "label": "A price we can see without a sales call", "test": "not quote-only" },
-      { "id": "free-start", "label": "A free plan to start on", "test": "free tier on file" }
+      { "id": "published-price", "label": "A price we can see without a sales call" },
+      { "id": "free-start", "label": "A free plan to start on" }
     ],
+    "fallback": { "text": "Tell us how you hire and get a stack recommendation, free", "href": "/consulting" },
     "prices": {
-      "_about": "Each system's cheapest published plan, from its pricing page as quoted in the ATS scorecard (as of 2026-08-22). per: user-month, month or year. Quote-only systems have no amount. Prices in another currency are never converted.",
+      "_about": "Each system’s cheapest published plan, from its pricing page as quoted in the ATS scorecard (as of 2026-08-22). per: user-month, month or year. maxEmployees: the company size the published price covers; above it, treat the price as a quote. Quote-only systems have no amount. Prices in another currency are never converted.",
       "Manatal": { "amount": 15, "per": "user-month", "currency": "USD", "note": "billed annually" },
       "Teamtailor": { "quote": true },
       "Pinpoint": { "quote": true },
-      "BambooHR": { "amount": 250, "per": "month", "currency": "USD", "note": "flat, under 26 employees" },
+      "BambooHR": { "amount": 250, "per": "month", "currency": "USD", "note": "flat, under 26 employees", "maxEmployees": 25 },
       "Breezy HR": { "amount": 157, "per": "month", "currency": "USD", "note": "billed annually", "free": "Bootstrap tier, 1 position" },
       "Greenhouse": { "quote": true },
-      "Ashby": { "amount": 400, "per": "month", "currency": "USD", "note": "Foundations, up to 100 employees" },
+      "Ashby": { "amount": 400, "per": "month", "currency": "USD", "note": "Foundations, up to 100 employees", "maxEmployees": 100 },
       "Zoho Recruit": { "amount": 25, "per": "user-month", "currency": "USD", "note": "billed annually", "free": "Forever Free, 1 active job" },
-      "Workable": { "amount": 299, "per": "month", "currency": "USD", "note": "billed annually, 1 to 20 employees" },
+      "Workable": { "amount": 299, "per": "month", "currency": "USD", "note": "billed annually, 1 to 20 employees", "maxEmployees": 20 },
       "JazzHR": { "amount": 1000, "per": "year", "currency": "USD", "note": "Hero plan" },
       "Recruitee": { "quote": true },
       "Lever": { "quote": true },
       "Homerun": { "amount": 99, "per": "month", "currency": "EUR", "note": "3 job slots" },
       "Fountain": { "quote": true }
     }
+  },
+
+  "situations": {
+    "_about": "Common situations with their own permanent page under /what-should-i-use/[slug], so the answers can be found, linked and quoted. Titles are the question people actually ask. The answer is computed from the data, never written by hand.",
+    "list": [
+      { "slug": "best-free-ats-resume-checker", "question": "What’s the best free ATS resume checker?", "ask": { "side": "seekers", "problem": "no-callbacks", "months": 3, "budget": 0, "must": [] } },
+      { "slug": "best-resume-checker-under-100", "question": "What’s the best resume checker for under $100?", "ask": { "side": "seekers", "problem": "no-callbacks", "months": 3, "budget": 100, "must": [] } },
+      { "slug": "best-free-resume-builder", "question": "What’s the best free resume builder?", "ask": { "side": "seekers", "problem": "rewriting", "months": 3, "budget": 0, "must": [] } },
+      { "slug": "resume-builder-without-4-week-billing", "question": "Which resume builder won’t bill you every 4 weeks?", "ask": { "side": "seekers", "problem": "rewriting", "months": 3, "budget": null, "must": ["no-4-week"] } },
+      { "slug": "best-free-job-application-tracker", "question": "What’s the best free job application tracker?", "ask": { "side": "seekers", "problem": "losing-track", "months": 6, "budget": 0, "must": [] } },
+      { "slug": "interviews-but-no-offers", "question": "I get interviews but no offers. Will a tool fix it?", "ask": { "side": "seekers", "problem": "interviews-stall", "months": 3, "budget": null, "must": [] } },
+      { "slug": "best-free-ats-for-small-business", "question": "What’s the best free applicant tracking system for a small business?", "ask": { "side": "hiring", "problem": "spreadsheets", "hiresPerYear": 10, "employees": 20, "seats": 3, "budget": 0, "must": [] } },
+      { "slug": "best-ats-for-small-teams-under-2000", "question": "What’s the best applicant tracking system for a small team on $2,000 a year?", "ask": { "side": "hiring", "problem": "spreadsheets", "hiresPerYear": 10, "employees": 20, "seats": 3, "budget": 2000, "must": ["published-price"] } },
+      { "slug": "best-ats-for-a-first-recruiter", "question": "What’s the best applicant tracking system when you hire your first recruiter?", "ask": { "side": "hiring", "problem": "spreadsheets", "hiresPerYear": 35, "employees": 50, "seats": 5, "budget": 5000, "must": ["published-price"] } },
+      { "slug": "best-ats-for-scaling-teams", "question": "What’s the best applicant tracking system for a company hiring 50+ people a year?", "ask": { "side": "hiring", "problem": "spreadsheets", "hiresPerYear": 75, "employees": 250, "seats": 10, "budget": null, "must": [] } },
+      { "slug": "cant-find-candidates", "question": "We can’t find candidates to reach out to. What should we use?", "ask": { "side": "hiring", "problem": "cant-find-people", "hiresPerYear": 35, "employees": 50, "seats": 3, "budget": null, "must": [] } },
+      { "slug": "inconsistent-interviews", "question": "Our interviews are inconsistent. Is there a tool for that?", "ask": { "side": "hiring", "problem": "interviews-inconsistent", "hiresPerYear": 35, "employees": 50, "seats": 3, "budget": null, "must": [] } }
+    ]
   }
 }

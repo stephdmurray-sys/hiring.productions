@@ -1,6 +1,7 @@
 import followData from '@/lib/evidence/follow.json'
 import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, framework, hiringPick, latestCheck, resumeTools, rising, risingPick } from '@/lib/evidence'
 import { hiringBoard, atsAsOf } from '@/app/(rebrand)/_components/data'
+import { answerText, recFramework, recommend, situations } from '@/lib/evidence/recommend'
 
 /**
  * llms.txt: a plain-text map of the review site for AI assistants and
@@ -46,6 +47,14 @@ Evidence last checked: ${latestCheck()}. Every number below has a source on the 
 - [For job seekers](${BASE}/for-job-seekers): where a search goes wrong and the tools that fix it.
 - [For hiring teams](${BASE}/for-hiring-teams): applicant tracking, sourcing and strategic guidance.
 - [All tool reviews](${BASE}/reviews)
+
+## What should I use? (${BASE}/what-should-i-use)
+
+${recFramework.promise} Every answer has its own link and a date. The full rules and the research behind them: ${BASE}/how-we-review#recommend
+
+${situations()
+  .map((x) => `- [${x.question}](${BASE}/what-should-i-use/${x.slug}): ${answerText(recommend(x.ask), { short: true })}`)
+  .join('\n')}
 
 ## Tool reviews: ATS resume checkers
 

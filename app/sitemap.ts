@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { CATALOG } from '@/lib/tools-catalog'
 import { RANK_ROLES } from '@/lib/rank-roles'
 import { resumeTools } from '@/lib/evidence'
+import { situations } from '@/lib/evidence/recommend'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://hiring.productions'
@@ -127,6 +128,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/how-we-review', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/reviews', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/who-to-follow', priority: 0.8, changeFrequency: 'monthly' },
+    // The recommender and the permanent answer pages for common situations
+    { path: '/what-should-i-use', priority: 0.95, changeFrequency: 'monthly' },
+    ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),
   ]
 

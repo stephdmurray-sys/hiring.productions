@@ -15,6 +15,7 @@ import {
   risingPick,
   type ToolEvidence,
 } from '@/lib/evidence'
+import { answerText, recFramework, recommend, situations } from '@/lib/evidence/recommend'
 
 /**
  * llms-full.txt: the whole review site as one plain-text file, for AI
@@ -105,6 +106,41 @@ ${framework.judgment.never.map((d) => `- ${d}`).join('\n')}
 ### Known limits
 
 ${framework.limits.map((d) => `- ${d}`).join('\n')}
+
+## What should I use? The recommender
+
+Page: ${BASE}/what-should-i-use
+
+${recFramework.promise}
+
+### The rules
+
+${recFramework.rules.map((r) => `- ${r}`).join('\n')}
+
+### The research behind them
+
+${recFramework.research.map((x) => `- ${x.title}: ${x.finding} ${x.usedFor} Source: ${x.source}, ${x.url}`).join('\n')}
+
+### Common situations, answered
+
+${situations()
+  .map((x) => `#### ${x.question}\n\n${BASE}/what-should-i-use/${x.slug}\n\n${answerText(recommend(x.ask))}`)
+  .join('\n\n')}
+
+### Linking to an answer for any situation
+
+Every answer is a link. Build one with these parameters on ${BASE}/what-should-i-use:
+
+${(['seekers', 'hiring'] as const)
+  .map(
+    (side) =>
+      `- side=${side}\n  - problem: ${recFramework[side].problems.map((p) => `${p.id} (${p.label})`).join('; ')}\n${recFramework[side].limits
+        .map((l) => `  - ${l.id}: ${l.options.map((o) => `${o.value === null ? 'any' : o.value} (${o.label})`).join('; ')}`)
+        .join('\n')}\n  - must (optional, comma separated): ${recFramework[side].mustHaves.map((m) => `${m.id} (${m.label})`).join('; ')}`,
+  )
+  .join('\n')}
+
+Example: ${BASE}/what-should-i-use?side=seekers&problem=no-callbacks&months=3&budget=0
 
 ## The "best of" lists we re-read
 

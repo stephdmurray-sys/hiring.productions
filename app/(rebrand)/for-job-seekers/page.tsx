@@ -65,6 +65,11 @@ export default function Page() {
           link: `Read the ${top.name} review`,
         },
       ]}
+      situationsCta={{
+        text: 'Tell us what\u2019s going wrong and what you can spend. We rule out every tool that doesn\u2019t fit and give you one pick, with the real cost.',
+        href: '/what-should-i-use?side=seekers#questions',
+        label: 'What should I use?',
+      }}
       board={{
         title: 'Resume builders and checkers',
         checked: `checked ${shortDate(checked)}`,

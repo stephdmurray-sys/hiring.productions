@@ -17,7 +17,7 @@ import { BRAND_SWAPS } from '@/app/(rebrand)/_components/brand'
  * Pages move off this renderer one by one as they are rebuilt.
  */
 
-export type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | null
+export type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | 'recommend' | null
 
 const NAV_RE = /<div class="navbar">[\s\S]*?<\/nav>\s*<\/div>\s*<\/div>/
 const FOOTER_RE = /<footer[\s\S]*?<\/footer>/

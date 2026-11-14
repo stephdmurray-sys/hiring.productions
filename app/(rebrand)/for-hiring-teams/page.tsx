@@ -78,9 +78,9 @@ export default function Page() {
         },
       ]}
       situationsCta={{
-        text: 'Tell us how you hire and we will recommend a stack. It is free, and no vendor can pay their way into the answer.',
-        href: '/consulting',
-        label: 'Get a recommendation',
+        text: 'Tell us how many people you hire, how big you are and what you can spend. We rule out every system that doesn\u2019t fit and give you one pick, with the real price.',
+        href: '/what-should-i-use?side=hiring#questions',
+        label: 'What should we use?',
       }}
       board={{
         title: 'Applicant tracking systems',

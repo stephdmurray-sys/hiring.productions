@@ -5,7 +5,8 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { Logo, PUBLISHER_DOMAINS } from '@/app/(rebrand)/_components/logo'
 import { Scoreboard, boardCss } from '@/app/(rebrand)/_components/scoreboard'
-import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
+import { recCss } from '@/app/(rebrand)/_components/recommender'
+import { problemsFor } from '@/lib/evidence/recommend'
 import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
@@ -103,7 +104,7 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + followCss + homeCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
@@ -184,6 +185,29 @@ export default function Home() {
         </div>
       </header>
 
+      <section className="wrap sec" id="what-to-use">
+        <h2>What should you use?</h2>
+        <p className="lead">
+          Tell us what&rsquo;s going wrong. We rule out every tool that doesn&rsquo;t fit your limits, show you why, and give you one pick.
+          Sometimes the honest answer is that no tool fixes it.
+        </p>
+        <div className="rec-sits">
+          {(['seekers', 'hiring'] as const).map((side) => (
+            <div key={side}>
+              <span className="rec-sits-k">
+                <span className={side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+                {side === 'seekers' ? 'I’m getting hired' : 'I’m hiring'}
+              </span>
+              {problemsFor(side).map((p) => (
+                <a className="rec-sit" href={`/what-should-i-use?side=${side}&problem=${p.id}#questions`} key={p.id}>
+                  {p.label} <span className="arr">&rarr;</span>
+                </a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="wrap sec" id="scoreboard">
         <div className="sec-head">
           <div>
@@ -246,11 +270,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="wrap sec" id="rising">
-        <h2>Stephanie&rsquo;s picks</h2>
-        <p className="lead">A pick is my judgment. A score is the evidence. You get both, labeled, and one never changes the other.</p>
-        <OnTheRise showPicks />
-      </section>
 
       <section className="band" id="lists">
         <div className="wrap band-grid">

@@ -49,7 +49,7 @@ export const chromeCss = `
   @media(max-width:760px){.site-footer .fgrid{grid-template-columns:1fr 1fr;}.site-footer .fgrid > div:first-child{grid-column:1 / -1;}}
 `
 
-type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | null
+type NavKey = 'hiring' | 'seekers' | 'review' | 'vendors' | 'consulting' | 'recommend' | null
 
 export function Wordmark() {
   return (
@@ -73,11 +73,11 @@ export function SiteNav({ active = null }: { active?: NavKey }) {
             <Wordmark />
           </a>
           <span className="links">
+            {link('recommend', '/what-should-i-use', 'What should I use?')}
             {link('seekers', '/for-job-seekers', 'For job seekers')}
             {link('hiring', '/for-hiring-teams', 'For hiring teams')}
             {link('review', '/how-we-review', 'How we review')}
             {link('vendors', '/for-vendors', 'For vendors')}
-            {link('consulting', '/consulting', 'Free stack recommendation')}
           </span>
         </nav>
       </div>
@@ -98,6 +98,7 @@ export function SiteFooter() {
               <a href="/how-we-review#scores">How each score is built</a>
               <a href="/how-we-review#research">The research behind it</a>
               <a href="/how-we-review#judgment">Where Stephanie comes in</a>
+              <a href="/how-we-review#recommend">How a recommendation is made</a>
             </p>
           </div>
           <div className="frate-parts">

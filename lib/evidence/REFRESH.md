@@ -126,4 +126,6 @@ Vercel preview links are marked noindex and may sit behind Vercel's login, so AI
 
 - Update `hiring.prices` when an applicant tracking system's pricing changes in `lib/scorecards/ats-small-teams.json` (same date, same source).
 - Update `seekers.capabilities` when a tool adds or drops a job tracker, builder or checker, from its own pricing or features page.
-- Never confirm an `otherSide` line yourself: those are Stephanie's words, shown only once she sets `confirmed: true`.
+- Every `otherSide` line states a published finding and links to it. Re-check the links each quarter; if a source moves or a newer study replaces it, update the line and the source together. No line without a source, and no line in Stephanie's first person.
+- Every situation in `situations.list` must use option values that exist in `limits` (the test in the recommender check enforces it): change both together.
+- After any change, run every combination through the engine (each side's problems x limits x must-haves) and confirm nothing throws, nothing reads `undefined`, no em dashes, and each situation's link opens its own answer.

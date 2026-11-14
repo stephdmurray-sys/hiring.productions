@@ -3,6 +3,7 @@ import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/how-we-review'
 import { atsScores, discovery, framework } from '@/lib/evidence'
 import ats from '@/lib/scorecards/ats-small-teams.json'
+import { recFramework } from '@/lib/evidence/recommend'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/how-we-review' },
@@ -46,6 +47,34 @@ function researchSections() {
 `
 }
 
+/** How a recommendation is made, from lib/evidence/recommend.json, the same rules /what-should-i-use runs on. */
+function recommendSection() {
+  const rule = (r: string) => {
+    const i = r.indexOf('. ')
+    return i === -1 ? `<tr><td><b>${esc(r)}</b></td><td></td></tr>` : `<tr><td><b>${esc(r.slice(0, i + 1))}</b></td><td>${esc(r.slice(i + 2))}</td></tr>`
+  }
+  const research = recFramework.research
+    .map(
+      (x) =>
+        `<tr><td><b>${esc(x.title)}</b><br><a href="${esc(x.url)}" rel="nofollow noopener" target="_blank" style="font-size:12.5px;color:#5432E0;text-decoration:underline;text-underline-offset:3px;">${esc(x.source)}</a></td><td>${esc(x.finding)} ${esc(x.usedFor)}</td></tr>`,
+    )
+    .join('')
+  return `
+      <section id="recommend">
+        <h2>How a recommendation is made</h2>
+        <p class="lead">${esc(recFramework.promise)} <a href="/what-should-i-use" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Try it</a>.</p>
+        <table>
+          <tr><th>The rule</th><th>What it means</th></tr>
+          ${recFramework.rules.map(rule).join('')}
+        </table>
+        <table style="margin-top:24px">
+          <tr><th>The research</th><th>What it shows, and how we use it</th></tr>
+          ${research}
+        </table>
+      </section>
+`
+}
+
 /** "How a tool gets on our radar", built from lib/evidence/discovery.json so the public page and /desk never disagree. */
 function radarSection() {
   const rows = discovery.triggers
@@ -72,8 +101,8 @@ export default function Page() {
   const b = atsScores(breezy)
   const withRadar = html
     .replace('<section id="refresh">', `${radarSection()}\n      <section id="refresh">`)
-    .replace('<section id="sources">', `${researchSections()}\n      <section id="sources">`)
-    .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a>')
+    .replace('<section id="sources">', `${researchSections()}${recommendSection()}\n      <section id="sources">`)
+    .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How a recommendation is made</a>')
     .replace(
       /<div class="rating"><span class="stars">[\s\S]*?Practitioner Score <span class="when">in final review<\/span><\/div>/,
       `<div class="rating"><span class="stars"><span class="stars-fill" style="width:${(b.value / 5) * 100}%"></span></span><b>${b.value.toFixed(1)}</b> Value Score <span class="when">published price and a free tier</span></div>`,
