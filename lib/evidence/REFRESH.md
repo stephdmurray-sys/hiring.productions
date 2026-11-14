@@ -119,3 +119,11 @@ AI assistants (ChatGPT, Claude, Perplexity, Gemini, Copilot) read the site three
 Check after a build: fetch a page as an AI crawler and confirm it returns 200 with the text in the raw HTML, e.g. `curl -A "ClaudeBot/1.0" localhost:3000/reviews/teal`.
 
 Vercel preview links are marked noindex and may sit behind Vercel's login, so AI tools can't read them. They read the production domain.
+
+## The recommendation framework (Nov 2026)
+
+`recommend.json` holds the rules, the questions and the data the recommender needs beyond the scorecards; `recommend.ts` applies them. At each monthly check:
+
+- Update `hiring.prices` when an applicant tracking system's pricing changes in `lib/scorecards/ats-small-teams.json` (same date, same source).
+- Update `seekers.capabilities` when a tool adds or drops a job tracker, builder or checker, from its own pricing or features page.
+- Never confirm an `otherSide` line yourself: those are Stephanie's words, shown only once she sets `confirmed: true`.
