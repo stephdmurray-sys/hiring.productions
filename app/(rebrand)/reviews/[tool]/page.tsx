@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { toolReviewLd, SITE } from '@/app/(rebrand)/_components/structured'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -135,11 +136,12 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
-          { '@type': 'ListItem', position: 2, name: 'Resume tools', item: '/guides/best-resume-tools' },
-          { '@type': 'ListItem', position: 3, name: `${t.name} review`, item: `/reviews/${t.id}` },
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Resume tools', item: `${SITE}/guides/best-resume-tools` },
+          { '@type': 'ListItem', position: 3, name: `${t.name} review`, item: `${SITE}/reviews/${t.id}` },
         ],
       },
+      toolReviewLd(t),
     ],
   }
 

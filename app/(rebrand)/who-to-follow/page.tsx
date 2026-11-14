@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
+import { JsonLd, graph, peopleLd } from '@/app/(rebrand)/_components/structured'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/who-to-follow' },
@@ -14,6 +15,7 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + followCss }} />
+      <JsonLd data={graph(peopleLd())} />
       <SiteNav />
       <header className="ph">
         <div className="wrap">

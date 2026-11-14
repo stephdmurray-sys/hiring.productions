@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { JsonLd, graph, resumeRankingLd, toolReviewLd } from '@/app/(rebrand)/_components/structured'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
@@ -306,6 +307,7 @@ export default function Page() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
+      <JsonLd data={graph(resumeRankingLd(), ...all.map(toolReviewLd))} />
       <HashOpener prefix="evidence-" />
       <SiteNav active="seekers" />
 

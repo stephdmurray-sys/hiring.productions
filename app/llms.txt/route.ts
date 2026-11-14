@@ -1,9 +1,12 @@
-import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, hiringPick, latestCheck, resumeTools, rising, risingPick } from '@/lib/evidence'
+import followData from '@/lib/evidence/follow.json'
+import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, framework, hiringPick, latestCheck, resumeTools, rising, risingPick } from '@/lib/evidence'
+import { hiringBoard, atsAsOf } from '@/app/(rebrand)/_components/data'
 
 /**
  * llms.txt: a plain-text map of the review site for AI assistants and
- * answer engines, generated from the same evidence layer as the pages, so
- * it updates with every monthly check.
+ * answer engines (the llmstxt.org format), generated from the same evidence
+ * layer as the pages, so it updates with every monthly check. The longer
+ * version, with every number, is /llms-full.txt.
  */
 export const dynamic = 'force-static'
 
@@ -14,29 +17,35 @@ function money(n: number) {
 }
 
 export function GET() {
-  const { checkers, builders } = resumeTools()
+  const { checkers, builders, all } = resumeTools()
   const line = (t: (typeof checkers)[number]) =>
     `- [${t.name}](${BASE}/reviews/${t.id}): ${t.overall !== null ? `${t.overall.toFixed(2)}/5, #${t.rank}` : `not scored (${formatCount(t.citableReviews)} of ${MIN_REVIEWS} citable reviews)`}. ${t.bestFor}. ${t.yearCost ? `A paid year: ${t.yearCost.approx ? 'about ' : ''}${money(t.yearCost.amount)}${t.yearCost.renewsEvery4Weeks ? ' (renews every 4 weeks)' : ''}.` : ''}`
   const counting = benchmarks.filter((l) => l.status === 'counts')
+  const people = followData.people as { name: string; known: string; side: string; links: { url: string }[] }[]
+  const person = (p: (typeof people)[number]) => `- [${p.name}](${p.links[0]?.url}): ${p.known}`
 
   const body = `# hiring.productions
 
-> Independent reviews of the tools on both sides of hiring: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Founded by Stephanie Murray (20 years in talent). Every score carries the date it was checked; no vendor can pay for a placement, a ranking or a score.
+> Independent reviews of the tools on both sides of hiring: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Founded by Stephanie Murray (20 years in talent acquisition). Every score is computed from public, dated data and re-checked monthly; no vendor can pay for a placement, a ranking or a score.
 
-Evidence last checked: ${latestCheck()}. Re-checked monthly.
+Evidence last checked: ${latestCheck()}. Every number below has a source on the linked page. Quoting and citing is welcome; please link the page you quote.
 
 ## How scores work
 
-- Overall = ${WEIGHTS.user * 100}% users + ${WEIGHTS.market * 100}% market + ${WEIGHTS.critics * 100}% critics + ${WEIGHTS.value * 100}% value. Every input is public, dated data; no one's personal score is an input. Stephanie's picks are labeled editorial and never change a score.
-- A tool needs at least ${MIN_REVIEWS} citable user reviews from foundation sources to be scored. G2, Capterra, GetApp and Software Advice share one review pool and count once.
-- Each month we re-read the other "best resume tool" lists. ${counting.length} of ${benchmarks.length} currently count; the rest are out of date or published by companies that sell what they rank.
-- Full method: ${BASE}/how-we-review
+- Overall = ${WEIGHTS.user * 100}% users + ${WEIGHTS.market * 100}% market + ${WEIGHTS.critics * 100}% critics + ${WEIGHTS.value * 100}% value, each out of 5. Every input is public data; no one's personal score is an input, Stephanie's included.
+- Users: review-site ratings, adjusted toward the category average when a tool has few reviews (the IMDb weighted-rating method). A tool needs at least ${MIN_REVIEWS} citable user reviews to be scored. G2, Capterra, GetApp and Software Advice share one review pool and count once.
+- Market: web traffic rank and review volume. Critics: how many independent "best of" lists name it (${counting.length} of ${benchmarks.length} lists currently count; vendor-published lists never do). Value: the free version and the real cost of a paid year, minus a point for 4-week billing.
+- Stephanie's picks are editorial, labeled as hers, and never change a score.
+- Full method and the research behind it: ${BASE}/how-we-review
 
 ## Guides
 
-- [The best resume tools of 2026](${BASE}/guides/best-resume-tools): builders and ATS checkers ranked on evidence, with the agreement grid against other lists, labeled demo videos and what a search costs.
-- [Applicant tracking systems by team size](${BASE}/guides/best-ats-for-small-teams)
+- [The best resume tools of 2026](${BASE}/guides/best-resume-tools): builders and ATS checkers ranked on evidence, the agreement grid against other lists, demo videos and what a search really costs.
+- [Applicant tracking systems by team size](${BASE}/guides/best-ats-for-small-teams): small, growing and scaling teams, ranked within each tier.
 - [Recruiter training and certifications](${BASE}/guides/best-recruiter-training)
+- [For job seekers](${BASE}/for-job-seekers): where a search goes wrong and the tools that fix it.
+- [For hiring teams](${BASE}/for-hiring-teams): applicant tracking, sourcing and strategic guidance.
+- [All tool reviews](${BASE}/reviews)
 
 ## Tool reviews: ATS resume checkers
 
@@ -46,14 +55,37 @@ ${checkers.map(line).join('\n')}
 
 ${builders.map(line).join('\n')}
 
+## Applicant tracking systems (data as of ${atsAsOf})
+
+${hiringBoard()
+  .map((r, i) => `- ${r.name} (${r.domain}): ${r.score.toFixed(2)}/5, #${i + 1} overall. ${r.sub}.`)
+  .join('\n')}
+
 ## Stephanie's picks (editorial; a pick never changes a score)
 
-- For job seekers: ${resumeTools().all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
+- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, her up-and-coming pick.
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}), her top pick. ${hiringPick.scoreStatus}
 
-## Waiting in the wings (watching, not scored)
+## Waiting in the wings (watching, not scored yet)
 
 ${rising.tools.map((t) => `- ${t.name} (${t.category}, for ${t.side === 'seekers' ? 'job seekers' : 'hiring teams'}): ${t.what}${t.evidence.length ? ` Named by ${t.evidence.map((e) => e.publication).join(' and ')}.` : ''}`).join('\n')}
+
+## Who to follow (${BASE}/who-to-follow)
+
+The best in talent acquisition:
+${people.filter((p) => p.side === 'hiring').map(person).join('\n')}
+
+For job seekers:
+${people.filter((p) => p.side === 'seekers').map(person).join('\n')}
+
+## About the ratings
+
+${framework.summary}
+
+## Optional
+
+- [Everything above in full, with every score part, price and source](${BASE}/llms-full.txt)
+- [About Stephanie Murray](${BASE}/about/stephanie)
 `
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
 }

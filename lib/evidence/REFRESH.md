@@ -107,3 +107,15 @@ Stephanie's direction: her score never goes on the board. Every score is compute
 ## Contrast (Nov 2026)
 
 Every page passed an automated WCAG AA contrast check (axe-core, color-contrast rule: 4.5:1 for normal text, 3:1 for large) on Nov 13, 2026, after fixing the nav links, the success green (now #157347), the older pages' gray (now #62627A), faded text on the colored hub headers, and the free stack recommendation page. The footer and nav carry their own color fallbacks so they render on the older page designs too. Re-run the check after any color change.
+
+## AI readability (Nov 2026)
+
+AI assistants (ChatGPT, Claude, Perplexity, Gemini, Copilot) read the site three ways, and all three rebuild from this folder, so a monthly data update updates them too:
+
+- `app/robots.ts` names each AI crawler and allows the whole public site. Only `/api/`, `/admin`, `/desk` and `/mockups` are closed. Don't block `/_next/`: it stops crawlers seeing images.
+- `/llms.txt` (short map) and `/llms-full.txt` (every score part, price, list and source), from `app/llms.txt` and `app/llms-full.txt`.
+- Structured data (schema.org JSON-LD) on every page, from `app/(rebrand)/_components/structured.tsx`: each review page carries the tool, its four parts and our score as a Review; the guides, hubs and homepage carry the rankings; /who-to-follow carries the people and their profile links. Users' ratings from other sites are listed as plain facts, never as an aggregateRating we didn't collect.
+
+Check after a build: fetch a page as an AI crawler and confirm it returns 200 with the text in the raw HTML, e.g. `curl -A "ClaudeBot/1.0" localhost:3000/reviews/teal`.
+
+Vercel preview links are marked noindex and may sit behind Vercel's login, so AI tools can't read them. They read the production domain.

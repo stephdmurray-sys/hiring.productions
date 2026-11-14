@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { JsonLd, graph, resumeRankingLd, atsRankingLd } from '@/app/(rebrand)/_components/structured'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
@@ -103,6 +104,7 @@ export default function Home() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + followCss + homeCss }} />
+      <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
       <header className="wrap hero">

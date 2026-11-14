@@ -57,6 +57,8 @@ export interface Video {
   year: number | null
   featured: boolean
   verified: boolean
+  /** The YouTube channel that published it. */
+  channel?: string
 }
 
 export interface Source {

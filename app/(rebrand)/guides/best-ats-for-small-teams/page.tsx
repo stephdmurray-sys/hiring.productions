@@ -3,6 +3,7 @@ import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-ats'
 import ats from '@/lib/scorecards/ats-small-teams.json'
 import { atsLeaders, atsScores, type AtsTool } from '@/lib/evidence'
+import { JsonLd, graph, atsRankingLd, atsToolsLd } from '@/app/(rebrand)/_components/structured'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/guides/best-ats-for-small-teams' },
@@ -117,5 +118,10 @@ function inlineVideos(src: string): string {
 
 export default function Page() {
   const out = inlineVideos(rebuildFootnote(rebuildReviews(rebuildPicks(rebuildTables(html)))))
-  return <MockPage html={out} active="hiring" />
+  return (
+    <>
+      <JsonLd data={graph(atsRankingLd(), ...atsToolsLd())} />
+      <MockPage html={out} active="hiring" />
+    </>
+  )
 }

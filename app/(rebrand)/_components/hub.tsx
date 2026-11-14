@@ -8,6 +8,7 @@ import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { calcCss } from '@/app/(rebrand)/_components/widgets-css'
 import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
 import { homeCss } from '@/app/(rebrand)/home-css'
+import { JsonLd, graph, rankingLd, SITE } from '@/app/(rebrand)/_components/structured'
 
 /**
  * Shared layout for the two audience hubs. The hero is a full block of the
@@ -80,6 +81,15 @@ export function Hub(props: HubProps) {
   return (
     <div className={`hub-${props.side}`}>
       <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + followCss + homeCss + hubCss }} />
+      <JsonLd
+        data={graph(
+          rankingLd(
+            props.board.title,
+            `${SITE}/${props.side === 'seekers' ? 'for-job-seekers' : 'for-hiring-teams'}`,
+            props.board.rows.map((r) => ({ name: r.name, url: r.href.startsWith('/') ? `${SITE}${r.href}` : r.href, score: r.score })),
+          ),
+        )}
+      />
       <SiteNav active={props.side} />
 
       <header className="hub-hero">

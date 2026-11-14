@@ -6,6 +6,7 @@ import { Scoreboard, boardCss } from '@/app/(rebrand)/_components/scoreboard'
 import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
 import { seekerRow, shortDate } from '@/app/(rebrand)/_components/data'
 import { MIN_REVIEWS, formatCount, latestCheck, resumeTools } from '@/lib/evidence'
+import { JsonLd, graph, resumeRankingLd } from '@/app/(rebrand)/_components/structured'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/reviews' },
@@ -32,6 +33,7 @@ export default function ReviewsIndex() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + css }} />
+      <JsonLd data={graph(resumeRankingLd())} />
       <SiteNav active="seekers" />
       <header className="ph">
         <div className="wrap">

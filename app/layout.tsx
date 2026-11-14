@@ -94,7 +94,7 @@ const jsonLd = {
       sameAs: [
         'https://www.linkedin.com/in/stephaniemurray11/',
       ],
-      description: 'Talent acquisition consulting and career coaching services. Recruitment marketing strategy, employer branding, and LinkedIn optimization.',
+      description: 'Independent reviews of the tools on both sides of hiring: resume builders and ATS checkers for job seekers, applicant tracking systems and recruiter training for hiring teams. Every score is built from dated public data, re-read monthly, and no vendor can pay for a place.',
     },
     {
       '@type': 'Person',
@@ -127,7 +127,7 @@ const jsonLd = {
       publisher: {
         '@id': 'https://hiring.productions/#organization',
       },
-      description: 'Tools, consulting, and coaching for the two sides of hiring.',
+      description: 'Independent, data-driven reviews of hiring tools for job seekers and hiring teams, with guides, cost comparisons and the people worth following in talent acquisition.',
     },
     {
       '@type': 'ProfessionalService',
