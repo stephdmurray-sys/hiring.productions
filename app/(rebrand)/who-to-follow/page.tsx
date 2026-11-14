@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/who-to-follow' },
   title: 'Who to Follow: The Best in Talent Acquisition, and the Most Helpful Voices for Job Seekers',
   description:
-    'The people worth your feed on both sides of hiring: career coaches, recruiters and comedians who make the job search and the hiring process easier to survive.',
+    'The best people to follow in recruiting and HR, and for your job search: recruiters, HR leaders, career coaches and a few comedians.',
 }
 
 export default function Page() {
@@ -24,8 +24,7 @@ export default function Page() {
           </p>
           <h1 className="display">Who to follow</h1>
           <p className="dek">
-            The best voices in talent acquisition, and the people who make a job search easier to survive. Some will make you laugh
-            about work. All of them know what they are talking about.
+            The best people to follow in recruiting and HR, and for your job search. Some are funny. All of them know their stuff.
           </p>
         </div>
       </header>

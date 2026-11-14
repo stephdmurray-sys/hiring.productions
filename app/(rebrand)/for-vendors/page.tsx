@@ -72,7 +72,7 @@ export default function Page() {
 
       <section className="wrap sec" id="ladder">
         <h2>Three kinds of review</h2>
-        <p className="lead">Every review says which kind it is. Telling us more makes a review more complete. It never moves a score by itself.</p>
+        <p className="lead">Every review says which kind it is. None of them changes a score.</p>
         <div className="tscroll">
           <table className="ledger ladder">
             <thead>

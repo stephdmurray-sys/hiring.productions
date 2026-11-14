@@ -272,7 +272,7 @@ export const html = `<style>
 
       <section id="refresh">
         <h2>We check everything monthly</h2>
-        <p class="lead">Reviews go stale. Ours get checked on the same schedule every month, and every review shows when we last checked each number.</p>
+        <p class="lead">We check every review on the same schedule each month, and show when we last checked each number.</p>
         <table>
           <tr><th>Signal</th><th>Refresh</th><th>How</th></tr>
           <tr>

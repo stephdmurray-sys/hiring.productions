@@ -68,7 +68,6 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
 
       <section className="wrap sec" id="common">
         <h2>Common questions, answered</h2>
-        <p className="lead">Each one has its own page, answered the same way as yours.</p>
         <RecSituations />
       </section>
 

@@ -40,7 +40,7 @@ export const followCss = `
   .cast-row + .cast-row{margin-top:64px;}
   .cast-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-bottom:14px;border-bottom:3px solid var(--indigo);}
   .cast-row.hiring .cast-head{border-bottom-color:var(--coral);}
-  .cast-head h3{display:flex;align-items:center;font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.02em;}
+  .cast-head h3{display:flex;align-items:center;flex-wrap:wrap;gap:14px;font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.02em;}
   .cast-head p{font-size:16px;color:var(--ink-2);}
   .cast-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:24px;}
   .cast-card{display:flex;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:16px 16px 14px;}
@@ -111,7 +111,7 @@ export function WhoToFollow({ side }: { side?: Side }) {
           <div className={`cast-row ${r.side}`} key={r.side}>
             <div className="cast-head">
               <h3>
-                <span className={r.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+                <span className={`pill pill-${r.side}`}>{r.side === 'seekers' ? 'For job seekers' : 'For hiring teams'}</span>
                 {r.title}
               </h3>
               <p>{r.lead}</p>

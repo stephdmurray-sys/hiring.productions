@@ -164,7 +164,7 @@ export function Hub(props: HubProps) {
 
       <section className="wrap sec" id="rising">
         <h2>Stephanie&rsquo;s pick</h2>
-        <p className="lead">A pick is my opinion. A score is the numbers. You get both, labeled, and one never changes the other.</p>
+        <p className="lead">Her opinion, labeled as hers. It never changes a score.</p>
         <OnTheRise side={props.side} showPicks />
       </section>
 
@@ -179,9 +179,8 @@ export function Hub(props: HubProps) {
           {props.guides.map((g) => (
             <a className="guide" href={g.href} key={g.href}>
               <span className="guide-side">
-                <span className={props.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
                 <span>
-                  Live guide
+                  <span className={`pill pill-sm pill-${props.side}`}>{props.side === 'seekers' ? 'Job seekers' : 'Hiring teams'}</span>
                   <span className="mono">{g.meta}</span>
                 </span>
               </span>

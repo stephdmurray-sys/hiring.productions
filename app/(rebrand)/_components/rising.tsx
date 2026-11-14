@@ -24,7 +24,7 @@ export const risingCss = `
   .note .note-facts{font-family:var(--mono);font-size:13px;color:var(--ink-3);margin-top:16px;}
   .note .tl{display:inline-block;margin-top:14px;}
   .note-pick + .note-pick{margin-top:36px;padding-top:4px;border-top:1px solid var(--rule);}
-  .note-side{display:flex;align-items:center;font-size:14px;font-weight:800;color:var(--ink-2);margin-top:24px;}
+  .note-side{margin-top:24px;}
   .note-side + .note-h{margin-top:10px;}
   .note .note-status{font-size:15px;color:var(--ink-2);margin-top:12px;}
   .note-ev{list-style:none;margin-top:10px;display:grid;gap:4px;font-size:13.5px;color:var(--ink-3);}
@@ -40,7 +40,7 @@ export const risingCss = `
   .wing-ev a{color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--rule-2);text-underline-offset:3px;}
   .wing-ev a:hover{text-decoration-color:var(--ink);}
   .wing-ready{display:block;font-size:13.5px;font-weight:700;color:var(--ok);margin-top:6px;}
-  .wing-side{font-size:13.5px;font-weight:700;color:var(--ink-2);white-space:nowrap;padding-top:3px;}
+  .wing-side{align-self:start;justify-self:start;margin-top:2px;}
   @media(max-width:960px){.wings{grid-template-columns:1fr;gap:48px;}}
   @media(max-width:640px){.wing-row{grid-template-columns:40px minmax(0,1fr);padding:14px 16px;}.wing-side{grid-column:2;padding-top:0;}}
 `
@@ -89,8 +89,7 @@ function WingRow({ t }: { t: RisingTool }) {
           </span>
         )}
       </div>
-      <span className="wing-side">
-        <span className={t.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+      <span className={`wing-side pill pill-sm pill-${t.side}`}>
         {t.side === 'seekers' ? 'Job seekers' : 'Hiring teams'}
       </span>
     </div>
@@ -177,8 +176,7 @@ export function OnTheRise({
           {picks.map((p) => (
             <div className="note-pick" key={p.name}>
               {!side && (
-                <span className="note-side">
-                  <span className={p.side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
+                <span className={`note-side pill pill-${p.side}`}>
                   {p.side === 'seekers' ? 'For job seekers' : 'For hiring teams'}
                 </span>
               )}

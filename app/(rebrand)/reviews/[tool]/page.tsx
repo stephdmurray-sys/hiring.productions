@@ -340,7 +340,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
       {t.videos.length > 0 && (
         <section className="wrap sec" id="videos">
           <h2>Watch {t.name} before you pay</h2>
-          <p className="lead">Labeled by who made each one, so you know whose best case you&rsquo;re watching.</p>
+          <p className="lead">Labeled by who made each one.</p>
           <div className="vid-grid">
             {t.videos.map((v) => (
               <figure className="vid" key={v.youtubeId}>

@@ -40,6 +40,14 @@ export const siteCss = `
   .dot-seekers,.dot-hiring{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:9px;vertical-align:1px;}
   .dot-seekers{background:var(--indigo);}
   .dot-hiring{background:var(--coral);}
+  /* Side pills: which side of the table a label belongs to, in the side's color. */
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 12px;border-radius:999px;font-weight:800;font-size:14px;line-height:1.15;white-space:nowrap;}
+  .pill::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0;}
+  .pill-seekers{background:var(--indigo);color:#fff;}
+  .pill-hiring{background:var(--coral);color:var(--coral-deep);}
+  .rec-sits-k .pill{font-size:15.5px;padding:8px 16px 8px 13px;}
+  .pill-sm{font-size:12.5px;padding:4px 10px 4px 9px;gap:6px;}
+  .pill-sm::before{width:6px;height:6px;}
 
   /* Logos: the real mark on a white tile, a lettermark underneath */
   .lg{position:relative;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:#fff;border:1px solid rgba(20,16,40,0.10);border-radius:10px;overflow:hidden;vertical-align:middle;}

@@ -237,7 +237,7 @@ export const html = `<style>
         <div class="vid-meta">
           <span class="vtag vtag-vendor">Vendor demo</span>
           <p class="vid-tool">Pinpoint</p>
-          <p class="vid-src">Pinpoint&rsquo;s own walkthrough. Expect the best-case tour; the table above keeps it honest.</p>
+          <p class="vid-src">Made by Pinpoint.</p>
         </div>
       </div>
       <div class="vid-card">

@@ -327,7 +327,7 @@ export default function Page() {
           </p>
           <p className="disclosure">
             Some links below can be affiliate links: if you buy through one, the vendor pays us a commission. Placement, rankings and scores
-            can&rsquo;t be bought, which is why the category&rsquo;s biggest advertiser ranks where the numbers put it.{' '}
+            can&rsquo;t be bought.{' '}
             <a href="/advertiser-disclosure">Full disclosure</a>
           </p>
         </div>
@@ -560,7 +560,7 @@ export default function Page() {
       <section className="wrap sec" id="rankings">
         <h2>How we ranked them</h2>
         <p className="lead">
-          Where a tool has fewer than {MIN_REVIEWS} public reviews, we say so instead of inventing stars.
+          Tools with fewer than {MIN_REVIEWS} public reviews aren&rsquo;t ranked.
         </p>
         <h3 className="h3">ATS resume checkers</h3>
         <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
@@ -601,8 +601,7 @@ export default function Page() {
       <section className="wrap sec" id="videos">
         <h2>Watch before you pay</h2>
         <p className="lead">
-          Every video is labeled by who made it. A company&rsquo;s own demo is the best-case tour. An independent creator shows what happens
-          after you sign up. New videos are pulled every month.
+          Each video is labeled: made by the company, or by an independent creator. We add new ones every month.
         </p>
         <div className="vid-grid">
           {featured.map((v) => {
@@ -632,7 +631,7 @@ export default function Page() {
 
       <section className="wrap sec" id="evidence">
         <h2>Every tool, in detail</h2>
-        <p className="lead">Each tool&rsquo;s sources, with the date we read them. Open a tool to see what its ranking rests on.</p>
+        <p className="lead">Where each tool&rsquo;s numbers come from, with dates.</p>
         <div className="efiles">
           {all.map((t) => (
             <EvidenceFile key={t.id} t={t} />

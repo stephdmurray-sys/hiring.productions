@@ -40,7 +40,7 @@
         "segments": [
           "checker"
         ],
-        "why": "Silence usually starts before a person reads anything: an applicant tracking system screens your resume against the posting first. A checker shows you what it sees.",
+        "why": "Often no person has read your resume yet: the applicant tracking system checks it against the job posting first. A resume checker shows you what it sees.",
         "otherSide": {
           "line": "Hiring teams know their systems screen out good people. In a Harvard Business School and Accenture study, 88% of employers agreed that qualified, high-skilled candidates get screened out for not matching a job description’s exact criteria. Use the posting’s own words.",
           "source": "Hidden Workers: Untapped Talent, Harvard Business School and Accenture, 2021",
@@ -54,7 +54,7 @@
         "segments": [
           "builder"
         ],
-        "why": "A builder gets you a clean, readable layout fast. The words are still yours to get right.",
+        "why": "A resume builder gives you a clean layout fast. You still write the words.",
         "otherSide": {
           "line": "In Ladders’ 2018 eye-tracking study, a recruiter’s first pass on a resume averaged 7.4 seconds, and the resumes that held attention had simple layouts with clear section headings. Pick the plainest template the builder offers.",
           "source": "Ladders eye-tracking study, 2018, reported by HR Dive",
@@ -68,7 +68,7 @@
         "needs": [
           "tracker"
         ],
-        "why": "A tracker keeps every application, contact and follow-up in one place, so nothing goes quiet without you noticing.",
+        "why": "A job tracker keeps every application, contact and follow-up in one place.",
         "otherSide": {
           "line": "Follow-ups count, and almost nobody sends them. In a 2017 Accountemps survey of more than 300 HR managers, 80% said they consider thank-you notes when choosing a candidate, yet they received notes from only 24% of applicants. Track the follow-up, not just the application.",
           "source": "Accountemps survey of US HR managers, 2017, reported by HR Dive",

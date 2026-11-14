@@ -189,14 +189,13 @@ export default function Home() {
         <h2>What should I use?</h2>
         <p className="lead">
           Tell us what&rsquo;s going wrong. We cross off every tool that doesn&rsquo;t fit your budget or your team, show you why, and give you
-          one pick. Sometimes the honest answer is that no tool fixes it.
+          one pick. If no tool fixes it, we&rsquo;ll say so.
         </p>
         <div className="rec-sits">
           {(['seekers', 'hiring'] as const).map((side) => (
             <div key={side}>
               <span className="rec-sits-k">
-                <span className={side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
-                {side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}
+                <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I’m a job seeker' : 'I’m hiring'}</span>
               </span>
               {problemsFor(side).map((p) => (
                 <a className="rec-sit" href={`/what-should-i-use?side=${side}&problem=${p.id}#questions`} key={p.id}>
@@ -212,7 +211,7 @@ export default function Home() {
         <div className="sec-head">
           <div>
             <h2>This month&rsquo;s scoreboard</h2>
-            <p className="lead">User ratings, popularity, best-of lists and what a year really costs, rolled into one score with the date we checked. Open any tool for the full review.</p>
+            <p className="lead">Scored on user ratings, popularity, best-of lists and price. Open any tool for the full review.</p>
           </div>
         </div>
         <div className="boards">
@@ -299,7 +298,7 @@ export default function Home() {
 
       <section className="wrap sec" id="watch">
         <h2>Watch before you pay</h2>
-        <p className="lead">Every demo is labeled by who made it: the company&rsquo;s best-case tour, or an independent creator after sign-up.</p>
+        <p className="lead">Each video is labeled: made by the company, or by an independent creator.</p>
         <div className="vid-grid">
           {featured.map((v) => {
             const t = byId[v.tool]
@@ -324,7 +323,7 @@ export default function Home() {
 
       <section className="wrap sec" id="follow">
         <h2>Who to follow</h2>
-        <p className="lead">The best voices in talent acquisition, and the people who make a job search easier to survive.</p>
+        <p className="lead">The best people to follow in recruiting and HR, and for your job search.</p>
         <WhoToFollow />
       </section>
 
@@ -333,9 +332,8 @@ export default function Home() {
         <div className="guides">
           <a className="guide" href="/guides/best-resume-tools">
             <span className="guide-side">
-              <span className="dot-seekers" />
               <span>
-                Job seekers
+                <span className="pill pill-sm pill-seekers">Job seekers</span>
                 <span className="mono">{`Checked ${shortDate(checked)}`}</span>
               </span>
             </span>
@@ -351,9 +349,8 @@ export default function Home() {
           </a>
           <a className="guide" href="/guides/best-ats-for-small-teams">
             <span className="guide-side">
-              <span className="dot-hiring" />
               <span>
-                Hiring teams
+                <span className="pill pill-sm pill-hiring">Hiring teams</span>
                 <span className="mono">{`Data as of ${shortDate(atsAsOf)}`}</span>
               </span>
             </span>
@@ -369,9 +366,8 @@ export default function Home() {
           </a>
           <a className="guide" href="/guides/best-recruiter-training">
             <span className="guide-side">
-              <span className="dot-hiring" />
               <span>
-                Hiring teams
+                <span className="pill pill-sm pill-hiring">Hiring teams</span>
                 <span className="mono">{'Updated 23 Aug 2026'}</span>
               </span>
             </span>

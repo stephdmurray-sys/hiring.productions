@@ -23,7 +23,7 @@
     {
       "tool": "kickresume",
       "label": "Best paid builder",
-      "line": "Honest annual pricing at $96, and students get six months free."
+      "line": "$96 a year with no surprise renewals, and students get six months free."
     }
   ],
   "risingPick": {
@@ -37,13 +37,13 @@
       "bestFor": "Checker, builder, and tracker in one. Real free tier",
       "call": {
         "stance": "agrees",
-        "line": "Three current lists name Teal, and we rank it first too. The reason is boring and rare: the free version is actually useful."
+        "line": "Three current lists name Teal, and we rank it first too. Its free version is actually useful."
       },
       "verdict": {
         "bestIf": "You want one tool for the whole search: resume builder, per-job keyword matching, and application tracking. The free version is actually useful, and it rates 4.9 from 3,200 Chrome Web Store ratings.",
         "skipIf": "You only need one deep scan against one job description. Jobscan's per-job reports go further.",
-        "like": "Free tier that does not hold your resume hostage. Quarterly billing at $79 is the sane paid option.",
-        "watch": "The $13 weekly plan reads cheap and compounds fast. Pick monthly or quarterly, never weekly."
+        "like": "The free version lets you download your resume. If you pay, $79 a quarter is the best deal.",
+        "watch": "The $13 weekly plan looks cheap but adds up fast. Pay monthly or quarterly instead."
       },
       "pricingLine": "Free tier · Teal+ $29/mo or $79/quarter",
       "walkthrough": null,
@@ -52,7 +52,7 @@
         "how": "4 quarters at $79",
         "renewsEvery4Weeks": false
       },
-      "freeAnswer": "Yes. The free version is actually useful, not a teaser. Teal+ is $29 a month or $79 a quarter.",
+      "freeAnswer": "Yes, and the free version is actually useful. Teal+ is $29 a month or $79 a quarter.",
       "freeLevel": "full"
     },
     "jobscan": {
@@ -93,10 +93,10 @@
       "bestFor": "Best paid builder. Templates recruiters read",
       "call": {
         "stance": "agrees",
-        "line": "Zapier, Geekflare and SkillScouter (#5) all name it, and it tops our builders too. $96 a year is the whole price, which in this category counts as a feature."
+        "line": "Zapier, Geekflare and SkillScouter (#5) all name it, and it tops our builders too. $96 a year is the whole price, with no surprise renewals."
       },
       "verdict": {
-        "bestIf": "You want a polished paid builder without billing games: $96 a year, flat, with 6,400 mobile ratings averaging 4.6 to back it up.",
+        "bestIf": "You want a polished paid builder without surprise billing: $96 a year, flat, with 6,400 mobile ratings averaging 4.6 to back it up.",
         "skipIf": "FlowCV's free tier already covers you. Pay for a builder only when you need multiple tailored versions.",
         "like": "Free tier allows real downloads on basic templates. Students get six months of premium free with a student ID.",
         "watch": "Web and iOS pricing differ; the App Store subscription is cheaper. Check both before paying."
@@ -115,7 +115,7 @@
       "bestFor": "The genuinely free builder. No watermark",
       "call": {
         "stance": "breaks",
-        "line": "None of the current lists we've checked names FlowCV. It earns its place on its users: 4.9 from 83 public ratings, and a free plan that gives you a watermark-free PDF."
+        "line": "None of the current lists we've checked names FlowCV. It’s here because of its users: 4.9 from 83 public ratings, and a free plan that gives you a watermark-free PDF."
       },
       "verdict": null,
       "pricingLine": "Free · Pro $60/yr",
@@ -152,10 +152,10 @@
         "line": "Zapier and Geekflare both name Resume.io. We rank it last of the builders we can score: the $2.95 trial renews at $29.95 every 4 weeks, and creators are now posting how-to-cancel videos."
       },
       "verdict": {
-        "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you treat it as a $2.95 one-week rental.",
+        "bestIf": "You want the slickest editor in the category, you set a calendar reminder to cancel, and you only need it for a week at $2.95.",
         "skipIf": "You might forget to cancel. The trial renews at $29.95 every 4 weeks, 13 times a year, and the free download is plain text with your formatting stripped.",
-        "like": "The editor itself is genuinely good, which is what makes the billing model such a shame.",
-        "watch": "Its only public reviews we can use come to 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewal pattern. The App Store apps under this name are third-party lookalikes, not Resume.io."
+        "like": "The editor itself is genuinely good.",
+        "watch": "The only public reviews we can use average 1.5 out of 5 across 195 Product Hunt reviews, nearly all about the renewals. The App Store apps under this name are third-party lookalikes, not Resume.io."
       },
       "pricingLine": "$2.95 7-day trial, renews $29.95 every 4 weeks · free download is .txt only",
       "walkthrough": null,

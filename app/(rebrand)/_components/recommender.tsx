@@ -369,8 +369,7 @@ export function RecSituations({ exclude }: { exclude?: string }) {
       {(['seekers', 'hiring'] as const).map((side) => (
         <div key={side}>
           <span className={`rec-sits-k rec-sits-${side}`}>
-            <span className={side === 'seekers' ? 'dot-seekers' : 'dot-hiring'} />
-            {side === 'seekers' ? 'Job seekers ask' : 'Hiring teams ask'}
+            <span className={`pill pill-${side}`}>{side === 'seekers' ? 'Job seekers ask' : 'Hiring teams ask'}</span>
           </span>
           {list
             .filter((s) => s.ask.side === side)

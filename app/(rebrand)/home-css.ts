@@ -12,8 +12,10 @@ export const homeCss = `
   .side{padding:34px 34px 32px;display:flex;flex-direction:column;gap:18px;min-height:460px;}
   .side-seekers{background:var(--indigo);color:#fff;}
   .side-hiring{background:var(--coral);color:var(--coral-deep);}
-  .side-k{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:800;}
-  .side-k i{width:10px;height:10px;border-radius:50%;background:currentColor;}
+  .side-k{display:inline-flex;align-self:flex-start;align-items:center;gap:9px;font-size:15px;font-weight:800;padding:8px 16px 8px 13px;border-radius:999px;background:#fff;box-shadow:0 2px 0 rgba(0,0,0,0.12);}
+  .side-seekers .side-k{color:var(--indigo-text);}
+  .side-hiring .side-k{color:var(--coral-text);}
+  .side-k i{width:9px;height:9px;border-radius:50%;background:currentColor;}
   .side h2{font-size:clamp(30px,3.2vw,42px);font-weight:900;letter-spacing:-0.02em;line-height:1.06;margin:0;color:inherit;}
   .side-logos{display:flex;flex-wrap:wrap;gap:10px;}
   .side-logos a{display:inline-flex;border-radius:12px;}
@@ -39,14 +41,16 @@ export const homeCss = `
 
   /* Scoreboard tabs: plain text tabs, one board visible */
   .boards{margin-top:36px;}
-  .board-tabs{display:flex;gap:28px;border-bottom:1px solid var(--rule);margin-bottom:20px;}
-  .board-tabs label{font-weight:800;font-size:17px;padding:10px 0 12px;color:var(--ink-3);cursor:pointer;display:flex;align-items:center;gap:8px;border-bottom:3px solid transparent;margin-bottom:-1px;}
-  .board-tabs label:hover{color:var(--ink);}
-  .board-tabs label i{width:9px;height:9px;border-radius:50%;}
+  .board-tabs{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+  .board-tabs label{font-weight:800;font-size:16px;padding:10px 18px 10px 15px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .15s ease,color .15s ease;}
+  .board-tabs label:hover{box-shadow:inset 0 0 0 2px currentColor;}
+  .board-tabs label i{width:9px;height:9px;border-radius:50%;background:currentColor !important;}
   .board-tabs label[for=b-seek] i{background:var(--indigo);}
   .board-tabs label[for=b-hire] i{background:var(--coral);}
-  #b-seek:checked ~ .board-tabs label[for=b-seek]{color:var(--ink);border-bottom-color:var(--indigo);}
-  #b-hire:checked ~ .board-tabs label[for=b-hire]{color:var(--ink);border-bottom-color:var(--coral);}
+  .board-tabs label[for=b-seek]{background:var(--indigo-tint);color:var(--indigo-text);}
+  .board-tabs label[for=b-hire]{background:var(--coral-tint);color:var(--coral-text);}
+  #b-seek:checked ~ .board-tabs label[for=b-seek]{background:var(--indigo);color:#fff;}
+  #b-hire:checked ~ .board-tabs label[for=b-hire]{background:var(--coral);color:var(--coral-deep);}
   #b-seek:focus-visible ~ .board-tabs label[for=b-seek],#b-hire:focus-visible ~ .board-tabs label[for=b-hire]{outline:2px solid var(--indigo);outline-offset:2px;}
   #b-seek:checked ~ .p-hire,#b-hire:checked ~ .p-seek{display:none;}
   .board-note{font-size:14px;color:var(--ink-3);margin-top:14px;max-width:860px;}
@@ -79,7 +83,7 @@ export const homeCss = `
   .guide b{display:block;font-size:clamp(22px,2.2vw,28px);font-weight:900;line-height:1.2;letter-spacing:-0.015em;}
   .guide:hover b{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;}
   .guide-d{display:block;font-size:16px;color:var(--ink-2);margin-top:6px;}
-  .guide-side .dot-seekers,.guide-side .dot-hiring{flex-shrink:0;}
+  .guide-side .pill{flex-shrink:0;}
   .research{font-size:15px;color:var(--ink-3);margin-top:20px;max-width:860px;}
   .guide .lg-stack{justify-self:end;}
   @media(max-width:760px){.guide .lg-stack{justify-self:start;}}

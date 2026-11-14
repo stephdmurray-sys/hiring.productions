@@ -43,7 +43,7 @@ export default function Page() {
             <a href="/">Home</a> / Advertiser disclosure
           </p>
           <h1 className="display">Who pays for this site?</h1>
-          <p className="dek">Two answers, and neither one touches a score.</p>
+          <p className="dek">Two sources, and neither one changes a score.</p>
         </div>
       </header>
 
@@ -81,7 +81,7 @@ export default function Page() {
           </p>
           <p>
             Every vendor link goes through hiring.productions/go/ so we can count clicks and change a link in one place. Several of our top
-            picks pay us nothing at all. We rank them anyway, because the rankings are the product.
+            picks pay us nothing at all.
           </p>
         </div>
       </section>
