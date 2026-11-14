@@ -30,11 +30,16 @@ export function RecForm({ action, children }: { action: string; children: ReactN
       const must = data.getAll('must').map(String)
       if (must.length) q.set('must', must.join(','))
     }
+    // A new side starts the guided questions: go there and bring the first question on screen.
+    if (target.name === 'side') {
+      start(() => router.push(`${action}?${q.toString()}#questions`))
+      return
+    }
     start(() => router.replace(`${action}?${q.toString()}`, { scroll: false }))
   }
 
   return (
-    <form ref={ref} action={action} method="get" className="rec-form" data-js={js ? '' : undefined} data-pending={pending ? '' : undefined} onChange={onChange}>
+    <form ref={ref} action={`${action}#questions`} method="get" className="rec-form" data-js={js ? '' : undefined} data-pending={pending ? '' : undefined} onChange={onChange}>
       {children}
     </form>
   )

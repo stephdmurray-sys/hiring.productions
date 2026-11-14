@@ -36,6 +36,17 @@ function Links({ side, back }: { side: Side; back: string | null }) {
   )
 }
 
+/** Once a side is chosen, the big side cards shrink to one line, so the question is the first thing on screen. */
+export function SideSwitch({ side }: { side: Side }) {
+  const other: Side = side === 'seekers' ? 'hiring' : 'seekers'
+  return (
+    <p className="g-side">
+      <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I\u2019m a job seeker' : 'I\u2019m hiring'}</span>
+      <a href={`${REC}?side=${other}#questions`}>{other === 'hiring' ? 'Switch to hiring' : 'Switch to job seeker'}</a>
+    </p>
+  )
+}
+
 export function GuidedStepView({ side, stepId }: { side: Side; stepId?: string }) {
   if (stepId === 'all') return <WholeList side={side} />
   const step = guidedStep(side, stepId)
@@ -128,7 +139,10 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
 }
 
 export const guidedCss = `
-  .g{max-width:820px;margin-top:clamp(40px,6vw,64px);padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--rule);}
+  .g{max-width:820px;margin-top:28px;}
+  .g-side{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;font-size:15px;font-weight:700;}
+  .g-side a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;}
+  .g-side a:hover{color:var(--ink);}
   .g-progress{display:flex;gap:8px;margin:0 0 18px;}
   .g-progress i{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink);background:transparent;}
   .g-seekers .g-progress i.on{background:var(--indigo);}

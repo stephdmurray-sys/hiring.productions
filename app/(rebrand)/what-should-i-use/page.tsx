@@ -3,7 +3,7 @@ import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { RecQuestions, RecAnswer, RecSituations, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
-import { GuidedStepView, RepveraAnswer, guidedCss } from '@/app/(rebrand)/_components/guided'
+import { GuidedStepView, RepveraAnswer, SideSwitch, guidedCss } from '@/app/(rebrand)/_components/guided'
 import { isRepveraProblem, stepFor } from '@/lib/evidence/guided'
 import { TrackOnce } from '@/app/(rebrand)/_components/picker-track'
 import { ScrollToAnswer } from '@/app/(rebrand)/_components/rec-form'
@@ -65,15 +65,17 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
 
       <section className="wrap sec-tight" id="questions" aria-label="Your situation">
         <div className={state.side ? `rec-${state.side}-q` : undefined}>
-          {!state.side || (!state.problem && !repvera) ? (
+          {!state.side ? (
+            <RecQuestions state={state} only="side" />
+          ) : !state.problem && !repvera ? (
             <>
-              <RecQuestions state={state} only="side" />
-              {state.side && <GuidedStepView side={state.side} stepId={one('g')} />}
+              <SideSwitch side={state.side} />
+              <GuidedStepView side={state.side} stepId={one('g')} />
             </>
           ) : repvera ? (
             <>
               <TrackOnce event="picker_start" side={state.side ?? undefined} />
-              <RecQuestions state={state} only="side" />
+              <SideSwitch side={state.side} />
             </>
           ) : (
             <>
