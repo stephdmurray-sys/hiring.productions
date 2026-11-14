@@ -90,6 +90,44 @@ export default function Page() {
         rows: hiringBoard().map((r) => ({ ...r, tag: tagFor[r.id] })),
         foot: <>Ranked here on one board. The guide splits them by team size: small, growing and scaling.</>,
       }}
+      extra={
+        <section className="wrap sec" id="tools">
+          <h2>Free tools, built on published standards</h2>
+          <p className="lead">Nothing you type is kept unless you ask us to email it.</p>
+          <div className="rows">
+            {[
+              {
+                q: 'What should we ask in the interview?',
+                a: 'A structured scorecard for any role: the same questions for every candidate, probes and a 1 to 5 scale, on the US Office of Personnel Management\u2019s method.',
+                href: '/interview-scorecard',
+                link: 'Build a scorecard',
+              },
+              {
+                q: 'What does a hire really cost?',
+                a: 'Cost per hire the way SHRM counts it, next to SHRM\u2019s 2025 medians: $1,200 per non-executive hire and $10,625 per executive hire.',
+                href: '/hiring-costs',
+                link: 'Work out your cost per hire',
+              },
+              {
+                q: 'Is this even a real candidate?',
+                a: 'The FBI\u2019s red flags for fake candidates as a checklist for your interviewers, and which systems flag fraud for you.',
+                href: '/is-this-a-real-candidate',
+                link: 'See the red flags',
+              },
+            ].map((t) => (
+              <div className="row" key={t.href}>
+                <span className="row-title">{t.q}</span>
+                <div>
+                  <p>{t.a}</p>
+                  <a className="tl tl-strong" href={t.href}>
+                    {t.link} <span className="arr">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      }
       guides={[
         {
           href: '/guides/best-ats-for-small-teams',

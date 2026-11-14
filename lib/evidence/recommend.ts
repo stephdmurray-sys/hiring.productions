@@ -121,6 +121,8 @@ interface Problem {
   why: string
   segments?: string[]
   needs?: string[]
+  /** Capabilities worth naming in the answer when a system has them on file, without ruling others out. */
+  highlight?: string[]
   categories?: string[]
   showFounderPick?: boolean
   guidance?: { text: string; href: string }
@@ -321,10 +323,31 @@ export function atsYear(name: string, seats: number): { amount: number; currency
   return { amount, currency: cur, how }
 }
 
-function judgeAts(t: AtsTool, ask: HiringAsk): Judged<AtsTool> {
+interface Capability {
+  what: string
+  source: string
+  date: string
+  url: string
+}
+
+const atsCapabilities = (data.hiring as unknown as { capabilities: Record<string, Record<string, Capability>> }).capabilities
+
+const CAPABILITY_MISSING: Record<string, string> = {
+  'fraud-detection': 'No built-in fraud detection on file.',
+  'ai-matching': 'No AI-assisted matching on file.',
+}
+
+/** A system's capability, from its own dated product page; undefined means not on file. */
+export function atsCapability(kind: string, name: string): Capability | undefined {
+  return atsCapabilities[kind]?.[name]
+}
+
+function judgeAts(t: AtsTool, ask: HiringAsk, problem?: Problem): Judged<AtsTool> {
   const price = prices[t.name]
   const fails: string[] = []
   const unknown: string[] = []
+  // What the problem needs (e.g. fraud detection): unknown is not yes.
+  for (const need of problem?.needs ?? []) if (!atsCapability(need, t.name)) unknown.push(CAPABILITY_MISSING[need] ?? 'Not on file.')
   // A published price that only covers smaller companies is a quote for this one.
   const tooBig = price?.maxEmployees !== undefined && ask.employees > price.maxEmployees
   const quoteOnly = !price || price.quote || tooBig
@@ -353,10 +376,14 @@ function judgeAts(t: AtsTool, ask: HiringAsk): Judged<AtsTool> {
 const TIER: Record<string, string> = { small: 'small-team', growing: 'growing-team', scaling: 'scaling-team' }
 const TIER_NAME: Record<string, string> = { small: 'small teams', growing: 'growing teams', scaling: 'scaling teams' }
 
-function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean): Candidate {
+function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean, problem?: Problem): Candidate {
   const s = atsScores(j.tool)
   const price = prices[j.name]
   const reasons = [first ? firstReason(j.name, fitCount, `${TIER[j.tool.segment]} system`, s.overall) : `${s.overall.toFixed(2)} out of 5.`]
+  for (const kind of [...(problem?.needs ?? []), ...(problem?.highlight ?? [])]) {
+    const c = atsCapability(kind, j.name)
+    if (c) reasons.push(`${c.what} (${c.source}, ${c.date}).`)
+  }
   if (j.cost && j.cost.total === 0) reasons.push(`Starts free: ${price?.free}.`)
   else if (j.cost) reasons.push(`About ${money(j.cost.total)} a year: ${j.cost.how}.`)
   else reasons.push('Price by quote: ask for it in writing before the demo.')
@@ -390,7 +417,7 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
   const inScope = ats.tools.filter((t) => t.segment === seg)
   r.considered = inScope.length
   r.costSpan = 'a year'
-  const judged = inScope.map((t) => judgeAts(t, ask))
+  const judged = inScope.map((t) => judgeAts(t, ask, problem))
   for (const j of judged) {
     if (j.fails.length) r.ruledOut.push({ name: j.name, reasons: j.fails })
     else if (j.unknown.length) r.couldNotCheck.push({ name: j.name, reasons: j.unknown })
@@ -403,7 +430,7 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
     // A system ranked for another team size may still fit every limit.
     const elsewhere = ats.tools
       .filter((t) => t.segment !== seg)
-      .map((t) => judgeAts(t, ask))
+      .map((t) => judgeAts(t, ask, problem))
       .filter((j) => !j.fails.length && !j.unknown.length)
       .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0]
     r.nearMiss = elsewhere
@@ -412,11 +439,12 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
     r.headline = r.nearMiss
       ? `Nothing ranked for ${TIER_NAME[seg]} fits every limit you set. The closest is ${r.nearMiss.name}. ${r.nearMiss.gap}`
       : `Nothing ranked for ${TIER_NAME[seg]} fits every limit you set.`
-    r.guidance = data.hiring.fallback
+    // A problem with its own free guidance (the fraud checklist) points there; otherwise, to a person.
+    r.guidance = problem.guidance ?? data.hiring.fallback
     return r
   }
-  r.pick = atsCandidate(pick, fits.length, true)
-  r.alt = alt ? { ...atsCandidate(alt, fits.length, false), why: altWhy } : null
+  r.pick = atsCandidate(pick, fits.length, true, problem)
+  r.alt = alt ? { ...atsCandidate(alt, fits.length, false, problem), why: altWhy } : null
   r.headline = `${pick.name}. ${r.pick.reasons[0]}`
   return r
 }

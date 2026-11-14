@@ -136,6 +136,9 @@ export function SiteFooter() {
             <p className="fh">Hiring teams</p>
             <a href="/guides/best-ats-for-small-teams">Applicant tracking systems</a>
             <a href="/guides/best-recruiter-training">Recruiter training</a>
+            <a href="/interview-scorecard">Interview scorecard builder</a>
+            <a href="/hiring-costs">What a hire costs</a>
+            <a href="/is-this-a-real-candidate">Spotting fake candidates</a>
             <a href="/consulting">Free stack recommendation</a>
             <a href="/for-hiring-teams">All hiring team guides</a>
           </div>

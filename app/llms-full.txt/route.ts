@@ -142,6 +142,12 @@ ${(['seekers', 'hiring'] as const)
 
 Example: ${BASE}/what-should-i-use?side=seekers&problem=no-callbacks&months=3&budget=0
 
+## Free tools for hiring teams
+
+- [What should we ask in the interview?](${BASE}/interview-scorecard): a structured interview scorecard for any role, with the same questions for every candidate, probes and a 1 to 5 scale. Definitions are the US Office of Personnel Management's (MOSAIC competencies, January 2013); the method follows OPM's structured interview guide.
+- [What does a hire really cost?](${BASE}/hiring-costs): cost per hire as SHRM defines it, compared with SHRM's 2025 medians ($1,200 per non-executive hire, $10,625 per executive hire; 2,371 organizations).
+- [Is this even a real candidate?](${BASE}/is-this-a-real-candidate): the FBI's red flags for fake candidates (I-012325-PSA, January 2025; PSA220628, June 2022), and which applicant tracking systems have fraud detection on file (Greenhouse, Ashby).
+
 ## The "best of" lists we re-read
 
 ${benchmarks.map((l) => `- ${l.publication}, "${l.title}" (${l.url}): ${l.status === 'counts' ? 'counts.' : `does not count. ${l.reason}`} Checked ${l.checked}.`).join('\n')}

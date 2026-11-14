@@ -47,18 +47,20 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         "Here's your cost per hire, in writing.",
         '',
         `Cost per hire: ${x.cph}`,
-        `Total recruiting costs: ${x.total ?? ''} (internal ${x.internal ?? ''}, external ${x.external ?? ''})`,
-        `Hires in the period: ${x.hires ?? ''}`,
+        `Total recruiting costs: ${x.total ?? ''}, across ${x.hires ?? ''} hires`,
+        x.breakdown ? `Where it went: ${x.breakdown}` : '',
         '',
         x.compare ?? '',
         '',
-        "Method: the ANSI/SHRM cost-per-hire standard. Internal plus external recruiting costs, divided by the hires in the same period. It leaves out the new hire's own pay and benefits.",
-        "Benchmark: SHRM's 2025 Recruiting Benchmarking data brief, 2,371 organizations: median cost per hire $1,200 for non-executive hires and $10,625 for executive hires.",
+        "How it's counted, as SHRM defines it: agency fees, advertising agency fees, job fairs, job boards, referral costs, travel, relocation, recruiter pay and benefits, and recruiting software, divided by the number of hires.",
+        "Benchmark: SHRM's 2025 Recruiting Benchmarking data brief, 2,371 organizations. Median cost per hire: $1,200 for non-executive hires, $10,625 for executive hires.",
         '',
         `Recalculate any time: ${SITE}/hiring-costs`,
         ...repveraNote('cost-per-hire-email', REPVERA_TEAMS_LINE),
         ...SIGN_OFF,
-      ].join('\n'),
+      ]
+        .filter((line, i, all) => line !== '' || all[i - 1] !== '')
+        .join('\n'),
     }
   }
 
