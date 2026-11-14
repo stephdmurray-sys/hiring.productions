@@ -155,7 +155,9 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="fbase">
-          <span>&copy; 2026 hiring.productions</span>
+          <span>
+            &copy; 2026 hiring.productions &middot; <a href="/privacy">Privacy</a> &middot; <a href="/terms">Terms</a>
+          </span>
           <span>
             No vendor can pay for a placement, a ranking or a score. hiring.productions is made by the team behind{' '}
             <a href={repveraLink('footer')} rel="noopener">RepVera</a>, which is never ranked or reviewed here.

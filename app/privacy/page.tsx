@@ -77,14 +77,7 @@ export default function PrivacyPage() {
         <h2>The free tools</h2>
         <p>
           The interview scorecard, interview practice and cost per hire calculator run in your browser. Nothing you type in them is kept unless
-          you ask us to email it. The AI tools send what you paste to our AI provider to write the answer, and we don&rsquo;t store it unless you
-          are a member and choose to save it.
-        </p>
-
-        <h2>Members</h2>
-        <p>
-          Stripe handles payment. We never see or store your card number. Stripe gives us your email, name and the role you chose, which is
-          your account.
+          you ask us to email it. Nothing on this site is for sale, so we never ask for payment details.
         </p>
 
         <h2>Analytics and cookies</h2>
@@ -100,7 +93,7 @@ export default function PrivacyPage() {
             recordings and heatmaps, so we can fix what&rsquo;s confusing. It hides what you type into forms, and it uses cookies.
           </li>
           <li>
-            <b>Our own cookie:</b> once you give us your email, a cookie remembers it, which unlocks more free uses of the AI tools.
+            <b>Our own cookie:</b> once you give us your email, a cookie remembers that you signed up.
           </li>
         </ul>
         <p>No Google Analytics, no Meta pixel, no LinkedIn tag, no selling data to advertisers.</p>

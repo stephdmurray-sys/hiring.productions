@@ -3,7 +3,7 @@ import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { CostPerHire } from '@/app/(rebrand)/_components/cost-per-hire'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
-import { REPVERA_TEAMS_LINE } from '@/lib/repvera'
+import { REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 
 /**
  * "What does a hire really cost?": cost per hire on SHRM's own definition,
@@ -115,11 +115,10 @@ export default function HiringCostsPage() {
         <aside className="ours" aria-label="From the team behind hiring.productions">
           <span className="ours-k">From the team behind hiring.productions</span>
           <p>
-            {REPVERA_TEAMS_LINE} RepVera&rsquo;s free mis-hire calculator sizes what a hire that doesn&rsquo;t work out costs, from SHRM and
-            Department of Labor ranges.
+            {REPVERA_TEAMS_LINE} {REPVERA_WHAT}
           </p>
-          <a className="tl tl-strong" href="/tools/mis-hire-calculator">
-            Size the cost of a mis-hire <span className="arr">&rarr;</span>
+          <a className="tl tl-strong" href={repveraLink('hiring-costs')} rel="noopener">
+            See how RepVera works <span className="arr">&#8599;</span>
           </a>
         </aside>
       </section>
