@@ -341,11 +341,9 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
         </details>
       )}
 
-      <div className="rec-share">
-        <span>Link to this answer</span>
-        <code>{url.replace('https://', '')}</code>
-        <CopyLink url={url} />
-      </div>
+      <p className="rec-share">
+        <CopyLink url={url} title={title} />
+      </p>
     </div>
   )
 }
@@ -472,11 +470,10 @@ export const recCss = `
   .rec-out li b{color:var(--ink);margin-right:6px;}
   .rec-out-k{font-size:14px;font-weight:800;color:var(--ink-3);margin:4px 0 10px;}
 
-  .rec-share{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:14px;color:var(--ink-3);}
-  .rec-share span{font-weight:700;}
-  .rec-share code{font-family:var(--mono);font-size:13px;color:var(--ink-2);background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:6px 10px;max-width:100%;overflow-x:auto;white-space:nowrap;}
-  .rec-copy{font:inherit;font-size:14px;font-weight:800;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--rule-2);padding:4px 0;cursor:pointer;}
+  .rec-share{margin-top:28px;min-height:28px;}
+  .rec-copy{font:inherit;font-size:15px;font-weight:800;color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--rule-2);padding:4px 0;cursor:pointer;}
   .rec-copy:hover{border-bottom-color:var(--ink);}
+  .rec-copy .arr{margin-left:4px;}
 
   /* Common questions */
   .rec-sits{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:28px;}

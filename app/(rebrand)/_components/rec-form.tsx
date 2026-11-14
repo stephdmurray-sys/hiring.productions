@@ -40,15 +40,28 @@ export function RecForm({ action, children }: { action: string; children: ReactN
   )
 }
 
-/** Copies the answer's link. */
-export function CopyLink({ url }: { url: string }) {
+/**
+ * "Share this answer": the phone's own share menu where there is one,
+ * otherwise copies the link. Hidden until the page is interactive, since
+ * it does nothing without JavaScript.
+ */
+export function CopyLink({ url, title }: { url: string; title: string }) {
+  const [ready, setReady] = useState(false)
   const [done, setDone] = useState(false)
+  useEffect(() => setReady(true), [])
+  if (!ready) return null
   return (
     <button
       type="button"
       className="rec-copy"
       onClick={async () => {
+        const nav = navigator as Navigator & { share?: (d: { title: string; url: string }) => Promise<void> }
+        const touch = window.matchMedia('(pointer: coarse)').matches
         try {
+          if (nav.share && touch) {
+            await nav.share({ title, url })
+            return
+          }
           await navigator.clipboard.writeText(url)
           setDone(true)
           setTimeout(() => setDone(false), 2400)
@@ -57,7 +70,13 @@ export function CopyLink({ url }: { url: string }) {
         }
       }}
     >
-      {done ? 'Copied' : 'Copy link'}
+      {done ? (
+        'Link copied'
+      ) : (
+        <>
+          Share this answer <span className="arr">&rarr;</span>
+        </>
+      )}
     </button>
   )
 }
