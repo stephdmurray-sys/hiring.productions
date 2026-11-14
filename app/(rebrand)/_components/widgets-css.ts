@@ -57,3 +57,18 @@ export const videoCardCss = `
   .vid-kind.k-vendor{color:var(--ink-3);}
   @media(max-width:900px){.vid-grid{grid-template-columns:1fr;}}
 `
+
+/** The email ask (capture.tsx). Lives here because CSS exported from a client module reaches server pages as a reference. */
+export const captureCss = `
+  .cap{display:grid;gap:12px;max-width:760px;padding-top:24px;border-top:1px solid var(--rule);}
+  .cap-promise{font-weight:800;font-size:19px;line-height:1.4;color:var(--ink);}
+  .cap-fields{display:flex;flex-wrap:wrap;gap:10px;}
+  .cap-fields input,.cap-fields select{flex:1 1 220px;min-height:52px;border:1.5px solid var(--rule-2);border-radius:var(--r);padding:10px 14px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px;}
+  .cap-fields input:focus,.cap-fields select:focus{border-color:var(--indigo);outline:none;box-shadow:0 0 0 3px var(--indigo-tint);}
+  .cap-fields .btn{min-height:52px;}
+  .cap-error{font-size:15px;color:var(--coral-text);font-weight:700;}
+  .cap-fine{font-size:13.5px;color:var(--ink-3);line-height:1.5;}
+  .cap-fine a{text-decoration:underline;text-underline-offset:3px;}
+  .cap-done{border-top:1px solid var(--rule);padding-top:24px;}
+  .cap-done p{font-weight:800;font-size:18px;color:var(--ok);}
+`

@@ -1,5 +1,6 @@
 import { Motion } from './motion'
 import { WEIGHTS, framework } from '@/lib/evidence'
+import { repveraLink } from '@/lib/repvera'
 
 /**
  * Shared navigation and footer. The nav is a solid indigo bar (the brand
@@ -149,7 +150,10 @@ export function SiteFooter() {
         </div>
         <div className="fbase">
           <span>&copy; 2026 hiring.productions</span>
-          <span>No vendor can pay for a placement, a ranking or a score.</span>
+          <span>
+            No vendor can pay for a placement, a ranking or a score. hiring.productions is made by the team behind{' '}
+            <a href={repveraLink('footer')} rel="noopener">RepVera</a>, which is never ranked or reviewed here.
+          </span>
         </div>
       </div>
     </footer>

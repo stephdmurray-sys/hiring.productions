@@ -1,4 +1,6 @@
 import { Logo } from './logo'
+import { Capture } from './capture'
+import { captureCss } from './widgets-css'
 import { RecForm, CopyLink } from './rec-form'
 import { recFramework as data, problemsFor, situations, askToQuery, situationFor, verdictTitle, type Ask, type AskState, type Recommendation } from '@/lib/evidence/recommend'
 
@@ -343,6 +345,18 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
       <p className="rec-share">
         <CopyLink url={url} title={title} />
       </p>
+
+      <div className="rec-keep">
+        <Capture
+          source="recommender"
+          audience={r.side === 'seekers' ? 'candidate' : 'hiring'}
+          promise="Get this answer by email, and one note if a monthly check ever changes it."
+          cta="Email me this answer"
+          done="Sent. If a monthly check changes this answer, you'll hear from us once."
+          extras={{ ask: askToQuery(ask), answer_title: title }}
+          askCompanySize={r.side === 'hiring'}
+        />
+      </div>
     </div>
   )
 }
@@ -371,7 +385,8 @@ export function RecSituations({ exclude }: { exclude?: string }) {
   )
 }
 
-export const recCss = `
+export const recCss = captureCss + `
+  .rec-keep{margin-top:40px;}
   /* Questions */
   .rec-form{display:grid;gap:clamp(40px,5vw,56px);}
   .rec-q{border:0;min-width:0;}

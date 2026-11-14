@@ -11,8 +11,9 @@ hiring.productions is the free, evidence-based place where job seekers and hirin
 hiring.productions and RepVera share an owner. The FTC's rule on reviews, 16 CFR 465.6 (in force since October 21, 2024), makes it unlawful to present a site you control as giving independent reviews of a category that includes your own product. So:
 
 - RepVera never appears in a score, ranking, scoreboard, recommender pick or alternative, "best" list, On the rise entry or comparison table.
-- We do not score any category RepVera competes in: reference checking, verified recommendations or candidate verification profiles. If one of those ever needs covering, it is coverage without scores, with the relationship disclosed at the top.
-- RepVera may appear only: in the footer disclosure; in a labeled note ("From the team behind hiring.productions") on pages about fraud, references and the cost of a mis-hire; in a hiring-team welcome email, labeled; in a conversation someone asked for.
+- We never score reference checking, the category RepVera competes in (Stephanie, Nov 14, 2026). If it ever needs covering, it is coverage without scores, with the relationship disclosed at the top.
+- What RepVera is: hiring teams ask for a candidate's RepVera early in the process, from application through interviews depending on the team, to see verified experiences of what someone is like to work with; candidates share theirs too. It is not a late-stage reference check: never describe it as one, or as the last step.
+- RepVera may appear only: in the footer disclosure; in a labeled note ("From the team behind hiring.productions") beside our screening and interview tools (the fraud checklist, the scorecard builder, interview prep) and the cost of a mis-hire; in a hiring-team welcome email from those tools, labeled; in a conversation someone asked for. Every link goes to repvera.com, tagged.
 - Commissions and the RepVera relationship are never inputs to anything in `lib/evidence`.
 
 ## Asking for an email

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import { OWNERSHIP_DISCLOSURE } from '@/lib/repvera'
 
 /**
  * Monthly evidence email signup. Posts to the site's existing lead
@@ -57,6 +58,9 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
           That didn&rsquo;t go through. Check the address and try again.
         </p>
       )}
+      <p className="signup-fine">
+        {OWNERSHIP_DISCLOSURE} One email a month. Unsubscribe in one click. <a href="/privacy">Privacy</a>
+      </p>
     </form>
   )
 }

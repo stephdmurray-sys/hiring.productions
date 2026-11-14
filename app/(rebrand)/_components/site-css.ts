@@ -150,6 +150,8 @@ export const siteCss = `
   .signup button{min-height:52px;}
   .signup-error{flex-basis:100%;font-size:15px;color:var(--coral-text);font-weight:700;}
   .signup-done{font-size:17px;font-weight:700;color:var(--ok);}
+  .signup-fine{flex-basis:100%;font-size:13.5px;color:var(--ink-3);line-height:1.5;}
+  .signup-fine a{text-decoration:underline;text-underline-offset:3px;}
 
   /* Details (FAQ, evidence files, list of lists) */
   details > summary{list-style:none;cursor:pointer;}

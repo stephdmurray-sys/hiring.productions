@@ -20,6 +20,7 @@ import { Redis } from '@upstash/redis'
 import { hash } from '@/lib/usage'
 import { COOKIE_NAMES } from '@/lib/identity'
 import { logEvent } from '@/lib/event-log'
+import { reviewSiteWelcome } from '@/lib/review-welcome'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -61,6 +62,10 @@ function welcomeForSource(
   source: string,
   extras?: Record<string, string>,
 ): { subject: string; text: string } | null {
+  // Review-site asks (recommender answers, calculators, scorecards, checklists, alerts).
+  const review = reviewSiteWelcome(source, extras)
+  if (review) return review
+
   // Mis-hire calculator result delivery email (RepVera-branded).
   // Interpolates the cost figures the user just calculated so the
   // email IS the result they came for. Voice: RepVera, not Stephanie.
@@ -290,16 +295,27 @@ export async function POST(request: NextRequest) {
 
     // Record the capture in Redis for our own records. Idempotent —
     // re-submissions overwrite with the latest metadata.
+    const audience: string = (body?.audience ?? '').toString().slice(0, 16)
     const r = getRedis()
     if (r) {
+      // Keep the whole relationship: every source they came through and what they told us,
+      // so the next email fits (GROWTH.md). Newer answers win; history is kept.
+      const key = `lead:${emailHash}`
+      const prev = (await r.get<Record<string, unknown>>(key).catch(() => null)) ?? {}
+      const prevSources = Array.isArray(prev.sources) ? (prev.sources as string[]) : prev.source ? [String(prev.source)] : []
       await r.set(
-        `lead:${emailHash}`,
+        key,
         JSON.stringify({
+          ...prev,
           email: rawEmail,
           source,
-          firstName,
-          lastName,
-          role,
+          sources: Array.from(new Set([...prevSources, source])).slice(-50),
+          firstName: firstName || prev.firstName || '',
+          lastName: lastName || prev.lastName || '',
+          role: role || prev.role || '',
+          audience: audience || prev.audience || '',
+          extras: { ...((prev.extras as Record<string, string>) ?? {}), ...(extras ?? {}) },
+          firstSeen: prev.firstSeen ?? prev.ts ?? Date.now(),
           ts: Date.now(),
         }),
       )
