@@ -61,6 +61,10 @@ Every movement on the site reveals evidence. None of it is decoration.
 - Links: the underline drops and the arrow nudges.
 - Still banned: hover lifts, scale-ups, glows, parallax, counting-up stat numbers. Everything respects reduced motion.
 
+### The 80s layer (Stephanie's call, Nov 14, 2026)
+
+The one place motion is allowed to be playful: the "Where are you stuck?" box on both hubs (`_components/retro.tsx`). A tilted "Start here" sticker pops in, a hand-drawn arrow draws itself to the box and keeps nudging toward it, and Memphis shapes (squiggle, zigzag, ring, dot grid) peek out from behind the box and drift. Hard ink outlines and offset shadows, never soft blurs or glows. Palette only: coral sticker and white arrow on indigo, indigo sticker and ink arrow on coral. On phones the box moves up to sit right after the intro. Reduced motion: everything holds still, arrow fully drawn.
+
 ## Rules that keep color from turning into slop
 
 - Color marks a side or a fact. Indigo means job seeker, coral means hiring team or "this costs you". Never decoration.
