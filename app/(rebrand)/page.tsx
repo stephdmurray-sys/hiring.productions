@@ -270,24 +270,14 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="wrap sec" id="cost">
-        <h2>What will your search cost?</h2>
-        <p className="lead">
-          Drag to your timeline. Every tool re-sorts by the cheapest way to pay for it, and shows what happens if you forget to cancel.
-        </p>
-        <div style={{ marginTop: 36 }}>
-          <CostCalculator tools={calcTools()} checked={shortDate(checked)} />
-        </div>
-      </section>
-
-
       <section className="band" id="lists">
         <div className="wrap band-grid">
           <div>
             <h2>We check the other lists so you don&rsquo;t have to</h2>
             <p>
-              {benchmarks.length} &ldquo;best resume tool&rdquo; lists, checked every month. {counting.length} are current and
-              independent, so they count. The rest are out of date, or published by companies that sell what they rank.
+              {benchmarks.length} &ldquo;best resume tool&rdquo; lists, checked every month. {counting.length} are current and come from
+              publishers that don&rsquo;t sell what they rank, so they count. The rest are out of date, or published by companies that sell
+              what they rank.
             </p>
             <a className="tl tl-strong" href="/guides/best-resume-tools#agree">
               See where every list lands <span className="arr">&rarr;</span>
@@ -305,37 +295,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="wrap sec" id="watch">
-        <h2>Watch before you pay</h2>
-        <p className="lead">Each video is labeled: made by the company, or by an independent creator.</p>
-        <div className="vid-grid">
-          {featured.map((v) => {
-            const t = byId[v.tool]
-            return (
-              <figure className="vid" key={v.youtubeId}>
-                <VideoEmbed youtubeId={v.youtubeId} title={v.title} />
-                <figcaption className="vid-meta">
-                  <Logo domain={t.domain} name={t.name} size={36} />
-                  <span>
-                    <b>
-                      <a href={`/reviews/${t.id}`}>{t.name}</a>
-                    </b>
-                    <span className="vid-title">{v.title}</span>
-                    <span className={`vid-kind k-${v.kind}`}>{VIDEO_KIND_LABEL[v.kind]}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            )
-          })}
-        </div>
-      </section>
-
-      <section className="wrap sec" id="follow">
-        <h2>Who to follow</h2>
-        <p className="lead">The best people to follow in recruiting and HR, and for your job search.</p>
-        <WhoToFollow />
       </section>
 
       <section className="wrap sec" id="guides">
@@ -402,8 +361,11 @@ export default function Home() {
       <section className="wrap sec" id="signup">
         <div className="signup-card">
           <div>
-            <h2>One email a month</h2>
-            <p className="sublead">One email a month with what changed: rankings that moved, prices that went up, and who&rsquo;s on the rise.</p>
+            <h2>Get an email when these rankings change</h2>
+            <p className="sublead">
+              Once a month, after we re-check every rating, list and price: the tools that moved, the prices that went up, and new tools
+              worth watching.
+            </p>
           </div>
           <EvidenceSignup />
         </div>

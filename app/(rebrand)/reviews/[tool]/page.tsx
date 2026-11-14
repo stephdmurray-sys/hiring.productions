@@ -316,7 +316,7 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
               For a 3-month search, {cheaperAlt.name} costs {money(cheapestCover(cheaperAlt.id, 90)!.total)}.{' '}
             </>
           )}
-          <a href="/#cost">Compare every tool on your timeline</a>.
+          <a href="/guides/best-resume-tools#cost">Compare every tool on your timeline</a>.
         </p>
       </section>
 

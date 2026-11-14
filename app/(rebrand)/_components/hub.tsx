@@ -171,8 +171,11 @@ export function Hub(props: HubProps) {
       <section className="wrap sec" id="signup">
         <div className="signup-card">
           <div>
-            <h2>One email a month</h2>
-            <p className="sublead">One email a month with what changed: rankings that moved, prices that went up, and who&rsquo;s on the rise.</p>
+            <h2>Get an email when these rankings change</h2>
+            <p className="sublead">
+              Once a month, after we re-check every rating, list and price: the tools that moved, the prices that went up, and new tools
+              worth watching.
+            </p>
           </div>
           <EvidenceSignup />
         </div>
