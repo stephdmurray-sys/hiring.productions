@@ -86,6 +86,56 @@ const RENAMED = [
   // The fake candidates answer became a short list (Nov 14, 2026): its section on applicant tracking systems answers the old question.
   { source: '/what-should-i-use/stop-fake-candidates', destination: '/guides/hiring-fraud-tools#ats', permanent: true },
 ]
+// Addresses people type or guess (journey pass, Nov 15, 2026): each goes to the page they're looking for, never a 404.
+const GUESSES = [
+  ['/about', '/about/stephanie'],
+  ['/stephanie', '/about/stephanie'],
+  ['/contact', '/about/stephanie'],
+  ['/blog', '/guides'],
+  ['/free-tools', '/guides'],
+  ['/search', '/guides'],
+  ['/faq', '/how-we-review'],
+  ['/methodology', '/how-we-review'],
+  ['/how-it-works', '/how-we-review'],
+  ['/calculator', '/guides/best-resume-tools#cost'],
+  ['/cost-calculator', '/guides/best-resume-tools#cost'],
+  ['/resume-cost-calculator', '/guides/best-resume-tools#cost'],
+  ['/resume-builders', '/guides/best-resume-tools'],
+  ['/resume-checkers', '/guides/best-resume-tools#rankings'],
+  ['/resume-tools', '/guides/best-resume-tools'],
+  ['/guides/resume-tools', '/guides/best-resume-tools'],
+  ['/rankings', '/guides/best-resume-tools#rankings'],
+  ['/scoreboard', '/#scoreboard'],
+  ['/ats', '/guides/best-ats-for-small-teams'],
+  ['/applicant-tracking-systems', '/guides/best-ats-for-small-teams'],
+  ['/guides/best-ats', '/guides/best-ats-for-small-teams'],
+  ['/reviews/ats', '/reviews'],
+  ['/recommend', '/what-should-i-use'],
+  ['/picker', '/what-should-i-use'],
+  ['/job-seekers', '/for-job-seekers'],
+  ['/seekers', '/for-job-seekers'],
+  ['/candidates', '/for-job-seekers'],
+  ['/hiring-teams', '/for-hiring-teams'],
+  ['/hiring', '/for-hiring-teams'],
+  ['/employers', '/for-hiring-teams'],
+  ['/login', '/'],
+  ['/signup', '/'],
+  ['/newsletter', '/what-should-i-use#signup'],
+  ['/disclosure', '/advertiser-disclosure'],
+  ['/vendors', '/for-vendors'],
+  ['/portfolio', '/guides/portfolio-sites'],
+  ['/fraud', '/guides/hiring-fraud-tools'],
+  ['/fake-candidates', '/guides/hiring-fraud-tools'],
+  ['/job-scams', '/is-this-a-real-job'],
+  ['/fake-jobs', '/is-this-a-real-job'],
+  ['/scorecard', '/interview-scorecard'],
+  ['/cost-per-hire', '/hiring-costs'],
+  ['/interview', '/interview-practice'],
+  ['/follow', '/who-to-follow'],
+  ['/free', '/free-job-search'],
+  ['/proof', '/show-how-you-work'],
+].map(([source, destination]) => ({ source, destination, permanent: false }))
+
 // Whole sections: anything left under these goes to the closest hub.
 const RETIRED_PREFIXES = [
   { source: '/membership/:path*', destination: '/', permanent: false },
@@ -115,7 +165,7 @@ const nextConfig = {
   // anywhere (search results, old emails, bookmarks, Stripe legacy
   // sessions, social posts) lands on /pro instead of 404'ing.
   async redirects() {
-    return [...RENAMED, ...RETIRED, ...RETIRED_PREFIXES]
+    return [...RENAMED, ...GUESSES, ...RETIRED, ...RETIRED_PREFIXES]
   },
 }
 

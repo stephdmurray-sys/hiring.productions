@@ -37,7 +37,10 @@ export default function Page() {
         rows: seekerBoard().map((r) => ({ ...r, tag: pickRows.find((x) => x.t.id === r.id)?.label })),
         foot: (
           <>
-            Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel.
+            Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to cancel.{' '}
+            <a className="tl" href="/guides/best-resume-tools#cost">
+              What will your search cost?
+            </a>
           </>
         ),
       }}

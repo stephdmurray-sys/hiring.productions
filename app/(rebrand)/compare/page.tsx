@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { buildComparison, compareHref, comparePairs, type Comparison } from '@/lib/compare'
@@ -70,6 +71,7 @@ export default function CompareIndex() {
         <Group title="Applicant tracking for growing teams" items={by('applicant tracking systems for growing teams')} />
         <Group title="Applicant tracking for scaling teams" items={by('applicant tracking systems for scaling teams')} />
       </section>
+      <NextStep side="both" line="Not sure which tool fits you? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />
     </>
   )

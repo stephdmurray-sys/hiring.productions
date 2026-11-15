@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { keepLast } from '@/lib/site-line'
 import { REPVERA_CATEGORY } from '@/lib/repvera'
 import { REPVERA_ANSWER } from '@/lib/evidence/guided'
@@ -125,6 +126,7 @@ export default function ReviewsIndex() {
         <OnTheRise />
       </section>
 
+      <NextStep side="both" line="Not sure which tool fits you? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />
     </>
   )

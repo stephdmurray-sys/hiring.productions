@@ -183,21 +183,36 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
                   <br />#{p.rank} of {p.tierCount} for {tier.toLowerCase()}
                 </span>
               </div>
-              <Meter
-                label="Users"
-                value={s.user}
-                note={g2 ? `${g2.rating} on G2 from ${formatCount(g2.reviews)} reviews; adjusted for sample size` : 'from public review sites'}
-              />
-              <Meter
-                label="Popularity"
-                value={s.market}
-                note={growthPct !== null ? `reviews up ${growthPct}% in a year` : 'how many teams use it, and how fast that’s growing'}
-              />
-              <Meter label="Value" value={s.value} note={quoteOnly ? 'no listed price: you have to ask for a quote' : t.sources.free_tier ? 'listed price and a free plan' : 'listed price'} />
             </aside>
           </div>
         </div>
       </header>
+
+      {p.verdict && (p.verdict.bestIf || p.verdict.skipIf) && (
+        <section className="wrap sec-tight rv-verdict" id="verdict">
+          {p.verdict.bestIf && (
+            <div>
+              <h2 className="rv-h2">Pick it if</h2>
+              <p>{p.verdict.bestIf}</p>
+            </div>
+          )}
+
+      <section className="wrap sec-tight" id="score">
+        <h2 className="rv-h2 rv-score-h">How the {s.overall.toFixed(2)} breaks down</h2>
+        <div className="rv-breakdown card">
+          <Meter
+            label="Users"
+            value={s.user}
+            note={g2 ? `${g2.rating} on G2 from ${formatCount(g2.reviews)} reviews; adjusted for sample size` : 'from public review sites'}
+          />
+          <Meter
+            label="Popularity"
+            value={s.market}
+            note={growthPct !== null ? `reviews up ${growthPct}% in a year` : 'how many teams use it, and how fast that’s growing'}
+          />
+          <Meter label="Value" value={s.value} note={quoteOnly ? 'no listed price: you have to ask for a quote' : t.sources.free_tier ? 'listed price and a free plan' : 'listed price'} />
+        </div>
+      </section>
 
       <section className="wrap sec" id="cost">
         <h2>What a year costs</h2>
@@ -244,14 +259,6 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
         <p className="cost-note">G2 and Capterra are separate review pools. The users score above weighs them by how many reviews each has.</p>
       </section>
 
-      {p.verdict && (p.verdict.bestIf || p.verdict.skipIf) && (
-        <section className="wrap sec rv-verdict" id="verdict">
-          {p.verdict.bestIf && (
-            <div>
-              <h2 className="rv-h2">Pick it if</h2>
-              <p>{p.verdict.bestIf}</p>
-            </div>
-          )}
           {p.verdict.skipIf && (
             <div>
               <h2 className="rv-h2">Skip it if</h2>
@@ -321,14 +328,6 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
         </section>
       )}
 
-      <section className="wrap sec" id="fit">
-        <div className="ats-cta">
-          <p>{keepLast(PICKER_INTRO)}</p>
-          <a className="btn btn-coral" href="/what-should-i-use?side=hiring&problem=spreadsheets#questions">
-            What should we use?
-          </a>
-        </div>
-      </section>
 
       {alternatives.length > 0 && (
         <section className="wrap sec" id="alternatives">
@@ -349,6 +348,15 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
                 ))}
               </p>
             )}
+
+      <section className="wrap sec" id="fit">
+        <div className="ats-cta">
+          <p>{keepLast(PICKER_INTRO)}</p>
+          <a className="btn btn-coral" href="/what-should-i-use?side=hiring&problem=spreadsheets#questions">
+            What should we use?
+          </a>
+        </div>
+      </section>
           </div>
         </section>
       )}

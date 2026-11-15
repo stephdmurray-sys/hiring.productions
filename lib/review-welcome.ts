@@ -151,6 +151,24 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
     }
   }
 
+  if (source === 'hiring_proof') {
+    return {
+      subject: 'Your answer: see how someone works before the first interview',
+      text: [
+        'Here is your answer.',
+        '',
+        'Ask candidates for their RepVera along with their resume. You see how someone works, in the words of people who have worked with them, each one verified through a work email.',
+        'See a real RepVera profile: https://www.repvera.com/u/stephaniemurray',
+        'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
+        '',
+        'Where to ask for it: add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+        '',
+        `The answer on the site: ${SITE}/what-should-i-use?side=hiring&problem=see-how-they-work`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
   if (source === 'proof_kit') {
     return {
       subject: 'Your checklist: show how you work before the interview',

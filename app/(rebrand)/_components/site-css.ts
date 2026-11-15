@@ -110,6 +110,7 @@ export const siteCss = `
   .toc-bar .wrap::-webkit-scrollbar{display:none;}
   .toc-bar a{flex-shrink:0;font-weight:700;font-size:14.5px;color:var(--ink-2);padding:14px 0;border-bottom:2px solid transparent;}
   .toc-bar a:hover{color:var(--indigo-text);border-bottom-color:var(--indigo);}
+  .toc-bar a[aria-current="true"]{color:var(--indigo-text);border-bottom-color:var(--indigo);}
 
   /* Buttons: one per moment */
   .btn{display:inline-block;font-weight:800;font-size:16px;line-height:1;padding:16px 22px;border-radius:var(--r);background:var(--ink);color:#fff;border:0;cursor:pointer;}

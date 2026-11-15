@@ -205,22 +205,6 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
                       <br />#{t.rank} of {ratedPeers} rated {SEGMENT_PLURAL[t.segment]}
                     </span>
                   </div>
-                  <Meter
-                    label="Users"
-                    value={t.userScore}
-                    note={`users say ${t.rawUserScore?.toFixed(1)} across ${formatCount(t.citableReviews)} reviews${t.rawUserScore !== null && t.userScore !== null && Math.abs(t.rawUserScore - t.userScore) >= 0.05 ? '; adjusted for sample size' : ''}`}
-                  />
-                  <Meter label="Popularity" value={t.marketScore} note="how many people use it, and how fast that’s growing" />
-                  <Meter
-                    label="Best-of lists"
-                    value={t.criticsScore}
-                    note={t.counted.length ? `named on ${t.counted.length} independent list${t.counted.length === 1 ? '' : 's'}` : 'no independent list names it yet'}
-                  />
-                  <Meter label="Value" value={t.valueScore} note={`${FREE_LEVEL_LABEL[t.freeLevel].toLowerCase()}${t.yearCost ? `; ${money(t.yearCost.amount)} a paid year` : ''}`} />
-                  <p className="rv-math">
-                    Overall = users {Math.round(WEIGHTS.user * 100)}% + popularity {Math.round(WEIGHTS.market * 100)}% + best-of lists{' '}
-                    {Math.round(WEIGHTS.critics * 100)}% + value {Math.round(WEIGHTS.value * 100)}%
-                  </p>
                 </>
               ) : (
                 <>
@@ -266,6 +250,30 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
               <h2 className="rv-h2">Watch out for</h2>
               <p>{t.verdict.watch}</p>
             </div>
+          </div>
+        </section>
+      )}
+
+      {t.enoughEvidence && (
+        <section className="wrap sec-tight" id="score">
+          <h2 className="rv-h2 rv-score-h">How the {t.overall?.toFixed(2)} breaks down</h2>
+          <div className="rv-breakdown card">
+            <Meter
+              label="Users"
+              value={t.userScore}
+              note={`users say ${t.rawUserScore?.toFixed(1)} across ${formatCount(t.citableReviews)} reviews${t.rawUserScore !== null && t.userScore !== null && Math.abs(t.rawUserScore - t.userScore) >= 0.05 ? '; adjusted for sample size' : ''}`}
+            />
+            <Meter label="Popularity" value={t.marketScore} note="how many people use it, and how fast that’s growing" />
+            <Meter
+              label="Best-of lists"
+              value={t.criticsScore}
+              note={t.counted.length ? `named on ${t.counted.length} independent list${t.counted.length === 1 ? '' : 's'}` : 'no independent list names it yet'}
+            />
+            <Meter label="Value" value={t.valueScore} note={`${FREE_LEVEL_LABEL[t.freeLevel].toLowerCase()}${t.yearCost ? `; ${money(t.yearCost.amount)} a paid year` : ''}`} />
+            <p className="rv-math">
+              Overall = users {Math.round(WEIGHTS.user * 100)}% + popularity {Math.round(WEIGHTS.market * 100)}% + best-of lists{' '}
+              {Math.round(WEIGHTS.critics * 100)}% + value {Math.round(WEIGHTS.value * 100)}%
+            </p>
           </div>
         </section>
       )}

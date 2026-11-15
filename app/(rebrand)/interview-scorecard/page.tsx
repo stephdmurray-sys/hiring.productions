@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import data from '@/lib/tools/scorecard.json'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -342,6 +343,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
         </aside>
       </section>
 
+      <NextStep side="hiring" line="Want to know how someone works before the interview?" button="Show me how" href={"/what-should-i-use?side=hiring&problem=see-how-they-work"} />
       <SiteFooter />
     </>
   )

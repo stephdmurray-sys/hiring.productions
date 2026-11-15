@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { labelGoLinks, moneyLine } from '@/lib/money'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-ats'
@@ -134,7 +135,7 @@ export default function Page() {
   return (
     <>
       <JsonLd data={graph(atsRankingLd(), ...atsToolsLd())} />
-      <MockPage html={labelGoLinks(out)} active="hiring" />
+      <MockPage html={labelGoLinks(out)} active="hiring" after={<NextStep side="hiring" line="Still deciding? Answer a few questions about your team and get your best match." button="Help me choose" href="/what-should-i-use?side=hiring#questions" />} />
     </>
   )
 }

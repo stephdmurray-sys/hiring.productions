@@ -2,13 +2,13 @@ import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce } from './picker-track'
 import { FRAUD_QUESTION, REAL_JOB_QUESTION, REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
-import { FOLLOW_ON, FREE_FROM_US, OTHER_SIDE_SEES, WONT_DO } from '@/lib/evidence/kit'
+import { FOLLOW_ON, FREE_FROM_US, NEXT_STEP, OTHER_SIDE_SEES, WONT_DO } from '@/lib/evidence/kit'
 import { moneyLine, moneyCss } from '@/lib/money'
 import { FollowOn, followCss } from './follow'
 import { Capture } from './capture'
 import { captureCss } from './widgets-css'
 import { RecForm, CopyLink } from './rec-form'
-import { recFramework as data, problemsFor, situations, askToQuery, situationFor, verdictTitle, type Ask, type AskState, type Recommendation } from '@/lib/evidence/recommend'
+import { recFramework as data, askFromState, problemsFor, situations, askToQuery, situationFor, verdictTitle, type Ask, type AskState, type Recommendation } from '@/lib/evidence/recommend'
 
 /**
  * "What should I use?": the questions and the answer. Built to the site's
@@ -113,6 +113,13 @@ export function RecQuestions({ state, only, from, repveraProblem }: { state: Ask
       {side && only !== 'side' && problem?.kind === 'tool' && (
         <fieldset className="rec-q">
           <legend>{side === 'seekers' ? 'What’s your budget and timeline?' : 'Tell us about your team'}</legend>
+          <p className="rec-hint">
+            {askFromState(state)
+              ? side === 'seekers'
+                ? keepLast('Your answer is below. Change your budget or timeline and it updates.')
+                : keepLast('Your answer is below. Change any of these and it updates.')
+              : keepLast('Three quick answers about your team, and your answer appears right below.')}
+          </p>
           <div className="rec-limits">
             {data[side].limits.map((l) => {
               const current = l.id === 'months' ? state.months : l.id === 'hires' ? state.hires : l.id === 'employees' ? state.employees : l.id === 'seats' ? state.seats : state.budget
@@ -273,6 +280,17 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
             </div>
             <p className="kit-reason">{keepLast(r.pick.reasons[0])}</p>
             <CostLine r={r} ask={ask} />
+            {ask.side === 'seekers' && (
+              <a className="tl kit-calc" href={`/guides/best-resume-tools?months=${ask.months}#cost`}>
+                Compare what every tool costs for {monthsText(ask.months)} <span className="arr">&rarr;</span>
+              </a>
+            )}
+            {NEXT_STEP[r.problem.id] && (
+              <p className="kit-next">
+                <b>Your next step: </b>
+                {keepLast(NEXT_STEP[r.problem.id][r.pick.cost?.total === 0 ? 'free' : 'paid'].replace('{name}', r.pick.name))}
+              </p>
+            )}
             <GoButton id={r.pick.id} name={r.pick.name} className={btn} />
             <a className="tl" href={r.pick.href}>
               {r.pick.linkText} <span className="arr">&rarr;</span>
@@ -346,7 +364,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
       {out.length > 0 && (
         <details className="rec-more kit-out">
           <summary>
-            What we ruled out <span>{out.length === 1 ? '1 tool' : `${out.length} tools`}</span>
+            What we ruled out, and why <span>{out.length === 1 ? '1 tool' : `${out.length} tools`}</span>
           </summary>
           <ul className="rec-out">
             {out.map((o) => (
@@ -455,6 +473,10 @@ export const kitCss = moneyCss + followCss + `
   .rec-hiring .kit-best .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
   .kit-reason{font-size:clamp(18px,1.8vw,21px);line-height:1.5;color:var(--ink);font-weight:600;text-wrap:pretty;}
   .kit-go{display:grid;justify-items:start;gap:0;}
+  .kit-calc{justify-self:start;font-size:15.5px;font-weight:800;margin-top:-6px;}
+  .kit-next{padding:14px 16px;background:var(--surface);border:2px solid var(--ink);border-radius:12px;font-size:17px;line-height:1.5;color:var(--ink);text-wrap:pretty;}
+  .rec-seekers .kit-next{background:var(--indigo-tint);}
+  .rec-hiring .kit-next{background:var(--coral-tint);}
   .kit-go .money{margin-top:8px;}
   .rec-pick > .tl{justify-self:start;font-weight:800;}
   .kit-also{display:grid;gap:0;border-top:1px solid var(--rule);}
@@ -483,6 +505,7 @@ export const kitCss = moneyCss + followCss + `
 `
 
 export const recCss = captureCss + kitCss + `
+  .rec-hint{margin:-6px 0 16px;font-size:16px;line-height:1.5;color:var(--ink-2);font-weight:600;max-width:640px;}
   .rec-chosen{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);}
   .rec-keep{margin-top:40px;}
   /* Questions */

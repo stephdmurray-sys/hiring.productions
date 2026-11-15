@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { keepLast } from '@/lib/site-line'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { PAYS_US, moneyLine } from '@/lib/money'
 import { JsonLd, graph, resumeRankingLd, toolReviewLd } from '@/app/(rebrand)/_components/structured'
@@ -48,9 +50,9 @@ const SEGMENT_SINGULAR = { checker: 'checker', builder: 'builder' } as const
 
 const ON_THIS_PAGE = [
   ['short', 'Picks'],
-  ['agree', 'Do reviewers agree?'],
   ['rankings', 'Rankings'],
   ['cost', 'What it costs'],
+  ['agree', 'Do reviewers agree?'],
   ['videos', 'Videos'],
   ['evidence', 'Every tool in detail'],
   ['faq', 'Questions'],
@@ -155,7 +157,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
       </summary>
 
       <div className="ef-body">
-        <p className="ef-call">{t.call.line}</p>
+        <p className="ef-call">{keepLast(t.call.line)}</p>
         <div className="ef-grid">
           <div className="sbars">
             <Bar label="User" value={t.userScore} />
@@ -237,7 +239,7 @@ function EvidenceFile({ t }: { t: ToolEvidence }) {
             <div>
               <dt>What it costs</dt>
               <dd>
-                <p>{t.pricingLine}</p>
+                <p>{keepLast(t.pricingLine)}</p>
                 {t.yearCost && (
                   <p className="faint">
                     A paid year: {t.yearCost.approx ? 'about ' : ''}
@@ -414,6 +416,38 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="wrap sec" id="rankings">
+        <h2>How we ranked them</h2>
+        <p className="lead">
+          Tools with fewer than {MIN_REVIEWS} public reviews aren&rsquo;t ranked.
+        </p>
+        <h3 className="h3">ATS resume checkers</h3>
+        <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
+        <RankTable tools={checkers} />
+        <h3 className="h3">Resume builders</h3>
+        <p className="sublead">Where you write the thing. Read the &ldquo;Free for real?&rdquo; column first.</p>
+        <RankTable tools={builders} />
+        <p className="footnote">
+          Ratings read {formatDate(ratingsRead)}. &dagger;n/e: fewer than {MIN_REVIEWS} public reviews, so no score yet.{' '}
+          <a href="/how-we-review">How scores work</a>
+        </p>
+      </section>
+
+      <section className="wrap sec" id="cost">
+        <h2>What will your search cost?</h2>
+        <p className="lead">
+          The sticker price is the trial. Drag to your timeline: every tool re-sorts by the cheapest published way to pay for it, and shows
+          what the first year costs if you then forget to cancel.
+        </p>
+        <div style={{ marginTop: 36 }}>
+          <CostCalculator tools={calcTools()} checked={shortDate(ratingsRead)} />
+        </div>
+        <p className="boxnote">
+          <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
+          then charge to download anything but plain&nbsp;text.
+        </p>
+      </section>
+
       <section className="wrap sec" id="agree">
         <h2>Do the other reviewers agree?</h2>
         <p className="lead">
@@ -567,23 +601,6 @@ export default function Page() {
         </details>
       </section>
 
-      <section className="wrap sec" id="rankings">
-        <h2>How we ranked them</h2>
-        <p className="lead">
-          Tools with fewer than {MIN_REVIEWS} public reviews aren&rsquo;t ranked.
-        </p>
-        <h3 className="h3">ATS resume checkers</h3>
-        <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
-        <RankTable tools={checkers} />
-        <h3 className="h3">Resume builders</h3>
-        <p className="sublead">Where you write the thing. Read the &ldquo;Free for real?&rdquo; column first.</p>
-        <RankTable tools={builders} />
-        <p className="footnote">
-          Ratings read {formatDate(ratingsRead)}. &dagger;n/e: fewer than {MIN_REVIEWS} public reviews, so no score yet.{' '}
-          <a href="/how-we-review">How scores work</a>
-        </p>
-      </section>
-
       <section className="wrap sec" id="signup">
         <div className="g-signup">
           <div>
@@ -592,21 +609,6 @@ export default function Page() {
           </div>
           <EvidenceSignup source="resume_guide" />
         </div>
-      </section>
-
-      <section className="wrap sec" id="cost">
-        <h2>What will your search cost?</h2>
-        <p className="lead">
-          The sticker price is the trial. Drag to your timeline: every tool re-sorts by the cheapest published way to pay for it, and shows
-          what the first year costs if you then forget to cancel.
-        </p>
-        <div style={{ marginTop: 36 }}>
-          <CostCalculator tools={calcTools()} checked={shortDate(ratingsRead)} />
-        </div>
-        <p className="boxnote">
-          <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
-          then charge to download anything but plain&nbsp;text.
-        </p>
       </section>
 
       <section className="wrap sec" id="videos">
@@ -710,6 +712,7 @@ export default function Page() {
         </div>
       </section>
 
+      <NextStep side="seekers" line="Still deciding? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use?side=seekers#questions" />
       <SiteFooter />
     </>
   )

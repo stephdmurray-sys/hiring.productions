@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 
 /**
  * What will your search cost? Drag the months; every tool re-sorts by the
@@ -30,6 +30,15 @@ function money(n: number) {
 export function CostCalculator({ tools, checked, initial = 3 }: { tools: CalcTool[]; checked: string; initial?: number }) {
   const [months, setMonths] = useState(initial)
   const id = useId()
+  // A picker answer links here with its timeline (?months=6), so the calculator opens on the same search.
+  useEffect(() => {
+    try {
+      const m = Number(new URLSearchParams(window.location.search).get('months'))
+      if (Number.isInteger(m) && m >= 1 && m <= 12) setMonths(m)
+    } catch {
+      // stays on the default
+    }
+  }, [])
   const max = Math.max(...tools.flatMap((t) => t.forgets))
   const sorted = [...tools].sort((a, b) => a.costs[months - 1] - b.costs[months - 1])
   const plural = months === 1 ? '' : 's'
@@ -79,6 +88,13 @@ export function CostCalculator({ tools, checked, initial = 3 }: { tools: CalcToo
             <span>6</span>
             <span>9</span>
             <span>12 mo</span>
+          </div>
+          <div className="calc-presets" role="group" aria-label="Common search lengths">
+            {[3, 6].map((m) => (
+              <button type="button" key={m} className="calc-preset" aria-pressed={months === m} onClick={() => setMonths(m)}>
+                {m} months
+              </button>
+            ))}
           </div>
           <div className="calc-key">
             <span>

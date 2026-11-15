@@ -1,7 +1,9 @@
 import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce, TrackedLink } from './picker-track'
-import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { CopyLink } from './rec-form'
+import { Capture } from './capture'
+import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { Dots, Zigzag } from './retro'
@@ -200,6 +202,21 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       </p>
       <p className="rec-fine">Nobody pays to be featured.</p>
       <PickerFeedback side={side} problem="repvera" />
+      {!seekers && (
+        <div className="rec-keep">
+          <Capture
+            source="hiring_proof"
+            audience="hiring"
+            promise="Get this answer by email, with where to ask candidates for it."
+            cta="Email me this answer"
+            done="Sent. Check your inbox."
+            askCompanySize
+          />
+        </div>
+      )}
+      <p className="rec-share">
+        <CopyLink url={`https://hiring.productions/what-should-i-use?side=${side}&problem=${REPVERA_PROBLEM[side].id}`} title={a.heading} />
+      </p>
     </div>
   )
 }

@@ -120,8 +120,35 @@ export const FOLLOW_ON: Record<string, string[]> = {
 /** "What the other side sees": one or two sentences in Stephanie's voice. Empty until she supplies them; the slot stays hidden. */
 export const OTHER_SIDE_SEES: Record<string, string> = {}
 
-/** The labels an alternative can carry. Exactly one each. */
-export type AlsoLabel = 'Best free option' | 'Most complete' | 'Stephanie’s pick'
+/**
+ * The labels an alternative can carry. Exactly one each. "Backup" (Nov 15, 2026) only appears when none
+ * of Stephanie's three labels qualifies, so every answer with a best match also has one alternative.
+ */
+export type AlsoLabel = 'Best free option' | 'Most complete' | 'Stephanie’s pick' | 'Backup'
+
+/** "Your next step": one concrete action right above the best match's button, by problem. {name} is the best match. */
+export const NEXT_STEP: Record<string, { free: string; paid: string }> = {
+  'no-callbacks': {
+    free: 'Open {name}’s free version and check your resume against the next job you want, before you apply.',
+    paid: 'Open {name} and check your resume against the next job you want, before you apply.',
+  },
+  rewriting: {
+    free: 'Start your rewrite in {name}’s free version, with its plainest template.',
+    paid: 'Start your rewrite in {name}, with its plainest template.',
+  },
+  'losing-track': {
+    free: 'Open {name}’s free version and add every application you’ve sent so far, with the date you applied.',
+    paid: 'Open {name} and add every application you’ve sent so far, with the date you applied.',
+  },
+  spreadsheets: {
+    free: 'Start {name}’s free plan with one open role and move one week of candidates into it.',
+    paid: 'Book a demo of {name} with one of your real open roles, and ask for the price in writing first.',
+  },
+  'too-many-applicants': {
+    free: 'Start {name}’s free plan with your busiest open role.',
+    paid: 'Book a demo of {name} with your busiest open role, and ask for the price in writing first.',
+  },
+}
 
 /** The picker's intro line, used everywhere the picker is introduced. */
 export const PICKER_INTRO = 'Pick what you’re dealing with. We’ll show you the best match and a couple of alternatives, and tell you what we ruled out.'

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { Capture } from '@/app/(rebrand)/_components/capture'
@@ -219,6 +220,7 @@ export default function RealCandidatePage() {
         </aside>
       </section>
 
+      <NextStep side="hiring" line="See the fraud tools, sorted by where the fraud shows up." button="Fraud tools to know" href="/guides/hiring-fraud-tools" />
       <SiteFooter />
     </>
   )

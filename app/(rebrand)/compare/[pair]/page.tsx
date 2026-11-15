@@ -278,14 +278,6 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
         </section>
       )}
 
-      <section className="wrap sec" id="next">
-        <div className="cmp-cta">
-          <p>{cta.text}</p>
-          <a className={resume ? 'btn btn-indigo' : 'btn btn-coral'} href={cta.href}>
-            {cta.button}
-          </a>
-        </div>
-      </section>
 
       <section className="wrap sec cmp-end" id="more">
         <h2>More comparisons</h2>
@@ -304,6 +296,15 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
             Every comparison
           </a>
         </p>
+      </section>
+
+      <section className="wrap sec" id="next">
+        <div className="cmp-cta">
+          <p>{cta.text}</p>
+          <a className={resume ? 'btn btn-indigo' : 'btn btn-coral'} href={cta.href}>
+            {cta.button}
+          </a>
+        </div>
       </section>
 
       <SiteFooter />

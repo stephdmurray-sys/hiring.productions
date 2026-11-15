@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { AutoForm, PrintButton } from '@/app/(rebrand)/_components/tool-forms'
@@ -293,6 +294,7 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
         </aside>
       </section>
 
+      <NextStep side="seekers" line="Send proof of how you work with your application, too." button="Show how you work" href="/show-how-you-work" />
       <SiteFooter />
     </>
   )

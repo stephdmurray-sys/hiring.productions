@@ -231,6 +231,8 @@ function alsoWorth<T>(
     if (most >= 2 && breadth(pick) <= most) add(rest.find((j) => !used.has(j) && breadth(j) === most), 'Most complete')
   }
   if (stephanieId) add(rest.find((j) => idOf(j) === stephanieId), 'Stephanie’s pick')
+  // No labeled alternative qualifies: the next-highest rated tool that fits is the backup.
+  if (!out.length) add(rest[0], 'Backup')
   return out
 }
 
@@ -316,7 +318,9 @@ function seekerAlso(j: Judged<ToolEvidence>, label: AlsoLabel): Also {
       ? `Free: ${freeDetail(t.freeAnswer)}.`
       : label === 'Stephanie’s pick' && risingPick.tool === t.id
         ? risingPick.line
-        : `${t.bestFor}.`
+        : label === 'Backup'
+          ? `The next-highest rated tool that fits everything you asked for. ${t.bestFor}.`
+          : `${t.bestFor}.`
   return { label, id: t.id, name: t.name, domain: t.domain, score: t.overall, line, href: `/reviews/${t.id}`, linkText: `Is ${t.name} worth it?` }
 }
 
@@ -485,7 +489,12 @@ function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean, prob
 
 function atsAlso(j: Judged<AtsTool>, label: AlsoLabel): Also {
   const price = prices[j.name]
-  const line = label === 'Best free option' && price?.free ? `Free plan: ${price.free}.` : `${atsScores(j.tool).overall.toFixed(2)} out of 5.`
+  const line =
+    label === 'Best free option' && price?.free
+      ? `Free plan: ${price.free}.`
+      : label === 'Backup'
+        ? `The next-highest rated system that fits everything you asked for.${!j.cost ? ' Price by quote.' : j.cost.total === 0 ? ' Starts on its free plan.' : ` About ${money(j.cost.total)} a year.`}`
+        : `${atsScores(j.tool).overall.toFixed(2)} out of 5.`
   return { label, id: slugOf(j.name), name: j.name, domain: j.tool.domain, score: atsScores(j.tool).overall, line, href: `/reviews/ats/${slugOf(j.name)}`, linkText: `Is ${j.name} worth it?` }
 }
 
@@ -596,6 +605,21 @@ export function stateFromParams(p: Params): AskState {
     employees: side === 'hiring' ? (num('employees') ?? null) : null,
     seats: side === 'hiring' ? (num('seats') ?? null) : null,
     must: [...new Set(must)],
+  }
+}
+
+/**
+ * Starting answers, so the answer shows as soon as it can (Nov 15, 2026): no set budget on both sides, and
+ * 3 months for a job search, the most common timeline in the cost calculator. Both stay on screen, selected,
+ * and changing either updates the answer. Hiring teams still answer hires, company size and seats themselves,
+ * because those decide which systems are even in the running.
+ */
+export function withStartingAnswers(s: AskState): AskState {
+  if (!s.side || !s.problem || s.problem.kind !== 'tool') return s
+  return {
+    ...s,
+    budget: s.budget === undefined ? null : s.budget,
+    months: s.side === 'seekers' && s.months === null ? 3 : s.months,
   }
 }
 

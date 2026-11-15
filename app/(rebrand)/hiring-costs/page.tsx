@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { CostPerHire } from '@/app/(rebrand)/_components/cost-per-hire'
@@ -123,6 +124,7 @@ export default function HiringCostsPage() {
         </aside>
       </section>
 
+      <NextStep side="hiring" line="Ready to pick a system that fits your team and budget?" button="Help me choose" href="/what-should-i-use?side=hiring#questions" />
       <SiteFooter />
     </>
   )

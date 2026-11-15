@@ -6,7 +6,7 @@
     "Sometimes the answer is no tool. When software won’t fix it, we say so and point you to what will.",
     "Your answers cross tools off, and they never change a rating. A tool fits everything you asked for or it’s out, and we show you why. The tools that fit stay in rating order, the same for everyone.",
     "If we can’t confirm it, we don’t recommend it. A tool we can’t confirm meets your needs can’t be in your answer. It’s listed under what we ruled out, with what we couldn’t confirm.",
-    "You get the best match and up to two alternatives. The best match is the top-rated tool that fits. Each alternative carries one label: best free option, most complete, or Stephanie’s pick, and her pick never changes a score. Every tool we left out is listed with the reason.",
+    "You get the best match and up to two alternatives. The best match is the top-rated tool that fits. Each alternative carries one label: best free option, most complete, or Stephanie’s pick, and her pick never changes a score. When none of those applies, the next-highest rated tool that fits is the backup. Every tool we left out is listed with the reason.",
     "Only rated tools can be the best match. Tools too new to rate stay on our watch list, labeled that way.",
     "Show what you’ll really pay: the cheapest way to pay for your timeline, and what it costs if you forget to cancel.",
     "If nothing fits, say so, and show the closest tool and what’s in the way.",
@@ -269,6 +269,10 @@
           "AI sourcing"
         ],
         "why": "This is sourcing: finding good people who haven’t applied. We don’t rate sourcing tools yet, so there’s no best match here.",
+        "guidance": {
+          "text": "See the sourcing courses in the recruiter training guide",
+          "href": "/guides/best-recruiter-training"
+        },
         "showFounderPick": true,
         "otherSide": {
           "line": "People who aren’t looking can tell a mass message from a real one. LinkedIn’s data shows messages sent one at a time get about 15% more responses than messages sent in bulk.",

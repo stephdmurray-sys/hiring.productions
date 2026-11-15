@@ -106,6 +106,10 @@ Homepage (same layer, `retro.tsx`): the two lanes are separate cards with a gap,
 
 A picker answer is a short kit, always in the same order, and a part with nothing in it is left out. The best match is the one highlighted card (a hard shadow in the side's color); everything after it is a small bold heading and plain content. One outbound button per tool, with the money line right under it. Short list pages (`short-list.tsx`) reuse the kit's parts: a row per tool, a small outlined button to the vendor, and the same bottom block (who to follow, free from us, nobody pays to be featured).
 
+## The journey rules (Nov 15, 2026)
+
+Every picker path ends in an answer with a best match (or a plain "no tool" verdict), at least one alternative, what was ruled out and why, the real cost, one "Your next step" line, the button to act on it, and a way to save or share it. Job seeker answers start at 3 months and no set budget, both on screen and changeable, so the answer shows as soon as the problem is picked; hiring teams answer hires, company size and seats. Review pages open with Pay for it if, Skip it if, What's good and Watch out for, then how the score breaks down. Guides lead with picks, then rankings, then costs, under a sticky bar that marks where you are. Every page ends with one next step (`next-step.tsx`), and addresses people guess redirect to the right page (`next.config.mjs`, GUESSES).
+
 ## Copy tells to avoid
 
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").

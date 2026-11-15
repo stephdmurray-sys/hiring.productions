@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-training'
 import { labelGoLinks } from '@/lib/money'
@@ -61,5 +62,5 @@ function evidenceOnly(src: string): string {
 }
 
 export default function Page() {
-  return <MockPage html={labelGoLinks(evidenceOnly(html))} active="hiring" />
+  return <MockPage html={labelGoLinks(evidenceOnly(html))} active="hiring" after={<NextStep side="hiring" line="Not sure training is what your team needs? Answer a few questions." button="Help me choose" href="/what-should-i-use?side=hiring#questions" />} />
 }

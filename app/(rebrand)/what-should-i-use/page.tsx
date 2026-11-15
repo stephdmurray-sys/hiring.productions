@@ -10,7 +10,7 @@ import { FRAUD_PROBLEM, isRepveraProblem, stepFor } from '@/lib/evidence/guided'
 import { PICKER_INTRO } from '@/lib/evidence/kit'
 import { TrackOnce } from '@/app/(rebrand)/_components/picker-track'
 import { ScrollToAnswer } from '@/app/(rebrand)/_components/rec-form'
-import { askFromState, recFramework, recommend, situationFor, stateFromParams } from '@/lib/evidence/recommend'
+import { askFromState, recFramework, recommend, situationFor, stateFromParams, withStartingAnswers } from '@/lib/evidence/recommend'
 import { latestCheck } from '@/lib/evidence'
 import { shortDate } from '@/app/(rebrand)/_components/data'
 import { keepLast } from '@/lib/site-line'
@@ -35,7 +35,7 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
 
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
   const sp = await searchParams
-  const state = stateFromParams(sp)
+  const state = withStartingAnswers(stateFromParams(sp))
   // Fake candidates skips team size and budget: one question, then the fraud short list.
   const fraud = state.side === 'hiring' && state.problem?.id === FRAUD_PROBLEM
   const ask = fraud ? null : askFromState(state)

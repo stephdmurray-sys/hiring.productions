@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { ShortListPage, shortListCss } from '@/app/(rebrand)/_components/short-list'
@@ -40,6 +41,7 @@ export default function Page() {
       <JsonLd data={ld} />
       <SiteNav active="seekers" />
       <ShortListPage list={list} />
+      <NextStep side="seekers" line="Get the three steps as a checklist in your inbox." button="Email me the checklist" href="/show-how-you-work#email" />
       <SiteFooter />
     </>
   )

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { REPVERA_CATEGORY, repveraLink } from '@/lib/repvera'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/how-we-review'
@@ -142,5 +143,5 @@ export default function Page() {
     .replace(/(<section id="sources">\s*<h2>[^<]*<\/h2>\s*<p class="lead">[\s\S]*?<\/p>)([\s\S]*?)(\s*<\/section>)/, (_m, head, body, end) => `${head}${fold('See each source', body)}${end}`)
     // The monthly schedule: keep the lead and the stale-review promise, fold the table
     .replace(/(<section id="refresh">[\s\S]*?<p class="lead">[\s\S]*?<\/p>)(\s*<table>[\s\S]*?<\/table>)/, (_m, head, table) => `${head}${fold('See the schedule', table)}`)
-  return <MockPage html={withRadar + FOLD_CSS} active="review" ratings="full" />
+  return <MockPage html={withRadar + FOLD_CSS} active="review" ratings="full" after={<NextStep side="both" line="See the method work on your own situation." button="Help me choose" href="/what-should-i-use#questions" />} />
 }

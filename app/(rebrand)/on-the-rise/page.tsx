@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { boardCss } from '@/app/(rebrand)/_components/scoreboard'
@@ -128,6 +129,7 @@ export default function OnTheRisePage() {
         </p>
       </section>
 
+      <NextStep side="both" line="Want a tool we can score today? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />
     </>
   )

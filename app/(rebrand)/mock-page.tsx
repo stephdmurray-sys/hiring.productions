@@ -101,7 +101,7 @@ const GLOBAL_FIXES = `
   @media(max-width:600px){.wrap,section.wrap{padding-left:18px !important;padding-right:18px !important;}}
 `
 
-export function MockPage({ html, active = null, ratings = 'short' }: { html: string; active?: NavKey; ratings?: 'short' | 'full' }): ReactNode {
+export function MockPage({ html, active = null, ratings = 'short', after }: { html: string; active?: NavKey; ratings?: 'short' | 'full'; after?: ReactNode }): ReactNode {
   const hasNav = NAV_RE.test(html)
   const hasFooter = FOOTER_RE.test(html)
   let body = html.replace(NAV_RE, '').replace(FOOTER_RE, '')
@@ -111,6 +111,7 @@ export function MockPage({ html, active = null, ratings = 'short' }: { html: str
       {hasNav && <SiteNav active={active} />}
       <div dangerouslySetInnerHTML={{ __html: body }} />
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_FIXES + chromeCss }} />
+      {after}
       {hasFooter && <SiteFooter ratings={ratings} />}
     </>
   )

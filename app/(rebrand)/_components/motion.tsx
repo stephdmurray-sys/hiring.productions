@@ -8,6 +8,25 @@ import { useEffect } from 'react'
  * Without JavaScript, or with reduced motion, bars simply show full.
  */
 export function Motion() {
+  // The sticky "On this page" bar marks the section you're reading, so you always know where you are.
+  useEffect(() => {
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc-bar a[href^="#"]'))
+    if (!links.length) return
+    const targets = links.map((a) => document.getElementById(a.hash.slice(1))).filter((el): el is HTMLElement => !!el)
+    const mark = () => {
+      const line = 140
+      let current: HTMLElement | undefined
+      for (const t of targets) if (t.getBoundingClientRect().top <= line) current = t
+      for (const a of links) {
+        if (current && a.hash === `#${current.id}`) a.setAttribute('aria-current', 'true')
+        else a.removeAttribute('aria-current')
+      }
+    }
+    mark()
+    window.addEventListener('scroll', mark, { passive: true })
+    return () => window.removeEventListener('scroll', mark)
+  }, [])
+
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const io = new IntersectionObserver(

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { EARN_COMMISSION, EARN_NOTHING, PAYS_US } from '@/lib/money'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -108,6 +109,7 @@ export default function Page() {
         </p>
       </section>
 
+      <NextStep side="both" line="Not sure which tool fits you? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />
     </>
   )

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { WhoToFollow, followCss } from '@/app/(rebrand)/_components/follow'
@@ -31,6 +32,7 @@ export default function Page() {
       <section className="wrap sec-tight">
         <WhoToFollow />
       </section>
+      <NextStep side="both" line="Ready to pick your tools? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />
     </>
   )

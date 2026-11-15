@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -104,6 +105,7 @@ export default async function SituationPage({ params }: { params: Promise<Params
         <RecHow />
       </section>
 
+      <NextStep side={s.ask.side} line="Your situation is a little different? Answer a few questions and get your own answer." button="Help me choose" href={`/what-should-i-use?side=${s.ask.side}#questions`} />
       <SiteFooter />
     </>
   )

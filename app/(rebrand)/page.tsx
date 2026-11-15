@@ -193,7 +193,10 @@ export default function Home() {
               foot={
                 <>
                   Coral bar: renews every 4 weeks. {resumeIo.name} costs <b>{money(resumeIo.yearCost!.amount)}</b> a year if you forget to
-                  cancel.
+                  cancel.{' '}
+                  <a className="tl" href="/guides/best-resume-tools#cost">
+                    What will your search cost?
+                  </a>
                 </>
               }
             />
@@ -218,7 +221,7 @@ export default function Home() {
               We read {benchmarks.length} &ldquo;best resume tool&rdquo; lists every month. Only {counting.length} count: they&rsquo;re
               current, and their publishers don&rsquo;t sell what they&nbsp;rank.
             </p>
-            <a className="tl tl-strong" href="/guides/best-resume-tools#agree">
+            <a className="tl tl-strong" href="/is-this-list-paid-for">
               See all {benchmarks.length} lists <span className="arr">&rarr;</span>
             </a>
           </div>
