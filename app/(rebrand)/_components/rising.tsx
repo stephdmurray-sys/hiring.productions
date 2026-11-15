@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import { moneyLine } from '@/lib/money'
 import { Logo } from './logo'
+import { PickFace } from './pick-face'
+import { pickFaceCss } from './pick-face-css'
+import { verdictFor } from '@/lib/picks'
 import { formatCount, formatMonth, guide, hiringPick, latestCheck, resumeTools, rising, risingPick, type RisingTool } from '@/lib/evidence'
 
 /**
@@ -13,7 +16,8 @@ import { formatCount, formatMonth, guide, hiringPick, latestCheck, resumeTools, 
  * testimonial card.
  */
 
-export const risingCss = `
+export const risingCss = pickFaceCss + `
+  .note-pick > .pf{margin:26px 0 10px 18px;}
   .wings{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:64px;align-items:start;margin-top:40px;}
   .wings.solo{grid-template-columns:minmax(0,1fr);max-width:960px;}
   .note-by{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink-3);line-height:1.35;}
@@ -98,6 +102,8 @@ function WingRow({ t }: { t: RisingTool }) {
 }
 
 interface Pick {
+  /** The tool's id, for Stephanie's verdict face (lib/picks.ts). */
+  id: string
   side: 'seekers' | 'hiring'
   name: string
   domain: string
@@ -119,6 +125,7 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
   const picks: Pick[] = []
   if (seeker) {
     picks.push({
+      id: seeker.id,
       side: 'seekers',
       name: seeker.name,
       domain: seeker.domain,
@@ -136,6 +143,7 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
     })
   }
   picks.push({
+    id: hiringPick.id,
     side: 'hiring',
     name: hiringPick.name,
     domain: hiringPick.domain,
@@ -179,6 +187,7 @@ export function OnTheRise({
           </div>
           {picks.map((p) => (
             <div className="note-pick" key={p.name}>
+              <PickFace verdict={verdictFor(p.id)} size={112} />
               {!side && (
                 <span className={`note-side pill pill-${p.side}`}>
                   {p.side === 'seekers' ? 'For job seekers' : 'For hiring teams'}

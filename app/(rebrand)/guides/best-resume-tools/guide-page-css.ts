@@ -1,5 +1,7 @@
 /** Resume guide layer on the stage system. */
-export const guidePageCss = `
+import { pickFaceCss } from '@/app/(rebrand)/_components/pick-face-css'
+
+export const guidePageCss = pickFaceCss + `
   /* Phones: the ranking table keeps rank, tool, free version, overall and users; the rest is one tap away on each review. */
   @media(max-width:640px){.rank-table th:nth-child(3),.rank-table td:nth-child(3),.rank-table th:nth-child(5),.rank-table td:nth-child(5),.rank-table th:nth-child(8),.rank-table td:nth-child(8),.rank-table th:nth-child(9),.rank-table td:nth-child(9),.rank-table th:nth-child(10),.rank-table td:nth-child(10){display:none;}}
   .vid-more{margin-top:28px;}
@@ -15,6 +17,7 @@ export const guidePageCss = `
   .pick-label{font-weight:800;font-size:15px;color:var(--indigo-text);margin-bottom:14px;}
   .pick-name{display:flex;align-items:center;gap:12px;font-weight:900;font-size:clamp(26px,2.6vw,32px);letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;}
   .pick-line{color:var(--ink-2);margin-bottom:16px;}
+  .pick-face{margin:18px 0 22px 14px;}
   .pick-by{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-3);line-height:1.35;margin-bottom:16px;}
   .pick-by img{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;}
   .pick-by b{display:block;color:var(--ink);}

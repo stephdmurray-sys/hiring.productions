@@ -118,6 +118,7 @@ export const homeCss = `
 
   /* Who makes this */
   .who{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,4vw,48px);align-items:start;max-width:880px;}
+  .who-loop{display:block;padding:18px 26px 26px 18px;}
   .who-photo{width:clamp(88px,10vw,120px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);}
   .who p{font-size:clamp(18px,1.7vw,20px);line-height:1.6;color:var(--ink-2);margin-top:14px;max-width:680px;text-wrap:pretty;}
   .who p.who-later{margin-top:clamp(40px,5vw,56px);}

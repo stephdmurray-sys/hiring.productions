@@ -35,6 +35,8 @@ import {
   atsScores,
 } from '@/lib/evidence'
 import { homeCss } from './home-css'
+import { FaceLoop } from '@/app/(rebrand)/_components/face-loop'
+import { pickFaceCss } from '@/app/(rebrand)/_components/pick-face-css'
 import { FreeToolsMirror, freeToolsCss } from '@/app/(rebrand)/_components/free-tools'
 import { freeToolCount } from '@/lib/free-tools'
 
@@ -73,7 +75,7 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss + freeToolsCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss + freeToolsCss + pickFaceCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
@@ -317,7 +319,9 @@ export default function Home() {
 
       <section className="wrap sec" id="who-makes-this">
         <div className="who">
-          <Image className="who-photo" src="/stephanie.jpg" alt="Stephanie Murray" width={120} height={120} />
+          <span className="who-loop">
+            <FaceLoop size={150} />
+          </span>
           <div>
             <h2>Who makes this</h2>
             <p>

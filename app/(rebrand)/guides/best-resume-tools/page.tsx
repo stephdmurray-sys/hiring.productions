@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { PickFace } from '@/app/(rebrand)/_components/pick-face'
+import { verdictFor } from '@/lib/picks'
 import { keepLast } from '@/lib/site-line'
 import { NextStep } from '@/app/(rebrand)/_components/next-step'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
@@ -395,6 +397,9 @@ export default function Page() {
               {rising.name}
             </h3>
             <p className="pick-line">{risingPick.line}</p>
+            <p className="pick-face">
+              <PickFace verdict={verdictFor(risingPick.tool)} size={96} />
+            </p>
             <p className="pick-by">
               <Image src="/stephanie.jpg" alt="" width={36} height={36} />
               <span>

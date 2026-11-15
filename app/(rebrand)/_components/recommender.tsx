@@ -1,4 +1,7 @@
 import { Logo } from './logo'
+import { PickMark } from './pick-face'
+import { pickFaceCss } from './pick-face-css'
+import { verdictFor } from '@/lib/picks'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce } from './picker-track'
 import { FRAUD_QUESTION, REAL_JOB_QUESTION, REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
@@ -338,6 +341,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
                 <Logo domain={a.domain} name={a.name} size={44} />
                 <div>
                   <span className={`kit-label kit-label-${r.side}`}>{a.label}</span>
+                  {a.label === 'Stephanie’s pick' && <PickMark verdict={verdictFor(a.id)} />}
                   <b>
                     {a.name} {a.score !== null && <span className="mono">{a.score.toFixed(2)}</span>}
                   </b>
@@ -463,7 +467,7 @@ export function RecSituations({ exclude }: { exclude?: string }) {
 }
 
 /** The kit's parts, shared with the short list pages. */
-export const kitCss = moneyCss + followCss + `
+export const kitCss = moneyCss + followCss + pickFaceCss + `
   /* The kit */
   .kit{margin-top:44px;max-width:820px;}
   .kit-k{font-size:clamp(20px,2.2vw,24px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);margin:0 0 16px;}

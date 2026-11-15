@@ -1,4 +1,7 @@
 import { Logo } from './logo'
+import { PickMark } from './pick-face'
+import { pickFaceCss } from './pick-face-css'
+import { verdictFor } from '@/lib/picks'
 import { Kit, kitCss } from './recommender'
 import { Dots, Squiggle, Zigzag, retroCss } from './retro'
 import { FollowOn } from './follow'
@@ -28,7 +31,12 @@ export function ShortToolRow({ t, side }: { t: ShortTool; side: 'seekers' | 'hir
           <h3 className="sl-name">{t.name}</h3>
         </div>
       </div>
-      {t.label && <span className={`sl-label sl-label-${side}`}>{t.label}</span>}
+      {t.label && (
+        <span className="sl-label-row">
+          <span className={`sl-label sl-label-${side}`}>{t.label}</span>
+          {t.label === 'Stephanie’s pick' && t.go && <PickMark verdict={verdictFor(t.go)} />}
+        </span>
+      )}
       <p className="sl-line">{keepLast(t.line)}</p>
       {t.note && <p className="sl-note">{t.note}</p>}
       <div className="sl-act">
@@ -169,7 +177,7 @@ export function ShortListPage({ list }: { list: ShortList }) {
 }
 
 /** The tool cards on their own, for a picker answer that lists short list tools. */
-export const slToolCss = `
+export const slToolCss = pickFaceCss + `
   .sl-tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:28px;margin-top:36px;}
   .sl-tools-one{grid-template-columns:minmax(0,560px);}
   .sl-tool{position:relative;display:flex;flex-direction:column;gap:12px;padding:24px 24px 22px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);}
@@ -177,6 +185,7 @@ export const slToolCss = `
   .sl-top .lg{border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);flex-shrink:0;}
   .sl-kind{display:block;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:2px;}
   .sl-name{font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.015em;line-height:1.15;margin:0;}
+  .sl-label-row{align-self:flex-start;display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
   .sl-label{align-self:flex-start;display:inline-block;padding:5px 12px;border:2px solid var(--ink);border-radius:999px;font-size:13px;font-weight:800;line-height:1.2;box-shadow:2px 2px 0 var(--ink);transform:rotate(-2deg);}
   .sl-label-seekers{background:var(--lavender);color:var(--ink);}
   .sl-label-hiring{background:var(--coral);color:var(--coral-deep);}

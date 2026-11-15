@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Logo } from './logo'
+import { keepLast } from '@/lib/site-line'
 import { Capture } from './capture'
 import type { StackLane } from '@/lib/stack'
 import { cancelReminders, dayAfter, fmt, plural, round2, stackLines, stackQuery, stackTotals, type StackState } from '@/lib/stack-math'
@@ -233,7 +234,7 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
                       <Logo domain={t.domain} name={t.name} size={34} />
                       <span className="sb-opt-t">
                         <b>{t.name}</b>
-                        <small>{t.tag}</small>
+                        <small>{keepLast(t.tag)}</small>
                       </span>
                       {t.score !== null && <span className="sb-score">{t.score.toFixed(2)}</span>}
                       <span className="sb-mark" aria-hidden="true">
