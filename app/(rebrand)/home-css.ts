@@ -146,4 +146,16 @@ export const homeCss = `
     .sec-head{grid-template-columns:1fr;}
     .side-logos .lg{width:44px !important;height:44px !important;}
   }
+
+  /* Free tools band: split down the middle in the two side colors, job seekers left, hiring teams right. */
+  .ftb{position:relative;overflow:hidden;padding:clamp(80px,10vw,130px) 0;background:linear-gradient(90deg,var(--indigo-tint) 50%,var(--coral-tint) 50%);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+  .ftb-in{position:relative;}
+  .ftb h2{max-width:920px;margin:0;}
+  .ftb-lead{margin-top:16px;}
+  .ftb-sticker{display:inline-block;margin:0 0 20px;padding:9px 14px 8px;font-weight:900;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;background:var(--ink);color:#fff;border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--coral);transform:rotate(-3deg);}
+  .ftb-dots{position:absolute;top:-30px;right:0;color:var(--coral);opacity:.6;}
+  .ftb-zig{position:absolute;bottom:-70px;left:-20px;color:var(--indigo);}
+  .ftb-cta{margin:20px 0 0;text-align:center;}
+  .ftb-cta .btn{font-size:18px;padding:18px 28px;}
+  @media(max-width:860px){.ftb{background:var(--paper-2);}.ftb-dots,.ftb-zig{display:none;}}
 `

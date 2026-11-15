@@ -29,7 +29,6 @@ const map = {
   '/what-recruiters-really-think': RESUME_GUIDE,
   '/resume': RESUME_GUIDE,
   '/answers': '/what-should-i-use',
-  '/tools': '/what-should-i-use',
   // job seeker AI tools
   '/tools/rehearsal-room': '/interview-practice',
   '/tools/what-theyre-asking': '/interview-practice',
@@ -144,7 +143,8 @@ const RETIRED_PREFIXES = [
   { source: '/dashboard/:path*', destination: '/', permanent: false },
   { source: '/rank/:path*', destination: SEEKERS, permanent: false },
   { source: '/q/:path*', destination: SEEKERS, permanent: false },
-  { source: '/tools/:path*', destination: '/what-should-i-use', permanent: false },
+  // One or more segments: /tools itself is the free tools page (Nov 15, 2026).
+  { source: '/tools/:path+', destination: '/what-should-i-use', permanent: false },
 ]
 
 /** @type {import('next').NextConfig} */

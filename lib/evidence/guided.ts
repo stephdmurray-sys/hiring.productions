@@ -278,23 +278,6 @@ export const ASK_FOR_IT = {
 }
 
 /** Free tools to go straight to, one row per side, under the first question on the homepage. */
-export const FREE_CHIPS: Record<Side, { label: string; href: string }[]> = {
-  // Four a side, in mirrored pairs: row by row, the same question from each side of the table.
-  // Ordered by the research Stephanie asked for (Nov 15, 2026): real or fake first, then interview
-  // questions (the most searched job topic), then screening software, then cost.
-  seekers: [
-    { label: 'Is this job even real?', href: '/is-this-a-real-job' },
-    { label: 'What will they ask me?', href: '/interview-practice' },
-    { label: 'Is software screening me out?', href: '/how-ats-actually-works' },
-    { label: 'What will my search cost?', href: '/build-your-stack' },
-  ],
-  hiring: [
-    { label: 'Is this candidate even real?', href: '/is-this-a-real-candidate' },
-    { label: 'What should we ask them?', href: '/interview-scorecard' },
-    { label: 'Is software screening them out?', href: '/how-ats-actually-works#hiring' },
-    { label: 'What will our tools cost?', href: '/build-your-stack/hiring' },
-  ],
-}
 
 
 /** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */

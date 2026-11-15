@@ -62,6 +62,10 @@ ${situations()
   .map((x) => `- [${x.question}](${BASE}/what-should-i-use/${x.slug}): ${answerText(recommend(x.ask), { short: true })}`)
   .join('\n')}
 
+## Free tools
+
+Every free tool, both sides of the table, on one page: ${BASE}/tools
+
 ## Free tool for job seekers
 
 - [What will they ask me in the interview?](${BASE}/interview-practice): practice the questions structured interviews use, the follow-ups you will hear, what a strong answer shows, and what to ask them at the end, from the US Office of Personnel Management's method (the same content hiring teams get from the interview scorecard).

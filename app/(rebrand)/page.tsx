@@ -35,6 +35,8 @@ import {
   atsScores,
 } from '@/lib/evidence'
 import { homeCss } from './home-css'
+import { FreeToolsMirror, freeToolsCss } from '@/app/(rebrand)/_components/free-tools'
+import { freeToolCount } from '@/lib/free-tools'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -71,7 +73,7 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss + freeToolsCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
@@ -161,6 +163,23 @@ export default function Home() {
         <div className="g-start">
           <GuidedFirst side="seekers" />
           <GuidedFirst side="hiring" />
+        </div>
+      </section>
+
+      {/* Free tools: their own band, split in the two side colors, mirrored row by row (Nov 15, 2026). */}
+      <section className="ftb" id="free-tools" aria-labelledby="free-tools-h">
+        <div className="wrap ftb-in">
+          <Dots className="ftb-dots" />
+          <Zigzag className="ftb-zig" />
+          <p className="ftb-sticker">Free, no sign-up</p>
+          <h2 id="free-tools-h">Free tools for both sides of the&nbsp;table</h2>
+          <p className="lead ftb-lead">Each row asks the same question from both sides. Pick yours.</p>
+          <FreeToolsMirror rows={4} />
+          <p className="ftb-cta">
+            <a className="btn" href="/tools">
+              {`See all ${freeToolCount()} free tools`} <span className="arr">&rarr;</span>
+            </a>
+          </p>
         </div>
       </section>
 

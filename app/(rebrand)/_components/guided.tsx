@@ -3,7 +3,7 @@ import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, PickerSuggest, TrackOnce, TrackedLink } from './picker-track'
 import { CopyLink } from './rec-form'
 import { Capture } from './capture'
-import { ASK_FOR_IT, FREE_CHIPS, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { Dots, Zigzag } from './retro'
@@ -85,11 +85,10 @@ export function GuidedStepView({ side, stepId, back }: { side: Side; stepId?: st
 /** The first guided question, for the homepage: one tap starts the picker. */
 export function GuidedFirst({ side }: { side: Side }) {
   const step = guidedStep(side, 'q1')
-  const tiles = FREE_CHIPS[side]
-  const tileRows = Math.ceil(tiles.length / 2)
-  // One grid row per piece (label, question, each card, links, tools heading, tile rows, suggestion), shared
-  // with the other side through subgrid, so the two sides line up row for row (.g-start in guidedCss).
-  const rows = 2 + step.options.length + 2 + tileRows + 1
+  // One grid row per piece (label, question, each card, links, suggestion), shared with the other side
+  // through subgrid, so the two sides line up row for row (.g-start in guidedCss). The free tools have
+  // their own band below (free-tools.tsx).
+  const rows = 2 + step.options.length + 2
   return (
     <div className={`g-first g-${side}`} style={{ gridRow: `span ${rows}` }}>
       <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I\u2019m a job seeker' : 'I\u2019m hiring'}</span>
@@ -106,17 +105,6 @@ export function GuidedFirst({ side }: { side: Side }) {
         {step.extra && <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>}
         <a href={stepHref(side, 'all')}>Show me the whole list</a>
       </p>
-      <p className="g-free-k">Or go straight to a free tool</p>
-      <div className="g-tiles" style={{ gridRow: `span ${tileRows}` }}>
-        {tiles.map((c) => (
-          <a className="g-tile" href={c.href} key={c.href}>
-            <span>{keepLast(c.label)}</span>
-            <span className="arr" aria-hidden="true">
-              &rarr;
-            </span>
-          </a>
-        ))}
-      </div>
       <PickerSuggest side={side} />
     </div>
   )
