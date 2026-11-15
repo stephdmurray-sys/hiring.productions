@@ -77,6 +77,17 @@ export default function Page() {
           logos: [],
         },
         {
+          href: '/guides/hiring-fraud-tools',
+          title: 'Fraud tools to know',
+          detail: 'Fraud detection companies, sorted by where the fraud shows up: the application, the interview or the identity check.',
+          meta: 'Short list, no scores yet',
+          logos: [
+            { domain: 'hiretofu.com', name: 'Tofu' },
+            { domain: 'pindrop.com', name: 'Pindrop' },
+            { domain: 'withpersona.com', name: 'Persona' },
+          ],
+        },
+        {
           href: '/compare',
           title: 'Down to two systems?',
           detail: 'Any two applicant tracking systems for the same team size, side by side: scores, a year\u2019s cost and a demo of each.',

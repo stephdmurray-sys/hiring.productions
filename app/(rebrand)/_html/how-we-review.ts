@@ -268,7 +268,7 @@ export const html = `<style>
       </section>
 
       <section id="refresh">
-        <h2>We check everything monthly</h2>
+        <h2>We check everything&nbsp;monthly</h2>
         <p class="lead">We check every review on the same schedule each month, and show when we last checked each number.</p>
         <table>
           <tr><th>Signal</th><th>Refresh</th><th>How</th></tr>

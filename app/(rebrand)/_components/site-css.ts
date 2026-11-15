@@ -144,7 +144,7 @@ export const siteCss = `
   .stance{font-weight:800;font-size:14.5px;white-space:nowrap;}
   .stance-agrees{color:var(--ok);}
   .stance-breaks{color:var(--indigo-text);}
-  .stance-thin{color:var(--ink-3);font-weight:600;font-style:italic;}
+  .stance-thin{color:var(--ink-3);font-weight:600;}
 
   /* Rows */
   .rows{border-top:1px solid var(--rule);margin-top:28px;}

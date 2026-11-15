@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
 import { moneyLine } from '@/lib/money'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
@@ -110,8 +111,8 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
   const hub = resume ? { href: '/for-job-seekers', label: 'For job seekers' } : { href: '/for-hiring-teams', label: 'For hiring teams' }
   const guide = resume ? { href: '/guides/best-resume-tools', label: 'Resume tools' } : { href: '/guides/best-ats-for-small-teams', label: 'Applicant tracking' }
   const cta = resume
-    ? { href: '/what-should-i-use?side=seekers#questions', text: 'If neither one fits, tell us where your search is stuck. We’ll recommend one tool and a backup, with the real price.', button: 'What should I use?' }
-    : { href: '/what-should-i-use?side=hiring&problem=spreadsheets#questions', text: 'If neither one fits, tell us your team size and budget. We’ll recommend one tool and a backup, with the real price.', button: 'What should we use?' }
+    ? { href: '/what-should-i-use?side=seekers#questions', text: PICKER_INTRO, button: 'What should I use?' }
+    : { href: '/what-should-i-use?side=hiring&problem=spreadsheets#questions', text: PICKER_INTRO, button: 'What should we use?' }
   const more = comparePairs()
     .filter((p) => p.kind === c.pair.kind && p.slug !== pair)
     .map((p) => ({ slug: p.slug, c: buildComparison(p.slug)! }))

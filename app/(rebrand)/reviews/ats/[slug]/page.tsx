@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
+import { keepLast } from '@/lib/site-line'
 import { moneyLine } from '@/lib/money'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
@@ -321,7 +323,7 @@ export default async function AtsReviewPage({ params }: { params: Promise<Params
 
       <section className="wrap sec" id="fit">
         <div className="ats-cta">
-          <p>If you&rsquo;re not sure it fits, tell us your team size, your hires and your budget. We&rsquo;ll recommend one tool and a backup, with the real price.</p>
+          <p>{keepLast(PICKER_INTRO)}</p>
           <a className="btn btn-coral" href="/what-should-i-use?side=hiring&problem=spreadsheets#questions">
             What should we use?
           </a>

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
+import { keepLast } from '@/lib/site-line'
 import { GuidedFirst, guidedCss } from '@/app/(rebrand)/_components/guided'
 import Image from 'next/image'
 import { wholeList } from '@/lib/evidence/guided'
@@ -155,7 +157,7 @@ export default function Home() {
 
       <section className="wrap sec" id="what-to-use">
         <h2>What should I use?</h2>
-        <p className="lead">Start with one question. We recommend one tool and a cheaper backup.</p>
+        <p className="lead">{keepLast(PICKER_INTRO)}</p>
         <div className="g-start">
           <GuidedFirst side="seekers" />
           <GuidedFirst side="hiring" />

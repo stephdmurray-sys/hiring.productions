@@ -148,6 +148,7 @@ export function SiteFooter({ ratings = 'short' }: { ratings?: 'short' | 'full' }
             <a href="/guides/best-resume-tools#rankings">ATS resume checkers</a>
             <a href="/guides/best-resume-tools#cost">What your search will cost</a>
             <a href="/interview-practice">Interview practice</a>
+            <a href="/is-this-a-real-job">Is this job even real?</a>
             <a href="/reviews">Every resume tool review</a>
             <a href="/for-job-seekers">Everything for job seekers</a>
           </div>
@@ -158,6 +159,7 @@ export function SiteFooter({ ratings = 'short' }: { ratings?: 'short' | 'full' }
             <a href="/interview-scorecard">Interview scorecard builder</a>
             <a href="/hiring-costs">What a hire costs</a>
             <a href="/is-this-a-real-candidate">Spotting fake candidates</a>
+            <a href="/guides/hiring-fraud-tools">Fraud tools to know</a>
             <a href="/hiring-stack">Free stack recommendation</a>
             <a href="/for-hiring-teams">Everything for hiring teams</a>
           </div>

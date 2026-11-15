@@ -151,6 +151,21 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
     }
   }
 
+  if (source === 'real_job') {
+    return {
+      subject: 'You’re on the list for “Is this job even real?”',
+      text: [
+        'Thanks for signing up. When the page changes, or we find a scam checker worth recommending, you’ll get one short email.',
+        '',
+        'Before you send a resume or anything else, check the signs:',
+        `${SITE}/is-this-a-real-job`,
+        '',
+        'Report a fake posting to the job board it’s on, and to the Federal Trade Commission at reportfraud.ftc.gov.',
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
   if (source === 'fraud_checklist') {
     return {
       subject: 'Your "Is this a real candidate?" checklist',
@@ -160,7 +175,7 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         'Before the interview',
         '- Check your applicant tracking system for other applicants with the same resume content or contact information. (FBI, January 2025)',
         '- Check resumes for typos and unusual wording. (FBI, January 2025)',
-        '- Verify identity during interviewing, not only at onboarding. (FBI, January 2025)',
+        '- Verify identity during interviews as well as at onboarding. (FBI, January 2025)',
         '',
         'During a video interview',
         "- Watch for lip movement that doesn't match the audio, or a cough or sneeze with no matching movement. (FBI, June 2022)",

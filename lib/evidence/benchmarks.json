@@ -41,7 +41,7 @@
       "picksComplete": true,
       "edition": "2026",
       "status": "counts",
-      "reason": "2026 edition, all six picks read on the live page on November 14, 2026. Each pick is \"best for\" a use, not a rank. No ownership conflict found.",
+      "reason": "2026 edition, all six picks read on the live page on November 14, 2026. Each pick is \"best for\" a use, and none is ranked. No ownership conflict found.",
       "checked": "2026-11-14",
       "verified": true
     },
@@ -96,7 +96,7 @@
       "picksComplete": true,
       "edition": "2026",
       "status": "counts",
-      "reason": "Updated October 26, 2026. All twelve picks read on the live page on November 14, 2026; listed, not ranked. No ownership conflict found.",
+      "reason": "Updated October 26, 2026. All twelve picks read on the live page on November 14, 2026; listed without a rank. No ownership conflict found.",
       "checked": "2026-11-14",
       "verified": true
     },
@@ -365,7 +365,7 @@
       "picksComplete": false,
       "edition": "2026",
       "status": "lead-page",
-      "reason": "A scored landing page, not an editorial review. Three of its top four (MyPerfectResume, Zety, LiveCareer) are owned by one company, BOLD.",
+      "reason": "A landing page that scores tools, with no editorial review behind it. Three of its top four (MyPerfectResume, Zety, LiveCareer) are owned by one company, BOLD.",
       "checked": "2026-11-13",
       "verified": false
     },

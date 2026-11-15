@@ -25,7 +25,7 @@ const FLAGS: { stage: string; items: { text: string; src: typeof FBI_2025 }[] }[
     items: [
       { text: 'Check your applicant tracking system for other applicants with the same resume content or contact information.', src: FBI_2025 },
       { text: 'Check resumes for typos and unusual wording.', src: FBI_2025 },
-      { text: 'Verify identity during interviewing, not only at onboarding.', src: FBI_2025 },
+      { text: 'Verify identity during interviews as well as at onboarding.', src: FBI_2025 },
     ],
   },
   {
@@ -190,8 +190,8 @@ export default function RealCandidatePage() {
         <p className="sys-note">
           These are features as the vendors describe them. We haven&rsquo;t tested how well they work, and we found no independent accuracy
           data yet.{' '}
-          <a className="tl" href="/what-should-i-use?side=hiring&problem=fake-candidates#questions">
-            Which one fits your team size and budget?
+          <a className="tl" href="/guides/hiring-fraud-tools">
+            Fraud tools to know, sorted by where the fraud shows up
           </a>
         </p>
       </section>

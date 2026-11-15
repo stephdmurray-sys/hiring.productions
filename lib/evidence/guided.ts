@@ -12,7 +12,13 @@ import { problemsFor } from './recommend'
 
 export type Side = 'seekers' | 'hiring'
 
-export type GuidedTarget = { step: string } | { problem: string }
+/** A step on the path, a problem's answer, or a page of its own (the fraud answers land on the fraud tools page). */
+export type GuidedTarget = { step: string } | { problem: string } | { href: string }
+
+/** The fraud short list. Each answer to "Where are you seeing it?" lands on its section. */
+export const FRAUD_PAGE = '/guides/hiring-fraud-tools'
+export const FRAUD_PROBLEM = 'fake-candidates'
+
 
 export interface GuidedOption {
   label: string
@@ -86,7 +92,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
     ],
   },
   hiring: {
-    depth: 2,
+    depth: 3,
     steps: [
       {
         id: 'q1',
@@ -115,7 +121,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         question: 'Which is closer?',
         options: [
           { label: 'There are too many to get through', to: { problem: 'too-many-applicants' } },
-          { label: 'Some of them aren’t real', to: { problem: 'fake-candidates' } },
+          { label: 'Some of them aren’t real', to: { step: 'fraud' } },
           { label: 'Every resume looks the same now', to: { problem: REPVERA_PROBLEM.hiring.id } },
         ],
         back: 'q1',
@@ -130,6 +136,19 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         ],
         back: 'q1',
       },
+      {
+        // Stephanie's update, Nov 14, 2026: the fraud path asks one question, skips team size and budget, and lands on the fraud short list.
+        id: 'fraud',
+        depth: 3,
+        question: 'Where are you seeing it?',
+        options: [
+          { label: 'Fake applicants are flooding our roles', to: { href: `${FRAUD_PAGE}?from=picker#applicants` } },
+          { label: 'Someone else showed up to the interview, or the answers are coming from a tool', to: { href: `${FRAUD_PAGE}?from=picker#interviews` } },
+          { label: 'We need to know this person is who they say they are', to: { href: `${FRAUD_PAGE}?from=picker#identity` } },
+          { label: 'We want to hear from people who have worked with them', to: { href: `${FRAUD_PAGE}?from=picker#worked-with` } },
+        ],
+        back: 'q2b',
+      },
     ],
   },
 }
@@ -141,6 +160,7 @@ export function guidedStep(side: Side, id: string | undefined): GuidedStep {
 
 /** Which guided step leads to this problem, so "Back" from an answer returns to it. */
 export function stepFor(side: Side, problem: string): string | null {
+  if (side === 'hiring' && problem === FRAUD_PROBLEM) return 'q2b'
   for (const s of GUIDED[side].steps) {
     if (s.options.some((o) => 'problem' in o.to && o.to.problem === problem)) return s.id
     if (s.extra && 'problem' in s.extra.to && s.extra.to.problem === problem) return s.id
@@ -191,6 +211,12 @@ export const REPVERA_ANSWER: Record<
     back: 'q2b',
   },
 }
+
+/** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */
+export const FRAUD_QUESTION = { question: 'Which applicant tracking systems flag fake candidates?', href: `${FRAUD_PAGE}#ats` }
+
+/** The job seeker common question about fake postings (Stephanie's update, Nov 14, 2026). */
+export const REAL_JOB_QUESTION = { question: 'How do I know a job posting is real?', href: '/is-this-a-real-job' }
 
 /** The two new "Common questions, answered" entries, each linking to RepVera's answer for its side. */
 export const REPVERA_QUESTIONS: Record<Side, string> = {

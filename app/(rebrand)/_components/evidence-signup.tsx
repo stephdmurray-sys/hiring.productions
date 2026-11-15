@@ -8,7 +8,8 @@ import { OWNERSHIP_DISCLOSURE } from '@/lib/repvera'
  * endpoint with its own source, so the welcome email matches what the
  * visitor signed up for.
  */
-export function EvidenceSignup({ source = 'evidence_report' }: { source?: string }) {
+/** `page`: a signup for changes to one page, not the monthly email (the button and the fine print say so). */
+export function EvidenceSignup({ source = 'evidence_report', page = false }: { source?: string; page?: boolean }) {
   const [email, setEmail] = useState('')
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
 
@@ -31,7 +32,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
   if (state === 'done') {
     return (
       <p className="signup-done" role="status">
-        You&rsquo;re on the list. The next one lands in your inbox the first week of the month.
+        {page ? 'You’re on the list. You’ll hear from us when this page changes.' : 'You’re on the list. The next one lands in your inbox the first week of the month.'}
       </p>
     )
   }
@@ -51,7 +52,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
         onChange={(e) => setEmail(e.target.value)}
       />
       <button type="submit" className="btn" disabled={state === 'sending'}>
-        {state === 'sending' ? 'Adding you…' : 'Send me the monthly email'}
+        {state === 'sending' ? 'Adding you…' : page ? 'Email me when it changes' : 'Send me the monthly email'}
       </button>
       {state === 'error' && (
         <p className="signup-error" role="alert">
@@ -59,7 +60,7 @@ export function EvidenceSignup({ source = 'evidence_report' }: { source?: string
         </p>
       )}
       <p className="signup-fine">
-        {OWNERSHIP_DISCLOSURE} One email a month. Unsubscribe in one click. <a href="/privacy">Privacy</a>
+        {OWNERSHIP_DISCLOSURE} {page ? 'Only when this page changes.' : 'One email a month.'} Unsubscribe in one click. <a href="/privacy">Privacy</a>
       </p>
     </form>
   )

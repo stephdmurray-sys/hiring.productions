@@ -155,3 +155,9 @@ G2 blocks automated reads, so the applicant tracking ratings in `lib/scorecards/
 ## The guided picker and what it counts
 
 The questions and the RepVera answers live in `lib/evidence/guided.ts`, word for word from Stephanie's handoff; change them only with her. If a problem id in `recommend.json` changes, update the paths there too (the guided test walks every path). The picker records starts, finishes, RepVera answer visits, profile clicks and "Did this help you decide?" answers through `/api/track`; vendor form submissions are recorded in `/api/vendor-submittal`. Counts appear by type on /admin.
+
+## The short kit and short lists (Nov 14, 2026)
+
+Every picker answer is a short kit, in this order: best match for you, also worth a look (up to two, each with one label: best free option, most complete, or Stephanie's pick), what we ruled out (collapsed), what a tool won't do, free from us, who to follow on this, what the other side sees. The labels come from the data in `recommend.ts`; the fixed lines are Stephanie's and live in `kit.ts`. Two slots stay empty until she supplies them: who to follow (only the fraud answers have a match) and what the other side sees (her voice, never written for her).
+
+Short lists (`shortlists.ts`) are categories too new to score: no scores, a few tools, a reason for each, and a date. Each month, open every vendor link on each short list and confirm it still goes to the company's own page for that product; update the `checked` date only after that. A category moves to scored rankings once there is enough public data, and How we review says so. The first short list is Fraud tools to know (`/guides/hiring-fraud-tools`), which is where the picker's fake candidates path ends.

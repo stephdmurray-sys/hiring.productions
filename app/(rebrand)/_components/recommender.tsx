@@ -1,7 +1,10 @@
 import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce } from './picker-track'
-import { REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
+import { FRAUD_QUESTION, REAL_JOB_QUESTION, REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
+import { FOLLOW_ON, FREE_FROM_US, OTHER_SIDE_SEES, WONT_DO } from '@/lib/evidence/kit'
+import { moneyLine, moneyCss } from '@/lib/money'
+import { FollowOn, followCss } from './follow'
 import { Capture } from './capture'
 import { captureCss } from './widgets-css'
 import { RecForm, CopyLink } from './rec-form'
@@ -195,15 +198,53 @@ function CostLine({ r, ask }: { r: Recommendation; ask: Ask }) {
   )
 }
 
+/** A section of the kit: a small heading and its content. */
+export function Kit({ k, children, className }: { k: string; children: React.ReactNode; className?: string }) {
+  return (
+    <section className={`kit${className ? ` ${className}` : ''}`}>
+      <h3 className="kit-k">{k}</h3>
+      {children}
+    </section>
+  )
+}
+
+/** An outbound button to the vendor's own site, with what we earn from it right under it. */
+function GoButton({ id, name, className }: { id: string; name: string; className: string }) {
+  return (
+    <span className="kit-go">
+      <a className={className} href={`/go/${id}`} rel="nofollow noopener">
+        Go to {name} <span className="arr">&#8599;</span>
+      </a>
+      <span className="money">{moneyLine(id)}</span>
+    </span>
+  )
+}
+
+/**
+ * Every answer is a short kit, in this order: best match for you, also
+ * worth a look, what we ruled out, what a tool won't do, free from us, who
+ * to follow on this, what the other side sees. A part with nothing in it
+ * is left out; the last two stay hidden until Stephanie supplies them.
+ */
 export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommendation; ask: Ask; headingLevel?: 2 | 3; editHref?: string }) {
   const { title, lead } = verdictTitle(r)
   const H = headingLevel === 2 ? 'h2' : 'h3'
-  const other = r.side === 'seekers' ? 'hiring' : 'seekers'
-  const otherLabel = r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'
   const btn = r.side === 'seekers' ? 'btn btn-indigo' : 'btn btn-coral'
   const sit = situationFor(ask)
   const url = sit ? `${SITE}${REC_PATH}/${sit.slug}` : `${SITE}${REC_PATH}?${askToQuery(ask)}`
-  const others = r.ruledOut.length + r.couldNotCheck.length
+  const wont = WONT_DO[r.problem.id]
+  const free = FREE_FROM_US[r.problem.id]
+  const follow = FOLLOW_ON[r.problem.id] ?? []
+  const otherSees = OTHER_SIDE_SEES[r.problem.id]
+  const otherLabel = r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'
+  // Everything considered and left out, one line each: broke a limit, couldn't be confirmed, or fit and rated lower.
+  const out = [
+    ...r.ruledOut,
+    ...r.couldNotCheck,
+    ...r.ratedLower,
+  ]
+  // A guidance link that isn't already the free tool below: the training guide, the job seeker guides, a stack recommendation.
+  const guidance = r.guidance && !r.pick && r.guidance.href !== free?.href ? r.guidance : null
 
   return (
     <div className={`rec-ans rec-${r.side}`}>
@@ -213,62 +254,31 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
       <H className="rec-title" id="answer-h">
         {title}
       </H>
-      {lead && <p className="rec-lead">{lead}</p>}
+      {lead && !r.pick && <p className="rec-lead">{keepLast(lead)}</p>}
 
       {r.pick && (
-        <div className="rec-pick">
-          <div className="rec-id">
-            <Logo domain={r.pick.domain} name={r.pick.name} size={64} />
-            <div>
-              <b>{r.pick.name}</b>
-              <span className="rec-score">
-                <span className="rec-bar" aria-hidden="true">
-                  <i style={{ width: `${(r.pick.score / 5) * 100}%` }} />
+        <Kit k="Best match for you" className="kit-best">
+          <div className="rec-pick">
+            <div className="rec-id">
+              <Logo domain={r.pick.domain} name={r.pick.name} size={64} />
+              <div>
+                <b>{r.pick.name}</b>
+                <span className="rec-score">
+                  <span className="rec-bar" aria-hidden="true">
+                    <i style={{ width: `${(r.pick.score / 5) * 100}%` }} />
+                  </span>
+                  {r.pick.score.toFixed(2)} out of 5
                 </span>
-                {r.pick.score.toFixed(2)} out of 5
-              </span>
+              </div>
             </div>
+            <p className="kit-reason">{keepLast(r.pick.reasons[0])}</p>
+            <CostLine r={r} ask={ask} />
+            <GoButton id={r.pick.id} name={r.pick.name} className={btn} />
+            <a className="tl" href={r.pick.href}>
+              {r.pick.linkText} <span className="arr">&rarr;</span>
+            </a>
           </div>
-          {(() => {
-            const why = r.pick.reasons.slice(1).filter((x) => !/^Free:|^If you upgrade|^Costs |^If you forget|^About \$|^Starts free|^Price by quote/.test(x))
-            return why.length > 0 ? (
-              <ul className="rec-why">
-                {why.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            ) : null
-          })()}
-          <CostLine r={r} ask={ask} />
-          <a className={btn} href={r.pick.href}>
-            {r.pick.linkText} <span className="arr">&rarr;</span>
-          </a>
-        </div>
-      )}
-
-      {r.alt && (
-        <div className="rec-alt">
-          <span className="rec-alt-k">Backup pick</span>
-          <div className="rec-alt-body">
-            <Logo domain={r.alt.domain} name={r.alt.name} size={44} />
-            <div>
-              <b>
-                {r.alt.name} <span className="mono">{r.alt.score.toFixed(2)}</span>
-              </b>
-              <p>
-                {[
-                  r.alt.why,
-                  ...r.alt.reasons
-                    .slice(1)
-                    .filter((x) => !/^If you upgrade|^If you forget|^There’s also|^Free: /.test(x)),
-                ].join(' ')}
-              </p>
-              <a className="tl" href={r.alt.href}>
-                {r.alt.linkText} <span className="arr">&rarr;</span>
-              </a>
-            </div>
-          </div>
-        </div>
+        </Kit>
       )}
 
       {r.verdict === 'nothing-fits' && (
@@ -282,91 +292,107 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
             </>
           ) : (
             'Loosen one limit above and the answer changes.'
-          )}{' '}
-          {r.side === 'hiring' && r.guidance ? 'Or skip the shopping:' : ''}
+          )}
         </p>
       )}
 
       {r.watching.length > 0 && (
-        <div className="rec-watch">
-          <span className="rec-alt-k">New and worth watching (too new to rate)</span>
-          {r.watching.map((w) => (
-            <div className="rec-watch-row" key={w.name}>
-              <Logo domain={w.domain} name={w.name} size={40} />
-              <p>
-                <b>{w.name}.</b> {w.what}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {r.stephanie && (
-        <div className="rec-watch">
-          <span className="rec-alt-k">Stephanie&rsquo;s pick (her opinion, with no effect on any score)</span>
-          <div className="rec-watch-row">
-            <Logo domain={r.stephanie.domain} name={r.stephanie.name} size={40} />
-            <p>
-              <b>{r.stephanie.name}.</b> {r.stephanie.line}{' '}
-              <a className="tl" href="/about/stephanie">
-                Who is Stephanie?
-              </a>
-            </p>
-          </div>
-        </div>
-      )}
-
-      {r.guidance && !r.pick && (
-        <p className="rec-guide">
-          <a className={btn} href={r.guidance.href}>
-            {r.guidance.text} <span className="arr">&rarr;</span>
+        <p className="rec-near">
+          <a className="tl" href="/on-the-rise">
+            See the new tools we&rsquo;re watching
           </a>
         </p>
       )}
 
-      <aside className={`rec-other rec-other-${other}`} aria-label={otherLabel}>
-        <span className="rec-other-k">{otherLabel}</span>
-        <p>{r.otherSide.line}</p>
-        <a className="rec-src" href={r.otherSide.url} rel="nofollow noopener" target="_blank">
-          Source: {r.otherSide.source}
-        </a>
-      </aside>
+      {guidance && (
+        <p className="rec-guide">
+          <a className={btn} href={guidance.href}>
+            {guidance.text} <span className="arr">&rarr;</span>
+          </a>
+        </p>
+      )}
 
-      {others > 0 && (
-        <details className="rec-more">
+      {r.also.length > 0 && (
+        <Kit k="Also worth a look">
+          <div className="kit-also">
+            {r.also.map((a) => (
+              <div className="kit-also-row" key={a.name}>
+                <Logo domain={a.domain} name={a.name} size={44} />
+                <div>
+                  <span className={`kit-label kit-label-${r.side}`}>{a.label}</span>
+                  <b>
+                    {a.name} {a.score !== null && <span className="mono">{a.score.toFixed(2)}</span>}
+                  </b>
+                  <p>{keepLast(a.line)}</p>
+                  {a.href ? (
+                    <a className="tl" href={a.href}>
+                      {a.linkText} <span className="arr">&rarr;</span>
+                    </a>
+                  ) : (
+                    <span className="kit-go">
+                      <a className="tl" href={`/go/${a.id}`} rel="nofollow noopener">
+                        Go to {a.name} <span className="arr">&#8599;</span>
+                      </a>
+                      <span className="money">{moneyLine(a.id)}</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Kit>
+      )}
+
+      {out.length > 0 && (
+        <details className="rec-more kit-out">
           <summary>
-            Why not the others? {r.ruledOut.length > 0 && <span>{r.ruledOut.length} didn&rsquo;t fit</span>}
-            {r.couldNotCheck.length > 0 && <span>{r.couldNotCheck.length} we couldn&rsquo;t check</span>}
+            What we ruled out <span>{out.length === 1 ? '1 tool' : `${out.length} tools`}</span>
           </summary>
-          {r.ruledOut.length > 0 && (
-            <ul className="rec-out">
-              {r.ruledOut.map((o) => (
-                <li key={o.name}>
-                  <b>{o.name}</b> {o.reasons.join(' ')}
-                </li>
-              ))}
-            </ul>
-          )}
-          {r.couldNotCheck.length > 0 && (
-            <>
-              <p className="rec-out-k">Couldn&rsquo;t confirm, so we won&rsquo;t recommend it</p>
-              <ul className="rec-out">
-                {r.couldNotCheck.map((o) => (
-                  <li key={o.name}>
-                    <b>{o.name}</b> {o.reasons.join(' ')}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+          <ul className="rec-out">
+            {out.map((o) => (
+              <li key={o.name}>
+                <b>{o.name}</b> {o.reasons.join(' ')}
+              </li>
+            ))}
+          </ul>
         </details>
       )}
 
-      <p className="rec-fine">Nobody pays to be featured.</p>
+      {wont && (
+        <Kit k="What a tool won’t do">
+          <p className="kit-wont">{keepLast(wont)}</p>
+        </Kit>
+      )}
 
-      <p className="rec-share">
-        <CopyLink url={url} title={title} />
-      </p>
+      {free && (
+        <Kit k="Free from us">
+          <a className="kit-free" href={free.href}>
+            <span>
+              <b>{free.title}</b>
+              <span>{keepLast(free.detail)}</span>
+            </span>
+            <span className="arr" aria-hidden="true">
+              &rarr;
+            </span>
+          </a>
+        </Kit>
+      )}
+
+      {follow.length > 0 && (
+        <Kit k="Who to follow on this">
+          <FollowOn ids={follow} />
+        </Kit>
+      )}
+
+      {otherSees && (
+        <Kit k={otherLabel} className={`kit-other kit-other-${r.side === 'seekers' ? 'hiring' : 'seekers'}`}>
+          <p>{keepLast(otherSees)}</p>
+        </Kit>
+      )}
+
+      <p className="rec-fine">Nobody pays to be featured.</p>
+      <TrackOnce event="picker_finish" side={r.side} problem={r.problem.id} />
+      <PickerFeedback side={r.side} problem={r.problem.id} />
 
       <div className="rec-keep">
         <Capture
@@ -380,8 +406,9 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
         />
       </div>
 
-      <TrackOnce event="picker_finish" side={r.side} problem={r.problem.id} />
-      <PickerFeedback side={r.side} problem={r.problem.id} />
+      <p className="rec-share">
+        <CopyLink url={url} title={title} />
+      </p>
     </div>
   )
 }
@@ -403,6 +430,11 @@ export function RecSituations({ exclude }: { exclude?: string }) {
                 {keepLast(s.question)} <span className="arr">&rarr;</span>
               </a>
             ))}
+          {(side === 'hiring' ? [FRAUD_QUESTION] : [REAL_JOB_QUESTION]).map((q) => (
+            <a className="rec-sit" href={q.href} key={q.href}>
+              {keepLast(q.question)} <span className="arr">&rarr;</span>
+            </a>
+          ))}
           <a className="rec-sit" href={`${REC_PATH}?side=${side}&problem=${REPVERA_PROBLEM[side].id}#questions`}>
             {keepLast(REPVERA_QUESTIONS[side])} <span className="arr">&rarr;</span>
           </a>
@@ -412,7 +444,45 @@ export function RecSituations({ exclude }: { exclude?: string }) {
   )
 }
 
-export const recCss = captureCss + `
+/** The kit's parts, shared with the short list pages. */
+export const kitCss = moneyCss + followCss + `
+  /* The kit */
+  .kit{margin-top:44px;max-width:820px;}
+  .kit-k{font-size:15px;font-weight:900;letter-spacing:0;color:var(--ink);margin:0 0 14px;}
+  .kit-best{margin-top:32px;}
+  .kit-best .rec-pick{margin-top:0;}
+  .rec-seekers .kit-best .rec-pick{border:3px solid var(--indigo);box-shadow:6px 6px 0 var(--indigo);}
+  .rec-hiring .kit-best .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
+  .kit-reason{font-size:clamp(18px,1.8vw,21px);line-height:1.5;color:var(--ink);font-weight:600;text-wrap:pretty;}
+  .kit-go{display:grid;justify-items:start;gap:0;}
+  .kit-go .money{margin-top:8px;}
+  .rec-pick > .tl{justify-self:start;font-weight:800;}
+  .kit-also{display:grid;gap:0;border-top:1px solid var(--rule);}
+  .kit-also-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;padding:20px 0;border-bottom:1px solid var(--rule);}
+  .kit-also-row:last-child{border-bottom:0;padding-bottom:0;}
+  .kit-also-row b{display:block;font-size:21px;font-weight:800;margin-top:6px;}
+  .kit-also-row b .mono{font-weight:600;font-size:15px;color:var(--ink-3);margin-left:6px;}
+  .kit-also-row p{color:var(--ink-2);margin:4px 0 8px;text-wrap:pretty;}
+  .kit-label{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:800;border:2px solid var(--ink);}
+  .kit-label-seekers{background:var(--indigo-tint);}
+  .kit-label-hiring{background:var(--coral-tint);}
+  .kit-out{margin-top:36px;}
+  .kit-wont{font-size:clamp(18px,1.8vw,21px);line-height:1.5;color:var(--ink);font-weight:600;padding-left:20px;border-left:4px solid var(--ink);text-wrap:pretty;}
+  .kit-free{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}
+  .kit-free:hover,.kit-free:focus-visible{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink);}
+  .kit-free b{display:block;font-size:19px;font-weight:900;line-height:1.3;}
+  .kit-free > span:first-child > span{display:block;font-size:15.5px;color:var(--ink-2);margin-top:4px;line-height:1.45;}
+  .kit-free .arr{flex-shrink:0;font-size:22px;}
+  .kit-other{border-left:4px solid var(--ink);padding-left:22px;}
+  .kit-other-hiring{border-left-color:var(--coral);}
+  .kit-other-seekers{border-left-color:var(--indigo);}
+  .kit-other p{font-size:clamp(19px,1.9vw,23px);line-height:1.5;color:var(--ink);font-weight:600;}
+  .rec-ans .rec-fine{margin-top:44px;}
+  .rec-ans .rec-help{margin-top:20px;max-width:820px;}
+  @media (prefers-reduced-motion: reduce){.kit-free{transition:none;}}
+`
+
+export const recCss = captureCss + kitCss + `
   .rec-chosen{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);}
   .rec-keep{margin-top:40px;}
   /* Questions */
@@ -518,6 +588,7 @@ export const recCss = captureCss + `
   .rec-copy .arr{margin-left:4px;}
 
   /* Common questions */
+  @media(max-width:420px){#common .common-h{font-size:36px;}}
   .rec-sits{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-top:28px;}
   .rec-sits-k{display:flex;align-items:center;font-weight:800;font-size:16px;padding-bottom:12px;border-bottom:1px solid var(--rule);}
   .rec-sit{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule);font-weight:700;font-size:17px;line-height:1.4;color:var(--ink);}
@@ -548,7 +619,7 @@ export const recCss = captureCss + `
 /** The rules and the research, in rows. The full list is on How we review. */
 /** The rules only. The research behind them lives on How we review (#recommend), not on the tool's own pages. */
 export function RecHow({ all = false }: { all?: boolean }) {
-  const rules = all ? data.rules : [0, 1, 2, 3, 4, 9].map((i) => data.rules[i])
+  const rules = all ? data.rules : [0, 1, 2, 3, 4, 8].map((i) => data.rules[i])
   const split = (r: string) => {
     const i = r.indexOf('. ')
     return i === -1 ? [r, ''] : [r.slice(0, i + 1), r.slice(i + 2)]

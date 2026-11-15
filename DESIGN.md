@@ -102,6 +102,10 @@ Homepage (same layer, `retro.tsx`): the two lanes are separate cards with a gap,
 - The footer's ratings summary is one sentence and a link everywhere except How we review, which keeps the full block (`SiteFooter ratings="full"`).
 - The one-sentence description of the site lives in `lib/site-line.ts` and feeds search results, link previews, the share image and the footer.
 
+## The short kit and short lists (Nov 14, 2026)
+
+A picker answer is a short kit, always in the same order, and a part with nothing in it is left out. The best match is the one highlighted card (a hard shadow in the side's color); everything after it is a small bold heading and plain content. One outbound button per tool, with the money line right under it. Short list pages (`short-list.tsx`) reuse the kit's parts: a row per tool, a small outlined button to the vendor, and the same bottom block (who to follow, free from us, nobody pays to be featured).
+
 ## Copy tells to avoid
 
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").

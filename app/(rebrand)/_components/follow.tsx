@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import followData from '@/lib/evidence/follow.json'
+import { keepLast } from '@/lib/site-line'
 
 /**
  * Who to follow, set like a cast list: one row of compact cards per
@@ -22,12 +23,16 @@ interface Person {
   photo: string | null
   /** A plain disclosure shown on the card, e.g. who they work for when we rate that company. */
   note?: string
+  /** The group row this person sits in, when it isn't their side's main row. */
+  group?: string
   links: { label: string; url: string }[]
 }
 interface Row {
   side: Side
+  /** A group within a side (e.g. "fraud"); people without a group sit in their side's main row. */
+  group?: string
   title: string
-  lead: string
+  lead?: string
 }
 
 const people = followData.people as Person[]
@@ -65,6 +70,8 @@ export const followCss = `
   @media(max-width:940px){.cast-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
   @media(max-width:700px){.cast-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}.cast-card{padding:14px 14px 12px;}}
   @media(max-width:440px){.cast-grid{grid-template-columns:1fr;}}
+  .follow-on .cast-grid{grid-template-columns:repeat(2,minmax(0,300px));margin-top:14px;}
+  @media(max-width:440px){.follow-on .cast-grid{grid-template-columns:1fr;}}
 `
 
 function initials(name: string) {
@@ -89,8 +96,8 @@ function Card({ p }: { p: Person }) {
       </div>
       <h4>{p.name}</h4>
       <span className="cast-known">{p.known}</span>
-      <p className="cast-why">{p.why}</p>
-      {p.note && <p className="cast-note">{p.note}</p>}
+      <p className="cast-why">{keepLast(p.why)}</p>
+      {p.note && <p className="cast-note">{keepLast(p.note)}</p>}
       <span className="cast-links">
         {p.links.map((l) => (
           <a key={l.url} href={l.url} target="_blank" rel="noopener" aria-label={`${p.name} on ${l.label}`}>
@@ -102,23 +109,38 @@ function Card({ p }: { p: Person }) {
   )
 }
 
+/** "Who to follow on this": up to two people, by id, for an answer or a short list. */
+export function FollowOn({ ids }: { ids: string[] }) {
+  const list = ids.map((id) => people.find((p) => p.id === id)).filter((p): p is Person => !!p).slice(0, 2)
+  if (!list.length) return null
+  return (
+    <div className={`cast-row ${list[0].side} follow-on`}>
+      <div className="cast-grid">
+        {list.map((p) => (
+          <Card p={p} key={p.id} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function WhoToFollow({ side }: { side?: Side }) {
   return (
     <>
       {rows
         .filter((r) => !side || r.side === side)
         .map((r) => (
-          <div className={`cast-row ${r.side}`} key={r.side}>
+          <div className={`cast-row ${r.side}`} key={`${r.side}-${r.group ?? 'main'}`} id={r.group ? `follow-${r.group}` : undefined}>
             <div className="cast-head">
               <h3>
                 <span className={`pill pill-${r.side}`}>{r.side === 'seekers' ? 'For job seekers' : 'For hiring teams'}</span>
                 {r.title}
               </h3>
-              <p>{r.lead}</p>
+              {r.lead && <p>{r.lead}</p>}
             </div>
             <div className="cast-grid">
               {people
-                .filter((p) => p.side === r.side)
+                .filter((p) => p.side === r.side && (p.group ?? null) === (r.group ?? null))
                 .map((p) => (
                   <Card p={p} key={p.id} />
                 ))}

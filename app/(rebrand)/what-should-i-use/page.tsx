@@ -4,17 +4,18 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { RecQuestions, RecAnswer, RecSituations, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
 import { GuidedStepView, RepveraAnswer, SideSwitch, guidedCss } from '@/app/(rebrand)/_components/guided'
-import { isRepveraProblem, stepFor } from '@/lib/evidence/guided'
+import { FRAUD_PROBLEM, isRepveraProblem, stepFor } from '@/lib/evidence/guided'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
 import { TrackOnce } from '@/app/(rebrand)/_components/picker-track'
 import { ScrollToAnswer } from '@/app/(rebrand)/_components/rec-form'
 import { askFromState, recFramework, recommend, situationFor, stateFromParams } from '@/lib/evidence/recommend'
 import { latestCheck } from '@/lib/evidence'
 import { shortDate } from '@/app/(rebrand)/_components/data'
+import { keepLast } from '@/lib/site-line'
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
-const DESCRIPTION =
-  "Tell us what's going wrong and what you need. We cross off every tool that doesn't fit, show you why, and recommend one tool and a cheaper backup, based on public reviews and real prices."
+const DESCRIPTION = `${PICKER_INTRO} Based on public reviews and real prices.`
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
   const sp = await searchParams
@@ -33,7 +34,9 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
 export default async function Page({ searchParams }: { searchParams: SearchParams }) {
   const sp = await searchParams
   const state = stateFromParams(sp)
-  const ask = askFromState(state)
+  // Fake candidates skips team size and budget: one question, then the fraud short list.
+  const fraud = state.side === 'hiring' && state.problem?.id === FRAUD_PROBLEM
+  const ask = fraud ? null : askFromState(state)
   const r = ask ? recommend(ask) : null
   const one = (k: string) => {
     const v = sp[k]
@@ -56,7 +59,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <a href="/">Home</a> / What should I use?
           </p>
           <h1 className="display">What should I use?</h1>
-          <p className="dek">Answer a few quick questions. We recommend one tool and a cheaper backup, with the real&nbsp;price.</p>
+          <p className="dek">{keepLast(PICKER_INTRO)}</p>
           <p className="dateline">
             Ratings and prices checked {shortDate(latestCheck())}. Nobody pays to be featured in an answer.
           </p>
@@ -71,6 +74,12 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <>
               <SideSwitch side={state.side} />
               <GuidedStepView side={state.side} stepId={one('g')} />
+            </>
+          ) : fraud ? (
+            <>
+              <TrackOnce event="picker_start" side={state.side ?? undefined} />
+              <SideSwitch side={state.side} />
+              <GuidedStepView side={state.side} stepId="fraud" back={from === 'all' ? 'all' : undefined} />
             </>
           ) : repvera ? (
             <>
@@ -107,7 +116,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
       {!(r && ask) && !repvera && (
       <>
       <section className="wrap sec" id="common">
-        <h2>Common questions,&nbsp;answered</h2>
+        <h2 className="common-h">Common questions,&nbsp;answered</h2>
         <RecSituations />
         <p className="lead" style={{ marginTop: 28 }}>
           Every answer follows the same rules, and nobody can pay to be in one.{' '}

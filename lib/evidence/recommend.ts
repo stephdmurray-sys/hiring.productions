@@ -1,16 +1,19 @@
 /**
- * The recommendation engine: a visitor’s problem and limits in, one pick out.
+ * The recommendation engine: a visitor’s problem and limits in, a short kit out.
  *
  * The rules live in recommend.json and are the public promise. In short:
  * diagnose first; "no tool" is a real answer; limits rule tools out but
- * never re-score them; unknown is not yes; one pick and one alternative;
- * only scored tools can be the pick; every answer carries what the other
- * side of the table sees, from published research; nothing about
- * commissions is an input; the same situation always gets the same answer.
+ * never re-score them; unknown is not yes; the best match is the top-rated
+ * tool that fits, with up to two alternatives, each carrying one label
+ * (best free option, most complete, Stephanie’s pick); only scored tools can
+ * be the best match; every tool left out is listed with the reason; nothing
+ * about commissions is an input; the same situation always gets the same
+ * answer. The fixed lines around the tools live in kit.ts.
  */
 import ats from '@/lib/scorecards/ats-small-teams.json'
 import data from './recommend.json'
-import { atsScores, cheapestCover, forgetCost, hiringPick, latestCheck, resumeTools, rising, type AtsTool, type ToolEvidence } from './index'
+import { atsScores, cheapestCover, forgetCost, hiringPick, latestCheck, resumeTools, rising, risingPick, type AtsTool, type ToolEvidence } from './index'
+import type { AlsoLabel } from './kit'
 
 export const recFramework = data
 
@@ -51,14 +54,30 @@ export interface Cost {
 }
 
 export interface Candidate {
+  /** The partner id behind /go/{id}, the outbound link. */
+  id: string
   name: string
   domain: string
   href: string
   linkText: string
   score: number
-  /** Why this tool, in plain sentences built from the data. */
+  /** Why this tool, in plain sentences built from the data. The first is the one-sentence reason. */
   reasons: string[]
   cost: Cost | null
+}
+
+/** "Also worth a look": one more tool, with exactly one label and one line. */
+export interface Also {
+  label: AlsoLabel
+  id: string
+  name: string
+  domain: string
+  /** null for a tool too new to score (Stephanie's pick can be one). */
+  score: number | null
+  line: string
+  /** Our review page, if the tool has one. */
+  href: string | null
+  linkText: string | null
 }
 
 export interface OtherSide {
@@ -75,14 +94,15 @@ export interface Recommendation {
   /** The one-line conclusion. */
   headline: string
   pick: Candidate | null
-  alt: (Candidate & { why: string }) | null
+  /** Up to two alternatives, each with one label. */
+  also: Also[]
   ruledOut: { name: string; reasons: string[] }[]
   couldNotCheck: { name: string; reasons: string[] }[]
+  /** Tools that fit everything asked for but rate lower and carry no label: listed under "What we ruled out". */
+  ratedLower: { name: string; reasons: string[] }[]
   nearMiss: { name: string; gap: string } | null
   watching: { name: string; domain: string; what: string }[]
-  /** Stephanie’s pick, labeled as hers: only where nothing can be scored yet. */
-  stephanie: { name: string; domain: string; line: string; href: string } | null
-  /** What the other side of the table sees, from published research. */
+  /** Published research on what the other side of the table sees. Kept on file; answers show Stephanie’s own line instead (kit.ts). */
   otherSide: OtherSide
   guidance: { text: string; href: string } | null
   /** How many tools were considered for this problem. */
@@ -153,12 +173,12 @@ function base(side: 'seekers' | 'hiring', problem: Problem): Recommendation {
     verdict: 'tool',
     headline: '',
     pick: null,
-    alt: null,
+    also: [],
     ruledOut: [],
     couldNotCheck: [],
+    ratedLower: [],
     nearMiss: null,
     watching: [],
-    stephanie: null,
     otherSide: problem.otherSide,
     guidance: problem.guidance ?? null,
     considered: 0,
@@ -173,22 +193,57 @@ function watchingFor(side: 'seekers' | 'hiring', problem: Problem, r: Recommenda
   r.watching = rising.tools
     .filter((t) => t.side === side && problem.categories?.includes(t.category))
     .map((t) => ({ name: t.name, domain: t.domain, what: t.what }))
+  // Stephanie's pick for this category, where the site has one (her sourcing pick).
   if (problem.showFounderPick && problem.categories?.includes(hiringPick.category))
-    r.stephanie = { name: hiringPick.name, domain: hiringPick.domain, line: hiringPick.line, href: hiringPick.url }
+    r.also = [{ label: 'Stephanie’s pick', id: hiringPick.id, name: hiringPick.name, domain: hiringPick.domain, score: null, line: hiringPick.line, href: null, linkText: null }]
   r.headline = `We don’t rate a tool for this yet. ${problem.why}`
 }
 
-/** Pick and alternative from the tools that fit: best score first; the alternative is the best cheaper one, else the next best. */
-function choose<T>(fits: Judged<T>[]): { pick: Judged<T> | null; alt: Judged<T> | null; altWhy: string } {
-  const ranked = [...fits].sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
-  const pick = ranked[0] ?? null
-  if (!pick) return { pick: null, alt: null, altWhy: '' }
-  const rest = ranked.slice(1)
-  const pickCost = pick.cost?.total
-  const cheaper = pickCost !== undefined ? rest.find((t) => t.cost && t.cost.total < pickCost) : undefined
-  if (cheaper) return { pick, alt: cheaper, altWhy: `Costs less: ${money(cheaper.cost!.total)} instead of ${money(pickCost!)}.` }
-  const next = rest[0] ?? null
-  return { pick, alt: next, altWhy: next ? 'The next-highest rated of the tools that fit.' : '' }
+/** The best match: the top-rated of the tools that fit. */
+function rank<T>(fits: Judged<T>[]): Judged<T>[] {
+  return [...fits].sort((a, b) => (b.score ?? 0) - (a.score ?? 0))
+}
+
+/**
+ * "Also worth a look": up to two of the other tools that fit, each with one
+ * label, in this order. A label only goes where the data backs it:
+ * - Best free option: the top-rated tool with a real free version, only when the best match isn't free.
+ * - Most complete: covers the most of what we track (job seekers: checker, builder, tracker), at least as much as the best match.
+ * - Stephanie's pick: her pick for this category, when it fits and isn't the best match.
+ */
+function alsoWorth<T>(
+  ranked: Judged<T>[],
+  { isFree, breadth, stephanieId, toAlso }: { isFree: (j: Judged<T>) => boolean; breadth?: (j: Judged<T>) => number; stephanieId?: string; toAlso: (j: Judged<T>, label: AlsoLabel) => Also },
+): Also[] {
+  const [pick, ...rest] = ranked
+  if (!pick) return []
+  const out: Also[] = []
+  const used = new Set<Judged<T>>()
+  const add = (j: Judged<T> | undefined, label: AlsoLabel) => {
+    if (j && !used.has(j) && out.length < 2) {
+      used.add(j)
+      out.push(toAlso(j, label))
+    }
+  }
+  if (!isFree(pick)) add(rest.find(isFree), 'Best free option')
+  if (breadth) {
+    const most = Math.max(...ranked.map(breadth))
+    if (most >= 2 && breadth(pick) <= most) add(rest.find((j) => !used.has(j) && breadth(j) === most), 'Most complete')
+  }
+  if (stephanieId) add(rest.find((j) => idOf(j) === stephanieId), 'Stephanie’s pick')
+  return out
+}
+
+const idOf = <T>(j: Judged<T>) => ((j.tool as { id?: string }).id ?? slugOf(j.name))
+const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+/** Every tool that fit but didn't make the kit, with its score, for "What we ruled out". */
+function lower<T>(ranked: Judged<T>[], shown: Also[]): { name: string; reasons: string[] }[] {
+  const names = new Set(shown.map((a) => a.name))
+  return ranked
+    .slice(1)
+    .filter((j) => !names.has(j.name))
+    .map((j) => ({ name: j.name, reasons: [`Fits everything you asked for, but rates lower: ${(j.score ?? 0).toFixed(2)} out of 5.`] }))
 }
 
 /** The scored tool closest to fitting: fewest broken limits, then the best score. */
@@ -201,8 +256,8 @@ function closest<T>(all: Judged<T>[]): { name: string; gap: string } | null {
 
 function firstReason(name: string, fitCount: number, noun: string, score: number) {
   return fitCount === 1
-    ? `The only ${noun} that fits everything you asked for (${score.toFixed(2)} out of 5).`
-    : `Top-rated of the ${fitCount} ${noun}s that fit everything you asked for (${score.toFixed(2)} out of 5).`
+    ? `The only ${noun} that fits everything you asked for, at ${score.toFixed(2)} out of 5.`
+    : `The top-rated of the ${fitCount} ${noun}s that fit everything you asked for, at ${score.toFixed(2)} out of 5.`
 }
 
 // ---------------------------------------------------------------- job seekers
@@ -248,7 +303,21 @@ function seekerCandidate(j: Judged<ToolEvidence>, ask: SeekerAsk, fitCount: numb
     reasons.push(`Costs ${money(c.total)} for ${monthsText(ask.months)}.`)
     if (c.ifYouForget && c.ifYouForget > c.total * 1.5) reasons.push(`If you forget to cancel, the year comes to ${money(c.ifYouForget)}. Set a reminder the day you sign up.`)
   }
-  return { name: t.name, domain: t.domain, href: `/reviews/${t.id}`, linkText: `Is ${t.name} worth it?`, score: t.overall!, reasons, cost: c }
+  return { id: t.id, name: t.name, domain: t.domain, href: `/reviews/${t.id}`, linkText: `Is ${t.name} worth it?`, score: t.overall!, reasons, cost: c }
+}
+
+/** Checker, builder, tracker: how many of the three a tool does, from capabilities on file. */
+const seekerBreadth = (j: Judged<ToolEvidence>) => ['checker', 'builder', 'tracker'].filter((k) => capabilities[k]?.includes(j.tool.id)).length
+
+function seekerAlso(j: Judged<ToolEvidence>, label: AlsoLabel): Also {
+  const t = j.tool
+  const line =
+    label === 'Best free option'
+      ? `Free: ${freeDetail(t.freeAnswer)}.`
+      : label === 'Stephanie’s pick' && risingPick.tool === t.id
+        ? risingPick.line
+        : `${t.bestFor}.`
+  return { label, id: t.id, name: t.name, domain: t.domain, score: t.overall, line, href: `/reviews/${t.id}`, linkText: `Is ${t.name} worth it?` }
 }
 
 export function recommendSeeker(ask: SeekerAsk): Recommendation {
@@ -277,7 +346,8 @@ export function recommendSeeker(ask: SeekerAsk): Recommendation {
     else if (j.unknown.length) r.couldNotCheck.push({ name: j.name, reasons: j.unknown })
   }
   const fits = judged.filter((j) => !j.fails.length && !j.unknown.length)
-  const { pick, alt, altWhy } = choose(fits)
+  const ranked = rank(fits)
+  const pick = ranked[0]
 
   if (!pick) {
     r.verdict = 'nothing-fits'
@@ -288,7 +358,13 @@ export function recommendSeeker(ask: SeekerAsk): Recommendation {
     return r
   }
   r.pick = seekerCandidate(pick, ask, fits.length, true)
-  r.alt = alt ? { ...seekerCandidate(alt, ask, fits.length, false), why: altWhy } : null
+  r.also = alsoWorth(ranked, {
+    isFree: (j) => j.cost?.total === 0,
+    breadth: seekerBreadth,
+    stephanieId: risingPick.tool,
+    toAlso: seekerAlso,
+  })
+  r.ratedLower = lower(ranked, r.also)
   r.headline = `${pick.name}. ${r.pick.reasons[0]}`
   return r
 }
@@ -396,14 +472,21 @@ function atsCandidate(j: Judged<AtsTool>, fitCount: number, first: boolean, prob
   else reasons.push('Price by quote: ask for it in writing before the demo.')
   if (j.cost && j.cost.total > 0 && price?.free) reasons.push(`There’s also a free plan to try it on: ${price.free}.`)
   return {
+    id: slugOf(j.name),
     name: j.name,
     domain: j.tool.domain,
-    href: `/reviews/ats/${j.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+    href: `/reviews/ats/${slugOf(j.name)}`,
     linkText: `Is ${j.name} worth it?`,
     score: s.overall,
     reasons,
     cost: j.cost,
   }
+}
+
+function atsAlso(j: Judged<AtsTool>, label: AlsoLabel): Also {
+  const price = prices[j.name]
+  const line = label === 'Best free option' && price?.free ? `Free plan: ${price.free}.` : `${atsScores(j.tool).overall.toFixed(2)} out of 5.`
+  return { label, id: slugOf(j.name), name: j.name, domain: j.tool.domain, score: atsScores(j.tool).overall, line, href: `/reviews/ats/${slugOf(j.name)}`, linkText: `Is ${j.name} worth it?` }
 }
 
 export function recommendHiring(ask: HiringAsk): Recommendation {
@@ -430,7 +513,8 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
     else if (j.unknown.length) r.couldNotCheck.push({ name: j.name, reasons: j.unknown })
   }
   const fits = judged.filter((j) => !j.fails.length && !j.unknown.length)
-  const { pick, alt, altWhy } = choose(fits)
+  const ranked = rank(fits)
+  const pick = ranked[0]
 
   if (!pick) {
     r.verdict = 'nothing-fits'
@@ -451,7 +535,9 @@ export function recommendHiring(ask: HiringAsk): Recommendation {
     return r
   }
   r.pick = atsCandidate(pick, fits.length, true, problem)
-  r.alt = alt ? { ...atsCandidate(alt, fits.length, false, problem), why: altWhy } : null
+  // No feature-breadth data on file for applicant tracking systems, and no Stephanie's pick in this category: only the free label can apply.
+  r.also = alsoWorth(ranked, { isFree: (j) => !!prices[j.name]?.free, toAlso: atsAlso })
+  r.ratedLower = lower(ranked, r.also)
   r.headline = `${pick.name}. ${r.pick.reasons[0]}`
   return r
 }
@@ -577,12 +663,8 @@ export function answerText(r: Recommendation, { short = false }: { short?: boole
     const c = r.pick.cost
     parts.push(c.total === 0 ? 'It costs nothing.' : `About ${money(c.total)} ${r.costSpan}: ${c.how}.`)
   }
-  if (r.alt) parts.push(`The backup pick is ${r.alt.name} (${r.alt.score.toFixed(2)} out of 5). ${r.alt.why}`)
-  if (r.watching.length) parts.push(`New and worth watching (too new to rate): ${listJoin(r.watching.map((w) => w.name))}.`)
-  if (r.ruledOut.length) parts.push(`Didn’t fit: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
-  if (!short) {
-    parts.push(`${r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'}: ${r.otherSide.line} (${r.otherSide.source}.)`)
-    parts.push(`Checked ${r.checked} by hiring.productions.`)
-  }
+  if (r.also.length) parts.push(`Also worth a look: ${listJoin(r.also.map((a) => `${a.name} (${a.label.toLowerCase()})`))}.`)
+  if (r.ruledOut.length) parts.push(`Ruled out: ${r.ruledOut.map((o) => o.name).join(', ')}.`)
+  if (!short) parts.push(`Checked ${r.checked} by hiring.productions.`)
   return parts.filter(Boolean).join(' ')
 }

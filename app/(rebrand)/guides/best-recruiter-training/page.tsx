@@ -54,7 +54,7 @@ function evidenceOnly(src: string): string {
   s = rep(s, '<h2>Ranked for how you recruit</h2>', '<h2>Compared, not ranked</h2>')
   s = s.replace(
     /Public review data is thin in this category, so every row is <b>Research based<\/b> and rankings lean on the Practitioner score\. \*Practitioner scores are in final review\./,
-    'Public review data is too thin in this category to score, so programs are compared, not ranked. Order within each table carries no meaning.',
+    'Public review data is too thin in this category to score, so programs are compared without a rank. Order within each table carries no meaning.',
   )
   s = s.replace(/<span class="review-rank">#\d+ &middot; /g, '<span class="review-rank">')
   return s

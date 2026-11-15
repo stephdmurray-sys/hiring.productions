@@ -1,16 +1,15 @@
 {
-  "_about": "The recommendation framework: how a visitor’s situation and limits turn into one pick. Read by lib/evidence/recommend.ts and rendered on /what-should-i-use. The rules here are the public promise; keep them in plain English. Every otherSide line states a published finding and links to it: no unsourced numbers, no first-person quotes.",
-  "promise": "Tell us what’s going wrong and what you need. We cross off every tool that doesn’t fit, show you why, and recommend one tool and a cheaper backup. Your answers decide which tools fit, and they never change a rating.",
+  "_about": "The recommendation framework: how a visitor’s situation and limits turn into a short kit: the best match, up to two labeled alternatives, and what was ruled out. Read by lib/evidence/recommend.ts and rendered on /what-should-i-use. The rules here are the public promise; keep them in plain English. Every otherSide line states a published finding and links to it: no unsourced numbers, no first-person quotes. Answers no longer show these lines: the slot is reserved for Stephanie’s own copy (kit.ts) and stays hidden until she supplies it.",
+  "promise": "Pick what you’re dealing with. We’ll show you the best match and a couple of alternatives, and tell you what we ruled out.",
   "rules": [
     "Start with what’s going wrong. The right tool depends on the problem you’re trying to fix.",
     "Sometimes the answer is no tool. When software won’t fix it, we say so and point you to what will.",
     "Your answers cross tools off, and they never change a rating. A tool fits everything you asked for or it’s out, and we show you why. The tools that fit stay in rating order, the same for everyone.",
-    "If we can’t confirm it, we don’t recommend it. A tool we can’t confirm meets your needs can’t be the pick. It’s listed under “Couldn’t confirm.”",
-    "We recommend one tool and a cheaper backup. The backup is the top-rated tool that costs you less. If none does, it’s the next-highest rated.",
-    "Only rated tools can be the pick. Tools too new to rate show up as worth watching, labeled that way.",
+    "If we can’t confirm it, we don’t recommend it. A tool we can’t confirm meets your needs can’t be in your answer. It’s listed under what we ruled out, with what we couldn’t confirm.",
+    "You get the best match and up to two alternatives. The best match is the top-rated tool that fits. Each alternative carries one label: best free option, most complete, or Stephanie’s pick, and her pick never changes a score. Every tool we left out is listed with the reason.",
+    "Only rated tools can be the best match. Tools too new to rate stay on our watch list, labeled that way.",
     "Show what you’ll really pay: the cheapest way to pay for your timeline, and what it costs if you forget to cancel.",
     "If nothing fits, say so, and show the closest tool and what’s in the way.",
-    "Every answer includes what the other side of the table sees, from published research, with the source.",
     "Commissions never change the answer. Whether we earn anything from a tool plays no part in any answer.",
     "Same situation, same answer. Every answer has its own link and a date, so you can share it."
   ],
@@ -23,9 +22,9 @@
       "url": "https://doi.org/10.1037/h0032955"
     },
     {
-      "title": "Why you get one tool and a backup",
+      "title": "Why you get a short kit instead of a ranked list",
       "finding": "Pooling 99 results from earlier studies, researchers found that more options leave people less satisfied and less sure of their choice when the choice is complicated, the decision is hard, they aren’t sure what they want, and they want it done quickly.",
-      "usedFor": "A job search or a hiring crunch hits all four, so the answer is one tool and a backup instead of a ranked list of ten.",
+      "usedFor": "A job search or a hiring crunch hits all four, so the answer is the best match and a couple of alternatives instead of a ranked list of ten.",
       "source": "Chernev, A., Bockenholt, U., and Goodman, J. (2015). Choice overload: A conceptual review and meta-analysis. Journal of Consumer Psychology, 25(2), 333-358.",
       "url": "https://www.kellogg.northwestern.edu/faculty/research/detail/2015/when-product-assortment-leads-to-choice-overload-a-conceptual"
     }
@@ -100,7 +99,7 @@
         "categories": [
           "Interview practice"
         ],
-        "why": "This one isn’t your resume, so a resume tool won’t fix it. Practice will. None of the practice tools has enough public reviews to rate yet.",
+        "why": "Getting interviews means your resume is working, so practice is what helps from here. None of the practice tools has enough public reviews to rate yet.",
         "otherSide": {
           "line": "Interview performance is coachable. In a study of 144 people taking structured interviews, those given more thorough coaching earned higher interview ratings. Rehearse out loud, with someone scoring your answers.",
           "source": "Tross, S. A., and Maurer, T. J. (2008). Journal of Occupational and Organizational Psychology",
@@ -269,7 +268,7 @@
         "categories": [
           "AI sourcing"
         ],
-        "why": "This is sourcing: finding good people who haven’t applied. We don’t rate sourcing tools yet, so there’s no pick here, only tools worth watching.",
+        "why": "This is sourcing: finding good people who haven’t applied. We don’t rate sourcing tools yet, so there’s no best match here.",
         "showFounderPick": true,
         "otherSide": {
           "line": "People who aren’t looking can tell a mass message from a real one. LinkedIn’s data shows messages sent one at a time get about 15% more responses than messages sent in bulk.",
@@ -299,7 +298,7 @@
         "id": "training",
         "label": "Our recruiters need training",
         "kind": "no-tool",
-        "why": "Software won’t train a team. Training will.",
+        "why": "A team learns these skills from people who teach them, so start with the training guide.",
         "guidance": {
           "text": "The recruiter training guide",
           "href": "/guides/best-recruiter-training"
@@ -432,7 +431,7 @@
     ],
     "fallback": {
       "text": "Tell us how you hire and get a stack recommendation, free",
-      "href": "/consulting"
+      "href": "/hiring-stack"
     },
     "prices": {
       "_about": "Each system’s cheapest published plan, from its pricing page as quoted in the ATS scorecard (as of 2026-08-22). per: user-month, month or year. maxEmployees: the company size the published price covers; above it, treat the price as a quote. Quote-only systems have no amount. Prices in another currency are never converted.",
@@ -694,19 +693,6 @@
           "hiresPerYear": 35,
           "employees": 50,
           "seats": 3,
-          "budget": null,
-          "must": []
-        }
-      },
-      {
-        "slug": "stop-fake-candidates",
-        "question": "Which applicant tracking systems flag fake candidates?",
-        "ask": {
-          "side": "hiring",
-          "problem": "fake-candidates",
-          "hiresPerYear": 75,
-          "employees": 250,
-          "seats": 10,
           "budget": null,
           "must": []
         }

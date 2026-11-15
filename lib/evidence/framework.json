@@ -66,7 +66,7 @@
     ]
   },
   "limits": [
-    "Most sources publish an average rating, not each review's date, so we can't yet discount older reviews the way G2 does. Where a source offers a last-12-months rating, we use it.",
+    "Most sources publish only an average rating, without each review's date, so we can't yet discount older reviews the way G2 does. Where a source offers a last-12-months rating, we use it.",
     "Independent lists for applicant tracking systems aren't tracked yet, so those scores use user ratings, popularity and value, which share the best-of lists weight."
   ]
 }

@@ -14,7 +14,8 @@ const REC = '/what-should-i-use'
 
 const stepHref = (side: Side, step: string) => `${REC}?side=${side}&g=${step}#questions`
 const problemHref = (side: Side, problem: string, from?: string) => `${REC}?side=${side}&problem=${problem}${from ? `&from=${from}` : ''}#questions`
-const targetHref = (side: Side, to: GuidedTarget, from: string) => ('step' in to ? stepHref(side, to.step) : problemHref(side, to.problem, from))
+const targetHref = (side: Side, to: GuidedTarget, from: string) =>
+  'step' in to ? stepHref(side, to.step) : 'href' in to ? to.href : problemHref(side, to.problem, from)
 
 function Progress({ side, at }: { side: Side; at: number }) {
   const total = GUIDED[side].depth
@@ -47,7 +48,7 @@ export function SideSwitch({ side }: { side: Side }) {
   )
 }
 
-export function GuidedStepView({ side, stepId }: { side: Side; stepId?: string }) {
+export function GuidedStepView({ side, stepId, back }: { side: Side; stepId?: string; back?: string }) {
   if (stepId === 'all') return <WholeList side={side} />
   const step = guidedStep(side, stepId)
   return (
@@ -70,7 +71,7 @@ export function GuidedStepView({ side, stepId }: { side: Side; stepId?: string }
           <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>
         </p>
       )}
-      <Links side={side} back={step.back} />
+      <Links side={side} back={back ?? step.back} />
     </div>
   )
 }

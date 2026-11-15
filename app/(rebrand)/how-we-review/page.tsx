@@ -106,6 +106,17 @@ function radarSection() {
 `
 }
 
+/** Short lists: categories too new to score (lib/evidence/shortlists.ts). The paragraph is Stephanie's (Nov 14, 2026). */
+function shortListSection() {
+  return `
+      <section id="short-lists">
+        <h2>Short lists</h2>
+        <p class="lead">Some categories are too new to score. For those we publish a short list with no scores, and we say so at the top of the page. A category moves to scored rankings once there is enough public data.</p>
+        <p style="margin-top:16px"><a href="/guides/hiring-fraud-tools" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Fraud tools to know</a></p>
+      </section>
+`
+}
+
 /** The sample review's rows: the same parts a real ATS review shows, from the live data. */
 function sampleRatings(b: { user: number; market: number; value: number; overall: number }, asOf: string) {
   const row = (v: number, label: string, when: string) =>
@@ -123,7 +134,7 @@ export default function Page() {
   const breezy = ats.tools.find((t) => t.name === 'Breezy HR')!
   const b = atsScores(breezy)
   const withRadar = html
-    .replace('<section id="refresh">', `${radarSection()}\n      <section id="refresh">`)
+    .replace('<section id="refresh">', `${radarSection()}${shortListSection()}\n      <section id="refresh">`)
     .replace('<section id="sources">', `${researchSections()}${recommendSection()}\n      <section id="sources">`)
     .replace('<a href="#scores" class="on">The four scores</a>', '<a href="#scores" class="on">The four scores</a><a href="#research">The research behind it</a><a href="#judgment">Where Stephanie comes in</a><a href="#recommend">How we pick a tool for you</a>')
     .replace('<!--SAMPLE_RATINGS-->', sampleRatings(b, breezy.sources.g2?.as_of ?? ats.as_of))

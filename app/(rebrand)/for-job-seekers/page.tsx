@@ -64,6 +64,13 @@ export default function Page() {
           logos: [],
         },
         {
+          href: '/is-this-a-real-job',
+          title: 'Is this job even real?',
+          detail: 'The signs to check before you send a resume or anything else.',
+          meta: 'Free checklist',
+          logos: [],
+        },
+        {
           href: '/compare',
           title: 'Down to two tools?',
           detail: 'Any two resume tools side by side: the scores, what each costs, the free versions and a video of each.',

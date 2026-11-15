@@ -59,6 +59,21 @@ const DESTINATIONS: Record<string, string> = {
   deel: 'https://www.deel.com',
   'resume-io': 'https://resume.io',
   huntr: 'https://huntr.co',
+  // Stephanie's sourcing pick (founder-picks.json), shown on the "find people who aren't applying" answer.
+  juicebox: 'https://juicebox.ai',
+  // Fraud tools to know (lib/evidence/shortlists.ts). Each is the company's own site, confirmed Nov 14, 2026;
+  // where the company sells more than this, the link goes to its page for hiring or interviews.
+  tofu: 'https://www.hiretofu.com',
+  'sherlock-ai': 'https://www.withsherlock.ai',
+  'polygraf-ai': 'https://www.polygraf.ai/interview-cheating-ai-detector/',
+  pindrop: 'https://www.pindrop.com/solution/meetings/hiring-fraud/',
+  brighthire: 'https://brighthire.com/solutions/candidate-fraud/zoom/',
+  fabric: 'https://fabrichq.ai/ai-interviewer',
+  'getreal-security': 'https://www.getrealsecurity.com',
+  persona: 'https://withpersona.com/solutions/candidate-verification/',
+  clear: 'https://identity.clearme.com/industries/workforce',
+  iproov: 'https://www.iproov.com',
+  proof: 'https://www.proof.com/use-cases/candidate-fraud',
 }
 
 export async function GET(

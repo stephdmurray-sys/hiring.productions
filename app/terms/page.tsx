@@ -51,7 +51,7 @@ export default function TermsPage() {
         <h2>What the ratings are</h2>
         <p>
           Every score is built from dated public data, the way <a href="/how-we-review">How we review</a> describes. Scores are our reading of
-          that data on the date shown, not a guarantee about any product. Prices and features change; check the vendor&rsquo;s own page before
+          that data on the date shown, and no guarantee about any product. Prices and features change; check the vendor&rsquo;s own page before
           you buy.
         </p>
 

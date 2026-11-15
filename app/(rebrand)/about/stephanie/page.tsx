@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
+import { keepLast } from '@/lib/site-line'
 import Image from 'next/image'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -197,7 +199,7 @@ export default function AboutStephaniePage() {
       <section className="wrap sec ab-close" id="start">
         <h2>Start with the question you already have.</h2>
         <p className="lead">
-          Tell us what&rsquo;s going wrong and what you can spend. We recommend one tool and a cheaper backup, and show you&nbsp;why.
+          {keepLast(PICKER_INTRO)}
         </p>
         <a className="btn btn-indigo" href="/what-should-i-use">
           What should I use?

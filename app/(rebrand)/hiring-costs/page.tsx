@@ -98,7 +98,7 @@ export default function HiringCostsPage() {
             <span className="row-title">The benchmark</span>
             <p>
               SHRM&rsquo;s 2025 medians: $1,200 per non-executive hire, down 27% since 2017, and $10,625 per executive hire, up 113% since
-              2017. Medians, not averages, so one very expensive hire doesn&rsquo;t skew them.
+              2017. These are medians, so one very expensive hire doesn&rsquo;t skew them.
             </p>
           </div>
           <div className="row">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { PICKER_INTRO } from '@/lib/evidence/kit'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { homeCss } from '@/app/(rebrand)/home-css'
@@ -20,8 +21,9 @@ type Item = { href: string; title: string; detail: string; kind: string }
 
 const SEEKERS: Item[] = [
   { href: '/guides/best-resume-tools', kind: 'Guide', title: 'The best resume tools', detail: 'Builders and ATS checkers ranked on public reviews and real prices.' },
-  { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: 'Tell us where your search is stuck and get a tool and a backup, with the real cost.' },
+  { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: PICKER_INTRO },
   { href: '/interview-practice', kind: 'Free tool', title: 'What will they ask me in the interview?', detail: 'Practice the questions structured interviews use, and what a strong answer shows.' },
+  { href: '/is-this-a-real-job', kind: 'Free checklist', title: 'Is this job even real?', detail: 'The signs to check before you send a resume or anything else.' },
   { href: '/guides/best-resume-tools#cost', kind: 'Free tool', title: 'What will your search cost?', detail: 'Every resume tool sorted by the cheapest way to pay for your timeline.' },
   { href: '/compare', kind: 'Comparisons', title: 'Down to two?', detail: 'Any two resume tools side by side.' },
 ]
@@ -29,9 +31,10 @@ const SEEKERS: Item[] = [
 const HIRING: Item[] = [
   { href: '/guides/best-ats-for-small-teams', kind: 'Guide', title: 'Applicant tracking systems by team size', detail: 'Small, growing and scaling teams, each with their own rankings.' },
   { href: '/guides/best-recruiter-training', kind: 'Guide', title: 'Recruiter training and certifications', detail: 'From sourcing and closing to SHRM and HRCI exam prep.' },
-  { href: '/what-should-i-use?side=hiring#questions', kind: 'Free tool', title: 'What should we use?', detail: 'Tell us your team size and what is going wrong, and get a tool and a backup.' },
+  { href: '/what-should-i-use?side=hiring#questions', kind: 'Free tool', title: 'What should we use?', detail: PICKER_INTRO },
   { href: '/interview-scorecard', kind: 'Free tool', title: 'Interview scorecard builder', detail: 'The same questions for every candidate, sent as a PDF and a spreadsheet.' },
   { href: '/hiring-costs', kind: 'Free tool', title: 'What does a hire cost?', detail: 'Cost per hire the way SHRM counts it, next to SHRM’s 2025 medians.' },
+  { href: '/guides/hiring-fraud-tools', kind: 'Short list', title: 'Fraud tools to know', detail: 'Fraud detection companies, sorted by where the fraud shows up. No scores yet.' },
   { href: '/is-this-a-real-candidate', kind: 'Free checklist', title: 'Is this even a real candidate?', detail: 'The FBI’s red flags for fake candidates, as a checklist for interviewers.' },
   { href: '/hiring-stack', kind: 'Free, from Stephanie', title: 'What should our whole hiring stack be?', detail: 'Tell Stephanie about your team and get a named set of tools back by email.' },
   { href: '/compare', kind: 'Comparisons', title: 'Down to two?', detail: 'Any two applicant tracking systems for the same team size, side by side.' },

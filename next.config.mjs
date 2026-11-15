@@ -82,7 +82,11 @@ const map = {
 }
 const RETIRED = Object.entries(map).map(([source, destination]) => ({ source, destination, permanent: false }))
 // Renamed pages keep their old address working for good (308).
-const RENAMED = [{ source: '/consulting', destination: '/hiring-stack', permanent: true }]
+const RENAMED = [
+  { source: '/consulting', destination: '/hiring-stack', permanent: true },
+  // The fake candidates answer became a short list (Nov 14, 2026): its section on applicant tracking systems answers the old question.
+  { source: '/what-should-i-use/stop-fake-candidates', destination: '/guides/hiring-fraud-tools#ats', permanent: true },
+]
 // Whole sections: anything left under these goes to the closest hub.
 const RETIRED_PREFIXES = [
   { source: '/membership/:path*', destination: '/', permanent: false },

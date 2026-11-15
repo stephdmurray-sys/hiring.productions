@@ -81,3 +81,26 @@ export function PickerFeedback({ side, problem }: { side: string; problem: strin
     </div>
   )
 }
+
+/**
+ * For a page the picker can end on (the fraud short list): when the visitor
+ * arrived from the picker (?from=picker), count the finish and ask "Did this
+ * help you decide?". Anyone else sees nothing, and the page stays static.
+ */
+export function PickerArrival({ side, problem }: { side: string; problem: string }) {
+  const [fromPicker, setFromPicker] = useState(false)
+  useEffect(() => {
+    try {
+      setFromPicker(new URLSearchParams(window.location.search).get('from') === 'picker')
+    } catch {
+      // no picker question, nothing breaks
+    }
+  }, [])
+  if (!fromPicker) return null
+  return (
+    <>
+      <TrackOnce event="picker_finish" side={side} problem={problem} />
+      <PickerFeedback side={side} problem={problem} />
+    </>
+  )
+}
