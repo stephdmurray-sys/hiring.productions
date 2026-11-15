@@ -85,35 +85,39 @@ export function GuidedStepView({ side, stepId, back }: { side: Side; stepId?: st
 /** The first guided question, for the homepage: one tap starts the picker. */
 export function GuidedFirst({ side }: { side: Side }) {
   const step = guidedStep(side, 'q1')
+  const tiles = FREE_CHIPS[side]
+  const tileRows = Math.ceil(tiles.length / 2)
+  // One grid row per piece (label, question, each card, links, tools heading, tile rows, suggestion), shared
+  // with the other side through subgrid, so the two sides line up row for row (.g-start in guidedCss).
+  const rows = 2 + step.options.length + 2 + tileRows + 1
   return (
-    <div className={`g-first g-${side}`}>
+    <div className={`g-first g-${side}`} style={{ gridRow: `span ${rows}` }}>
       <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I\u2019m a job seeker' : 'I\u2019m hiring'}</span>
       <h3 className="g-first-q">{keepLast(step.question)}</h3>
-      <div className="g-cards">
-        {step.options.map((o) => (
-          <a className="g-card" href={targetHref(side, o.to, step.id)} key={o.label}>
-            <span>{keepLast(o.label)}</span>
+      {step.options.map((o) => (
+        <a className="g-card" href={targetHref(side, o.to, step.id)} key={o.label}>
+          <span>{keepLast(o.label)}</span>
+          <span className="arr" aria-hidden="true">
+            &rarr;
+          </span>
+        </a>
+      ))}
+      <p className="g-first-links">
+        {step.extra && <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>}
+        <a href={stepHref(side, 'all')}>Show me the whole list</a>
+      </p>
+      <p className="g-free-k">Or go straight to a free tool</p>
+      <div className="g-tiles" style={{ gridRow: `span ${tileRows}` }}>
+        {tiles.map((c) => (
+          <a className="g-tile" href={c.href} key={c.href}>
+            <span>{keepLast(c.label)}</span>
             <span className="arr" aria-hidden="true">
               &rarr;
             </span>
           </a>
         ))}
       </div>
-      <p className="g-first-links">
-        {step.extra && <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>}
-        <a href={stepHref(side, 'all')}>Show me the whole list</a>
-      </p>
-      <div className="g-free">
-        <p className="g-free-k">Or go straight to a free tool</p>
-        <p className="g-chips">
-          {FREE_CHIPS[side].map((c) => (
-            <a className="g-chip" href={c.href} key={c.href}>
-              {c.label}
-            </a>
-          ))}
-        </p>
-        <PickerSuggest side={side} />
-      </div>
+      <PickerSuggest side={side} />
     </div>
   )
 }
@@ -247,11 +251,25 @@ export const guidedCss = `
   .g-seekers .g-progress i.on{background:var(--indigo);}
   .g-hiring .g-progress i.on{background:var(--coral);}
   .g-q{margin:0;text-wrap:balance;}
-  .g-start{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,48px);margin-top:36px;}
-  .g-first-q{font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.015em;line-height:1.15;margin:16px 0 0;}
-  .g-first .g-cards{margin-top:18px;gap:12px;}
-  .g-first .g-card{min-height:64px;padding:16px 20px;font-size:18px;}
-  @media(max-width:860px){.g-start{grid-template-columns:1fr;}}
+  /* The two sides of the homepage picker share every row (subgrid), so cards, links, the dashed line and the tiles sit level. */
+  .g-start{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(28px,4vw,48px);row-gap:0;margin-top:36px;}
+  .g-first{display:grid;grid-template-rows:subgrid;min-width:0;}
+  .g-first > .pill{justify-self:start;align-self:start;}
+  .g-first-q{font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.015em;line-height:1.15;margin:16px 0 18px;align-self:start;}
+  .g-first > .g-card{min-height:64px;padding:16px 20px;font-size:18px;margin-bottom:12px;}
+  .g-first > .g-first-links{align-self:start;margin:4px 0 0;}
+  .g-first > .g-free-k{margin:24px 0 12px;padding-top:20px;border-top:2px dashed var(--rule-2);align-self:end;}
+  .g-tiles{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:subgrid;column-gap:12px;}
+  .g-tile{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:62px;margin-bottom:12px;padding:12px 16px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);font-size:16px;font-weight:800;line-height:1.25;text-wrap:pretty;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
+  .g-tile .arr{flex:none;font-size:18px;}
+  .g-tile:hover,.g-tile:focus-visible{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink);}
+  .g-seekers .g-tile:hover{background:var(--indigo-tint);}
+  .g-hiring .g-tile:hover{background:var(--coral-tint);}
+  .g-first > .g-sug-open,.g-first > .g-sug-done{justify-self:start;align-self:start;margin-top:6px;}
+  .g-first > .g-sug{align-self:start;margin-top:6px;}
+  @media(max-width:860px){.g-start{grid-template-columns:1fr;}.g-first.g-hiring > .pill{margin-top:56px;}}
+  @media(max-width:420px){.g-tile{font-size:15px;padding:12px;}}
+  @media (prefers-reduced-motion: reduce){.g-tile{transition:none;}.g-tile:hover{transform:none;}}
   .g-cards{display:grid;gap:14px;margin-top:28px;}
   .g-first-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 0;font-size:15.5px;font-weight:700;}
   .g-first-links a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;}

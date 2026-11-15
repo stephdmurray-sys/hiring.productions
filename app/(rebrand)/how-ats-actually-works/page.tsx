@@ -54,6 +54,12 @@ export default function Page() {
       url: matching.url,
     },
   ]
+  // The same three findings, read from the hiring side (Nov 15, 2026): the homepage tile "Is software screening them out?" lands here.
+  const hiring = [
+    { big: findings[0].big, text: findings[0].text, todo: 'Read your filters against the job, and cut any requirement a strong hire could do without.', source: findings[0].source, url: findings[0].url },
+    { big: findings[1].big, text: findings[1].text, todo: 'Decide what you’re looking for before anyone reads a resume, and score every applicant on the same things.', source: findings[1].source, url: findings[1].url },
+    { big: findings[2].big, text: findings[2].text, todo: 'Keep a person reading the shortlist, and know what your system ranks on.', source: findings[2].source, url: findings[2].url },
+  ]
   const url = `${SITE}${PATH}`
   const ld = graph(
     {
@@ -89,6 +95,9 @@ export default function Page() {
         title="What does the screening software do to my resume?"
         dek="Here’s what published research and the systems’ own product pages say happens to your resume, and what to do about each one."
       />
+      <p className="wrap ats-jump">
+        Hiring? <a className="tl" href="#hiring">Read it from your side of the&nbsp;table</a>
+      </p>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="findings">
         <StepHead title="What the other side of the table says" sub="Each finding links to its source." />
@@ -122,6 +131,34 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="wrap sec sl-sec sl-sec-hiring" id="hiring">
+        <StepHead title="If you’re the one hiring: are qualified people getting screened out?" sub="The same research, and what to do about it from your side of the table." />
+        <div className="ats-finds ats-finds-hiring">
+          {hiring.map((f) => (
+            <article className="ats-find" key={f.big}>
+              <p className="ats-big">{f.big}</p>
+              <p className="ats-text">{keepLast(f.text)}</p>
+              <p className="ats-todo">
+                <b>What to do: </b>
+                {keepLast(f.todo)}
+              </p>
+              <a className="ats-src" href={f.url} rel="nofollow noopener" target="_blank">
+                Source: {f.source}
+              </a>
+            </article>
+          ))}
+        </div>
+        <div className="sl-callout">
+          <Squiggle className="slc-squig" />
+          <p className="sl-text">{keepLast('A scorecard sets what you’re looking for before anyone reads a resume, so every applicant is read against the same things.')}</p>
+          <p className="tp-cta">
+            <a className="btn btn-coral" href="/interview-scorecard">
+              Build a free scorecard <span className="arr">&rarr;</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
       <div className="sec" />
       <SiteFooter />
     </>
@@ -136,4 +173,8 @@ const css = `
   .ats-todo{margin:4px 0 0;padding:12px 14px;background:var(--indigo-tint);border:2px solid var(--ink);border-radius:12px;font-size:16px;line-height:1.5;color:var(--ink);}
   .ats-src{margin-top:auto;font-size:13.5px;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;}
   .ats-src:hover{color:var(--ink);}
+  .ats-jump{margin-top:28px;font-size:16px;font-weight:700;color:var(--ink-2);}
+  .ats-finds-hiring .ats-big{color:var(--coral-text);}
+  .ats-finds-hiring .ats-todo{background:var(--coral-tint);}
+  #hiring .sl-callout{margin-top:40px;}
 `

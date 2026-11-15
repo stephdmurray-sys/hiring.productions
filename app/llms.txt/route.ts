@@ -64,7 +64,7 @@ ${situations()
 
 ## Free tool for job seekers
 
-- [What will they ask me in the interview?](${BASE}/interview-practice): practice the questions structured interviews use, the follow-ups you will hear, and what a strong answer shows, from the US Office of Personnel Management's method (the same content hiring teams get from the interview scorecard).
+- [What will they ask me in the interview?](${BASE}/interview-practice): practice the questions structured interviews use, the follow-ups you will hear, what a strong answer shows, and what to ask them at the end, from the US Office of Personnel Management's method (the same content hiring teams get from the interview scorecard).
 
 ## Free tools for hiring teams
 
@@ -76,7 +76,7 @@ ${situations()
 - [What will your job search cost?](${BASE}/build-your-stack): a stack builder. Click a resume builder, checker, job tracker, proof and interview practice into your stack; it shows the cost for your timeline (1 to 12 months, the cheapest published way to pay), the first year if you forget to cancel, and the $0 version. A tool that covers several parts is paid for once. A link opens the same stack.
 - [What will your hiring tools cost?](${BASE}/build-your-stack/hiring): the same for hiring teams. An applicant tracking system priced for your seats and company size from its cheapest published plan, plus the free scorecard, fraud checklist and cost per hire tools. Tools with no published price are listed and left out of the total.
 - [The $0 job search](${BASE}/free-job-search): the resume tools we rate that have a free version you can keep using, what each free plan includes, and the free tools on this site.
-- [What does the screening software do to my resume?](${BASE}/how-ats-actually-works): sourced findings only. Harvard Business School and Accenture (2021): 88% of employers agreed qualified, high-skilled candidates get screened out for not matching a job description's exact criteria. Ladders (2018): a recruiter's first pass averaged 7.4 seconds. Greenhouse's product page (February 2026) on AI-assisted matching that leaves the decision to a person.
+- [What does the screening software do to my resume?](${BASE}/how-ats-actually-works): sourced findings only. Harvard Business School and Accenture (2021): 88% of employers agreed qualified, high-skilled candidates get screened out for not matching a job description's exact criteria. Ladders (2018): a recruiter's first pass averaged 7.4 seconds. Greenhouse's product page (February 2026) on AI-assisted matching that leaves the decision to a person. A section for hiring teams reads the same findings from their side.
 - [Is this best-of list paid for?](${BASE}/is-this-list-paid-for): the four checks we run on every best-of list (owner conflict, ranks itself, lead page, out of date), with what we found on each list we track.
 - [How do I show employers how I work before the interview?](${BASE}/show-how-you-work): three steps. Receipts from people who have worked with you (RepVera, built by Stephanie Murray and never scored), your work if people can see it, and where to put the link.
 - [Is this job even real?](${BASE}/is-this-a-real-job): the signs of a fake job posting or a fake recruiter, what to do, and where to report it (reportfraud.ftc.gov).

@@ -62,8 +62,9 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
           { label: 'Yes, but no offers', to: { step: 'q2b' } },
           // Nov 15, 2026: people at the start of a search had no answer to "Are you getting interviews?"
           { label: 'I haven’t started applying yet', to: { step: 'q2c' } },
+          // Nov 15, 2026: a card of its own, so both sides of the homepage picker have four.
+          { label: 'I’m losing track of my applications', to: { problem: 'losing-track' } },
         ],
-        extra: { label: 'Something else: I’m losing track of my applications', to: { problem: 'losing-track' } },
         back: null,
       },
       {
@@ -278,21 +279,23 @@ export const ASK_FOR_IT = {
 
 /** Free tools to go straight to, one row per side, under the first question on the homepage. */
 export const FREE_CHIPS: Record<Side, { label: string; href: string }[]> = {
+  // Four a side, in mirrored pairs: row by row, the same question from each side of the table.
+  // Ordered by the research Stephanie asked for (Nov 15, 2026): real or fake first, then interview
+  // questions (the most searched job topic), then screening software, then cost.
   seekers: [
-    { label: 'What will my search cost?', href: '/build-your-stack' },
     { label: 'Is this job even real?', href: '/is-this-a-real-job' },
-    { label: 'The $0 job search', href: '/free-job-search' },
-    { label: 'Interview practice', href: '/interview-practice' },
-    { label: 'Which tools keep charging you?', href: '/pricing-traps' },
+    { label: 'What will they ask me?', href: '/interview-practice' },
+    { label: 'Is software screening me out?', href: '/how-ats-actually-works' },
+    { label: 'What will my search cost?', href: '/build-your-stack' },
   ],
   hiring: [
+    { label: 'Is this candidate even real?', href: '/is-this-a-real-candidate' },
+    { label: 'What should we ask them?', href: '/interview-scorecard' },
+    { label: 'Is software screening them out?', href: '/how-ats-actually-works#hiring' },
     { label: 'What will our tools cost?', href: '/build-your-stack/hiring' },
-    { label: 'Interview scorecard', href: '/interview-scorecard' },
-    { label: 'What a hire costs', href: '/hiring-costs' },
-    { label: 'Fraud tools to know', href: '/guides/hiring-fraud-tools' },
-    { label: 'Is this a real candidate?', href: '/is-this-a-real-candidate' },
   ],
 }
+
 
 /** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */
 export const FRAUD_QUESTION = { question: 'Which applicant tracking systems flag fake candidates?', href: `${FRAUD_PAGE}#ats` }

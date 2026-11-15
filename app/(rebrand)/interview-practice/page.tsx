@@ -7,6 +7,7 @@ import { Capture } from '@/app/(rebrand)/_components/capture'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
 import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { SCORECARD_MAX, cleanRole, pickCompetencies, scorecardData as data } from '@/lib/scorecard'
+import { keepLast } from '@/lib/site-line'
 
 /**
  * "What will they ask me in the interview?": interview practice for job
@@ -273,6 +274,34 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
           />
         </section>
       )}
+
+      {/* Nov 15, 2026: questions to ask the interviewer, the most searched interview topic (Ciphr, Semrush data). Built from the method above. */}
+      <section className="wrap sec" id="ask-them">
+        <h2>What should I ask them at the end?</h2>
+        <p className="lead">{keepLast('Ask for the things they score you on. In a structured interview those are set before you walk in, so they can tell you.')}</p>
+        <ul className="ip-rules">
+          <li>
+            <b>Which skills are you rating in this interview?</b>
+            <span>{keepLast('Every answer is rated against the skills the job needs. Knowing them tells you which examples to use next round.')}</span>
+          </li>
+          <li>
+            <b>What does a strong answer look like on this team?</b>
+            <span>{keepLast('Interviewers rate against set examples of a weak, average and strong answer. This asks them to describe the strong one.')}</span>
+          </li>
+          <li>
+            <b>What does doing this job well look like a few months in?</b>
+            <span>{keepLast('It tells you what they will measure once you start, and gives you something specific to answer in your follow-up.')}</span>
+          </li>
+          <li>
+            <b>Who else will I meet, and what is each of them looking for?</b>
+            <span>{keepLast('So you bring a different example for each person, matched to what they rate.')}</span>
+          </li>
+          <li>
+            <b>What happens next, and when should I expect to hear from you?</b>
+            <span>{keepLast('So you know when a follow-up is fair, and when silence means something.')}</span>
+          </li>
+        </ul>
+      </section>
 
       <section className="wrap sec no-print" id="other-side">
         <aside className="other" aria-label="What the hiring side sees">
