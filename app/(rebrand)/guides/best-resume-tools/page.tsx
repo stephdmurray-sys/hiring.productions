@@ -444,7 +444,10 @@ export default function Page() {
         </div>
         <p className="boxnote">
           <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
-          then charge to download anything but plain&nbsp;text.
+          then charge to download anything but plain&nbsp;text.{' '}
+          <a className="tl" href="/pricing-traps">
+            Which tools keep charging you
+          </a>
         </p>
       </section>
 

@@ -35,6 +35,15 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     alternates: { canonical: compareHref(pair) },
     title: `${c.a.name} vs ${c.b.name}: Which Is Better? Ratings, Price and Free Version (2026)`,
     description: `${c.verdict} ${c.a.name} and ${c.b.name} side by side: user ratings, what they really cost, the free versions and a video of each.`,
+    openGraph: {
+      type: 'article',
+      url: `https://hiring.productions${compareHref(pair)}`,
+      title: `${c.a.name} or ${c.b.name}? ${c.a.overall.toFixed(2)} vs ${c.b.overall.toFixed(2)}, checked ${shortDate(c.asOf)}`,
+      description: c.verdict,
+      siteName: 'hiring.productions',
+      authors: ['Stephanie Murray'],
+    },
+    twitter: { card: 'summary_large_image', title: `${c.a.name} or ${c.b.name}?`, description: c.verdict },
   }
 }
 
@@ -87,6 +96,7 @@ const css = `
   .fit p{font-size:17px;color:var(--ink-2);margin-top:12px;line-height:1.6;}
   .fit p b{color:var(--ink);}
   .vid-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .cmp-note{margin-top:14px;max-width:760px;font-size:16.5px;line-height:1.55;color:var(--ink-2);padding:12px 16px;border-left:4px solid var(--ink);background:var(--surface);}
   .cmp-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:32px;border-radius:var(--r-lg);}
   .k-resume .cmp-cta{background:var(--indigo-tint);}
   .k-ats .cmp-cta{background:var(--coral-tint);}
@@ -204,6 +214,7 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
             {a.name} or {b.name}?
           </h1>
           <p className="dek">{verdict}</p>
+          {c.note && <p className="cmp-note">{c.note}</p>}
           <p className="dateline">
             Two of the {c.group} we rate &middot; ratings and prices as of {asOf} &middot; next check {formatMonth(evidenceGuide.nextCheck)}
           </p>

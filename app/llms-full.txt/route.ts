@@ -17,6 +17,7 @@ import {
 } from '@/lib/evidence'
 import { answerText, recFramework, recommend, situations } from '@/lib/evidence/recommend'
 import { buildComparison, comparePairs } from '@/lib/compare'
+import { trapFacts, trapHref, trapTools } from '@/lib/pricing-traps'
 
 /**
  * llms-full.txt: the whole review site as one plain-text file, for AI
@@ -69,6 +70,57 @@ function tool(t: ToolEvidence): string {
   return lines.filter((l) => l !== null).join('\n')
 }
 
+/**
+ * The machine-readable block at the top of the file: every rated tool with its score, the date it was
+ * checked, what 3 months and a forgotten first year cost, and the outside ratings behind the score.
+ */
+function dataBlock() {
+  const { all } = resumeTools()
+  return {
+    site: BASE,
+    checked: latestCheck(),
+    method: `${BASE}/how-we-review`,
+    nobodyPaysToBeFeatured: true,
+    weights: { users: WEIGHTS.user, popularity: WEIGHTS.market, bestOfLists: WEIGHTS.critics, value: WEIGHTS.value },
+    author: { name: 'Stephanie Murray', role: 'Founder, 20 years in talent acquisition', url: `${BASE}/about/stephanie` },
+    resumeTools: all.map((t) => {
+      const f = trapFacts(t)
+      return {
+        name: t.name,
+        kind: t.segment === 'checker' ? 'ATS resume checker' : 'resume builder',
+        review: `${BASE}/reviews/${t.id}`,
+        overall: t.overall,
+        rank: t.overall !== null ? t.rank : null,
+        checked: latestCheck(),
+        freeVersion: FREE_LEVEL_LABEL[t.freeLevel],
+        pricing: t.pricingLine,
+        threeMonthSearchUSD: f.threeMonths,
+        firstYearIfYouForgetToCancelUSD: f.firstYearIfForgotten,
+        billsEvery4Weeks: f.renews4w,
+        pricingTrapPage: trapTools().some((x) => x.id === t.id) ? `${BASE}${trapHref(t.id)}` : null,
+        outsideRatings: t.ratings.map((r) => ({ source: r.platform, rating: r.rating, reviews: r.reviews, read: r.asOf, counted: !r.droppedBecause })),
+        listsThatNameIt: t.counted.map((a) => a.list.publication),
+      }
+    }),
+    applicantTrackingSystems: [...ats.tools]
+      .sort((a, b) => atsScores(b).overall - atsScores(a).overall)
+      .map((t) => ({
+        name: t.name,
+        rankedFor: TEAM[t.segment],
+        review: `${BASE}/reviews/ats/${t.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+        overall: Number(atsScores(t).overall.toFixed(2)),
+        checked: ats.as_of,
+        pricing: t.sources.pricing,
+        freePlan: !!t.sources.free_tier,
+        outsideRatings: [
+          t.sources.g2 ? { source: 'G2', rating: t.sources.g2.rating, reviews: t.sources.g2.reviews, read: t.sources.g2.as_of } : null,
+          t.sources.capterra ? { source: 'Capterra', rating: t.sources.capterra.rating, reviews: t.sources.capterra.reviews, read: t.sources.capterra.as_of } : null,
+        ].filter(Boolean),
+      })),
+    bestOfListsChecked: benchmarks.map((l) => ({ publication: l.publication, title: l.title, url: l.url, status: l.status, checked: l.checked })),
+  }
+}
+
 export function GET() {
   const { checkers, builders, all } = resumeTools()
   const counting = benchmarks.filter((l) => l.status === 'counts')
@@ -80,6 +132,24 @@ export function GET() {
 > Hiring tools ranked for job seekers and hiring teams, made by Stephanie Murray (20 years in talent acquisition). This file holds every score, every part of every score, prices and sources, in plain text. The short map is ${BASE}/llms.txt. Every number has a dated source on the linked page; please link the page you quote.
 
 Evidence last checked: ${latestCheck()}. Re-checked monthly.
+
+## Data (JSON)
+
+Every score, date, cost and source below, in one block for machines. The same numbers are in plain text further down and on the linked pages.
+
+\`\`\`json
+${JSON.stringify(dataBlock(), null, 1)}
+\`\`\`
+
+## Pricing traps: tools that bill every 4 weeks
+
+${trapTools()
+  .map((t) => {
+    const f = trapFacts(t)
+    return `- ${t.name} (${BASE}${trapHref(t.id)}): ${t.pricingLine}. A 3-month search costs ${f.threeMonths !== null ? money(f.threeMonths) : 'n/a'}; the first year costs ${f.firstYearIfForgotten !== null ? money(f.firstYearIfForgotten) : 'n/a'} if you forget to cancel. 13 charges a year. Checked ${f.checked}.`
+  })
+  .join('\n')}
+- Every resume tool by first-year cost if you forget to cancel: ${BASE}/pricing-traps
 
 ## Who is behind it
 

@@ -1,6 +1,6 @@
 import followData from '@/lib/evidence/follow.json'
 import ats from '@/lib/scorecards/ats-small-teams.json'
-import { WEIGHTS, latestCheck, atsScores, type ToolEvidence } from '@/lib/evidence'
+import { WEIGHTS, cheapestCover, forgetCost, latestCheck, atsScores, plansFor, type ToolEvidence } from '@/lib/evidence'
 import { seekerBoard, hiringBoard } from './data'
 
 /**
@@ -14,6 +14,60 @@ import { seekerBoard, hiringBoard } from './data'
 
 export const SITE = 'https://hiring.productions'
 const ORG = { '@id': `${SITE}/#organization` }
+/** Stephanie Murray, defined once in the site-wide graph (app/layout.tsx): founder, 20 years in talent acquisition. */
+export const PERSON = { '@id': `${SITE}/#person` }
+
+const usd = (n: number) => (Number.isInteger(n) ? `$${n.toLocaleString('en-US')}` : `$${n.toFixed(2)}`)
+
+/** Each published plan as an Offer, with how long one payment lasts, so "every 4 weeks" is machine-readable (P28D). */
+export function toolOffers(t: ToolEvidence) {
+  const offers: Record<string, unknown>[] = plansFor(t.id).map((p) => ({
+    '@type': 'Offer',
+    name: p.label,
+    price: p.price,
+    priceCurrency: 'USD',
+    ...(p.once
+      ? { description: 'Paid once' }
+      : {
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: p.price,
+            priceCurrency: 'USD',
+            billingDuration: `P${p.days}D`,
+            ...(p.trial ? { description: `Trial: renews automatically after ${p.days} days` } : {}),
+          },
+        }),
+  }))
+  if (t.freeLevel === 'full') offers.unshift({ '@type': 'Offer', name: 'Free version', price: 0, priceCurrency: 'USD' })
+  return offers
+}
+
+/** The four pricing questions people ask about a resume tool, answered from the plans on file. Shown on the page and in FAQPage markup. */
+export function pricingFaqs(t: ToolEvidence): { q: string; a: string }[] {
+  const three = cheapestCover(t.id, 90)
+  const forget = forgetCost(t.id, 90)
+  const out: { q: string; a: string }[] = [{ q: `Is ${t.name} free?`, a: t.freeAnswer }]
+  if (three)
+    out.push({
+      q: `What does ${t.name} cost for a 3-month job search?`,
+      a: `${usd(three.total)}, the cheapest published way to pay for 3 months: ${three.steps.join(', then ').toLowerCase()}. Checked ${latestCheck()}.`,
+    })
+  if (three && forget !== null)
+    out.push({
+      q: `What does ${t.name} cost if I forget to cancel?`,
+      a:
+        forget > three.total + 0.005
+          ? `${usd(forget)} for the first year, if you pay for a 3-month search and the plan keeps renewing. Set a reminder the day you sign up.`
+          : `${usd(forget)} for the first year. The plan doesn’t renew inside a year, so forgetting to cancel costs nothing extra.`,
+    })
+  out.push({
+    q: `Does ${t.name} renew every 4 weeks?`,
+    a: t.yearCost?.renewsEvery4Weeks
+      ? `Yes. ${t.pricingLine.split('·')[0].trim()}. That’s 13 charges a year, and a year comes to ${usd(t.yearCost.amount)} if you never cancel.`
+      : `No. Its plans: ${t.pricingLine}.`,
+  })
+  return out
+}
 
 export function JsonLd({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
@@ -47,16 +101,25 @@ export function toolReviewLd(t: ToolEvidence) {
     applicationSubCategory: t.segment === 'checker' ? 'ATS resume checker' : 'Resume builder',
     operatingSystem: 'Web',
     additionalProperty: props,
+    offers: toolOffers(t),
     ...(t.overall !== null
       ? {
           review: {
             '@type': 'Review',
             url: page,
-            author: ORG,
+            name: `Is ${t.name} worth it?`,
+            author: PERSON,
             publisher: ORG,
             datePublished: latestCheck(),
+            dateModified: latestCheck(),
             reviewBody: t.call.line,
-            reviewRating: { '@type': 'Rating', ratingValue: t.overall, bestRating: 5, worstRating: 1 },
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: t.overall,
+              bestRating: 5,
+              worstRating: 1,
+              ratingExplanation: `Built from dated public data: users ${WEIGHTS.user * 100}%, popularity ${WEIGHTS.market * 100}%, best-of lists ${WEIGHTS.critics * 100}%, value ${WEIGHTS.value * 100}%. Nobody pays to be scored.`,
+            },
           },
         }
       : {}),

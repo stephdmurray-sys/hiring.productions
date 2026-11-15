@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { moneyLine } from '@/lib/money'
-import { toolReviewLd, SITE } from '@/app/(rebrand)/_components/structured'
+import { toolReviewLd, pricingFaqs, SITE } from '@/app/(rebrand)/_components/structured'
+import { trapHref, trapTools } from '@/lib/pricing-traps'
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -57,10 +58,15 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { tool } = await params
   const t = find(tool)
   if (!t) return {}
+  const title = `Is ${t.name} Worth It? ${t.name} Review, Real Cost and Alternatives (2026)`
+  const description = `${t.name} ${SEGMENT[t.segment]} review: ${t.call.line} Pricing, what a year really costs, which independent lists name it, demo videos and the best alternatives. Checked ${shortDate(latestCheck())}.`
+  const ogTitle = t.overall !== null ? `${t.name}: ${t.overall.toFixed(2)} out of 5, checked ${shortDate(latestCheck())}` : `${t.name}: not scored yet, checked ${shortDate(latestCheck())}`
   return {
     alternates: { canonical: `/reviews/${t.id}` },
-    title: `Is ${t.name} Worth It? ${t.name} Review, Real Cost and Alternatives (2026)`,
-    description: `${t.name} ${SEGMENT[t.segment]} review: ${t.call.line} Pricing, what a year really costs, which independent lists name it, demo videos and the best alternatives. Checked ${shortDate(latestCheck())}.`,
+    title,
+    description,
+    openGraph: { type: 'article', url: `${SITE}/reviews/${t.id}`, title: ogTitle, description: t.call.line, siteName: 'hiring.productions', modifiedTime: latestCheck(), authors: ['Stephanie Murray'] },
+    twitter: { card: 'summary_large_image', title: ogTitle, description: t.call.line },
   }
 }
 
@@ -105,25 +111,8 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
     ? `${t.name} ranks #${t.rank} of the ${ratedPeers} ${SEGMENT_PLURAL[t.segment]} with enough reviews for a score, at ${t.overall?.toFixed(2)} out of 5.`
     : `${t.name} doesn't have enough public reviews for a score yet (${formatCount(t.citableReviews)} of the ${MIN_REVIEWS} we require).`
 
-  const faqs: { q: string; a: string }[] = [
-    { q: `Is ${t.name} worth it?`, a: `${verdictLine} ${t.call.line}` },
-    {
-      q: `Is ${t.name} free?`,
-      a: t.freeAnswer,
-    },
-    {
-      q: `How much does ${t.name} cost for a year?`,
-      a: t.yearCost
-        ? `${t.yearCost.approx ? 'About ' : ''}${money(t.yearCost.amount)} (${t.yearCost.how.toLowerCase()}), from the published pricing as of ${shortDate(checked)}.`
-        : `${t.pricingLine}.`,
-    },
-  ]
-  if (t.yearCost?.renewsEvery4Weeks) {
-    faqs.push({
-      q: `Does ${t.name} renew automatically?`,
-      a: `Yes. ${t.pricingLine.split('·')[0].trim()}. That's 13 charges a year, not 12, so a year costs ${money(t.yearCost.amount)} if you never cancel.`,
-    })
-  }
+  // Worth it, then the four pricing questions people ask (the same answers go into the FAQPage markup), then the alternative.
+  const faqs: { q: string; a: string }[] = [{ q: `Is ${t.name} worth it?`, a: `${verdictLine} ${t.call.line}` }, ...pricingFaqs(t)]
   if (bestAlt) {
     faqs.push({
       q: `What's the best alternative to ${t.name}?`,
@@ -282,8 +271,15 @@ export default async function ReviewPage({ params }: { params: Promise<Params> }
         <h2>What {t.name} really costs</h2>
         <p className="lead">
           <b>Is it free?</b> {t.freeAnswer}{' '}
-          {t.yearCost?.renewsEvery4Weeks && <b className="rv-warn">That&rsquo;s 13 charges a year, not 12.</b>}
+          {t.yearCost?.renewsEvery4Weeks && <b className="rv-warn">That&rsquo;s 13 charges a year.</b>}
         </p>
+        {trapTools().some((x) => x.id === t.id) && (
+          <p style={{ marginTop: 14, fontSize: 17, fontWeight: 700 }}>
+            <a className="tl" href={trapHref(t.id)}>
+              How {t.name}&rsquo;s 4-week billing works, and the free alternatives <span className="arr">&rarr;</span>
+            </a>
+          </p>
+        )}
         {costRows[0].on && (
           <div className="tscroll">
             <table className="ledger rv-cost">

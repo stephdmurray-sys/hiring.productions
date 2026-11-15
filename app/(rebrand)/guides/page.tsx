@@ -22,6 +22,7 @@ type Item = { href: string; title: string; detail: string; kind: string }
 const SEEKERS: Item[] = [
   { href: '/guides/best-resume-tools', kind: 'Guide', title: 'The best resume tools', detail: 'Builders and ATS checkers ranked on public reviews and real prices.' },
   { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: PICKER_INTRO },
+  { href: '/pricing-traps', kind: 'Pricing check', title: 'Which resume tools keep charging you?', detail: 'Every resume tool by what the first year costs if you forget to cancel, and which bill every 4 weeks.' },
   { href: '/free-job-search', kind: 'Free list', title: 'The $0 job search', detail: 'The resume tools with a real free version, what free gets you, and the free tools on this site.' },
   { href: '/how-ats-actually-works', kind: 'Explainer', title: 'What does the screening software do to my resume?', detail: 'What published research and the systems’ own product pages say, and what to do about each one.' },
   { href: '/show-how-you-work', kind: 'Free checklist', title: 'How do I show employers how I work before the interview?', detail: 'Proof from the people who have worked with you and from your work, in three steps.' },

@@ -1,4 +1,5 @@
 import { atsProfiles } from '@/lib/ats-profiles'
+import { trapHref, trapTools } from '@/lib/pricing-traps'
 import { MetadataRoute } from 'next'
 import { resumeTools } from '@/lib/evidence'
 import { situations } from '@/lib/evidence/recommend'
@@ -51,6 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/how-ats-actually-works', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/is-this-list-paid-for', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/show-how-you-work', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/pricing-traps', priority: 0.9, changeFrequency: 'monthly' },
+    ...trapTools().map((t) => ({ path: trapHref(t.id), priority: 0.9, changeFrequency: 'monthly' as const })),
     { path: '/is-this-a-real-job', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),

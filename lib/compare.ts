@@ -10,7 +10,17 @@ import { ATS_TIER, atsAsOfDate, atsInTier, atsProfile, atsSlug, type AtsProfile 
  * hand, so the comparison can't drift from the reviews.
  */
 
-export type ComparePair = { slug: string; kind: 'resume' | 'ats'; a: string; b: string }
+export type ComparePair = { slug: string; kind: 'resume' | 'ats'; a: string; b: string; searched?: boolean }
+
+/**
+ * Pairs people search for even though the tools sit in different groups (Nov 15, 2026): a resume checker
+ * against a builder, or systems we rank for different team sizes. Same scores and prices as every other
+ * comparison, with a plain note on what makes the two different.
+ */
+const SEARCHED_PAIRS: { kind: 'resume' | 'ats'; a: string; b: string }[] = [
+  { kind: 'resume', a: 'teal', b: 'kickresume' },
+  { kind: 'ats', a: 'manatal', b: 'greenhouse' },
+]
 
 const resumeSlug = (t: ToolEvidence) => t.id
 
@@ -29,6 +39,7 @@ export function comparePairs(): ComparePair[] {
       for (let j = i + 1; j < ts.length; j++)
         out.push({ slug: `${atsSlug(ts[i].name)}-vs-${atsSlug(ts[j].name)}`, kind: 'ats', a: atsSlug(ts[i].name), b: atsSlug(ts[j].name) })
   }
+  for (const s of SEARCHED_PAIRS) if (!out.some((p) => (p.a === s.a && p.b === s.b) || (p.a === s.b && p.b === s.a))) out.push({ ...s, slug: `${s.a}-vs-${s.b}`, searched: true })
   return out
 }
 
@@ -146,6 +157,8 @@ export interface Comparison {
   a: Side
   b: Side
   group: string
+  /** For a searched pair across groups: what makes the two different, in plain words. */
+  note?: string
   asOf: string
   wins: Win[]
   verdict: string
@@ -158,20 +171,24 @@ export function buildComparison(slug: string): Comparison | undefined {
   const pair = comparePair(slug)
   if (!pair) return undefined
   let a: Side, b: Side, group: string, asOf: string
+  let note: string | undefined
   if (pair.kind === 'resume') {
     const all = resumeTools().all
     const ta = all.find((t) => t.id === pair.a)!
     const tb = all.find((t) => t.id === pair.b)!
     a = resumeSide(ta)
     b = resumeSide(tb)
-    group = ta.segment === 'checker' ? 'resume checkers' : 'resume builders'
+    group = pair.searched ? 'resume tools' : ta.segment === 'checker' ? 'resume checkers' : 'resume builders'
+    if (pair.searched) note = `${ta.name} is ranked with resume ${ta.segment}s and ${tb.name} with resume ${tb.segment}s, scored the same way. ${ta.name}: ${lower(ta.bestFor)}. ${tb.name}: ${lower(tb.bestFor)}.`
     asOf = latestCheck()
   } else {
     const pa = atsProfile(pair.a)!
     const pb = atsProfile(pair.b)!
     a = atsSide(pa)
     b = atsSide(pb)
-    group = `applicant tracking systems for ${ATS_TIER[pa.tier].toLowerCase()}`
+    group = pair.searched ? 'applicant tracking systems' : `applicant tracking systems for ${ATS_TIER[pa.tier].toLowerCase()}`
+    if (pair.searched)
+      note = `We rank ${pa.t.name} for ${ATS_TIER[pa.tier].toLowerCase()} and ${pb.t.name} for ${ATS_TIER[pb.tier].toLowerCase()}. They’re scored the same way, so the numbers compare, but each is built for a different size of team.`
     asOf = atsAsOfDate
   }
   const wins: Win[] = []
@@ -226,7 +243,7 @@ export function buildComparison(slug: string): Comparison | undefined {
     wins.push({
       what: 'No billing every 4 weeks',
       winner: safe.name,
-      line: `${trap.name} renews every 4 weeks, which is 13 charges a year, not 12.`,
+      line: `${trap.name} renews every 4 weeks, which is 13 charges a year.`,
       says: 'doesn’t bill every 4 weeks',
     })
   }
@@ -242,7 +259,7 @@ export function buildComparison(slug: string): Comparison | undefined {
       says: 'gets better reviews from users',
     })
   }
-  return { pair, a, b, group, asOf, wins, verdict: verdictFor(hi, lo, tied, wins) }
+  return { pair, a, b, group, note, asOf, wins, verdict: verdictFor(hi, lo, tied, wins) }
 }
 
 const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1)

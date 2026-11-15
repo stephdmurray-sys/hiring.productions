@@ -63,6 +63,7 @@ export default function CompareIndex() {
         <h2>For job seekers</h2>
         <Group title="Resume checkers" items={by('resume checkers')} />
         <Group title="Resume builders" items={by('resume builders')} />
+        <Group title="Often searched together" items={by('resume tools')} />
       </section>
 
       <section className="wrap sec cg-end" id="hiring-teams">
@@ -70,6 +71,7 @@ export default function CompareIndex() {
         <Group title="Applicant tracking for small teams" items={by('applicant tracking systems for small teams')} />
         <Group title="Applicant tracking for growing teams" items={by('applicant tracking systems for growing teams')} />
         <Group title="Applicant tracking for scaling teams" items={by('applicant tracking systems for scaling teams')} />
+        <Group title="Often searched together" items={by('applicant tracking systems')} />
       </section>
       <NextStep side="both" line="Not sure which tool fits you? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use#questions" />
       <SiteFooter />

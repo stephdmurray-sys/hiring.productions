@@ -1,4 +1,5 @@
 import followData from '@/lib/evidence/follow.json'
+import { trapHref, trapTools } from '@/lib/pricing-traps'
 import { MIN_REVIEWS, WEIGHTS, benchmarks, formatCount, framework, hiringPick, latestCheck, resumeTools, rising, risingPick } from '@/lib/evidence'
 import { hiringBoard, atsAsOf } from '@/app/(rebrand)/_components/data'
 import { answerText, recFramework, recommend, situations } from '@/lib/evidence/recommend'
@@ -48,6 +49,10 @@ Evidence last checked: ${latestCheck()}. Every number below has a source on the 
 - [For hiring teams](${BASE}/for-hiring-teams): applicant tracking, sourcing and strategic guidance.
 - [All tool reviews](${BASE}/reviews)
 - [Two tools side by side](${BASE}/compare): every rated tool against the ones it competes with, with who wins on rating, price and free version.
+- [Pricing traps](${BASE}/pricing-traps): every resume tool by what the first year costs if you pay for a 3-month search and forget to cancel. The tools that start with a cheap trial and bill every 4 weeks have their own pages: ${trapTools()
+  .map((t) => `[${t.name}](${BASE}${trapHref(t.id)})`)
+  .join(', ')}.
+- Every score, date, cost and outside rating as one JSON block: the top of ${BASE}/llms-full.txt
 
 ## What should I use? (${BASE}/what-should-i-use)
 
