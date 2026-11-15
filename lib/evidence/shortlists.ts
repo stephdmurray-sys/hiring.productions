@@ -224,7 +224,7 @@ export const PORTFOLIO_SITES: ShortList = {
     {
       id: 'worked-with',
       heading: 'My work isn’t something I can post',
-      sub: 'Sales, operations, nursing, support, recruiting and most other jobs. The proof is what the people who worked with you saw.',
+      sub: 'Sales, operations, nursing, support, recruiting and most other jobs. No work samples? The proof is what the people who worked with you saw.',
       tools: [
         {
           go: null,

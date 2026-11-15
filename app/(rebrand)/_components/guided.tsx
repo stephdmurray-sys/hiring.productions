@@ -166,6 +166,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       {seekers && (
         <Kit k={PROOF.work}>
           <p className="rv-work-lead">{keepLast(PROOF.workLead)}</p>
+          <p className="rv-nowork">{keepLast(PROOF.noWork)}</p>
           <div className="sl-tools rv-work">
             {PORTFOLIO_PICKS.map((t) => (
               <ShortToolRow t={t} side={side} key={t.name} />
@@ -181,6 +182,11 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       {seekers ? (
         <Kit k={PROOF.where.k}>
           <p className="kit-wont">{keepLast(PROOF.where.text)}</p>
+          <p className="rv-more">
+            <a className="tl" href={PROOF.email.href}>
+              {keepLast(PROOF.email.text)} <span className="arr">&rarr;</span>
+            </a>
+          </p>
         </Kit>
       ) : (
         <Kit k={ASK_FOR_IT.k}>
@@ -236,6 +242,7 @@ export const guidedCss = `
   .rec-hiring.rv-ans .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
   .rv-work-lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
   .rv-work{margin-top:22px;}
+  .rv-nowork{display:inline-block;margin-top:12px;padding:8px 14px;background:var(--lavender);color:var(--ink);border:2px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);font-size:16px;font-weight:800;line-height:1.35;}
   .rv-lane{position:relative;max-width:820px;margin-bottom:24px;}
   .rv-lane > .rec-pick{position:relative;z-index:2;}
   .rv-lane .rv-dots{top:-30px;right:-28px;}

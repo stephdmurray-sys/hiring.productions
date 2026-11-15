@@ -68,6 +68,10 @@ ${situations()
 - [Is this even a real candidate?](${BASE}/is-this-a-real-candidate): the FBI's red flags for fake candidates (I-012325-PSA, January 2025; PSA220628, June 2022), and which applicant tracking systems have fraud detection on file (Greenhouse, Ashby).
 - [Fraud tools to know](${BASE}/guides/hiring-fraud-tools): a short list with no scores yet, because there is no public data worth scoring. Hiring fraud companies sorted by where the fraud shows up: the application, the interview, identity, and hearing from people who have worked with the candidate.
 - [Portfolio sites to know](${BASE}/guides/portfolio-sites): a short list with no scores. Where job seekers can show their work, sorted by the kind of work (design, writing, code, a one-page site for any job), and what to use when the work is not something you can post.
+- [The $0 job search](${BASE}/free-job-search): the resume tools we rate that have a free version you can keep using, what each free plan includes, and the free tools on this site.
+- [What does the screening software do to my resume?](${BASE}/how-ats-actually-works): sourced findings only. Harvard Business School and Accenture (2021): 88% of employers agreed qualified, high-skilled candidates get screened out for not matching a job description's exact criteria. Ladders (2018): a recruiter's first pass averaged 7.4 seconds. Greenhouse's product page (February 2026) on AI-assisted matching that leaves the decision to a person.
+- [Is this best-of list paid for?](${BASE}/is-this-list-paid-for): the four checks we run on every best-of list (owner conflict, ranks itself, lead page, out of date), with what we found on each list we track.
+- [How do I show employers how I work before the interview?](${BASE}/show-how-you-work): three steps. Receipts from people who have worked with you (RepVera, built by Stephanie Murray and never scored), your work if people can see it, and where to put the link.
 - [Is this job even real?](${BASE}/is-this-a-real-job): the signs of a fake job posting or a fake recruiter, what to do, and where to report it (reportfraud.ftc.gov).
 
 ## Tool reviews: ATS resume checkers

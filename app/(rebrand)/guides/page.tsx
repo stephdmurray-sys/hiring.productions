@@ -22,6 +22,10 @@ type Item = { href: string; title: string; detail: string; kind: string }
 const SEEKERS: Item[] = [
   { href: '/guides/best-resume-tools', kind: 'Guide', title: 'The best resume tools', detail: 'Builders and ATS checkers ranked on public reviews and real prices.' },
   { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: PICKER_INTRO },
+  { href: '/free-job-search', kind: 'Free list', title: 'The $0 job search', detail: 'The resume tools with a real free version, what free gets you, and the free tools on this site.' },
+  { href: '/how-ats-actually-works', kind: 'Explainer', title: 'What does the screening software do to my resume?', detail: 'What published research and the systems’ own product pages say, and what to do about each one.' },
+  { href: '/show-how-you-work', kind: 'Free checklist', title: 'How do I show employers how I work before the interview?', detail: 'Proof from the people who have worked with you and from your work, in three steps.' },
+  { href: '/is-this-list-paid-for', kind: 'Free check', title: 'Is this best-of list paid for?', detail: 'Who wrote the list you’re reading, and the four checks to run on any list.' },
   { href: '/interview-practice', kind: 'Free tool', title: 'What will they ask me in the interview?', detail: 'Practice the questions structured interviews use, and what a strong answer shows.' },
   { href: '/guides/portfolio-sites', kind: 'Short list', title: 'Portfolio sites to know', detail: 'Where to show your work, sorted by the kind of work you do. No scores yet.' },
   { href: '/is-this-a-real-job', kind: 'Free checklist', title: 'Is this job even real?', detail: 'The signs to check before you send a resume or anything else.' },

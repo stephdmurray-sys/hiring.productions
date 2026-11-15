@@ -47,6 +47,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Short lists (no scores yet) and the job seeker scam checklist
     { path: '/guides/hiring-fraud-tools', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/guides/portfolio-sites', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/free-job-search', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/how-ats-actually-works', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/is-this-list-paid-for', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/show-how-you-work', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/is-this-a-real-job', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),

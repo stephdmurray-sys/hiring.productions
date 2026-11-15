@@ -151,6 +151,42 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
     }
   }
 
+  if (source === 'proof_kit') {
+    return {
+      subject: 'Your checklist: show how you work before the interview',
+      text: [
+        'Here are the three steps.',
+        '',
+        '1. Get receipts from the people who have worked with you.',
+        'RepVera: you send a personal link to people you’ve worked with, like managers, teammates and clients. Each of them writes a short receipt about what it was like to work with you, verified through their work email. It works for every job, with or without work samples.',
+        'See a real RepVera profile: https://www.repvera.com/u/stephaniemurray',
+        'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
+        '',
+        '2. Add your work, if people can see it.',
+        `Designs, writing or code. Portfolio sites, sorted by the kind of work: ${SITE}/guides/portfolio-sites`,
+        'No work samples? Skip this step. Step one is your proof.',
+        '',
+        '3. Put the link where they’ll see it.',
+        'At the top of your resume next to your email, and in the Featured section of your LinkedIn profile.',
+        '',
+        `The checklist on the site: ${SITE}/show-how-you-work`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'free_plans') {
+    return {
+      subject: 'You’re on the list for free plan changes',
+      text: [
+        'Thanks for signing up. When one of the free plans on The $0 job search changes, you’ll get one short email.',
+        '',
+        `The page: ${SITE}/free-job-search`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
   if (source === 'real_job') {
     return {
       subject: 'You’re on the list for “Is this job even real?”',

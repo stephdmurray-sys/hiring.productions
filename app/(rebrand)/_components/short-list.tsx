@@ -206,7 +206,7 @@ export const shortListCss =
   .sl-hero h1{position:relative;z-index:2;color:inherit;max-width:900px;}
   .sl-hero .dek{position:relative;z-index:2;}
   .sl-hero :focus-visible{outline-color:currentColor;}
-  .sl-sticker{position:relative;z-index:2;display:inline-block;margin:6px 0 18px;padding:9px 14px 8px;font-weight:900;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-4deg);animation:sl-st-in .7s cubic-bezier(.2,1.7,.4,1) .15s both;}
+  .sl-sticker{position:relative;z-index:2;display:inline-block;margin:6px 0 18px;padding:9px 14px 8px;font-weight:900;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-4deg);animation:sl-st-in .7s cubic-bezier(.2,1.7,.4,1) .15s both;}
   .sl-hero-seekers .sl-sticker{background:var(--coral);color:var(--ink);}
   .sl-hero-hiring .sl-sticker{background:#fff;color:var(--ink);}
   .slh-dots{top:-6px;right:4%;}

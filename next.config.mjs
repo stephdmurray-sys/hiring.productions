@@ -26,7 +26,6 @@ const map = {
   '/returning-to-work': SEEKERS,
   '/stand-out': SEEKERS,
   '/linkedin-guide': SEEKERS,
-  '/how-ats-actually-works': RESUME_GUIDE,
   '/what-recruiters-really-think': RESUME_GUIDE,
   '/resume': RESUME_GUIDE,
   '/answers': '/what-should-i-use',

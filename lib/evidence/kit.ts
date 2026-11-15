@@ -61,6 +61,37 @@ export const FREE_TOOLS = {
     detail: 'Practice the questions structured interviews use, and what a strong answer shows.',
     href: '/interview-practice',
   },
+  // The job seeker free tools built from the site's own data (Nov 15, 2026)
+  freeSearch: {
+    title: 'The $0 job search',
+    detail: 'The resume tools with a real free version, what free gets you, and the free tools on this site.',
+    href: '/free-job-search',
+  },
+  screening: {
+    title: 'What does the screening software do to my resume?',
+    detail: 'What published research and the systems’ own product pages say, and what to do about each one.',
+    href: '/how-ats-actually-works',
+  },
+  listCheck: {
+    title: 'Is this best-of list paid for?',
+    detail: 'Who wrote the list you’re reading, and the four checks to run on any list.',
+    href: '/is-this-list-paid-for',
+  },
+  proofKit: {
+    title: 'How do I show employers how I work before the interview?',
+    detail: 'Proof from the people who have worked with you and from your work, in three steps.',
+    href: '/show-how-you-work',
+  },
+  realJob: {
+    title: 'Is this job even real?',
+    detail: 'The signs to check before you send a resume or anything else.',
+    href: '/is-this-a-real-job',
+  },
+  portfolio: {
+    title: 'Portfolio sites to know',
+    detail: 'Where to show your work, sorted by the kind of work you do. Most have a free plan.',
+    href: '/guides/portfolio-sites',
+  },
 } satisfies Record<string, FreeTool>
 
 /** "Free from us": the site's own free tool, where one fits the answer. */

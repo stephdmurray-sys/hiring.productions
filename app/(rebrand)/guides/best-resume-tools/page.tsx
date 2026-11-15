@@ -519,6 +519,11 @@ export default function Page() {
             BOLD owns MyPerfectResume, LiveCareer and Zety. It also owns FlexJobs and Monster, and both of their &ldquo;best resume
             builder&rdquo; lists put BOLD brands on top. We show those lists but don&rsquo;t count them.
           </p>
+          <p style={{ marginTop: 14 }}>
+            <a className="tl" href="/is-this-list-paid-for">
+              The four checks to run on any list
+            </a>
+          </p>
         </div>
 
         <details className="lists-details">

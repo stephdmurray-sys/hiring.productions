@@ -245,6 +245,8 @@ export const PROOF = {
   people: 'From the people who have worked with you',
   work: 'From the work itself',
   workLead: 'If people can see what you make, like designs, writing or code, a portfolio puts it one click from your resume.',
+  noWork: 'No work samples? Your RepVera is proof on its own.',
+  email: { text: 'Get these steps as a checklist by email', href: '/show-how-you-work#email' },
   more: { text: 'Portfolio sites to know, sorted by the kind of work', href: '/guides/portfolio-sites' },
   where: {
     k: 'Where to put the link',
