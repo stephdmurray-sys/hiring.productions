@@ -230,6 +230,17 @@
         }
       },
       {
+        "id": "choosing-ats",
+        "label": "We’re choosing or switching our applicant tracking system",
+        "kind": "tool",
+        "why": "The right system depends on how many people you hire a year, how big the company is and how many people will log in.",
+        "otherSide": {
+          "line": "Your applicant tracking system is also your candidates’ first impression of you. In a CareerBuilder study, 60% of job seekers said they had quit an online application partway through because of its length or complexity. Whatever you choose, keep the application short.",
+          "source": "CareerBuilder candidate study, reported by SHRM",
+          "url": "https://www.shrm.org/topics-tools/news/technology/study-job-seekers-abandon-online-job-applications"
+        }
+      },
+      {
         "id": "too-many-applicants",
         "label": "We’re buried in applicants",
         "kind": "tool",

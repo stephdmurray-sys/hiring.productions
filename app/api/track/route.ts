@@ -10,7 +10,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { logEvent, type EventType } from '@/lib/event-log'
 
-const EVENTS = new Set<EventType>(['picker_start', 'picker_finish', 'picker_feedback', 'repvera_answer_view', 'repvera_profile_click'])
+const EVENTS = new Set<EventType>(['picker_start', 'picker_finish', 'picker_feedback', 'repvera_answer_view', 'repvera_profile_click', 'picker_suggest'])
 const SIDES = new Set(['seekers', 'hiring'])
 const ANSWERS = new Set(['yes', 'partly', 'no'])
 
@@ -32,6 +32,19 @@ export async function POST(req: NextRequest) {
   if (problem) meta.problem = problem
   const step = clean(body.step, 10)
   if (step) meta.step = step
+  if (event === 'picker_suggest') {
+    // The visitor's own words: plain text only, short, with anything that looks like an email or a link removed.
+    const raw = typeof body.text === 'string' ? body.text : ''
+    const text = raw
+      .replace(/\S+@\S+/g, '')
+      .replace(/https?:\/\/\S+/gi, '')
+      .replace(/[<>{}]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 200)
+    if (text.length < 3) return NextResponse.json({ ok: false }, { status: 400 })
+    meta.text = text
+  }
   if (event === 'picker_feedback') {
     const answer = clean(body.answer, 10)
     if (!answer || !ANSWERS.has(answer)) return NextResponse.json({ ok: false }, { status: 400 })

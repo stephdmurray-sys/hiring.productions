@@ -223,6 +223,12 @@ export async function GET(request: NextRequest) {
       // Reading recent N days for spend trend (most will be 0 due to TTL).
       byDay: recentSpend,
     },
+    // What visitors said they're dealing with when it wasn't on the picker's list (newest first).
+    visitorNeeds: events
+      .filter((e: LoggedEvent) => e.type === 'picker_suggest')
+      .slice(-50)
+      .reverse()
+      .map((e: LoggedEvent) => ({ ts: new Date(e.ts).toISOString(), side: String(e.meta?.side ?? ''), text: String(e.meta?.text ?? '') })),
     recentEvents: recentEvents.map((e: LoggedEvent) => ({
       type: e.type,
       ts: new Date(e.ts).toISOString(),

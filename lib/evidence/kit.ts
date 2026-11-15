@@ -21,6 +21,7 @@ export const WONT_DO: Record<string, string> = {
   // but the site has no job-search tools on file for "these" to point to, so it stays off until there are some.
   // Hiring teams
   spreadsheets: 'A tracking system keeps every candidate in one place, but it won’t speed up a slow decision.',
+  'choosing-ats': 'A tracking system keeps every candidate in one place, but it won’t speed up a slow decision.',
   'too-many-applicants': 'Screening tools sort the pile, but someone still has to decide what good looks like for the role.',
   'fake-candidates': 'No single tool catches everything, so use more than one check.',
   'cant-find-people': 'Sourcing tools find people, but they can’t make the job or the pay more appealing.',
@@ -107,6 +108,7 @@ export const FREE_FROM_US: Record<string, FreeTool> = {
   'interviews-inconsistent': FREE_TOOLS.scorecard,
   // Hiring answers about cost or volume: the cost per hire tool
   spreadsheets: FREE_TOOLS.costPerHire,
+  'choosing-ats': FREE_TOOLS.costPerHire,
   'too-many-applicants': FREE_TOOLS.costPerHire,
   // Fraud answers: the red flags checklist
   'fake-candidates': FREE_TOOLS.redFlags,
@@ -142,6 +144,10 @@ export const NEXT_STEP: Record<string, { free: string; paid: string }> = {
   },
   spreadsheets: {
     free: 'Start {name}’s free plan with one open role and move one week of candidates into it.',
+    paid: 'Book a demo of {name} with one of your real open roles, and ask for the price in writing first.',
+  },
+  'choosing-ats': {
+    free: 'Start {name}’s free plan with one open role, and run it next to what you use today for a week.',
     paid: 'Book a demo of {name} with one of your real open roles, and ask for the price in writing first.',
   },
   'too-many-applicants': {

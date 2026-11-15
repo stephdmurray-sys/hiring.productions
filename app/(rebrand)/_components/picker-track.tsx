@@ -9,7 +9,7 @@ import { useEffect, useState, type ReactNode } from 'react'
  * no personal data. If the post fails, nothing on the page changes.
  */
 
-type Payload = { event: string; side?: string; problem?: string; step?: string; answer?: string }
+type Payload = { event: string; side?: string; problem?: string; step?: string; answer?: string; text?: string }
 
 function send(p: Payload) {
   try {
@@ -102,5 +102,42 @@ export function PickerArrival({ side, problem }: { side: string; problem: string
       <TrackOnce event="picker_finish" side={side} problem={problem} />
       <PickerFeedback side={side} problem={problem} />
     </>
+  )
+}
+
+/**
+ * "Not on the list? Tell us what you're dealing with": a few words, kept with no name, email or link, so
+ * Stephanie can see what the picker doesn't cover yet (/admin). Hidden until the page is interactive.
+ */
+export function PickerSuggest({ side }: { side: string }) {
+  const [ready, setReady] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [text, setText] = useState('')
+  const [sent, setSent] = useState(false)
+  useEffect(() => setReady(true), [])
+  if (!ready) return null
+  if (sent) return <p className="g-sug-done" role="status">Thanks. It helps us decide what to cover next.</p>
+  if (!open)
+    return (
+      <button type="button" className="g-sug-open" onClick={() => setOpen(true)}>
+        Not on the list? Tell us what you&rsquo;re dealing with
+      </button>
+    )
+  return (
+    <form
+      className="g-sug"
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (text.trim().length < 3) return
+        send({ event: 'picker_suggest', side, text: text.trim() })
+        setSent(true)
+      }}
+    >
+      <label htmlFor={`sug-${side}`}>What are you dealing with?</label>
+      <span className="g-sug-row">
+        <input id={`sug-${side}`} type="text" maxLength={200} value={text} onChange={(e) => setText(e.target.value)} placeholder="A few words. Please leave out names and emails." autoFocus />
+        <button type="submit">Send</button>
+      </span>
+    </form>
   )
 }

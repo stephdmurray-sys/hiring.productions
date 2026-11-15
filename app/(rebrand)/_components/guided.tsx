@@ -1,9 +1,9 @@
 import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
-import { PickerFeedback, TrackOnce, TrackedLink } from './picker-track'
+import { PickerFeedback, PickerSuggest, TrackOnce, TrackedLink } from './picker-track'
 import { CopyLink } from './rec-form'
 import { Capture } from './capture'
-import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { ASK_FOR_IT, FREE_CHIPS, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { Dots, Zigzag } from './retro'
@@ -99,6 +99,21 @@ export function GuidedFirst({ side }: { side: Side }) {
           </a>
         ))}
       </div>
+      <p className="g-first-links">
+        {step.extra && <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>}
+        <a href={stepHref(side, 'all')}>Show me the whole list</a>
+      </p>
+      <div className="g-free">
+        <p className="g-free-k">Or go straight to a free tool</p>
+        <p className="g-chips">
+          {FREE_CHIPS[side].map((c) => (
+            <a className="g-chip" href={c.href} key={c.href}>
+              {c.label}
+            </a>
+          ))}
+        </p>
+        <PickerSuggest side={side} />
+      </div>
     </div>
   )
 }
@@ -117,6 +132,7 @@ function WholeList({ side }: { side: Side }) {
           </a>
         ))}
       </div>
+      <PickerSuggest side={side} />
       <p className="g-links">
         <a href={stepHref(side, 'q1')}>&larr; Back to the questions</a>
       </p>
@@ -237,6 +253,25 @@ export const guidedCss = `
   .g-first .g-card{min-height:64px;padding:16px 20px;font-size:18px;}
   @media(max-width:860px){.g-start{grid-template-columns:1fr;}}
   .g-cards{display:grid;gap:14px;margin-top:28px;}
+  .g-first-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin:16px 0 0;font-size:15.5px;font-weight:700;}
+  .g-first-links a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;}
+  .g-first-links a:hover{color:var(--ink);}
+  .g-free{margin-top:24px;padding-top:20px;border-top:2px dashed var(--rule-2);}
+  .g-free-k{font-size:14px;font-weight:900;color:var(--ink);margin:0 0 10px;}
+  .g-chips{display:flex;flex-wrap:wrap;gap:10px;margin:0;}
+  .g-chip{display:inline-flex;align-items:center;padding:8px 14px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-size:14.5px;font-weight:800;line-height:1.2;box-shadow:2px 2px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
+  .g-chip:hover,.g-chip:focus-visible{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink);}
+  .g-seekers .g-chip:hover{background:var(--indigo-tint);}
+  .g-hiring .g-chip:hover{background:var(--coral-tint);}
+  .g-sug-open{margin-top:16px;padding:0;font:inherit;font-size:15px;font-weight:700;color:var(--ink-2);background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
+  .g-sug-open:hover{color:var(--ink);}
+  .g-sug{display:grid;gap:8px;margin-top:16px;max-width:560px;}
+  .g-sug label{font-size:15px;font-weight:900;color:var(--ink);}
+  .g-sug-row{display:flex;gap:8px;}
+  .g-sug input{flex:1;min-width:0;min-height:46px;padding:10px 14px;font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);}
+  .g-sug button{min-height:46px;padding:0 18px;font:inherit;font-size:15.5px;font-weight:900;color:#fff;background:var(--ink);border:2px solid var(--ink);border-radius:10px;cursor:pointer;}
+  .g-sug-done{margin-top:16px;font-size:15px;font-weight:800;color:var(--ink);}
+  @media (prefers-reduced-motion: reduce){.g-chip{transition:none;}}
   .g-card{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:76px;padding:20px 24px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);font-size:clamp(18px,2vw,21px);font-weight:800;line-height:1.35;text-wrap:pretty;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}
   .g-card .arr{flex-shrink:0;font-size:22px;}
   .g-card:hover,.g-card:focus-visible{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink);}

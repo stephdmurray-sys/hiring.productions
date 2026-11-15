@@ -45,6 +45,8 @@ export type EventType =
   | 'repvera_answer_view'
   | 'repvera_profile_click'
   | 'vendor_submit'
+  // "Not on the list? Tell us what you're dealing with" (Nov 15, 2026): the unmet need, in the visitor's words
+  | 'picker_suggest'
 
 export interface EventPayload {
   /** Tool involved, if any (e.g. "recruiter-search-rank"). */

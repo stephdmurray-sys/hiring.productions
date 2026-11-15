@@ -60,9 +60,23 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'Not really', to: { step: 'q2a' } },
           { label: 'Yes, but no offers', to: { step: 'q2b' } },
+          // Nov 15, 2026: people at the start of a search had no answer to "Are you getting interviews?"
+          { label: 'I haven’t started applying yet', to: { step: 'q2c' } },
         ],
         extra: { label: 'Something else: I’m losing track of my applications', to: { problem: 'losing-track' } },
         back: null,
+      },
+      {
+        id: 'q2c',
+        depth: 2,
+        question: 'Where do you want to start?',
+        options: [
+          { label: 'Getting my resume ready', to: { problem: 'rewriting' } },
+          { label: 'Spending as little as possible', to: { href: '/free-job-search' } },
+          { label: 'Having proof of how I work ready to send', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          { label: 'Figuring out what to apply for', to: { problem: 'what-to-apply-for' } },
+        ],
+        back: 'q1',
       },
       {
         id: 'q2a',
@@ -119,6 +133,8 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
           { label: 'Finding people', to: { step: 'q2a' } },
           { label: 'Sorting through applicants', to: { step: 'q2b' } },
           { label: 'Our interviews and our team', to: { step: 'q2c' } },
+          // Nov 15, 2026: the most common reason a hiring team shops, straight to its answer
+          { label: 'Choosing or switching our applicant tracking system', to: { problem: 'choosing-ats' } },
         ],
         back: null,
       },
@@ -258,6 +274,22 @@ export const PROOF = {
 export const ASK_FOR_IT = {
   k: 'Where to ask for it',
   text: 'Add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+}
+
+/** Free tools to go straight to, one row per side, under the first question on the homepage. */
+export const FREE_CHIPS: Record<Side, { label: string; href: string }[]> = {
+  seekers: [
+    { label: 'Is this job even real?', href: '/is-this-a-real-job' },
+    { label: 'The $0 job search', href: '/free-job-search' },
+    { label: 'Interview practice', href: '/interview-practice' },
+    { label: 'Which tools keep charging you?', href: '/pricing-traps' },
+  ],
+  hiring: [
+    { label: 'Interview scorecard', href: '/interview-scorecard' },
+    { label: 'What a hire costs', href: '/hiring-costs' },
+    { label: 'Fraud tools to know', href: '/guides/hiring-fraud-tools' },
+    { label: 'Is this a real candidate?', href: '/is-this-a-real-candidate' },
+  ],
 }
 
 /** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */
