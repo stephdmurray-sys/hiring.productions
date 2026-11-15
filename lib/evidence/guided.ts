@@ -39,14 +39,15 @@ export interface GuidedStep {
 
 /**
  * RepVera's answer, one per side. The only tool that is recommended without a score.
- * Job seekers (Stephanie, Nov 15, 2026): the way in is what they want, proving how they work,
- * never a problem assigned to them. The old id still opens the same answer.
+ * Stephanie, Nov 15, 2026: on both sides the way in is what people want, never a problem assigned
+ * to them. Job seekers want to prove how they work; hiring teams want to know how someone works
+ * before they interview or hire (her line). The old ids still open the same answers.
  */
 export const REPVERA_PROBLEM: Record<Side, { id: string; label: string }> = {
   seekers: { id: 'prove-how-i-work', label: 'I want to prove how I work' },
-  hiring: { id: 'resumes-look-the-same', label: 'Every resume looks the same now' },
+  hiring: { id: 'see-how-they-work', label: 'We want to know how someone works before we interview or hire' },
 }
-const REPVERA_ALIASES: Record<Side, string[]> = { seekers: ['resume-looks-the-same'], hiring: [] }
+const REPVERA_ALIASES: Record<Side, string[]> = { seekers: ['resume-looks-the-same'], hiring: ['resumes-look-the-same'] }
 
 export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
   seekers: {
@@ -138,7 +139,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'There are too many to get through', to: { problem: 'too-many-applicants' } },
           { label: 'Some of them aren’t real', to: { step: 'fraud' } },
-          { label: 'Every resume looks the same now', to: { problem: REPVERA_PROBLEM.hiring.id } },
+          { label: REPVERA_PROBLEM.hiring.label, to: { problem: REPVERA_PROBLEM.hiring.id } },
         ],
         back: 'q1',
       },
@@ -149,6 +150,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'Every interviewer asks something different', to: { problem: 'interviews-inconsistent' } },
           { label: 'Our recruiters need training', to: { problem: 'training' } },
+          { label: REPVERA_PROBLEM.hiring.label, to: { problem: REPVERA_PROBLEM.hiring.id } },
         ],
         back: 'q1',
       },
@@ -218,8 +220,8 @@ export const REPVERA_ANSWER: Record<
     back: 'q3',
   },
   hiring: {
-    heading: 'Every resume looks the same now',
-    opening: 'When every resume is polished, it stops telling you who is good to work with. You can ask candidates for something that does.',
+    heading: 'See how someone works before the first interview.',
+    opening: 'The people who have worked with a candidate already know how they work. You can hear from them before you book the first interview.',
     label: 'Stephanie built this one',
     name: 'RepVera',
     lines: [
@@ -250,6 +252,12 @@ export const PROOF = {
   },
 }
 
+/** The hiring side's practical step after RepVera's card: where to ask candidates for it. */
+export const ASK_FOR_IT = {
+  k: 'Where to ask for it',
+  text: 'Add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+}
+
 /** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */
 export const FRAUD_QUESTION = { question: 'Which applicant tracking systems flag fake candidates?', href: `${FRAUD_PAGE}#ats` }
 
@@ -259,5 +267,5 @@ export const REAL_JOB_QUESTION = { question: 'How do I know a job posting is rea
 /** The two new "Common questions, answered" entries, each linking to RepVera's answer for its side. */
 export const REPVERA_QUESTIONS: Record<Side, string> = {
   seekers: 'How do I show employers how I work before the interview?',
-  hiring: 'How do we tell candidates apart when every resume looks the same?',
+  hiring: 'How do we see how someone works before we interview them?',
 }

@@ -1,7 +1,7 @@
 import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce, TrackedLink } from './picker-track'
-import { GUIDED, PROOF, REPVERA_ANSWER, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { ShortToolRow } from './short-list'
@@ -173,9 +173,13 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
           </p>
         </Kit>
       )}
-      {seekers && (
+      {seekers ? (
         <Kit k={PROOF.where.k}>
           <p className="kit-wont">{keepLast(PROOF.where.text)}</p>
+        </Kit>
+      ) : (
+        <Kit k={ASK_FOR_IT.k}>
+          <p className="kit-wont">{keepLast(ASK_FOR_IT.text)}</p>
         </Kit>
       )}
       <p className="rv-back">
@@ -224,6 +228,7 @@ export const guidedCss = `
   .rv-k{margin-top:36px;}
   .rv-k + .rec-pick{margin-top:0;}
   .rec-seekers.rv-ans .rec-pick{border:3px solid var(--indigo);box-shadow:6px 6px 0 var(--indigo);}
+  .rec-hiring.rv-ans .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
   .rv-work-lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
   .rv-work{margin-top:16px;}
   .rv-work .sl-tool{padding:22px 0;}
