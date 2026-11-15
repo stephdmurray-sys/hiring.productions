@@ -88,7 +88,7 @@ export function GuidedFirst({ side }: { side: Side }) {
   // One grid row per piece (label, question, each card, links, suggestion), shared with the other side
   // through subgrid, so the two sides line up row for row (.g-start in guidedCss). The free tools have
   // their own band below (free-tools.tsx).
-  const rows = 2 + step.options.length + 2
+  const rows = 2 + step.options.length + 1
   return (
     <div className={`g-first g-${side}`} style={{ gridRow: `span ${rows}` }}>
       <span className={`pill pill-${side}`}>{side === 'seekers' ? 'I\u2019m a job seeker' : 'I\u2019m hiring'}</span>
@@ -101,11 +101,14 @@ export function GuidedFirst({ side }: { side: Side }) {
           </span>
         </a>
       ))}
-      <p className="g-first-links">
+      {/* One row of quiet links under the cards; the suggestion box opens full width beneath them. */}
+      <div className="g-first-links">
         {step.extra && <a href={targetHref(side, step.extra.to, step.id)}>{keepLast(step.extra.label)}</a>}
-        <a href={stepHref(side, 'all')}>Show me the whole list</a>
-      </p>
-      <PickerSuggest side={side} />
+        <a href={stepHref(side, 'all')}>
+          Show me the whole list <span className="arr">&rarr;</span>
+        </a>
+        <PickerSuggest side={side} />
+      </div>
     </div>
   )
 }
@@ -245,7 +248,9 @@ export const guidedCss = `
   .g-first > .pill{justify-self:start;align-self:start;}
   .g-first-q{font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-0.015em;line-height:1.15;margin:16px 0 18px;align-self:start;}
   .g-first > .g-card{min-height:64px;padding:16px 20px;font-size:18px;margin-bottom:12px;}
-  .g-first > .g-first-links{align-self:start;margin:4px 0 0;}
+  .g-first > .g-first-links{align-self:start;margin:10px 0 0;align-items:baseline;}
+  .g-first-links .g-sug-open{margin-top:0;}
+  .g-first-links .g-sug,.g-first-links .g-sug-done{flex-basis:100%;margin-top:6px;}
   .g-first > .g-free-k{margin:24px 0 12px;padding-top:20px;border-top:2px dashed var(--rule-2);align-self:end;}
   .g-tiles{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:subgrid;column-gap:12px;}
   .g-tile{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:62px;margin-bottom:12px;padding:12px 16px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 var(--ink);font-size:16px;font-weight:800;line-height:1.25;text-wrap:pretty;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}

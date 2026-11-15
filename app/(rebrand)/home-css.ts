@@ -149,7 +149,8 @@ export const homeCss = `
   }
 
   /* Free tools band: split down the middle in the two side colors, job seekers left, hiring teams right. */
-  .ftb{position:relative;overflow:hidden;padding:clamp(80px,10vw,130px) 0;background:linear-gradient(90deg,var(--indigo-tint) 50%,var(--coral-tint) 50%);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+  /* Space above the band: sections only pad their tops, so a band right after one needs its own gap. */
+  .ftb{margin-top:clamp(96px,11vw,150px);position:relative;overflow:hidden;padding:clamp(80px,10vw,130px) 0;background:linear-gradient(90deg,var(--indigo-tint) 50%,var(--coral-tint) 50%);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
   .ftb-in{position:relative;}
   .ftb h2{max-width:920px;margin:0;}
   .ftb-lead{margin-top:16px;}
