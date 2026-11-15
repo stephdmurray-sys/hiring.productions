@@ -106,6 +106,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         question: 'How do the interviews go?',
         options: [
           { label: 'I get nervous or lose my train of thought', to: { problem: 'interview-practice' } },
+          { label: 'I can’t explain why they should pick me', to: { href: '/professional-value-proposition' } },
           { label: 'They go well, and then they pick someone else', to: { step: 'q3b' } },
         ],
         back: 'q1',
@@ -146,6 +147,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'We don’t have a real system. It’s spreadsheets and email', to: { problem: 'spreadsheets' } },
           { label: 'The right people aren’t applying', to: { problem: 'cant-find-people' } },
+          { label: 'Good people don’t see why they’d want to work here', to: { href: '/employer-value-proposition' } },
         ],
         back: 'q1',
       },
