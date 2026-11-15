@@ -44,6 +44,8 @@ export type EventType =
   | 'picker_feedback'
   | 'repvera_answer_view'
   | 'repvera_profile_click'
+  /** Stephanie's booking link on the hiring RepVera card. */
+  | 'repvera_call_click'
   | 'vendor_submit'
   // "Not on the list? Tell us what you're dealing with" (Nov 15, 2026): the unmet need, in the visitor's words
   | 'picker_suggest'

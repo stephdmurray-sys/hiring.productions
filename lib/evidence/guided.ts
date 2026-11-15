@@ -220,7 +220,24 @@ export function isStep(side: Side, id: string | undefined): id is string {
 /** The two RepVera answers. Copy is final (handoff, Nov 14, 2026). */
 export const REPVERA_ANSWER: Record<
   Side,
-  { heading: string; opening: string; label: string; name: string; lines: string[]; note: string; button: string; url: string; back: string }
+  {
+    heading: string
+    opening: string
+    label: string
+    name: string
+    lines: string[]
+    /** A hiring team's quote set right after the lines (lib/repvera-quotes.ts). */
+    leadQuote?: string
+    quotesK: string
+    quoteIds: string[]
+    /** A second group of quotes after the first (job seekers: what a hiring team said). */
+    afterK?: string
+    afterIds?: string[]
+    note: string
+    cta: { k?: string; text?: string; button: string; url: string; under?: string; event: 'repvera_call_click' | 'repvera_profile_click' }
+    second: { text: string; url: string }
+    back: string
+  }
 > = {
   seekers: {
     heading: 'Let how you work arrive before you do.',
@@ -231,23 +248,38 @@ export const REPVERA_ANSWER: Record<
       'A resume shows what you’ve done. RepVera shows what you’re like to work with.',
       'You send a personal link to people you’ve worked with, like managers, teammates and clients. Each of them writes a short receipt about what it was like to work with you, and it’s verified through their work email. Your profile goes out with your application, so your reputation shows up before you do. It’s free to start.',
     ],
+    quotesK: 'What people who have one say',
+    quoteIds: ['marissa', 'tai', 'ingrid', 'rimshah'],
+    afterK: 'What a hiring team said after reading one',
+    afterIds: ['james'],
     note: 'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
-    button: 'See a real RepVera profile',
-    url: 'https://www.repvera.com/u/stephaniemurray',
+    cta: { button: 'Start your RepVera', url: 'https://www.repvera.com/?utm_source=hiring.productions&utm_medium=referral&utm_campaign=picker_seekers', event: 'repvera_profile_click' },
+    second: { text: 'See a real RepVera profile first', url: 'https://www.repvera.com/u/stephaniemurray' },
     back: 'q3',
   },
+  // Stephanie's card, word for word (Nov 15, 2026).
   hiring: {
     heading: 'See how someone works before the first interview.',
-    opening: 'The people who have worked with a candidate already know how they work. You can hear from them before you book the first interview.',
+    opening: 'The people who have worked with a candidate already know what they are like to work with. You can read it with the resume, and some candidates already put it at the top of theirs.',
     label: 'Stephanie built this one',
     name: 'RepVera',
     lines: [
       'A resume shows what someone has done. RepVera shows what they’re like to work with.',
-      'Ask candidates for their RepVera along with their resume. You see how someone works, in the words of people who have worked with them, before the first interview. You spend less time and money on interviews that go nowhere, and the ones you do hold are more useful because you already know what to ask about.',
+      'Ask candidates for their RepVera along with their resume. You read what the people who have worked with them say, in their own words, and you walk into the interview already knowing what to ask about.',
     ],
-    note: 'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
-    button: 'See a real RepVera profile',
-    url: 'https://www.repvera.com/u/stephaniemurray',
+    leadQuote: 'james',
+    quotesK: 'What candidates say about having one',
+    quoteIds: ['marissa', 'tai', 'ingrid'],
+    note: 'Disclosure: I built RepVera, so I don’t give it a score.',
+    cta: {
+      k: 'Have a role open right now? Try it on that one.',
+      text: 'I’ll set it up with you and show you what a profile looks like for a role like yours. It starts with one conversation with me, and it is free to try.',
+      button: 'Talk to Stephanie about one role',
+      url: 'https://calendly.com/stephaniewithrepvera/30min',
+      under: 'No slides. You talk to the person who built it, after twenty years in recruiting.',
+      event: 'repvera_call_click',
+    },
+    second: { text: 'See a real RepVera profile first', url: 'https://www.repvera.com/u/stephaniemurray' },
     back: 'q2b',
   },
 }

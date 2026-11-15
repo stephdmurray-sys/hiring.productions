@@ -10,7 +10,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { logEvent, type EventType } from '@/lib/event-log'
 
-const EVENTS = new Set<EventType>(['picker_start', 'picker_finish', 'picker_feedback', 'repvera_answer_view', 'repvera_profile_click', 'picker_suggest'])
+const EVENTS = new Set<EventType>(['picker_start', 'picker_finish', 'picker_feedback', 'repvera_answer_view', 'repvera_profile_click', 'repvera_call_click', 'picker_suggest'])
 const SIDES = new Set(['seekers', 'hiring'])
 const ANSWERS = new Set(['yes', 'partly', 'no'])
 

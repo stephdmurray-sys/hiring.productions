@@ -1,4 +1,6 @@
+import Image from 'next/image'
 import { Logo } from './logo'
+import { quotes, type RepveraQuote } from '@/lib/repvera-quotes'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, PickerSuggest, TrackOnce, TrackedLink } from './picker-track'
 import { CopyLink } from './rec-form'
@@ -140,11 +142,36 @@ function WholeList({ side }: { side: Side }) {
  * is the proof answer: RepVera for proof from people, then portfolio sites for proof from the work,
  * then where to put the link.
  */
+/** One quote about RepVera: the words, then who said it (photo, initials, or a quote mark when they asked for no name). */
+function RvQuote({ q, big = false }: { q: RepveraQuote; big?: boolean }) {
+  const initials = q.name ? q.name.split(' ').map((w) => w[0]).join('') : null
+  return (
+    <figure className={big ? 'rv-q rv-q-big' : 'rv-q'}>
+      <blockquote>&ldquo;{q.text}&rdquo;</blockquote>
+      <figcaption>
+        <span className="rv-av" aria-hidden="true">
+          {q.photo ? <Image src={q.photo} alt="" width={96} height={96} /> : initials ? initials : '\u201C'}
+        </span>
+        <span className="rv-who">
+          {q.name && <b>{q.name}</b>}
+          {q.title && <span>{q.title}</span>}
+          {!q.name && !q.title && <span>A RepVera user</span>}
+          {q.context && <span className="rv-ctx">{q.context}</span>}
+          {q.pilot && <span className="rv-ctx">Part of RepVera&rsquo;s free pilot for hiring teams.</span>}
+        </span>
+      </figcaption>
+    </figure>
+  )
+}
+
 export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
   const a = REPVERA_ANSWER[side]
   const seekers = side === 'seekers'
   const back = from === 'all' ? stepHref(side, 'all') : stepHref(side, isStep(side, from) ? from : a.back)
   const btn = side === 'seekers' ? 'btn btn-indigo' : 'btn btn-coral'
+  const lead = a.leadQuote ? quotes([a.leadQuote]) : []
+  const said = quotes(a.quoteIds)
+  const after = quotes(a.afterIds ?? [])
   return (
     <div className={`rec-ans rec-${side} rv-ans`}>
       <TrackOnce event="repvera_answer_view" side={side} />
@@ -165,15 +192,60 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
             <span className="rv-built">{a.label}</span>
           </div>
         </div>
-        {a.lines.map((l) => (
-          <p className="rv-line" key={l.slice(0, 24)}>
-            {l}
-          </p>
+        <div className="rv-body">
+          <div className="rv-text">
+            {a.lines.map((l, n) => (
+              <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
+                {l}
+              </p>
+            ))}
+          </div>
+          <a className="rv-shot" href={a.second.url} rel="noopener" target="_blank">
+            <Image
+              src="/repvera/profile-overview.webp"
+              alt="A real RepVera profile: the finding, who is behind the profile, the summary and the strongest patterns"
+              width={656}
+              height={740}
+              sizes="(max-width: 760px) 90vw, 320px"
+            />
+            <span>A real profile: Stephanie&rsquo;s own</span>
+          </a>
+        </div>
+        {lead.map((q) => (
+          <RvQuote q={q} key={q.id} big />
         ))}
+        {said.length > 0 && (
+          <>
+            <h3 className="rv-qk">{a.quotesK}</h3>
+            <div className={`rv-quotes rv-quotes-${said.length}`}>
+              {said.map((q) => (
+                <RvQuote q={q} key={q.id} />
+              ))}
+            </div>
+          </>
+        )}
+        {after.length > 0 && a.afterK && (
+          <>
+            <h3 className="rv-qk">{a.afterK}</h3>
+            {after.map((q) => (
+              <RvQuote q={q} key={q.id} big />
+            ))}
+          </>
+        )}
         <p className="rv-note">{a.note}</p>
-        <TrackedLink href={a.url} className={btn} event="repvera_profile_click" side={side}>
-          {a.button} <span className="arr">&#8599;</span>
-        </TrackedLink>
+        {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
+        {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
+        <p className="rv-cta">
+          <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
+            {a.cta.button} <span className="arr">&#8599;</span>
+          </TrackedLink>
+        </p>
+        {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
+        <p className="rv-second">
+          <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+            {a.second.text} <span className="arr">&#8599;</span>
+          </TrackedLink>
+        </p>
       </div>
       </div>
       {seekers && (
@@ -298,6 +370,37 @@ export const guidedCss = `
   .rv-line{font-size:18px;line-height:1.6;color:var(--ink-2);margin-top:14px;text-wrap:pretty;}
   .rv-line:first-of-type{color:var(--ink);font-weight:700;}
   .rv-note{margin:18px 0 22px;padding:14px 16px;border-left:4px solid var(--ink);background:var(--surface);font-size:16px;line-height:1.55;color:var(--ink);text-wrap:pretty;}
+  .rv-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start;margin-top:6px;}
+  .rv-line-big{font-size:clamp(20px,2vw,24px) !important;font-weight:900;line-height:1.3;letter-spacing:-0.01em;color:var(--ink) !important;}
+  .rv-shot{display:block;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink);transform:rotate(1.5deg);transition:transform .15s ease,box-shadow .15s ease;}
+  .rv-shot:hover{transform:rotate(0) translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink);}
+  .rv-shot img{display:block;width:100%;height:auto;}
+  .rv-shot span{display:block;padding:8px 12px;border-top:2px solid var(--ink);font-size:13px;font-weight:800;background:var(--paper-2);}
+  .rv-q{margin:26px 0 0;padding:20px 22px;background:var(--paper);border:2px solid var(--ink);border-radius:14px;}
+  .rv-q blockquote{margin:0;font-size:17px;line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
+  .rv-q-big blockquote{font-size:clamp(19px,1.9vw,22px);font-weight:800;line-height:1.4;}
+  .rv-q figcaption{display:flex;align-items:center;gap:12px;margin-top:14px;}
+  .rv-av{position:relative;flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:2px solid var(--ink);overflow:hidden;background:var(--lavender);color:var(--ink);font-weight:900;font-size:16px;}
+  .rec-hiring .rv-av{background:var(--coral-tint);}
+  .rv-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .rv-who{display:grid;font-size:14px;line-height:1.35;color:var(--ink-2);}
+  .rv-who b{font-size:15px;color:var(--ink);}
+  .rv-ctx{color:var(--ink-3);}
+  .rv-qk{margin:30px 0 0;font-size:clamp(20px,2.2vw,24px);font-weight:900;letter-spacing:-0.01em;}
+  .rv-quotes{display:grid;gap:14px;}
+  .rv-quotes .rv-q{margin-top:14px;}
+  .rv-quotes-2,.rv-quotes-4{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .rv-quotes-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .rv-quotes .rv-q{margin-top:0;}
+  .rv-quotes{margin-top:14px;}
+  .rv-cta-k{margin:8px 0 0;font-size:clamp(22px,2.4vw,28px);font-weight:900;letter-spacing:-0.015em;line-height:1.2;}
+  .rv-cta-text{margin:10px 0 0;font-size:17px;line-height:1.55;color:var(--ink-2);max-width:620px;}
+  .rv-cta{margin:20px 0 0;}
+  .rv-cta .btn{font-size:17px;padding:17px 24px;}
+  .rv-under{margin:12px 0 0;font-size:14.5px;font-weight:600;color:var(--ink-3);}
+  .rv-second{margin:16px 0 0;font-size:16px;font-weight:700;}
+  @media(max-width:860px){.rv-body{grid-template-columns:1fr;}.rv-shot{max-width:360px;transform:none;}.rv-quotes-3{grid-template-columns:1fr;}}
+  @media(max-width:600px){.rv-quotes-2,.rv-quotes-4{grid-template-columns:1fr;}}
   .rv-back{margin-top:36px;font-size:15px;}
   .rv-k{margin-top:36px;}
   .rv-k + .rec-pick{margin-top:0;}

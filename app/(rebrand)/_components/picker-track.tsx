@@ -36,9 +36,9 @@ export function TrackOnce(p: Payload) {
   return null
 }
 
-export function TrackedLink({ href, className, event, side, children }: { href: string; className?: string; event: string; side?: string; children: ReactNode }) {
+export function TrackedLink({ href, className, event, side, newTab, children }: { href: string; className?: string; event: string; side?: string; newTab?: boolean; children: ReactNode }) {
   return (
-    <a href={href} className={className} rel="noopener" onClick={() => send({ event, side })}>
+    <a href={href} className={className} rel="noopener" {...(newTab ? { target: '_blank' } : {})} onClick={() => send({ event, side })}>
       {children}
     </a>
   )

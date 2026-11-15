@@ -6,6 +6,7 @@
  */
 import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
 import { hiringLane, seekerLane } from '@/lib/stack'
+import { REPVERA_CALL_URL } from '@/lib/repvera-quotes'
 import { fmt, plural, stackFromQuery, stackLines, stackQuery, stackTotals } from '@/lib/stack-math'
 import { OWNERSHIP_DISCLOSURE, REPVERA_NOTE_LABEL, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { cleanRole, pickCompetencies, scorecardData, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
@@ -164,6 +165,9 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
         '',
         'Where to ask for it: add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+        '',
+        'Have a role open right now? Try it on that one. I’ll set it up with you and show you what a profile looks like for a role like yours. It starts with one conversation with me, and it is free to try.',
+        `Talk to Stephanie about one role: ${REPVERA_CALL_URL}`,
         '',
         `The answer on the site: ${SITE}/what-should-i-use?side=hiring&problem=see-how-they-work`,
         ...SIGN_OFF,

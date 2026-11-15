@@ -93,8 +93,8 @@ export default function ReviewsIndex() {
           </div>
           <p className="rv-list-line">{REPVERA_ANSWER.hiring.lines[0]}</p>
           <p className="rv-list-note">{REPVERA_ANSWER.hiring.note}</p>
-          <TrackedLink href={REPVERA_ANSWER.hiring.url} className="btn btn-indigo" event="repvera_profile_click">
-            {REPVERA_ANSWER.hiring.button} <span className="arr">&#8599;</span>
+          <TrackedLink href={REPVERA_ANSWER.hiring.second.url} className="btn btn-indigo" event="repvera_profile_click" newTab>
+            See a real RepVera profile <span className="arr">&#8599;</span>
           </TrackedLink>
         </div>
       </section>
