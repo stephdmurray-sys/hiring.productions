@@ -23,6 +23,7 @@ export type FreeToolIcon =
   | 'calculator'
   | 'shield'
   | 'layers'
+  | 'value'
 
 export interface FreeToolCard {
   id: string
@@ -74,6 +75,15 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       get: 'Cancel reminders',
       href: '/build-your-stack',
       icon: 'bill',
+    },
+    {
+      id: 'value-prop',
+      side: 'seekers',
+      title: 'What’s my professional value proposition?',
+      what: 'Turn what people say about working with you into one line for your resume, LinkedIn and interviews.',
+      get: 'Your line, four ways',
+      href: '/professional-value-proposition',
+      icon: 'value',
     },
     {
       id: 'free-search',
@@ -148,6 +158,15 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       get: 'A yearly bill',
       href: '/build-your-stack/hiring',
       icon: 'bill',
+    },
+    {
+      id: 'evp',
+      side: 'hiring',
+      title: 'What’s our employer value proposition?',
+      what: 'Turn what your team says about working there into one line for the job post, outreach and the offer.',
+      get: 'Your line, four ways',
+      href: '/employer-value-proposition',
+      icon: 'value',
     },
     {
       id: 'hire-cost',

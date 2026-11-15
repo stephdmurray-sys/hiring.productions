@@ -133,8 +133,9 @@ export default function Page() {
     },
     {
       title: 'A person reads from the top',
-      todo: 'Put your best match at the top of page one.',
-      why: 'The first read is fast, and it starts with whoever the search or sort put first.',
+      todo: 'Lead with your value proposition at the top of page one.',
+      why: 'The first read is fast, and it starts with whoever the search or sort put first. The first line they read should say why you.',
+      more: { href: '/professional-value-proposition', label: 'Build your value proposition' },
     },
     {
       title: 'The bottom of the list may never get opened',

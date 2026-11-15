@@ -54,6 +54,15 @@ export const REPVERA_QUOTES: Record<string, RepveraQuote> = {
     photo: '/people/tai-freligh.webp',
     approved: false,
   },
+  /** Tai's answer to "What surprised you?" in the Professional Stories sheet (Oct 29, 2026), word for word. Stephanie chose it for the value proposition page (Nov 15, 2026). */
+  'tai-themes': {
+    id: 'tai-themes',
+    text: 'I didn’t have the big picture of trends across all of my testimonials. I didn’t see the forest through the trees until I inputted them all into my RepVera account and saw the different themes, especially broken down by relationship type (peer, manager, vendor, etc.).',
+    name: 'Tai Freligh',
+    title: 'Senior Marketing Manager and Editorial Director',
+    photo: '/people/tai-freligh.webp',
+    approved: false,
+  },
   ingrid: {
     id: 'ingrid',
     text: 'A recruiter was curious about the link I attached to my resume.',

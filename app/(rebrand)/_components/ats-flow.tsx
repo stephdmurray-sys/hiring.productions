@@ -15,7 +15,8 @@ export interface FlowStep {
   title: string
   todo: string
   why: string
-  more?: { href: string; label: string }
+  /** A link under the detail. Arrows: up for a section above, down for one below, across for another page. */
+  more?: { href: string; label: string; up?: boolean }
   /** The step that can say no without a person. */
   auto?: boolean
 }
@@ -83,7 +84,7 @@ export function AtsFlow({ steps }: { steps: FlowStep[] }) {
                 <p>{s.why}</p>
                 {s.more && (
                   <a className="tl" href={s.more.href}>
-                    {s.more.label} <span className="arr">&darr;</span>
+                    {s.more.label} <span className="arr">{s.more.up ? '\u2191' : s.more.href.startsWith('#') ? '\u2193' : '\u2192'}</span>
                   </a>
                 )}
               </div>
