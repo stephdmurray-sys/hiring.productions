@@ -1,23 +1,17 @@
-import type { Metadata } from "next";
-import { siteCss } from "@/app/(rebrand)/_components/site-css";
-import {
-  SiteNav,
-  SiteFooter,
-  chromeCss,
-} from "@/app/(rebrand)/_components/site-chrome";
-import { shortListCss } from "@/app/(rebrand)/_components/short-list";
-import {
-  ToolHero,
-  StepHead,
-  toolPageCss,
-} from "@/app/(rebrand)/_components/tool-hero";
-import { JsonLd, graph, SITE } from "@/app/(rebrand)/_components/structured";
-import { Logo } from "@/app/(rebrand)/_components/logo";
-import { Dots } from "@/app/(rebrand)/_components/retro";
-import { keepLast } from "@/lib/site-line";
-import { moneyLine } from "@/lib/money";
-import { formatDate, latestCheck, resumeTools } from "@/lib/evidence";
-import { recFramework } from "@/lib/evidence/recommend";
+import type { Metadata } from 'next'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+import { shortListCss } from '@/app/(rebrand)/_components/short-list'
+import { ToolHero, StepHead, toolPageCss } from '@/app/(rebrand)/_components/tool-hero'
+import { JsonLd, graph, SITE } from '@/app/(rebrand)/_components/structured'
+import { Logo } from '@/app/(rebrand)/_components/logo'
+import { Dots } from '@/app/(rebrand)/_components/retro'
+import { AtsFlow, type FlowStep } from '@/app/(rebrand)/_components/ats-flow'
+import { atsFlowCss } from '@/app/(rebrand)/_components/ats-flow-css'
+import { keepLast } from '@/lib/site-line'
+import { moneyLine } from '@/lib/money'
+import { formatDate, latestCheck, resumeTools } from '@/lib/evidence'
+import { recFramework } from '@/lib/evidence/recommend'
 import {
   CHECKED,
   KNOCKOUTS,
@@ -32,7 +26,7 @@ import {
   SKILLSYNCER,
   allSources,
   type Source,
-} from "@/lib/evidence/ats-explainer";
+} from '@/lib/evidence/ats-explainer'
 
 /**
  * "What does the screening software do to my resume?" Rebuilt Nov 15, 2026
@@ -42,183 +36,186 @@ import {
  * Nov 15, 2026) and recommend.json (Ladders, Harvard Business School).
  */
 
-const PATH = "/how-ats-actually-works";
+const PATH = '/how-ats-actually-works'
 
 export const metadata: Metadata = {
-  title:
-    "What Does the Screening Software Do to My Resume? How Applicant Tracking Systems Really Work",
+  title: 'What Does the Screening Software Do to My Resume? How Applicant Tracking Systems Really Work',
   description:
-    "Software rarely rejects a resume on its own, and the 75% figure has no study behind it. What happens after you click apply, the knockout questions that can reject you, what breaks the read, and free checkers.",
+    'Software rarely rejects a resume on its own, and the 75% figure has no study behind it. What happens after you click apply, the knockout questions that can reject you, what breaks the read, and free checkers.',
   alternates: { canonical: PATH },
-};
+}
 
 const ON_THIS_PAGE: [string, string][] = [
-  ["steps", "After you apply"],
-  ["knockout", "Knockout questions"],
-  ["parsing", "What breaks the read"],
-  ["pile", "The pile"],
-  ["checkers", "Free checkers"],
-  ["hiring", "If you’re hiring"],
-];
+  ['steps', 'After you apply'],
+  ['knockout', 'Knockout questions'],
+  ['parsing', 'What breaks the read'],
+  ['pile', 'The pile'],
+  ['checkers', 'Free checkers'],
+  ['hiring', 'If you’re hiring'],
+]
 
-const research = (id: string) =>
-  recFramework.seekers.problems.find((p) => p.id === id)!.otherSide;
+const research = (id: string) => recFramework.seekers.problems.find((p) => p.id === id)!.otherSide
 
 function Sources({ items }: { items: Source[] }) {
   return (
     <p className="ax-src">
-      {items.length > 1 ? "Sources: " : "Source: "}
+      {items.length > 1 ? 'Sources: ' : 'Source: '}
       {items.map((s, i) => (
         <span key={s.url}>
-          {i > 0 && "; "}
+          {i > 0 && '; '}
           <a href={s.url} rel="nofollow noopener" target="_blank">
-            {s.source.split(",")[0]}
+            {s.source.split(',')[0]}
           </a>
-          , {s.date.replace(/^(read|updated) /, "")}
+          , {s.date.replace(/^(read|updated) /, '')}
         </span>
       ))}
     </p>
-  );
+  )
 }
 
 /** "Partly. The score is free; the fixes cost $49 a month." becomes free: "The score is free." and paid: "The fixes cost $49 a month." */
 function freeAndPaid(answer: string): { free: string; paid: string } {
   const parts = answer
-    .replace(/^(Yes|Partly|No)[.,:]\s*/i, "")
+    .replace(/^(Yes|Partly|No)[.,:]\s*/i, '')
     .split(/(?<=[.;])\s+/)
-    .map((p) => p.replace(/;$/, "."));
-  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+    .map((p) => p.replace(/;$/, '.'))
+  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
   return {
-    free: cap(parts.filter((p) => !p.includes("$")).join(" ")),
-    paid: cap(parts.filter((p) => p.includes("$")).join(" ")),
-  };
+    free: cap(parts.filter((p) => !p.includes('$')).join(' ')),
+    paid: cap(parts.filter((p) => p.includes('$')).join(' ')),
+  }
 }
 
 export default function Page() {
-  const hidden = research("no-callbacks");
-  const ladders = research("rewriting");
+  const hidden = research('no-callbacks')
+  const ladders = research('rewriting')
   const hbs: Source = {
-    source: "Harvard Business School and Accenture, Hidden Workers",
-    date: "2021",
+    source: 'Harvard Business School and Accenture, Hidden Workers',
+    date: '2021',
     url: hidden.url,
-  };
+  }
   const firstPass: Source = {
-    source: "Ladders eye-tracking study",
-    date: "2018",
+    source: 'Ladders eye-tracking study',
+    date: '2018',
     url: ladders.url,
-  };
-  const caps = recFramework.seekers.capabilities as unknown as Record<
-    string,
-    string[]
-  >;
+  }
+  const caps = recFramework.seekers.capabilities as unknown as Record<string, string[]>
   const rated = resumeTools()
     .all.filter((t) => caps.checker?.includes(t.id))
-    .sort((a, b) => (b.overall ?? -1) - (a.overall ?? -1));
-  const plansChecked = formatDate(latestCheck());
+    .sort((a, b) => (b.overall ?? -1) - (a.overall ?? -1))
+  const plansChecked = formatDate(latestCheck())
 
-  // What happens, and what to do about it. One line each.
-  const steps: { happens: string; todo: string; auto?: boolean }[] = [
+  // The flow chart: the step, what to do, and the detail behind "Why?".
+  const steps: FlowStep[] = [
     {
-      happens: "It reads your resume into a profile.",
-      todo: "Send one plain column.",
+      title: 'It reads your resume into a profile',
+      todo: 'Send one plain column.',
+      why: 'The system pulls your name, contact details, jobs and education into fields a recruiter can search. Columns, tables and text boxes can leave fields empty.',
+      more: { href: '#parsing', label: 'What breaks the read' },
     },
     {
-      happens:
-        "Knockout questions run. A wrong answer rejects you on the spot.",
-      todo: "Answer exactly what’s asked.",
+      title: 'Knockout questions run',
+      todo: 'Answer exactly what’s asked.',
+      why: 'If the employer set up a rule, a wrong answer to a yes-or-no question rejects you on the spot. In most setups it’s the only step that runs without a person.',
+      more: { href: '#knockout', label: 'The questions that can reject you' },
       auto: true,
     },
     {
-      happens: "Everything else waits in a list.",
-      todo: "No reply yet usually means nobody has opened it.",
+      title: 'Everything else waits in a list',
+      todo: 'Give it time. No reply usually means nobody has opened it yet.',
+      why: 'Applications that get past the knockout questions sit in the system until a recruiter gets to them.',
     },
     {
-      happens: "Recruiters search and sort the list.",
-      todo: "Use the posting’s words for skills you have.",
+      title: 'Recruiters search and sort the list',
+      todo: 'Use the posting’s words for skills you have.',
+      why: 'They search resumes by keyword, and some systems sort applicants by how well they match criteria the recruiter set.',
+      more: { href: '#pile', label: 'What recruiters do with the pile' },
     },
     {
-      happens: "A person reads from the top.",
-      todo: "Put your best match at the top of page one.",
+      title: 'A person reads from the top',
+      todo: 'Put your best match at the top of page one.',
+      why: 'The first read is fast, and it starts with whoever the search or sort put first.',
     },
     {
-      happens: "The bottom of the list may never get opened.",
-      todo: "Apply in the first few days.",
+      title: 'The bottom of the list may never get opened',
+      todo: 'Apply in the first few days.',
+      why: 'Recruiters often start interviewing from the first strong applicants before they reach the rest.',
+      more: { href: '#pile', label: 'What recruiters do with the pile' },
     },
-  ];
+  ].map((st) => ({ ...st, title: keepLast(st.title), todo: keepLast(st.todo), why: keepLast(st.why) }))
 
   const hiringTodo = [
-    "Keep knockout questions to legal and license requirements.",
-    "Check who your rules rejected every week.",
-    "Turn on the rejection email.",
-    "Know what your match score is built from before you sort by it.",
-    "Score every applicant on the same things.",
-  ];
+    'Keep knockout questions to legal and license requirements.',
+    'Check who your rules rejected every week.',
+    'Turn on the rejection email.',
+    'Know what your match score is built from before you sort by it.',
+    'Score every applicant on the same things.',
+  ]
 
-  const url = `${SITE}${PATH}`;
-  const citations = [...allSources(), hbs, firstPass];
+  const url = `${SITE}${PATH}`
+  const citations = [...allSources(), hbs, firstPass]
   const ld = graph(
     {
-      "@type": "Article",
-      "@id": `${url}#article`,
-      headline: "What does the screening software do to my resume?",
-      description:
-        "What happens to a resume after someone clicks apply, step by step, from the systems’ own help pages and recruiter research.",
+      '@type': 'Article',
+      '@id': `${url}#article`,
+      headline: 'What does the screening software do to my resume?',
+      description: 'What happens to a resume after someone clicks apply, step by step, from the systems’ own help pages and recruiter research.',
       url,
       dateModified: CHECKED,
-      publisher: { "@id": `${SITE}/#organization` },
+      publisher: { '@id': `${SITE}/#organization` },
       citation: citations.map((s) => ({
-        "@type": "CreativeWork",
+        '@type': 'CreativeWork',
         name: s.source,
         url: s.url,
       })),
     },
     {
-      "@type": "FAQPage",
-      "@id": `${url}#faq`,
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
       mainEntity: [
         {
-          "@type": "Question",
-          name: "Do applicant tracking systems reject 75% of resumes before a person sees them?",
+          '@type': 'Question',
+          name: 'Do applicant tracking systems reject 75% of resumes before a person sees them?',
           acceptedAnswer: {
-            "@type": "Answer",
-            text: "No. The figure traces to a 2012 sales pitch by Preptel, a resume company that closed in 2013 without publishing how it got the number. In 25 interviews with US recruiters in 2025, 23 said their system does not reject resumes on its own.",
+            '@type': 'Answer',
+            text: 'No. The figure traces to a 2012 sales pitch by Preptel, a resume company that closed in 2013 without publishing how it got the number. In 25 interviews with US recruiters in 2025, 23 said their system does not reject resumes on its own.',
           },
         },
         {
-          "@type": "Question",
-          name: "What rejects an application automatically?",
+          '@type': 'Question',
+          name: 'What rejects an application automatically?',
           acceptedAnswer: {
-            "@type": "Answer",
-            text: "Usually a knockout question: a yes-or-no question the employer sets up so that a wrong answer, such as no to work authorization, a required license or relocation, rejects the application right away.",
+            '@type': 'Answer',
+            text: 'Usually a knockout question: a yes-or-no question the employer sets up so that a wrong answer, such as no to work authorization, a required license or relocation, rejects the application right away.',
           },
         },
       ],
     },
     {
-      "@type": "BreadcrumbList",
+      '@type': 'BreadcrumbList',
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
         {
-          "@type": "ListItem",
+          '@type': 'ListItem',
           position: 2,
-          name: "For job seekers",
+          name: 'For job seekers',
           item: `${SITE}/for-job-seekers`,
         },
         {
-          "@type": "ListItem",
+          '@type': 'ListItem',
           position: 3,
-          name: "What does the screening software do to my resume?",
+          name: 'What does the screening software do to my resume?',
           item: url,
         },
       ],
     },
-  );
+  )
 
   return (
     <>
       <style
         dangerouslySetInnerHTML={{
-          __html: siteCss + chromeCss + shortListCss + toolPageCss + css,
+          __html: siteCss + chromeCss + shortListCss + toolPageCss + atsFlowCss + css,
         }}
       />
       <JsonLd data={ld} />
@@ -227,8 +224,7 @@ export default function Page() {
         side="seekers"
         crumbs={
           <>
-            <a href="/">Home</a> /{" "}
-            <a href="/for-job-seekers">For job seekers</a> / Screening software
+            <a href="/">Home</a> / <a href="/for-job-seekers">For job seekers</a> / Screening software
           </>
         }
         sticker="Every line sourced"
@@ -240,12 +236,12 @@ export default function Page() {
         <div className="ax-myth">
           <p>
             {keepLast(
-              "23 of 25 recruiters interviewed in 2025 said their system doesn’t reject resumes on its own. The automatic no comes from questions the employer writes.",
+              '23 of 25 recruiters interviewed in 2025 said their system doesn’t reject resumes on its own. The automatic no comes from questions the employer writes.',
             )}
           </p>
           <Sources items={[MYTH.origin, MYTH.survey]} />
           <p className="ax-jump">
-            Hiring?{" "}
+            Hiring?{' '}
             <a className="tl" href="#hiring">
               Skip to your side of the&nbsp;table
             </a>
@@ -265,48 +261,14 @@ export default function Page() {
 
       {/* The sequence, with what to do at each step. */}
       <section className="wrap sec sl-sec sl-sec-seekers" id="steps">
-        <StepHead title="What happens after you click apply" />
-        <div
-          className="flow"
-          role="table"
-          aria-label="What happens after you apply, and what to do"
-        >
-          <div className="flow-row flow-head" role="row">
-            <span role="columnheader" aria-hidden="true" />
-            <span role="columnheader">What happens</span>
-            <span role="columnheader">What to do</span>
-          </div>
-          {steps.map((s, i) => (
-            <div
-              className={s.auto ? "flow-row flow-auto" : "flow-row"}
-              role="row"
-              key={s.happens}
-            >
-              <span className="flow-n" role="cell">
-                {i + 1}
-              </span>
-              <span className="flow-what" role="cell">
-                {keepLast(s.happens)}
-              </span>
-              <span className="flow-do" role="cell">
-                {keepLast(s.todo)}
-              </span>
-            </div>
-          ))}
-        </div>
+        <StepHead title="What happens after you click apply" sub="Six steps. In most setups only one of them can say no without a person." />
+        <AtsFlow steps={steps} />
       </section>
 
       {/* Knockout questions. */}
       <section className="wrap sec sl-sec sl-sec-seekers" id="knockout">
-        <StepHead
-          title="The questions that can reject you on their own"
-          sub="A wrong answer ends your application before anyone reads your resume."
-        />
-        <div
-          className="ko"
-          role="table"
-          aria-label="Knockout questions and how to answer them"
-        >
+        <StepHead title="The questions that can reject you on their own" sub="A wrong answer ends your application before anyone reads your resume." />
+        <div className="ko" role="table" aria-label="Knockout questions and how to answer them">
           <div className="ko-row ko-head" role="row">
             <span role="columnheader">They ask</span>
             <span role="columnheader">How to answer</span>
@@ -323,29 +285,13 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <p className="ax-note">
-          {keepLast(
-            "Rejection email minutes after you applied? It was most likely a knockout answer.",
-          )}
-        </p>
-        <Sources
-          items={[
-            MYTH.rules,
-            KNOCKOUTS[1].from,
-            KNOCKOUTS[3].from,
-            KNOCKOUTS[4].from,
-            KNOCKOUT_DOCS[2],
-            KNOCKOUT_DOCS[3],
-          ]}
-        />
+        <p className="ax-note">{keepLast('Rejection email minutes after you applied? It was most likely a knockout answer.')}</p>
+        <Sources items={[MYTH.rules, KNOCKOUTS[1].from, KNOCKOUTS[3].from, KNOCKOUTS[4].from, KNOCKOUT_DOCS[2], KNOCKOUT_DOCS[3]]} />
       </section>
 
       {/* Parsing. */}
       <section className="wrap sec sl-sec sl-sec-seekers" id="parsing">
-        <StepHead
-          title="What still breaks the read"
-          sub="These won’t get you rejected. They leave the recruiter a half-empty profile to fix by hand."
-        />
+        <StepHead title="What still breaks the read" sub="These won’t get you rejected. They leave the recruiter a half-empty profile to fix by hand." />
         <div className="pz">
           {PARSING.map((p) => (
             <div className="pz-row" key={p.breaks}>
@@ -354,20 +300,8 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <p className="ax-note">
-          {keepLast(
-            "Some newer systems read columns and tables. You can’t tell which system an employer uses, so plain is safest.",
-          )}
-        </p>
-        <Sources
-          items={[
-            PARSE_RESULT,
-            ...PARSING.flatMap((p) => p.from).filter(
-              (s, i, a) => s !== PARSE_RESULT && a.indexOf(s) === i,
-            ),
-            PARSE_COUNTER,
-          ]}
-        />
+        <p className="ax-note">{keepLast('Some newer systems read columns and tables. You can’t tell which system an employer uses, so plain is safest.')}</p>
+        <Sources items={[PARSE_RESULT, ...PARSING.flatMap((p) => p.from).filter((s, i, a) => s !== PARSE_RESULT && a.indexOf(s) === i), PARSE_COUNTER]} />
       </section>
 
       {/* The pile. */}
@@ -376,64 +310,34 @@ export default function Page() {
         <div className="pile">
           <p className="pile-n">{QUEUE.perJob.now}</p>
           <div>
-            <p className="pile-what">
-              {keepLast(
-                `applications per job, on average, up from ${QUEUE.perJob.then} in ${QUEUE.perJob.thenYear}`,
-              )}
-            </p>
+            <p className="pile-what">{keepLast(`applications per job, on average, up from ${QUEUE.perJob.then} in ${QUEUE.perJob.thenYear}`)}</p>
             <ul className="pile-list">
-              <li>{keepLast("They search it by keyword.")}</li>
-              <li>
-                {keepLast(
-                  "They sort it by match, then by the date you applied.",
-                )}
-              </li>
-              <li>
-                {keepLast("They skim: a first pass averages 7.4 seconds.")}
-              </li>
-              <li>
-                {keepLast(
-                  "They often start interviewing before they reach the bottom.",
-                )}
-              </li>
+              <li>{keepLast('They search it by keyword.')}</li>
+              <li>{keepLast('They sort it by match, then by the date you applied.')}</li>
+              <li>{keepLast('They skim: a first pass averages 7.4 seconds.')}</li>
+              <li>{keepLast('They often start interviewing before they reach the bottom.')}</li>
             </ul>
           </div>
         </div>
-        <Sources
-          items={[
-            QUEUE.volume,
-            QUEUE.search,
-            QUEUE.sort,
-            firstPass,
-            QUEUE.stop.from,
-          ]}
-        />
+        <Sources items={[QUEUE.volume, QUEUE.search, QUEUE.sort, firstPass, QUEUE.stop.from]} />
       </section>
 
       {/* Free checkers. */}
       <section className="wrap sec sl-sec sl-sec-seekers" id="checkers">
-        <StepHead
-          title="Free resume checkers"
-          sub="Use one to find missing skills and a broken layout. Don’t chase the score."
-        />
+        <StepHead title="Free resume checkers" sub="Use one to find missing skills and a broken layout. Don’t chase the score." />
         <div className="ck">
           {NO_ACCOUNT_CHECKERS.map((c) => (
             <div className="ck-row" key={c.id}>
               <div className="ck-name">
                 <Logo domain={c.domain} name={c.name} size={40} />
                 <span>
-                  <b>{c.name.replace(/ (ATS )?resume checker$/, "")}</b>
+                  <b>{c.name.replace(/ (ATS )?resume checker$/, '')}</b>
                   <span className="ck-tag">No account needed</span>
                 </span>
               </div>
-              <p className="ck-free">{keepLast(c.free.split(". ")[0] + ".")}</p>
+              <p className="ck-free">{keepLast(c.free.split('. ')[0] + '.')}</p>
               <span className="ck-go">
-                <a
-                  className="tl"
-                  href={c.url}
-                  rel="nofollow noopener"
-                  target="_blank"
-                >
+                <a className="tl" href={c.url} rel="nofollow noopener" target="_blank">
                   Open it <span className="arr">&#8599;</span>
                 </a>
                 <span className="money">{moneyLine(c.id)}</span>
@@ -441,41 +345,29 @@ export default function Page() {
             </div>
           ))}
           {rated.map((t) => {
-            const { free, paid } = freeAndPaid(t.freeAnswer);
+            const { free, paid } = freeAndPaid(t.freeAnswer)
             return (
               <div className="ck-row" key={t.id}>
                 <div className="ck-name">
                   <Logo domain={t.domain} name={t.name} size={40} />
                   <span>
                     <b>{t.name}</b>
-                    <span className="ck-tag">
-                      {t.overall !== null
-                        ? `${t.overall.toFixed(2)} out of 5`
-                        : "Too few reviews to rate"}
-                    </span>
+                    <span className="ck-tag">{t.overall !== null ? `${t.overall.toFixed(2)} out of 5` : 'Too few reviews to rate'}</span>
                   </span>
                 </div>
                 <p className="ck-free">
                   {keepLast(free)}
-                  {paid && (
-                    <span className="ck-paid">
-                      {keepLast(paid.replace(/^Paid plans are /, "Paid: "))}
-                    </span>
-                  )}
+                  {paid && <span className="ck-paid">{keepLast(paid.replace(/^Paid plans are /, 'Paid: '))}</span>}
                 </p>
                 <a className="tl ck-go" href={`/reviews/${t.id}`}>
                   Is it worth it? <span className="arr">&rarr;</span>
                 </a>
               </div>
-            );
+            )
           })}
           <div className="ck-row">
             <div className="ck-name">
-              <Logo
-                domain={SKILLSYNCER.domain}
-                name={SKILLSYNCER.name}
-                size={40}
-              />
+              <Logo domain={SKILLSYNCER.domain} name={SKILLSYNCER.name} size={40} />
               <span>
                 <b>{SKILLSYNCER.name}</b>
                 <span className="ck-tag">Not rated yet</span>
@@ -486,12 +378,7 @@ export default function Page() {
               <span className="ck-paid">{keepLast(SKILLSYNCER.paid)}</span>
             </p>
             <span className="ck-go">
-              <a
-                className="tl"
-                href={SKILLSYNCER.url}
-                rel="nofollow noopener"
-                target="_blank"
-              >
+              <a className="tl" href={SKILLSYNCER.url} rel="nofollow noopener" target="_blank">
                 Open it <span className="arr">&#8599;</span>
               </a>
               <span className="money">{moneyLine(SKILLSYNCER.id)}</span>
@@ -504,10 +391,7 @@ export default function Page() {
           )}
         </p>
         <p className="tp-cta">
-          <a
-            className="btn btn-indigo"
-            href="/what-should-i-use?side=seekers&problem=no-callbacks#questions"
-          >
+          <a className="btn btn-indigo" href="/what-should-i-use?side=seekers&problem=no-callbacks#questions">
             Which checker should I use? <span className="arr">&rarr;</span>
           </a>
         </p>
@@ -519,15 +403,9 @@ export default function Page() {
           <div className="ax-hire">
             <Dots className="ax-hire-dots" />
             <p className="ax-pill">If you’re hiring</p>
-            <h2 className="sl-h">
-              {keepLast(
-                "Your own rules may be screening out people you’d hire.",
-              )}
-            </h2>
+            <h2 className="sl-h">{keepLast('Your own rules may be screening out people you’d hire.')}</h2>
             <p className="ax-hire-lead">
-              {keepLast(
-                "88% of employers agreed qualified candidates get screened out for not matching a job description’s exact criteria.",
-              )}
+              {keepLast('88% of employers agreed qualified candidates get screened out for not matching a job description’s exact criteria.')}
             </p>
             <ol className="ax-hire-list">
               {hiringTodo.map((t) => (
@@ -547,7 +425,7 @@ export default function Page() {
 
       <SiteFooter />
     </>
-  );
+  )
 }
 
 const css = `
@@ -559,18 +437,6 @@ const css = `
   .ax-src a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
   .ax-src a:hover{color:var(--ink);}
   .ax-note{margin:24px 0 0;font-size:18px;line-height:1.5;font-weight:700;color:var(--ink);}
-
-  /* Steps */
-  .flow{margin-top:36px;max-width:980px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;}
-  .flow-row{display:grid;grid-template-columns:48px minmax(0,1.25fr) minmax(0,1fr);gap:20px;align-items:center;padding:16px 24px;border-top:1px solid var(--rule);}
-  .flow-row:first-child{border-top:0;}
-  .flow-head{padding-top:12px;padding-bottom:12px;background:var(--paper-2);font-size:14px;font-weight:800;color:var(--ink-2);}
-  .flow-n{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:3px solid var(--ink);background:var(--indigo);color:#fff;font-weight:900;font-size:17px;}
-  .flow-what{font-size:18px;line-height:1.4;font-weight:700;color:var(--ink);}
-  .flow-do{font-size:17px;line-height:1.45;color:var(--indigo-text);font-weight:700;}
-  .flow-auto{background:var(--coral-tint);}
-  .flow-auto .flow-n{background:var(--coral);color:var(--coral-deep);}
-  .flow-auto .flow-do{color:var(--coral-text);}
 
   /* Knockout questions */
   .ko{margin-top:36px;max-width:980px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;}
@@ -626,11 +492,9 @@ const css = `
   .ax-hire-sec .tp-fine{margin-top:32px;}
 
   @media(max-width:760px){
-    .flow-head,.ko-head{display:none;}
-    .flow-row{grid-template-columns:44px minmax(0,1fr);gap:4px 14px;padding:16px 18px;}
-    .flow-n{grid-row:span 2;align-self:start;}
+    .ko-head{display:none;}
     .ko-row,.pz-row{grid-template-columns:1fr;gap:8px;padding:16px 18px;}
     .ck-row{grid-template-columns:1fr;gap:10px;padding:16px 18px;}
     .pile{grid-template-columns:1fr;gap:10px;}
   }
-`;
+`
