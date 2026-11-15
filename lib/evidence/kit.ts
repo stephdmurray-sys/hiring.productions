@@ -70,7 +70,7 @@ export const FREE_TOOLS = {
   },
   screening: {
     title: 'What does the screening software do to my resume?',
-    detail: 'What published research and the systems’ own product pages say, and what to do about each one.',
+    detail: 'What happens after you click apply, step by step, from the systems’ own help pages.',
     href: '/how-ats-actually-works',
   },
   listCheck: {
