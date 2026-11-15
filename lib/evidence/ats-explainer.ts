@@ -59,31 +59,31 @@ export const KNOCKOUTS: { kind: string; example: string; from: Source; answer: s
     kind: 'Work authorization and sponsorship',
     example: 'Are you legally allowed to work in this country?',
     from: MYTH.rules,
-    answer: 'Answer for the country the job is in. If a question asks about sponsorship now or in the future, count the future.',
+    answer: 'Answer for the country the job is in. If it says “now or in the future,” count the future.',
   },
   {
     kind: 'Where you live',
     example: 'Are you based in the UK?',
     from: S({ source: 'Workable Help, Auto-disqualify candidates', date: 'read November 15, 2026', url: 'https://help.workable.com/hc/en-us/articles/115012238688-Auto-disqualify-candidates-using-application-form-questions' }),
-    answer: 'Answer for where you live today. If the job is remote, check which states or countries it covers before you apply.',
+    answer: 'Answer for where you live today.',
   },
   {
     kind: 'Relocation',
     example: 'Are you willing to relocate?',
     from: S({ source: 'Greenhouse Support, Auto-Reject for prospect post', date: 'read November 15, 2026', url: 'https://support.greenhouse.io/hc/en-us/articles/360029081512-Auto-Reject-for-prospect-post' }),
-    answer: 'Say yes only if you would move for this job. A no ends the application in systems set up this way.',
+    answer: 'Say yes only if you’d move for this job.',
   },
   {
     kind: 'Licenses and certifications',
     example: 'Do you have a Class A Commercial Driver’s License?',
     from: S({ source: 'Greenhouse Support, Auto-reject', date: 'read November 15, 2026', url: 'https://support.greenhouse.io/hc/en-us/articles/360000653472-Auto-reject' }),
-    answer: 'Yes means you hold it today. If yours is in progress, answer no and put the date you expect it on your resume.',
+    answer: 'Yes means you hold it today.',
   },
   {
     kind: 'Years of experience',
     example: 'A certain number of years of experience',
     from: S({ source: 'Lever, ATS myths', date: 'updated October 15, 2026', url: 'https://www.lever.co/blog/applicant-tracking-system-myths-debunked' }),
-    answer: 'Count the years you did that work at any job, the way the posting describes it. Don’t round up.',
+    answer: 'Count every year you did that work, at any job. Don’t round up.',
   },
 ]
 

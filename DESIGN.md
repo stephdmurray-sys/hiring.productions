@@ -112,6 +112,7 @@ Every picker path ends in an answer with a best match (or a plain "no tool" verd
 
 ## Copy tells to avoid
 
+- Get to the point (Stephanie, Nov 15, 2026, for every page). Lead with the answer. One short block per idea, no section bigger than its idea, no explaining what nobody asked. Sources sit in one small line per section, not under every row. If a section takes more than a screen to say one thing, cut it.
 - Talk like a person (Stephanie, Nov 15, 2026). Every question and answer reads the way someone would say it out loud: "What would help you get the offer?", never "What would tip it your way?"; "Which sounds like you?", never "Which is closer?".
 
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").
