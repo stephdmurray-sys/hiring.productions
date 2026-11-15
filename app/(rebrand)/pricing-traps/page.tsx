@@ -53,14 +53,14 @@ export default function Page() {
             <a href="/">Home</a> / <a href="/for-job-seekers">For job seekers</a> / Pricing traps
           </>
         }
-        sticker={`${traps.size} bill every 4 weeks`}
+        sticker={`${traps.size} tools bill every 4 weeks`}
         title="Which resume tools keep charging you?"
         dek="Every resume tool we rate, by what the first year costs if you pay for a 3-month search and forget to cancel. The ones that start with a cheap trial and bill every 4 weeks are marked."
         dateline={`From each tool’s own pricing, checked ${formatDate(checked)} · nobody pays to be featured`}
       />
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="list">
-        <StepHead n={1} title="The first year, if you forget to cancel" sub="Most expensive first." />
+        <StepHead title="The first year, if you forget to cancel" sub="Most expensive first." />
         <div className="tscroll">
           <table className="ptx-table">
             <thead>
@@ -90,7 +90,7 @@ export default function Page() {
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="traps">
-        <StepHead n={2} title="The ones that bill every 4 weeks" sub="A cheap trial, then a charge every 4 weeks: 13 a year." />
+        <StepHead title="The ones that bill every 4 weeks" sub="A cheap trial, then a charge every 4 weeks: 13 a year." />
         <div className="free-grid">
           {rows
             .filter((r) => traps.has(r.t.id))

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 const css = `
   .nf{padding-bottom:clamp(96px,11vw,150px);}
   .nf-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px;font-size:18px;font-weight:800;}
+  .nf-sticker{display:inline-block;margin:6px 0 18px;padding:9px 14px 8px;font-weight:900;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;background:var(--coral);color:var(--ink);border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-4deg);}
 `
 
 export default function NotFound() {
@@ -28,6 +29,7 @@ export default function NotFound() {
           <p className="crumbs">
             <a href="/">Home</a> / Not found
           </p>
+          <p className="nf-sticker">Error 404</p>
           <h1 className="display">This page isn&rsquo;t here.</h1>
           <p className="dek">It may have moved when we rebuilt the site. Tell us where you&rsquo;re stuck and we&rsquo;ll point you to the right tool.</p>
           <p style={{ marginTop: 32 }}>

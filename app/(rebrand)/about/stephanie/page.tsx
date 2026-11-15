@@ -45,9 +45,9 @@ export const metadata: Metadata = {
 
 const css = `
   .ab-hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;}
-  .ab-photo{width:clamp(140px,18vw,220px);aspect-ratio:1;border-radius:50%;overflow:hidden;position:relative;}
+  .ab-photo{width:clamp(140px,18vw,220px);aspect-ratio:1;border-radius:50%;overflow:hidden;position:relative;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink);background:var(--coral);}
   .ab-photo img{object-fit:cover;}
-  .ab-hero h1 span{display:block;color:var(--indigo-text);}
+  .ab-hero h1 span{display:block;color:#FFB3C0;}
   .ab-result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(32px,5vw,72px);align-items:end;margin-top:40px;}
   .ab-big{font-weight:900;font-size:clamp(76px,9.5vw,136px);line-height:.9;letter-spacing:-0.045em;color:var(--ink);white-space:nowrap;}
   .ab-big small{white-space:normal;}

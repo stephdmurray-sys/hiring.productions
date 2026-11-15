@@ -54,8 +54,8 @@ export default function OnTheRisePage() {
           </p>
           <h1 className="display">Which tools are about to break out?</h1>
           <p className="dek">
-            New tools for job seekers and hiring teams that people are starting to talk about. None has enough public reviews for a rating
-            yet, so each one shows only what we can back up, with dates. When one gets enough reviews, it gets rated.
+            New tools for job seekers and hiring teams that people are starting to talk about. Each one shows only what we can back up,
+            with dates. A tool gets rated once it has enough public reviews and tools like it to be ranked&nbsp;against.
           </p>
           <p className="dateline">
             Checked {shortDate(latestCheck())}. Next check {formatMonth(guide.nextCheck)}. Never ranked, never paid for.

@@ -57,7 +57,8 @@ export default function ReviewsIndex() {
         </div>
       </header>
 
-      <section className="wrap sec-tight">
+      <section className="wrap sec" id="resume-tools">
+        <h2>Resume tools</h2>
         <div className="ix-boards">
           <Scoreboard side="seekers" title="ATS resume checkers" checked={`checked ${shortDate(checked)}`} rows={scored(checkers)} />
           <Scoreboard side="seekers" title="Resume builders" checked={`checked ${shortDate(checked)}`} rows={scored(builders)} />

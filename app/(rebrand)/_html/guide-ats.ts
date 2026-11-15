@@ -138,8 +138,6 @@ export const html = `<style>
       <div class="byline">
         <span>Data as of August 22, 2026 &middot; next check December 2026</span>
         <span class="dot">&middot;</span>
-        <span>Next full check: December 2026</span>
-        <span class="dot">&middot;</span>
         <a href="/how-we-review" style="color:#C9BFE8;text-decoration:underline;">How we review</a>
       </div>
       <p class="disclosure">

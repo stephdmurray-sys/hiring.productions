@@ -466,7 +466,7 @@ export function RecSituations({ exclude }: { exclude?: string }) {
 export const kitCss = moneyCss + followCss + `
   /* The kit */
   .kit{margin-top:44px;max-width:820px;}
-  .kit-k{font-size:15px;font-weight:900;letter-spacing:0;color:var(--ink);margin:0 0 14px;}
+  .kit-k{font-size:clamp(20px,2.2vw,24px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);margin:0 0 16px;}
   .kit-best{margin-top:32px;}
   .kit-best .rec-pick{margin-top:0;}
   .rec-seekers .kit-best .rec-pick{border:3px solid var(--indigo);box-shadow:6px 6px 0 var(--indigo);}
@@ -506,6 +506,14 @@ export const kitCss = moneyCss + followCss + `
 
 export const recCss = captureCss + kitCss + `
   .rec-hint{margin:-6px 0 16px;font-size:16px;line-height:1.5;color:var(--ink-2);font-weight:600;max-width:640px;}
+  .rec-change{border:2px solid var(--ink);border-radius:var(--r-lg);background:var(--surface);box-shadow:4px 4px 0 var(--ink);}
+  .rec-change > summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:16px 20px;}
+  .rec-change > summary::-webkit-details-marker{display:none;}
+  .rec-change-k{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);}
+  .rec-change-v{font-size:16px;font-weight:700;color:var(--ink);flex:1 1 280px;line-height:1.45;}
+  .rec-change-btn{font-size:15px;font-weight:800;color:var(--indigo-text,var(--indigo));text-decoration:underline;text-underline-offset:3px;white-space:nowrap;}
+  .rec-change[open] .rec-change-btn{color:var(--ink-3);}
+  .rec-change-body{padding:4px 20px 20px;border-top:1px solid var(--rule);}
   .rec-chosen{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 8px;font-size:18px;font-weight:800;color:var(--ink);}
   .rec-keep{margin-top:40px;}
   /* Questions */

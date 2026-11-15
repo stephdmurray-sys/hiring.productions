@@ -69,7 +69,7 @@ export default function Page() {
       />
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="free-tools">
-        <StepHead n={1} title="Resume tools with a real free version" sub="Ranked by score, the same scores as our rankings." />
+        <StepHead title="Resume tools with a real free version" sub="Ranked by score, the same scores as our rankings." />
         <div className="sl-tools">
           {free.map((t) => {
             const { free: f, upgrade } = split(t.freeAnswer)
@@ -113,7 +113,7 @@ export default function Page() {
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="free-here">
-        <StepHead n={2} title="Free on this site" sub="No account, no trial, and nothing you type is kept unless you ask us to email it." />
+        <StepHead title="Free on this site" sub="No account, no trial, and nothing you type is kept unless you ask us to email it." />
         <FreeCards items={[FREE_TOOLS.screening, FREE_TOOLS.interviewPractice, FREE_TOOLS.proofKit, FREE_TOOLS.portfolio, FREE_TOOLS.realJob, FREE_TOOLS.listCheck]} />
       </section>
 

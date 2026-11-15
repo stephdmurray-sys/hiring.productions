@@ -27,12 +27,15 @@ export function ToolHero({ side, crumbs, sticker, title, dek, dateline }: { side
 }
 
 /** A numbered section heading, the same as on the short lists. */
-export function StepHead({ n, title, sub }: { n: number; title: string; sub?: string }) {
+export function StepHead({ n, title, sub }: { n?: number; title: string; sub?: string }) {
+  // Numbers only where the sections are steps a visitor takes in order.
   return (
-    <div className="sl-head">
-      <span className="sl-num sl-num-big" aria-hidden="true">
-        {n}
-      </span>
+    <div className={n ? 'sl-head' : 'sl-head sl-head-plain'}>
+      {n ? (
+        <span className="sl-num sl-num-big" aria-hidden="true">
+          {n}
+        </span>
+      ) : null}
       <div>
         <h2 className="sl-h">{keepLast(title)}</h2>
         {sub && <p className="lead">{keepLast(sub)}</p>}
@@ -62,6 +65,7 @@ export function FreeCards({ items }: { items: FreeTool[] }) {
 
 export const toolPageCss = `
   .free-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:22px;margin-top:32px;}
+  @media(min-width:760px){.free-grid:has(> :nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr));}}
   .free-grid .kit-free{height:100%;}
   .tp-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:28px;}
   .tp-fine{margin-top:44px;font-size:14px;font-weight:700;color:var(--ink-2);}

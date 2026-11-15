@@ -279,12 +279,14 @@ export const ASK_FOR_IT = {
 /** Free tools to go straight to, one row per side, under the first question on the homepage. */
 export const FREE_CHIPS: Record<Side, { label: string; href: string }[]> = {
   seekers: [
+    { label: 'What will my search cost?', href: '/build-your-stack' },
     { label: 'Is this job even real?', href: '/is-this-a-real-job' },
     { label: 'The $0 job search', href: '/free-job-search' },
     { label: 'Interview practice', href: '/interview-practice' },
     { label: 'Which tools keep charging you?', href: '/pricing-traps' },
   ],
   hiring: [
+    { label: 'What will our tools cost?', href: '/build-your-stack/hiring' },
     { label: 'Interview scorecard', href: '/interview-scorecard' },
     { label: 'What a hire costs', href: '/hiring-costs' },
     { label: 'Fraud tools to know', href: '/guides/hiring-fraud-tools' },

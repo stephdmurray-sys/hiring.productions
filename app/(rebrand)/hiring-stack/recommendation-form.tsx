@@ -74,7 +74,7 @@ export function RecommendationForm() {
             <label htmlFor="rec-pain">What&rsquo;s breaking right now?</label>
             <textarea id="rec-pain" name="pain" maxLength={2000} placeholder="Slow to offer, no view of the pipeline, candidates ghosting, too many tools" />
 
-            <button className="btn btn-indigo" type="submit" disabled={status === 'sending'}>
+            <button className="btn btn-coral" type="submit" disabled={status === 'sending'}>
               {status === 'sending' ? 'Sending\u2026' : 'Send my situation'}
             </button>
             {status === 'error' && (

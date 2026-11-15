@@ -80,7 +80,7 @@ export default function Page() {
       />
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="checks">
-        <StepHead n={1} title="The four checks" sub="Each one comes with a real example from the lists we track." />
+        <StepHead title="The four checks" sub="Each one comes with a real example from the lists we track." />
         <div className="lc-checks">
           {checks.map((c, i) => (
             <article className="lc-check" key={c.q}>
@@ -96,7 +96,7 @@ export default function Page() {
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="lists">
-        <StepHead n={2} title="Every list we track" sub="We show every one. Only the lists that pass all four checks count toward our rankings." />
+        <StepHead title="Every list we track" sub="We show every one. Only the lists that pass all four checks count toward our rankings." />
         <div className="lc-lists">
           {lists.map((l) => {
             const s = STATUS[l.status] ?? { label: l.status, tone: 'old' as const }

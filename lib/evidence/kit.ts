@@ -88,6 +88,17 @@ export const FREE_TOOLS = {
     detail: 'The signs to check before you send a resume or anything else.',
     href: '/is-this-a-real-job',
   },
+  // The stack builder (Nov 15, 2026): every part of a search or a hiring setup, priced from what is on file.
+  stackSeekers: {
+    title: 'What will your job search cost?',
+    detail: 'Click tools into your stack and see the total, the cost if you forget to cancel, and the $0 version.',
+    href: '/build-your-stack',
+  },
+  stackHiring: {
+    title: 'What will your hiring tools cost?',
+    detail: 'Click tools into your hiring stack and see the year’s cost for your team size.',
+    href: '/build-your-stack/hiring',
+  },
   portfolio: {
     title: 'Portfolio sites to know',
     detail: 'Where to show your work, sorted by the kind of work you do. Most have a free plan.',
@@ -97,10 +108,10 @@ export const FREE_TOOLS = {
 
 /** "Free from us": the site's own free tool, where one fits the answer. */
 export const FREE_FROM_US: Record<string, FreeTool> = {
-  // Resume answers: the cost calculator
-  'no-callbacks': FREE_TOOLS.costCalculator,
-  rewriting: FREE_TOOLS.costCalculator,
-  'losing-track': FREE_TOOLS.costCalculator,
+  // Resume answers: the stack builder, priced for their timeline
+  'no-callbacks': FREE_TOOLS.stackSeekers,
+  rewriting: FREE_TOOLS.stackSeekers,
+  'losing-track': FREE_TOOLS.stackSeekers,
   // Interview answers: the site's free interview practice
   'interview-practice': FREE_TOOLS.interviewPractice,
   'interviews-stall': FREE_TOOLS.interviewPractice,
@@ -108,7 +119,7 @@ export const FREE_FROM_US: Record<string, FreeTool> = {
   'interviews-inconsistent': FREE_TOOLS.scorecard,
   // Hiring answers about cost or volume: the cost per hire tool
   spreadsheets: FREE_TOOLS.costPerHire,
-  'choosing-ats': FREE_TOOLS.costPerHire,
+  'choosing-ats': FREE_TOOLS.stackHiring,
   'too-many-applicants': FREE_TOOLS.costPerHire,
   // Fraud answers: the red flags checklist
   'fake-candidates': FREE_TOOLS.redFlags,

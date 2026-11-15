@@ -255,7 +255,7 @@ export function buildComparison(slug: string): Comparison | undefined {
     wins.push({
       what: 'Users rate it higher',
       winner: u.name,
-      line: `Users: ${u.name} ${Math.max(userA, userB).toFixed(1)}, ${other.name} ${Math.min(userA, userB).toFixed(1)} out of 5.`,
+      line: `Users: ${u.name} ${Math.max(userA, userB).toFixed(2)}, ${other.name} ${Math.min(userA, userB).toFixed(2)} out of 5.`,
       says: 'gets better reviews from users',
     })
   }

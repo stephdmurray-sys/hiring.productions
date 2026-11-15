@@ -8,6 +8,32 @@ import { useEffect } from 'react'
  * Without JavaScript, or with reduced motion, bars simply show full.
  */
 export function Motion() {
+  // Phones: every data table becomes a stack of cards, each value labeled with its column (chromeCss, .tbl-stack).
+  useEffect(() => {
+    for (const table of Array.from(document.querySelectorAll<HTMLTableElement>('table'))) {
+      // The header is the thead, or (older guides) a first row made only of th cells.
+      const first = table.querySelector('tr')
+      const headRow = table.querySelector('thead tr') ?? (first && Array.from(first.children).every((c) => c.tagName === 'TH') ? first : null)
+      if (!headRow || table.classList.contains('tbl-keep')) continue
+      headRow.classList.add('tbl-head')
+      const heads = Array.from(headRow.children).map((th) => (th as HTMLElement).innerText.replace(/\s+/g, ' ').trim())
+      for (const row of Array.from(table.querySelectorAll('tr'))) {
+        if (row === headRow || row.closest('thead')) continue
+        let col = 0
+        for (const cell of Array.from(row.children) as HTMLElement[]) {
+          const span = Number(cell.getAttribute('colspan') || 1)
+          const label = heads[col] ?? ''
+          if (span > 1) cell.classList.add('tbl-span')
+          else if (label === '#') cell.classList.add('tbl-rank')
+          else if (col <= 1 && /^(tool|program|system|plan|your search|if your search takes)$/i.test(label)) cell.classList.add('tbl-title')
+          else cell.setAttribute('data-label', label)
+          col += span
+        }
+      }
+      table.classList.add('tbl-stack')
+    }
+  }, [])
+
   // The sticky "On this page" bar marks the section you're reading, so you always know where you are.
   useEffect(() => {
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc-bar a[href^="#"]'))

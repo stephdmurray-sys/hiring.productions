@@ -243,7 +243,7 @@ export const html = `<style>
         <div class="review-id"><span class="review-rank">#3 &middot; Cert prep</span><span class="favicon"><img src="https://www.google.com/s2/favicons?domain=aihr.com&sz=64" width="20" height="20" alt=""></span><span class="review-name">AIHR</span></div>
         <span class="etag etag-res">Public info only</span>
       </div>
-      <p class="review-updated">Updated August 23, 2026 &middot; Affiliate partner: AIHR pays us a commission; the score was set before the partnership and does not change because of it</p>
+      <p class="review-updated">Updated August 23, 2026</p>
       <div class="verdict">
         <div class="v-row"><span class="v-key v-good">Best if</span><span class="v-val">You want modern specialty depth (people analytics, talent acquisition strategy, AI for HR) and your 60 recertification credits at the same time: 29 SHRM plus 29 HRCI per certificate.</span></div>
         <div class="v-row"><span class="v-key">Skip it if</span><span class="v-val">You are prepping for the PHR or SHRM-CP exam itself. AIHR builds skills; SHRM&rsquo;s system and HRCP prep the exam.</span></div>

@@ -35,15 +35,25 @@ const GLOBAL_FIXES = `
   }
   body{background:var(--paper) !important;color:var(--ink);font-family:inherit;-webkit-font-smoothing:antialiased;font-size:17px;}
   .wrap,section.wrap{padding-left:32px;padding-right:32px;}
+  .wrap{max-width:1200px !important;}
   section.wrap{padding-top:clamp(56px,7vw,96px);}
   :focus-visible{outline:2px solid var(--indigo);outline-offset:3px;}
   input,select,textarea{font-size:16px;}
 
   /* Page headers: paper and ink with a heavy rule, no dark gradient band */
-  .page-hero,.rec-hero,[style*="linear-gradient"]{background:var(--paper) !important;color:var(--ink) !important;}
-  .page-hero,.rec-hero{border-bottom:2px solid var(--ink);padding:clamp(40px,6vw,80px) 0 clamp(28px,4vw,44px) !important;}
-  .page-hero *{color:var(--ink-2) !important;}
-  .page-hero h1,.page-hero h1[style]{color:var(--ink) !important;font-weight:800 !important;font-size:clamp(40px,6vw,76px) !important;line-height:1.02 !important;letter-spacing:-0.025em !important;text-wrap:balance;}
+  .rec-hero,[style*="linear-gradient"]{background:var(--paper) !important;color:var(--ink) !important;}
+  /* The header band, the same as every rebuilt page: indigo, coral on hiring pages. */
+  .page-hero{position:relative;overflow:hidden;background:var(--indigo) !important;color:#fff !important;}
+  .site-nav[data-side="hiring"] ~ div .page-hero{background:var(--coral) !important;color:var(--coral-deep) !important;}
+  .page-hero::before{content:"";position:absolute;top:-8px;right:4%;width:128px;height:96px;background-image:radial-gradient(currentColor 2.6px,transparent 3px);background-size:16px 16px;opacity:.38;pointer-events:none;}
+  .page-hero > .wrap{position:relative;z-index:1;}
+  .page-hero,.rec-hero{border-bottom:3px solid var(--ink);padding:clamp(40px,6vw,80px) 0 clamp(44px,5.5vw,72px) !important;}
+  .page-hero *{color:inherit !important;}
+  .page-hero p,.page-hero .byline{font-size:17px !important;}
+  .page-hero a{text-decoration-color:currentColor !important;}
+  .page-hero :focus-visible{outline-color:currentColor;}
+  .page-hero h1,.page-hero h1[style]{color:inherit !important;font-weight:900 !important;font-size:clamp(44px,6.6vw,84px) !important;line-height:1.02 !important;letter-spacing:-0.03em !important;text-wrap:balance;}
+  @media(max-width:760px){.page-hero::before{right:-48px;top:-30px;}}
   .page-hero a{text-decoration:underline;text-underline-offset:3px;}
   .disclosure{background:none !important;border:0 !important;padding:0 !important;font-size:14px !important;margin-top:8px !important;}
   .badge-live,.badge-live *{background:none !important;border:0 !important;padding:0 !important;border-radius:0 !important;}
@@ -106,6 +116,8 @@ export function MockPage({ html, active = null, ratings = 'short', after }: { ht
   const hasFooter = FOOTER_RE.test(html)
   let body = html.replace(NAV_RE, '').replace(FOOTER_RE, '')
   for (const [re, to] of BRAND_SWAPS) body = body.replace(re, to)
+  // No single word alone on the last line: the last two words of a heading, paragraph or list item stay together.
+  body = body.replace(/(>[^<]*?)([^\s<>]+)\s+([^\s<>]+)\s*(<\/(?:h1|h2|h3|p|li)>)/g, (_m, pre: string, a: string, b: string, close: string) => `${pre}${a.replace(/-/g, '\u2011')}&nbsp;${b.replace(/-/g, '\u2011')}${close}`)
   return (
     <>
       {hasNav && <SiteNav active={active} />}

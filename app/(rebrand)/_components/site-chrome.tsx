@@ -23,13 +23,37 @@ export const chromeCss = `
   .site-nav .links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,0.5);}
   .site-nav .links a.on{color:#fff;border-bottom-color:#fff;}
   .site-nav :focus-visible{outline-color:#fff;}
+  .site-nav .nav-toggle{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+  .site-nav .nav-menu{display:none;}
   /* Older page templates set nav{height:62px}; the bar must grow to hold the wrapped links row. */
   .site-nav nav{height:auto;}
   @media(max-width:900px){
     .site-nav nav{flex-wrap:wrap;gap:4px 0;padding:14px 0 4px;}
-    .site-nav .links{margin-left:0;width:100%;overflow-x:auto;scrollbar-width:none;gap:22px;}
-    .site-nav .links::-webkit-scrollbar{display:none;}
-    .site-nav .links a{padding:10px 0;}
+    /* Phones: a Menu button opens every link as a list, so nothing is cut off at the edge. */
+    .site-nav nav{flex-wrap:wrap;gap:0;padding:12px 0;min-height:0;}
+    .site-nav .nav-menu{display:inline-flex;margin-left:auto;align-items:center;gap:8px;font-weight:800;font-size:15px;color:var(--ink,#1A1A22);background:#fff;border:2px solid var(--ink,#1A1A22);border-radius:10px;box-shadow:3px 3px 0 var(--ink,#1A1A22);padding:9px 14px;cursor:pointer;}
+    .site-nav .nav-menu i{display:block;width:16px;height:2px;background:currentColor;box-shadow:0 -5px 0 currentColor,0 5px 0 currentColor;margin:5px 0;}
+    .site-nav .nav-toggle:focus-visible + .nav-menu{outline:3px solid #fff;outline-offset:3px;}
+    .site-nav .links{display:none;margin-left:0;width:100%;flex-direction:column;align-items:stretch;gap:0;padding:10px 0 6px;}
+    .site-nav .nav-toggle:checked ~ .links{display:flex;}
+    .site-nav .links a{padding:13px 0;font-size:18px;border-bottom:1px solid rgba(255,255,255,0.22);}
+    .site-nav .links a.on{border-bottom-color:rgba(255,255,255,0.22);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;}
+  }
+
+  /* Phones: data tables stack into one card per row, each value with its column name (labels set by motion.tsx). */
+  @media(max-width:600px){
+    table.tbl-stack,table.tbl-stack tbody,table.tbl-stack tr,table.tbl-stack td{display:block !important;width:auto !important;min-width:0 !important;max-width:none !important;}
+    table.tbl-stack{border:0 !important;margin-top:20px !important;}
+    table.tbl-stack thead,table.tbl-stack tr.tbl-head{display:none !important;}
+    table.tbl-stack tr{position:relative;border:2px solid var(--ink,#1A1A22) !important;border-radius:14px !important;background:#fff !important;margin:0 0 14px !important;padding:8px 16px !important;box-shadow:3px 3px 0 var(--ink,#1A1A22);}
+    table.tbl-stack td{display:flex !important;justify-content:space-between;align-items:baseline;gap:16px;text-align:right !important;padding:9px 0 !important;border:0 !important;border-bottom:1px solid var(--rule,#E3DED2) !important;background:none !important;white-space:normal !important;}
+    table.tbl-stack td:last-child{border-bottom:0 !important;}
+    table.tbl-stack td[data-label]::before{content:attr(data-label);flex:none;max-width:48%;text-align:left;font-weight:800;font-size:13.5px;line-height:1.35;color:var(--ink-2,#4A4A5A);}
+    table.tbl-stack td[data-label=""]::before{display:none;}
+    table.tbl-stack td.tbl-title{justify-content:flex-start;text-align:left !important;font-size:18px !important;font-weight:900;padding-top:12px !important;}
+    table.tbl-stack td.tbl-rank{position:absolute;top:10px;right:14px;border:0 !important;padding:0 !important;font-weight:900;color:var(--ink-3,#62627A);}
+    table.tbl-stack td.tbl-span{justify-content:flex-start;text-align:left !important;}
+    .tscroll:has(> table.tbl-stack),div:has(> table.tbl-stack){overflow:visible !important;border:0 !important;background:none !important;box-shadow:none !important;}
   }
 
   /* Scroll-in motion (motion.tsx). Only elements below the first screen are ever hidden, and only with scripts on. */
@@ -75,18 +99,24 @@ export function Wordmark() {
 export function SiteNav({ active = null }: { active?: NavKey }) {
   // Pages for one audience light up that audience's topic.
   const on = active === 'seekers' ? 'resume' : active === 'hiring' ? 'ats' : active
+  // The page header below takes this side's color (site-css .ph).
+  const side = on === 'resume' ? 'seekers' : on === 'ats' ? 'hiring' : undefined
   const link = (key: NavKey, href: string, label: string) => (
     <a href={href} className={on === key ? 'on' : undefined} aria-current={on === key ? 'page' : undefined}>
       {label}
     </a>
   )
   return (
-    <div className="site-nav">
+    <div className="site-nav" data-side={side}>
       <div className="wrap">
         <nav aria-label="Main">
           <a href="/" aria-label="hiring.productions home">
             <Wordmark />
           </a>
+          <input type="checkbox" id="nav-toggle" className="nav-toggle" aria-label="Menu" />
+          <label htmlFor="nav-toggle" className="nav-menu" aria-hidden="true">
+            <i /> Menu
+          </label>
           <span className="links">
             {link('recommend', '/what-should-i-use', 'What should I use?')}
             {link('resume', '/guides/best-resume-tools', 'Resume tools')}

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NextStep } from '@/app/(rebrand)/_components/next-step'
-import { labelGoLinks, moneyLine } from '@/lib/money'
+import { labelGoLinks } from '@/lib/money'
 import { MockPage } from '@/app/(rebrand)/mock-page'
 import { html } from '@/app/(rebrand)/_html/guide-ats'
 import ats from '@/lib/scorecards/ats-small-teams.json'
@@ -78,7 +78,7 @@ function rebuildPicks(src: string): string {
           <span class="pick-name">${leader.name}</span>
         </div>
         <p class="pick-best">Top score for ${SEG_NAME[SEG_OF[flag]].toLowerCase()} on the data: users ${s.user.toFixed(2)}, and a published price (${leader.sources.pricing}).</p>
-        <a href="/go/${slugOf(leader.name)}" class="visit">Visit ${leader.name} &#8599;</a><span class="money" style="display:block;font-size:12.5px;line-height:1.4;font-weight:600;color:#62627A;margin-top:6px;">${moneyLine(slugOf(leader.name))}</span>
+        <a href="/go/${slugOf(leader.name)}" class="visit">Visit ${leader.name} &#8599;</a>
       </div>`
     },
   )

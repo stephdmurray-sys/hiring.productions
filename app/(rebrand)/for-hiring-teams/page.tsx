@@ -56,6 +56,13 @@ export default function Page() {
           ],
         },
         {
+          href: '/build-your-stack/hiring',
+          title: 'What will your hiring tools cost?',
+          detail: 'Click an applicant tracking system, a scorecard and a fraud check into your stack and see the year’s cost for your team size.',
+          meta: 'Free stack builder',
+          logos: [],
+        },
+        {
           href: '/interview-scorecard',
           title: 'What should we ask in the interview?',
           detail: 'A structured scorecard for any role, on the US Office of Personnel Management\u2019s method, sent to you as a PDF and a spreadsheet.',

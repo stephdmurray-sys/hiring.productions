@@ -210,15 +210,15 @@ export const shortListCss =
   .sl-hero-seekers .sl-sticker{background:var(--coral);color:var(--ink);}
   .sl-hero-hiring .sl-sticker{background:#fff;color:var(--ink);}
   .slh-dots{top:-6px;right:4%;}
-  .slh-zig{bottom:-40px;right:26%;}
-  .slh-squig{top:46%;right:7%;}
+  .slh-zig{bottom:-40px;right:0;}
+  .slh-squig{display:none;}
   .sl-hero-seekers .slh-dots{color:var(--lavender);}
   .sl-hero-seekers .slh-zig{color:var(--coral);}
   .sl-hero-seekers .slh-squig{color:#fff;}
   .sl-hero-hiring .slh-dots{color:var(--ink);opacity:.5;}
   .sl-hero-hiring .slh-zig{color:var(--indigo);}
   .sl-hero-hiring .slh-squig{color:#fff;}
-  @media(max-width:760px){.slh-squig{display:none;}.slh-zig{right:8%;}.slh-dots{top:-30px;right:-62px;}}
+  @media(max-width:760px){.slh-zig{right:0;}.slh-dots{top:-30px;right:-62px;}}
 
   .sl-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:18px;margin-top:clamp(40px,5vw,56px);}
   .sl-pick-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 18px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);font-size:16.5px;font-weight:800;line-height:1.3;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;animation:g-in .5s cubic-bezier(.2,.7,.2,1) both;}
@@ -240,7 +240,7 @@ export const shortListCss =
   .sl-num-big{width:64px;height:64px;font-size:28px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-6deg);flex-shrink:0;}
   .sl-sec{scroll-margin-top:24px;}
   .sl-head{display:flex;align-items:flex-start;gap:22px;}
-  .sl-h{font-size:clamp(30px,3.8vw,46px);line-height:1.1;letter-spacing:-0.02em;max-width:900px;margin:4px 0 0;}
+  .sl-h{font-size:clamp(40px,5.4vw,60px);line-height:1.1;letter-spacing:-0.02em;max-width:900px;margin:4px 0 0;}
   .sl-head .lead{margin-top:12px;}
   .sl-also{margin-top:28px;}
   .sl-also-k{font-size:14px;font-weight:900;color:var(--ink);margin:0 0 10px;}

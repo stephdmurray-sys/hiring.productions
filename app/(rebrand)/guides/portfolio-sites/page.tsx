@@ -41,7 +41,7 @@ export default function Page() {
       <JsonLd data={ld} />
       <SiteNav active="seekers" />
       <ShortListPage list={list} />
-      <NextStep side="seekers" line="Get the three steps as a checklist in your inbox." button="Email me the checklist" href="/show-how-you-work#email" />
+      <NextStep side="seekers" line="Three steps to show employers how you work before the interview, as a checklist in your inbox." button="Email me the checklist" href="/show-how-you-work#email" />
       <SiteFooter />
     </>
   )

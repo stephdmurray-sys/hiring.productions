@@ -91,7 +91,7 @@ export default function Page() {
       />
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="findings">
-        <StepHead n={1} title="What the other side of the table says" sub="Each finding links to its source." />
+        <StepHead title="What the other side of the table says" sub="Each finding links to its source." />
         <div className="ats-finds">
           {findings.map((f) => (
             <article className="ats-find" key={f.big}>
@@ -110,7 +110,7 @@ export default function Page() {
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="check">
-        <StepHead n={2} title="Check your resume before you send it" />
+        <StepHead title="Check your resume before you send it" />
         <div className="sl-callout">
           <Squiggle className="slc-squig" />
           <p className="sl-text">{keepLast('A resume checker shows how your resume reads against a job posting, before a person or a system sees it.')}</p>

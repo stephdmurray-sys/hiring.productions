@@ -111,7 +111,7 @@ export default async function TrapPage({ params }: { params: Promise<Params> }) 
       />
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="how">
-        <StepHead n={1} title="How the billing works" />
+        <StepHead title="How the billing works" />
         <div className="pt-steps">
           {steps.map((s) => (
             <article className="pt-step" key={s.big}>
@@ -123,7 +123,7 @@ export default async function TrapPage({ params }: { params: Promise<Params> }) 
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="cost">
-        <StepHead n={2} title="What it costs, by how long you search" sub="The cheapest published way to pay, next to what the first year costs if you then forget to cancel." />
+        <StepHead title="What it costs, by how long you search" sub="The cheapest published way to pay, next to what the first year costs if you then forget to cancel." />
         <div className="tscroll">
           <table className="pt-table">
             <thead>
@@ -153,7 +153,7 @@ export default async function TrapPage({ params }: { params: Promise<Params> }) 
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="stop">
-        <StepHead n={3} title="How to keep it from billing you" />
+        <StepHead title="How to keep it from billing you" />
         <div className="sl-callout">
           <p className="sl-text">{keepLast('Put a reminder in your calendar for the day before the trial ends, and cancel before then if you don’t want the 4-week plan.')}</p>
         </div>
@@ -169,7 +169,7 @@ export default async function TrapPage({ params }: { params: Promise<Params> }) 
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="free">
-        <StepHead n={4} title="Free alternatives with a free version you can keep using" sub="Scored with the same data as every tool we rate." />
+        <StepHead title="Free alternatives with a free version you can keep using" sub="Scored with the same data as every tool we rate." />
         <div className="sl-tools">
           {alts.map((a) => (
             <div className="sl-tool sl-tool-seekers" key={a.id}>

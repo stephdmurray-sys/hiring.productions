@@ -55,9 +55,12 @@ export default function Page() {
           </p>
           <h1 className="display">What should our whole hiring stack be?</h1>
           <p className="dek">
-            The <a className="tl" href="/what-should-i-use?side=hiring">recommender</a> picks one tool for one problem. For the whole setup,
-            tell Stephanie how you hire, and she&rsquo;ll email you the tools she would run for your team and why. It&rsquo;s free, there&rsquo;s
-            no sales call, and no vendor can pay to be in the answer.
+            Tell Stephanie how you hire, and she&rsquo;ll email you the tools she would run for your team and why. It&rsquo;s free, there&rsquo;s
+            no sales call, and no vendor can pay to be in the answer. To price a setup yourself first,{' '}
+            <a className="tl" href="/build-your-stack/hiring">
+              build your hiring&nbsp;stack
+            </a>
+            .
           </p>
         </div>
       </header>

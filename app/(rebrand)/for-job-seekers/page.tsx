@@ -53,8 +53,15 @@ export default function Page() {
           logos: all.slice(0, 6).map((t) => ({ domain: t.domain, name: t.name })),
         },
         {
+          href: '/build-your-stack',
+          title: 'What will your job search cost?',
+          detail: 'Click a tool into each part of your search and watch the bill: your timeline, the cost if you forget to cancel, and the $0 version.',
+          meta: 'Free stack builder',
+          logos: [],
+        },
+        {
           href: '/guides/best-resume-tools#cost',
-          title: 'What will your search cost?',
+          title: 'What will one tool cost?',
           detail: 'Drag to your timeline and every tool re-sorts by the cheapest way to pay, with what happens if you forget to cancel.',
           meta: 'Free calculator',
           logos: [],

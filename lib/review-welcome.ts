@@ -5,6 +5,8 @@
  * costs, labeled as ours (GROWTH.md).
  */
 import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
+import { hiringLane, seekerLane } from '@/lib/stack'
+import { fmt, plural, stackFromQuery, stackLines, stackQuery, stackTotals } from '@/lib/stack-math'
 import { OWNERSHIP_DISCLOSURE, REPVERA_NOTE_LABEL, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { cleanRole, pickCompetencies, scorecardData, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
 
@@ -188,6 +190,42 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         'At the top of your resume next to your email, and in the Featured section of your LinkedIn profile.',
         '',
         `The checklist on the site: ${SITE}/show-how-you-work`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if ((source === 'stack_seekers' || source === 'stack_hiring') && x.stack) {
+    // Rebuilt from the stack's own address, so the email says exactly what the page showed.
+    const lane = source === 'stack_seekers' ? seekerLane() : hiringLane()
+    const q = new URLSearchParams(x.stack)
+    const state = stackFromQuery(lane, (k) => q.get(k))
+    const L = stackLines(lane, state)
+    if (!L.length) return null
+    const t = stackTotals(L)
+    const seekers = lane.lane === 'seekers'
+    const window_ = seekers ? `for ${plural(state.months, 'month')}` : 'a year'
+    const url = `${SITE}${seekers ? '/build-your-stack' : '/build-your-stack/hiring'}?${stackQuery(lane, state)}`
+    return {
+      subject: seekers ? `Your job search stack: ${fmt(t.usd)} ${window_}` : `Your hiring stack: ${fmt(t.usd)} ${window_}`,
+      text: [
+        'Here is the stack you built, in writing.',
+        '',
+        ...L.map(
+          (l) =>
+            `${l.tool.name}: ${l.cost === null ? 'no published price on file' : l.cost === 0 ? `$0 (${l.how.toLowerCase()})` : `${fmt(l.cost, l.currency)} ${window_} (${l.how})`}${
+              !l.onFree && l.renewsAfter ? `. It renews on day ${l.renewsAfter} after you sign up, so cancel before then if your search is done.` : ''
+            }`,
+        ),
+        '',
+        `Total ${window_}: ${fmt(t.usd)}${t.eur ? `, plus ${fmt(t.eur, 'EUR')} billed in euros` : ''}`,
+        ...(seekers && t.forget > t.usd ? [`If you forget to cancel: ${fmt(t.forget)} in the first year`] : []),
+        ...(!seekers && t.usd > 0 ? [`In tools per hire, at ${plural(state.hires, 'hire')} a year: ${fmt(Math.round(t.usd / state.hires))}. SHRM’s 2025 median cost per hire, everything in: $1,200.`] : []),
+        ...(t.unpriced.length ? [`Not in the total: ${t.unpriced.map((l) => `${l.tool.name} (${l.how.charAt(0).toLowerCase()}${l.how.slice(1)})`).join(', ')}`] : []),
+        '',
+        `Open it again, or change it: ${url}`,
+        '',
+        'We check every price each month. If a price in your stack changes, we will email you once to say what changed.',
         ...SIGN_OFF,
       ].join('\n'),
     }

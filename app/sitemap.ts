@@ -53,6 +53,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/is-this-list-paid-for', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/show-how-you-work', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/pricing-traps', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/build-your-stack', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/build-your-stack/hiring', priority: 0.9, changeFrequency: 'monthly' },
     ...trapTools().map((t) => ({ path: trapHref(t.id), priority: 0.9, changeFrequency: 'monthly' as const })),
     { path: '/is-this-a-real-job', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),

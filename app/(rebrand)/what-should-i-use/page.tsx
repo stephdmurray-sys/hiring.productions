@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
-import { RecQuestions, RecAnswer, RecSituations, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
+import { RecQuestions, RecAnswer, RecSituations, recCss, askSummary, REC_PATH } from '@/app/(rebrand)/_components/recommender'
 import { GuidedStepView, RepveraAnswer, SideSwitch, guidedCss } from '@/app/(rebrand)/_components/guided'
 import { slToolCss } from '@/app/(rebrand)/_components/short-list'
 import { retroCss } from '@/app/(rebrand)/_components/retro'
@@ -12,7 +12,7 @@ import { TrackOnce } from '@/app/(rebrand)/_components/picker-track'
 import { ScrollToAnswer } from '@/app/(rebrand)/_components/rec-form'
 import { askFromState, recFramework, recommend, situationFor, stateFromParams, withStartingAnswers } from '@/lib/evidence/recommend'
 import { latestCheck } from '@/lib/evidence'
-import { shortDate } from '@/app/(rebrand)/_components/data'
+import { atsAsOf, shortDate } from '@/app/(rebrand)/_components/data'
 import { keepLast } from '@/lib/site-line'
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
@@ -49,6 +49,8 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
   const from = one('from')
   // Back from an answer: the guided step it came from, the whole list, or the first question.
   const backStep = state.side && state.problem ? (from === 'all' ? 'all' : from ?? stepFor(state.side, state.problem.id) ?? 'q1') : null
+  // Once there is an answer it leads the page; the questions fold into one line above it.
+  const answered = Boolean((r && ask) || repvera)
 
   return (
     <>
@@ -61,9 +63,14 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <a href="/">Home</a> / What should I use?
           </p>
           <h1 className="display">What should I use?</h1>
-          <p className="dek">{keepLast(PICKER_INTRO)}</p>
+          {!answered && <p className="dek">{keepLast(PICKER_INTRO)}</p>}
           <p className="dateline">
-            Ratings and prices checked {shortDate(latestCheck())}. Nobody pays to be featured in an answer.
+            {state.side === 'hiring'
+              ? `Hiring tool data as of ${shortDate(atsAsOf)}.`
+              : state.side === 'seekers'
+                ? `Resume tool ratings and prices checked ${shortDate(latestCheck())}.`
+                : `Resume tools checked ${shortDate(latestCheck())}. Hiring tools: data as of ${shortDate(atsAsOf)}.`}{' '}
+            Nobody pays to be featured in an answer.
           </p>
         </div>
       </header>
@@ -87,6 +94,23 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
             <>
               <TrackOnce event="picker_start" side={state.side ?? undefined} />
               <SideSwitch side={state.side} />
+            </>
+          ) : r && ask ? (
+            <>
+              <TrackOnce event="picker_start" side={state.side ?? undefined} />
+              <details className="rec-change">
+                <summary>
+                  <span className="rec-change-k">Your answers</span>
+                  <span className="rec-change-v">{askSummary(ask)}</span>
+                  <span className="rec-change-btn">Change your answers</span>
+                </summary>
+                <div className="rec-change-body">
+                  <p className="g-links g-links-top">
+                    <a href={`${REC_PATH}?side=${state.side}&g=${backStep}#questions`}>&larr; Start from a different question</a>
+                  </p>
+                  <RecQuestions state={state} from={from} />
+                </div>
+              </details>
             </>
           ) : (
             <>
