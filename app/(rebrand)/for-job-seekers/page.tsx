@@ -64,6 +64,13 @@ export default function Page() {
           logos: [],
         },
         {
+          href: '/guides/portfolio-sites',
+          title: 'Portfolio sites to know',
+          detail: 'Where to show your work, sorted by the kind of work you do, and what to use when your work isn\u2019t something you can post.',
+          meta: 'Short list, no scores yet',
+          logos: [],
+        },
+        {
           href: '/is-this-a-real-job',
           title: 'Is this job even real?',
           detail: 'The signs to check before you send a resume or anything else.',

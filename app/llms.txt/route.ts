@@ -67,6 +67,7 @@ ${situations()
 - [What does a hire really cost?](${BASE}/hiring-costs): cost per hire as SHRM defines it, compared with SHRM's 2025 medians ($1,200 per non-executive hire, $10,625 per executive hire; 2,371 organizations).
 - [Is this even a real candidate?](${BASE}/is-this-a-real-candidate): the FBI's red flags for fake candidates (I-012325-PSA, January 2025; PSA220628, June 2022), and which applicant tracking systems have fraud detection on file (Greenhouse, Ashby).
 - [Fraud tools to know](${BASE}/guides/hiring-fraud-tools): a short list with no scores yet, because there is no public data worth scoring. Hiring fraud companies sorted by where the fraud shows up: the application, the interview, identity, and hearing from people who have worked with the candidate.
+- [Portfolio sites to know](${BASE}/guides/portfolio-sites): a short list with no scores. Where job seekers can show their work, sorted by the kind of work (design, writing, code, a one-page site for any job), and what to use when the work is not something you can post.
 - [Is this job even real?](${BASE}/is-this-a-real-job): the signs of a fake job posting or a fake recruiter, what to do, and where to report it (reportfraud.ftc.gov).
 
 ## Tool reviews: ATS resume checkers

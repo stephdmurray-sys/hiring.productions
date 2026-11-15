@@ -46,6 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/is-this-a-real-candidate', priority: 0.9, changeFrequency: 'monthly' },
     // Short lists (no scores yet) and the job seeker scam checklist
     { path: '/guides/hiring-fraud-tools', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/guides/portfolio-sites', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/is-this-a-real-job', priority: 0.9, changeFrequency: 'monthly' },
     ...situations().map((x) => ({ path: `/what-should-i-use/${x.slug}`, priority: 0.85, changeFrequency: 'monthly' as const })),
     ...resumeTools().all.map((t) => ({ path: `/reviews/${t.id}`, priority: 0.85, changeFrequency: 'monthly' as const })),

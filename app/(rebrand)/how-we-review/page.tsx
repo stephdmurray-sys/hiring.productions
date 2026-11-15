@@ -112,7 +112,7 @@ function shortListSection() {
       <section id="short-lists">
         <h2>Short lists</h2>
         <p class="lead">Some categories are too new to score. For those we publish a short list with no scores, and we say so at the top of the page. A category moves to scored rankings once there is enough public data.</p>
-        <p style="margin-top:16px"><a href="/guides/hiring-fraud-tools" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Fraud tools to know</a></p>
+        <p style="margin-top:16px"><a href="/guides/hiring-fraud-tools" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Fraud tools to know</a> &middot; <a href="/guides/portfolio-sites" style="text-decoration:underline;text-underline-offset:3px;font-weight:700;color:#5432E0">Portfolio sites to know</a></p>
       </section>
 `
 }

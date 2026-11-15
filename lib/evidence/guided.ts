@@ -37,11 +37,16 @@ export interface GuidedStep {
   back: string | null
 }
 
-/** RepVera's answer, one per side. The only tool that is recommended without a score. */
+/**
+ * RepVera's answer, one per side. The only tool that is recommended without a score.
+ * Job seekers (Stephanie, Nov 15, 2026): the way in is what they want, proving how they work,
+ * never a problem assigned to them. The old id still opens the same answer.
+ */
 export const REPVERA_PROBLEM: Record<Side, { id: string; label: string }> = {
-  seekers: { id: 'resume-looks-the-same', label: 'My resume looks like everyone else’s' },
+  seekers: { id: 'prove-how-i-work', label: 'I want to prove how I work' },
   hiring: { id: 'resumes-look-the-same', label: 'Every resume looks the same now' },
 }
+const REPVERA_ALIASES: Record<Side, string[]> = { seekers: ['resume-looks-the-same'], hiring: [] }
 
 export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
   seekers: {
@@ -75,7 +80,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'It needs a rewrite', to: { problem: 'rewriting' } },
           { label: 'It’s decent, but I don’t know if it gets past the screening software', to: { problem: 'no-callbacks' } },
-          { label: 'It’s fine. It just looks like everyone else’s', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          { label: 'It’s solid. I want proof of how I work to go with it', to: { problem: REPVERA_PROBLEM.seekers.id } },
         ],
         back: 'q2a',
       },
@@ -85,9 +90,20 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         question: 'How do the interviews go?',
         options: [
           { label: 'I get nervous or lose my train of thought', to: { problem: 'interview-practice' } },
-          { label: 'They go well, and then they pick someone else', to: { problem: 'interviews-stall' } },
+          { label: 'They go well, and then they pick someone else', to: { step: 'q3b' } },
         ],
         back: 'q1',
+      },
+      {
+        // By the last round everyone interviewed well: what's left is practice, or proof of how you work.
+        id: 'q3b',
+        depth: 3,
+        question: 'What would tip it your way?',
+        options: [
+          { label: 'Sharper answers in the last round', to: { problem: 'interviews-stall' } },
+          { label: 'Proof of how I work, from people who have seen it', to: { problem: REPVERA_PROBLEM.seekers.id } },
+        ],
+        back: 'q2b',
       },
     ],
   },
@@ -174,7 +190,12 @@ export function wholeList(side: Side): { id: string; label: string }[] {
 }
 
 export function isRepveraProblem(side: Side | null, problem: string | undefined): side is Side {
-  return !!side && problem === REPVERA_PROBLEM[side].id
+  return !!side && !!problem && (problem === REPVERA_PROBLEM[side].id || REPVERA_ALIASES[side].includes(problem))
+}
+
+/** True when this id is a step on the side's path (so a "from" in a link can be trusted for Back). */
+export function isStep(side: Side, id: string | undefined): id is string {
+  return !!id && GUIDED[side].steps.some((s) => s.id === id)
 }
 
 /** The two RepVera answers. Copy is final (handoff, Nov 14, 2026). */
@@ -183,8 +204,8 @@ export const REPVERA_ANSWER: Record<
   { heading: string; opening: string; label: string; name: string; lines: string[]; note: string; button: string; url: string; back: string }
 > = {
   seekers: {
-    heading: 'My resume looks like everyone else’s',
-    opening: 'Most resumes are polished now, so a better one won’t set you apart. What will is hearing from the people who have worked with you.',
+    heading: 'Let how you work arrive before you do.',
+    opening: 'Send proof with your application. It can come from the people who have worked with you, and from the work itself.',
     label: 'Stephanie built this one',
     name: 'RepVera',
     lines: [
@@ -212,6 +233,23 @@ export const REPVERA_ANSWER: Record<
   },
 }
 
+/**
+ * The job seeker proof answer, around RepVera's card (Stephanie, Nov 15, 2026): proof of how you
+ * work comes from two places, the people who have worked with you and the work itself. Most jobs
+ * have no work to post, so RepVera comes first; anyone who makes things people can see also gets
+ * portfolio sites (lib/evidence/shortlists.ts), and everyone gets where to put the link.
+ */
+export const PROOF = {
+  people: 'From the people who have worked with you',
+  work: 'From the work itself',
+  workLead: 'If people can see what you make, like designs, writing or code, a portfolio puts it one click from your resume.',
+  more: { text: 'Portfolio sites to know, sorted by the kind of work', href: '/guides/portfolio-sites' },
+  where: {
+    k: 'Where to put the link',
+    text: 'At the top of your resume next to your email, and in the Featured section of your LinkedIn profile, so it’s there wherever a recruiter finds you.',
+  },
+}
+
 /** The fraud common question: its old answer page now points to the fraud short list's applicant tracking section. */
 export const FRAUD_QUESTION = { question: 'Which applicant tracking systems flag fake candidates?', href: `${FRAUD_PAGE}#ats` }
 
@@ -220,6 +258,6 @@ export const REAL_JOB_QUESTION = { question: 'How do I know a job posting is rea
 
 /** The two new "Common questions, answered" entries, each linking to RepVera's answer for its side. */
 export const REPVERA_QUESTIONS: Record<Side, string> = {
-  seekers: 'How do I stand out when every resume looks the same?',
+  seekers: 'How do I show employers how I work before the interview?',
   hiring: 'How do we tell candidates apart when every resume looks the same?',
 }

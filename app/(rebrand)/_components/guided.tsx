@@ -1,7 +1,10 @@
 import { Logo } from './logo'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce, TrackedLink } from './picker-track'
-import { GUIDED, REPVERA_ANSWER, guidedStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { GUIDED, PROOF, REPVERA_ANSWER, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
+import { Kit } from './recommender'
+import { ShortToolRow } from './short-list'
 
 /**
  * The guided picker screens (lib/evidence/guided.ts holds the copy). Every
@@ -118,10 +121,15 @@ function WholeList({ side }: { side: Side }) {
   )
 }
 
-/** RepVera's answer for one side: no score, no rank, and always Stephanie's note. */
+/**
+ * RepVera's answer for one side: no score, no rank, and always Stephanie's note. For job seekers it
+ * is the proof answer: RepVera for proof from people, then portfolio sites for proof from the work,
+ * then where to put the link.
+ */
 export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
   const a = REPVERA_ANSWER[side]
-  const back = from === 'all' ? stepHref(side, 'all') : stepHref(side, a.back)
+  const seekers = side === 'seekers'
+  const back = from === 'all' ? stepHref(side, 'all') : stepHref(side, isStep(side, from) ? from : a.back)
   const btn = side === 'seekers' ? 'btn btn-indigo' : 'btn btn-coral'
   return (
     <div className={`rec-ans rec-${side} rv-ans`}>
@@ -130,7 +138,8 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       <h2 className="rec-title" id="answer-h">
         {a.heading}
       </h2>
-      <p className="rec-lead">{a.opening}</p>
+      <p className="rec-lead">{keepLast(a.opening)}</p>
+      {seekers && <h3 className="kit-k rv-k">{PROOF.people}</h3>}
       <div className="rec-pick">
         <div className="rec-id">
           <Logo domain="repvera.com" name={a.name} size={64} />
@@ -148,12 +157,32 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
         <TrackedLink href={a.url} className={btn} event="repvera_profile_click" side={side}>
           {a.button} <span className="arr">&#8599;</span>
         </TrackedLink>
-        <p className="rv-back">
-          <a className="tl" href={back}>
-            Go back and pick a different answer
-          </a>
-        </p>
       </div>
+      {seekers && (
+        <Kit k={PROOF.work}>
+          <p className="rv-work-lead">{keepLast(PROOF.workLead)}</p>
+          <div className="sl-tools rv-work">
+            {PORTFOLIO_PICKS.map((t) => (
+              <ShortToolRow t={t} side={side} key={t.name} />
+            ))}
+          </div>
+          <p className="rv-more">
+            <a className="tl" href={PROOF.more.href}>
+              {keepLast(PROOF.more.text)} <span className="arr">&rarr;</span>
+            </a>
+          </p>
+        </Kit>
+      )}
+      {seekers && (
+        <Kit k={PROOF.where.k}>
+          <p className="kit-wont">{keepLast(PROOF.where.text)}</p>
+        </Kit>
+      )}
+      <p className="rv-back">
+        <a className="tl" href={back}>
+          Go back and pick a different answer
+        </a>
+      </p>
       <p className="rec-fine">Nobody pays to be featured.</p>
       <PickerFeedback side={side} problem="repvera" />
     </div>
@@ -191,7 +220,14 @@ export const guidedCss = `
   .rv-line{font-size:18px;line-height:1.6;color:var(--ink-2);margin-top:14px;text-wrap:pretty;}
   .rv-line:first-of-type{color:var(--ink);font-weight:700;}
   .rv-note{margin:18px 0 22px;padding:14px 16px;border-left:4px solid var(--ink);background:var(--surface);font-size:16px;line-height:1.55;color:var(--ink);text-wrap:pretty;}
-  .rv-back{margin-top:16px;font-size:15px;}
+  .rv-back{margin-top:36px;font-size:15px;}
+  .rv-k{margin-top:36px;}
+  .rv-k + .rec-pick{margin-top:0;}
+  .rec-seekers.rv-ans .rec-pick{border:3px solid var(--indigo);box-shadow:6px 6px 0 var(--indigo);}
+  .rv-work-lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
+  .rv-work{margin-top:16px;}
+  .rv-work .sl-tool{padding:22px 0;}
+  .rv-more{margin-top:18px;font-size:17px;font-weight:700;}
   .rec-fine{margin-top:18px;font-size:14px;font-weight:700;color:var(--ink-2);}
   .rec-help{margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);}
   .rec-help-q{font-size:20px;font-weight:900;color:var(--ink);}

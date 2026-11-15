@@ -16,7 +16,8 @@ import type { ShortList, ShortTool } from '@/lib/evidence/shortlists'
  * note and no money line: she built it.
  */
 
-function Tool({ t, side }: { t: ShortTool; side: 'seekers' | 'hiring' }) {
+/** One tool on a short list (also used inside picker answers). */
+export function ShortToolRow({ t, side }: { t: ShortTool; side: 'seekers' | 'hiring' }) {
   return (
     <div className="sl-tool">
       <Logo domain={t.domain} name={t.name} size={52} />
@@ -74,7 +75,7 @@ export function ShortListPage({ list }: { list: ShortList }) {
           {s.tools.length > 0 && (
             <div className="sl-tools">
               {s.tools.map((t) => (
-                <Tool t={t} side={list.side} key={t.name} />
+                <ShortToolRow t={t} side={list.side} key={t.name} />
               ))}
             </div>
           )}
@@ -99,12 +100,12 @@ export function ShortListPage({ list }: { list: ShortList }) {
           {s.text && (
             <p className="sl-text">
               {s.text.before}
-              {s.text.links.map((l, i) => (
+              {(s.text.links ?? []).map((l, i, all) => (
                 <span key={l.href}>
                   <a className="tl" href={l.href}>
                     {l.text}
                   </a>
-                  {i < s.text!.links.length - 2 ? ', ' : i === s.text!.links.length - 2 ? ' and ' : ''}
+                  {i < all.length - 2 ? ', ' : i === all.length - 2 ? ' and ' : ''}
                 </span>
               ))}
               {keepLast(s.text.after)}
@@ -114,20 +115,24 @@ export function ShortListPage({ list }: { list: ShortList }) {
       ))}
 
       <section className="wrap sec sl-end">
-        <Kit k="Who to follow on this">
-          <FollowOn ids={list.follow} />
-        </Kit>
-        <Kit k="Free from us">
-          <a className="kit-free" href={list.free.href}>
-            <span>
-              <b>{list.free.title}</b>
-              <span>{keepLast(list.free.detail)}</span>
-            </span>
-            <span className="arr" aria-hidden="true">
-              &rarr;
-            </span>
-          </a>
-        </Kit>
+        {list.follow && list.follow.length > 0 && (
+          <Kit k="Who to follow on this">
+            <FollowOn ids={list.follow} />
+          </Kit>
+        )}
+        {list.free && (
+          <Kit k="Free from us">
+            <a className="kit-free" href={list.free.href}>
+              <span>
+                <b>{list.free.title}</b>
+                <span>{keepLast(list.free.detail)}</span>
+              </span>
+              <span className="arr" aria-hidden="true">
+                &rarr;
+              </span>
+            </a>
+          </Kit>
+        )}
         <p className="sl-vendors">
           <a className="tl" href="/for-vendors">
             Missing from this page? Tell&nbsp;us.
@@ -140,15 +145,8 @@ export function ShortListPage({ list }: { list: ShortList }) {
   )
 }
 
-export const shortListCss =
-  kitCss +
-  `
-  .sl-jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;max-width:980px;}
-  .sl-jump a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);font-size:15px;font-weight:800;line-height:1.3;box-shadow:3px 3px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}
-  .sl-jump a:hover,.sl-jump a:focus-visible{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink);}
-  .sl-sec{scroll-margin-top:24px;}
-  .sl-h{font-size:clamp(30px,3.8vw,46px);line-height:1.1;letter-spacing:-0.02em;max-width:900px;}
-  .sl-sec .lead{margin-top:14px;}
+/** The tool rows on their own, for a picker answer that lists short list tools. */
+export const slToolCss = `
   .sl-tools{display:grid;gap:0;margin-top:32px;border-top:1px solid var(--rule);max-width:880px;}
   .sl-tool{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:start;padding:28px 0;border-bottom:1px solid var(--rule);}
   .sl-name{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.015em;line-height:1.2;}
@@ -156,12 +154,26 @@ export const shortListCss =
   .sl-note{margin:16px 0 4px;padding:14px 16px;border-left:4px solid var(--ink);background:var(--surface);font-size:16px;line-height:1.55;color:var(--ink);max-width:720px;}
   .sl-go{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:12px 18px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);font-size:15.5px;font-weight:800;line-height:1;box-shadow:3px 3px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}
   .sl-go:hover,.sl-go:focus-visible{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink);}
+  @media(max-width:560px){.sl-tool{grid-template-columns:1fr;gap:12px;}}
+  @media (prefers-reduced-motion: reduce){.sl-go{transition:none;}}
+`
+
+export const shortListCss =
+  kitCss +
+  slToolCss +
+  `
+  .sl-jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;max-width:980px;}
+  .sl-jump a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);font-size:15px;font-weight:800;line-height:1.3;box-shadow:3px 3px 0 var(--ink);transition:transform .12s ease,box-shadow .12s ease;}
+  .sl-jump a:hover,.sl-jump a:focus-visible{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink);}
+  .sl-sec{scroll-margin-top:24px;}
+  .sl-h{font-size:clamp(30px,3.8vw,46px);line-height:1.1;letter-spacing:-0.02em;max-width:900px;}
+  .sl-sec .lead{margin-top:14px;}
   .sl-also{margin-top:24px;max-width:880px;}
   .sl-also p{font-size:17px;font-weight:700;color:var(--ink);}
   .sl-text{margin-top:18px;font-size:clamp(19px,1.9vw,22px);line-height:1.55;color:var(--ink);font-weight:600;max-width:780px;text-wrap:pretty;}
   .sl-end .kit:first-child{margin-top:0;}
   .sl-vendors{margin-top:44px;font-size:18px;font-weight:700;}
   .sl-end .rec-fine{margin-top:14px;font-size:14px;font-weight:700;color:var(--ink-2);}
-  @media(max-width:560px){.sl-tool{grid-template-columns:1fr;gap:12px;}.sl-jump a{font-size:14px;}}
-  @media (prefers-reduced-motion: reduce){.sl-jump a,.sl-go{transition:none;}}
+  @media(max-width:560px){.sl-jump a{font-size:14px;}}
+  @media (prefers-reduced-motion: reduce){.sl-jump a{transition:none;}}
 `

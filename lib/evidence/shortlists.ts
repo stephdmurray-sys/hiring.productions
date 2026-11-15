@@ -36,7 +36,7 @@ export interface ShortSection {
   /** "Also in this space": named, linked, no line. */
   also?: { go: string; name: string }[]
   /** A section with no tools, only a line (e.g. what your applicant tracking system already does). */
-  text?: { before: string; links: { text: string; href: string }[]; after: string }
+  text?: { before: string; links?: { text: string; href: string }[]; after: string }
 }
 
 export interface ShortList {
@@ -48,8 +48,9 @@ export interface ShortList {
   intro: string
   checked: string
   sections: ShortSection[]
-  follow: string[]
-  free: FreeTool
+  /** Who to follow on this (follow.json ids); left out when there's no match yet. */
+  follow?: string[]
+  free?: FreeTool
   /** The picker problem that ends on this page, so a visitor from the picker gets "Did this help you decide?". */
   pickerProblem?: string
 }
@@ -146,3 +147,107 @@ export const FRAUD_TOOLS: ShortList = {
   free: FREE_TOOLS.redFlags,
   pickerProblem: 'fake-candidates',
 }
+
+/**
+ * Portfolio sites to know (Nov 15, 2026), the job seeker short list behind the proof answer.
+ * Lines are drafts built only from facts on each company's own pages (help, pricing and product
+ * pages, read from search results on their own domains; direct fetches were blocked). Paid prices
+ * are left out until they're read on the live pricing pages. The last section is for the most
+ * common case: work nobody can post, where the proof is what the people who worked with you saw.
+ */
+export const PORTFOLIO_SITES: ShortList = {
+  path: '/guides/portfolio-sites',
+  side: 'seekers',
+  title: 'Portfolio sites to know',
+  metaTitle: 'Portfolio Sites to Know: Where to Show Your Work, by the Kind of Work You Do',
+  description:
+    'Where to show your work so a hiring manager sees it before the first call, sorted by the kind of work you do, and what to use when your work is not something you can post. No scores yet.',
+  intro:
+    'A portfolio puts your work in front of a hiring manager before the first call. These sites are sorted by the kind of work you do, and the last section is for work you can’t post. We don’t score portfolio sites yet, so this is a short list with no scores.',
+  checked: '2026-11-15',
+  sections: [
+    {
+      id: 'design',
+      heading: 'I design, draw or take photos',
+      sub: 'Visual work is easiest to judge when people can see it.',
+      tools: [
+        {
+          go: 'behance',
+          name: 'Behance',
+          domain: 'behance.net',
+          line: 'Adobe’s portfolio site. The free version has no limit on how many projects you post, and a Hire Me button shows recruiters you’re open to full-time or freelance work.',
+        },
+        { go: 'dribbble', name: 'Dribbble', domain: 'dribbble.com', line: 'A portfolio site for product and visual designers. The free plan lets you post your work and get work inquiries.' },
+      ],
+      also: [{ go: 'adobe-portfolio', name: 'Adobe Portfolio' }],
+    },
+    {
+      id: 'writing',
+      heading: 'I write',
+      sub: 'Clips and samples in one place, so nobody has to search for them.',
+      tools: [
+        { go: 'journo-portfolio', name: 'Journo Portfolio', domain: 'journoportfolio.com', line: 'A portfolio site for writers. The free plan is a one-page portfolio with up to 10 pieces.' },
+        { go: 'muck-rack', name: 'Muck Rack', domain: 'muckrack.com', line: 'For journalists, who never pay. It finds your newly published articles and adds them to your profile.' },
+      ],
+      also: [{ go: 'clippings-me', name: 'Clippings.me' }],
+    },
+    {
+      id: 'code',
+      heading: 'I write code',
+      sub: 'Let them read the code itself.',
+      tools: [
+        {
+          go: 'github-pages',
+          name: 'GitHub',
+          domain: 'github.com',
+          line: 'Public repositories show your code. GitHub Pages turns one into a free personal site, one per account, and it works with your own domain.',
+        },
+      ],
+    },
+    {
+      id: 'one-page',
+      heading: 'I want one simple page for any job',
+      sub: 'Your best work, a short intro and a way to reach you, on one link.',
+      tools: [
+        { go: 'carrd', name: 'Carrd', domain: 'carrd.co', line: 'One-page sites. The Basic plan is free and gives you three sites.' },
+        { go: 'canva', name: 'Canva', domain: 'canva.com', line: 'Start from a portfolio template and publish it free on a Canva address. Your own domain needs Canva Pro.' },
+        { go: 'notion', name: 'Notion', domain: 'notion.com', line: 'Publish a Notion page as a site, free on a notion.site address. Your own domain costs extra.' },
+      ],
+      also: [
+        { go: 'wix', name: 'Wix' },
+        { go: 'squarespace', name: 'Squarespace' },
+        { go: 'contra', name: 'Contra' },
+      ],
+    },
+    {
+      id: 'worked-with',
+      heading: 'My work isn’t something I can post',
+      sub: 'Sales, operations, nursing, support, recruiting and most other jobs. The proof is what the people who worked with you saw.',
+      tools: [
+        {
+          go: null,
+          name: 'RepVera',
+          domain: 'repvera.com',
+          label: 'Stephanie built this one',
+          line: 'You send a personal link to people you’ve worked with, like managers, teammates and clients. Each of them writes a short receipt about what it was like to work with you, and it’s verified through their work email.',
+          note: 'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
+          link: { text: 'See a real RepVera profile', url: 'https://www.repvera.com/u/stephaniemurray' },
+        },
+      ],
+    },
+    {
+      id: 'where',
+      heading: 'Where to put the link',
+      tools: [],
+      text: {
+        before: '',
+        after: 'At the top of your resume next to your email, and in the Featured section of your LinkedIn profile, so it’s there wherever a recruiter finds you.',
+      },
+    },
+  ],
+}
+
+/** The portfolio sites a job seeker sees inside the proof answer: one for each kind of work. */
+export const PORTFOLIO_PICKS: ShortTool[] = ['behance', 'journo-portfolio', 'github-pages', 'carrd'].map(
+  (go) => PORTFOLIO_SITES.sections.flatMap((s) => s.tools).find((t) => t.go === go)!,
+)

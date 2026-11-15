@@ -23,6 +23,7 @@ const SEEKERS: Item[] = [
   { href: '/guides/best-resume-tools', kind: 'Guide', title: 'The best resume tools', detail: 'Builders and ATS checkers ranked on public reviews and real prices.' },
   { href: '/what-should-i-use?side=seekers#questions', kind: 'Free tool', title: 'What should I use?', detail: PICKER_INTRO },
   { href: '/interview-practice', kind: 'Free tool', title: 'What will they ask me in the interview?', detail: 'Practice the questions structured interviews use, and what a strong answer shows.' },
+  { href: '/guides/portfolio-sites', kind: 'Short list', title: 'Portfolio sites to know', detail: 'Where to show your work, sorted by the kind of work you do. No scores yet.' },
   { href: '/is-this-a-real-job', kind: 'Free checklist', title: 'Is this job even real?', detail: 'The signs to check before you send a resume or anything else.' },
   { href: '/guides/best-resume-tools#cost', kind: 'Free tool', title: 'What will your search cost?', detail: 'Every resume tool sorted by the cheapest way to pay for your timeline.' },
   { href: '/compare', kind: 'Comparisons', title: 'Down to two?', detail: 'Any two resume tools side by side.' },

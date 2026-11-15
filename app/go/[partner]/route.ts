@@ -74,6 +74,20 @@ const DESTINATIONS: Record<string, string> = {
   clear: 'https://identity.clearme.com/industries/workforce',
   iproov: 'https://www.iproov.com',
   proof: 'https://www.proof.com/use-cases/candidate-fraud',
+  // Portfolio sites to know (lib/evidence/shortlists.ts), each the company's own portfolio page, confirmed Nov 15, 2026.
+  behance: 'https://www.behance.net',
+  dribbble: 'https://dribbble.com',
+  'adobe-portfolio': 'https://portfolio.adobe.com',
+  'journo-portfolio': 'https://www.journoportfolio.com',
+  'muck-rack': 'https://muckrack.com/journalists',
+  'clippings-me': 'https://www.clippings.me',
+  'github-pages': 'https://pages.github.com',
+  carrd: 'https://carrd.co',
+  canva: 'https://www.canva.com/create/portfolios/',
+  notion: 'https://www.notion.com/product/sites',
+  wix: 'https://www.wix.com/portfolio-website',
+  squarespace: 'https://www.squarespace.com/websites/create-a-portfolio',
+  contra: 'https://contra.com/portfolios',
 }
 
 export async function GET(

@@ -4,6 +4,7 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { RecQuestions, RecAnswer, RecSituations, recCss, REC_PATH } from '@/app/(rebrand)/_components/recommender'
 import { GuidedStepView, RepveraAnswer, SideSwitch, guidedCss } from '@/app/(rebrand)/_components/guided'
+import { slToolCss } from '@/app/(rebrand)/_components/short-list'
 import { FRAUD_PROBLEM, isRepveraProblem, stepFor } from '@/lib/evidence/guided'
 import { PICKER_INTRO } from '@/lib/evidence/kit'
 import { TrackOnce } from '@/app/(rebrand)/_components/picker-track'
@@ -50,7 +51,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss + guidedCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss + guidedCss + slToolCss }} />
       <SiteNav active="recommend" />
 
       <header className="ph">

@@ -1,0 +1,3204 @@
+[
+ {
+  "u": "/guides/portfolio-sites",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[href$=\"#design\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#writing\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#code\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#one-page\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#worked-with\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#where\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "span[title=\"Behance\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Dribbble\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">D</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers&problem=prove-how-i-work",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"RepVera\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers&g=q3b",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".g-card:nth-child(1) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card:nth-child(2) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/guides/hiring-fraud-tools",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[href$=\"#applicants\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#interviews\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#identity\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#worked-with\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[href$=\"#ats\"] > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">↓</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "span[title=\"Tofu\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/is-this-a-real-job",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/who-to-follow",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/what-should-i-use?side=hiring&problem=fake-candidates",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".g-card:nth-child(1) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card:nth-child(2) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(3) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(4) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers&problem=no-callbacks&months=3&budget=50",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".tl[href$=\"teal\"] > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "span[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"huntr\"] > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".rec-copy > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=hiring&problem=spreadsheets&hires=10&employees=20&seats=3&budget=2000",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".tl[href$=\"manatal\"] > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".rec-copy > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=hiring&problem=cant-find-people",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".rec-copy > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".g-card:nth-child(1) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card:nth-child(2) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=hiring&g=q2b",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".g-card:nth-child(1) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card:nth-child(2) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers&problem=resume-looks-the-same",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"RepVera\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=hiring&problem=resumes-look-the-same",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".lg-letter",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use?side=seekers&g=all",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".g-card:nth-child(1) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card:nth-child(2) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(3) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(4) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(5) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(6) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".g-card.rv-hide:nth-child(7) > .arr[aria-hidden=\"true\"]",
+    "html": "<span class=\"arr\" aria-hidden=\"true\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/guides",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/about/stephanie",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/advertiser-disclosure",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/for-vendors",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/hiring-stack",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "#rec-pain",
+    "html": "<textarea id=\"rec-pain\" name=\"pain\" maxlength=\"2000\" placeholder=\"Slow to offer, no view of the pipeline, cand",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "12.0pt (16px)",
+     "fontWeight": "normal",
+     "messageKey": "elmPartiallyObscured",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/reviews/teal",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".rv-id > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/nope",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Teal review\"] > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Kickresume review\"] > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"FlowCV review\"] > .lg[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Jobscan review\"] > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Rezi review\"] > .lg[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[href$=\"resume-worded\"] > .lg[title=\"Resume Worded\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Enhancv\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">E</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Novoresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">N</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".side-seekers > .side-act > .side-go > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Manatal in the ATS guide\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Pinpoint in the ATS guide\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Ashby in the ATS guide\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Teamtailor in the ATS guide\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Workable in the ATS guide\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"BambooHR in the ATS guide\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Breezy HR in the ATS guide\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "16.5pt (22px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".side-hiring > .side-act > .side-go > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/compare",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/compare/teal-vs-jobscan",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".vs-id > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".vs-id > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/compare/manatal-vs-zoho-recruit",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".vs-id > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".vs-id > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/compare/kickresume-vs-resume-io",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".vs-id > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".vs-id > .lg[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/compare/greenhouse-vs-lever",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".vs-id > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": ".vs-id > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/reviews/teal",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".rv-id > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/reviews/ats/manatal",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".rv-id > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/reviews/ats/greenhouse",
+  "bad": [],
+  "unsure": [
+   {
+    "target": ".rv-id > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "20.3pt (27px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/for-hiring-teams",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"BambooHR\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Breezy HR\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Zoho Recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"JazzHR\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a:nth-child(2) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(3) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(4) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "aside > a:nth-child(5) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(6) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(7) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(8) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"zoho-recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"bamboohr\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"breezy-hr\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jazzhr\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/for-job-seekers",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Teal\"] > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Huntr\"] > .lg[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Jobscan\"] > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[href$=\"resume-worded\"] > .lg[title=\"Resume Worded\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Kickresume\"] > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"FlowCV\"] > .lg[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Rezi\"] > .lg[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Resume.io\"] > .lg[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Enhancv\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">E</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Novoresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">N</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Zety\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a:nth-child(2) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(3) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "aside > a:nth-child(4) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(5) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(6) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(7) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(8) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .lg[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"flowcv\"] > .lg[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"rezi\"] > .lg[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"rezi\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .lg[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/privacy",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/terms",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/reviews",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "a[href$=\"rezi\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/for-hiring-teams",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"BambooHR\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Breezy HR\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Zoho Recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"JazzHR\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a:nth-child(2) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(3) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(4) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "aside > a:nth-child(5) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(6) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(7) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(8) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"zoho-recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"bamboohr\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"breezy-hr\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jazzhr\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/for-job-seekers",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Teal\"] > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Huntr\"] > .lg[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Jobscan\"] > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[href$=\"resume-worded\"] > .lg[title=\"Resume Worded\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Kickresume\"] > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"FlowCV\"] > .lg[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Rezi\"] > .lg[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Resume.io\"] > .lg[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Enhancv\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">E</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Novoresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">N</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "span[title=\"Zety\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a:nth-child(2) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(3) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "aside > a:nth-child(4) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(5) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(6) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(7) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(8) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .lg[title=\"Kickresume\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">K</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"kickresume\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .lg[title=\"Teal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teal\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .lg[title=\"Huntr\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"huntr\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"flowcv\"] > .lg[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .lg[title=\"Jobscan\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jobscan\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"rezi\"] > .lg[title=\"Rezi\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"rezi\"] > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .lg[title=\"Resume.io\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Zapier\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".trap > .board-name > .board-sub > .sub-main > .lg-stack > .lg-round.lg[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/what-should-i-use",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/about/stephanie",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/on-the-rise",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "span[title=\"FlowCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".tl-strong.tl[href$=\"flowcv\"] > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "span[title=\"Juicebox\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Yoodli\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Y</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".wing-row:nth-child(2) > div > .wing-ev > .wing-e:nth-child(1) > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"TechPP\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Revarta\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Fast Company\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Metaview\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Final Round AI\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".wing-row:nth-child(5) > div > .wing-ev > .wing-e > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Interview Sidekick\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">I</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".wing-row:nth-child(6) > div > .wing-ev > .wing-e > .lg-round.lg[title=\"SkillScouter\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">S</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"VisualCV\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">V</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": "span[title=\"Geekflare\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "6.0pt (8px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ },
+ {
+  "u": "/interview-scorecard?role=Account%20Executive&c=teamwork,leadership",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/hiring-costs",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/is-this-a-real-candidate",
+  "bad": [],
+  "unsure": []
+ },
+ {
+  "u": "/for-hiring-teams",
+  "bad": [],
+  "unsure": [
+   {
+    "target": "a[aria-label=\"Manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"BambooHR\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Breezy HR\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Zoho Recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"JazzHR\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a[aria-label=\"Fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "15.0pt (20px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "3:1"
+    }
+   },
+   {
+    "target": "a:nth-child(2) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(3) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(4) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "aside > a:nth-child(5) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(6) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(7) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": "a:nth-child(8) > .arr",
+    "html": "<span class=\"arr\">→</span>",
+    "data": {
+     "messageKey": "nonBmp"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"manatal\"] > .lg[title=\"Manatal\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">M</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"zoho-recruit\"] > .lg[title=\"Zoho Recruit\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">Z</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"bamboohr\"] > .lg[title=\"BambooHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"breezy-hr\"] > .lg[title=\"Breezy HR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">B</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"teamtailor\"] > .lg[title=\"Teamtailor\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">T</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"ashby\"] > .lg[title=\"Ashby\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">A</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"workable\"] > .lg[title=\"Workable\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">W</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"pinpoint\"] > .lg[title=\"Pinpoint\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">P</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"greenhouse\"] > .lg[title=\"Greenhouse\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">G</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"jazzhr\"] > .lg[title=\"JazzHR\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">J</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"homerun\"] > .lg[title=\"Homerun\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">H</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"lever\"] > .lg[title=\"Lever\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">L</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"recruitee\"] > .lg[title=\"Recruitee\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">R</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   },
+   {
+    "target": ".board-row[href$=\"fountain\"] > .lg[title=\"Fountain\"] > .lg-letter[aria-hidden=\"true\"]",
+    "html": "<span class=\"lg-letter\" aria-hidden=\"true\">F</span>",
+    "data": {
+     "contrastRatio": 0,
+     "fontSize": "13.5pt (18px)",
+     "fontWeight": "bold",
+     "messageKey": "shortTextContent",
+     "expectedContrastRatio": "4.5:1"
+    }
+   }
+  ]
+ }
+]
