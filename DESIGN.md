@@ -112,6 +112,8 @@ Every picker path ends in an answer with a best match (or a plain "no tool" verd
 
 ## Copy tells to avoid
 
+- Talk like a person (Stephanie, Nov 15, 2026). Every question and answer reads the way someone would say it out loud: "What would help you get the offer?", never "What would tip it your way?"; "Which sounds like you?", never "Which is closer?".
+
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").
 - Two-beat slogans ("Her opinion, labeled as hers. It never changes a score."). Say it in one plain sentence: "This is Stephanie's opinion, and it has no effect on the score."
 - Filler: actually, genuinely, real talk, finally, quietly. And the words quiet and gap, anywhere.

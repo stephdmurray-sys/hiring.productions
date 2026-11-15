@@ -73,8 +73,8 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         question: 'Where do you want to start?',
         options: [
           { label: 'Getting my resume ready', to: { problem: 'rewriting' } },
-          { label: 'Spending as little as possible', to: { href: '/free-job-search' } },
-          { label: 'Having proof of how I work ready to send', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          { label: 'Doing it without spending money', to: { href: '/free-job-search' } },
+          { label: 'Showing employers how I work', to: { problem: REPVERA_PROBLEM.seekers.id } },
           { label: 'Figuring out what to apply for', to: { problem: 'what-to-apply-for' } },
         ],
         back: 'q1',
@@ -82,7 +82,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
       {
         id: 'q2a',
         depth: 2,
-        question: 'Which is closer?',
+        question: 'Which sounds like you?',
         options: [
           { label: 'I’m not sure what to apply for', to: { problem: 'what-to-apply-for' } },
           { label: 'I apply and hear nothing back', to: { step: 'q3' } },
@@ -92,11 +92,11 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
       {
         id: 'q3',
         depth: 3,
-        question: 'What about your resume?',
+        question: 'How’s your resume?',
         options: [
           { label: 'It needs a rewrite', to: { problem: 'rewriting' } },
-          { label: 'It’s decent, but I don’t know if it gets past the screening software', to: { problem: 'no-callbacks' } },
-          { label: 'It’s solid. I want proof of how I work to go with it', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          { label: 'It’s fine, but I don’t know if it gets past the screening software', to: { problem: 'no-callbacks' } },
+          { label: 'It’s good. I want something that shows how I work, too', to: { problem: REPVERA_PROBLEM.seekers.id } },
         ],
         back: 'q2a',
       },
@@ -114,10 +114,10 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         // By the last round everyone interviewed well: what's left is practice, or proof of how you work.
         id: 'q3b',
         depth: 3,
-        question: 'What would tip it your way?',
+        question: 'What would help you get the offer?',
         options: [
-          { label: 'Sharper answers in the last round', to: { problem: 'interviews-stall' } },
-          { label: 'Proof of how I work, from people who have seen it', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          { label: 'Better answers in the final interview', to: { problem: 'interviews-stall' } },
+          { label: 'People I’ve worked with backing me up', to: { problem: REPVERA_PROBLEM.seekers.id } },
         ],
         back: 'q2b',
       },
@@ -142,7 +142,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
       {
         id: 'q2a',
         depth: 2,
-        question: 'Which is closer?',
+        question: 'Which sounds like your team?',
         options: [
           { label: 'We don’t have a real system. It’s spreadsheets and email', to: { problem: 'spreadsheets' } },
           { label: 'The right people aren’t applying', to: { problem: 'cant-find-people' } },
@@ -152,7 +152,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
       {
         id: 'q2b',
         depth: 2,
-        question: 'Which is closer?',
+        question: 'Which sounds like your team?',
         options: [
           { label: 'There are too many to get through', to: { problem: 'too-many-applicants' } },
           { label: 'Some of them aren’t real', to: { step: 'fraud' } },
@@ -163,7 +163,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
       {
         id: 'q2c',
         depth: 2,
-        question: 'Which is closer?',
+        question: 'Which sounds like your team?',
         options: [
           { label: 'Every interviewer asks something different', to: { problem: 'interviews-inconsistent' } },
           { label: 'Our recruiters need training', to: { problem: 'training' } },
@@ -178,7 +178,7 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         question: 'Where are you seeing it?',
         options: [
           { label: 'Fake applicants are flooding our roles', to: { href: `${FRAUD_PAGE}?from=picker#applicants` } },
-          { label: 'Someone else showed up to the interview, or the answers are coming from a tool', to: { href: `${FRAUD_PAGE}?from=picker#interviews` } },
+          { label: 'Someone else showed up to the interview, or they’re reading answers off AI', to: { href: `${FRAUD_PAGE}?from=picker#interviews` } },
           { label: 'We need to know this person is who they say they are', to: { href: `${FRAUD_PAGE}?from=picker#identity` } },
           { label: 'We want to hear from people who have worked with them', to: { href: `${FRAUD_PAGE}?from=picker#worked-with` } },
         ],
