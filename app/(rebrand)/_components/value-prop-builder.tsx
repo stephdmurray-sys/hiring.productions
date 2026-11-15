@@ -60,16 +60,19 @@ function findWords(text: string): Found[] {
     .map(({ word, lines, count }) => ({ word, lines, count }))
 }
 
+const SHRM_LINKEDIN = 'https://www.shrm.org/mena/topics-tools/news/organizational-employee-development/how-to-write-seo-enhanced-linkedin-profile'
+
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 const clean = (s: string) => s.trim().replace(/[.\s]+$/, '')
 const article = (s: string) => (/^[aeiou]/i.test(s) ? 'an' : 'a')
 const lowerFirst = (s: string) => (/^[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s)
 const and = (w: string[]) => (w.length > 1 ? `${w.slice(0, -1).join(', ')} and ${w[w.length - 1]}` : w[0] ?? '')
 
-const COPY: Record<Side, { role: [string, string]; change: [string, string]; said: [string, string]; empty: string }> = {
+const COPY: Record<Side, { role: [string, string]; change: [string, string]; skills?: [string, string]; said: [string, string]; empty: string }> = {
   seekers: {
     role: ['What do you do?', 'Marketing manager'],
     change: ['Finish the sentence: I’m a {role} who…', 'turns messy launches into pipeline'],
+    skills: ['Which skills do the job postings you want ask for?', 'product marketing, demand generation, B2B SaaS'],
     said: ['What do people say it’s like to work with you?', 'Paste a few lines, one per line: LinkedIn recommendations, review comments, thank-you notes, your RepVera receipts.'],
     empty: 'Paste a few lines above, and the words people repeat show up here.',
   },
@@ -86,6 +89,7 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
   const [role, setRole] = useState('')
   const [change, setChange] = useState('')
   const [said, setSaid] = useState('')
+  const [skills, setSkills] = useState('')
   const [picked, setPicked] = useState<string[] | null>(null)
   const [copied, setCopied] = useState<number | null>(null)
 
@@ -96,14 +100,32 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
   const x = lowerFirst(clean(change)) || (side === 'seekers' ? '[what changes because of you]' : '[what they’ll do]')
   const w = words.length ? words : ['[their words]']
   const rl = lowerFirst(r)
+  const sk = skills
+    .split(/[,|;\n]+/)
+    .map((k) => k.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+  const skillLine = sk.length ? sk.map(cap).join(' | ') : '[skills from the postings]'
 
-  const outputs: { where: string; note: string; text: string }[] =
+  // LinkedIn: the headline is where recruiters' keyword searches land, so it holds the job title and the skills postings ask for.
+  // Colleagues' words go in the About section, which SHRM calls the place to be more personal (Mary Southern, Jan 17, 2023).
+  const outputs: { where: string; note: string; text: string; src?: { label: string; url: string } }[] =
     side === 'seekers'
       ? [
           { where: 'Top of your resume', note: 'Right under your name, where the first read starts.', text: `${cap(r)} who ${x}. In colleagues’ words: ${w.join(', ')}.` },
-          { where: 'LinkedIn headline', note: 'The line people see next to your name.', text: `${cap(r)} | ${cap(x)} | ${w.map(cap).join(' · ')}` },
-          { where: '“Tell me about yourself”', note: 'Open with it, then give one example that proves it.', text: `I’m ${article(rl)} ${rl} who ${x}. The people I’ve worked with keep using the same words for me: ${and(w)}.` },
-          { where: 'Cover letter or recruiter message', note: 'Make it the first line.', text: `I’m ${article(rl)} ${rl} who ${x}, and the people I’ve worked with describe me as ${and(w)}.` },
+          {
+            where: 'LinkedIn headline',
+            note: 'Recruiters search headlines for job titles and skills, so keep it to those. Their words go in your About section.',
+            text: `${cap(r)} | ${skillLine}`,
+            src: { label: 'SHRM on LinkedIn headlines', url: SHRM_LINKEDIN },
+          },
+          {
+            where: 'LinkedIn About, first lines',
+            note: 'The About section is the place to be more personal, so their words go here.',
+            text: `I’m ${article(rl)} ${rl} who ${x}. The people I’ve worked with describe me as ${and(w)}.`,
+            src: { label: 'SHRM', url: SHRM_LINKEDIN },
+          },
+          { where: '“Tell me about yourself”', note: 'Open with it, then give one example that proves it. It works as a cover letter’s first line too.', text: `I’m ${article(rl)} ${rl} who ${x}. The people I’ve worked with keep using the same words for me: ${and(w)}.` },
         ]
       : [
           { where: 'First line of the job post', note: 'The first thing a candidate reads.', text: `As our ${rl}, you’ll ${x}. Our team’s words for working here: ${w.join(', ')}.` },
@@ -145,9 +167,18 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
           <span className="vp-q">{c.change[0].replace('a {role}', clean(role) ? `${article(rl)} ${rl}` : 'a [your job]')}</span>
           <input type="text" value={change} onChange={(e) => setChange(e.target.value)} placeholder={c.change[1]} maxLength={110} />
         </label>
+        {c.skills && (
+          <label className="vp-step">
+            <span className="vp-n" aria-hidden="true">
+              3
+            </span>
+            <span className="vp-q">{c.skills[0]}</span>
+            <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder={c.skills[1]} maxLength={140} />
+          </label>
+        )}
         <label className="vp-step">
           <span className="vp-n" aria-hidden="true">
-            3
+            {c.skills ? 4 : 3}
           </span>
           <span className="vp-q">{c.said[0]}</span>
           <textarea value={said} onChange={(e) => (setSaid(e.target.value), setPicked(null))} placeholder={c.said[1]} rows={5} maxLength={4000} />
@@ -183,7 +214,17 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
             <div className="vp-card" key={o.where}>
               <p className="vp-where">{o.where}</p>
               <p className="vp-text">{o.text}</p>
-              <p className="vp-note">{o.note}</p>
+              <p className="vp-note">
+                {o.note}
+                {o.src && (
+                  <>
+                    {' '}
+                    <a href={o.src.url} rel="nofollow noopener" target="_blank">
+                      Source: {o.src.label}
+                    </a>
+                  </>
+                )}
+              </p>
               <button type="button" className="vp-copy" onClick={() => copy(i, o.text)}>
                 {copied === i ? 'Copied' : 'Copy'}
               </button>

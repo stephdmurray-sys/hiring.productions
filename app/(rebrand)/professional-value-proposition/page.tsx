@@ -29,7 +29,7 @@ const TITLE = 'What’s my professional value proposition?'
 export const metadata: Metadata = {
   title: 'What’s My Professional Value Proposition? Build Yours From What People Say About You',
   description:
-    'A free builder: what you do, what changes because of you, and the words people who have worked with you keep using, turned into one line for your resume, LinkedIn headline, interviews and cover letters. Nothing is saved.',
+    'A free builder: what you do, what changes because of you, the skills job postings ask for, and the words people who have worked with you keep using, turned into your resume’s top line, a LinkedIn headline built for search, your LinkedIn About and your interview answer. Nothing is saved.',
   alternates: { canonical: PATH },
 }
 
@@ -51,7 +51,7 @@ export default function Page() {
     {
       title: 'Put their words to work',
       todo: 'Paste them into the builder.',
-      why: 'The words they repeat become your line for your resume, LinkedIn, interviews and cover letters.',
+      why: 'The words they repeat become your line for the top of your resume, your LinkedIn About section and your interviews.',
       more: { href: '#build', label: 'Back to the builder', up: true },
     },
   ].map((s) => ({ ...s, title: keepLast(s.title), todo: keepLast(s.todo), why: keepLast(s.why) }))
@@ -101,7 +101,7 @@ export default function Page() {
       </p>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="build">
-        <StepHead title="Build yours" sub="Three steps. Your line updates as you type." />
+        <StepHead title="Build yours" sub="Four steps. Your line updates as you type." />
         <ValuePropBuilder side="seekers" noWords={{ text: 'Nobody has said it in writing yet?', href: '#repvera', label: 'Get receipts from the people who’ve worked with you' }} />
       </section>
 

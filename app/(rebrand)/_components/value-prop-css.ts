@@ -29,6 +29,7 @@ export const valuePropCss = `
   .vp-text{margin:0;font-size:17px;line-height:1.45;font-weight:700;color:var(--ink);text-wrap:pretty;}
   .vp-card:first-child .vp-text{font-size:clamp(19px,1.9vw,22px);}
   .vp-note{margin:0;font-size:13.5px;line-height:1.45;color:var(--ink-3);}
+  .vp-note a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
   .vp-copy{grid-column:2;grid-row:1 / span 3;align-self:center;padding:7px 14px;font:inherit;font-size:14px;font-weight:800;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:8px;box-shadow:3px 3px 0 var(--ink);cursor:pointer;}
   .vp-copy:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink);}
   @media(max-width:900px){

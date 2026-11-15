@@ -80,7 +80,7 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       id: 'value-prop',
       side: 'seekers',
       title: 'What’s my professional value proposition?',
-      what: 'Turn what people say about working with you into one line for your resume, LinkedIn and interviews.',
+      what: 'Turn what people say about working with you into one line for your resume, LinkedIn About and interviews.',
       get: 'Your line, four ways',
       href: '/professional-value-proposition',
       icon: 'value',
