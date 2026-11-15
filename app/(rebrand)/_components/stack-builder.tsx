@@ -55,38 +55,42 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
   }, [path, query])
 
   const { usd, eur, forget, unpriced } = stackTotals(L)
-  const filled = lane.slots.filter((x) => s.picks[x.id]).length
+  const filled = lane.slots.filter((x) => s.picks[x.id]?.length).length
 
   const set = (patch: Partial<StackState>) => {
     setNote(null)
     setS((x) => ({ ...x, ...patch }))
   }
-  const pick = (slot: string, id: string | null) => {
-    const picks = { ...s.picks }
-    if (id === null || picks[slot] === id) delete picks[slot]
-    else picks[slot] = id
-    set({ picks })
+  // One-tool parts: a click picks that tool (and replaces the last one). Add-any parts: a click adds or removes it.
+  const pick = (slotId: string, id: string) => {
+    const slot = lane.slots.find((x) => x.id === slotId)!
+    const now = s.picks[slotId] ?? []
+    const next = slot.multi ? (now.includes(id) ? now.filter((x) => x !== id) : [...now, id]) : [id]
+    set({ picks: { ...s.picks, [slotId]: next } })
   }
+  const remove = (slotId: string, id: string) => set({ picks: { ...s.picks, [slotId]: (s.picks[slotId] ?? []).filter((x) => x !== id) } })
   const setPaid = (id: string, on: boolean) => set({ paid: on ? [...new Set([...s.paid, id])] : s.paid.filter((x) => x !== id) })
 
   // Make it free: every tool onto its free version, and a free tool in place of any that has none or no price.
   const freeVersion = () => {
-    const picks = { ...s.picks }
+    const picks: Record<string, string[]> = {}
     const swaps: string[] = []
     for (const slot of lane.slots) {
-      const id = picks[slot.id]
-      if (!id) continue
-      const t = lane.tools[id]
-      const isAts = side === 'hiring' && slot.id === 'ats'
-      const hasFree = isAts ? !!t.plan?.freeTier : t.free === 'full' || t.free === 'limited' || t.free === 'site'
-      if (hasFree) continue
-      // Only swap where there is a free tool for that part; RepVera, portfolios and sourcing stay as chosen.
-      if (!isAts && slot.id !== 'fraud' && t.free === 'unknown') continue
-      const alt = isAts ? slot.options.find((o) => lane.tools[o].plan?.freeTier) : slot.options.find((o) => ['full', 'site'].includes(lane.tools[o].free))
-      if (alt && alt !== id) {
-        picks[slot.id] = alt
-        swaps.push(`${lane.tools[alt].name} for ${t.name}`)
+      const ids = s.picks[slot.id] ?? []
+      const out: string[] = []
+      for (const id of ids) {
+        const t = lane.tools[id]
+        const isAts = side === 'hiring' && slot.id === 'ats'
+        const hasFree = isAts ? !!t.plan?.freeTier : t.free === 'full' || t.free === 'limited' || t.free === 'site'
+        // Only swap where there is a free tool for that part; RepVera, portfolios and sourcing stay as chosen.
+        const keep = hasFree || (!isAts && slot.id !== 'fraud' && t.free === 'unknown')
+        const alt = keep ? undefined : isAts ? slot.options.find((o) => lane.tools[o].plan?.freeTier) : slot.options.find((o) => ['full', 'site'].includes(lane.tools[o].free))
+        if (alt && alt !== id) {
+          if (!out.includes(alt)) out.push(alt)
+          swaps.push(`${lane.tools[alt].name} for ${t.name}`)
+        } else if (!out.includes(id)) out.push(id)
       }
+      if (out.length) picks[slot.id] = out
     }
     return { next: { ...s, picks, paid: [] as string[] }, swaps }
   }
@@ -129,7 +133,7 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
               className={`sb-starter sb-starter-${st.id}`}
               onClick={() => {
                 setNote(null)
-                setS((x) => ({ ...x, picks: { ...st.picks }, paid: [...st.paid] }))
+                setS((x) => ({ ...x, picks: Object.fromEntries(Object.entries(st.picks).map(([k, v]) => [k, [...v]])), paid: [...st.paid] }))
               }}
             >
               {st.label}
@@ -198,17 +202,17 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
         )}
 
         {lane.slots.map((slot) => {
-          const chosen = s.picks[slot.id] ? lane.tools[s.picks[slot.id]] : null
+          const ids = s.picks[slot.id] ?? []
+          const chosen = ids.map((id) => lane.tools[id]).filter(Boolean)
           // A tool already in the stack for another part that does this one too.
-          const already = [...new Set(Object.entries(s.picks).filter(([k, id]) => k !== slot.id && lane.tools[id]?.covers.includes(slot.id) && s.picks[slot.id] !== id).map(([, id]) => id))].map(
-            (id) => lane.tools[id],
-          )
-          const line = chosen ? L.find((l) => l.tool.id === chosen.id) : null
+          const already = [...new Set(Object.entries(s.picks).flatMap(([k, list]) => (k === slot.id ? [] : list)))]
+            .filter((id) => lane.tools[id]?.covers.includes(slot.id) && !ids.includes(id))
+            .map((id) => lane.tools[id])
           return (
-            <section className={`sb-slot${chosen ? ' sb-slot-on' : ''}`} key={slot.id} aria-labelledby={`sb-${slot.id}`}>
+            <section className={`sb-slot${chosen.length ? ' sb-slot-on' : ''}`} key={slot.id} aria-labelledby={`sb-${slot.id}`}>
               <div className="sb-slot-head">
                 <h3 id={`sb-${slot.id}`}>{slot.title}</h3>
-                <span className="sb-slot-state">{chosen ? chosen.name : 'Empty'}</span>
+                <span className="sb-slot-state">{slot.multi ? (chosen.length ? `${chosen.length} added` : 'Add any') : chosen.length ? chosen[0].name : 'Pick one'}</span>
               </div>
               <p className="sb-why">{slot.why}</p>
               {already.length > 0 && (
@@ -223,7 +227,7 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
               <div className="sb-opts">
                 {slot.options.map((id) => {
                   const t = lane.tools[id]
-                  const on = s.picks[slot.id] === id
+                  const on = ids.includes(id)
                   return (
                     <button type="button" key={id} className="sb-opt" aria-pressed={on} onClick={() => pick(slot.id, id)}>
                       <Logo domain={t.domain} name={t.name} size={34} />
@@ -232,45 +236,57 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
                         <small>{t.tag}</small>
                       </span>
                       {t.score !== null && <span className="sb-score">{t.score.toFixed(2)}</span>}
+                      <span className="sb-mark" aria-hidden="true">
+                        {on ? '\u2713' : '+'}
+                      </span>
                     </button>
                   )
                 })}
               </div>
-              {chosen && line && (
-                <div className="sb-detail">
-                  <p className="sb-free">{chosen.freeLine}</p>
-                  {((side === 'seekers' && chosen.paid && (chosen.free === 'full' || chosen.free === 'limited')) || (side === 'hiring' && slot.id === 'ats' && chosen.plan?.freeTier)) && (
-                    <div className="sb-toggle" role="radiogroup" aria-label={`${chosen.name}: free or paid`}>
-                      <button type="button" role="radio" aria-checked={!s.paid.includes(chosen.id)} onClick={() => setPaid(chosen.id, false)}>
-                        Free version
+              {chosen.map((t) => {
+                const line = L.find((l) => l.tool.id === t.id)
+                if (!line) return null
+                return (
+                  <div className="sb-detail" key={t.id}>
+                    <p className="sb-detail-name">
+                      <b>{t.name}</b>
+                      <button type="button" className="sb-remove" onClick={() => remove(slot.id, t.id)}>
+                        Remove
                       </button>
-                      <button type="button" role="radio" aria-checked={s.paid.includes(chosen.id)} onClick={() => setPaid(chosen.id, true)}>
-                        Paid plan
-                      </button>
-                    </div>
-                  )}
-                  <p className="sb-cost">
-                    <b>{line.cost === null ? line.how : line.cost === 0 ? '$0' : fmt(line.cost, line.currency)}</b>
-                    {line.cost !== null && line.cost > 0 && <span>{` ${window_}: ${line.how}`}</span>}
-                  </p>
-                  {line.renewsAfter !== undefined && !line.onFree && (
-                    <p className="sb-renew">
-                      {line.renewsAfter === null
-                        ? 'Paid once. It never renews.'
-                        : `It renews on day ${line.renewsAfter}${today ? `, around ${dayAfter(today, line.renewsAfter)} if you start today` : ''}. Cancel before then if your search is done.`}
                     </p>
-                  )}
-                  {chosen.renews4w && !line.onFree && (
-                    <p className="sb-trap">
-                      Bills every 4 weeks, so 13 charges a year.{' '}
-                      {chosen.trap && <a href={chosen.trap}>What {chosen.name} really costs</a>}
+                    <p className="sb-free">{t.freeLine}</p>
+                    {((side === 'seekers' && t.paid && (t.free === 'full' || t.free === 'limited')) || (side === 'hiring' && slot.id === 'ats' && t.plan?.freeTier)) && (
+                      <div className="sb-toggle" role="radiogroup" aria-label={`${t.name}: free or paid`}>
+                        <button type="button" role="radio" aria-checked={!s.paid.includes(t.id)} onClick={() => setPaid(t.id, false)}>
+                          Free version
+                        </button>
+                        <button type="button" role="radio" aria-checked={s.paid.includes(t.id)} onClick={() => setPaid(t.id, true)}>
+                          Paid plan
+                        </button>
+                      </div>
+                    )}
+                    <p className="sb-cost">
+                      <b>{line.cost === null ? line.how : line.cost === 0 ? '$0' : fmt(line.cost, line.currency)}</b>
+                      {line.cost !== null && line.cost > 0 && <span>{` ${window_}: ${line.how}`}</span>}
                     </p>
-                  )}
-                  <a className="tl" href={chosen.href} {...(chosen.external && chosen.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
-                    {chosen.hrefLabel} <span className="arr">&rarr;</span>
-                  </a>
-                </div>
-              )}
+                    {line.renewsAfter !== undefined && !line.onFree && (
+                      <p className="sb-renew">
+                        {line.renewsAfter === null
+                          ? 'Paid once. It never renews.'
+                          : `It renews on day ${line.renewsAfter}${today ? `, around ${dayAfter(today, line.renewsAfter)} if you start today` : ''}. Cancel before then if your search is done.`}
+                      </p>
+                    )}
+                    {t.renews4w && !line.onFree && (
+                      <p className="sb-trap">
+                        Bills every 4 weeks, so 13 charges a year. {t.trap && <a href={t.trap}>What {t.name} really costs</a>}
+                      </p>
+                    )}
+                    <a className="tl" href={t.href} {...(t.external && t.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+                      {t.hrefLabel} <span className="arr">&rarr;</span>
+                    </a>
+                  </div>
+                )
+              })}
             </section>
           )
         })}
@@ -310,6 +326,7 @@ export function StackBuilder({ lane, initial, path }: { lane: StackLane; initial
             {total}
           </b>
           {eur > 0 && <span className="sb-eur">plus {fmt(eur, 'EUR')} billed in euros</span>}
+          {unpriced.length > 0 && <span className="sb-plus">{`plus ${plural(unpriced.length, 'tool')} not in this total`}</span>}
           {side === 'hiring' && usd > 0 && <span className="sb-sub">{`About ${fmt(Math.round(usd / 12))} a month`}</span>}
         </div>
         {side === 'seekers' && forget > usd && (

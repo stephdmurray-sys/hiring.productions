@@ -53,6 +53,8 @@ export interface StackTool {
 
 export interface StackSlot {
   id: string
+  /** true: add as many tools as you like to this part. false: one tool (picking another replaces it). */
+  multi: boolean
   title: string
   why: string
   options: string[]
@@ -63,13 +65,15 @@ export interface StackLane {
   slots: StackSlot[]
   tools: Record<string, StackTool>
   /** One-click starting points. */
-  starters: { id: string; label: string; picks: Record<string, string>; paid: string[] }[]
+  starters: { id: string; label: string; picks: Record<string, string[]>; paid: string[] }[]
   /** Applicant tracking: seat and company size choices, from the picker's own options. */
   seats?: { label: string; value: number }[]
   employees?: { label: string; value: number }[]
   /** Hires a year, for the cost per hire line: the visitor's own number. */
   hires?: number[]
 }
+
+const asLists = (o: Record<string, string>) => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, [v]]))
 
 const caps = (recData.seekers as unknown as { capabilities: Record<string, string[]> }).capabilities
 
@@ -153,11 +157,11 @@ export function seekerLane(): StackLane {
   }
   const ids = all.map((t) => t.id)
   const slots: StackSlot[] = [
-    { id: 'resume', title: 'Build the resume', why: 'The one document every application starts with.', options: byScore(ids.filter((id) => tools[id].covers.includes('resume'))) },
-    { id: 'check', title: 'Check it against each job post', why: 'Compare your resume with the posting before you send it.', options: byScore(ids.filter((id) => tools[id].covers.includes('check'))) },
-    { id: 'track', title: 'Keep track of every application', why: 'Every job, contact and follow-up in one place.', options: byScore(ids.filter((id) => tools[id].covers.includes('track'))) },
-    { id: 'proof', title: 'Show how you work before the interview', why: 'Receipts from people who have worked with you, or the work itself.', options: ['repvera', ...PORTFOLIO_PICKS.map((p) => p.go!)] },
-    { id: 'practice', title: 'Practice the interview', why: 'Know the questions before they ask them.', options: ['practice'] },
+    { id: 'resume', multi: false, title: 'Build the resume', why: 'The one document every application starts with.', options: byScore(ids.filter((id) => tools[id].covers.includes('resume'))) },
+    { id: 'check', multi: false, title: 'Check it against each job post', why: 'Compare your resume with the posting before you send it.', options: byScore(ids.filter((id) => tools[id].covers.includes('check'))) },
+    { id: 'track', multi: false, title: 'Keep track of every application', why: 'Every job, contact and follow-up in one place.', options: byScore(ids.filter((id) => tools[id].covers.includes('track'))) },
+    { id: 'proof', multi: true, title: 'Show how you work before the interview', why: 'Receipts from people who have worked with you, or the work itself.', options: ['repvera', ...PORTFOLIO_PICKS.map((p) => p.go!)] },
+    { id: 'practice', multi: true, title: 'Practice the interview', why: 'Know the questions before they ask them.', options: ['practice'] },
   ]
   // Starting points: the top-rated tool in each slot on its paid plan, and the best free version in each.
   const top: Record<string, string> = {}
@@ -171,8 +175,8 @@ export function seekerLane(): StackLane {
     slots,
     tools,
     starters: [
-      { id: 'free', label: 'Start with the $0 stack', picks: { ...free, practice: 'practice' }, paid: [] },
-      { id: 'top', label: 'Start with the top-rated tools, paid', picks: { ...top, practice: 'practice' }, paid: [...new Set(Object.values(top))].filter((id) => tools[id].paid) },
+      { id: 'free', label: 'Start with the $0 stack', picks: { ...asLists(free), practice: ['practice'] }, paid: [] },
+      { id: 'top', label: 'Start with the top-rated tools, paid', picks: { ...asLists(top), practice: ['practice'] }, paid: [...new Set(Object.values(top))].filter((id) => tools[id].paid) },
     ],
   }
 }
@@ -267,12 +271,12 @@ export function hiringLane(): StackLane {
   }
   const atsIds = ranked.map((t) => atsSlug(t.name))
   const slots: StackSlot[] = [
-    { id: 'ats', title: 'Track every applicant in one place', why: 'Your applicant tracking system: postings, applicants and interview stages.', options: atsIds },
-    { id: 'interview', title: 'Ask every candidate the same questions', why: 'A structured interview, so candidates are compared on the same things.', options: ['scorecard'] },
-    { id: 'fraud', title: 'Catch fake candidates', why: 'Start with the FBI’s red flags, and add a tool if fake applicants keep getting through.', options: ['red-flags', ...fraudVendors.map((f) => f.go!)] },
-    { id: 'source', title: 'Find people who aren’t applying', why: 'Go find the people who would fit, and reach out first.', options: [hiringPick.id] },
-    { id: 'proof', title: 'See how they work before you interview', why: 'Hear from people who have worked with the candidate, early.', options: ['repvera'] },
-    { id: 'cost', title: 'Know what each hire costs', why: 'The number your budget conversations start from.', options: ['cost-per-hire'] },
+    { id: 'ats', multi: false, title: 'Track every applicant in one place', why: 'Your applicant tracking system: postings, applicants and interview stages.', options: atsIds },
+    { id: 'interview', multi: true, title: 'Ask every candidate the same questions', why: 'A structured interview, so candidates are compared on the same things.', options: ['scorecard'] },
+    { id: 'fraud', multi: true, title: 'Catch fake candidates', why: 'Start with the FBI’s red flags, and add a tool if fake applicants keep getting through.', options: ['red-flags', ...fraudVendors.map((f) => f.go!)] },
+    { id: 'source', multi: true, title: 'Find people who aren’t applying', why: 'Go find the people who would fit, and reach out first.', options: [hiringPick.id] },
+    { id: 'proof', multi: true, title: 'See how they work before you interview', why: 'Hear from people who have worked with the candidate, early.', options: ['repvera'] },
+    { id: 'cost', multi: true, title: 'Know what each hire costs', why: 'The number your budget conversations start from.', options: ['cost-per-hire'] },
   ]
   const freeAts = atsIds.find((id) => tools[id].plan?.freeTier) ?? atsIds[0]
   const limits = recData.hiring.limits as { id: string; options: { label: string; value: number | null }[] }[]
@@ -282,8 +286,8 @@ export function hiringLane(): StackLane {
     slots,
     tools,
     starters: [
-      { id: 'free', label: 'Start with the $0 stack', picks: { ats: freeAts, interview: 'scorecard', fraud: 'red-flags', cost: 'cost-per-hire' }, paid: [] },
-      { id: 'top', label: 'Start with the top-rated system', picks: { ats: atsIds[0], interview: 'scorecard', fraud: 'red-flags', cost: 'cost-per-hire' }, paid: [atsIds[0]] },
+      { id: 'free', label: 'Start with the $0 stack', picks: { ats: [freeAts], interview: ['scorecard'], fraud: ['red-flags'], cost: ['cost-per-hire'] }, paid: [] },
+      { id: 'top', label: 'Start with the top-rated system', picks: { ats: [atsIds[0]], interview: ['scorecard'], fraud: ['red-flags'], cost: ['cost-per-hire'] }, paid: [atsIds[0]] },
     ],
     seats: opts('seats'),
     employees: opts('employees'),

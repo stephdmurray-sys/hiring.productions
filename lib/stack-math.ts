@@ -6,7 +6,8 @@
 import type { StackLane, StackTool } from './stack'
 
 export interface StackState {
-  picks: Record<string, string>
+  /** The tools in each part of the stack, by part id. One-tool parts hold at most one. */
+  picks: Record<string, string[]>
   paid: string[]
   months: number
   seats: number
@@ -63,9 +64,10 @@ export function atsCost(t: StackTool, s: StackState, paid: boolean): { cost: num
 export function stackLines(lane: StackLane, s: StackState): Line[] {
   const bySlot = new Map<string, string[]>()
   for (const slot of lane.slots) {
-    const id = s.picks[slot.id]
-    if (!id || !lane.tools[id]) continue
-    bySlot.set(id, [...(bySlot.get(id) ?? []), slot.id])
+    for (const id of s.picks[slot.id] ?? []) {
+      if (!lane.tools[id]) continue
+      bySlot.set(id, [...(bySlot.get(id) ?? []), slot.id])
+    }
   }
   return [...bySlot.entries()].map(([id, slots]) => {
     const t = lane.tools[id]
@@ -94,8 +96,9 @@ export function stackTotals(L: Line[]) {
 
 export function stackQuery(lane: StackLane, s: StackState): string {
   const q = new URLSearchParams()
-  for (const slot of lane.slots) if (s.picks[slot.id]) q.set(slot.id, s.picks[slot.id])
-  const paid = s.paid.filter((id) => Object.values(s.picks).includes(id))
+  for (const slot of lane.slots) if (s.picks[slot.id]?.length) q.set(slot.id, s.picks[slot.id].join(','))
+  const all = Object.values(s.picks).flat()
+  const paid = s.paid.filter((id) => all.includes(id))
   if (paid.length) q.set('paid', paid.join(','))
   if (lane.lane === 'seekers') q.set('m', String(s.months))
   else {
@@ -108,10 +111,10 @@ export function stackQuery(lane: StackLane, s: StackState): string {
 
 /** A stack from the address. Anything that isn't a tool for that part is dropped. */
 export function stackFromQuery(lane: StackLane, get: (k: string) => string | null | undefined): StackState {
-  const picks: Record<string, string> = {}
+  const picks: Record<string, string[]> = {}
   for (const slot of lane.slots) {
-    const v = get(slot.id)
-    if (v && lane.tools[v]?.covers.includes(slot.id)) picks[slot.id] = v
+    const ids = [...new Set((get(slot.id) ?? '').split(','))].filter((id) => lane.tools[id]?.covers.includes(slot.id))
+    if (ids.length) picks[slot.id] = slot.multi ? ids : ids.slice(0, 1)
   }
   const paid = (get('paid') ?? '')
     .split(',')

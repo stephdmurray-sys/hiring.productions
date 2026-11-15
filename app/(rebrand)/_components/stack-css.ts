@@ -36,6 +36,12 @@ export const stackCss = `
   .sb-opt-t b{font-size:15.5px;font-weight:800;line-height:1.2;}
   .sb-opt-t small{font-size:12.5px;font-weight:600;opacity:.8;line-height:1.3;}
   .sb-score{flex:none;font-weight:900;font-size:15px;font-variant-numeric:tabular-nums;}
+  .sb-mark{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid currentColor;font-weight:900;font-size:15px;line-height:1;opacity:.55;}
+  .sb-opt[aria-pressed="true"] .sb-mark{opacity:1;background:#fff;color:var(--ink);border-color:var(--ink);}
+  .sb-detail-name{display:flex;align-items:baseline;gap:14px;margin:0;font-size:17px;}
+  .sb-remove{font:inherit;font-size:14.5px;font-weight:700;color:var(--ink-3);background:none;border:0;padding:4px 0;text-decoration:underline;text-underline-offset:3px;cursor:pointer;}
+  .sb-remove:hover{color:var(--coral-text);}
+  .sb-plus{font-size:15px;font-weight:800;color:var(--coral-text);}
   .sb-detail{margin-top:20px;padding-top:18px;border-top:1px dashed var(--rule-2);display:grid;gap:12px;justify-items:start;}
   .sb-free{margin:0;color:var(--ink-2);font-size:16px;max-width:640px;}
   .sb-toggle{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden;}
