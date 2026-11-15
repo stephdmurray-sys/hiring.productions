@@ -1,0 +1,174 @@
+{
+  "_about": "On the rise: tools we're watching that don't have a score yet. Honorable mentions, never ranked, and never paid for. Each shows only the evidence it already has (independent lists that name it, citable reviews counted so far) and how far it is from earning a score (minReviews citable reviews from foundation sources; every score is public data). Re-checked monthly; a tool graduates into the rankings when it crosses the line. Every evidence line must trace to a list or source we can link. verified=false: read from search listings, confirmed on the live page at the next check. Each tool records why it is here (trigger, see discovery.json), the month its check is due (checkDue), and the scoreboard it would rank on (board; null means its category has no board yet, a category gap).",
+  "minReviews": 25,
+  "tools": [
+    {
+      "id": "yoodli",
+      "name": "Yoodli",
+      "domain": "yoodli.ai",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "Practice interview answers out loud and get feedback on how they land.",
+      "evidence": [
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "note": "#1 of 5 AI interview prep tools",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14"
+        },
+        {
+          "publication": "TechPP",
+          "domain": "techpp.com",
+          "note": "Named in 8 AI interview prep tools",
+          "date": "2026-08",
+          "url": "https://techpp.com/2026/08/13/ai-tools-for-job-interview-preparation/",
+          "confirmed": false
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false,
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null
+    },
+    {
+      "id": "revarta",
+      "name": "Revarta",
+      "domain": "revarta.com",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "Mock interviews by voice, scored question by question.",
+      "evidence": [
+        {
+          "publication": "Fast Company",
+          "domain": "fastcompany.com",
+          "note": "#3 of 5 AI tools to land a job",
+          "date": "2026",
+          "url": "https://www.fastcompany.com/91514957/ai-job-search-tools",
+          "confirmed": false
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false,
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null
+    },
+    {
+      "id": "metaview",
+      "name": "Metaview",
+      "domain": "metaview.ai",
+      "side": "hiring",
+      "category": "Interview notes",
+      "what": "Takes structured interview notes so interviewers can listen instead of type.",
+      "evidence": [],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false,
+      "trigger": [
+        "editor-added"
+      ],
+      "checkDue": "2026-12",
+      "board": null
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null,
+      "id": "final-round-ai",
+      "name": "Final Round AI",
+      "domain": "finalroundai.com",
+      "side": "seekers",
+      "category": "Live interview co-pilot",
+      "what": "An AI co-pilot that runs during live interviews. SkillScouter calls it the best live interview co-pilot; its own FAQ asks whether using AI in a live interview is ethical.",
+      "evidence": [
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14",
+          "note": "#2 of 5 AI interview prep tools"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": null,
+      "id": "interview-sidekick",
+      "name": "Interview Sidekick",
+      "domain": "interviewsidekick.com",
+      "side": "seekers",
+      "category": "Interview practice",
+      "what": "AI interview practice; SkillScouter's budget option.",
+      "evidence": [
+        {
+          "publication": "SkillScouter",
+          "domain": "skillscouter.com",
+          "date": "2026-06",
+          "url": "https://skillscouter.com/best-ai-interview-prep-tools/",
+          "confirmed": true,
+          "checked": "2026-11-14",
+          "note": "#3 of 5 AI interview prep tools"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    },
+    {
+      "trigger": [
+        "independent-list"
+      ],
+      "checkDue": "2026-12",
+      "board": "Resume tools: builders",
+      "id": "visualcv",
+      "name": "VisualCV",
+      "domain": "visualcv.com",
+      "side": "seekers",
+      "category": "Resume builder",
+      "what": "A resume and CV builder; listed first on Geekflare's current list.",
+      "evidence": [
+        {
+          "publication": "Geekflare",
+          "domain": "geekflare.com",
+          "note": "Listed first of 12 resume builders",
+          "date": "2026-10",
+          "url": "https://geekflare.com/guides/best-resume-builders/",
+          "confirmed": true,
+          "checked": "2026-11-14"
+        }
+      ],
+      "citableReviews": null,
+      "watchingSince": "2026-11",
+      "verified": false
+    }
+  ],
+  "graduated": [
+    {
+      "id": "huntr",
+      "name": "Huntr",
+      "date": "2026-11-13",
+      "to": "Resume tools: ATS checkers",
+      "note": "Suggested Nov 13 and checked the same day: 1,300 public ratings, plus traffic and prices from the live site."
+    }
+  ]
+}

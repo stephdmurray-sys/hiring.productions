@@ -1,193 +1,86 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+
+/**
+ * Terms, in plain words, for the free version of the site. Nothing is
+ * for sale in this version (Stephanie, Nov 14, 2026), so there is no
+ * payment, refund or membership section. A formal, lawyer-reviewed
+ * version replaces this before paid advertising, like the privacy page.
+ */
 
 export const metadata: Metadata = {
-  title: 'Terms',
-  description:
-    'The short version of how hiring.productions works while the formal terms are in review.',
+  title: 'Terms: Using hiring.productions',
+  description: 'The plain terms for using hiring.productions: free to use, ratings built from public data, no advice, and how to reach us.',
   alternates: { canonical: 'https://hiring.productions/terms' },
   robots: { index: false, follow: true },
 }
 
+const UPDATED = '14 Nov 2026'
+
+const css = `
+  .tm{max-width:820px;}
+  .tm h2{font-size:clamp(26px,3vw,34px);margin-top:clamp(48px,6vw,72px);}
+  .tm p,.tm li{font-size:18px;line-height:1.65;color:var(--ink-2);}
+  .tm p{margin-top:14px;}
+  .tm ul{margin-top:14px;padding-left:20px;display:grid;gap:8px;}
+  .tm a{color:var(--indigo-text);text-decoration:underline;text-underline-offset:3px;}
+  .tm-end{padding-bottom:clamp(96px,11vw,150px);}
+`
+
 export default function TermsPage() {
   return (
-    <main style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="light" />
-
-      <section
-        style={{
-          maxWidth: '720px',
-          margin: '0 auto',
-          padding: '80px 24px 100px',
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '11px',
-            fontWeight: 800,
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: '#A78BFA',
-            marginBottom: '16px',
-          }}
-        >
-          ◆ TERMS
+    <>
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + css }} />
+      <SiteNav />
+      <header className="ph">
+        <div className="wrap">
+          <p className="crumbs">
+            <a href="/">Home</a> / Terms
+          </p>
+          <h1 className="display">Using this site</h1>
+          <p className="dek">The plain version, while a formal one is reviewed by a lawyer.</p>
+          <p className="dateline">Last updated {UPDATED}</p>
         </div>
-        <h1
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: 'clamp(36px, 5vw, 56px)',
-            fontWeight: 900,
-            letterSpacing: '-0.025em',
-            lineHeight: 1.05,
-            color: '#1A1A22',
-            margin: '0 0 24px',
-          }}
-        >
-          What you can expect, what we ask in return.
-        </h1>
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '17px',
-            color: '#5A5A6E',
-            lineHeight: 1.7,
-            marginBottom: '28px',
-          }}
-        >
-          Formal, lawyer-reviewed terms will live on this page before
-          hiring.productions runs paid advertising. Until then, this is the
-          plain-language agreement between you and us.
+      </header>
+
+      <section className="wrap sec-tight tm tm-end">
+        <h2>It&rsquo;s free</h2>
+        <p>Everything on hiring.productions is free to use. Nothing is for sale here, and there&rsquo;s no account to make.</p>
+
+        <h2>What the ratings are</h2>
+        <p>
+          Every score is built from dated public data, the way <a href="/how-we-review">How we review</a> describes. Scores are our reading of
+          that data on the date shown, and no guarantee about any product. Prices and features change; check the vendor&rsquo;s own page before
+          you buy.
         </p>
 
-        <Section title="What we promise">
-          <p>
-            The free tools stay free. The Pro tools cost $14.99/month or $99/year — billed
-            once, cancel anytime through the Stripe portal, and the access
-            stops at the end of your current term. We will not raise the price
-            on existing members without 60 days&apos; notice.
-          </p>
-          <p>
-            The AI-generated output is advice, not a guarantee. We&apos;re
-            putting recruiter expertise into the system prompts so the output
-            is as good as it gets, but we can&apos;t promise it will get you a
-            job. No one can.
-          </p>
-        </Section>
-
-        <Section title="What we ask">
-          <p>
-            Don&apos;t scrape or resell the outputs. Don&apos;t use the tools
-            to generate content that misrepresents who you are or what
-            you&apos;ve done — the tools are sharpest when they&apos;re working
-            on real material. Don&apos;t try to break the gates programmatically
-            — if a tool says Pro, it&apos;s Pro.
-          </p>
-          <p>
-            Be honest in the inputs. The career-change tool, the gap explainer,
-            the visibility simulator — all of them produce sharper output when
-            you put your real situation in. Fabricated inputs give you AI-flavored
-            outputs that won&apos;t survive a real interview.
-          </p>
-        </Section>
-
-        <Section title="Refunds">
-          <p>
-            Email{' '}
-            <a
-              href="https://www.linkedin.com/in/stephaniemurray11/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#A78BFA' }}
-            >
-              Stephanie on LinkedIn
-            </a>{' '}
-            within 14 days of purchase and you&apos;ll get a refund, no
-            questions asked. After 14 days, we&apos;ll work with you in good
-            faith — most refund requests are because something didn&apos;t
-            work, which we want to fix.
-          </p>
-        </Section>
-
-        <Section title="The fine print, briefly">
-          <p>
-            We can update these terms — when we do, the &quot;Last updated&quot;
-            date below changes and material changes get an email to members.
-            The site is provided as-is; we&apos;re a small team and can&apos;t
-            promise zero downtime. Any disputes get handled in good faith
-            first, then under the laws of Washington State (US).
-          </p>
-        </Section>
-
-        <p
-          style={{
-            fontFamily: "'Figtree', sans-serif",
-            fontSize: '13px',
-            color: '#6B6A82',
-            marginTop: '48px',
-          }}
-        >
-          Last updated 2026-05-12. Questions?{' '}
-          <a
-            href="https://www.linkedin.com/in/stephaniemurray11/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#A78BFA' }}
-          >
-            Reach out via LinkedIn
-          </a>
-          .
+        <h2>What the free tools are</h2>
+        <p>
+          The recommender, interview scorecard, interview practice and cost per hire calculator give general information, built on published
+          sources we name on each page. They aren&rsquo;t legal, employment or financial advice. For a hiring decision with legal weight, talk
+          to someone who can advise on your situation.
         </p>
 
-        <div style={{ marginTop: '40px' }}>
-          <Link
-            href="/"
-            style={{
-              fontFamily: "'Figtree', sans-serif",
-              fontSize: '14px',
-              fontWeight: 700,
-              color: '#A78BFA',
-              textDecoration: 'none',
-            }}
-          >
-            ← Back to hiring.productions
-          </Link>
-        </div>
+        <h2>What we ask</h2>
+        <ul>
+          <li>Don&rsquo;t copy the site&rsquo;s data in bulk or scrape it. Quoting a score with a link back is welcome.</li>
+          <li>Don&rsquo;t send us anything you don&rsquo;t have the right to share.</li>
+        </ul>
+
+        <h2>Links and money</h2>
+        <p>
+          Right now no link on this site earns us anything. If that changes, the line under the vendor&rsquo;s button will say so. No one can pay for a placement, a ranking, a score or a recommendation.{' '}
+          <a href="/advertiser-disclosure">Who pays for this site</a>.
+        </p>
+
+        <h2>Changes and contact</h2>
+        <p>
+          When these terms change, the date above changes. Questions: <a href="mailto:hello@hiring.productions">hello@hiring.productions</a>.
+          How we handle your data is on the <a href="/privacy">privacy page</a>.
+        </p>
       </section>
-
-      <Footer />
-    </main>
-  )
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ marginBottom: '32px' }}>
-      <h2
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '20px',
-          fontWeight: 800,
-          letterSpacing: '-0.015em',
-          color: '#1A1A22',
-          margin: '0 0 12px',
-        }}
-      >
-        {title}
-      </h2>
-      <div
-        style={{
-          fontFamily: "'Figtree', sans-serif",
-          fontSize: '15px',
-          color: '#5A5A6E',
-          lineHeight: 1.7,
-        }}
-      >
-        {children}
-      </div>
-    </div>
+      <SiteFooter />
+    </>
   )
 }

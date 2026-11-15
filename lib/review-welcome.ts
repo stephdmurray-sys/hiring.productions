@@ -1,0 +1,307 @@
+/**
+ * Welcome emails for the review site's email asks. Each one delivers what
+ * the visitor asked for, in writing, and carries the ownership disclosure.
+ * RepVera appears only in hiring-team emails about fraud or what hiring
+ * costs, labeled as ours (GROWTH.md).
+ */
+import { answerText, askFromState, askToQuery, recommend, situationFor, stateFromParams, verdictTitle } from '@/lib/evidence/recommend'
+import { hiringLane, seekerLane } from '@/lib/stack'
+import { REPVERA_CALL_URL } from '@/lib/repvera-quotes'
+import { fmt, plural, stackFromQuery, stackLines, stackQuery, stackTotals } from '@/lib/stack-math'
+import { OWNERSHIP_DISCLOSURE, REPVERA_NOTE_LABEL, REPVERA_TEAMS_LINE, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { cleanRole, pickCompetencies, scorecardData, scorecardFileName, scorecardUrl } from '@/lib/scorecard'
+
+const SITE = 'https://hiring.productions'
+
+const SIGN_OFF = ['', OWNERSHIP_DISCLOSURE, "You're getting this because you asked for it on hiring.productions. Unsubscribe in one click.", '', 'Stephanie', 'hiring.productions']
+
+/** A labeled RepVera note for hiring-team emails about screening, interviewing or what a hire costs (GROWTH.md). */
+function repveraNote(campaign: string, lead?: string): string[] {
+  return ['', `${REPVERA_NOTE_LABEL}:`, ...(lead ? [lead] : []), REPVERA_WHAT, `See how it works: ${repveraLink(campaign)}`]
+}
+
+/**
+ * The scorecard a visitor built, rebuilt from its role and skill ids. Older
+ * asks only sent the page link, so that is read as a fallback.
+ */
+function scorecardFromExtras(x: Record<string, string>) {
+  let role = x.role ?? ''
+  let ids = x.ids ?? ''
+  if (!ids && x.url) {
+    try {
+      const u = new URL(x.url)
+      ids = u.searchParams.get('c') ?? ''
+      role = role || (u.searchParams.get('role') ?? '')
+    } catch {
+      return null
+    }
+  }
+  const { chosen } = pickCompetencies(ids)
+  if (!chosen.length) return null
+  return { role: cleanRole(role), chosen }
+}
+
+/** Files to attach to a welcome email: the interview scorecard as a PDF and an Excel workbook. */
+export async function reviewSiteAttachments(source: string, extras?: Record<string, string>): Promise<{ filename: string; content: string }[]> {
+  if (source !== 'scorecard') return []
+  const sc = scorecardFromExtras(extras ?? {})
+  if (!sc) return []
+  // Loaded only when a scorecard is emailed, so other sign-ups don't pay for it.
+  const { scorecardPdf, scorecardXlsx } = await import('@/lib/scorecard-files')
+  const [pdf, xlsx] = await Promise.all([scorecardPdf(sc.role, sc.chosen), scorecardXlsx(sc.role, sc.chosen)])
+  return [
+    { filename: scorecardFileName(sc.role, 'pdf'), content: Buffer.from(pdf).toString('base64') },
+    { filename: scorecardFileName(sc.role, 'xlsx'), content: xlsx.toString('base64') },
+  ]
+}
+
+export function reviewSiteWelcome(source: string, extras?: Record<string, string>): { subject: string; text: string } | null {
+  const x = extras ?? {}
+
+  if (source === 'recommender' && x.ask) {
+    const ask = askFromState(stateFromParams(Object.fromEntries(new URLSearchParams(x.ask))))
+    if (!ask) return null
+    const r = recommend(ask)
+    const sit = situationFor(ask)
+    const url = sit ? `${SITE}/what-should-i-use/${sit.slug}` : `${SITE}/what-should-i-use?${askToQuery(ask)}`
+    return {
+      subject: `Your answer: ${verdictTitle(r).title}`,
+      text: [
+        "Here's the answer you asked for, in writing.",
+        '',
+        answerText(r),
+        '',
+        `See it, with why the other tools didn't fit: ${url}`,
+        '',
+        "We check every price, rating and list each month. If this answer changes, we'll email you once to say what changed.",
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'cost_per_hire' && x.cph) {
+    return {
+      subject: `Your cost per hire: ${x.cph}`,
+      text: [
+        "Here's your cost per hire, in writing.",
+        '',
+        `Cost per hire: ${x.cph}`,
+        `Total recruiting costs: ${x.total ?? ''}, across ${x.hires ?? ''} hires`,
+        x.breakdown ? `Where it went: ${x.breakdown}` : '',
+        '',
+        x.compare ?? '',
+        '',
+        "How it's counted, as SHRM defines it: agency fees, advertising agency fees, job fairs, job boards, referral costs, travel, relocation, recruiter pay and benefits, and recruiting software, divided by the number of hires.",
+        "Benchmark: SHRM's 2025 Recruiting Benchmarking data brief, 2,371 organizations. Median cost per hire: $1,200 for non-executive hires, $10,625 for executive hires.",
+        '',
+        `Recalculate any time: ${SITE}/hiring-costs`,
+        ...repveraNote('cost-per-hire-email', REPVERA_TEAMS_LINE),
+        ...SIGN_OFF,
+      ]
+        .filter((line, i, all) => line !== '' || all[i - 1] !== '')
+        .join('\n'),
+    }
+  }
+
+  if (source === 'scorecard') {
+    const sc = scorecardFromExtras(x)
+    if (!sc) return null
+    return {
+      subject: `Your interview scorecard${sc.role ? `: ${sc.role}` : ''}`,
+      text: [
+        'Your interview scorecard is attached two ways:',
+        `- ${scorecardFileName(sc.role, 'pdf')}: print one for each interviewer, for each candidate.`,
+        `- ${scorecardFileName(sc.role, 'xlsx')}: score up to five candidates side by side. The averages fill in as you rate.`,
+        '',
+        `It covers: ${sc.chosen.map((c) => c.name).join(', ')}.`,
+        `Open or change it on the site: ${scorecardUrl(sc.role, sc.chosen)}`,
+        '',
+        "How to run it, from the US Office of Personnel Management's guide to structured interviews:",
+        '1. Ask every candidate the same questions, in the same order.',
+        '2. Take notes during each answer.',
+        '3. Rate each answer on the scale before anyone discusses it.',
+        '4. Decide before the first interview how final ratings are set: consensus or average.',
+        ...repveraNote('scorecard-email'),
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'interview_practice') {
+    const sc = scorecardFromExtras(x)
+    if (!sc) return null
+    const follow = scorecardData.method.probes.flatMap((p) => p.items).join(' ')
+    const q = new URLSearchParams()
+    if (sc.role) q.set('role', sc.role)
+    q.set('c', sc.chosen.map((c) => c.id).join(','))
+    return {
+      subject: `Your interview practice questions${sc.role ? `: ${sc.role}` : ''}`,
+      text: [
+        "Here are the questions to practice, out loud, before the interview. They're the ones structured interviews use, from the US Office of Personnel Management's method.",
+        '',
+        ...sc.chosen.flatMap((c, i) => [
+          `${i + 1}. ${c.name}`,
+          `They'll ask: ${c.question}`,
+          `A strong answer: ${c.outstanding}`,
+          '',
+        ]),
+        `Expect follow-ups on every answer: ${follow}`,
+        'Say "I", not "we". When you say "we did", interviewers are told to ask what you did.',
+        '',
+        `Your practice sheet, to plan each answer: ${SITE}/interview-practice?${q.toString()}`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'hiring_proof') {
+    return {
+      subject: 'Your answer: see how someone works before the first interview',
+      text: [
+        'Here is your answer.',
+        '',
+        'Ask candidates for their RepVera along with their resume. You see how someone works, in the words of people who have worked with them, each one verified through a work email.',
+        'See a real RepVera profile: https://www.repvera.com/u/stephaniemurray',
+        'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
+        '',
+        'Where to ask for it: add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+        '',
+        'Have a role open right now? Try it on that one. I’ll set it up with you and show you what a profile looks like for a role like yours. It starts with one conversation with me, and it is free to try.',
+        `Talk to Stephanie about one role: ${REPVERA_CALL_URL}`,
+        '',
+        `The answer on the site: ${SITE}/what-should-i-use?side=hiring&problem=see-how-they-work`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'proof_kit') {
+    return {
+      subject: 'Your checklist: show how you work before the interview',
+      text: [
+        'Here are the three steps.',
+        '',
+        '1. Get receipts from the people who have worked with you.',
+        'RepVera: you send a personal link to people you’ve worked with, like managers, teammates and clients. Each of them writes a short receipt about what it was like to work with you, verified through their work email. It works for every job, with or without work samples.',
+        'See a real RepVera profile: https://www.repvera.com/u/stephaniemurray',
+        'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
+        '',
+        '2. Add your work, if people can see it.',
+        `Designs, writing or code. Portfolio sites, sorted by the kind of work: ${SITE}/guides/portfolio-sites`,
+        'No work samples? Skip this step. Step one is your proof.',
+        '',
+        '3. Put the link where they’ll see it.',
+        'At the top of your resume next to your email, and in the Featured section of your LinkedIn profile.',
+        '',
+        `The checklist on the site: ${SITE}/show-how-you-work`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if ((source === 'stack_seekers' || source === 'stack_hiring') && x.stack) {
+    // Rebuilt from the stack's own address, so the email says exactly what the page showed.
+    const lane = source === 'stack_seekers' ? seekerLane() : hiringLane()
+    const q = new URLSearchParams(x.stack)
+    const state = stackFromQuery(lane, (k) => q.get(k))
+    const L = stackLines(lane, state)
+    if (!L.length) return null
+    const t = stackTotals(L)
+    const seekers = lane.lane === 'seekers'
+    const window_ = seekers ? `for ${plural(state.months, 'month')}` : 'a year'
+    const url = `${SITE}${seekers ? '/build-your-stack' : '/build-your-stack/hiring'}?${stackQuery(lane, state)}`
+    return {
+      subject: seekers ? `Your job search stack: ${fmt(t.usd)} ${window_}` : `Your hiring stack: ${fmt(t.usd)} ${window_}`,
+      text: [
+        'Here is the stack you built, in writing.',
+        '',
+        ...L.map(
+          (l) =>
+            `${l.tool.name}: ${l.cost === null ? 'no published price on file' : l.cost === 0 ? `$0 (${l.how.toLowerCase()})` : `${fmt(l.cost, l.currency)} ${window_} (${l.how})`}${
+              !l.onFree && l.renewsAfter ? `. It renews on day ${l.renewsAfter} after you sign up, so cancel before then if your search is done.` : ''
+            }`,
+        ),
+        '',
+        `Total ${window_}: ${fmt(t.usd)}${t.eur ? `, plus ${fmt(t.eur, 'EUR')} billed in euros` : ''}`,
+        ...(seekers && t.forget > t.usd ? [`If you forget to cancel: ${fmt(t.forget)} in the first year`] : []),
+        ...(!seekers && t.usd > 0 ? [`In tools per hire, at ${plural(state.hires, 'hire')} a year: ${fmt(Math.round(t.usd / state.hires))}. SHRM’s 2025 median cost per hire, everything in: $1,200.`] : []),
+        ...(t.unpriced.length ? [`Not in the total: ${t.unpriced.map((l) => `${l.tool.name} (${l.how.charAt(0).toLowerCase()}${l.how.slice(1)})`).join(', ')}`] : []),
+        '',
+        `Open it again, or change it: ${url}`,
+        '',
+        'We check every price each month. If a price in your stack changes, we will email you once to say what changed.',
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'free_plans') {
+    return {
+      subject: 'You’re on the list for free plan changes',
+      text: [
+        'Thanks for signing up. When one of the free plans on The $0 job search changes, you’ll get one short email.',
+        '',
+        `The page: ${SITE}/free-job-search`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'real_job') {
+    return {
+      subject: 'You’re on the list for “Is this job even real?”',
+      text: [
+        'Thanks for signing up. When the page changes, or we find a scam checker worth recommending, you’ll get one short email.',
+        '',
+        'Before you send a resume or anything else, check the signs:',
+        `${SITE}/is-this-a-real-job`,
+        '',
+        'Report a fake posting to the job board it’s on, and to the Federal Trade Commission at reportfraud.ftc.gov.',
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'fraud_checklist') {
+    return {
+      subject: 'Your "Is this a real candidate?" checklist',
+      text: [
+        'Here is the checklist for your interviewers. Every item comes from the FBI, with the notice named.',
+        '',
+        'Before the interview',
+        '- Check your applicant tracking system for other applicants with the same resume content or contact information. (FBI, January 2025)',
+        '- Check resumes for typos and unusual wording. (FBI, January 2025)',
+        '- Verify identity during interviews as well as at onboarding. (FBI, January 2025)',
+        '',
+        'During a video interview',
+        "- Watch for lip movement that doesn't match the audio, or a cough or sneeze with no matching movement. (FBI, June 2022)",
+        '- Know that face-swapping software has been used in video interviews. (FBI, January 2025)',
+        '- Ask "soft" questions for specific details about where they live and where they studied. (FBI, January 2025)',
+        '',
+        'After',
+        '- Do as much of the hiring and onboarding as you can in person. (FBI, January 2025)',
+        '',
+        'Why it matters: in a Gartner survey of 3,000 candidates, 6% said they had taken part in interview fraud.',
+        '',
+        'Sources: FBI Internet Crime Complaint Center, I-012325-PSA (January 23, 2025) and PSA220628 (June 28, 2022); Gartner, as reported by HR Dive.',
+        `The full guide: ${SITE}/is-this-a-real-candidate`,
+        ...repveraNote('fraud-checklist-email'),
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  if (source === 'on_the_rise') {
+    return {
+      subject: "You'll hear when a new tool breaks out",
+      text: [
+        "You're on the list. When a tool we're watching earns enough public reviews to score, or a new one shows up on the lists we check, you'll get one short note.",
+        '',
+        `Who we're watching now: ${SITE}/on-the-rise`,
+        ...SIGN_OFF,
+      ].join('\n'),
+    }
+  }
+
+  return null
+}

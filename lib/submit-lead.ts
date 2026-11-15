@@ -89,6 +89,7 @@ export async function submitLead(input: SubmitLeadInput): Promise<SubmitLeadResu
         firstName: input.firstName,
         lastName: input.lastName,
         role: input.role,
+        audience: input.audience,
         // Forward legacyExtras to /api/lead so source-specific welcome
         // emails (e.g., the mis-hire calculator result email) can
         // interpolate the data the visitor just calculated.

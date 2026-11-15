@@ -32,11 +32,23 @@ export type EventType =
   | 'tool_run_success'
   | 'tool_run_blocked'
   | 'email_capture'
+  | 'affiliate_click'
   | 'paywall_open'
   | 'checkout_start'
   | 'payment_success'
   | 'pdf_rejected'
   | 'error'
+  // The picker and RepVera (Stephanie's measurement list, Nov 14, 2026)
+  | 'picker_start'
+  | 'picker_finish'
+  | 'picker_feedback'
+  | 'repvera_answer_view'
+  | 'repvera_profile_click'
+  /** Stephanie's booking link on the hiring RepVera card. */
+  | 'repvera_call_click'
+  | 'vendor_submit'
+  // "Not on the list? Tell us what you're dealing with" (Nov 15, 2026): the unmet need, in the visitor's words
+  | 'picker_suggest'
 
 export interface EventPayload {
   /** Tool involved, if any (e.g. "recruiter-search-rank"). */

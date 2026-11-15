@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og'
+import { SITE_LINE } from '@/lib/site-line'
 
 // Renders the site-wide Open Graph image at /opengraph-image.png.
 // File-based convention — Next.js auto-discovers this and serves it.
@@ -6,7 +7,7 @@ import { ImageResponse } from 'next/og'
 // no longer needed once this exists.
 
 export const runtime = 'edge'
-export const alt = 'hiring.productions — Both sides of hiring. Finally in the open.'
+export const alt = `hiring.productions: ${SITE_LINE}`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -80,7 +81,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          BOTH SIDES OF HIRING. FINALLY IN THE OPEN.
+          FOR JOB SEEKERS AND HIRING TEAMS
         </div>
 
         {/* Headline */}
@@ -119,7 +120,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          Free tools and the Recruiter Insights every recruiter wishes you knew.
+          {SITE_LINE}
         </div>
       </div>
     ),

@@ -147,17 +147,21 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Figtree', sans-serif;
   }
 
   html, body {
-    font-family: 'Figtree', sans-serif !important;
     scroll-behavior: smooth;
-    background-color: #FAF8F3 !important;
     color: #1A1A22;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  /* Jumping to a section shouldn't glide for people who asked for less motion. */
+  @media (prefers-reduced-motion: reduce) {
+    html, body {
+      scroll-behavior: auto;
+    }
   }
 
   a {

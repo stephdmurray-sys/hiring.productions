@@ -1,0 +1,796 @@
+{
+  "_about": "Who to follow: Stephanie's list of the best voices in talent acquisition and the most helpful (or funniest) people for job seekers. Editorial, like her picks: never scored, never paid for, and no follower counts. Every link was taken from research, not guessed. Photos: each person's own public profile picture from their official YouTube channel or website, saved to /public/people so they can't break; the channel or page is confirmed as theirs by its own description or videos. Remove any photo on request. Without a confirmed photo, the card shows initials. approved=false: draft until Stephanie signs off. Mike Peditto added Nov 14, 2026 at Stephanie's request: he left Teal (Teal's own blog calls him its former director of talent; SHRM, Nov 9, 2026, calls him a fractional recruiting leader, HR tech advisor and content creator), and his card says he used to work there. Links verified Nov 14, 2026 from each person's own YouTube About links, website or podcast page. Added Nov 14, 2026 (hiring side): Laurie Ruettimann, Kat Kibben, Ashley Herd, Josh Bersin and HR Besties, each confirmed through their own YouTube channel (links and photo). Josh Bersin's card discloses Galileo, which is in our recruiter training guide. Added Nov 14, 2026 at Stephanie's request: Jennifer McClure and Ben Eubanks (links from their own YouTube channels), Adam Karpiak (links from karpiakconsulting.com), Bonnie Dilber (links from her Linktree), Steve Browne (his own blog, sbrownehr.com, which links no LinkedIn; SHRM, May 2026, confirms his role at LaRosa's) and Johnny Campbell (socialtalent.com About page; SocialTalent is in our training guide, disclosed). Steve's and Johnny's LinkedIn addresses aren't linked from their own pages, so they're left off until confirmed. Added Nov 14, 2026 at Stephanie's request: a Fraud and trust group at the top of the hiring side, with Stacy Zapar. Her line is Stephanie's copy. Her LinkedIn (linkedin.com/in/stacyzapar) is the one her own site, thisistenfold.com, points to in its page data; her site warns about an impostor profile (linkedin.com/in/stacy-zapar-4316313a6), which is never linked. Her photo was provided by Stephanie (Nov 15, 2026), from Stacy's own #FraudSquad profile picture, cropped inside the ring so her face fills the round frame.",
+  "approved": false,
+  "checked": "2026-11-14",
+  "rows": [
+    {
+      "side": "hiring",
+      "group": "fraud",
+      "title": "Fraud and trust"
+    },
+    {
+      "side": "hiring",
+      "title": "The best in talent acquisition",
+      "lead": "The people recruiting leaders read, watch and listen to."
+    },
+    {
+      "side": "seekers",
+      "title": "Help for your job search",
+      "lead": "Recruiters, career coaches and one comedian worth following while you look."
+    }
+  ],
+  "people": [
+    {
+      "id": "hung-lee",
+      "name": "Hung Lee",
+      "known": "Recruiting Brainfood",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "The weekly newsletter and live show TA leaders read and watch: what's changing in hiring, AI included.",
+      "photo": "/people/hung-lee.jpg",
+      "photoSource": "YouTube @hunglee3069 (Brainfood Live On Air)",
+      "links": [
+        {
+          "label": "Newsletter",
+          "url": "https://recruitingbrainfood.substack.com"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/hunglee/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/the-recruiting-brainfood-podcast/id1463275155"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@hunglee3069"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.recruitingbrainfood.com"
+        }
+      ]
+    },
+    {
+      "id": "matt-alder",
+      "name": "Matt Alder",
+      "known": "Recruiting Future",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "A talent acquisition futurist with over 25 years in the field, interviewing the TA leaders who are changing how hiring works.",
+      "photo": "/people/matt-alder.jpg",
+      "photoSource": "His LinkedIn profile photo, provided by Stephanie (Nov 14, 2026)",
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id963756980"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/mattalder/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@recruitingfuturepod"
+        },
+        {
+          "label": "Website",
+          "url": "https://recruitingfuture.com"
+        }
+      ]
+    },
+    {
+      "id": "madeline-laurano",
+      "name": "Madeline Laurano",
+      "known": "Aptitude Research",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder and chief analyst at Aptitude Research, covering talent acquisition and hiring tech for over 18 years.",
+      "photo": "/people/madeline-laurano.jpg",
+      "photoSource": "aptituderesearch.com team page",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/madelinelaurano/"
+        },
+        {
+          "label": "Research",
+          "url": "https://www.aptituderesearch.com/about-aptitude-research/"
+        }
+      ]
+    },
+    {
+      "id": "adam-posner",
+      "name": "Adam Posner",
+      "known": "The POZCAST",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder of NHP Talent Group, recording live with the TA leaders running hiring at companies like NBCUniversal and Toshiba.",
+      "photo": "/people/adam-posner.jpg",
+      "photoSource": "YouTube @ThePOZcast (cropped from the show art)",
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id1452900760"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@ThePOZcast"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/adamjposner/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.thepozcast.com"
+        }
+      ]
+    },
+    {
+      "id": "maureen-clough",
+      "name": "Maureen Wiley Clough",
+      "known": "It Gets Late Early",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Conversations about what's happening to mid-career workers, from fake job postings to age bias, with the recruiting leaders who can fix it.",
+      "photo": "/people/maureen-clough.jpg",
+      "photoSource": "YouTube @itgetslateearly",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@itgetslateearly"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/gb/podcast/it-gets-late-early-career-tips-for-tech-employees-in/id1676637848"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/maureenwclough/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/maureenwclough/"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://maureenclough.substack.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://itgetslateearly.com"
+        }
+      ]
+    },
+    {
+      "id": "glen-cathey",
+      "name": "Glen Cathey",
+      "known": "Boolean Black Belt",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "The deepest free writing on sourcing there is, from Boolean search to AI in recruiting.",
+      "photo": "/people/glen-cathey.jpg",
+      "photoSource": "YouTube @GlenCathey (sourcing demos, Talent42)",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/glencathey/"
+        },
+        {
+          "label": "Blog",
+          "url": "https://booleanblackbelt.com"
+        }
+      ]
+    },
+    {
+      "id": "katrina-collier",
+      "name": "Katrina Collier",
+      "known": "The Robot-Proof Recruiter",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "How to keep the human part of recruiting, from candidate experience to working with hiring managers.",
+      "photo": "/people/katrina-collier.jpg",
+      "photoSource": "YouTube @KatrinaMCollier",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/katrinacollier/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/katrinamcollier/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@KatrinaMCollier"
+        },
+        {
+          "label": "Website",
+          "url": "https://katrinacollier.com"
+        }
+      ]
+    },
+    {
+      "id": "kat-kibben",
+      "name": "Kat Kibben",
+      "known": "Three Ears Media",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "How to write job posts the right candidates answer.",
+      "photo": "/people/kat-kibben.jpg",
+      "photoSource": "YouTube @KatrinaKibben (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/katrinakibben/"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/katrinakibben"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@KatrinaKibben"
+        },
+        {
+          "label": "Website",
+          "url": "https://threeearsmedia.com"
+        }
+      ]
+    },
+    {
+      "id": "ashley-herd",
+      "name": "Ashley Herd",
+      "known": "Manager Method",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Plain, practical training for managers, the people who make most hiring decisions.",
+      "photo": "/people/ashley-herd.jpg",
+      "photoSource": "YouTube Manager Method channel avatar, cropped",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/channel/UC61BD2RSgpaO1t-V16wEYdA"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://www.managermethod.com/newsletter"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.managermethod.com"
+        }
+      ]
+    },
+    {
+      "id": "josh-bersin",
+      "name": "Josh Bersin",
+      "known": "The Josh Bersin Company",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "An HR industry analyst who tracks where HR and HR technology are heading.",
+      "note": "The Josh Bersin Company sells Galileo, which appears in our recruiter training guide.",
+      "photo": "/people/josh-bersin.jpg",
+      "photoSource": "YouTube @JoshBersinCompany channel avatar, cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/bersin"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@JoshBersinCompany"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/Josh_Bersin"
+        },
+        {
+          "label": "Website",
+          "url": "https://joshbersin.com"
+        }
+      ]
+    },
+    {
+      "id": "ben-eubanks",
+      "name": "Ben Eubanks",
+      "known": "Lighthouse Research & Advisory",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Research on how employers and candidates behave, written for the people who run hiring.",
+      "photo": "/people/ben-eubanks.jpg",
+      "photoSource": "YouTube @ben.eubanks (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/beneubanks"
+        },
+        {
+          "label": "Research",
+          "url": "https://lhra.io"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@ben.eubanks"
+        },
+        {
+          "label": "Community",
+          "url": "https://upstarthr.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://thebeneubanks.com"
+        }
+      ]
+    },
+    {
+      "id": "jennifer-mcclure",
+      "name": "Jennifer McClure",
+      "known": "DisruptHR",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Founder of DisruptHR, and a coach to HR leaders on influence and impact.",
+      "photo": "/people/jennifer-mcclure.jpg",
+      "photoSource": "YouTube @JenniferMcClure (own channel avatar), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/jennifermcclure"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/jennifermcclure"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@JenniferMcClure"
+        },
+        {
+          "label": "DisruptHR",
+          "url": "https://disrupthr.co"
+        },
+        {
+          "label": "Website",
+          "url": "https://jennifermcclure.net"
+        }
+      ]
+    },
+    {
+      "id": "steve-browne",
+      "name": "Steve Browne",
+      "known": "Chief People Officer, LaRosa's",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "A working chief people officer who writes about getting HR into business decisions early.",
+      "photo": "/people/steve-browne.jpg",
+      "photoSource": "His LinkedIn profile photo, provided by Stephanie (Nov 14, 2026)",
+      "links": [
+        {
+          "label": "Blog",
+          "url": "https://www.sbrownehr.com"
+        }
+      ]
+    },
+    {
+      "id": "johnny-campbell",
+      "name": "Johnny Campbell",
+      "known": "SocialTalent",
+      "side": "hiring",
+      "vibe": "helpful",
+      "why": "Co-founder of SocialTalent, teaching recruiters and hiring managers how to hire well.",
+      "note": "SocialTalent sells recruiter training and appears in our recruiter training guide.",
+      "photo": "/people/johnny-campbell.jpg",
+      "photoSource": "socialtalent.com About page (labeled Johnny Campbell, CEO and co-founder), cropped",
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://www.socialtalent.com/about-us"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@SocialTalent"
+        }
+      ]
+    },
+    {
+      "id": "laurie-ruettimann",
+      "name": "Laurie Ruettimann",
+      "known": "Punk Rock HR",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "Two decades in HR, now telling the truth about what HR and hiring teams get wrong.",
+      "photo": "/people/laurie-ruettimann.jpg",
+      "photoSource": "YouTube @laurieruettimann (her own channel avatar), cropped",
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://laurieruettimann.com/podcast/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/laurieruettimann"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/lruettimann"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@laurieruettimann"
+        },
+        {
+          "label": "Website",
+          "url": "https://laurieruettimann.com"
+        }
+      ]
+    },
+    {
+      "id": "tim-sackett",
+      "name": "Tim Sackett",
+      "known": "The Tim Sackett Project",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "A staffing firm president who writes about recruiting with jokes and sports analogies, and real advice under them.",
+      "photo": "/people/tim-sackett.jpg",
+      "photoSource": "timsackett.com headshot",
+      "links": [
+        {
+          "label": "Blog",
+          "url": "https://timsackett.com"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/timsackett/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/hr-famous/id1497749456"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/timsackett/"
+        }
+      ]
+    },
+    {
+      "id": "adam-karpiak",
+      "name": "Adam Karpiak",
+      "known": "Karpiak Consulting",
+      "side": "hiring",
+      "vibe": "both",
+      "why": "A recruiter whose short, sarcastic posts call out the hiring habits candidates hate.",
+      "photo": "/people/adam-karpiak.jpg",
+      "photoSource": "His LinkedIn profile photo, provided by Stephanie (Nov 14, 2026)",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/akarpiak"
+        },
+        {
+          "label": "X",
+          "url": "https://twitter.com/Adam_Karpiak"
+        },
+        {
+          "label": "Website",
+          "url": "https://karpiakconsulting.com"
+        }
+      ]
+    },
+    {
+      "id": "hr-besties",
+      "name": "Jamie Jackson, Ashley Herd and Leigh Elena Henderson",
+      "known": "HR Besties",
+      "side": "hiring",
+      "vibe": "funny",
+      "why": "Three HR pros talking openly about work, with plenty of jokes.",
+      "photo": "/people/hr-besties.jpg",
+      "photoSource": "YouTube @hrbestiespod channel avatar (the three hosts)",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@hrbestiespod"
+        }
+      ]
+    },
+    {
+      "id": "chad-cheese",
+      "name": "Chad Sowash and Joel Cheesman",
+      "known": "The Chad & Cheese Podcast",
+      "side": "hiring",
+      "vibe": "funny",
+      "why": "Irreverent weekly take on HR tech and hiring news from two industry veterans. Explicit language, honest opinions.",
+      "photo": "/people/chad-cheese.jpg",
+      "photoSource": "YouTube @chadcheese",
+      "links": [
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/the-chad-cheese-podcast/id1211760335"
+        },
+        {
+          "label": "Spotify",
+          "url": "https://open.spotify.com/show/7o010HWTkmlPL0EGe54wT9"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@chadcheese"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/company/the-chad-&-cheese-podcast/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.chadcheese.com"
+        }
+      ]
+    },
+    {
+      "id": "madeline-mann",
+      "name": "Madeline Mann",
+      "known": "Self Made Millennial",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former head of HR who walks you through interview questions and job offers.",
+      "photo": "/people/madeline-mann.jpg",
+      "photoSource": "YouTube @SelfMadeMillennial",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@SelfMadeMillennial"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@selfmademillennial"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/madelinemann/"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/self.made.millennial/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.madelinemann.com"
+        }
+      ]
+    },
+    {
+      "id": "erin-mcgoff",
+      "name": "Erin McGoff",
+      "known": "Advice With Erin",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Short, practical answers to everyday work questions, from networking to giving bad news.",
+      "photo": "/people/erin-mcgoff.jpg",
+      "photoSource": "YouTube @AdviceWithErin",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@AdviceWithErin"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@erinmcgoff"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/advicewitherin/"
+        },
+        {
+          "label": "Website",
+          "url": "https://advicewitherin.com"
+        }
+      ]
+    },
+    {
+      "id": "andrew-lacivita",
+      "name": "Andrew LaCivita",
+      "known": "milewalk Academy",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "Interview prep in depth: the hard questions, the stories to tell, and the questions to ask back.",
+      "photo": "/people/andrew-lacivita.jpg",
+      "photoSource": "YouTube @andylacivita",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@andylacivita"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/tips-for-work-and-life-with-andrew-lacivita/id1120387046"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/andrewlacivita/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@andrewlacivita"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/andrewlacivita/"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.milewalkacademy.com"
+        }
+      ]
+    },
+    {
+      "id": "austin-belcak",
+      "name": "Austin Belcak",
+      "known": "Cultivated Culture",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "How to get hired through referrals and direct outreach instead of another online application.",
+      "photo": "/people/austin-belcak.jpg",
+      "photoSource": "YouTube @austin-belcak",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/abelcak/"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://cultivatedculture.com/newsletter"
+        },
+        {
+          "label": "Website",
+          "url": "https://cultivatedculture.com"
+        }
+      ]
+    },
+    {
+      "id": "jt-odonnell",
+      "name": "J.T. O'Donnell",
+      "known": "Work It Daily",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A former recruiter whose Work It Daily videos explain why resumes go unanswered, and what to do instead.",
+      "photo": "/people/jt-odonnell.jpg",
+      "photoSource": "Her LinkedIn profile photo, provided by Stephanie (Nov 14, 2026)",
+      "links": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@Workitdaily"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/jtodonnell/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@j.t.odonnell"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://newsletter.workitdaily.com"
+        },
+        {
+          "label": "Website",
+          "url": "https://www.workitdaily.com"
+        }
+      ]
+    },
+    {
+      "id": "mike-peditto",
+      "name": "Mike Peditto",
+      "known": "Realistic Recruiting",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A recruiter who tells job seekers what's really happening on the hiring side, with realistic advice instead of scare tactics.",
+      "note": "Former director of talent at Teal, one of the tools we rate.",
+      "photo": "/people/mike-peditto.jpg",
+      "photoSource": "YouTube @RealisticRecruiting (his own channel avatar), cropped to his face",
+      "links": [
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@realisticrecruiting"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/realisticrecruiting/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/mpeditto/"
+        },
+        {
+          "label": "Podcast",
+          "url": "https://podcasts.apple.com/us/podcast/id1841552118"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@RealisticRecruiting"
+        },
+        {
+          "label": "Website",
+          "url": "https://mikepeditto.com"
+        }
+      ]
+    },
+    {
+      "id": "bonnie-dilber",
+      "name": "Bonnie Dilber",
+      "known": "Recruiting at Zapier",
+      "side": "seekers",
+      "vibe": "helpful",
+      "why": "A working recruiter showing exactly how applications get screened, so yours gets through.",
+      "photo": "/people/bonnie-dilber.jpg",
+      "photoSource": "Her Linktree profile picture (linktr.ee/bonniedilber), cropped",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/bonnie-dilber"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://tiktok.com/@bonniedilber"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://instagram.com/bonniedilber"
+        },
+        {
+          "label": "Newsletter",
+          "url": "https://bonniedilber.substack.com"
+        }
+      ]
+    },
+    {
+      "id": "corporate-natalie",
+      "name": "Corporate Natalie",
+      "known": "Natalie Marshall",
+      "side": "seekers",
+      "vibe": "funny",
+      "why": "Comedy about office life that recruiters and job seekers will both recognize.",
+      "photo": "/people/corporate-natalie.jpg",
+      "photoSource": "YouTube @corporatenatalie",
+      "links": [
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/corporatenatalie/"
+        },
+        {
+          "label": "TikTok",
+          "url": "https://www.tiktok.com/@corporatenatalie"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/natalie-corporate-natalie-0b634a231/"
+        },
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@corporatenatalie"
+        }
+      ]
+    },
+    {
+      "id": "stacy-zapar",
+      "name": "Stacy Zapar",
+      "known": "Tenfold",
+      "side": "hiring",
+      "group": "fraud",
+      "vibe": "helpful",
+      "why": "Close to thirty years in recruiting. Built the Zappos Insider program, trained recruiting teams at Amazon, Netflix and Walmart, and now speaks up about hiring fraud.",
+      "photo": "/people/stacy-zapar.jpg",
+      "photoSource": "Her #FraudSquad profile picture, provided by Stephanie (Nov 15, 2026)",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/stacyzapar/"
+        },
+        {
+          "label": "Website",
+          "url": "https://thisistenfold.com"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+
+/** The page keeps its own inline styles; the site menu and footer only need the page-width rule. */
+const CHROME_WRAP = '.site-nav .wrap,.site-footer .wrap{max-width:1200px;margin:0 auto;padding-left:32px;padding-right:32px;}@media(max-width:760px){.site-nav .wrap,.site-footer .wrap{padding-left:18px;padding-right:18px;}}'
 import { OPPORTUNITIES } from '@/lib/opportunities'
 
 /**
@@ -34,7 +36,8 @@ const STEPS = [
 export default function ConsiderMeIndexPage() {
   return (
     <div style={{ background: '#FAF8F3', color: '#1A1A22', minHeight: '100vh' }}>
-      <Navigation variant="light" />
+      <style dangerouslySetInnerHTML={{ __html: chromeCss + CHROME_WRAP }} />
+      <SiteNav />
 
       {/* Hero */}
       <section
@@ -279,7 +282,7 @@ export default function ConsiderMeIndexPage() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   )
 }

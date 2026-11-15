@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:videos": "NODE_USE_ENV_PROXY=1 node scripts/check-videos.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -48,10 +49,12 @@
     "cmdk": "1.1.1",
     "date-fns": "4.1.0",
     "embla-carousel-react": "8.6.0",
+    "exceljs": "4.4.0",
     "input-otp": "1.4.2",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",
     "next-themes": "^0.4.6",
+    "pdf-lib": "1.17.1",
     "react": "19.2.4",
     "react-day-picker": "9.13.2",
     "react-dom": "19.2.4",

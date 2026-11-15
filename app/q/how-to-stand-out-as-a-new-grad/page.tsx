@@ -28,7 +28,7 @@ export default function StandOutNewGradPage() {
       sections={[
         {
           heading: 'The trap every new-grad resume falls into',
-          body: 'Every new-grad resume reads the same: education at the top, a few internships described with corporate-flavored bullets, a "Skills" section listing programs anyone can list, and "References available upon request" at the bottom. Recruiters skim thousands of these. The candidates who get the call have something the resume can’t show — proof of how they actually show up, in words other people used. That used to mean a long employment history. For new grads it means somewhere recruiters can SEE the receipts of how you’ve worked with the people who already know you.',
+          body: 'Every new-grad resume reads the same: education at the top, a few internships described with corporate-flavored bullets, a "Skills" section listing programs anyone can list, and "References available upon request" at the bottom. Recruiters skim thousands of these. The candidates who get the call have something the resume can’t show — proof of how they show up, in words other people used. That used to mean a long employment history. For new grads it means somewhere recruiters can SEE the receipts of how you’ve worked with the people who already know you.',
         },
         {
           heading: 'What recruiters actually want from new grads',

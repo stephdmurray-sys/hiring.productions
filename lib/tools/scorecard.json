@@ -1,0 +1,203 @@
+{
+  "_about": "The interview scorecard builder's content. Definitions are the US Office of Personnel Management's MOSAIC competency definitions (January 2013), quoted verbatim (public domain). Lead questions follow OPM's structured-interview guidance: open-ended, superlative, situation-action-result. Benchmarks follow the pattern of OPM's worked example (the level is set by how demanding a situation the candidate handled); OPM's method has the people who know the job review and adjust them, and the page says so. Interpersonal Skills uses OPM's own example question and benchmarks.",
+  "sources": {
+    "guide": { "name": "US Office of Personnel Management, Structured Interviews", "url": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/structured-interviews/structured-interviews.pdf" },
+    "competencies": { "name": "US Office of Personnel Management, MOSAIC Competencies (January 2013)", "url": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/competencies/mosaic-studies-competencies.pdf" },
+    "example": { "name": "US Office of Personnel Management, Structured Interview: Example Question and Rating Scale", "url": "https://www.opm.gov/policy-data-oversight/assessment-and-selection/examples/structured-interview-example.pdf" }
+  },
+  "method": {
+    "standard": [
+      "All candidates are asked the same predetermined questions, in the same order.",
+      "A panel of trained interviewers takes detailed notes on each answer.",
+      "Every answer is rated on the same scale, against the same standards for an acceptable answer."
+    ],
+    "competencyCount": "Most structured interviews cover 4 to 6 skills (OPM calls them competencies).",
+    "why": "OPM: structure and standardization give the interview validity, reliability, fairness and practicality, and let it meet legal and professional standards for an assessment method.",
+    "probes": [
+      { "kind": "Situation or task", "items": ["Who was involved?", "What factors led up to this situation?"] },
+      { "kind": "Action", "items": ["How did you respond?", "What was your role?"] },
+      { "kind": "Result", "items": ["What was the outcome?", "Is there anything you would have done differently?"] }
+    ],
+    "probeRules": [
+      "Decide beforehand which probes are allowed, and use the same ones for every candidate.",
+      "Ask for their own role when a candidate says \"we did\" or \"our group\".",
+      "Don't use leading probes that hint at the answer."
+    ],
+    "avoid": [
+      { "name": "First impressions", "what": "Rating on the first few minutes instead of the answers." },
+      { "name": "\"Similar to me\"", "what": "Giving higher than deserved ratings to candidates who seem similar to you." },
+      { "name": "Halo effect", "what": "Letting a rating on one competency influence the ratings on others." },
+      { "name": "Leniency or strictness", "what": "Rating every candidate high, or every candidate low, whatever they actually said." },
+      { "name": "Central tendency", "what": "Rating everything in the middle of the scale, like all 3s on a 5-point scale." }
+    ],
+    "rating": [
+      "Focus on the candidate's answers, not on the candidate.",
+      "Take detailed notes on the answers, not on the candidate.",
+      "Compare each answer to the benchmarks for each level before giving a rating.",
+      "Decide before the first interview how final ratings are set: consensus, majority or average."
+    ]
+  },
+  "scale": [
+    { "level": 1, "label": "Low" },
+    { "level": 2, "label": "" },
+    { "level": 3, "label": "Average" },
+    { "level": 4, "label": "" },
+    { "level": 5, "label": "Outstanding" }
+  ],
+  "competencies": [
+    {
+      "id": "interpersonal-skills",
+      "name": "Interpersonal skills",
+      "definition": "Shows understanding, friendliness, courtesy, tact, empathy, concern, and politeness to others; develops and maintains effective relationships with others; may include effectively dealing with individuals who are difficult, hostile, or distressed; relates well to people from varied backgrounds and different situations; is sensitive to cultural diversity, race, gender, disabilities, and other individual differences.",
+      "question": "Describe a situation in which you dealt with individuals who were difficult, hostile, or distressed. Who was involved, what specific actions did you take, and what were the results?",
+      "low": "Handles interpersonal situations involving little or no tension or discomfort.",
+      "average": "Handles interpersonal situations involving a moderate degree of tension or discomfort.",
+      "outstanding": "Handles interpersonal situations involving a high degree of tension or discomfort.",
+      "opmExample": true
+    },
+    {
+      "id": "teamwork",
+      "name": "Teamwork",
+      "definition": "Encourages and facilitates cooperation, pride, trust, and group identity; fosters commitment and team spirit; works with others to achieve goals.",
+      "question": "Describe the most difficult goal you reached as part of a team. Who was involved, what specific actions did you take, and what were the results?",
+      "low": "Cooperates on shared work when the goal is clear and the team already agrees.",
+      "average": "Gets a team past moderate disagreement or unclear roles to a shared goal.",
+      "outstanding": "Builds commitment in a team facing high pressure, conflict or setbacks, and the goal is met."
+    },
+    {
+      "id": "oral-communication",
+      "name": "Oral communication",
+      "definition": "Expresses information (for example, ideas or facts) to individuals or groups effectively, taking into account the audience and nature of the information (for example, technical, sensitive, controversial); makes clear and convincing oral presentations; listens to others, attends to nonverbal cues, and responds appropriately.",
+      "question": "Describe the most difficult thing you've had to explain out loud to a person or a group. Who was the audience, what specific actions did you take, and what were the results?",
+      "low": "Explains routine information to a familiar, receptive audience.",
+      "average": "Explains technical or sensitive information so a mixed audience understands it and acts on it.",
+      "outstanding": "Explains controversial or high-stakes information to a skeptical audience, reads the room, and changes minds."
+    },
+    {
+      "id": "written-communication",
+      "name": "Written communication",
+      "definition": "Writes in a clear, concise, organized, and convincing manner for the intended audience.",
+      "question": "Describe the most important document you've written for readers who had to act on it. Who was it for, what specific actions did you take, and what were the results?",
+      "low": "Writes routine messages that are clear to a familiar reader.",
+      "average": "Writes organized documents that a varied audience understands and acts on.",
+      "outstanding": "Writes concise, convincing documents on complex or contested topics that move a decision."
+    },
+    {
+      "id": "problem-solving",
+      "name": "Problem solving",
+      "definition": "Identifies problems; determines accuracy and relevance of information; uses sound judgment to generate and evaluate alternatives, and to make recommendations.",
+      "question": "Describe the most complex problem you've solved at work. What information did you rely on, what alternatives did you weigh, and what were the results?",
+      "low": "Solves routine problems where the information is clear and the answer is known.",
+      "average": "Separates relevant from irrelevant information and weighs several workable alternatives.",
+      "outstanding": "Solves ambiguous, high-stakes problems on incomplete information and explains the trade-offs."
+    },
+    {
+      "id": "decision-making",
+      "name": "Decision making",
+      "definition": "Makes sound, well-informed, and objective decisions; perceives the impact and implications of decisions; commits to action, even in uncertain situations, to accomplish organizational goals; causes change.",
+      "question": "Describe the hardest decision you've made without all the information you wanted. Who was affected, what specific actions did you take, and what were the results?",
+      "low": "Makes routine decisions within clear guidelines.",
+      "average": "Makes sound decisions under moderate uncertainty and weighs who is affected.",
+      "outstanding": "Commits to a well-reasoned decision under high uncertainty and owns the consequences."
+    },
+    {
+      "id": "customer-service",
+      "name": "Customer service",
+      "definition": "Works with clients and customers (that is, any individuals who use or receive the services or products that your work unit produces, including the general public, individuals who work in the agency, other agencies, or organizations outside the Government) to assess their needs, provide information or assistance, resolve their problems, or satisfy their expectations; knows about available products and services; is committed to providing quality products and services.",
+      "question": "Describe the most difficult customer need you've resolved. Who was the customer, what specific actions did you take, and what were the results?",
+      "low": "Meets straightforward requests from cooperative customers.",
+      "average": "Works out an unclear or competing need and resolves it to the customer's satisfaction.",
+      "outstanding": "Turns around a dissatisfied or escalated customer with a complex need."
+    },
+    {
+      "id": "flexibility",
+      "name": "Flexibility",
+      "definition": "Is open to change and new information; adapts behavior or work methods in response to new information, changing conditions, or unexpected obstacles; effectively deals with ambiguity.",
+      "question": "Describe the biggest unexpected change you've had to adapt to at work. What changed, what specific actions did you take, and what were the results?",
+      "low": "Adjusts to small, well-communicated changes.",
+      "average": "Changes work methods in response to new information or obstacles without losing pace.",
+      "outstanding": "Stays effective through sudden, ambiguous change and helps others adjust."
+    },
+    {
+      "id": "integrity",
+      "name": "Integrity and honesty",
+      "definition": "Contributes to maintaining the integrity of the organization; displays high standards of ethical conduct and understands the impact of violating these standards on an organization, self, and others; is trustworthy.",
+      "question": "Describe the hardest time you were asked, or tempted, to bend a rule or a standard. What was at stake, what specific actions did you take, and what were the results?",
+      "low": "Follows clear rules when the right course is obvious.",
+      "average": "Upholds a standard when doing so costs time or convenience.",
+      "outstanding": "Upholds a standard under real pressure from others, and resolves the situation openly."
+    },
+    {
+      "id": "planning",
+      "name": "Planning and evaluating",
+      "definition": "Organizes work, sets priorities, and determines resource requirements; determines short- or long-term goals and strategies to achieve them; coordinates with other organizations or parts of the organization to accomplish goals; monitors progress and evaluates outcomes.",
+      "question": "Describe the most complex piece of work you've planned and delivered. How did you set priorities and resources, what specific actions did you take, and what were the results?",
+      "low": "Plans their own routine tasks against a set deadline.",
+      "average": "Plans multi-step work with competing priorities and tracks progress.",
+      "outstanding": "Plans and coordinates work across groups, adjusts as conditions change, and evaluates the outcome."
+    },
+    {
+      "id": "accountability",
+      "name": "Accountability",
+      "definition": "Holds self and others accountable for measurable high-quality, timely, and cost-effective results. Determines objectives, sets priorities, and delegates work. Accepts responsibility for mistakes. Complies with established control systems and rules.",
+      "question": "Describe the most significant time a result you owned went wrong. What happened, what specific actions did you take, and what were the results?",
+      "low": "Admits small mistakes when asked about them.",
+      "average": "Owns a significant mistake, fixes it, and changes the process behind it.",
+      "outstanding": "Owns a costly failure openly, holds self and others to the fix, and prevents a repeat."
+    },
+    {
+      "id": "attention-to-detail",
+      "name": "Attention to detail",
+      "definition": "Is thorough when performing work and conscientious about attending to detail.",
+      "question": "Describe the most detailed or error-sensitive work you've done. How did you check it, what specific actions did you take, and what were the results?",
+      "low": "Checks routine work where errors are easy to spot.",
+      "average": "Catches errors in detailed work before they reach anyone else.",
+      "outstanding": "Builds checks that keep complex, high-stakes work free of errors."
+    },
+    {
+      "id": "conflict-management",
+      "name": "Conflict management",
+      "definition": "Manages and resolves conflicts, grievances, confrontations, or disagreements in a constructive manner to minimize negative personal impact.",
+      "question": "Describe the most serious disagreement you've helped resolve at work. Who was involved, what specific actions did you take, and what were the results?",
+      "low": "Resolves disagreements involving little or no tension.",
+      "average": "Resolves a disagreement involving a moderate degree of tension.",
+      "outstanding": "Resolves a confrontation involving a high degree of tension and keeps the working relationships intact."
+    },
+    {
+      "id": "influencing",
+      "name": "Influencing and negotiating",
+      "definition": "Persuades others to accept recommendations, cooperate, or change their behavior; works with others towards an agreement; negotiates to find mutually acceptable solutions.",
+      "question": "Describe the hardest time you persuaded someone to accept a recommendation or change course. Who was involved, what specific actions did you take, and what were the results?",
+      "low": "Persuades people who are already open to the idea.",
+      "average": "Wins agreement from people with competing interests.",
+      "outstanding": "Moves resistant, senior or outside stakeholders to an agreement both sides accept."
+    },
+    {
+      "id": "self-management",
+      "name": "Self-management",
+      "definition": "Sets well-defined and realistic personal goals; displays a high level of initiative, effort, and commitment towards completing assignments in a timely manner; works with minimal supervision; is motivated to achieve; demonstrates responsible behavior.",
+      "question": "Describe the most demanding goal you've set for yourself at work and met with little supervision. What was it, what specific actions did you take, and what were the results?",
+      "low": "Completes assigned work on time with regular check-ins.",
+      "average": "Sets and meets their own goals with minimal supervision.",
+      "outstanding": "Sets ambitious goals, drives them through obstacles without direction, and delivers."
+    },
+    {
+      "id": "leadership",
+      "name": "Leadership",
+      "definition": "Influences, motivates, and challenges others; adapts leadership styles to a variety of situations.",
+      "question": "Describe the most difficult situation in which you got others to follow your lead. Who was involved, what specific actions did you take, and what were the results?",
+      "low": "Guides a willing group through routine work.",
+      "average": "Motivates a group through a challenge and adapts their approach to the people involved.",
+      "outstanding": "Leads people through high-stakes change or resistance and lifts how they perform."
+    },
+    {
+      "id": "technical-competence",
+      "name": "Technical competence",
+      "definition": "Uses knowledge that is acquired through formal training or extensive on-the-job experience to perform one's job; works with, understands, and evaluates technical information related to the job; advises others on technical issues.",
+      "question": "Describe the most complex technical problem in your field that you've solved or advised on. What knowledge did you use, what specific actions did you take, and what were the results?",
+      "low": "Applies established technical knowledge to routine tasks.",
+      "average": "Evaluates technical information to solve non-routine problems.",
+      "outstanding": "Advises others on complex technical issues and is relied on as the expert."
+    }
+  ]
+}

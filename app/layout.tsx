@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { SITE_LINE } from '@/lib/site-line'
 import Script from 'next/script'
 import { Figtree } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     default: 'hiring.productions',
     template: '%s | hiring.productions',
   },
-  description: 'The only place where candidates see how they\'re actually evaluated. Recruiter Insights built from real recruiting practice. Free to start.',
+  description: `${SITE_LINE} Resume tools for job seekers, applicant tracking systems for hiring teams. Every score is dated and the method is published.`,
   keywords: ['hiring', 'job search', 'recruiting', 'ATS screening', 'resume tips', 'interview prep', 'talent acquisition', 'candidate experience', 'job description SEO', 'employer branding'],
   authors: [{ name: 'Stephanie Murray', url: 'https://www.linkedin.com/in/stephaniemurray11/' }],
   creator: 'Stephanie Murray',
@@ -51,14 +52,14 @@ export const metadata: Metadata = {
     url: 'https://hiring.productions',
     siteName: 'hiring.productions',
     title: 'hiring.productions',
-    description: 'Both sides of hiring. Finally in the open.',
+    description: SITE_LINE,
     // OG image is generated dynamically from app/opengraph-image.tsx —
     // Next.js auto-includes it, no manual `images` reference needed.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'hiring.productions',
-    description: 'Both sides of hiring. Finally in the open.',
+    description: SITE_LINE,
     // twitter-image inherits from opengraph-image when not specified.
     creator: '@stephaniemurray',
   },
@@ -94,7 +95,7 @@ const jsonLd = {
       sameAs: [
         'https://www.linkedin.com/in/stephaniemurray11/',
       ],
-      description: 'Talent acquisition consulting and career coaching services. Recruitment marketing strategy, employer branding, and LinkedIn optimization.',
+      description: 'Hiring tools ranked for job seekers and hiring teams: resume builders and ATS checkers, applicant tracking systems and recruiter training. Every score is built from dated public data and re-read monthly, and nobody pays to be featured. Made by Stephanie Murray, who also built RepVera.',
     },
     {
       '@type': 'Person',
@@ -104,11 +105,11 @@ const jsonLd = {
       worksFor: {
         '@id': 'https://hiring.productions/#organization',
       },
-      url: 'https://hiring.productions',
+      url: 'https://hiring.productions/about/stephanie',
       sameAs: [
         'https://www.linkedin.com/in/stephaniemurray11/',
       ],
-      description: '18+ years of talent acquisition experience. Transform Award Winner, Talent Strategy of the Year 2025.',
+      description: 'Founder of hiring.productions, 20 years in talent acquisition. Her talent team won Talent Strategy of the Year at the 2025 Transform Awards.',
       knowsAbout: [
         'Recruitment Marketing',
         'Employer Branding',
@@ -127,7 +128,7 @@ const jsonLd = {
       publisher: {
         '@id': 'https://hiring.productions/#organization',
       },
-      description: 'Tools, consulting, and coaching for the two sides of hiring.',
+      description: 'Hiring tools ranked for job seekers and hiring teams, with guides, cost comparisons and the people worth following in talent acquisition. Nobody pays to be featured.',
     },
     {
       '@type': 'ProfessionalService',
@@ -165,8 +166,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <style dangerouslySetInnerHTML={{ __html: `
-          *, *::before, *::after { font-family: 'Figtree', sans-serif !important; }
-          html, body { background-color: #FAF8F3 !important; color: #1A1A22; }
+          html, body { color: #1A1A22; }
         `}} />
       </head>
       <body style={{ backgroundColor: '#FAF8F3', color: '#1A1A22' }}>

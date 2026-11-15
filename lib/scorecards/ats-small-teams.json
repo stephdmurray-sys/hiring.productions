@@ -1,0 +1,552 @@
+{
+  "guide": "best-ats-for-small-teams",
+  "as_of": "2026-08-22",
+  "methodology": {
+    "weights": {
+      "user": 0.4,
+      "market_traction": 0.25,
+      "value": 0.15,
+      "critics": "not tracked yet for ATS; the other three share its weight"
+    },
+    "market_traction": "Mean of Footprint and Momentum. Footprint: mean of traffic score (5 - 1.2*(log10(Tranco rank)-3), clamped 1-5; suite-level domains use volume only) and review-volume score (1 + 1.6*(log10(total reviews)-1), clamped 1-5). Momentum: annualized review-count growth vs an Internet Archive snapshot of the same public page, scored 2 + 6*growth, clamped 1-5; capped at 3.5 when absolute gain < 20 reviews; requires a >= 120-day window; tools without a usable archive get a neutral 2.5 prior, never their footprint alone.",
+    "user": "Average of public G2 and Capterra ratings weighted by review count, cited as dated facts.",
+    "product": "Retired Nov 2026. The expert rubric was a draft awaiting founder markup; scores are now data only (users, market, value).",
+    "collection": "Manual, logged-out citation of public pages, search listings, and Internet Archive snapshots. No accounts, no scraping, no bot-defense bypass.",
+    "momentum_rationale": "All-time review totals reward incumbency. Momentum measures direction of travel from a dated baseline forward, so a 3-year-old product competes on current trajectory, not accumulated history. Known limitation: velocity partly reflects vendor review campaigns; anomalous spikes are flagged and re-verified at the next refresh.",
+    "segments": "Tools are ranked within team-size tiers, not against each other across tiers. Small: under 20 hires a year, no full-time recruiter. Growing: 20 to 50 hires a year, first dedicated recruiter. Scaling: 50+ hires a year, dedicated TA function. Axis is hires per year plus who runs hiring, not company headcount, because hiring volume is what determines tool fit."
+  },
+  "tools": [
+    {
+      "name": "Manatal",
+      "domain": "manatal.com",
+      "sources": {
+        "g2": {
+          "rating": 4.8,
+          "reviews": 306,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 141,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 127786,
+        "pricing": "$15/user/mo annual",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 147,
+        "snapshot_date": "20251207",
+        "now_count": 306,
+        "window_days": 258,
+        "annualized_growth": 1.5302,
+        "momentum_score": 5.0,
+        "confidence_note": "Fast riser; growth corroborated by third-party count discrepancy noted in collection."
+      },
+      "computed": {
+        "traffic_score": 2.47,
+        "review_volume_score": 3.64,
+        "footprint_score": 3.06,
+        "market_traction_score": 4.03,
+        "user_score": 4.74
+      },
+      "data_notes": "",
+      "segment": "small"
+    },
+    {
+      "name": "Teamtailor",
+      "domain": "teamtailor.com",
+      "sources": {
+        "g2": {
+          "rating": 4.6,
+          "reviews": 505,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 109,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 16375,
+        "pricing": "Quote-only",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 358,
+        "snapshot_date": "20260105",
+        "now_count": 505,
+        "window_days": 229,
+        "annualized_growth": 0.6545,
+        "momentum_score": 5.0,
+        "confidence_note": "LOW CONFIDENCE: +147 reviews in 7.5 months suggests a vendor review campaign; verify next refresh."
+      },
+      "computed": {
+        "traffic_score": 3.54,
+        "review_volume_score": 3.86,
+        "footprint_score": 3.7,
+        "market_traction_score": 4.35,
+        "user_score": 4.6
+      },
+      "data_notes": "",
+      "segment": "growing"
+    },
+    {
+      "name": "Pinpoint",
+      "domain": "pinpointhq.com",
+      "sources": {
+        "g2": {
+          "rating": 4.8,
+          "reviews": 134,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.7,
+          "reviews": 91,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 68916,
+        "pricing": "Quote-only",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 101,
+        "snapshot_date": "20250827",
+        "now_count": 134,
+        "window_days": 360,
+        "annualized_growth": 0.3313,
+        "momentum_score": 3.99,
+        "confidence_note": ""
+      },
+      "computed": {
+        "traffic_score": 2.79,
+        "review_volume_score": 3.16,
+        "footprint_score": 2.98,
+        "market_traction_score": 3.49,
+        "user_score": 4.76
+      },
+      "data_notes": "",
+      "segment": "growing"
+    },
+    {
+      "name": "BambooHR",
+      "domain": "bamboohr.com",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 5414,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 3546,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 8132,
+        "pricing": "$250/mo flat under 26 employees",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "cap",
+        "then_count": 3095,
+        "snapshot_date": "20260209",
+        "now_count": 3546,
+        "window_days": 194,
+        "annualized_growth": 0.2742,
+        "momentum_score": 3.65,
+        "confidence_note": "G2 history discarded: count doubled in 10 months, likely listing merge. Capterra basis used."
+      },
+      "computed": {
+        "traffic_score": 3.91,
+        "review_volume_score": 5.0,
+        "footprint_score": 4.46,
+        "market_traction_score": 4.05,
+        "user_score": 4.48
+      },
+      "data_notes": "Full HRIS; review volume reflects whole suite",
+      "segment": "growing"
+    },
+    {
+      "name": "Breezy HR",
+      "domain": "breezy.hr",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 683,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 1420,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 26826,
+        "pricing": "$157/mo annual (free Bootstrap tier: 1 position)",
+        "free_tier": true
+      },
+      "momentum": {
+        "basis": "cap",
+        "then_count": 1420,
+        "snapshot_date": "20250116",
+        "now_count": 1420,
+        "window_days": 583,
+        "annualized_growth": 0.0,
+        "momentum_score": 2.0,
+        "confidence_note": "Capterra basis; G2 snapshot too recent (40-day window). Zero new Capterra reviews in 19 months."
+      },
+      "computed": {
+        "traffic_score": 3.29,
+        "review_volume_score": 4.72,
+        "footprint_score": 4.0,
+        "market_traction_score": 3.0,
+        "user_score": 4.47
+      },
+      "data_notes": "",
+      "segment": "small"
+    },
+    {
+      "name": "Greenhouse",
+      "domain": "greenhouse.io",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 3935,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 765,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 4526,
+        "pricing": "Custom / contact sales",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "cap",
+        "then_count": 736,
+        "snapshot_date": "20260305",
+        "now_count": 765,
+        "window_days": 170,
+        "annualized_growth": 0.0846,
+        "momentum_score": 2.51,
+        "confidence_note": "G2 archive unavailable; Capterra basis."
+      },
+      "computed": {
+        "traffic_score": 4.21,
+        "review_volume_score": 5.0,
+        "footprint_score": 4.61,
+        "market_traction_score": 3.56,
+        "user_score": 4.42
+      },
+      "data_notes": "",
+      "segment": "scaling"
+    },
+    {
+      "name": "Ashby",
+      "domain": "ashbyhq.com",
+      "sources": {
+        "g2": {
+          "rating": 4.7,
+          "reviews": 107,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 12,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 21286,
+        "pricing": "$400/mo Foundations (up to 100 employees)",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 90,
+        "snapshot_date": "20251006",
+        "now_count": 107,
+        "window_days": 320,
+        "annualized_growth": 0.2155,
+        "momentum_score": 3.29,
+        "confidence_note": "2023 Capterra snapshot discarded (different listing)."
+      },
+      "computed": {
+        "traffic_score": 3.41,
+        "review_volume_score": 2.72,
+        "footprint_score": 3.07,
+        "market_traction_score": 3.18,
+        "user_score": 4.68
+      },
+      "data_notes": "Capterra sample tiny (12 reviews) | Practitioner score set by founder 2026-08-23: startup-native, clearly ahead of Greenhouse/Lever for scaling teams.",
+      "segment": "scaling"
+    },
+    {
+      "name": "Zoho Recruit",
+      "domain": "zoho.com/recruit",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 1850,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 1192,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": null,
+        "pricing": "$25/user/mo annual (Forever Free: 1 active job)",
+        "free_tier": true
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 1802,
+        "snapshot_date": "20250908",
+        "now_count": 1850,
+        "window_days": 348,
+        "annualized_growth": 0.0279,
+        "momentum_score": 2.17,
+        "confidence_note": ""
+      },
+      "computed": {
+        "traffic_score": null,
+        "review_volume_score": 4.97,
+        "footprint_score": 4.97,
+        "market_traction_score": 3.57,
+        "user_score": 4.44
+      },
+      "data_notes": "Tranco excluded: suite-level domain. G2 count lowest-confidence",
+      "segment": "small"
+    },
+    {
+      "name": "Workable",
+      "domain": "workable.com",
+      "sources": {
+        "g2": {
+          "rating": 4.6,
+          "reviews": 443,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.4,
+          "reviews": 661,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 10489,
+        "pricing": "$299/mo annual (1-20 employees; old $149 Starter closed)",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 447,
+        "snapshot_date": "20250414",
+        "now_count": 443,
+        "window_days": 495,
+        "annualized_growth": -0.0066,
+        "momentum_score": 1.96,
+        "confidence_note": "Count slightly declined; G2 removes filtered reviews."
+      },
+      "computed": {
+        "traffic_score": 3.78,
+        "review_volume_score": 4.27,
+        "footprint_score": 4.02,
+        "market_traction_score": 2.99,
+        "user_score": 4.48
+      },
+      "data_notes": "G2 product listing 4.6/443; seller aggregate 4.4/702",
+      "segment": "growing"
+    },
+    {
+      "name": "JazzHR",
+      "domain": "jazzhr.com",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 843,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.3,
+          "reviews": 492,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 238094,
+        "pricing": "$1,000/yr Hero (~$83/mo, ~3 postings/mo)",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 808,
+        "snapshot_date": "20250826",
+        "now_count": 843,
+        "window_days": 361,
+        "annualized_growth": 0.0438,
+        "momentum_score": 2.26,
+        "confidence_note": ""
+      },
+      "computed": {
+        "traffic_score": 2.15,
+        "review_volume_score": 4.4,
+        "footprint_score": 3.28,
+        "market_traction_score": 2.77,
+        "user_score": 4.36
+      },
+      "data_notes": "G2 count varies across snippets (483-843)",
+      "segment": "growing"
+    },
+    {
+      "name": "Recruitee",
+      "domain": "recruitee.com",
+      "sources": {
+        "g2": {
+          "rating": 4.5,
+          "reviews": 450,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.4,
+          "reviews": 192,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 19306,
+        "pricing": "Quote-only (1-yr minimum)",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": "g2",
+        "then_count": 449,
+        "snapshot_date": "20260128",
+        "now_count": 450,
+        "window_days": 206,
+        "annualized_growth": 0.0039,
+        "momentum_score": 2.02,
+        "confidence_note": ""
+      },
+      "computed": {
+        "traffic_score": 3.46,
+        "review_volume_score": 3.89,
+        "footprint_score": 3.67,
+        "market_traction_score": 2.84,
+        "user_score": 4.47
+      },
+      "data_notes": "Now branded Tellent Recruitee",
+      "segment": "growing"
+    },
+    {
+      "name": "Lever",
+      "domain": "lever.co",
+      "sources": {
+        "g2": {
+          "rating": 4.3,
+          "reviews": 2115,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 654,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 9457,
+        "pricing": "Custom / contact sales",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": null,
+        "then_count": null,
+        "snapshot_date": null,
+        "now_count": null,
+        "window_days": null,
+        "annualized_growth": null,
+        "momentum_score": null,
+        "confidence_note": "No usable archive snapshot. Neutral prior used."
+      },
+      "computed": {
+        "traffic_score": 3.83,
+        "review_volume_score": 4.91,
+        "footprint_score": 4.37,
+        "market_traction_score": 3.44,
+        "user_score": 4.37
+      },
+      "data_notes": "Practitioner score set by founder 2026-08-23: ranked below Fountain.",
+      "segment": "scaling"
+    },
+    {
+      "name": "Homerun",
+      "domain": "homerun.co",
+      "sources": {
+        "g2": {
+          "rating": 4.4,
+          "reviews": 158,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.5,
+          "reviews": 77,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 151939,
+        "pricing": "EUR 99/mo (3 job slots)",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": null,
+        "then_count": null,
+        "snapshot_date": null,
+        "now_count": null,
+        "window_days": null,
+        "annualized_growth": null,
+        "momentum_score": null,
+        "confidence_note": "No usable archive snapshot. Neutral prior used."
+      },
+      "computed": {
+        "traffic_score": 2.38,
+        "review_volume_score": 3.19,
+        "footprint_score": 2.79,
+        "market_traction_score": 2.65,
+        "user_score": 4.43
+      },
+      "data_notes": "EUR pricing only",
+      "segment": "small"
+    },
+    {
+      "name": "Fountain",
+      "domain": "fountain.com",
+      "sources": {
+        "g2": {
+          "rating": 4.3,
+          "reviews": 126,
+          "as_of": "2026-08-22"
+        },
+        "capterra": {
+          "rating": 4.6,
+          "reviews": 39,
+          "as_of": "2026-08-22"
+        },
+        "tranco_rank": 70427,
+        "pricing": "Quote-only",
+        "free_tier": false
+      },
+      "momentum": {
+        "basis": null,
+        "then_count": null,
+        "snapshot_date": null,
+        "now_count": null,
+        "window_days": null,
+        "annualized_growth": null,
+        "momentum_score": null,
+        "confidence_note": "Only an 81-day-old snapshot found; below 120-day minimum window. Neutral prior used."
+      },
+      "computed": {
+        "traffic_score": 2.78,
+        "review_volume_score": 2.95,
+        "footprint_score": 2.87,
+        "market_traction_score": 2.69,
+        "user_score": 4.37
+      },
+      "data_notes": "Capterra figure from single snippet",
+      "segment": "scaling"
+    }
+  ]
+}

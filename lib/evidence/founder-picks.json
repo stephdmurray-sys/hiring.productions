@@ -1,0 +1,53 @@
+{
+  "_about": "Stephanie's picks: editorial judgment, shown beside the evidence and labeled as hers. A pick does not need a score, and a pick never changes a score: scores are public data only. The seeker-side pick lives in resume-guide.json (risingPick) because it is a scored resume tool. Hiring-side picks live here. confirmed=false: the line is a draft until Stephanie writes or approves it. verified=false: the evidence was read from search listings and is confirmed on the live page at the next check.",
+  "hiring": {
+    "id": "juicebox",
+    "name": "Juicebox",
+    "domain": "juicebox.ai",
+    "url": "https://juicebox.ai",
+    "category": "AI sourcing",
+    "label": "Stephanie's pick",
+    "line": "Search for the person you need the way you'd describe them to a colleague, in plain language instead of Boolean strings.",
+    "confirmed": false,
+    "scoreStatus": "Enough reviews to rate: 4.8 from 103 on G2. What's missing: a ranking of sourcing tools, so it's compared with the tools it competes with.",
+    "facts": "4.8 from 103 G2 reviews",
+    "evidence": [
+      {
+        "source": "G2",
+        "note": "4.8 from 103 reviews (96 five-star, 5 four-star, 1 three-star, 1 two-star), read on the live page Nov 13, 2026",
+        "url": "https://www.g2.com/products/juicebox-ai/reviews"
+      },
+      {
+        "source": "Dupple",
+        "note": "First in a 10-tool roundup of AI tools for recruiters (2026); not yet confirmed on the live page",
+        "url": "https://dupple.com/learn/best-ai-tools-for-recruiters"
+      }
+    ],
+    "verified": true,
+    "trigger": [
+      "founder-nomination",
+      "independent-list"
+    ],
+    "checkDue": "2026-12",
+    "board": null,
+    "traffic": {
+      "trancoRank": 169996,
+      "trancoDate": "2026-11-12"
+    },
+    "citableReviews": 103,
+    "scoring": {
+      "readOn": "2026-11-13",
+      "user": 4.8,
+      "userBasis": "G2, 103 reviews, read by Stephanie on the live page.",
+      "trancoRank": 169996,
+      "trancoDate": "2026-11-12",
+      "trafficScore": 2.32,
+      "reviewVolumeScore": 2.62,
+      "footprintScore": 2.47,
+      "marketScore": 2.49,
+      "formula": "Same rules as every tool: traffic = 5 - 1.2 x (log10(rank) - 3); review volume = 1 + 1.6 x (log10(reviews) - 1), both clamped 1 to 5; footprint = their average; market = average of footprint and momentum, with momentum held at the neutral 2.5 until an Internet Archive snapshot at least 120 days old confirms growth.",
+      "momentumNote": "Third-party captures put Juicebox's G2 count near 12 in July 2026 and 62 in September. If an Internet Archive snapshot confirms that growth, momentum scores at the 5.0 cap and the market score rises to about 3.7. One competitor (Pin) claims most early reviews came from seller invites; G2 labels those, and the share should be counted and shown.",
+      "note": "Users 4.8 and market 2.49 are in. Value waits on a live read of its pricing page."
+    }
+  }
+}

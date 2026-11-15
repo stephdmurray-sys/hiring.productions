@@ -309,6 +309,7 @@ interface Stats {
   }
   costCents: number
   costDollars: string
+  visitorNeeds?: Array<{ ts: string; side: string; text: string }>
   recentEvents: Array<{
     type: string
     ts: string
@@ -434,6 +435,14 @@ function StatsView({ data }: { data: Stats }) {
               (types.payment_success ?? 0).toString(),
             ])}
           headers={['Day', 'Visitors', 'Pageviews', 'Tool ✓', 'Email', 'Checkout', 'Pay']}
+        />
+      </Section>
+
+      {/* What visitors told the picker they're dealing with */}
+      <Section title="Not on the picker's list: what visitors told us">
+        <SimpleTable
+          rows={(data.visitorNeeds ?? []).map((n) => [new Date(n.ts).toLocaleString(), n.side || '—', n.text])}
+          headers={['When', 'Side', 'What they said']}
         />
       </Section>
 

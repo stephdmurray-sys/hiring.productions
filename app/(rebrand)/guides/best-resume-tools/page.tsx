@@ -1,0 +1,727 @@
+import type { Metadata } from 'next'
+import { PickFace } from '@/app/(rebrand)/_components/pick-face'
+import { verdictFor } from '@/lib/picks'
+import { keepLast } from '@/lib/site-line'
+import { NextStep } from '@/app/(rebrand)/_components/next-step'
+import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
+import { PAYS_US, moneyLine } from '@/lib/money'
+import { JsonLd, graph, resumeRankingLd, toolReviewLd } from '@/app/(rebrand)/_components/structured'
+import type { ReactNode } from 'react'
+import Image from 'next/image'
+import { siteCss } from '@/app/(rebrand)/_components/site-css'
+import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
+import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
+import { HashOpener } from '@/app/(rebrand)/_components/hash-opener'
+import { Logo as BrandLogo } from '@/app/(rebrand)/_components/logo'
+import { boardCss } from '@/app/(rebrand)/_components/scoreboard'
+import { CostCalculator } from '@/app/(rebrand)/_components/cost-calculator'
+import { OnTheRise, risingCss } from '@/app/(rebrand)/_components/rising'
+import { calcCss, videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
+import { calcTools } from '@/app/(rebrand)/_components/data'
+import { guidePageCss } from './guide-page-css'
+import {
+  MIN_REVIEWS,
+  STANCE_LABEL,
+  STATUS_LABEL,
+  VIDEO_KIND_LABEL,
+  absenceUnconfirmed,
+  formatCount,
+  formatDate,
+  formatMonth,
+  gridCell,
+  guide,
+  hasUnverified,
+  latestCheck,
+  resumeLists,
+  resumeTools,
+  risingPick,
+  videos,
+  type Appearance,
+  type ToolEvidence,
+} from '@/lib/evidence'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/guides/best-resume-tools' },
+  title: 'The Best Resume Tools of 2026: Builders and ATS Checkers, Ranked on Real Reviews and Prices',
+  description:
+    'Resume builders and ATS checkers ranked on public reviews and real prices, checked every month against the other lists you are likely to read, with labeled demo videos and what a year of each tool costs.',
+}
+
+const SEGMENT_LABEL = { checker: 'Checker', builder: 'Builder' } as const
+const SEGMENT_SINGULAR = { checker: 'checker', builder: 'builder' } as const
+
+const ON_THIS_PAGE = [
+  ['short', 'Picks'],
+  ['rankings', 'Rankings'],
+  ['cost', 'What it costs'],
+  ['agree', 'Do reviewers agree?'],
+  ['videos', 'Videos'],
+  ['evidence', 'Every tool in detail'],
+  ['faq', 'Questions'],
+] as const
+
+function Logo({ domain, name, size = 28 }: { domain: string; name: string; size?: number }) {
+  return <BrandLogo domain={domain} name={name} size={size} />
+}
+
+function money(n: number) {
+  return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
+}
+
+function shortDate(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number)
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+}
+
+function placement(a: Appearance) {
+  if (a.position) return `#${a.position}`
+  return a.list.format === 'picks' ? 'pick' : 'listed'
+}
+
+function rankLabel(t: ToolEvidence) {
+  if (!t.enoughEvidence) return 'Unranked'
+  return `#${t.rank} ${SEGMENT_SINGULAR[t.segment]}`
+}
+
+function Stance({ t }: { t: ToolEvidence }) {
+  return <span className={`stance stance-${t.call.stance}`}>{STANCE_LABEL[t.call.stance]}</span>
+}
+
+function Bar({ label, value, places = 1 }: { label: string; value: number | null; places?: number }) {
+  return (
+    <div className="sbar">
+      <span>{label}</span>
+      <span className="sbar-track" aria-hidden="true">
+        {value !== null && <i style={{ width: `${(value / 5) * 100}%` }} />}
+      </span>
+      <b>{value !== null ? value.toFixed(places) : 'n/e'}</b>
+    </div>
+  )
+}
+
+function RankTable({ tools }: { tools: ToolEvidence[] }) {
+  return (
+    <div className="tscroll">
+      <table className="ledger rank-table">
+        <thead>
+          <tr>
+            <th className="num">#</th>
+            <th>Tool</th>
+            <th>Best for</th>
+            <th>Free for real?</th>
+            <th>Price</th>
+            <th className="num">Overall</th>
+            <th className="num">Users</th>
+            <th className="num">Popularity</th>
+            <th className="num">Best-of lists</th>
+            <th className="num">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tools.map((t) => (
+            <tr key={t.id}>
+              <td className="num">{t.enoughEvidence ? t.rank : '–'}</td>
+              <td className="tool-cell">
+                <Logo domain={t.domain} name={t.name} />
+                <a href={`/reviews/${t.id}`}>{t.name}</a>
+              </td>
+              <td>{t.bestFor}</td>
+              <td>{t.freeTier}</td>
+              <td>{t.pricing}</td>
+              <td className="num tscore">{t.overall !== null ? t.overall.toFixed(2) : <span className="faint">n/e&dagger;</span>}</td>
+              <td className="num">{t.userScore !== null ? t.userScore.toFixed(1) : <span className="faint">n/e&dagger;</span>}</td>
+              <td className="num">{t.marketScore.toFixed(2)}</td>
+              <td className="num">{t.criticsScore.toFixed(2)}</td>
+              <td className="num">{t.valueScore.toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function EvidenceFile({ t }: { t: ToolEvidence }) {
+  const ratingsDate = t.ratings.length ? t.ratings.map((r) => r.asOf).sort().slice(-1)[0] : null
+  return (
+    <details className="efile" id={`evidence-${t.id}`}>
+      <summary>
+        <span className="ef-rank">
+          {t.enoughEvidence ? `#${t.rank}` : '–'} {SEGMENT_LABEL[t.segment]}
+        </span>
+        <span className="ef-name">
+          <Logo domain={t.domain} name={t.name} size={30} />
+          {t.name}
+        </span>
+        <span className="ef-score">{t.overall !== null ? t.overall.toFixed(2) : 'n/e'}</span>
+        <Stance t={t} />
+        <span className="ef-toggle" aria-hidden="true" />
+      </summary>
+
+      <div className="ef-body">
+        <p className="ef-call">{keepLast(t.call.line)}</p>
+        <div className="ef-grid">
+          <div className="sbars">
+            <Bar label="User" value={t.userScore} />
+            <Bar label="Popularity" value={t.marketScore} places={2} />
+            <Bar label="Best-of lists" value={t.criticsScore} places={2} />
+            <Bar label="Value" value={t.valueScore} places={2} />
+          </div>
+          <dl className="facts">
+            <div>
+              <dt>What users say</dt>
+              <dd>
+                {t.enoughEvidence ? (
+                  <p>
+                    {t.rawUserScore?.toFixed(1)} from {formatCount(t.citableReviews)} public reviews.
+                  </p>
+                ) : (
+                  <p>
+                    Not enough reviews yet: {formatCount(t.citableReviews)} public review{t.citableReviews === 1 ? '' : 's'}, and we need{' '}
+                    {MIN_REVIEWS}.
+                  </p>
+                )}
+                <ul>
+                  {t.ratings.length === 0 && <li>No public reviews found.</li>}
+                  {t.ratings.map((r) => (
+                    <li key={r.platform} className={r.droppedBecause ? 'faint' : undefined}>
+                      {r.rating} from {formatCount(r.reviews)} on {r.platform}
+                      {r.sourceStatus === 'permission-pending' && !r.droppedBecause && <span className="flag"> (permission pending)</span>}
+                      {r.droppedBecause && <> (not counted: {r.droppedBecause.toLowerCase()})</>}
+                    </li>
+                  ))}
+                </ul>
+                {ratingsDate && <p className="mono faint">Read {shortDate(ratingsDate)}</p>}
+              </dd>
+            </div>
+            <div>
+              <dt>What other reviewers rank</dt>
+              <dd>
+                {t.counted.length === 0 && (
+                  <p>
+                    {absenceUnconfirmed(t)
+                      ? 'Not on the current lists we’ve checked so far. Full lists are confirmed at the next check.'
+                      : 'Not named on any current list we track.'}
+                  </p>
+                )}
+                <ul>
+                  {t.counted.map((a) => (
+                    <li key={a.list.id}>
+                      <a className="tl" href={a.list.url} target="_blank" rel="noopener noreferrer">
+                        {a.list.publication}
+                      </a>{' '}
+                      {placement(a)} ({a.list.edition})
+                    </li>
+                  ))}
+                  {t.notCounted.map((a) => (
+                    <li key={a.list.id} className="faint">
+                      {a.list.publication} {placement(a)} (not counted: {STATUS_LABEL[a.list.status].toLowerCase()})
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>Demos</dt>
+              <dd>
+                <p>{t.walkthrough ? `Walked through with the vendor on ${formatDate(t.walkthrough.date)}.` : 'Our walkthrough is not booked yet.'}</p>
+                <ul>
+                  {t.videos.map((v) => (
+                    <li key={v.youtubeId}>
+                      <a className="tl" href={`https://www.youtube.com/watch?v=${v.youtubeId}`} target="_blank" rel="noopener noreferrer">
+                        {v.title}
+                      </a>{' '}
+                      ({VIDEO_KIND_LABEL[v.kind].toLowerCase()}
+                      {v.year && !v.title.includes(String(v.year)) ? `, ${v.year}` : ''})
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>What it costs</dt>
+              <dd>
+                <p>{keepLast(t.pricingLine)}</p>
+                {t.yearCost && (
+                  <p className="faint">
+                    A paid year: {t.yearCost.approx ? 'about ' : ''}
+                    {money(t.yearCost.amount)} ({t.yearCost.how.charAt(0).toLowerCase() + t.yearCost.how.slice(1)})
+                  </p>
+                )}
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        {t.verdict && (
+          <dl className="verdict">
+            <div>
+              <dt>Best if</dt>
+              <dd>{t.verdict.bestIf}</dd>
+            </div>
+            <div>
+              <dt>Skip it if</dt>
+              <dd>{t.verdict.skipIf}</dd>
+            </div>
+            <div>
+              <dt>What we like</dt>
+              <dd>{t.verdict.like}</dd>
+            </div>
+            <div>
+              <dt>Watch for</dt>
+              <dd>{t.verdict.watch}</dd>
+            </div>
+          </dl>
+        )}
+        <p className="ef-visit">
+          <a href={`/reviews/${t.id}`} className="tl tl-strong">
+            Read the full {t.name} review <span className="arr">&rarr;</span>
+          </a>
+          <span className="faint"> &middot; </span>
+          <a href={`/go/${t.id}`} className="tl">
+            Visit {t.name} &#8599;
+          </a>
+          <span className="money">{moneyLine(t.id)}</span>
+        </p>
+      </div>
+    </details>
+  )
+}
+
+function Faq({ q, children }: { q: string; children: ReactNode }) {
+  return (
+    <details className="faq-item">
+      <summary>{q}</summary>
+      <p>{children}</p>
+    </details>
+  )
+}
+
+export default function Page() {
+  const { checkers, builders, all } = resumeTools()
+  const lists = resumeLists()
+  const counting = lists.filter((l) => l.status === 'counts')
+  const notCounting = lists.length - counting.length
+  const byId = Object.fromEntries(all.map((t) => [t.id, t]))
+  const breaks = all.filter((t) => t.call.stance === 'breaks')
+  const featured = videos.filter((v) => v.featured)
+  const checked = latestCheck()
+  const ratingPlatforms = Array.from(new Set(all.flatMap((t) => t.ratings.map((r) => r.platform))))
+  const ratingsRead = all.flatMap((t) => t.ratings.map((r) => r.asOf)).sort().slice(-1)[0]
+  const rising = byId[risingPick.tool]
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
+      <JsonLd data={graph(resumeRankingLd(), ...all.map(toolReviewLd))} />
+      <HashOpener prefix="evidence-" />
+      <SiteNav active="seekers" />
+
+      <header className="ph">
+        <div className="wrap">
+          <p className="crumbs">
+            <a href="/">Home</a> / <a href="/for-job-seekers">For job seekers</a> / Resume tools
+          </p>
+          <h1>The best resume tools of 2026</h1>
+          <p className="dek">
+            {all.length} builders and ATS checkers, ranked on public reviews and real prices and checked every month against the {lists.length} other lists
+            you&rsquo;re likely to read.
+          </p>
+          <p className="dateline">
+            Lists and videos checked {shortDate(checked)} &middot; ratings read {shortDate(ratingsRead)} &middot; next check{' '}
+            {formatMonth(guide.nextCheck)} &middot; <a href="/how-we-review">how we review</a>
+          </p>
+          <p className="disclosure">
+            {PAYS_US.size === 0
+              ? 'No link on this page earns us anything right now, and nobody can pay for placement, rankings or scores.'
+              : 'Some links below earn us a commission, and the line under each one says so. Nobody can pay for placement, rankings or scores.'}{' '}
+            <a href="/advertiser-disclosure">Full disclosure</a>
+          </p>
+        </div>
+      </header>
+
+      {hasUnverified() && (
+        <div className="demo-note">
+          <div className="wrap">
+            <b>Still being confirmed.</b> A list placement or video on this page was read from a search listing and is confirmed on the live
+            page at the next monthly check.
+          </div>
+        </div>
+      )}
+
+      <nav className="toc-bar" aria-label="On this page">
+        <div className="wrap">
+          {ON_THIS_PAGE.map(([id, label]) => (
+            <a key={id} href={`#${id}`}>
+              {label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <section className="wrap sec" id="short">
+        <h2>Our picks</h2>
+        <p className="lead">
+          Some builders are free until you download, and some $2 trials renew every 4 weeks. These picks rank on public reviews and real
+          prices.
+        </p>
+        <div className="picks">
+          {guide.picks.map((p) => {
+            const t = byId[p.tool]
+            return (
+              <div className="pick" key={p.tool}>
+                <p className="pick-label">{p.label}</p>
+                <h3 className="pick-name">
+                  <Logo domain={t.domain} name={t.name} size={44} />
+                  {t.name}
+                </h3>
+                <p className="pick-line">
+                  {p.line}
+                  {t.headlineRating ? ` ${t.headlineRating}.` : ''}
+                </p>
+                <p className="pick-facts">
+                  {t.overall?.toFixed(2)} overall &middot; #{t.rank} {SEGMENT_SINGULAR[t.segment]}
+                  {t.yearCost ? ` · ${money(t.yearCost.amount)} a paid year` : ''}
+                </p>
+                <a href={`/go/${t.id}`} className="tl tl-strong">
+                  Visit {t.name} &#8599;
+                </a>
+                <span className="money">{moneyLine(t.id)}</span>
+              </div>
+            )
+          })}
+          <div className="pick pick-rising">
+            <p className="pick-label">{risingPick.label}</p>
+            <h3 className="pick-name">
+              <Logo domain={rising.domain} name={rising.name} size={44} />
+              {rising.name}
+            </h3>
+            <p className="pick-line">{risingPick.line}</p>
+            <p className="pick-face">
+              <PickFace verdict={verdictFor(risingPick.tool)} size={96} />
+            </p>
+            <p className="pick-by">
+              <Image src="/stephanie.jpg" alt="" width={36} height={36} />
+              <span>
+                <b>
+                  <a href="/about/stephanie">Stephanie Murray</a>
+                </b>{' '}
+                2025 Transform Award, Talent Strategy of the Year
+              </span>
+            </p>
+            <p className="pick-facts">
+              {rising.rawUserScore?.toFixed(1)} from {formatCount(rising.citableReviews)} users &middot; #{rising.rank}{' '}
+              {SEGMENT_SINGULAR[rising.segment]} &middot; $0 for a clean PDF
+            </p>
+            <a href={`/go/${rising.id}`} className="tl tl-strong">
+              Visit {rising.name} &#8599;
+            </a>
+            <span className="money">{moneyLine(rising.id)}</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="wrap sec" id="rankings">
+        <h2>How we ranked them</h2>
+        <p className="lead">
+          Tools with fewer than {MIN_REVIEWS} public reviews aren&rsquo;t ranked.
+        </p>
+        <h3 className="h3">ATS resume checkers</h3>
+        <p className="sublead">Tools that read your resume the way applicant tracking software does, before a recruiter ever sees it.</p>
+        <RankTable tools={checkers} />
+        <h3 className="h3">Resume builders</h3>
+        <p className="sublead">Where you write the thing. Read the &ldquo;Free for real?&rdquo; column first.</p>
+        <RankTable tools={builders} />
+        <p className="footnote">
+          Ratings read {formatDate(ratingsRead)}. &dagger;n/e: fewer than {MIN_REVIEWS} public reviews, so no score yet.{' '}
+          <a href="/how-we-review">How scores work</a>
+        </p>
+      </section>
+
+      <section className="wrap sec" id="cost">
+        <h2>What will your search cost?</h2>
+        <p className="lead">
+          The sticker price is the trial. Drag to your timeline: every tool re-sorts by the cheapest published way to pay for it, and shows
+          what the first year costs if you then forget to cancel.
+        </p>
+        <div style={{ marginTop: 36 }}>
+          <CostCalculator tools={calcTools()} checked={shortDate(ratingsRead)} />
+        </div>
+        <p className="boxnote">
+          <b>If you take one thing from this page:</b> never leave a 4-week resume trial running. Resume.io and Zety let you build for free,
+          then charge to download anything but plain&nbsp;text.{' '}
+          <a className="tl" href="/pricing-traps">
+            Which tools keep charging you
+          </a>
+        </p>
+      </section>
+
+      <section className="wrap sec" id="agree">
+        <h2>Do the other reviewers agree?</h2>
+        <p className="lead">
+          We read {lists.length} other &ldquo;best resume tool&rdquo; lists every month. Only {counting.length} count. Here is where they
+          land next to&nbsp;us.
+        </p>
+        <div className="tscroll">
+          <table className="ledger agree-grid">
+            <thead>
+              <tr>
+                <th>Tool</th>
+                <th>Our rank</th>
+                <th className="num">Users</th>
+                {counting.map((l) => (
+                  <th key={l.id} className="col-list">
+                    {l.publication}
+                    <span className="mono">{l.edition}</span>
+                  </th>
+                ))}
+                <th className="col-list">
+                  Not counted
+                  <span className="mono">{notCounting} lists</span>
+                </th>
+                <th>Our call</th>
+              </tr>
+            </thead>
+            <tbody>
+              {all.map((t) => (
+                <tr key={t.id}>
+                  <td className="tool-cell">
+                    <Logo domain={t.domain} name={t.name} />
+                    <a href={`#evidence-${t.id}`}>{t.name}</a>
+                  </td>
+                  <td className="nowrap">{rankLabel(t)}</td>
+                  <td className="num nowrap">
+                    {t.userScore !== null ? (
+                      <>
+                        <b>{t.userScore.toFixed(1)}</b> <span className="faint">({formatCount(t.citableReviews)})</span>
+                      </>
+                    ) : (
+                      <span className="faint">too few</span>
+                    )}
+                  </td>
+                  {counting.map((l) => {
+                    const c = gridCell(t, l)
+                    return (
+                      <td key={l.id} className="cell">
+                        {c.state === 'named' && <b>{c.label}</b>}
+                        {c.state === 'unknown' && (
+                          <span className="faint" title="Full list not confirmed yet">
+                            ?
+                          </span>
+                        )}
+                        {c.state === 'not-named' && <span className="faint">no</span>}
+                        {c.state === 'not-covered' && <span className="faint">&middot;</span>}
+                      </td>
+                    )
+                  })}
+                  <td className="cell">
+                    {t.notCounted.length > 0 ? (
+                      <span title={t.notCounted.map((a) => a.list.publication).join(', ')}>{t.notCounted.length}</span>
+                    ) : (
+                      <span className="faint">&middot;</span>
+                    )}
+                  </td>
+                  <td>
+                    <Stance t={t} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="footnote">
+          A position (#1) or &ldquo;Pick&rdquo; means the list names the tool. A question mark means we haven&rsquo;t confirmed the full list
+          yet. A dot means the list doesn&rsquo;t cover that kind of tool.
+        </p>
+
+        {breaks.length > 0 && (
+          <>
+            <h3 className="h3">Where we disagree with other lists</h3>
+            <div className="rows">
+              {breaks.map((t) => (
+                <div className="row" key={t.id}>
+                  <span className="row-title">
+                    <Logo domain={t.domain} name={t.name} size={30} /> {t.name}
+                  </span>
+                  <div>
+                    <p>{t.call.line}</p>
+                    <a className="tl" href={`#evidence-${t.id}`}>
+                      See the details
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="owner">
+          <h3 className="h3">Who owns the list you&rsquo;re reading?</h3>
+          <p className="lead">
+            BOLD owns MyPerfectResume, LiveCareer and Zety. It also owns FlexJobs and Monster, and both of their &ldquo;best resume
+            builder&rdquo; lists put BOLD brands on top. We show those lists but don&rsquo;t count them.
+          </p>
+          <p style={{ marginTop: 14 }}>
+            <a className="tl" href="/is-this-list-paid-for">
+              The four checks to run on any list
+            </a>
+          </p>
+        </div>
+
+        <details className="lists-details">
+          <summary>
+            All {lists.length} lists we checked, and why {notCounting} don&rsquo;t count
+          </summary>
+          <div className="tscroll">
+            <table className="ledger">
+              <thead>
+                <tr>
+                  <th>List</th>
+                  <th>Edition</th>
+                  <th>Status</th>
+                  <th>Why</th>
+                </tr>
+              </thead>
+              <tbody>
+                {lists.map((l) => (
+                  <tr key={l.id}>
+                    <td>
+                      <b>{l.publication}</b>
+                      <br />
+                      <a className="tl" href={l.url} target="_blank" rel="noopener noreferrer">
+                        {l.title}
+                      </a>
+                    </td>
+                    <td className="mono">{l.edition}</td>
+                    <td className="nowrap">
+                      {l.status === 'counts' ? <b>{STATUS_LABEL[l.status]}</b> : <span className="faint">{STATUS_LABEL[l.status]}</span>}
+                    </td>
+                    <td>{l.reason}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="footnote">
+            A list counts when it shows an update or current-year edition within the last 12 months and its publisher doesn&rsquo;t own what
+            it ranks. Every list is re-checked monthly and saved to the Internet Archive.
+          </p>
+        </details>
+      </section>
+
+      <section className="wrap sec" id="signup">
+        <div className="g-signup">
+          <div>
+            <h2>Get an email when these rankings change</h2>
+            <p className="sublead">One email a month: the tools that moved and the prices that went&nbsp;up.</p>
+          </div>
+          <EvidenceSignup source="resume_guide" />
+        </div>
+      </section>
+
+      <section className="wrap sec" id="videos">
+        <h2>Watch before you pay</h2>
+        <p className="lead">
+          Each video is labeled: made by the company, or by an independent creator. We add new ones every month.
+        </p>
+        <div className="vid-grid">
+          {featured.slice(0, 3).map((v) => {
+            const t = byId[v.tool]
+            return (
+              <figure className="vid" key={v.youtubeId}>
+                <VideoEmbed youtubeId={v.youtubeId} title={v.title} />
+                <figcaption className="vid-meta">
+                  <Logo domain={t.domain} name={t.name} size={36} />
+                  <span>
+                    <b>
+                      <a href={`/reviews/${t.id}`}>{t.name}</a>
+                    </b>
+                    <span className="vid-title">{v.title}</span>
+                    <span className={`vid-kind k-${v.kind}`}>{VIDEO_KIND_LABEL[v.kind]}</span>
+                    <span className="mono faint vid-check">
+                      {v.year && !v.title.includes(String(v.year)) ? `${v.year} · ` : ''}
+                      {v.verified ? 'channel confirmed' : 'label from the title, channel check pending'}
+                    </span>
+                  </span>
+                </figcaption>
+              </figure>
+            )
+          })}
+        </div>
+        {featured.length > 3 && (
+          <details className="vid-more">
+            <summary>See {featured.length - 3} more videos</summary>
+            <div className="vid-grid">
+              {featured.slice(3).map((v) => {
+                const t = byId[v.tool]
+                return (
+                  <figure className="vid" key={v.youtubeId}>
+                    <VideoEmbed youtubeId={v.youtubeId} title={v.title} />
+                    <figcaption className="vid-meta">
+                      <Logo domain={t.domain} name={t.name} size={36} />
+                      <span>
+                        <b>
+                          <a href={`/reviews/${t.id}`}>{t.name}</a>
+                        </b>
+                        <span className="vid-title">{v.title}</span>
+                        <span className={`vid-kind k-${v.kind}`}>{VIDEO_KIND_LABEL[v.kind]}</span>
+                      </span>
+                    </figcaption>
+                  </figure>
+                )
+              })}
+            </div>
+          </details>
+        )}
+      </section>
+
+      <section className="wrap sec" id="evidence">
+        <h2>Every tool, in detail</h2>
+        <p className="lead">Where each tool&rsquo;s numbers come from, with dates.</p>
+        <div className="efiles">
+          {all.map((t) => (
+            <EvidenceFile key={t.id} t={t} />
+          ))}
+        </div>
+        <ul className="refresh-log">
+          {guide.refreshLog.map((entry) => (
+            <li key={entry.date}>
+              <span className="mono">{shortDate(entry.date)}</span> {entry.what}. {entry.how}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="wrap narrow sec" id="faq">
+        <h2>Questions job seekers ask</h2>
+        <div className="faq">
+          <Faq q="Are free resume builders really free?">
+            Usually not. The common pattern is free to build and paid to download anything usable. Here, only FlowCV gives you a
+            watermark-free PDF for nothing, and Teal and Kickresume have free tiers that produce real documents. Everyone else charges at
+            the exit.
+          </Faq>
+          <Faq q="Do ATS scores mean anything?">
+            Partly. Keyword and formatting checks catch real problems, and Jobscan&rsquo;s per-job reports are useful. A score is also a
+            sales device: a middling free number with a paid path to a better one. Real applicant tracking systems don&rsquo;t grade you out
+            of 100. Use the checks and ignore the number.
+          </Faq>
+          <Faq q="What should a resume tool cost?">
+            $0 covers most people: FlowCV plus Teal&rsquo;s free tier is a complete setup. If you&rsquo;re applying at volume, $79 to $96 a
+            year buys the top paid tools. Anything billed every 4 weeks is priced on the hope that you forget it.
+          </Faq>
+          <Faq q="Why don't you count every “best resume builder” list?">
+            Some of the most visible ones are published by companies that sell resume builders. When a list&rsquo;s owner also owns the tools
+            at the top of it, that list is advertising. We still show every list we checked and say why it does or doesn&rsquo;t count.
+          </Faq>
+          <Faq q="How often does this page change?">
+            Every month. In the first week of each month we check every rating and every list again, pull new demo videos and save each
+            vendor&rsquo;s pricing page to the Internet Archive. If a ranking moves, the details here say why.
+          </Faq>
+        </div>
+      </section>
+
+      <NextStep side="seekers" line="Still deciding? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use?side=seekers#questions" />
+      <SiteFooter />
+    </>
+  )
+}

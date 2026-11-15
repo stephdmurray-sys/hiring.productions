@@ -1,0 +1,72 @@
+{
+  "_about": "The research behind the rating framework, and where Stephanie's judgment comes in. Rendered on /how-we-review (#research, #judgment) and summarized in the site footer. Every finding links to its source; keep it that way.",
+  "summary": "Every score is built from public data and checked every month: user ratings 40%, popularity 25%, best-of lists 20% and value 15%. No one's opinion goes into a score, ours included, and no vendor can pay for a place. Stephanie's picks sit beside the scores, labeled as hers, and never change one.",
+  "research": [
+    {
+      "finding": "G2 places software on two measures, user satisfaction and market presence, and its Grid placement can't be changed by hand.",
+      "usedFor": "Our user and popularity scores mirror those two measures, and no one can adjust a score or a rank by hand.",
+      "source": "G2 research scoring methodologies",
+      "url": "https://research.g2.com/research-guidelines"
+    },
+    {
+      "finding": "Capterra's Shortlist scores each product half on user ratings from the last 12 months and half on popularity.",
+      "usedFor": "Same two pillars. We weight users above popularity (40% to 25%) because popularity rewards whoever has been around longest.",
+      "source": "Capterra Shortlist methodology",
+      "url": "https://www.capterra.com.au/blog/2584/shortlist-methodology"
+    },
+    {
+      "finding": "G2 counts a review about 3% less for every month it ages, and TrustRadius weights newer reviews more and gives extra weight to reviews collected independently of vendors.",
+      "usedFor": "We re-check every rating monthly and count review growth in the popularity score. Lists published by companies that sell what they rank never count.",
+      "source": "G2 research guidelines; TrustRadius scoring FAQ",
+      "url": "https://trustradius.com/static/about-trustradius-scoring"
+    },
+    {
+      "finding": "IMDb's published weighted rating pulls titles with few votes toward the overall average, so a handful of votes can't outrank thousands.",
+      "usedFor": "Our users score uses the same adjustment: a tool with 37 reviews moves a little toward the category average; one with 3,200 barely moves. Below 25 reviews there is no score at all.",
+      "source": "IMDb help center",
+      "url": "https://help.imdb.com/article/imdb/track-movies-tv/the-vote-average-for-film-x-should-be-y-why-are-you-displaying-another-rating/G3RC8ZNFAGWNTX4L"
+    },
+    {
+      "finding": "Northwestern's Spiegel Research Center found purchase likelihood peaks at 4.2 to 4.5 stars and falls as ratings near a perfect 5, and that five reviews make a purchase 270% more likely than none.",
+      "usedFor": "We always print the review count next to a rating. A wall of perfect scores makes us look closer.",
+      "source": "Spiegel Research Center, Northwestern University",
+      "url": "https://spiegel.medill.northwestern.edu/wp-content/uploads/sites/2/2021/04/Online-Reviews-Whitepaper.pdf"
+    },
+    {
+      "finding": "Reviewers who get something in return rate the same products about 0.4 to 0.5 stars higher, and disclosing the incentive doesn't remove the bias.",
+      "usedFor": "Where a source labels reviews as incentivized or vendor-invited, we record the share and show it next to the rating.",
+      "source": "University of Florida, Warrington College of Business",
+      "url": "https://bear.warrington.ufl.edu/wshin/Woochoel_Shin/IR.pdf"
+    },
+    {
+      "finding": "Consumer Reports builds its overall scores from tests and owner surveys, and a product earns its Recommended label through those scores.",
+      "usedFor": "Our labels like Top-rated checker and Small teams pick are earned the same way: they go to the top data score in their group, automatically.",
+      "source": "Consumer Reports",
+      "url": "https://www.consumerreports.org/cars-what-goes-into-consumer-reports-overall-score-for-cars/"
+    },
+    {
+      "finding": "Wirecutter's picks are editorial judgments, kept independent of affiliate deals and advertising.",
+      "usedFor": "Stephanie's picks work like Wirecutter's: a named person's judgment, labeled as hers, and kept apart from the scores.",
+      "source": "Wirecutter, The New York Times",
+      "url": "https://thenewyorktimeshelpcenter.helpjuice.com/21870729656596-Wirecutter-Product-Recommendations"
+    }
+  ],
+  "judgment": {
+    "does": [
+      "Names her picks, one for job seekers and one for hiring teams, labeled as hers.",
+      "Nominates tools to check, so a good one doesn't have to wait for a marketing budget to get noticed.",
+      "Writes the guidance: what a recruiter sees when your resume lands, how to use a tool and what to watch out for.",
+      "Chooses the people worth following."
+    ],
+    "never": [
+      "Sets or edits a score.",
+      "Moves a tool up or down a ranking.",
+      "Changes a weight for one tool or one category.",
+      "Accepts money, gifts or deals for any of the above."
+    ]
+  },
+  "limits": [
+    "Most sources publish only an average rating, without each review's date, so we can't yet discount older reviews the way G2 does. Where a source offers a last-12-months rating, we use it.",
+    "Independent lists for applicant tracking systems aren't tracked yet, so those scores use user ratings, popularity and value, which share the best-of lists weight."
+  ]
+}
