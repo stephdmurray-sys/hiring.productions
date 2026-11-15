@@ -45,7 +45,7 @@ export function Motion() {
     )
     const items = Array.from(
       document.querySelectorAll<HTMLElement>(
-        'section, .guide, .g-card, .rec-sit, .cast, .pick, .efile, .vid, .row, .side',
+        'section, .guide, .g-card, .rec-sit, .cast, .pick, .efile, .vid, .row, .side, .sl-tool, .sign',
       ),
     ).filter((el) => !el.closest('footer, nav, header, .site-nav') && !el.querySelector('section'))
     const seen = new Set<HTMLElement>()

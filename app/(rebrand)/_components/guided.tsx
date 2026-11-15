@@ -4,6 +4,7 @@ import { PickerFeedback, TrackOnce, TrackedLink } from './picker-track'
 import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
+import { Dots, Zigzag } from './retro'
 import { ShortToolRow } from './short-list'
 
 /**
@@ -140,6 +141,9 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       </h2>
       <p className="rec-lead">{keepLast(a.opening)}</p>
       {seekers && <h3 className="kit-k rv-k">{PROOF.people}</h3>}
+      <div className="rv-lane">
+      <Dots className="rv-dots" />
+      <Zigzag className="rv-zig" />
       <div className="rec-pick">
         <div className="rec-id">
           <Logo domain="repvera.com" name={a.name} size={64} />
@@ -157,6 +161,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
         <TrackedLink href={a.url} className={btn} event="repvera_profile_click" side={side}>
           {a.button} <span className="arr">&#8599;</span>
         </TrackedLink>
+      </div>
       </div>
       {seekers && (
         <Kit k={PROOF.work}>
@@ -230,8 +235,16 @@ export const guidedCss = `
   .rec-seekers.rv-ans .rec-pick{border:3px solid var(--indigo);box-shadow:6px 6px 0 var(--indigo);}
   .rec-hiring.rv-ans .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
   .rv-work-lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
-  .rv-work{margin-top:16px;}
-  .rv-work .sl-tool{padding:22px 0;}
+  .rv-work{margin-top:22px;}
+  .rv-lane{position:relative;max-width:820px;margin-bottom:24px;}
+  .rv-lane > .rec-pick{position:relative;z-index:2;}
+  .rv-lane .rv-dots{top:-30px;right:-28px;}
+  .rv-lane .rv-zig{bottom:-36px;right:44px;}
+  .rec-seekers .rv-lane .m-dots{color:var(--lavender);}
+  .rec-seekers .rv-lane .m-zig{color:var(--coral);}
+  .rec-hiring .rv-lane .m-dots{color:var(--coral);}
+  .rec-hiring .rv-lane .m-zig{color:var(--indigo);}
+  @media(max-width:560px){.rv-lane .rv-dots{right:-12px;}}
   .rv-more{margin-top:18px;font-size:17px;font-weight:700;}
   .rec-fine{margin-top:18px;font-size:14px;font-weight:700;color:var(--ink-2);}
   .rec-help{margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);}

@@ -21,6 +21,8 @@ export interface ShortTool {
   name: string
   domain: string
   label?: string
+  /** A small tag above the name where a list mixes kinds of work (the proof answer). */
+  kind?: string
   line: string
   /** RepVera only: Stephanie's note, and a link instead of the vendor button. */
   note?: string
@@ -248,6 +250,11 @@ export const PORTFOLIO_SITES: ShortList = {
 }
 
 /** The portfolio sites a job seeker sees inside the proof answer: one for each kind of work. */
-export const PORTFOLIO_PICKS: ShortTool[] = ['behance', 'journo-portfolio', 'github-pages', 'carrd'].map(
-  (go) => PORTFOLIO_SITES.sections.flatMap((s) => s.tools).find((t) => t.go === go)!,
-)
+export const PORTFOLIO_PICKS: ShortTool[] = (
+  [
+    ['behance', 'For design'],
+    ['journo-portfolio', 'For writing'],
+    ['github-pages', 'For code'],
+    ['carrd', 'For any job'],
+  ] as const
+).map(([go, kind]) => ({ ...PORTFOLIO_SITES.sections.flatMap((s) => s.tools).find((t) => t.go === go)!, kind }))
