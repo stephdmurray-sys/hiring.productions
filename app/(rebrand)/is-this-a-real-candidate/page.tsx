@@ -11,6 +11,8 @@ import ats from '@/lib/scorecards/ats-small-teams.json'
 import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { ShortToolRow, shortListCss } from '@/app/(rebrand)/_components/short-list'
 import { FRAUD_TOOLS } from '@/lib/evidence/shortlists'
+import { KnowList, knowCss } from '@/app/(rebrand)/_components/know-list'
+import { BACKGROUND_CHECKS } from '@/lib/evidence/tools-to-know'
 import { keepLast } from '@/lib/site-line'
 
 /**
@@ -85,6 +87,11 @@ const css = `
   .fr-stage-sub{margin:8px 0 0;font-size:17px;color:var(--ink-2);}
   .fr-tools{margin-top:20px;}
   .fr-more{margin:16px 0 0;font-size:15.5px;color:var(--ink-2);}
+  .bg-steps{margin-top:28px;max-width:860px;padding:22px 24px;background:var(--coral-tint);border:3px solid var(--ink);border-radius:16px;}
+  .bg-steps-k{margin:0;font-size:17px;font-weight:900;color:var(--ink);}
+  .bg-steps ol{margin:12px 0 0;padding-left:22px;list-style:decimal;display:grid;gap:8px;font-size:16.5px;line-height:1.5;color:var(--ink);}
+  .bg-src{margin:14px 0 0;font-size:13px;line-height:1.5;color:var(--ink-3);}
+  .bg-src a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
 `
 
 export default function RealCandidatePage() {
@@ -118,7 +125,7 @@ export default function RealCandidatePage() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + shortListCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + shortListCss + knowCss + css }} />
       <JsonLd data={ld} />
       <SiteNav active="hiring" />
 
@@ -195,6 +202,31 @@ export default function RealCandidatePage() {
             )}
           </div>
         ))}
+      </section>
+
+      <section className="wrap sec" id="background">
+        <h2>Background checks, before the offer</h2>
+        <p className="lead">{keepLast('A background check confirms what a candidate told you about their record, after the interviews and before the offer.')}</p>
+        <div className="bg-steps">
+          <p className="bg-steps-k">Before you run one, federal law says</p>
+          <ol>
+            <li>{keepLast('Tell the candidate in writing, in a document that says only that, and get their written permission.')}</li>
+            <li>{keepLast('Certify to the screening company that you won’t use the report to break equal employment law.')}</li>
+            <li>{keepLast('Before you turn someone down because of the report, give them a copy of it and a written summary of their rights.')}</li>
+          </ol>
+          <p className="bg-src">
+            Sources:{' '}
+            <a href="https://www.govinfo.gov/content/pkg/USCODE-2023-title15/html/USCODE-2023-title15-chap41-subchapIII-sec1681b.htm" rel="nofollow noopener" target="_blank">
+              Fair Credit Reporting Act, 15 U.S.C. §1681b
+            </a>
+            ;{' '}
+            <a href="https://www.consumerfinance.gov/ask-cfpb/when-i-apply-for-a-job-what-do-employers-see-when-they-do-a-credit-check-for-employment-and-a-background-check-en-1823/" rel="nofollow noopener" target="_blank">
+              Consumer Financial Protection Bureau
+            </a>
+            , read November 16, 2026. This is a summary of federal law, and your state may add its own rules.
+          </p>
+        </div>
+        <KnowList tools={BACKGROUND_CHECKS} side="hiring" />
       </section>
 
       <section className="wrap sec-tight" id="keep">

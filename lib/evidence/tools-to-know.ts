@@ -79,10 +79,10 @@ const PRACTICE: KnowTool[] = [
     name: 'Huru',
     domain: 'huru.ai',
     line: 'Answer real interview questions out loud on video, or talk with an AI interviewer, and get a score on every answer.',
-    free: 'All of it, as of its October 2026 rebuild.',
+    free: 'Every feature, for job seekers.',
     reviews: 'Apple App Store: 4.6 out of 5 from 107 ratings. Chrome extension: 3.6 out of 5 from 17 ratings.',
     watch: 'The app links the audio and video you record to you.',
-    src: { label: 'Apple App Store listing', url: 'https://apps.apple.com/us/app/huru-ai-mock-interview-prep/id1549599609', date: READ },
+    src: { label: 'Huru', url: 'https://huru.ai/', date: READ },
   },
   {
     go: 'yoodli',
@@ -112,9 +112,11 @@ const MOCKS: KnowTool[] = [
     name: 'Aced Practice',
     domain: 'aced.io',
     tag: 'What Pramp became. Mostly tech, plus behavioral and product sessions',
-    line: 'Free mock interviews with another person, taking turns as interviewer and candidate.',
-    free: 'Peer mock interviews.',
-    src: { label: 'Pramp', url: 'https://www.pramp.com/', date: READ },
+    line: 'Mock interviews with another person, taking turns as interviewer and candidate.',
+    free: 'Monthly credits for peer mock interviews.',
+    paid: 'Membership adds unlimited mock interviews and AI feedback. The price isn’t on a page we could read.',
+    watch: 'Membership renews automatically. Refunds are within 5 days of purchase.',
+    src: { label: 'Aced', url: 'https://www.aced.io/practice', date: READ },
   },
   {
     go: 'interviewing-io',
@@ -241,6 +243,109 @@ export const INTERVIEW_CONSISTENCY: KnowTool[] = [
     line: 'AI interview notes you can move into your scorecard in one click.',
     reviews: 'Chrome extension: 4.5 out of 5 from 8 ratings.',
     src: { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/brighthire/mbokiighkhdopgedihndpibkincpcgan', date: READ },
+  },
+]
+
+/**
+ * Other ways to see how someone works, beside RepVera (Stephanie, Nov 16, 2026: "ok add the tools").
+ * Review counts from Capterra; Capterra's own price fields are left out where they disagree with the vendor.
+ * SkillSurvey couldn't be checked (its site redirects to icims.com, which is blocked).
+ */
+export const SEE_HOW: KnowSet[] = [
+  {
+    k: 'Skills tests and work samples',
+    note: 'See them do a sample of the work before you meet.',
+    tools: [
+      {
+        go: 'testgorilla',
+        name: 'TestGorilla',
+        domain: 'testgorilla.com',
+        line: 'Skills tests to screen candidates before you meet them.',
+        free: '10 credits a month and 5 essential skills tests, with unlimited use.',
+        paid: 'Core from $215 a month, billed annually.',
+        reviews: 'Capterra: 4.1 out of 5 from 267 reviews.',
+        watch: 'Fees aren’t refundable, credits expire at the end of the term, and plans renew automatically.',
+        src: { label: 'TestGorilla pricing and terms', url: 'https://www.testgorilla.com/pricing/', date: READ },
+      },
+      {
+        go: 'codesignal',
+        name: 'CodeSignal',
+        domain: 'codesignal.com',
+        tag: 'For engineering roles',
+        line: 'Coding assessments. Its Build plan is made for small teams making their first technical hires.',
+        paid: '$79 a month billed annually, or $99 billed monthly.',
+        reviews: 'Capterra: 4.6 out of 5 from 49 reviews.',
+        watch: 'No free trial, and extra credits cost $20 each.',
+        src: { label: 'CodeSignal pricing', url: 'https://codesignal.com/pricing/', date: READ },
+      },
+      {
+        go: 'vervoe',
+        name: 'Vervoe',
+        domain: 'vervoe.com',
+        tag: 'Built for higher-volume hiring',
+        line: 'Skills assessments that show how candidates do real work.',
+        paid: 'Quote only.',
+        reviews: 'Capterra: 4.5 out of 5 from 66 reviews.',
+        src: { label: 'Vervoe pricing', url: 'https://vervoe.com/pricing/', date: READ },
+      },
+    ],
+  },
+  {
+    k: 'Reference check tools',
+    note: 'Structured surveys sent to the references a candidate names.',
+    tools: [
+      {
+        go: 'crosschq',
+        name: 'Crosschq',
+        domain: 'crosschq.com',
+        line: 'Structured reference checks, with more than 135 role-specific survey templates.',
+        paid: 'Quote only.',
+        reviews: 'Capterra: 4.9 out of 5 from 15 reviews.',
+        src: { label: 'Crosschq', url: 'https://www.crosschq.com/platform/reference-checks', date: READ },
+      },
+      {
+        go: 'checkster',
+        name: 'Checkster by Harver',
+        domain: 'harver.com',
+        line: 'The candidate enters their references, and each one gets a short survey they can finish in about 2 minutes on a phone.',
+        paid: 'Quote only.',
+        src: { label: 'Harver', url: 'https://harver.com/software/reference-checking/', date: READ },
+      },
+    ],
+  },
+]
+
+/** Background checks before an offer, with the federal steps. */
+export const BACKGROUND_CHECKS: KnowTool[] = [
+  {
+    go: 'checkr',
+    name: 'Checkr',
+    domain: 'checkr.com',
+    line: 'Background checks you order one report at a time, from a basic criminal search up to county, state and federal searches.',
+    paid: 'From $29.99, $59.99 or $94.99 a report, by package.',
+    reviews: 'Capterra: 4.5 out of 5 from 308 reviews.',
+    watch: 'Court and database fees can be added, passed through at cost.',
+    src: { label: 'Checkr pricing', url: 'https://checkr.com/pricing', date: READ },
+  },
+  {
+    go: 'goodhire',
+    name: 'GoodHire',
+    domain: 'goodhire.com',
+    tag: 'A Checkr company, with the same package prices',
+    line: 'Background checks in three packages: Basic, Essential and Complete.',
+    paid: 'From $29.99, $59.99 or $94.99 a check.',
+    reviews: 'Capterra: 4.8 out of 5 from 117 reviews.',
+    watch: 'Third-party fees may apply.',
+    src: { label: 'GoodHire pricing', url: 'https://www.goodhire.com/pricing/', date: READ },
+  },
+  {
+    go: 'hireright',
+    name: 'HireRight',
+    domain: 'hireright.com',
+    line: 'Background screening with a focus on compliance.',
+    paid: 'Quote only.',
+    reviews: 'Capterra: 3.8 out of 5 from 23 reviews.',
+    src: { label: 'HireRight pricing', url: 'https://www.hireright.com/pricing', date: READ },
   },
 ]
 

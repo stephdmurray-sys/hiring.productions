@@ -104,8 +104,16 @@ const DESTINATIONS: Record<string, string> = {
   huru: 'https://huru.ai/',
   yoodli: 'https://yoodli.ai/',
   'big-interview': 'https://www.biginterview.com/',
-  'aced-practice': 'https://www.pramp.com/',
+  'aced-practice': 'https://www.aced.io/practice',
   'interviewing-io': 'https://interviewing.io/',
+  testgorilla: 'https://www.testgorilla.com/',
+  codesignal: 'https://codesignal.com/',
+  vervoe: 'https://vervoe.com/',
+  crosschq: 'https://www.crosschq.com/',
+  checkster: 'https://harver.com/software/reference-checking/',
+  checkr: 'https://checkr.com/',
+  goodhire: 'https://www.goodhire.com/',
+  hireright: 'https://www.hireright.com/',
 }
 
 export async function GET(

@@ -10,6 +10,8 @@ import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { Dots, Zigzag } from './retro'
 import { ShortToolRow } from './short-list'
+import { KnowList } from './know-list'
+import { SEE_HOW } from '@/lib/evidence/tools-to-know'
 
 /**
  * The guided picker screens (lib/evidence/guided.ts holds the copy). Every
@@ -264,6 +266,14 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
           </p>
         </Kit>
       )}
+      {/* Other ways to see how someone works, beside RepVera (Stephanie, Nov 16, 2026: "ok add the tools"). */}
+      {!seekers &&
+        SEE_HOW.map((set) => (
+          <Kit k={set.k} key={set.k}>
+            {set.note && <p className="kit-know-note">{keepLast(set.note)}</p>}
+            <KnowList tools={set.tools} side={side} />
+          </Kit>
+        ))}
       {seekers ? (
         <Kit k={PROOF.where.k}>
           <p className="kit-wont">{keepLast(PROOF.where.text)}</p>
