@@ -12,7 +12,7 @@ import type { KnowTool } from '@/lib/evidence/tools-to-know'
  */
 export function KnowList({ tools, side }: { tools: KnowTool[]; side: 'seekers' | 'hiring' }) {
   return (
-    <div className={`know know-${side}`}>
+    <div className={`know know-${side} know-n${tools.length}`}>
       {tools.map((t) => (
         <div className="know-card" key={t.go}>
           <div className="know-top">
@@ -59,6 +59,10 @@ export function KnowList({ tools, side }: { tools: KnowTool[]; side: 'seekers' |
 
 export const knowCss = `
   .know{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px;margin-top:18px;}
+  /* Even rows only (Stephanie hates a lone card): two or four go two across, three go three across or stack. */
+  .know-n2,.know-n3,.know-n4{grid-template-columns:1fr;}
+  @media(min-width:700px){.know-n2,.know-n4{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media(min-width:900px){.know-n3{grid-template-columns:repeat(3,minmax(0,1fr));}}
   .know-card{display:flex;flex-direction:column;gap:8px;padding:18px 20px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);}
   .know-top{display:flex;align-items:center;gap:12px;}
   .know-top > div{display:grid;gap:2px;}

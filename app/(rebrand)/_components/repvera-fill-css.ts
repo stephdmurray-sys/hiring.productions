@@ -8,13 +8,13 @@ export const repveraFillCss = `
   .rf-steps::before{right:12.5%;background:var(--rule-2);}
   .rf-steps::after{width:calc((100% - 25%) * var(--rf-progress, 100) / 100);background:var(--ink);transition:width .6s ease;}
   .rf-steps li{position:relative;z-index:1;}
-  .rf-step{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 6px;text-align:center;font:inherit;color:var(--ink);background:none;border:0;cursor:pointer;}
+  .rf-step{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 6px;text-align:center;font:inherit;color:var(--ink);background:none;border:0;}
   .rf-n{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;border:3px solid var(--ink);background:#fff;font-weight:900;font-size:19px;box-shadow:3px 3px 0 var(--ink);transition:background .3s ease,color .3s ease,transform .3s ease;}
   .rf-done .rf-n{background:var(--indigo);color:#fff;}
+  .rf-hiring .rf-done .rf-n{background:var(--coral);color:var(--ink);}
   .rf-now .rf-n{transform:scale(1.08) rotate(-6deg);}
   .rf-step b{margin-top:4px;font-size:16.5px;line-height:1.25;font-weight:900;}
   .rf-line{font-size:14px;line-height:1.45;color:var(--ink-2);max-width:250px;}
-  .rf-step:hover b{text-decoration:underline;text-underline-offset:3px;}
 
   /* The window */
   .rfw{background:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);overflow:hidden;}
@@ -41,7 +41,7 @@ export const repveraFillCss = `
   .rfw-k{margin:4px 0 0;font-size:13.5px;font-weight:900;color:var(--ink-3);}
   .rfw-known{margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.25;font-weight:900;letter-spacing:-0.015em;color:var(--ink);}
   .rfw-known-more{margin:8px 0 0;max-width:760px;font-size:clamp(17px,1.6vw,19px);line-height:1.5;font-weight:600;color:var(--ink-2);}
-  .rfw-known mark{background:linear-gradient(transparent 58%,var(--indigo-tint) 58%);color:inherit;padding:0 3px;}
+  .rfw-known mark{background:linear-gradient(transparent 58%,var(--indigo-tint) 58%);color:inherit;padding:0;}
 
   .rfw-stack{display:flex;height:16px;border-radius:8px;overflow:hidden;}
   .rfw-stack i{display:block;flex-basis:0;border-right:2px solid #fff;}

@@ -164,7 +164,7 @@ export function reviewSiteWelcome(source: string, extras?: Record<string, string
         'See a real RepVera profile: https://www.repvera.com/u/stephaniemurray',
         'Full disclosure: I built RepVera, so I don’t give it a score. Take a look and decide for yourself.',
         '',
-        'Where to ask for it: add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+        'When to ask for it: when you need to trust people sooner. Before the first screen, or after the first interview, before you send them to the hiring manager.',
         '',
         'Have a role open right now? Try it on that one. I’ll set it up with you and show you what a profile looks like for a role like yours. It starts with one conversation with me, and it is free to try.',
         `Talk to Stephanie about one role: ${REPVERA_CALL_URL}`,

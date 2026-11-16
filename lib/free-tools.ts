@@ -191,7 +191,7 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       side: 'hiring',
       title: 'How do we see how they work?',
       what: 'Hear from people who have worked with a candidate, before the first interview.',
-      get: 'Where to ask for it',
+      get: 'When to ask for it',
       href: '/what-should-i-use?side=hiring&problem=see-how-they-work',
       icon: 'proof',
     },

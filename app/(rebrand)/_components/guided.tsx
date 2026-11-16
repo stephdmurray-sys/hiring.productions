@@ -5,13 +5,15 @@ import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, PickerSuggest, TrackOnce, TrackedLink } from './picker-track'
 import { CopyLink } from './rec-form'
 import { Capture } from './capture'
-import { ASK_FOR_IT, GUIDED, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
+import { ASK_FOR_IT, GUIDED, HIRING_READ, PROOF, REPVERA_ANSWER, REPVERA_PROBLEM, guidedStep, isStep, wholeList, type GuidedTarget, type Side } from '@/lib/evidence/guided'
 import { PORTFOLIO_PICKS } from '@/lib/evidence/shortlists'
 import { Kit } from './recommender'
 import { Dots, Zigzag } from './retro'
 import { ShortToolRow } from './short-list'
 import { KnowList } from './know-list'
 import { SEE_HOW } from '@/lib/evidence/tools-to-know'
+import { RepveraFill } from './repvera-fill'
+import { REPVERA_EXAMPLE } from '@/lib/repvera-example'
 
 /**
  * The guided picker screens (lib/evidence/guided.ts holds the copy). Every
@@ -166,6 +168,116 @@ function RvQuote({ q, big = false }: { q: RepveraQuote; big?: boolean }) {
   )
 }
 
+/**
+ * The hiring answer around a large profile (Stephanie, Nov 16, 2026: "the profile being larger",
+ * and clear enough that hiring teams grab it). Her card copy stays word for word. Order: the card
+ * with the full-width profile filling in, what to ask about in the interview (read off the profile),
+ * when to ask candidates for it, then the quotes and the one button.
+ */
+function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER)['hiring']; side: Side; btn: string; lead: RepveraQuote[]; said: RepveraQuote[] }) {
+  const trait = (name: string) => REPVERA_EXAMPLE.traits.find((t) => t.name === name)!
+  const asks = [
+    { ...HIRING_READ.confirmed, t: trait(HIRING_READ.confirmed.trait), cls: 'rv-ask-yes' },
+    { ...HIRING_READ.open, t: trait(HIRING_READ.open.trait), cls: 'rv-ask-open' },
+  ]
+  return (
+    <>
+      <div className="rv-lane rv-lane-wide">
+        <Dots className="rv-dots" />
+        <Zigzag className="rv-zig" />
+        <div className="rec-pick">
+          <div className="rec-id">
+            <Logo domain="repvera.com" name={a.name} size={64} />
+            <div>
+              <b>{a.name}</b>
+              <span className="rv-built">{a.label}</span>
+            </div>
+          </div>
+          <div className="rv-text rv-text-wide">
+            {a.lines.map((l, n) => (
+              <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
+                {l}
+              </p>
+            ))}
+          </div>
+          <h3 className="rv-prof-k">{HIRING_READ.profileK}</h3>
+          <RepveraFill side="hiring" />
+          <p className="rv-prof-src">
+            {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}.`)}{' '}
+            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+              See the whole profile <span className="arr">&#8599;</span>
+            </TrackedLink>
+          </p>
+        </div>
+      </div>
+      <Kit k={HIRING_READ.askK}>
+        <p className="kit-know-note">{keepLast(HIRING_READ.askLead)}</p>
+        <div className="rv-asks">
+          {asks.map((x) => (
+            <div className={`rv-ask ${x.cls}`} key={x.trait}>
+              <span className="rv-ask-tag">{x.tag}</span>
+              <p className="rv-ask-trait">
+                <b>{x.t.name}</b>
+                <span className="rfw-marks" aria-label={`${x.t.marks} of 3 marks`}>
+                  {[1, 2, 3].map((m) => (
+                    <i key={m} className={m <= x.t.marks ? 'rfw-mark-on' : ''} />
+                  ))}
+                </span>
+              </p>
+              <p className="rv-ask-detail">{x.t.marks ? x.t.detail : x.t.detail.split('. ')[0] + '.'}</p>
+              <p className="rv-ask-do">{keepLast(x.ask)}</p>
+            </div>
+          ))}
+        </div>
+      </Kit>
+      <Kit k={ASK_FOR_IT.k}>
+        <p className="kit-know-note">{keepLast(ASK_FOR_IT.lead)}</p>
+        <ol className="rv-steps">
+          {ASK_FOR_IT.steps.map((step, i) => (
+            <li key={step}>
+              <span className="rv-step-n" aria-hidden="true">
+                {i + 1}
+              </span>
+              <span>{keepLast(step)}</span>
+            </li>
+          ))}
+        </ol>
+      </Kit>
+      <div className="rv-lane rv-lane-end">
+        <div className="rec-pick">
+          {lead.map((q) => (
+            <RvQuote q={q} key={q.id} big />
+          ))}
+          {said.length > 0 && (
+            <>
+              <h3 className="rv-qk">{a.quotesK}</h3>
+              <div className={`rv-quotes rv-quotes-${said.length}`}>
+                {said.map((q) => (
+                  <RvQuote q={q} key={q.id} />
+                ))}
+              </div>
+            </>
+          )}
+          <p className="rv-note">{a.note}</p>
+          {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
+          {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
+          <p className="rv-cta">
+            <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
+              {a.cta.button} <span className="arr">&#8599;</span>
+            </TrackedLink>
+          </p>
+          {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
+          <p className="rv-second">
+            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+              {a.second.text} <span className="arr">&#8599;</span>
+            </TrackedLink>
+          </p>
+        </div>
+      </div>
+    </>
+  )
+}
+
 export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
   const a = REPVERA_ANSWER[side]
   const seekers = side === 'seekers'
@@ -182,74 +294,80 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
         {a.heading}
       </h2>
       <p className="rec-lead">{keepLast(a.opening)}</p>
-      {seekers && <h3 className="kit-k rv-k">{PROOF.people}</h3>}
-      <div className="rv-lane">
-      <Dots className="rv-dots" />
-      <Zigzag className="rv-zig" />
-      <div className="rec-pick">
-        <div className="rec-id">
-          <Logo domain="repvera.com" name={a.name} size={64} />
-          <div>
-            <b>{a.name}</b>
-            <span className="rv-built">{a.label}</span>
+      {seekers ? (
+        <>
+        {seekers && <h3 className="kit-k rv-k">{PROOF.people}</h3>}
+        <div className="rv-lane">
+        <Dots className="rv-dots" />
+        <Zigzag className="rv-zig" />
+        <div className="rec-pick">
+          <div className="rec-id">
+            <Logo domain="repvera.com" name={a.name} size={64} />
+            <div>
+              <b>{a.name}</b>
+              <span className="rv-built">{a.label}</span>
+            </div>
           </div>
-        </div>
-        <div className="rv-body">
-          <div className="rv-text">
-            {a.lines.map((l, n) => (
-              <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
-                {l}
-              </p>
-            ))}
-          </div>
-          <a className="rv-shot" href={a.second.url} rel="noopener" target="_blank">
-            <Image
-              src="/repvera/profile-overview.webp"
-              alt="A real RepVera profile: the finding, who is behind the profile, the summary and the strongest patterns"
-              width={656}
-              height={740}
-              sizes="(max-width: 760px) 90vw, 320px"
-            />
-            <span>A real profile: Stephanie&rsquo;s own</span>
-          </a>
-        </div>
-        {lead.map((q) => (
-          <RvQuote q={q} key={q.id} big />
-        ))}
-        {said.length > 0 && (
-          <>
-            <h3 className="rv-qk">{a.quotesK}</h3>
-            <div className={`rv-quotes rv-quotes-${said.length}`}>
-              {said.map((q) => (
-                <RvQuote q={q} key={q.id} />
+          <div className="rv-body">
+            <div className="rv-text">
+              {a.lines.map((l, n) => (
+                <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
+                  {l}
+                </p>
               ))}
             </div>
-          </>
-        )}
-        {after.length > 0 && a.afterK && (
-          <>
-            <h3 className="rv-qk">{a.afterK}</h3>
-            {after.map((q) => (
-              <RvQuote q={q} key={q.id} big />
-            ))}
-          </>
-        )}
-        <p className="rv-note">{a.note}</p>
-        {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
-        {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
-        <p className="rv-cta">
-          <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
-            {a.cta.button} <span className="arr">&#8599;</span>
-          </TrackedLink>
-        </p>
-        {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
-        <p className="rv-second">
-          <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
-            {a.second.text} <span className="arr">&#8599;</span>
-          </TrackedLink>
-        </p>
-      </div>
-      </div>
+            <a className="rv-shot" href={a.second.url} rel="noopener" target="_blank">
+              <Image
+                src="/repvera/profile-overview.webp"
+                alt="A real RepVera profile: the finding, who is behind the profile, the summary and the strongest patterns"
+                width={656}
+                height={740}
+                sizes="(max-width: 760px) 90vw, 320px"
+              />
+              <span>A real profile: Stephanie&rsquo;s own</span>
+            </a>
+          </div>
+          {lead.map((q) => (
+            <RvQuote q={q} key={q.id} big />
+          ))}
+          {said.length > 0 && (
+            <>
+              <h3 className="rv-qk">{a.quotesK}</h3>
+              <div className={`rv-quotes rv-quotes-${said.length}`}>
+                {said.map((q) => (
+                  <RvQuote q={q} key={q.id} />
+                ))}
+              </div>
+            </>
+          )}
+          {after.length > 0 && a.afterK && (
+            <>
+              <h3 className="rv-qk">{a.afterK}</h3>
+              {after.map((q) => (
+                <RvQuote q={q} key={q.id} big />
+              ))}
+            </>
+          )}
+          <p className="rv-note">{a.note}</p>
+          {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
+          {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
+          <p className="rv-cta">
+            <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
+              {a.cta.button} <span className="arr">&#8599;</span>
+            </TrackedLink>
+          </p>
+          {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
+          <p className="rv-second">
+            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+              {a.second.text} <span className="arr">&#8599;</span>
+            </TrackedLink>
+          </p>
+        </div>
+        </div>
+        </>
+      ) : (
+        <HiringRepvera a={a} side={side} btn={btn} lead={lead} said={said} />
+      )}
       {seekers && (
         <Kit k={PROOF.work} id="work">
           <p className="rv-work-lead">{keepLast(PROOF.workLead)}</p>
@@ -284,11 +402,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
             </a>
           </p>
         </Kit>
-      ) : (
-        <Kit k={ASK_FOR_IT.k}>
-          <p className="kit-wont">{keepLast(ASK_FOR_IT.text)}</p>
-        </Kit>
-      )}
+      ) : null}
       <p className="rv-back">
         <a className="tl" href={back}>
           Go back and pick a different answer
@@ -301,7 +415,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
           <Capture
             source="hiring_proof"
             audience="hiring"
-            promise="Get this answer by email, with where to ask candidates for it."
+            promise="Get this answer by email, with when to ask candidates for it."
             cta="Email me this answer"
             done="Sent. Check your inbox."
             askCompanySize
@@ -430,6 +544,28 @@ export const guidedCss = `
   .rec-hiring .rv-lane .m-dots{color:var(--coral);}
   .rec-hiring .rv-lane .m-zig{color:var(--indigo);}
   @media(max-width:560px){.rv-lane .rv-dots{right:-12px;}}
+  /* Hiring answer: the profile at full width, what to ask, when to ask for it (Nov 16, 2026) */
+  .rv-lane-wide,.rv-lane-wide > .rec-pick{max-width:none;}
+  .rv-lane-wide > .rec-pick{grid-template-columns:minmax(0,1fr);}
+  .rv-text-wide{max-width:760px;}
+  .rv-prof-k{margin:10px 0 0;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);}
+  .rv-lane-wide .rf{margin-top:4px;}
+  .rv-prof-src{margin:2px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3);}
+  .rv-prof-src .tl{font-size:13.5px;}
+  .rv-asks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;}
+  .rv-ask{display:flex;flex-direction:column;gap:8px;padding:20px 22px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);}
+  .rv-ask-tag{align-self:flex-start;padding:4px 11px;border:2px solid var(--ink);border-radius:999px;font-size:12.5px;font-weight:900;color:var(--ink);}
+  .rv-ask-yes .rv-ask-tag{background:var(--ok-bright);}
+  .rv-ask-open .rv-ask-tag{background:var(--coral-tint);}
+  .rv-ask-trait{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 0;font-size:20px;line-height:1.2;color:var(--ink);}
+  .rv-ask-trait b{font-weight:900;}
+  .rv-ask-detail{margin:0;font-size:14.5px;line-height:1.45;color:var(--ink-3);}
+  .rv-ask-do{margin:auto 0 0;padding-top:12px;border-top:1px solid var(--rule);font-size:16.5px;line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
+  .rv-steps{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0 0;padding:0;}
+  .rv-steps li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;padding:20px 22px;background:var(--coral-tint);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);font-size:17.5px;line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
+  .rv-step-n{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--coral);color:var(--ink);border:3px solid var(--ink);font-weight:900;font-size:17px;line-height:1;transform:rotate(-6deg);}
+  .rv-lane-end{margin-top:44px;}
+  @media(max-width:700px){.rv-asks,.rv-steps{grid-template-columns:1fr;}}
   .rv-more{margin-top:18px;font-size:17px;font-weight:700;}
   .rec-fine{margin-top:18px;font-size:14px;font-weight:700;color:var(--ink-2);}
   .rec-help{margin-top:36px;padding-top:24px;border-top:1px solid var(--rule);}
