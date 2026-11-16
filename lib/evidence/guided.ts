@@ -313,6 +313,23 @@ export const PROOF = {
 export const ASK_FOR_IT = {
   k: 'Where to ask for it',
   text: 'Add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
+  /** The same two moves as numbered steps, on the hiring answer (Nov 16, 2026). */
+  steps: ['Add a field for it on your application form, next to the resume upload.', 'Say in the job post that you read it before you book interviews.'],
+}
+
+/**
+ * The hiring answer around a large profile (Stephanie, Nov 16, 2026: "the profile being larger"
+ * and make it clear enough that hiring teams grab it). The two cards read straight off the
+ * example profile (lib/repvera-example.ts): one trait people confirmed, one nobody has described yet,
+ * and what to ask about each, so "you walk into the interview already knowing what to ask about"
+ * (her card) is shown, not told.
+ */
+export const HIRING_READ = {
+  profileK: 'What lands with the resume',
+  askK: 'Walk in knowing what to ask',
+  askLead: 'The profile shows what people have confirmed and what nobody has described yet, so you know where to dig.',
+  confirmed: { tag: 'Confirmed', trait: 'Conscientiousness', ask: 'Ask for one example, and listen for what the people behind the profile described.' },
+  open: { tag: 'Nobody has described it yet', trait: 'Coachability', ask: 'Ask: “Tell me about a time you took feedback on board.”' },
 }
 
 /** Free tools to go straight to, one row per side, under the first question on the homepage. */

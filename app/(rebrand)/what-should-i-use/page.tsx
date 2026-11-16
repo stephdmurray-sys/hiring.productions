@@ -14,6 +14,7 @@ import { askFromState, recFramework, recommend, situationFor, stateFromParams, w
 import { latestCheck } from '@/lib/evidence'
 import { atsAsOf, shortDate } from '@/app/(rebrand)/_components/data'
 import { keepLast } from '@/lib/site-line'
+import { repveraFillCss } from '@/app/(rebrand)/_components/repvera-fill-css'
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
@@ -54,7 +55,7 @@ export default async function Page({ searchParams }: { searchParams: SearchParam
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss + guidedCss + slToolCss + retroCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss + guidedCss + slToolCss + retroCss + repveraFillCss }} />
       <SiteNav active="recommend" />
 
       <header className="ph">

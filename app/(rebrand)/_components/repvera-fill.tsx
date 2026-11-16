@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { REPVERA_EXAMPLE as R, repveraReceipts } from '@/lib/repvera-example'
+import { keepLast } from '@/lib/site-line'
 
 /**
  * "Watch a real profile fill in" (Stephanie, Nov 16, 2026): how a RepVera
@@ -15,12 +16,17 @@ import { REPVERA_EXAMPLE as R, repveraReceipts } from '@/lib/repvera-example'
  * Styles: repvera-fill-css.ts.
  */
 
-const STEPS = [
-  { title: 'You say it', line: 'On its own, what you’re known for is your word.' },
+const SHARED = [
   { title: 'Receipts come in', line: 'From managers, peers and clients, each verified through their work email.' },
   { title: 'Their words show up', line: 'Word for word. Nobody sees anyone else’s answers.' },
   { title: 'Patterns become proof', line: 'A trait is confirmed when different kinds of people, at different companies, say the same thing.' },
 ]
+
+/** Step one is the only one that changes by side: the job seeker's own word, or the candidate's resume (hiring answer, Nov 16, 2026). */
+const STEPS_BY_SIDE = {
+  seekers: [{ title: 'You say it', line: 'On its own, what you’re known for is your word.' }, ...SHARED],
+  hiring: [{ title: 'The resume says it', line: 'On its own, a resume is the candidate’s word.' }, ...SHARED],
+}
 
 /** Shades for the relationship types, darkest first. */
 const SHADES = ['#1a1a22', '#3b2a99', '#5432e0', '#6c47ff', '#8a6dff', '#a78bfa', '#c4b2fc', '#dcd2fd']
@@ -33,7 +39,8 @@ function Bold({ text }: { text: string }) {
   )
 }
 
-export function RepveraFill() {
+export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' }) {
+  const STEPS = STEPS_BY_SIDE[side]
   const total = repveraReceipts()
   const [step, setStep] = useState(STEPS.length)
   const ref = useRef<HTMLDivElement>(null)
@@ -76,7 +83,7 @@ export function RepveraFill() {
   const progress = ((step - 1) / (STEPS.length - 1)) * 100
 
   return (
-    <div className="rf" ref={ref}>
+    <div className={`rf rf-${side}`} ref={ref}>
       <ol className="rf-steps" style={{ ['--rf-progress' as string]: `${progress}%` }}>
         {STEPS.map((s, i) => (
           <li key={s.title}>
@@ -84,8 +91,8 @@ export function RepveraFill() {
               <span className="rf-n" aria-hidden="true">
                 {i + 1}
               </span>
-              <b>{s.title}</b>
-              <span className="rf-line">{s.line}</span>
+              <b>{keepLast(s.title)}</b>
+              <span className="rf-line">{keepLast(s.line)}</span>
             </button>
           </li>
         ))}
@@ -111,7 +118,7 @@ export function RepveraFill() {
               <p className="rfw-role">{R.headline}</p>
               <p className="rfw-bio">{R.bio}</p>
             </div>
-            <span className={proven ? 'rfw-badge rfw-badge-on' : 'rfw-badge'}>{proven ? `Backed by ${total} receipts` : 'Your word'}</span>
+            <span className={proven ? 'rfw-badge rfw-badge-on' : 'rfw-badge'}>{proven ? `Backed by ${total} receipts` : side === 'hiring' ? 'Their word' : 'Your word'}</span>
           </div>
           <p className="rfw-tabs" aria-hidden="true">
             {R.tabs.map((t, i) => (
