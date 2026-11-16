@@ -13,6 +13,7 @@ import { ShortToolRow } from './short-list'
 import { KnowList } from './know-list'
 import { SEE_HOW } from '@/lib/evidence/tools-to-know'
 import { RepveraFill } from './repvera-fill'
+import { RepveraWork } from './repvera-work'
 import { REPVERA_EXAMPLE } from '@/lib/repvera-example'
 
 /**
@@ -334,6 +335,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
         <Kit k={PROOF.work} id="work">
           <p className="rv-work-lead">{keepLast(PROOF.workLead)}</p>
           <p className="rv-work-rv">{keepLast(PROOF.repveraWork)}</p>
+          <RepveraWork k={PROOF.workTabK} note={PROOF.workTabNote} />
           <p className="rv-nowork">{keepLast(PROOF.noWork)}</p>
           <div className="sl-tools rv-work">
             {PORTFOLIO_PICKS.map((t) => (

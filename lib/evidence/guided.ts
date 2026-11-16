@@ -303,6 +303,9 @@ export const PROOF = {
   noWork: 'No work samples? Your RepVera is proof on its own.',
   /** Stephanie, Nov 16, 2026: RepVera can show the work too, verified by the people who saw it. */
   repveraWork: 'Your RepVera can hold your work too, verified by the people who saw it.',
+  /** Above the example Work tab, and the line under it (Stephanie, Nov 16, 2026). */
+  workTabK: 'What witnessed work looks like',
+  workTabNote: 'An example Work tab, with names and details changed.',
   email: { text: 'Get these steps as a checklist by email', href: '/show-how-you-work#email' },
   more: { text: 'Portfolio sites to know, sorted by the kind of work', href: '/guides/portfolio-sites' },
   where: {
