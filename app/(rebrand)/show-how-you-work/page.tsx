@@ -54,6 +54,7 @@ export default function Page() {
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="work">
         <StepHead n={2} title="Add your work, if people can see it" sub="Designs, writing or code. No work samples? Skip this step. Step one is your proof." />
+        <p className="pk-rv-work">{keepLast(PROOF.repveraWork)}</p>
         <div className="sl-tools">
           {PORTFOLIO_PICKS.map((t) => (
             <ShortToolRow t={t} side="seekers" key={t.name} />
@@ -95,6 +96,7 @@ export default function Page() {
 }
 
 const css = `
+  .pk-rv-work{margin-top:18px;max-width:720px;padding-left:14px;border-left:4px solid var(--indigo);font-size:18px;line-height:1.5;font-weight:800;color:var(--ink);text-wrap:pretty;}
   .pk-one{margin-top:32px;}
   .pk-more{margin-top:24px;font-size:17px;font-weight:700;}
   .pk-email{align-items:center;}

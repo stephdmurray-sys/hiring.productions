@@ -8,6 +8,9 @@ import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
 import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { SCORECARD_MAX, cleanRole, pickCompetencies, scorecardData as data } from '@/lib/scorecard'
 import { keepLast } from '@/lib/site-line'
+import { KnowList, knowCss } from '@/app/(rebrand)/_components/know-list'
+import { moneyCss } from '@/lib/money'
+import { PRACTICE, MOCKS } from '@/lib/evidence/tools-to-know'
 
 /**
  * "What will they ask me in the interview?": interview practice for job
@@ -110,7 +113,7 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + moneyCss + knowCss + css }} />
       <SiteNav active="seekers" />
 
       <header className="ph">
@@ -276,6 +279,12 @@ export default async function InterviewPracticePage({ searchParams }: { searchPa
       )}
 
       {/* Nov 15, 2026: questions to ask the interviewer, the most searched interview topic (Ciphr, Semrush data). Built from the method above. */}
+      <section className="wrap sec no-print" id="out-loud">
+        <h2>Practice it out loud</h2>
+        <p className="lead">{keepLast('Saying the answer out loud is different from knowing it. These tools listen and give you feedback, and one pairs you with a real person.')}</p>
+        <KnowList tools={[PRACTICE[0], PRACTICE[1], MOCKS[0], PRACTICE[2]]} side="seekers" />
+      </section>
+
       <section className="wrap sec" id="ask-them">
         <h2>What should I ask them at the end?</h2>
         <p className="lead">{keepLast('Ask for the things they score you on. In a structured interview those are set before you walk in, so they can tell you.')}</p>

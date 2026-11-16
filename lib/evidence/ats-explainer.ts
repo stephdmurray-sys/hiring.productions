@@ -139,11 +139,28 @@ export const PARSE_COUNTER = MYTH.origin // "modern ATS can extract information 
 
 /** Volume, search and sort. */
 export const QUEUE = {
-  perJob: { now: 95, then: 28, thenYear: 2021 },
-  volume: S({
-    source: 'Greenhouse customer data from August 2025, in Recruiters are overloaded',
-    date: 'October 2, 2025',
-    url: 'https://www.greenhouse.com/blog/hiring-pipeline-overload',
+  /**
+   * Applications per job post by work type, US, January to August 2026
+   * (Greenhouse, The Hire Standard, Fall 2026, appendix table A7 "Role type
+   * levels": "Apps per posting  On-site 128  Hybrid 206  Remote 415").
+   * 9,473 US organizations, 161.8 million applications, 831,933 hires.
+   * Replaces the 2025 average of 95 (Stephanie, Nov 16, 2026: "it's even
+   * higher for remote roles... in 2026, the averages are"): that figure was
+   * across all jobs, and on-site alone is now 128. 415 / 128 = 3.2.
+   * Report page: https://www.greenhouse.com/recruiting-benchmarks (download form).
+   */
+  perPost: { onsite: 128, hybrid: 206, remote: 415 },
+  perPostFrom: S({
+    source: 'Greenhouse Hire Standard report, Fall 2026, US data from January to August 2026, table A7',
+    date: 'November 10, 2026',
+    url: 'https://cdn.prod.website-files.com/6668a687e71e2722fccb8357/6af3aa54e0a5c01ffec1552e_The-Hire-Standard-Fall-2026_US.pdf',
+  }),
+  interview: { remote: 3.4, other: 5.3 },
+  interviewFrom: S({
+    source: 'Huntr, Q3 2026 Job Search Trends Report',
+    date: 'Q3 2026', // tracker data pulled October 1, 2026
+    url: 'https://huntr.co/research/job-search-trends-q3-2026',
+    // "Remote-only applications got interviews at 3.4% in Q3 2026, against 5.3% each for hybrid-only and onsite-only. Remote-only ranked last in every quarter of 2026."
   }),
   search: S({
     source: 'Greenhouse Support, Search resumes for keywords',
@@ -197,6 +214,6 @@ export const SKILLSYNCER = {
 export function allSources(): Source[] {
   const seen = new Map<string, Source>()
   const add = (s: Source) => seen.set(s.url, s)
-  ;[MYTH.origin, MYTH.traced, MYTH.survey, MYTH.rules, ...KNOCKOUT_DOCS, ...KNOCKOUTS.map((k) => k.from), ...PARSING.flatMap((p) => p.from), QUEUE.volume, QUEUE.search, QUEUE.sort, SKILLSYNCER.from, ...NO_ACCOUNT_CHECKERS.map((c) => c.from)].forEach(add)
+  ;[MYTH.origin, MYTH.traced, MYTH.survey, MYTH.rules, ...KNOCKOUT_DOCS, ...KNOCKOUTS.map((k) => k.from), ...PARSING.flatMap((p) => p.from), QUEUE.perPostFrom, QUEUE.interviewFrom, QUEUE.search, QUEUE.sort, SKILLSYNCER.from, ...NO_ACCOUNT_CHECKERS.map((c) => c.from)].forEach(add)
   return [...seen.values()]
 }

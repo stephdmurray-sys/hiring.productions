@@ -406,12 +406,13 @@ export default function Page() {
                 <b>
                   <a href="/about/stephanie">Stephanie Murray</a>
                 </b>{' '}
-                2025 Transform Award, Talent Strategy of the Year
+                Talent Advisor, 20 years experience
               </span>
             </p>
             <p className="pick-facts">
-              {rising.rawUserScore?.toFixed(1)} from {formatCount(rising.citableReviews)} users &middot; #{rising.rank}{' '}
-              {SEGMENT_SINGULAR[rising.segment]} &middot; $0 for a clean PDF
+              {rising.rawUserScore?.toFixed(1)} from {formatCount(rising.citableReviews)} ratings &middot; #{rising.rank}{' '}
+              {SEGMENT_SINGULAR[rising.segment]}
+              {risingPick.facts && <> &middot; {risingPick.facts}</>}
             </p>
             <a href={`/go/${rising.id}`} className="tl tl-strong">
               Visit {rising.name} &#8599;

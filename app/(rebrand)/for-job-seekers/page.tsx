@@ -21,7 +21,7 @@ export default function Page() {
 
   const pickRows = [
     ...guide.picks.map((p) => ({ t: byId[p.tool], label: p.label })),
-    { t: byId[risingPick.tool], label: "Stephanie's pick" },
+    { t: byId[risingPick.tool], label: risingPick.label },
   ]
 
   return (

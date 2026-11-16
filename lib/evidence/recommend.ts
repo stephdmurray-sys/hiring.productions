@@ -208,8 +208,8 @@ function rank<T>(fits: Judged<T>[]): Judged<T>[] {
  * "Also worth a look": up to two of the other tools that fit, each with one
  * label, in this order. A label only goes where the data backs it:
  * - Best free option: the top-rated tool with a real free version, only when the best match isn't free.
+ * - Stephanie's pick: her pick for this category, when it fits and isn't the best match (shown to job seekers as her up-and-coming fav).
  * - Most complete: covers the most of what we track (job seekers: checker, builder, tracker), at least as much as the best match.
- * - Stephanie's pick: her pick for this category, when it fits and isn't the best match.
  */
 function alsoWorth<T>(
   ranked: Judged<T>[],
@@ -226,11 +226,12 @@ function alsoWorth<T>(
     }
   }
   if (!isFree(pick)) add(rest.find(isFree), 'Best free option')
+  // Her pick comes before Most complete, so a tool that earns both shows as hers (Stephanie, Nov 16, 2026: Huntr, her up-and-coming fav).
+  if (stephanieId) add(rest.find((j) => idOf(j) === stephanieId), 'Stephanie’s pick')
   if (breadth) {
     const most = Math.max(...ranked.map(breadth))
     if (most >= 2 && breadth(pick) <= most) add(rest.find((j) => !used.has(j) && breadth(j) === most), 'Most complete')
   }
-  if (stephanieId) add(rest.find((j) => idOf(j) === stephanieId), 'Stephanie’s pick')
   // No labeled alternative qualifies: the next-highest rated tool that fits is the backup.
   if (!out.length) add(rest[0], 'Backup')
   return out

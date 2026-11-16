@@ -49,7 +49,7 @@ const ON_THIS_PAGE: [string, string][] = [
   ['steps', 'After you apply'],
   ['knockout', 'Knockout questions'],
   ['parsing', 'What breaks the read'],
-  ['pile', 'The pile'],
+  ['pile', 'Stack of applicants'],
   ['checkers', 'Free checkers'],
   ['hiring', 'If you’re hiring'],
 ]
@@ -129,7 +129,7 @@ export default function Page() {
       title: 'Recruiters search and sort the list',
       todo: 'Use the posting’s words for skills you have.',
       why: 'They search resumes by keyword, and some systems sort applicants by how well they match criteria the recruiter set.',
-      more: { href: '#pile', label: 'What recruiters do with the pile' },
+      more: { href: '#pile', label: 'What recruiters do with the stack of applicants' },
     },
     {
       title: 'A person reads from the top',
@@ -140,7 +140,7 @@ export default function Page() {
       title: 'The bottom of the list may never get opened',
       todo: 'Apply in the first few days.',
       why: 'Recruiters often start interviewing from the first strong applicants before they reach the rest.',
-      more: { href: '#pile', label: 'What recruiters do with the pile' },
+      more: { href: '#pile', label: 'What recruiters do with the stack of applicants' },
     },
   ].map((st) => ({ ...st, title: keepLast(st.title), todo: keepLast(st.todo), why: keepLast(st.why) }))
 
@@ -304,22 +304,43 @@ export default function Page() {
         <Sources items={[PARSE_RESULT, ...PARSING.flatMap((p) => p.from).filter((s, i, a) => s !== PARSE_RESULT && a.indexOf(s) === i), PARSE_COUNTER]} />
       </section>
 
-      {/* The pile. */}
+      {/* The stack of applicants (Stephanie, Nov 16, 2026: say "stack of applicants", never "pile"). The id stays "pile" so old links still land here. */}
       <section className="wrap sec sl-sec sl-sec-seekers" id="pile">
-        <StepHead title="What recruiters do with the pile" />
-        <div className="pile">
-          <p className="pile-n">{QUEUE.perJob.now}</p>
-          <div>
-            <p className="pile-what">{keepLast(`applications per job, on average, up from ${QUEUE.perJob.then} in ${QUEUE.perJob.thenYear}`)}</p>
-            <ul className="pile-list">
-              <li>{keepLast('They search it by keyword.')}</li>
-              <li>{keepLast('They sort it by match, then by the date you applied.')}</li>
-              <li>{keepLast('They skim: a first pass averages 7.4 seconds.')}</li>
-              <li>{keepLast('They often start interviewing before they reach the bottom.')}</li>
-            </ul>
+        <StepHead title="What recruiters do with the stack of applicants" />
+        {/* Applications per job post in 2026 by work type (Stephanie, Nov 16, 2026). The bars fill as they scroll in; the numbers are always in the text. */}
+        <div className="rj">
+          <p className="rj-lead">Applications per job post, January to August 2026</p>
+          <div className="rj-rows">
+            {[
+              { n: QUEUE.perPost.onsite, what: 'on-site jobs' },
+              { n: QUEUE.perPost.hybrid, what: 'hybrid jobs' },
+              { n: QUEUE.perPost.remote, what: 'remote jobs', top: true },
+            ].map((r) => (
+              <div className={`rj-row${r.top ? ' rj-top' : ''}`} key={r.what}>
+                <p className="rj-num">
+                  <b>{r.n}</b> {r.what}
+                </p>
+                <span className="rj-bar" aria-hidden="true">
+                  <i style={{ width: `${Math.round((r.n / QUEUE.perPost.remote) * 100)}%` }} />
+                </span>
+              </div>
+            ))}
           </div>
+          <p className="rj-so">{keepLast('A remote job gets more than 3 times the applications of an on-site job.')}</p>
+          <p className="rj-int">
+            {keepLast(
+              `Remote applications also get fewer interviews: ${QUEUE.interview.remote} in 100, against ${QUEUE.interview.other} in 100 for hybrid and on-site jobs. If you can work hybrid or on-site, add those jobs to your search.`,
+            )}
+          </p>
         </div>
-        <Sources items={[QUEUE.volume, QUEUE.search, QUEUE.sort, firstPass, QUEUE.stop.from]} />
+        <h3 className="rj-k">What they do with it</h3>
+        <ul className="pile-list">
+          <li>{keepLast('They search it by keyword.')}</li>
+          <li>{keepLast('They sort it by match, then by the date you applied.')}</li>
+          <li>{keepLast('They skim: a first pass averages 7.4 seconds.')}</li>
+          <li>{keepLast('They often start interviewing before they reach the bottom.')}</li>
+        </ul>
+        <Sources items={[QUEUE.perPostFrom, QUEUE.interviewFrom, QUEUE.search, QUEUE.sort, firstPass, QUEUE.stop.from]} />
       </section>
 
       {/* Free checkers. */}
@@ -457,12 +478,26 @@ const css = `
   .pz-fix{font-weight:700;color:var(--ink);}
   .pz-fix::before{content:"Fix: ";font-weight:800;color:var(--indigo-text);}
 
-  /* The pile */
-  .pile{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:center;margin-top:32px;max-width:980px;}
-  .pile-n{margin:0;font-weight:900;font-size:clamp(100px,14vw,170px);line-height:.85;letter-spacing:-0.05em;color:var(--indigo-text);}
-  .pile-what{margin:0;font-size:clamp(20px,2.2vw,24px);line-height:1.3;font-weight:800;color:var(--ink);}
-  .pile-list{margin:14px 0 0;padding-left:20px;display:grid;gap:6px;font-size:17px;line-height:1.5;color:var(--ink-2);}
+  /* The stack of applicants */
+  .pile-list{margin:14px 0 0;max-width:760px;padding-left:20px;display:grid;gap:6px;font-size:17px;line-height:1.5;color:var(--ink-2);}
   .pile-list li::marker{color:var(--indigo);}
+  .rj{margin-top:32px;max-width:760px;}
+  .rj-k{margin:clamp(48px,6vw,64px) 0 0;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);}
+  .rj-lead{margin:0;font-size:clamp(20px,2.2vw,24px);line-height:1.3;font-weight:800;color:var(--ink);}
+  .rj-rows{display:grid;gap:22px;margin-top:20px;}
+  .rj-num{margin:0;font-size:18px;line-height:1.3;font-weight:700;color:var(--ink);}
+  .rj-num b{font-size:clamp(34px,4vw,44px);font-weight:900;letter-spacing:-0.03em;color:var(--ink);margin-right:4px;}
+  .rj-top .rj-num b{font-size:clamp(56px,8vw,96px);line-height:.95;color:var(--indigo-text);}
+  .rj-bar{display:block;margin-top:8px;height:22px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:clip;}
+  .rj-bar i{display:block;height:100%;background:var(--lavender);border-right:3px solid var(--ink);}
+  .rj-top .rj-bar{height:30px;}
+  .rj-top .rj-bar i{background:var(--indigo);border-right:0;}
+  .rj-bar i{transform-origin:left center;transition:transform .9s cubic-bezier(.2,.8,.2,1);}
+  .rj-row:nth-child(2) .rj-bar i{transition-delay:.15s;}
+  .rj-row:nth-child(3) .rj-bar i{transition-delay:.3s;}
+  .rj-rows.rv-wait .rj-bar i{transform:scaleX(0);}
+  .rj-so{margin:24px 0 0;font-size:clamp(20px,2.2vw,24px);line-height:1.35;font-weight:900;color:var(--ink);text-wrap:balance;}
+  .rj-int{margin:12px 0 0;font-size:17px;line-height:1.55;color:var(--ink-2);text-wrap:pretty;}
 
   /* Free checkers */
   .ck{margin-top:36px;max-width:980px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;}
@@ -495,6 +530,5 @@ const css = `
     .ko-head{display:none;}
     .ko-row,.pz-row{grid-template-columns:1fr;gap:8px;padding:16px 18px;}
     .ck-row{grid-template-columns:1fr;gap:10px;padding:16px 18px;}
-    .pile{grid-template-columns:1fr;gap:10px;}
   }
 `

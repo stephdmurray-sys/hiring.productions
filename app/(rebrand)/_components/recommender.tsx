@@ -2,11 +2,14 @@ import { Logo } from './logo'
 import { PickMark } from './pick-face'
 import { pickFaceCss } from './pick-face-css'
 import { verdictFor } from '@/lib/picks'
+import { risingPick } from '@/lib/evidence'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce } from './picker-track'
 import { FRAUD_QUESTION, REAL_JOB_QUESTION, REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
 import { FOLLOW_ON, FREE_FROM_US, NEXT_STEP, OTHER_SIDE_SEES, WONT_DO } from '@/lib/evidence/kit'
 import { moneyLine, moneyCss } from '@/lib/money'
+import { KnowList, knowCss } from './know-list'
+import { TOOLS_TO_KNOW } from '@/lib/evidence/tools-to-know'
 import { FollowOn, followCss } from './follow'
 import { Capture } from './capture'
 import { captureCss } from './widgets-css'
@@ -209,9 +212,9 @@ function CostLine({ r, ask }: { r: Recommendation; ask: Ask }) {
 }
 
 /** A section of the kit: a small heading and its content. */
-export function Kit({ k, children, className }: { k: string; children: React.ReactNode; className?: string }) {
+export function Kit({ k, children, className, id }: { k: string; children: React.ReactNode; className?: string; id?: string }) {
   return (
-    <section className={`kit${className ? ` ${className}` : ''}`}>
+    <section className={`kit${className ? ` ${className}` : ''}`} id={id}>
       <h3 className="kit-k">{k}</h3>
       {children}
     </section>
@@ -244,6 +247,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
   const url = sit ? `${SITE}${REC_PATH}/${sit.slug}` : `${SITE}${REC_PATH}?${askToQuery(ask)}`
   const wont = WONT_DO[r.problem.id]
   const free = FREE_FROM_US[r.problem.id]
+  const know = TOOLS_TO_KNOW[r.problem.id]
   const follow = FOLLOW_ON[r.problem.id] ?? []
   const otherSees = OTHER_SIDE_SEES[r.problem.id]
   const otherLabel = r.side === 'seekers' ? 'What the hiring side sees' : 'What candidates see'
@@ -265,6 +269,14 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
         {title}
       </H>
       {lead && !r.pick && <p className="rec-lead">{keepLast(lead)}</p>}
+
+      {/* No path ends with nothing to use (Nov 16, 2026 value audit): where nothing can be scored, the top options with plain facts. */}
+      {!r.pick && know && (
+        <Kit k={know.k} className="kit-know">
+          {know.note && <p className="kit-know-note">{keepLast(know.note)}</p>}
+          <KnowList tools={know.tools} side={r.side} />
+        </Kit>
+      )}
 
       {r.pick && (
         <Kit k="Best match for you" className="kit-best">
@@ -340,7 +352,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
               <div className="kit-also-row" key={a.name}>
                 <Logo domain={a.domain} name={a.name} size={44} />
                 <div>
-                  <span className={`kit-label kit-label-${r.side}`}>{a.label}</span>
+                  <span className={`kit-label kit-label-${r.side}`}>{a.label === 'Stephanie’s pick' && a.id === risingPick.tool ? risingPick.label : a.label}</span>
                   {a.label === 'Stephanie’s pick' && <PickMark verdict={verdictFor(a.id)} />}
                   <b>
                     {a.name} {a.score !== null && <span className="mono">{a.score.toFixed(2)}</span>}
@@ -467,9 +479,11 @@ export function RecSituations({ exclude }: { exclude?: string }) {
 }
 
 /** The kit's parts, shared with the short list pages. */
-export const kitCss = moneyCss + followCss + pickFaceCss + `
+export const kitCss = moneyCss + followCss + pickFaceCss + knowCss + `
+  .kit-know-note{margin:0;max-width:720px;font-size:16px;line-height:1.55;color:var(--ink-2);}
   /* The kit */
   .kit{margin-top:44px;max-width:820px;}
+  .kit[id]{scroll-margin-top:28px;}
   .kit-k{font-size:clamp(20px,2.2vw,24px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);margin:0 0 16px;}
   .kit-best{margin-top:32px;}
   .kit-best .rec-pick{margin-top:0;}

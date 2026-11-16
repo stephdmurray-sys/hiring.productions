@@ -67,7 +67,7 @@ export default function Home() {
   const ATS_TAGS: Record<string, string> = Object.fromEntries(Object.entries(atsLeaders()).map(([seg, name]) => [name, SEG_LABEL[seg]]))
   const TAGS: Record<string, string> = Object.fromEntries([
     ...guide.picks.map((p) => [p.tool, p.label]),
-    [risingPick.tool, "Stephanie's pick"],
+    [risingPick.tool, risingPick.label],
   ])
   const counting = benchmarks.filter((l) => l.status === 'counts')
   // The band shows every list that counts and one example of each reason a list doesn't; the guide shows all of them.

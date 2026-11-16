@@ -129,10 +129,10 @@ function founderPicks(side?: 'seekers' | 'hiring'): Pick[] {
       side: 'seekers',
       name: seeker.name,
       domain: seeker.domain,
-      heading: "Stephanie's pick",
-      body: risingPick.line.replace(/^The one I'd tell a friend about first\.\s*/, ''),
+      heading: risingPick.label,
+      body: risingPick.line,
       facts: [
-        seeker.rawUserScore !== null ? `${seeker.rawUserScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} users` : '',
+        seeker.rawUserScore !== null ? `${seeker.rawUserScore.toFixed(1)} from ${formatCount(seeker.citableReviews)} ratings` : '',
         seeker.rank ? `#${seeker.rank} ${seeker.segment}` : '',
       ]
         .filter(Boolean)
@@ -182,7 +182,7 @@ export function OnTheRise({
               <b>
                 <a href="/about/stephanie">Stephanie Murray</a>
               </b>
-              Founder, 20 years in talent
+              Talent Advisor, 20 years experience
             </span>
           </div>
           {picks.map((p) => (

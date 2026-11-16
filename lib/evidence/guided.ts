@@ -119,6 +119,8 @@ export const GUIDED: Record<Side, { steps: GuidedStep[]; depth: number }> = {
         options: [
           { label: 'Better answers in the final interview', to: { problem: 'interviews-stall' } },
           { label: 'People I’ve worked with backing me up', to: { problem: REPVERA_PROBLEM.seekers.id } },
+          // Stephanie, Nov 16, 2026: proof of work too, which RepVera can verify through the people who saw it.
+          { label: 'Showing my work, like a portfolio', to: { href: `/what-should-i-use?side=seekers&problem=${REPVERA_PROBLEM.seekers.id}&from=q3b#work` } },
         ],
         back: 'q2b',
       },
@@ -297,6 +299,8 @@ export const PROOF = {
   work: 'From the work itself',
   workLead: 'If people can see what you make, like designs, writing or code, a portfolio puts it one click from your resume.',
   noWork: 'No work samples? Your RepVera is proof on its own.',
+  /** Stephanie, Nov 16, 2026: RepVera can show the work too, verified by the people who saw it. */
+  repveraWork: 'Your RepVera can hold your work too, verified by the people who saw it.',
   email: { text: 'Get these steps as a checklist by email', href: '/show-how-you-work#email' },
   more: { text: 'Portfolio sites to know, sorted by the kind of work', href: '/guides/portfolio-sites' },
   where: {
