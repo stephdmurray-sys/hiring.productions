@@ -94,18 +94,20 @@ export default function Page() {
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="repvera">
         <StepHead title="Find it in how others experience working with you" />
-        <div className="vp-rv">
-          <Dots className="vp-rv-dots" />
+        <div className="vp-rv-intro">
           <p className="vp-rv-built">Stephanie built this one</p>
           <p className="vp-rv-lead">{keepLast('RepVera helps you uncover your value prop through how others experience working with you.')}</p>
           <p className="vp-rv-k">Watch a real profile fill in</p>
-          <RepveraFill />
-          <p className="vp-rv-src">
-            {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}. Every word and count is on the profile.`)}{' '}
-            <a href={REPVERA_EXAMPLE.profileUrl} rel="noopener" target="_blank">
-              See the whole profile
-            </a>
-          </p>
+        </div>
+        <RepveraFill />
+        <p className="vp-rv-src">
+          {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}. Every word and count is on the profile.`)}{' '}
+          <a href={REPVERA_EXAMPLE.profileUrl} rel="noopener" target="_blank">
+            See the whole profile
+          </a>
+        </p>
+        <div className="vp-rv">
+          <Dots className="vp-rv-dots" />
           {tai && (
             <figure className="vp-quote">
               <blockquote>&ldquo;{tai.text}&rdquo;</blockquote>
@@ -143,7 +145,8 @@ export default function Page() {
 
 const css = `
   .vp-jump{margin-top:28px;font-size:16px;font-weight:700;color:var(--ink-2);}
-  .vp-rv{position:relative;margin-top:36px;max-width:980px;padding:clamp(26px,4vw,44px);background:var(--indigo-tint);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);}
+  .vp-rv-intro{margin-top:28px;}
+  .vp-rv{position:relative;margin-top:48px;max-width:980px;padding:clamp(26px,4vw,44px);background:var(--indigo-tint);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);}
   .vp-rv > :not(.memphis){position:relative;z-index:2;}
   .vp-rv-dots{top:-30px;right:-22px;color:var(--lavender);}
   .vp-rv-built{display:inline-block;margin:0;padding:5px 12px;border-radius:999px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:800;}
@@ -151,7 +154,7 @@ const css = `
   .vp-rv-k{margin:28px 0 0;font-size:clamp(20px,2vw,24px);font-weight:900;letter-spacing:-0.01em;color:var(--ink);}
   .vp-rv-src{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3);}
   .vp-rv-src a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
-  .vp-quote{margin:36px 0 0;padding:22px 24px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);max-width:860px;}
+  .vp-quote{margin:0;padding:22px 24px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);max-width:860px;}
   .vp-quote blockquote{margin:0;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
   .vp-quote figcaption{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:14.5px;line-height:1.35;color:var(--ink-2);}
   .vp-quote figcaption > span:last-child{display:grid;}

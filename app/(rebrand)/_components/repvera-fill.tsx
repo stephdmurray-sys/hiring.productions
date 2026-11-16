@@ -1,29 +1,41 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { REPVERA_EXAMPLE as R, repveraReceipts } from '@/lib/repvera-example'
 
 /**
- * "Watch a real profile fill in" (Stephanie, Nov 16, 2026: show how RepVera
- * pulls in the different sections as people use it, so a job seeker goes from
- * "take my word for it" to proof). Four stages, shown on Stephanie's real
- * profile: you say it, receipts come in, their words and patterns show up,
- * traits are confirmed and the line is backed. It plays once when it scrolls
- * into view; tapping a stage stops it there. Reduced motion and no-JS show the
- * whole profile. Styles: repvera-fill-css.ts.
+ * "Watch a real profile fill in" (Stephanie, Nov 16, 2026): how a RepVera
+ * profile pulls in each section as receipts arrive, so a job seeker goes from
+ * "take my word for it" to proof. Laid out the way the real profile is, at
+ * full width, inside a product window: four steps across the top, then the
+ * profile, filling in step by step on Stephanie's real data.
+ * Plays once when the profile scrolls into view; tapping a step stops it
+ * there. Reduced motion and no-JS show the whole profile.
+ * Styles: repvera-fill-css.ts.
  */
 
-const STAGES = [
-  { title: 'You say it', line: 'On its own, “I’m known for…” is your word.' },
-  { title: 'People who’ve worked with you send receipts', line: 'Managers, peers, clients. Each one is verified through their work email.' },
-  { title: 'Their words show up, word for word', line: 'Nothing is paraphrased, and nobody sees anyone else’s answers.' },
-  { title: 'Patterns become proof', line: 'A trait is confirmed when different kinds of people, at different companies, describe the same thing.' },
+const STEPS = [
+  { title: 'You say it', line: 'On its own, what you’re known for is your word.' },
+  { title: 'Receipts come in', line: 'From managers, peers and clients, each verified through their work email.' },
+  { title: 'Their words show up', line: 'Word for word. Nobody sees anyone else’s answers.' },
+  { title: 'Patterns become proof', line: 'A trait is confirmed when different kinds of people, at different companies, say the same thing.' },
 ]
+
+/** Shades for the relationship types, darkest first. */
+const SHADES = ['#1a1a22', '#3b2a99', '#5432e0', '#6c47ff', '#8a6dff', '#a78bfa', '#c4b2fc', '#dcd2fd']
+
+function Bold({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/\[\[|\]\]/).map((part, i) => (i % 2 ? <b key={i}>{part}</b> : <Fragment key={i}>{part}</Fragment>))}
+    </>
+  )
+}
 
 export function RepveraFill() {
   const total = repveraReceipts()
-  const [stage, setStage] = useState(STAGES.length)
+  const [step, setStep] = useState(STEPS.length)
   const ref = useRef<HTMLDivElement>(null)
   const timer = useRef(0)
   const touched = useRef(false)
@@ -31,7 +43,7 @@ export function RepveraFill() {
   useEffect(() => {
     const el = ref.current
     if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    setStage(1)
+    setStep(1)
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting || touched.current) return
@@ -39,121 +51,177 @@ export function RepveraFill() {
         let n = 1
         timer.current = window.setInterval(() => {
           n++
-          setStage(n)
-          if (n >= STAGES.length) window.clearInterval(timer.current)
-        }, 2200)
+          setStep(n)
+          if (n >= STEPS.length) window.clearInterval(timer.current)
+        }, 2400)
       },
       { threshold: 0.2 },
     )
-    io.observe(el.querySelector('.rf-profile') ?? el)
+    io.observe(el.querySelector('.rfw') ?? el)
     return () => {
       io.disconnect()
       window.clearInterval(timer.current)
     }
   }, [])
 
-  const show = (n: number) => `rf-sec${stage >= n ? ' rf-on' : ''}`
-  const proven = stage >= 4
+  const go = (n: number) => {
+    // A tap takes over from the autoplay.
+    touched.current = true
+    window.clearInterval(timer.current)
+    setStep(n)
+  }
+
+  const at = (n: number) => (step >= n ? ' rf-on' : '')
+  const proven = step >= 4
+  const progress = ((step - 1) / (STEPS.length - 1)) * 100
 
   return (
     <div className="rf" ref={ref}>
-      <ol className="rf-stages">
-        {STAGES.map((s, i) => (
+      <ol className="rf-steps" style={{ ['--rf-progress' as string]: `${progress}%` }}>
+        {STEPS.map((s, i) => (
           <li key={s.title}>
-            <button
-              type="button"
-              className={`rf-stage${stage === i + 1 ? ' rf-now' : ''}${stage > i ? ' rf-done' : ''}`}
-              aria-pressed={stage === i + 1}
-              onClick={() => {
-                // A tap takes over from the autoplay.
-                touched.current = true
-                window.clearInterval(timer.current)
-                setStage(i + 1)
-              }}
-            >
+            <button type="button" className={`rf-step${step === i + 1 ? ' rf-now' : ''}${step > i ? ' rf-done' : ''}`} aria-pressed={step === i + 1} onClick={() => go(i + 1)}>
               <span className="rf-n" aria-hidden="true">
                 {i + 1}
               </span>
-              <span>
-                <b>{s.title}</b>
-                <span className="rf-line">{s.line}</span>
-              </span>
+              <b>{s.title}</b>
+              <span className="rf-line">{s.line}</span>
             </button>
           </li>
         ))}
       </ol>
 
-      <div className="rf-profile" aria-live="polite">
-        <div className="rf-head">
-          <span className="rf-av">
-            <Image src={R.photo} alt="" width={96} height={96} />
+      <div className="rfw" aria-live="polite">
+        <div className="rfw-bar" aria-hidden="true">
+          <span className="rfw-dots">
+            <i />
+            <i />
+            <i />
           </span>
-          <span>
-            <b>{R.name}</b>
-            <span>{R.headline}</span>
-          </span>
-          <span className={proven ? 'rf-badge rf-badge-on' : 'rf-badge'}>{proven ? `Backed by ${total} receipts` : 'Your word'}</span>
-        </div>
-        <p className="rf-known">
-          I’m known for <mark>{R.knownFor}</mark>.
-        </p>
-
-        <div className={show(2)}>
-          <p className="rf-k">
-            Who’s behind it <span>{total} receipts</span>
-          </p>
-          <div className="rf-bar" aria-hidden="true">
-            {R.who.map(([label, n], i) => (
-              <i key={label} style={{ flexGrow: n, opacity: 1 - i * 0.09 }} />
-            ))}
-          </div>
-          <p className="rf-legend">{R.who.map(([label, n]) => `${label} ${n}`).join(' · ')}</p>
+          <span className="rfw-url">{R.profilePath}</span>
         </div>
 
-        <div className={`${show(3)} rf-two`}>
-          <div>
-            <p className="rf-k">How people describe her</p>
-            <div className="rf-chips">
-              {R.words.map((w) => (
-                <span key={w}>{w}</span>
-              ))}
+        <div className="rfw-in">
+          <div className="rfw-head">
+            <span className="rfw-av">
+              <Image src={R.photo} alt="" width={128} height={128} />
+            </span>
+            <div className="rfw-who">
+              <p className="rfw-name">{R.name}</p>
+              <p className="rfw-role">{R.headline}</p>
+              <p className="rfw-bio">{R.bio}</p>
             </div>
-            <p className="rf-rule">{R.rules.verbatim}</p>
+            <span className={proven ? 'rfw-badge rfw-badge-on' : 'rfw-badge'}>{proven ? `Backed by ${total} receipts` : 'Your word'}</span>
           </div>
-          <div>
-            <p className="rf-k">Strongest patterns</p>
-            <div className="rf-patterns">
-              {R.patterns.map(([label, w]) => (
-                <p key={label}>
-                  <span>{label}</span>
-                  <i aria-hidden="true">
-                    <b style={{ width: `${w}%` }} />
-                  </i>
+          <p className="rfw-tabs" aria-hidden="true">
+            {R.tabs.map((t, i) => (
+              <span key={t} className={i === 0 ? 'rfw-tab-on' : ''}>
+                {t}
+              </span>
+            ))}
+          </p>
+
+          {/* A RepVera profile is written by other people, so it never says "I'm" (Stephanie, Nov 16, 2026). */}
+          <div className="rfw-row rfw-row-full">
+            <p className="rfw-known">
+              Known for <mark>{R.knownFor}</mark>.
+            </p>
+          </div>
+
+          <div className={`rfw-row rf-sec${at(2)}`}>
+            <p className="rfw-k">Who’s behind it</p>
+            <div>
+              <div className="rfw-stack" aria-hidden="true">
+                {R.who.map(([label, n], i) => (
+                  <i key={label} style={{ flexGrow: n, background: SHADES[i] }} />
+                ))}
+              </div>
+              <ul className="rfw-legend">
+                {R.who.map(([label, n], i) => (
+                  <li key={label}>
+                    <i style={{ background: SHADES[i] }} aria-hidden="true" />
+                    {label} <b>{n}</b>
+                  </li>
+                ))}
+                <li className="rfw-total">
+                  <b>{total}</b> receipts
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="rfw-row">
+            <p className="rfw-k">The read</p>
+            <div className="rfw-read">
+              <div className={`rfw-card rfw-summary rf-sec${at(3)}`}>
+                <p className="rfw-ck">Summary</p>
+                <p className="rfw-text">
+                  <Bold text={R.summary} />
                 </p>
-              ))}
-            </div>
-            <p className="rf-rule">{R.rules.apart}</p>
-          </div>
-        </div>
-
-        <div className={show(4)}>
-          <p className="rf-k">Confirmed traits</p>
-          <div className="rf-traits">
-            {R.traits.map((t) => (
-              <p key={t.name}>
-                <b>{t.name}</b>
-                <span className="rf-marks" aria-label={`${t.marks} of 3 marks`}>
-                  {[1, 2, 3].map((m) => (
-                    <i key={m} className={m <= t.marks ? 'rf-mark-on' : ''} />
+              </div>
+              <div className={`rfw-card rf-sec${at(3)}`}>
+                <p className="rfw-ck">Strongest patterns</p>
+                <div className="rfw-patterns">
+                  {R.patterns.map(([label, w]) => (
+                    <p key={label}>
+                      <span>{label}</span>
+                      <i aria-hidden="true">
+                        <b style={{ width: step >= 3 ? `${w}%` : '0%' }} />
+                      </i>
+                    </p>
                   ))}
-                </span>
-                <span className="rf-detail">{t.detail}</span>
-              </p>
-            ))}
+                </div>
+                <p className="rfw-note">{R.rules.apart}</p>
+              </div>
+              <div className={`rfw-card rf-sec${at(3)}`}>
+                <p className="rfw-ck">How people describe her</p>
+                <div className="rfw-chips">
+                  {R.words.map((w) => (
+                    <span key={w}>{w}</span>
+                  ))}
+                </div>
+                <p className="rfw-note">{R.rules.verbatim}</p>
+              </div>
+              <div className={`rfw-card rf-sec${at(4)}`}>
+                <p className="rfw-ck">Confirmed traits</p>
+                <div className="rfw-traits">
+                  {R.traits.map((t) => (
+                    <div key={t.name}>
+                      <p>
+                        <b>{t.name}</b>
+                        <span className="rfw-marks" aria-label={`${t.marks} of 3 marks`}>
+                          {[1, 2, 3].map((m) => (
+                            <i key={m} className={m <= t.marks ? 'rfw-mark-on' : ''} />
+                          ))}
+                        </span>
+                      </p>
+                      <p className="rfw-detail">{t.detail}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="rfw-note">{R.rules.marks}</p>
+              </div>
+              <div className={`rfw-card rf-sec${at(4)}`}>
+                <p className="rfw-ck">Selected values</p>
+                <ul className="rfw-values">
+                  {R.values.map((v) => (
+                    <li key={v}>
+                      {v}
+                      <i aria-label="Echoed in receipts" />
+                    </li>
+                  ))}
+                </ul>
+                <p className="rfw-note">{R.rules.values}</p>
+              </div>
+            </div>
           </div>
-          <p className="rf-finding">
-            <b>{R.said}</b> {R.finding}
-          </p>
+
+          <div className={`rfw-row rf-sec${at(4)}`}>
+            <p className="rfw-k">The finding</p>
+            <p className="rfw-finding">
+              <b>{R.said}</b> {R.finding}
+            </p>
+          </div>
         </div>
       </div>
     </div>

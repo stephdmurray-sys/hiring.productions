@@ -133,28 +133,33 @@ export function ValuePropBuilder({
   const s = lowerFirst(clean(so).replace(/^so,? /i, '')) || '[what changes because of it]'
   const r = lowerFirst(clean(role)) || (side === 'seekers' ? '[your job]' : '[the role]')
   const a = article(r)
+  // "attracting great candidates" reads as "…, and for attracting great candidates"; "launches land on time" as "…, so launches land on time".
+  const NOT_ING = new Set(['thing', 'things', 'nothing', 'something', 'anything', 'everything', 'morning', 'evening', 'during', 'bring', 'spring', 'string', 'king', 'ring', 'wing', 'sing'])
+  const first = s.split(/\s+/)[0].toLowerCase()
+  const ger = /^[a-z]{3,}ing$/.test(first) && !NOT_ING.has(first)
+  const then = ger ? `, and for ${s}` : `, so ${s}`
 
-  const mainLine = side === 'seekers' ? `I’m known for ${k}, so ${s}.` : `Our team is known for ${k}, so ${s}.`
+  const mainLine = side === 'seekers' ? `I’m known for ${k}${then}.` : `Our team is known for ${k}${then}.`
 
   // The moments people freeze. Each says the same thing in the way that moment needs.
   const moments: { where: string; note: string; text: string; src?: { label: string; url: string } }[] =
     side === 'seekers'
       ? [
-          { where: '“Tell me about yourself”', note: 'Then tell one time it happened.', text: `I’m ${a} ${r}. The people I’ve worked with know me for ${k}, so ${s}.` },
-          { where: '“What would your last manager say about you?”', note: 'You’re repeating what they said, so it doesn’t feel like bragging.', text: `They’d say I’m known for ${k}. It’s why ${s}.` },
+          { where: '“Tell me about yourself”', note: 'Then tell one time it happened.', text: `I’m ${a} ${r}. The people I’ve worked with know me for ${k}${then}.` },
+          { where: '“What would your last manager say about you?”', note: 'You’re repeating what they said, so it doesn’t feel like bragging.', text: ger ? `They’d say I’m known for ${k}, and for ${s}.` : `They’d say I’m known for ${k}. It’s why ${s}.` },
           { where: '“So, what do you do?”', note: 'For networking and coffee chats. Short on purpose.', text: `I’m ${a} ${r}, and I’m known for ${k}.` },
           {
             where: 'First line of your LinkedIn About or a cover letter',
             note: 'The About section is the place to be more personal.',
-            text: `I’m ${a} ${r} known for ${k}, so ${s}.`,
+            text: `I’m ${a} ${r} known for ${k}${then}.`,
             src: { label: 'SHRM', url: SHRM_LINKEDIN },
           },
         ]
       : [
-          { where: '“What’s it like to work there?”', note: 'For the first call, or whenever a candidate asks.', text: `People here would tell you we’re known for ${k}, so ${s}.` },
-          { where: '“Why should I take this job?”', note: 'Have it ready for the end of the interview.', text: `You’d join a team known for ${k}, so ${s}.` },
-          { where: 'Your first message to a candidate', note: 'Lead with it.', text: `I’m hiring ${a} ${r}. Our team is known for ${k}, so ${s}. Open to a quick call?` },
-          { where: 'First line of the job post', note: 'The first thing a candidate reads.', text: `As our ${r}, you’ll join a team known for ${k}, so ${s}.` },
+          { where: '“What’s it like to work there?”', note: 'For the first call, or whenever a candidate asks.', text: `People here would tell you we’re known for ${k}${then}.` },
+          { where: '“Why should I take this job?”', note: 'Have it ready for the end of the interview.', text: `You’d join a team known for ${k}${then}.` },
+          { where: 'Your first message to a candidate', note: 'Lead with it.', text: `I’m hiring ${a} ${r}. Our team is known for ${k}${then}. Open to a quick call?` },
+          { where: 'First line of the job post', note: 'The first thing a candidate reads.', text: `As our ${r}, you’ll join a team known for ${k}${then}.` },
         ]
 
   const toggle = (word: string) => {
