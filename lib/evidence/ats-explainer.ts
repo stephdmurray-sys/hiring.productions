@@ -156,6 +156,34 @@ export const QUEUE = {
     url: 'https://support.greenhouse.io/hc/en-us/articles/41396009937307-Talent-Matching',
     // "Candidates are grouped by match score and ordered by application date within each group." / "It does not automatically advance or reject candidates."
   }),
+  /**
+   * Remote jobs (Stephanie, Nov 16, 2026: "it's even higher for remote roles").
+   * The 95 above is Greenhouse's average across all jobs, not in-person only.
+   * Nobody we could verify publishes a per-job average split by remote and
+   * in-person, so this shows each remote job's share of the pile instead.
+   * 37 / 9 = 4.1, so a remote post draws about 4 times the applications of
+   * the average post. Untraceable blog figures (like 52 in-person vs 847
+   * remote) are left out.
+   */
+  remote: {
+    postsPct: 9,
+    appsPct: 37,
+    times: 4,
+    from: S({
+      source: 'LinkedIn Economic Graph, US Monthly Insights, paid US job posts in March 2026',
+      date: 'March 2026',
+      url: 'https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/us-monthly-insights-march-2026.pdf',
+      // "As of March 2026, paid remote jobs on LinkedIn (9% of all paid jobs) continue to attract an outsized proportion of applications (37%) and views (31%)."
+      // Read through the search index: the PDF host is blocked from our build sandbox. February 2026 says the same 9% and 37%.
+    }),
+    interview: { remote: 3.4, other: 5.3 },
+    interviewFrom: S({
+      source: 'Huntr, Q3 2026 Job Search Trends Report',
+      date: 'Q3 2026', // tracker data pulled October 1, 2026
+      url: 'https://huntr.co/research/job-search-trends-q3-2026',
+      // "Remote-only applications got interviews at 3.4% in Q3 2026, against 5.3% each for hybrid-only and onsite-only. Remote-only ranked last in every quarter of 2026."
+    }),
+  },
   stop: {
     quote: 'If we find strong candidates there, we’ll probably start interviewing before we even look at the rest.',
     who: 'A recruiter in consumer goods, interviewed by Enhancv',
@@ -197,6 +225,6 @@ export const SKILLSYNCER = {
 export function allSources(): Source[] {
   const seen = new Map<string, Source>()
   const add = (s: Source) => seen.set(s.url, s)
-  ;[MYTH.origin, MYTH.traced, MYTH.survey, MYTH.rules, ...KNOCKOUT_DOCS, ...KNOCKOUTS.map((k) => k.from), ...PARSING.flatMap((p) => p.from), QUEUE.volume, QUEUE.search, QUEUE.sort, SKILLSYNCER.from, ...NO_ACCOUNT_CHECKERS.map((c) => c.from)].forEach(add)
+  ;[MYTH.origin, MYTH.traced, MYTH.survey, MYTH.rules, ...KNOCKOUT_DOCS, ...KNOCKOUTS.map((k) => k.from), ...PARSING.flatMap((p) => p.from), QUEUE.volume, QUEUE.remote.from, QUEUE.remote.interviewFrom, QUEUE.search, QUEUE.sort, SKILLSYNCER.from, ...NO_ACCOUNT_CHECKERS.map((c) => c.from)].forEach(add)
   return [...seen.values()]
 }

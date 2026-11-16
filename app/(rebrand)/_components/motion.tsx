@@ -66,7 +66,7 @@ export function Motion() {
       { threshold: 0.2 },
     )
     const vh = window.innerHeight
-    for (const b of Array.from(document.querySelectorAll<HTMLElement>('.board'))) {
+    for (const b of Array.from(document.querySelectorAll<HTMLElement>('.board, .rj-rows'))) {
       const r = b.getBoundingClientRect()
       const hidden = b.offsetParent === null
       if (hidden || r.top > vh * 0.9 || r.bottom < 0) {

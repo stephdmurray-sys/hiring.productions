@@ -319,7 +319,33 @@ export default function Page() {
             </ul>
           </div>
         </div>
-        <Sources items={[QUEUE.volume, QUEUE.search, QUEUE.sort, firstPass, QUEUE.stop.from]} />
+        {/* Remote jobs (Stephanie, Nov 16, 2026). The bars fill as they scroll in; the numbers are always in the text. */}
+        <div className="rj">
+          <h3 className="rj-k">Remote jobs get a much bigger pile</h3>
+          <p className="rj-lead">On LinkedIn in the US, remote jobs are</p>
+          <div className="rj-rows">
+            {[
+              { pct: QUEUE.remote.postsPct, what: 'of the job posts' },
+              { pct: QUEUE.remote.appsPct, what: 'of the applications' },
+            ].map((r) => (
+              <div className="rj-row" key={r.what}>
+                <p className="rj-num">
+                  <b>{r.pct}%</b> {r.what}
+                </p>
+                <span className="rj-bar" aria-hidden="true">
+                  <i style={{ width: `${r.pct}%` }} />
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="rj-so">{keepLast(`So a remote job draws about ${QUEUE.remote.times} times the applications of the average job.`)}</p>
+          <p className="rj-int">
+            {keepLast(
+              `Remote applications also get fewer interviews: ${QUEUE.remote.interview.remote} in 100, against ${QUEUE.remote.interview.other} in 100 for hybrid and onsite jobs. If you can work hybrid or onsite, add those jobs to your search.`,
+            )}
+          </p>
+        </div>
+        <Sources items={[QUEUE.volume, QUEUE.remote.from, QUEUE.remote.interviewFrom, QUEUE.search, QUEUE.sort, firstPass, QUEUE.stop.from]} />
       </section>
 
       {/* Free checkers. */}
@@ -463,6 +489,19 @@ const css = `
   .pile-what{margin:0;font-size:clamp(20px,2.2vw,24px);line-height:1.3;font-weight:800;color:var(--ink);}
   .pile-list{margin:14px 0 0;padding-left:20px;display:grid;gap:6px;font-size:17px;line-height:1.5;color:var(--ink-2);}
   .pile-list li::marker{color:var(--indigo);}
+  .rj{margin-top:clamp(48px,6vw,64px);max-width:760px;}
+  .rj-k{margin:0;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);}
+  .rj-lead{margin:14px 0 0;font-size:18px;line-height:1.5;color:var(--ink-2);}
+  .rj-rows{display:grid;gap:22px;margin-top:20px;}
+  .rj-num{margin:0;font-size:18px;line-height:1.3;font-weight:700;color:var(--ink);}
+  .rj-num b{font-size:clamp(34px,4vw,44px);font-weight:900;letter-spacing:-0.03em;color:var(--indigo-text);margin-right:4px;}
+  .rj-bar{display:block;margin-top:8px;height:22px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:clip;}
+  .rj-bar i{display:block;height:100%;background:var(--indigo);border-right:3px solid var(--ink);}
+  .rj-bar i{transform-origin:left center;transition:transform .9s cubic-bezier(.2,.8,.2,1);}
+  .rj-row + .rj-row .rj-bar i{transition-delay:.15s;}
+  .rj-rows.rv-wait .rj-bar i{transform:scaleX(0);}
+  .rj-so{margin:24px 0 0;font-size:clamp(20px,2.2vw,24px);line-height:1.35;font-weight:900;color:var(--ink);text-wrap:balance;}
+  .rj-int{margin:12px 0 0;font-size:17px;line-height:1.55;color:var(--ink-2);text-wrap:pretty;}
 
   /* Free checkers */
   .ck{margin-top:36px;max-width:980px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);overflow:hidden;}
