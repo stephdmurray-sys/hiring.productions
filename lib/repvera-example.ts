@@ -57,3 +57,58 @@ export const REPVERA_EXAMPLE = {
 }
 
 export const repveraReceipts = () => REPVERA_EXAMPLE.who.reduce((n, [, c]) => n + c, 0)
+
+/**
+ * An example RepVera Work tab (Stephanie, Nov 16, 2026: "Just use fake names for Praemeenah's, it's ok").
+ * The layout, the three statuses and RepVera's own note come from a real profile's Work tab; the
+ * names, employers and projects are changed so nobody on it can be identified. Always shown with
+ * a line saying it's an example with names and details changed. Four items so the grid is even.
+ */
+export type WorkStatus = 'witnessed' | 'awaiting' | 'shared'
+export const REPVERA_WORK_EXAMPLE = {
+  name: 'Maya Torres',
+  initials: 'MT',
+  role: 'Senior Project Manager',
+  bio: 'Leads digital rollouts and partnerships for humanitarian programs.',
+  path: 'repvera.com/u/example',
+  items: [
+    {
+      type: 'Other',
+      status: 'awaiting' as WorkStatus,
+      label: 'Awaiting 1 witness',
+      title: 'Set up a community of practice on identity management',
+      org: 'Global aid nonprofit',
+      year: '2025',
+      desc: 'Launched the global community and ran its peer-support sessions.',
+    },
+    {
+      type: 'Article',
+      status: 'shared' as WorkStatus,
+      label: 'Shared by Maya',
+      title: 'Reflections from a field rollout',
+      org: 'Field program',
+      year: '2025',
+      desc: 'Uploaded by Maya. Not yet witnessed by a contributor.',
+    },
+    {
+      type: 'Other',
+      status: 'witnessed' as WorkStatus,
+      label: 'Witnessed by 1',
+      title: 'Built e-learning modules on running financial assessments',
+      org: 'Global aid nonprofit',
+      year: '2016',
+      witness: { name: 'Dana Okafor', role: 'Project Manager', initials: 'DO' },
+    },
+    {
+      type: 'Other',
+      status: 'witnessed' as WorkStatus,
+      label: 'Witnessed by 1',
+      title: 'Guest speaker: local communities to global systems',
+      org: 'University guest lecture',
+      year: '2026',
+      witness: { name: 'Lena Hart', role: 'Lecturer', initials: 'LH' },
+    },
+  ] as { type: string; status: WorkStatus; label: string; title: string; org: string; year: string; desc?: string; witness?: { name: string; role: string; initials: string } }[],
+  /** RepVera's own note under the Work tab, with the example name. */
+  note: 'Witnessed means a named contributor confirmed they saw this work happen. Awaiting means someone has been asked and has not answered yet. Items shared by Maya without a witness are labeled exactly that.',
+}

@@ -10,6 +10,7 @@ import { keepLast } from '@/lib/site-line'
 import { PORTFOLIO_PICKS, PORTFOLIO_SITES } from '@/lib/evidence/shortlists'
 import { PROOF, REPVERA_QUESTIONS } from '@/lib/evidence/guided'
 import { RepveraFill } from '@/app/(rebrand)/_components/repvera-fill'
+import { RepveraWork } from '@/app/(rebrand)/_components/repvera-work'
 import { repveraFillCss } from '@/app/(rebrand)/_components/repvera-fill-css'
 import { REPVERA_EXAMPLE } from '@/lib/repvera-example'
 
@@ -67,7 +68,8 @@ export default function Page() {
       <section className="wrap sec sl-sec sl-sec-seekers" id="work">
         <StepHead n={2} title="Add your work, if people can see it" sub="Designs, writing or code. No work samples? Skip this step. Step one is your proof." />
         <p className="pk-rv-work">{keepLast(PROOF.repveraWork)}</p>
-        <div className="sl-tools">
+        <RepveraWork k={PROOF.workTabK} note={PROOF.workTabNote} />
+        <div className="sl-tools pk-sites">
           {PORTFOLIO_PICKS.map((t) => (
             <ShortToolRow t={t} side="seekers" key={t.name} />
           ))}
@@ -110,6 +112,7 @@ export default function Page() {
 const css = `
   .pk-rv-work{margin-top:18px;max-width:720px;padding-left:14px;border-left:4px solid var(--indigo);font-size:18px;line-height:1.5;font-weight:800;color:var(--ink);text-wrap:pretty;}
   .pk-one{margin-top:32px;}
+  .pk-sites{margin-top:48px;}
   .pk-prof-k{margin:48px 0 0;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);}
   .pk-prof-src{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3);}
   .pk-prof-src .tl{font-size:13.5px;}
