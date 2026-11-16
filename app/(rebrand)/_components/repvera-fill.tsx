@@ -110,7 +110,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
             <div className="rfw-who">
               <p className="rfw-name">{R.name}</p>
               <p className="rfw-role">{R.headline}</p>
-              <p className="rfw-bio">{R.bio}</p>
+              <p className="rfw-bio">{keepLast(R.bio)}</p>
             </div>
             <span className={proven ? 'rfw-badge rfw-badge-on' : 'rfw-badge'}>{proven ? `Backed by ${total} receipts` : side === 'hiring' ? 'Their word' : 'Your word'}</span>
           </div>
@@ -128,7 +128,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
               <p className="rfw-known">
                 Known for <mark>{R.knownFor}</mark>.
               </p>
-              <p className="rfw-known-more">{R.knownMore}</p>
+              <p className="rfw-known-more">{keepLast(R.knownMore)}</p>
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
               <div className={`rfw-card rfw-summary rf-sec${at(3)}`}>
                 <p className="rfw-ck">Summary</p>
                 <p className="rfw-text">
-                  <Bold text={R.summary} />
+                  <Bold text={keepLast(R.summary)} />
                 </p>
               </div>
               <div className={`rfw-card rf-sec${at(3)}`}>
@@ -175,7 +175,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
                     </p>
                   ))}
                 </div>
-                <p className="rfw-note">{R.rules.apart}</p>
+                <p className="rfw-note">{keepLast(R.rules.apart)}</p>
               </div>
               <div className={`rfw-card rf-sec${at(3)}`}>
                 <p className="rfw-ck">How people describe her</p>
@@ -184,7 +184,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
                     <span key={w}>{w}</span>
                   ))}
                 </div>
-                <p className="rfw-note">{R.rules.verbatim}</p>
+                <p className="rfw-note">{keepLast(R.rules.verbatim)}</p>
               </div>
               <div className={`rfw-card rf-sec${at(4)}`}>
                 <p className="rfw-ck">Confirmed traits</p>
@@ -199,7 +199,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
                           ))}
                         </span>
                       </p>
-                      <p className="rfw-detail">{t.detail}</p>
+                      <p className="rfw-detail">{keepLast(t.detail)}</p>
                     </div>
                   ))}
                 </div>
@@ -214,7 +214,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
                     </li>
                   ))}
                 </ul>
-                <p className="rfw-note">{R.rules.values}</p>
+                <p className="rfw-note">{keepLast(R.rules.values)}</p>
               </div>
             </div>
           </div>
@@ -222,7 +222,7 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
           <div className={`rfw-row rf-sec${at(4)}`}>
             <p className="rfw-k">The finding</p>
             <p className="rfw-finding">
-              <b>{R.said}</b> {R.finding}
+              <b>{R.said}</b> {keepLast(R.finding)}
             </p>
           </div>
         </div>

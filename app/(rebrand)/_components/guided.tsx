@@ -168,13 +168,97 @@ function RvQuote({ q, big = false }: { q: RepveraQuote; big?: boolean }) {
   )
 }
 
+type RvAnswer = (typeof REPVERA_ANSWER)[Side]
+
+/**
+ * RepVera's card with Stephanie's real profile at full width, filling in step by step
+ * (Stephanie, Nov 16, 2026: the large profile on every profile view). Both picker answers use it.
+ */
+function RvProfileCard({ a, side, k }: { a: RvAnswer; side: Side; k: string }) {
+  return (
+    <div className="rv-lane rv-lane-wide">
+      <Dots className="rv-dots" />
+      <Zigzag className="rv-zig" />
+      <div className="rec-pick">
+        <div className="rec-id">
+          <Logo domain="repvera.com" name={a.name} size={64} />
+          <div>
+            <b>{a.name}</b>
+            <span className="rv-built">{a.label}</span>
+          </div>
+        </div>
+        <div className="rv-text rv-text-wide">
+          {a.lines.map((l, n) => (
+            <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
+              {l}
+            </p>
+          ))}
+        </div>
+        <h3 className="rv-prof-k">{k}</h3>
+        <RepveraFill side={side} />
+        <p className="rv-prof-src">
+          {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}.`)}{' '}
+          <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+            See the whole profile <span className="arr">&#8599;</span>
+          </TrackedLink>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+/** The quotes, the disclosure and the one button, in their own card after the profile. */
+function RvEndCard({ a, side, btn, lead, said, after }: { a: RvAnswer; side: Side; btn: string; lead: RepveraQuote[]; said: RepveraQuote[]; after: RepveraQuote[] }) {
+  return (
+    <div className="rv-lane rv-lane-end">
+      <div className="rec-pick">
+        {lead.map((q) => (
+          <RvQuote q={q} key={q.id} big />
+        ))}
+        {said.length > 0 && (
+          <>
+            <h3 className="rv-qk">{a.quotesK}</h3>
+            <div className={`rv-quotes rv-quotes-${said.length}`}>
+              {said.map((q) => (
+                <RvQuote q={q} key={q.id} />
+              ))}
+            </div>
+          </>
+        )}
+        {after.length > 0 && a.afterK && (
+          <>
+            <h3 className="rv-qk">{a.afterK}</h3>
+            {after.map((q) => (
+              <RvQuote q={q} key={q.id} big />
+            ))}
+          </>
+        )}
+        <p className="rv-note">{a.note}</p>
+        {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
+        {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
+        <p className="rv-cta">
+          <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
+            {a.cta.button} <span className="arr">&#8599;</span>
+          </TrackedLink>
+        </p>
+        {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
+        <p className="rv-second">
+          <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
+            {a.second.text} <span className="arr">&#8599;</span>
+          </TrackedLink>
+        </p>
+      </div>
+    </div>
+  )
+}
+
 /**
  * The hiring answer around a large profile (Stephanie, Nov 16, 2026: "the profile being larger",
  * and clear enough that hiring teams grab it). Her card copy stays word for word. Order: the card
  * with the full-width profile filling in, what to ask about in the interview (read off the profile),
  * when to ask candidates for it, then the quotes and the one button.
  */
-function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER)['hiring']; side: Side; btn: string; lead: RepveraQuote[]; said: RepveraQuote[] }) {
+function HiringRepvera({ a, side, btn, lead, said }: { a: RvAnswer; side: Side; btn: string; lead: RepveraQuote[]; said: RepveraQuote[] }) {
   const trait = (name: string) => REPVERA_EXAMPLE.traits.find((t) => t.name === name)!
   const asks = [
     { ...HIRING_READ.confirmed, t: trait(HIRING_READ.confirmed.trait), cls: 'rv-ask-yes' },
@@ -182,34 +266,7 @@ function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER
   ]
   return (
     <>
-      <div className="rv-lane rv-lane-wide">
-        <Dots className="rv-dots" />
-        <Zigzag className="rv-zig" />
-        <div className="rec-pick">
-          <div className="rec-id">
-            <Logo domain="repvera.com" name={a.name} size={64} />
-            <div>
-              <b>{a.name}</b>
-              <span className="rv-built">{a.label}</span>
-            </div>
-          </div>
-          <div className="rv-text rv-text-wide">
-            {a.lines.map((l, n) => (
-              <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
-                {l}
-              </p>
-            ))}
-          </div>
-          <h3 className="rv-prof-k">{HIRING_READ.profileK}</h3>
-          <RepveraFill side="hiring" />
-          <p className="rv-prof-src">
-            {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}.`)}{' '}
-            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
-              See the whole profile <span className="arr">&#8599;</span>
-            </TrackedLink>
-          </p>
-        </div>
-      </div>
+      <RvProfileCard a={a} side={side} k={HIRING_READ.profileK} />
       <Kit k={HIRING_READ.askK}>
         <p className="kit-know-note">{keepLast(HIRING_READ.askLead)}</p>
         <div className="rv-asks">
@@ -243,37 +300,7 @@ function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER
           ))}
         </ol>
       </Kit>
-      <div className="rv-lane rv-lane-end">
-        <div className="rec-pick">
-          {lead.map((q) => (
-            <RvQuote q={q} key={q.id} big />
-          ))}
-          {said.length > 0 && (
-            <>
-              <h3 className="rv-qk">{a.quotesK}</h3>
-              <div className={`rv-quotes rv-quotes-${said.length}`}>
-                {said.map((q) => (
-                  <RvQuote q={q} key={q.id} />
-                ))}
-              </div>
-            </>
-          )}
-          <p className="rv-note">{a.note}</p>
-          {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
-          {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
-          <p className="rv-cta">
-            <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
-              {a.cta.button} <span className="arr">&#8599;</span>
-            </TrackedLink>
-          </p>
-          {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
-          <p className="rv-second">
-            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
-              {a.second.text} <span className="arr">&#8599;</span>
-            </TrackedLink>
-          </p>
-        </div>
-      </div>
+      <RvEndCard a={a} side={side} btn={btn} lead={lead} said={said} after={[]} />
     </>
   )
 }
@@ -296,74 +323,9 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       <p className="rec-lead">{keepLast(a.opening)}</p>
       {seekers ? (
         <>
-        {seekers && <h3 className="kit-k rv-k">{PROOF.people}</h3>}
-        <div className="rv-lane">
-        <Dots className="rv-dots" />
-        <Zigzag className="rv-zig" />
-        <div className="rec-pick">
-          <div className="rec-id">
-            <Logo domain="repvera.com" name={a.name} size={64} />
-            <div>
-              <b>{a.name}</b>
-              <span className="rv-built">{a.label}</span>
-            </div>
-          </div>
-          <div className="rv-body">
-            <div className="rv-text">
-              {a.lines.map((l, n) => (
-                <p className={n === 0 ? 'rv-line rv-line-big' : 'rv-line'} key={l.slice(0, 24)}>
-                  {l}
-                </p>
-              ))}
-            </div>
-            <a className="rv-shot" href={a.second.url} rel="noopener" target="_blank">
-              <Image
-                src="/repvera/profile-overview.webp"
-                alt="A real RepVera profile: the finding, who is behind the profile, the summary and the strongest patterns"
-                width={656}
-                height={740}
-                sizes="(max-width: 760px) 90vw, 320px"
-              />
-              <span>A real profile: Stephanie&rsquo;s own</span>
-            </a>
-          </div>
-          {lead.map((q) => (
-            <RvQuote q={q} key={q.id} big />
-          ))}
-          {said.length > 0 && (
-            <>
-              <h3 className="rv-qk">{a.quotesK}</h3>
-              <div className={`rv-quotes rv-quotes-${said.length}`}>
-                {said.map((q) => (
-                  <RvQuote q={q} key={q.id} />
-                ))}
-              </div>
-            </>
-          )}
-          {after.length > 0 && a.afterK && (
-            <>
-              <h3 className="rv-qk">{a.afterK}</h3>
-              {after.map((q) => (
-                <RvQuote q={q} key={q.id} big />
-              ))}
-            </>
-          )}
-          <p className="rv-note">{a.note}</p>
-          {a.cta.k && <h3 className="rv-cta-k">{a.cta.k}</h3>}
-          {a.cta.text && <p className="rv-cta-text">{keepLast(a.cta.text)}</p>}
-          <p className="rv-cta">
-            <TrackedLink href={a.cta.url} className={btn} event={a.cta.event} side={side} newTab>
-              {a.cta.button} <span className="arr">&#8599;</span>
-            </TrackedLink>
-          </p>
-          {a.cta.under && <p className="rv-under">{a.cta.under}</p>}
-          <p className="rv-second">
-            <TrackedLink href={a.second.url} className="tl" event="repvera_profile_click" side={side} newTab>
-              {a.second.text} <span className="arr">&#8599;</span>
-            </TrackedLink>
-          </p>
-        </div>
-        </div>
+          <h3 className="kit-k rv-k">{PROOF.people}</h3>
+          <RvProfileCard a={a} side={side} k={PROOF.profileK} />
+          <RvEndCard a={a} side={side} btn={btn} lead={lead} said={said} after={after} />
         </>
       ) : (
         <HiringRepvera a={a} side={side} btn={btn} lead={lead} said={said} />
@@ -495,12 +457,7 @@ export const guidedCss = `
   .rv-line{font-size:18px;line-height:1.6;color:var(--ink-2);margin-top:14px;text-wrap:pretty;}
   .rv-line:first-of-type{color:var(--ink);font-weight:700;}
   .rv-note{margin:18px 0 22px;padding:14px 16px;border-left:4px solid var(--ink);background:var(--surface);font-size:16px;line-height:1.55;color:var(--ink);text-wrap:pretty;}
-  .rv-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start;margin-top:6px;}
   .rv-line-big{font-size:clamp(20px,2vw,24px) !important;font-weight:900;line-height:1.3;letter-spacing:-0.01em;color:var(--ink) !important;}
-  .rv-shot{display:block;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink);transform:rotate(1.5deg);transition:transform .15s ease,box-shadow .15s ease;}
-  .rv-shot:hover{transform:rotate(0) translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink);}
-  .rv-shot img{display:block;width:100%;height:auto;}
-  .rv-shot span{display:block;padding:8px 12px;border-top:2px solid var(--ink);font-size:13px;font-weight:800;background:var(--paper-2);}
   .rv-q{margin:26px 0 0;padding:20px 22px;background:var(--paper);border:2px solid var(--ink);border-radius:14px;}
   .rv-q blockquote{margin:0;font-size:17px;line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
   .rv-q-big blockquote{font-size:clamp(19px,1.9vw,22px);font-weight:800;line-height:1.4;}
@@ -524,7 +481,7 @@ export const guidedCss = `
   .rv-cta .btn{font-size:17px;padding:17px 24px;}
   .rv-under{margin:12px 0 0;font-size:14.5px;font-weight:600;color:var(--ink-3);}
   .rv-second{margin:16px 0 0;font-size:16px;font-weight:700;}
-  @media(max-width:860px){.rv-body{grid-template-columns:1fr;}.rv-shot{max-width:360px;transform:none;}.rv-quotes-3{grid-template-columns:1fr;}}
+  @media(max-width:860px){.rv-quotes-3{grid-template-columns:1fr;}}
   @media(max-width:600px){.rv-quotes-2,.rv-quotes-4{grid-template-columns:1fr;}}
   .rv-back{margin-top:36px;font-size:15px;}
   .rv-k{margin-top:36px;}
