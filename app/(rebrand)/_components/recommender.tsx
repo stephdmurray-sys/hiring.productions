@@ -211,9 +211,9 @@ function CostLine({ r, ask }: { r: Recommendation; ask: Ask }) {
 }
 
 /** A section of the kit: a small heading and its content. */
-export function Kit({ k, children, className }: { k: string; children: React.ReactNode; className?: string }) {
+export function Kit({ k, children, className, id }: { k: string; children: React.ReactNode; className?: string; id?: string }) {
   return (
-    <section className={`kit${className ? ` ${className}` : ''}`}>
+    <section className={`kit${className ? ` ${className}` : ''}`} id={id}>
       <h3 className="kit-k">{k}</h3>
       {children}
     </section>
@@ -482,6 +482,7 @@ export const kitCss = moneyCss + followCss + pickFaceCss + knowCss + `
   .kit-know-note{margin:0;max-width:720px;font-size:16px;line-height:1.55;color:var(--ink-2);}
   /* The kit */
   .kit{margin-top:44px;max-width:820px;}
+  .kit[id]{scroll-margin-top:28px;}
   .kit-k{font-size:clamp(20px,2.2vw,24px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);margin:0 0 16px;}
   .kit-best{margin-top:32px;}
   .kit-best .rec-pick{margin-top:0;}

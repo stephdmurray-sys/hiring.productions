@@ -251,8 +251,9 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
       </div>
       </div>
       {seekers && (
-        <Kit k={PROOF.work}>
+        <Kit k={PROOF.work} id="work">
           <p className="rv-work-lead">{keepLast(PROOF.workLead)}</p>
+          <p className="rv-work-rv">{keepLast(PROOF.repveraWork)}</p>
           <p className="rv-nowork">{keepLast(PROOF.noWork)}</p>
           <div className="sl-tools rv-work">
             {PORTFOLIO_PICKS.map((t) => (
@@ -418,6 +419,7 @@ export const guidedCss = `
   .rec-hiring.rv-ans .rec-pick{border:3px solid var(--coral);box-shadow:6px 6px 0 var(--coral);}
   .rv-work-lead{font-size:18px;line-height:1.55;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
   .rv-work{margin-top:22px;}
+  .rv-work-rv{margin-top:14px;max-width:720px;padding-left:14px;border-left:4px solid var(--indigo);font-size:18px;line-height:1.5;font-weight:800;color:var(--ink);text-wrap:pretty;}
   .rv-nowork{display:inline-block;margin-top:12px;padding:8px 14px;background:var(--lavender);color:var(--ink);border:2px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);font-size:16px;font-weight:800;line-height:1.35;}
   .rv-lane{position:relative;max-width:820px;margin-bottom:24px;}
   .rv-lane > .rec-pick{position:relative;z-index:2;}
