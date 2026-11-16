@@ -6,11 +6,16 @@ import { JsonLd, graph, SITE } from '@/app/(rebrand)/_components/structured'
 import { keepLast } from '@/lib/site-line'
 import { formatDate } from '@/lib/evidence'
 import { Dots, Squiggle, Zigzag, retroCss } from '@/app/(rebrand)/_components/retro'
+import { KnowList, knowCss } from '@/app/(rebrand)/_components/know-list'
+import { moneyCss } from '@/lib/money'
+import { JOB_CHECKS } from '@/lib/evidence/tools-to-know'
 
 /**
  * "Is this job even real?": the job seeker side of hiring fraud. Copy is
- * Stephanie's, word for word (Nov 14, 2026). No tool is recommended here:
- * we haven't found a scam checker worth recommending, and the page says so.
+ * Stephanie's, word for word (Nov 14, 2026). No scam checker is recommended:
+ * we haven't found one worth recommending, and the page says so. The free
+ * official ways to check (BBB, LinkedIn, ICANN, state registries) were added
+ * Nov 16, 2026 from the value audit.
  */
 
 const PATH = '/is-this-a-real-job'
@@ -100,7 +105,7 @@ export default function Page() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + retroCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + retroCss + moneyCss + knowCss + css }} />
       <JsonLd data={ld} />
       <SiteNav active="seekers" />
 
@@ -154,6 +159,12 @@ export default function Page() {
             </span>
           </li>
         </ol>
+      </section>
+
+      <section className="wrap sec" id="check">
+        <h2>Free ways to check it yourself</h2>
+        <p className="lead">{keepLast('Look up the phone number, the email domain and the company before you send anything.')}</p>
+        <KnowList tools={JOB_CHECKS} side="seekers" />
       </section>
 
       <section className="wrap sec" id="tools">

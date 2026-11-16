@@ -23,10 +23,12 @@ export function KnowList({ tools, side }: { tools: KnowTool[]; side: 'seekers' |
             </div>
           </div>
           <p className="know-line">{keepLast(t.line)}</p>
-          <p className="know-fact">
-            <b>Free: </b>
-            {keepLast(t.free)}
-          </p>
+          {t.free && (
+            <p className="know-fact">
+              <b>Free: </b>
+              {keepLast(t.free)}
+            </p>
+          )}
           {t.paid && (
             <p className="know-fact">
               <b>If you pay: </b>
@@ -34,9 +36,15 @@ export function KnowList({ tools, side }: { tools: KnowTool[]; side: 'seekers' |
             </p>
           )}
           {t.reviews && <p className="know-reviews">{keepLast(t.reviews)}</p>}
+          {t.watch && (
+            <p className="know-watch">
+              <b>Watch out: </b>
+              {keepLast(t.watch)}
+            </p>
+          )}
           <span className="know-go">
             <a href={`/go/${t.go}`} rel="nofollow noopener">
-              Go to {t.name} <span className="arr">&#8599;</span>
+              {t.cta ?? `Go to ${t.name}`} <span className="arr">&#8599;</span>
             </a>
             <span className="money">{moneyLine(t.go)}</span>
           </span>
@@ -59,6 +67,8 @@ export const knowCss = `
   .know-line{margin:2px 0 0;font-size:15.5px;line-height:1.5;color:var(--ink);}
   .know-fact{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-2);}
   .know-fact b{color:var(--ink);}
+  .know-watch{margin:0;padding:8px 10px;border-radius:10px;background:var(--coral-tint);font-size:13.5px;line-height:1.45;color:var(--ink);}
+  .know-watch b{color:var(--coral-text);}
   .know-reviews{margin:0;font-size:13px;line-height:1.45;color:var(--ink-3);}
   .know-go{display:flex;flex-direction:column;margin-top:auto;padding-top:6px;}
   .know-go a{font-weight:800;font-size:15px;text-decoration:underline;text-underline-offset:3px;}

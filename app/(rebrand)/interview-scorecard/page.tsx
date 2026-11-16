@@ -8,6 +8,9 @@ import { Capture } from '@/app/(rebrand)/_components/capture'
 import { captureCss } from '@/app/(rebrand)/_components/widgets-css'
 import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
 import { SCORECARD_MAX, SCORECARD_PATH, cleanRole, pickCompetencies, scorecardUrl } from '@/lib/scorecard'
+import { KnowList, knowCss } from '@/app/(rebrand)/_components/know-list'
+import { moneyCss } from '@/lib/money'
+import { INTERVIEW_CONSISTENCY } from '@/lib/evidence/tools-to-know'
 
 /**
  * "What should we ask in the interview?": a structured interview scorecard
@@ -121,7 +124,7 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + moneyCss + knowCss + css }} />
       <SiteNav active="hiring" />
 
       <header className="ph">
@@ -317,6 +320,12 @@ export default async function ScorecardPage({ searchParams }: { searchParams: Se
           />
         </section>
       )}
+
+      <section className="wrap sec no-print" id="tools">
+        <h2>Tools that keep every interview on the scorecard</h2>
+        <p className="lead">Two are built into an applicant tracking system, and two take notes and fill in the scorecard in the one you&nbsp;have.</p>
+        <KnowList tools={INTERVIEW_CONSISTENCY} side="hiring" />
+      </section>
 
       <section className="wrap sec no-print" id="why">
         <h2>Why structure</h2>
