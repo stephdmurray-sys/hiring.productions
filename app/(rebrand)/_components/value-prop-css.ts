@@ -21,6 +21,7 @@ export const valuePropCss = `
   .vp-main > p{grid-column:1;}
   .vp-main-text{margin:0;font-size:clamp(22px,2.4vw,28px);line-height:1.3;font-weight:900;letter-spacing:-0.01em;color:var(--ink);text-wrap:pretty;}
   .vp-main .vp-copy{grid-column:2;grid-row:1 / span 3;align-self:center;}
+  .vp-proof{margin:6px 0 0;padding-top:10px;border-top:2px dashed var(--rule-2);font-size:14.5px;line-height:1.5;font-weight:700;color:var(--ink);}
   .vp-k{margin:0;font-size:15px;font-weight:800;color:var(--ink);}
   .vp-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
   .vp-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font:inherit;font-size:15.5px;font-weight:800;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;}

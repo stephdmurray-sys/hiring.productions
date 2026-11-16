@@ -106,7 +106,16 @@ const COPY: Record<
   },
 }
 
-export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { text: string; href: string; label: string } }) {
+export function ValuePropBuilder({
+  side,
+  noWords,
+  proof,
+}: {
+  side: Side
+  noWords?: { text: string; href: string; label: string }
+  /** Under the line: it's your word until receipts back it up. */
+  proof?: { text: string; href: string; label: string }
+}) {
   const c = COPY[side]
   const [said, setSaid] = useState('')
   const [picked, setPicked] = useState<string[] | null>(null)
@@ -258,6 +267,14 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
           <p className="vp-where">{side === 'seekers' ? 'Your line' : 'Your team’s line'}</p>
           <p className="vp-main-text">{mainLine}</p>
           <p className="vp-note">{c.main}</p>
+          {proof && (
+            <p className="vp-proof">
+              {proof.text}{' '}
+              <a className="tl" href={proof.href}>
+                {proof.label} <span className="arr">&darr;</span>
+              </a>
+            </p>
+          )}
           <button type="button" className="vp-copy" onClick={() => copy(-1, mainLine)}>
             {copied === -1 ? 'Copied' : 'Copy'}
           </button>

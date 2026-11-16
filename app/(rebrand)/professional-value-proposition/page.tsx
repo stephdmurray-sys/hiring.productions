@@ -5,8 +5,9 @@ import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site
 import { shortListCss } from '@/app/(rebrand)/_components/short-list'
 import { ToolHero, StepHead, toolPageCss } from '@/app/(rebrand)/_components/tool-hero'
 import { JsonLd, graph, SITE } from '@/app/(rebrand)/_components/structured'
-import { AtsFlow, type FlowStep } from '@/app/(rebrand)/_components/ats-flow'
-import { atsFlowCss } from '@/app/(rebrand)/_components/ats-flow-css'
+import { RepveraFill } from '@/app/(rebrand)/_components/repvera-fill'
+import { repveraFillCss } from '@/app/(rebrand)/_components/repvera-fill-css'
+import { REPVERA_EXAMPLE } from '@/lib/repvera-example'
 import { ValuePropBuilder } from '@/app/(rebrand)/_components/value-prop-builder'
 import { valuePropCss } from '@/app/(rebrand)/_components/value-prop-css'
 import { TrackedLink } from '@/app/(rebrand)/_components/picker-track'
@@ -37,24 +38,6 @@ const REPVERA_URL = 'https://www.repvera.com/?utm_source=hiring.productions&utm_
 const REPVERA_PROFILE = 'https://www.repvera.com/u/stephaniemurray'
 
 export default function Page() {
-  const steps: FlowStep[] = [
-    {
-      title: 'Ask the people who’ve worked with you',
-      todo: 'Send your RepVera link to managers, teammates and clients.',
-      why: 'Each of them writes a short receipt about what it was like to work with you, and it’s verified through their work email.',
-    },
-    {
-      title: 'See the themes',
-      todo: 'Look for what comes up again and again.',
-      why: 'Your receipts sit in one place, with the themes broken down by who said them: managers, peers, clients.',
-    },
-    {
-      title: 'Put their words to work',
-      todo: 'Paste them into the builder.',
-      why: 'The words they repeat become what you’re known for, ready to say in an interview, a networking chat or your LinkedIn About.',
-      more: { href: '#build', label: 'Back to the builder', up: true },
-    },
-  ].map((s) => ({ ...s, title: keepLast(s.title), todo: keepLast(s.todo), why: keepLast(s.why) }))
   const tai = quotes(['tai-themes'])[0]
 
   const url = `${SITE}${PATH}`
@@ -82,7 +65,7 @@ export default function Page() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + shortListCss + toolPageCss + atsFlowCss + valuePropCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + shortListCss + toolPageCss + repveraFillCss + valuePropCss + css }} />
       <JsonLd data={ld} />
       <SiteNav active="seekers" />
       <ToolHero
@@ -102,7 +85,11 @@ export default function Page() {
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="build">
         <StepHead title="Build yours" sub="Start with what other people say. Your line updates as you type." />
-        <ValuePropBuilder side="seekers" noWords={{ text: 'Nobody has said it in writing yet?', href: '#repvera', label: 'Get receipts from the people who’ve worked with you' }} />
+        <ValuePropBuilder
+          side="seekers"
+          noWords={{ text: 'Nobody has said it in writing yet?', href: '#repvera', label: 'Get receipts from the people who’ve worked with you' }}
+          proof={{ text: 'Right now, this is your word. Receipts from people who’ve worked with you back it up.', href: '#repvera', label: 'See how' }}
+        />
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="repvera">
@@ -111,7 +98,14 @@ export default function Page() {
           <Dots className="vp-rv-dots" />
           <p className="vp-rv-built">Stephanie built this one</p>
           <p className="vp-rv-lead">{keepLast('RepVera helps you uncover your value prop through how others experience working with you.')}</p>
-          <AtsFlow steps={steps} />
+          <p className="vp-rv-k">Watch a real profile fill in</p>
+          <RepveraFill />
+          <p className="vp-rv-src">
+            {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}. Every word and count is on the profile.`)}{' '}
+            <a href={REPVERA_EXAMPLE.profileUrl} rel="noopener" target="_blank">
+              See the whole profile
+            </a>
+          </p>
           {tai && (
             <figure className="vp-quote">
               <blockquote>&ldquo;{tai.text}&rdquo;</blockquote>
@@ -154,7 +148,9 @@ const css = `
   .vp-rv-dots{top:-30px;right:-22px;color:var(--lavender);}
   .vp-rv-built{display:inline-block;margin:0;padding:5px 12px;border-radius:999px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:800;}
   .vp-rv-lead{margin:16px 0 0;max-width:760px;font-size:clamp(22px,2.4vw,28px);line-height:1.3;font-weight:900;letter-spacing:-0.01em;color:var(--ink);text-wrap:balance;}
-  .vp-rv .af{margin-top:30px;}
+  .vp-rv-k{margin:28px 0 0;font-size:clamp(20px,2vw,24px);font-weight:900;letter-spacing:-0.01em;color:var(--ink);}
+  .vp-rv-src{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3);}
+  .vp-rv-src a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
   .vp-quote{margin:36px 0 0;padding:22px 24px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);max-width:860px;}
   .vp-quote blockquote{margin:0;font-size:clamp(18px,1.8vw,21px);line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
   .vp-quote figcaption{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:14.5px;line-height:1.35;color:var(--ink-2);}
