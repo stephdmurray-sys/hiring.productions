@@ -18,7 +18,7 @@ export function ToolHero({ side, crumbs, sticker, title, dek, dateline }: { side
         <Squiggle className="slh-squig" />
         <p className="crumbs">{crumbs}</p>
         {sticker && <p className="sl-sticker">{sticker}</p>}
-        <h1 className="display">{title}</h1>
+        <h1 className="display">{keepLast(title)}</h1>
         <p className="dek">{keepLast(dek)}</p>
         {dateline && <p className="dateline">{dateline}</p>}
       </div>

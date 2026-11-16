@@ -1,0 +1,41 @@
+import { FREE_TOOL_CARDS, type FreeToolCard } from '@/lib/free-tools'
+
+/**
+ * Shared content for the homepage facelift mockups (Stephanie, Nov 16, 2026: she liked a ChatGPT
+ * layout's hero, the two "I'm building my career / my team" cards and the row of challenges under
+ * it, and hated how AI-generated it looked). Every question, page and line here is already on the
+ * site; nothing is invented. Not linked from the site, and /mockups is kept out of search.
+ */
+
+const pick = (side: 'seekers' | 'hiring', ids: string[]) => ids.map((id) => FREE_TOOL_CARDS[side].find((c) => c.id === id)!) as FreeToolCard[]
+
+/** Three questions per side, so the two sides stay even. */
+export const STUCK = {
+  seekers: pick('seekers', ['screening', 'real-job', 'proof']),
+  hiring: pick('hiring', ['real-candidate', 'proof-hiring', 'whole-stack']),
+}
+
+export const HERO = {
+  h1: 'Hiring is a production.',
+  dek: 'See how the other side actually works, and what’s worth using, whether you’re getting hired or doing the hiring.',
+  /** Four, so the list stays even. Each is true of the site today. */
+  trust: ['Nobody pays to be featured.', 'Every number is sourced and dated.', 'Free tools for both sides of the table.', 'Made by Stephanie Murray, 20 years in talent.'],
+  seekers: { k: 'For job seekers', title: ['I’m building my ', 'career.', ''], line: 'See how recruiters actually read you, and which tools are worth paying for.', cta: 'Help me choose', href: '/what-should-i-use?side=seekers#questions' },
+  hiring: { k: 'For hiring teams', title: ['I’m building my ', 'team.', ''], line: 'See what strong candidates see, and which tools earn their price.', cta: 'Help me choose', href: '/what-should-i-use?side=hiring#questions' },
+}
+
+/** Two per side. Titles and lines from the pages themselves. */
+export const NOW_PLAYING: { side: 'seekers' | 'hiring'; icon: FreeToolCard['icon']; title: string; line: string; href: string }[] = [
+  { side: 'seekers', icon: 'screen', title: 'What does the screening software do to my resume?', line: 'Less than you’ve been told. What happens after you click apply, sourced line by line.', href: '/how-ats-actually-works' },
+  { side: 'seekers', icon: 'proof', title: 'How do I show employers how I work before the interview?', line: 'Proof from the people who have worked with you, and from the work itself.', href: '/show-how-you-work' },
+  { side: 'hiring', icon: 'list', title: 'Which fraud tools should we know?', line: 'The tools that catch fake candidates, at each stage of hiring.', href: '/guides/hiring-fraud-tools' },
+  { side: 'hiring', icon: 'proof', title: 'See how someone works before the first interview.', line: 'Read what the people who have worked with a candidate already know.', href: '/what-should-i-use?side=hiring&problem=see-how-they-work' },
+]
+
+export const sideName = (s: 'seekers' | 'hiring') => (s === 'seekers' ? 'For job seekers' : 'For hiring teams')
+export const sideShort = (s: 'seekers' | 'hiring') => (s === 'seekers' ? 'Job seekers' : 'Hiring teams')
+
+export const mockBarCss = `
+  .mock-bar{position:sticky;top:0;z-index:50;display:flex;justify-content:center;gap:16px;padding:9px 16px;background:var(--ink);color:#fff;font-size:14px;font-weight:800;}
+  .mock-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px;}
+`

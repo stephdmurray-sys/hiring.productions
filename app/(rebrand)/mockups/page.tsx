@@ -17,6 +17,8 @@ const css = `
 `
 
 const OPTIONS = [
+  { href: '/mockups/home-a', letter: '1', name: 'Homepage facelift A: Clapperboards', bg: 'linear-gradient(135deg,#6C47FF 50%,#FF4F6A 50%)', what: 'Nov 16, 2026. The headline left, two clapperboards right that snap shut on hover, then Where are you stuck? and Now playing.' },
+  { href: '/mockups/home-b', letter: '2', name: 'Homepage facelift B: Two doors', bg: 'linear-gradient(90deg,#6C47FF 50%,#FF4F6A 50%)', what: 'Nov 16, 2026. The headline over one split card, each side with its three questions right in the hero, Stephanie on the seam, then ticket stubs.' },
   { href: '/mockups/a', letter: 'A', name: 'Center stage', bg: '#170F3A', what: 'The first redesign’s dark indigo stage, cleaned up: real logos on the evidence cards, a moving strip of every tool we score, colorful pick cards.' },
   { href: '/mockups/b', letter: 'B', name: 'Both sides', bg: 'linear-gradient(90deg,#6C47FF 50%,#FF4F6A 50%)', what: 'An indigo half for job seekers and a coral half for hiring teams, each full of logos, with a ticker of this month’s findings.' },
   { href: '/mockups/c', letter: 'C', name: 'Scoreboard', bg: '#6C47FF', what: 'A light page with a live scoreboard: logos, filling score bars, publisher logos for the lists, and video thumbnails.' },

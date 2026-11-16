@@ -61,7 +61,8 @@ export const REPVERA_QUOTES: Record<string, RepveraQuote> = {
     name: 'Tai Freligh',
     title: 'Senior Marketing Manager and Editorial Director',
     photo: '/people/tai-freligh.webp',
-    approved: false,
+    // Tai approved, Nov 16, 2026 (Stephanie).
+    approved: true,
   },
   ingrid: {
     id: 'ingrid',
