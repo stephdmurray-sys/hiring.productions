@@ -172,7 +172,7 @@ function RvQuote({ q, big = false }: { q: RepveraQuote; big?: boolean }) {
  * The hiring answer around a large profile (Stephanie, Nov 16, 2026: "the profile being larger",
  * and clear enough that hiring teams grab it). Her card copy stays word for word. Order: the card
  * with the full-width profile filling in, what to ask about in the interview (read off the profile),
- * where to ask candidates for it, then the quotes and the one button.
+ * when to ask candidates for it, then the quotes and the one button.
  */
 function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER)['hiring']; side: Side; btn: string; lead: RepveraQuote[]; said: RepveraQuote[] }) {
   const trait = (name: string) => REPVERA_EXAMPLE.traits.find((t) => t.name === name)!
@@ -231,6 +231,7 @@ function HiringRepvera({ a, side, btn, lead, said }: { a: (typeof REPVERA_ANSWER
         </div>
       </Kit>
       <Kit k={ASK_FOR_IT.k}>
+        <p className="kit-know-note">{keepLast(ASK_FOR_IT.lead)}</p>
         <ol className="rv-steps">
           {ASK_FOR_IT.steps.map((step, i) => (
             <li key={step}>
@@ -414,7 +415,7 @@ export function RepveraAnswer({ side, from }: { side: Side; from?: string }) {
           <Capture
             source="hiring_proof"
             audience="hiring"
-            promise="Get this answer by email, with where to ask candidates for it."
+            promise="Get this answer by email, with when to ask candidates for it."
             cta="Email me this answer"
             done="Sent. Check your inbox."
             askCompanySize
@@ -543,7 +544,7 @@ export const guidedCss = `
   .rec-hiring .rv-lane .m-dots{color:var(--coral);}
   .rec-hiring .rv-lane .m-zig{color:var(--indigo);}
   @media(max-width:560px){.rv-lane .rv-dots{right:-12px;}}
-  /* Hiring answer: the profile at full width, what to ask, where to ask for it (Nov 16, 2026) */
+  /* Hiring answer: the profile at full width, what to ask, when to ask for it (Nov 16, 2026) */
   .rv-lane-wide,.rv-lane-wide > .rec-pick{max-width:none;}
   .rv-lane-wide > .rec-pick{grid-template-columns:minmax(0,1fr);}
   .rv-text-wide{max-width:760px;}

@@ -309,12 +309,17 @@ export const PROOF = {
   },
 }
 
-/** The hiring side's practical step after RepVera's card: where to ask candidates for it. */
+/**
+ * The hiring side's practical step after RepVera's card: when to ask candidates for it.
+ * Stephanie, Nov 16, 2026: never on the application form or in the job post. "You ask for it
+ * when you need trust in people sooner. Before the first screen, after the first interview
+ * before you send to a hiring manager."
+ */
 export const ASK_FOR_IT = {
-  k: 'Where to ask for it',
-  text: 'Add a field for it on your application form, next to the resume upload, and say in the job post that you read it before you book interviews.',
-  /** The same two moves as numbered steps, on the hiring answer (Nov 16, 2026). */
-  steps: ['Add a field for it on your application form, next to the resume upload.', 'Say in the job post that you read it before you book interviews.'],
+  k: 'When to ask for it',
+  lead: 'When you need to trust people sooner.',
+  text: 'Ask for it when you need to trust people sooner: before the first screen, or after the first interview, before you send them to the hiring manager.',
+  steps: ['Before the first screen', 'After the first interview, before you send them to the hiring manager'],
 }
 
 /**

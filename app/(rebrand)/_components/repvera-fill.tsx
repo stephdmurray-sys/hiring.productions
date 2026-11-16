@@ -11,8 +11,10 @@ import { keepLast } from '@/lib/site-line'
  * "take my word for it" to proof. Laid out the way the real profile is, at
  * full width, inside a product window: four steps across the top, then the
  * profile, filling in step by step on Stephanie's real data.
- * Plays once when the profile scrolls into view; tapping a step stops it
- * there. Reduced motion and no-JS show the whole profile.
+ * Plays once when the profile scrolls into view: each step lights up and
+ * its sections fill in, 1.5 seconds apart, until the whole profile shows.
+ * The steps are not buttons (Stephanie, Nov 16, 2026: the numbers weren't
+ * obvious to click). Reduced motion and no-JS show the whole profile.
  * Styles: repvera-fill-css.ts.
  */
 
@@ -45,7 +47,6 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
   const [step, setStep] = useState(STEPS.length)
   const ref = useRef<HTMLDivElement>(null)
   const timer = useRef(0)
-  const touched = useRef(false)
 
   useEffect(() => {
     const el = ref.current
@@ -53,14 +54,14 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
     setStep(1)
     const io = new IntersectionObserver(
       ([e]) => {
-        if (!e.isIntersecting || touched.current) return
+        if (!e.isIntersecting) return
         io.disconnect()
         let n = 1
         timer.current = window.setInterval(() => {
           n++
           setStep(n)
           if (n >= STEPS.length) window.clearInterval(timer.current)
-        }, 2400)
+        }, 1500)
       },
       { threshold: 0.2 },
     )
@@ -71,13 +72,6 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
     }
   }, [])
 
-  const go = (n: number) => {
-    // A tap takes over from the autoplay.
-    touched.current = true
-    window.clearInterval(timer.current)
-    setStep(n)
-  }
-
   const at = (n: number) => (step >= n ? ' rf-on' : '')
   const proven = step >= 4
   const progress = ((step - 1) / (STEPS.length - 1)) * 100
@@ -87,13 +81,13 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
       <ol className="rf-steps" style={{ ['--rf-progress' as string]: `${progress}%` }}>
         {STEPS.map((s, i) => (
           <li key={s.title}>
-            <button type="button" className={`rf-step${step === i + 1 ? ' rf-now' : ''}${step > i ? ' rf-done' : ''}`} aria-pressed={step === i + 1} onClick={() => go(i + 1)}>
+            <div className={`rf-step${step === i + 1 ? ' rf-now' : ''}${step > i ? ' rf-done' : ''}`} aria-current={step === i + 1 ? 'step' : undefined}>
               <span className="rf-n" aria-hidden="true">
                 {i + 1}
               </span>
               <b>{keepLast(s.title)}</b>
               <span className="rf-line">{keepLast(s.line)}</span>
-            </button>
+            </div>
           </li>
         ))}
       </ol>
@@ -209,7 +203,6 @@ export function RepveraFill({ side = 'seekers' }: { side?: 'seekers' | 'hiring' 
                     </div>
                   ))}
                 </div>
-                <p className="rfw-note">{R.rules.marks}</p>
               </div>
               <div className={`rfw-card rf-sec${at(4)}`}>
                 <p className="rfw-ck">Selected values</p>
