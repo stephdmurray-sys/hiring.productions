@@ -296,6 +296,8 @@ export const REPVERA_ANSWER: Record<
  */
 export const PROOF = {
   people: 'From the people who have worked with you',
+  /** Above the large profile on the job seeker answer, as on the value proposition page. */
+  profileK: 'Watch a real profile fill in',
   work: 'From the work itself',
   workLead: 'If people can see what you make, like designs, writing or code, a portfolio puts it one click from your resume.',
   noWork: 'No work samples? Your RepVera is proof on its own.',
