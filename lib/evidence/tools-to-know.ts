@@ -244,6 +244,46 @@ export const INTERVIEW_CONSISTENCY: KnowTool[] = [
   },
 ]
 
+/** Recruiter training, from our own training guide (data verified on each provider's page, Aug 23, 2026). */
+const GUIDE = { label: 'Our recruiter training guide', url: '/guides/best-recruiter-training', date: 'checked August 23, 2026' }
+const TRAINING: KnowTool[] = [
+  {
+    go: 'airs',
+    name: 'AIRS Recruiter Academy',
+    domain: 'airsdirectory.com',
+    tag: 'Recruiter training pick',
+    line: 'The industry-standard credential set since 1997, now owned by ADP: 16 certifications, with SHRM and HRCI credits included.',
+    paid: 'OnDemand $1,995, Premium $2,495, or single certifications from $895.',
+    src: GUIDE,
+  },
+  {
+    go: 'sourcecon',
+    name: 'SourceCon Academy',
+    domain: 'eretraining.com',
+    tag: 'Sourcing pick',
+    line: 'The deepest pure-sourcing curriculum, from the community that invented the discipline.',
+    free: 'A 5-day free trial.',
+    paid: '$995 a year, or $495 for one quarter.',
+    src: GUIDE,
+  },
+  {
+    go: 'socialtalent',
+    name: 'SocialTalent',
+    domain: 'socialtalent.com',
+    line: 'Self-paced training built for corporate recruiting teams learning together.',
+    paid: 'From €1,095 for teams.',
+    src: GUIDE,
+  },
+  {
+    go: 'skillpanel',
+    name: 'SkillPanel Tech Recruitment Certification',
+    domain: 'skillpanel.com',
+    line: 'A self-paced foundation in tech recruiting.',
+    free: 'All of it.',
+    src: GUIDE,
+  },
+]
+
 /** By picker problem id. */
 export { PRACTICE, MOCKS }
 
@@ -262,6 +302,11 @@ export const TOOLS_TO_KNOW: Record<string, KnowSet> = {
     k: 'Mock interviews to know',
     note: 'Practice with a person, or out loud with feedback. Here’s what each one does and what’s free, from their own pages.',
     tools: [...MOCKS, PRACTICE[0]],
+  },
+  training: {
+    k: 'The top programs from our training guide',
+    note: 'Ranked in the guide by our practitioner score. Here’s what each costs, from their own pages.',
+    tools: TRAINING,
   },
   'cant-find-people': {
     k: 'Sourcing tools to know',
