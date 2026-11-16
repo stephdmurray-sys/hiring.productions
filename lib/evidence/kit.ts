@@ -22,7 +22,7 @@ export const WONT_DO: Record<string, string> = {
   // Hiring teams
   spreadsheets: 'A tracking system keeps every candidate in one place, but it won’t speed up a slow decision.',
   'choosing-ats': 'A tracking system keeps every candidate in one place, but it won’t speed up a slow decision.',
-  'too-many-applicants': 'Screening tools sort the pile, but someone still has to decide what good looks like for the role.',
+  'too-many-applicants': 'Screening tools sort the stack of applicants, but someone still has to decide what good looks like for the role.',
   'fake-candidates': 'No single tool catches everything, so use more than one check.',
   'cant-find-people': 'Sourcing tools find people, but they can’t make the job or the pay more appealing.',
   'interviews-inconsistent': 'A scorecard gets everyone asking the same things, but people still have to use it.',
@@ -101,7 +101,7 @@ export const FREE_TOOLS = {
   },
   screeningHiring: {
     title: 'Is software screening them out?',
-    detail: 'How your own knockout rules screen people out, and what to change so the pile is the right pile.',
+    detail: 'How your own knockout rules screen people out, and what to change so the right people end up in your stack of applicants.',
     href: '/how-ats-actually-works#hiring',
   },
   // Value propositions, both sides (Nov 15, 2026)
@@ -137,7 +137,7 @@ export const FREE_FROM_US: Record<string, FreeTool> = {
   // Hiring answers about cost or volume: the cost per hire tool
   spreadsheets: FREE_TOOLS.costPerHire,
   'choosing-ats': FREE_TOOLS.stackHiring,
-  // Buried in applicants: the knockout rules that decide who's in the pile (Nov 16, 2026 audit)
+  // Buried in applicants: the knockout rules that decide who's in the stack of applicants (Nov 16, 2026 audit)
   'too-many-applicants': FREE_TOOLS.screeningHiring,
   // The right people aren't applying: why someone would take this job
   'cant-find-people': FREE_TOOLS.evp,

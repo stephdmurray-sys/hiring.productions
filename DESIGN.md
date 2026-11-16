@@ -118,6 +118,7 @@ Every picker path ends in an answer with a best match (or a plain "no tool" verd
 - "X, not Y" or "not just X, but Y" as a rhetorical move. Fine when it states a fact ("priced per posting, not per seat").
 - Two-beat slogans ("Her opinion, labeled as hers. It never changes a score."). Say it in one plain sentence: "This is Stephanie's opinion, and it has no effect on the score."
 - Filler: actually, genuinely, real talk, finally, quietly. And the words quiet and gap, anywhere.
+- "Pile" for applicants. Say "stack of applicants" (Stephanie, Nov 16, 2026: "that's not normal jargon at all").
 - "One pick". Say "one tool and a backup". "Receipts" belongs to RepVera only.
 - Lists of three by default. Use two or four, or a sentence.
 - Plus the house rules in CLAUDE.md: no em dashes, no emojis, no unsourced numbers.
