@@ -9,12 +9,21 @@ import { JsonLd, graph, SITE } from '@/app/(rebrand)/_components/structured'
 import { atsCapability } from '@/lib/evidence/recommend'
 import ats from '@/lib/scorecards/ats-small-teams.json'
 import { REPVERA_NOTE_LABEL, REPVERA_WHAT, repveraLink } from '@/lib/repvera'
+import { ShortToolRow, shortListCss } from '@/app/(rebrand)/_components/short-list'
+import { FRAUD_TOOLS } from '@/lib/evidence/shortlists'
+import { keepLast } from '@/lib/site-line'
 
 /**
  * "Is this even a real candidate?": the FBI's red flags for fake
  * candidates, what to change in the process, and which systems we track
  * have fraud detection on file. Every item names its source.
  */
+
+/** The fraud tools to know, by the stage where they catch it (Stephanie, Nov 16, 2026: "is this candidate real" should offer fraud tools). */
+const STAGES = (['applicants', 'interviews', 'identity'] as const).map((id) => {
+  const s = FRAUD_TOOLS.sections.find((x) => x.id === id)!
+  return { ...s, shown: s.tools.slice(0, 2), more: [...s.tools.slice(2).map((t) => t.name), ...(s.also ?? []).map((a) => a.name)] }
+})
 
 const FBI_2025 = { name: 'FBI Internet Crime Complaint Center, I-012325-PSA, January 23, 2025', url: 'https://www.ic3.gov/PSA/2025/PSA250123' }
 const FBI_2022 = { name: 'FBI Internet Crime Complaint Center, PSA220628, June 28, 2022', url: 'https://www.ic3.gov/PSA/2022/PSA220628' }
@@ -71,6 +80,11 @@ const css = `
   .ours-k{display:block;font-size:14px;font-weight:800;color:var(--indigo-text);}
   .ours p{font-size:18px;line-height:1.55;color:var(--ink);margin-top:6px;}
   .ours a{display:inline-block;margin-top:10px;}
+  .fr-stage{margin-top:44px;}
+  .fr-stage-h{margin:0;font-size:clamp(22px,2.4vw,28px);line-height:1.2;font-weight:900;letter-spacing:-0.01em;}
+  .fr-stage-sub{margin:8px 0 0;font-size:17px;color:var(--ink-2);}
+  .fr-tools{margin-top:20px;}
+  .fr-more{margin:16px 0 0;font-size:15.5px;color:var(--ink-2);}
 `
 
 export default function RealCandidatePage() {
@@ -104,7 +118,7 @@ export default function RealCandidatePage() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + shortListCss + css }} />
       <JsonLd data={ld} />
       <SiteNav active="hiring" />
 
@@ -155,6 +169,32 @@ export default function RealCandidatePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="wrap sec" id="tools">
+        <h2>Tools that catch it</h2>
+        <p className="lead">
+          {keepLast('Fake candidates get caught in stages, so one tool won’t cover it. These are the companies to know at each stage. There are no scores yet, because the only accuracy numbers come from the vendors themselves.')}
+        </p>
+        {STAGES.map((s) => (
+          <div className="fr-stage" key={s.id}>
+            <h3 className="fr-stage-h">{s.heading}</h3>
+            {s.sub && <p className="fr-stage-sub">{s.sub}</p>}
+            <div className="sl-tools fr-tools">
+              {s.shown.map((t) => (
+                <ShortToolRow t={t} side="hiring" key={t.name} />
+              ))}
+            </div>
+            {s.more.length > 0 && (
+              <p className="fr-more">
+                Also in this space: {s.more.join(', ')}.{' '}
+                <a className="tl" href={`/guides/hiring-fraud-tools#${s.id}`}>
+                  See them all
+                </a>
+              </p>
+            )}
+          </div>
+        ))}
       </section>
 
       <section className="wrap sec-tight" id="keep">
