@@ -29,7 +29,7 @@ const TITLE = 'What’s my professional value proposition?'
 export const metadata: Metadata = {
   title: 'What’s My Professional Value Proposition? Build Yours From What People Say About You',
   description:
-    'A free builder: what you do, what changes because of you, the skills job postings ask for, and the words people who have worked with you keep using, turned into your resume’s top line, a LinkedIn headline built for search, your LinkedIn About and your interview answer. Nothing is saved.',
+    'Say what you’re known for, easily. Start with what people who have worked with you say, finish “I’m known for…”, and see how it sounds when someone says “Tell me about yourself” or “What would your last manager say about you?” Free, and nothing is saved.',
   alternates: { canonical: PATH },
 }
 
@@ -51,7 +51,7 @@ export default function Page() {
     {
       title: 'Put their words to work',
       todo: 'Paste them into the builder.',
-      why: 'The words they repeat become your line for the top of your resume, your LinkedIn About section and your interviews.',
+      why: 'The words they repeat become what you’re known for, ready to say in an interview, a networking chat or your LinkedIn About.',
       more: { href: '#build', label: 'Back to the builder', up: true },
     },
   ].map((s) => ({ ...s, title: keepLast(s.title), todo: keepLast(s.todo), why: keepLast(s.why) }))
@@ -66,7 +66,7 @@ export default function Page() {
       url,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Any',
-      description: 'Build a professional value proposition from what you do and the words people who have worked with you use about you.',
+      description: 'Finish “I’m known for…” from the words people who have worked with you use about you, and hear how it sounds in an interview and in conversation.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       publisher: { '@id': `${SITE}/#organization` },
     },
@@ -94,14 +94,14 @@ export default function Page() {
         }
         sticker="Free, nothing saved"
         title={TITLE}
-        dek="The one line that tells a hiring team why you. The people you’ve worked with have already said it."
+        dek="It starts with “I’m known for…”, and the people you’ve worked with have already said the rest."
       />
       <p className="wrap vp-jump">
         Hiring? <a className="tl" href="/employer-value-proposition">Build your employer value&nbsp;proposition</a>
       </p>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="build">
-        <StepHead title="Build yours" sub="Four steps. Your line updates as you type." />
+        <StepHead title="Build yours" sub="Start with what other people say. Your line updates as you type." />
         <ValuePropBuilder side="seekers" noWords={{ text: 'Nobody has said it in writing yet?', href: '#repvera', label: 'Get receipts from the people who’ve worked with you' }} />
       </section>
 

@@ -3,11 +3,14 @@
 import { useMemo, useState } from 'react'
 
 /**
- * The value proposition builder (Stephanie, Nov 15, 2026): what you do, what
- * changes because of you, and the words other people use about working with
- * you, turned into one line four ways. The job seeker version builds a
- * professional value proposition; the hiring version builds an employer value
- * proposition from what the team says about working there.
+ * The value proposition builder (Stephanie, Nov 15, 2026). The point is being
+ * able to talk about yourself easily: "I'm known for..." It starts with what
+ * other people say about working with you, so the line is theirs and saying it
+ * doesn't feel like bragging. Out comes one line to say out loud, and how it
+ * sounds at the moments people freeze ("Tell me about yourself", "What would
+ * your last manager say about you?", "So, what do you do?").
+ * The hiring version is the same idea for a team: "Our team is known for..."
+ * Nothing here tells anyone what to put at the top of a resume.
  * Everything runs in the browser. Nothing typed is saved or sent anywhere.
  * Styles: value-prop-css.ts.
  */
@@ -20,20 +23,24 @@ const STOP = new Set(
     .filter(Boolean),
 )
 
-/** Words people use for strengths, nudged up when they show up. */
+/** Describing words people use about someone they've worked with. */
 const STRENGTH = new Set(
-  `calm clear creative reliable organized organised thoughtful strategic curious kind honest direct collaborative detailed patient positive leader mentor fast dependable proactive resourceful empathetic generous trusted steady sharp funny humble driven responsive flexible adaptable innovative analytical communicator listener supportive accountable consistent transparent candid prepared insightful passionate pragmatic decisive fair warm energetic focused rigorous meticulous inclusive approachable diplomatic resilient grounded`
+  `calm clear creative reliable organized organised thoughtful strategic curious kind honest direct collaborative detailed patient positive fast dependable proactive resourceful empathetic generous trusted steady sharp funny humble driven responsive flexible adaptable innovative analytical supportive accountable consistent transparent candid prepared insightful passionate pragmatic decisive fair warm energetic focused rigorous meticulous inclusive approachable diplomatic resilient grounded`
     .split(/\s+/)
     .filter(Boolean),
 )
 
+/** Words for the kind of person someone is to work with ("a great listener"). */
+const PERSON = new Set(`leader mentor communicator listener teammate partner connector coach advocate champion collaborator organizer planner thinker problem-solver`.split(/\s+/))
+
+const isDescribing = (w: string) => STRENGTH.has(w) || /(ful|ive|ous|able|ible|ic|ent|ant)$/.test(w)
+
 interface Found {
   word: string
   lines: number
-  count: number
 }
 
-/** The words that repeat across what people said, most repeated first. Names are left out. */
+/** The words that repeat across what people said, describing words first. Names are left out. */
 function findWords(text: string): Found[] {
   const lines = text
     .split(/\n+|(?<=[.!?])\s+/)
@@ -43,7 +50,7 @@ function findWords(text: string): Found[] {
   lines.forEach((line, li) => {
     const tokens = line.match(/[A-Za-z][A-Za-z'’-]+/g) ?? []
     tokens.forEach((raw, ti) => {
-      let w = raw.toLowerCase().replace(/’/g, "'").replace(/'s$/, '').replace(/-+$/, '')
+      const w = raw.toLowerCase().replace(/’/g, "'").replace(/'s$/, '').replace(/-+$/, '')
       if (w.length < 3 || STOP.has(w)) return
       const s = stats.get(w) ?? { lines: new Set<number>(), count: 0, proper: 0 }
       s.lines.add(li)
@@ -54,90 +61,98 @@ function findWords(text: string): Found[] {
   })
   return [...stats.entries()]
     .filter(([, s]) => s.proper / s.count < 0.5)
-    .map(([word, s]) => ({ word, lines: s.lines.size, count: s.count, score: s.lines.size * 3 + s.count + (STRENGTH.has(word) ? 2 : 0) }))
+    .map(([word, s]) => ({ word, lines: s.lines.size, score: s.lines.size * 3 + s.count + (isDescribing(word) || PERSON.has(word) ? 3 : 0) }))
     .sort((a, b) => b.score - a.score || a.word.localeCompare(b.word))
     .slice(0, 10)
-    .map(({ word, lines, count }) => ({ word, lines, count }))
+    .map(({ word, lines }) => ({ word, lines }))
 }
 
 const SHRM_LINKEDIN = 'https://www.shrm.org/mena/topics-tools/news/organizational-employee-development/how-to-write-seo-enhanced-linkedin-profile'
 
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 const clean = (s: string) => s.trim().replace(/[.\s]+$/, '')
 const article = (s: string) => (/^[aeiou]/i.test(s) ? 'an' : 'a')
 const lowerFirst = (s: string) => (/^[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s)
-const and = (w: string[]) => (w.length > 1 ? `${w.slice(0, -1).join(', ')} and ${w[w.length - 1]}` : w[0] ?? '')
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+const and = (w: string[]) => (w.length > 1 ? `${w.slice(0, -1).join(', ')} and ${w[w.length - 1]}` : (w[0] ?? ''))
 
-const COPY: Record<Side, { role: [string, string]; change: [string, string]; skills?: [string, string]; said: [string, string]; empty: string }> = {
+/** Picked words as the end of "known for…": "being calm and organized", "being a great listener". */
+function knownFrom(words: string[]): string {
+  if (!words.length) return ''
+  const parts = words.map((w) => (PERSON.has(w) ? `${article(w)} ${w}` : w))
+  return words.every((w) => isDescribing(w) || PERSON.has(w)) ? `being ${and(parts)}` : and(parts)
+}
+
+const COPY: Record<
+  Side,
+  { said: [string, string]; empty: string; known: [string, string]; so: [string, string]; role: [string, string]; start: string; main: string }
+> = {
   seekers: {
-    role: ['What do you do?', 'Marketing manager'],
-    change: ['Finish the sentence: I’m a {role} who…', 'turns messy launches into pipeline'],
-    skills: ['Which skills do the job postings you want ask for?', 'product marketing, demand generation, B2B SaaS'],
     said: ['What do people say it’s like to work with you?', 'Paste a few lines, one per line: LinkedIn recommendations, review comments, thank-you notes, your RepVera receipts.'],
     empty: 'Paste a few lines above, and the words people repeat show up here.',
+    known: ['Finish the sentence: I’m known for…', 'being calm when plans change'],
+    so: ['What changes because of it? Finish: …so', 'launches still land on time'],
+    role: ['What do you do?', 'Marketing manager'],
+    start: 'I’m known for',
+    main: 'Say it out loud a few times, until it sounds like you.',
   },
   hiring: {
-    role: ['What’s the role?', 'Senior data analyst'],
-    change: ['Finish the sentence: In this job, you’ll…', 'build our first forecasting model'],
     said: ['What does your team say it’s like to work here?', 'Paste a few lines, one per line: team shout-outs, stay interview notes, what people wrote in reviews.'],
     empty: 'Paste a few lines above, and the words your team repeats show up here.',
+    known: ['Finish the sentence: Our team is known for…', 'being supportive and flexible'],
+    so: ['What does that mean for the person who joins? Finish: …so', 'you’re never stuck waiting on an answer'],
+    role: ['What’s the role?', 'Senior data analyst'],
+    start: 'Our team is known for',
+    main: 'Say it the same way at every step, from the job post to the offer.',
   },
 }
 
 export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { text: string; href: string; label: string } }) {
   const c = COPY[side]
-  const [role, setRole] = useState('')
-  const [change, setChange] = useState('')
   const [said, setSaid] = useState('')
-  const [skills, setSkills] = useState('')
   const [picked, setPicked] = useState<string[] | null>(null)
+  const [known, setKnown] = useState('')
+  const [knownEdited, setKnownEdited] = useState(false)
+  const [so, setSo] = useState('')
+  const [role, setRole] = useState('')
   const [copied, setCopied] = useState<number | null>(null)
 
   const found = useMemo(() => findWords(said), [said])
   const words = (picked ?? found.slice(0, 2).map((f) => f.word)).filter((w) => found.some((f) => f.word === w))
+  const knownValue = knownEdited ? known : knownFrom(words)
 
-  const r = clean(role) || (side === 'seekers' ? '[your job]' : '[the role]')
-  const x = lowerFirst(clean(change)) || (side === 'seekers' ? '[what changes because of you]' : '[what they’ll do]')
-  const w = words.length ? words : ['[their words]']
-  const rl = lowerFirst(r)
-  const sk = skills
-    .split(/[,|;\n]+/)
-    .map((k) => k.trim())
-    .filter(Boolean)
-    .slice(0, 4)
-  const skillLine = sk.length ? sk.map(cap).join(' | ') : '[skills from the postings]'
+  const k = lowerFirst(clean(knownValue).replace(/^(i[’']m |our team is )?known for /i, '')) || '[what people say]'
+  const s = lowerFirst(clean(so).replace(/^so,? /i, '')) || '[what changes because of it]'
+  const r = lowerFirst(clean(role)) || (side === 'seekers' ? '[your job]' : '[the role]')
+  const a = article(r)
 
-  // LinkedIn: the headline is where recruiters' keyword searches land, so it holds the job title and the skills postings ask for.
-  // Colleagues' words go in the About section, which SHRM calls the place to be more personal (Mary Southern, Jan 17, 2023).
-  const outputs: { where: string; note: string; text: string; src?: { label: string; url: string } }[] =
+  const mainLine = side === 'seekers' ? `I’m known for ${k}, so ${s}.` : `Our team is known for ${k}, so ${s}.`
+
+  // The moments people freeze. Each says the same thing in the way that moment needs.
+  const moments: { where: string; note: string; text: string; src?: { label: string; url: string } }[] =
     side === 'seekers'
       ? [
-          { where: 'Top of your resume', note: 'Right under your name, where the first read starts.', text: `${cap(r)} who ${x}. In colleagues’ words: ${w.join(', ')}.` },
+          { where: '“Tell me about yourself”', note: 'Then tell one time it happened.', text: `I’m ${a} ${r}. The people I’ve worked with know me for ${k}, so ${s}.` },
+          { where: '“What would your last manager say about you?”', note: 'You’re repeating what they said, so it doesn’t feel like bragging.', text: `They’d say I’m known for ${k}. It’s why ${s}.` },
+          { where: '“So, what do you do?”', note: 'For networking and coffee chats. Short on purpose.', text: `I’m ${a} ${r}, and I’m known for ${k}.` },
           {
-            where: 'LinkedIn headline',
-            note: 'Recruiters search headlines for job titles and skills, so keep it to those. Their words go in your About section.',
-            text: `${cap(r)} | ${skillLine}`,
-            src: { label: 'SHRM on LinkedIn headlines', url: SHRM_LINKEDIN },
-          },
-          {
-            where: 'LinkedIn About, first lines',
-            note: 'The About section is the place to be more personal, so their words go here.',
-            text: `I’m ${article(rl)} ${rl} who ${x}. The people I’ve worked with describe me as ${and(w)}.`,
+            where: 'First line of your LinkedIn About or a cover letter',
+            note: 'The About section is the place to be more personal.',
+            text: `I’m ${a} ${r} known for ${k}, so ${s}.`,
             src: { label: 'SHRM', url: SHRM_LINKEDIN },
           },
-          { where: '“Tell me about yourself”', note: 'Open with it, then give one example that proves it. It works as a cover letter’s first line too.', text: `I’m ${article(rl)} ${rl} who ${x}. The people I’ve worked with keep using the same words for me: ${and(w)}.` },
         ]
       : [
-          { where: 'First line of the job post', note: 'The first thing a candidate reads.', text: `As our ${rl}, you’ll ${x}. Our team’s words for working here: ${w.join(', ')}.` },
-          { where: 'Recruiter message', note: 'Lead with it in the first message.', text: `I’m hiring ${article(rl)} ${rl} to ${x}. Our team’s words for working here: ${w.join(', ')}. Open to a quick call?` },
-          { where: '“Why should I take this job?”', note: 'Have it ready for the end of the interview.', text: `You’ll ${x}, with a team whose words for working here are ${and(w)}.` },
-          { where: 'The offer call', note: 'Say it again when you make the offer.', text: `You’d join as our ${rl} to ${x}, on a team that describes working here as ${and(w)}.` },
+          { where: '“What’s it like to work there?”', note: 'For the first call, or whenever a candidate asks.', text: `People here would tell you we’re known for ${k}, so ${s}.` },
+          { where: '“Why should I take this job?”', note: 'Have it ready for the end of the interview.', text: `You’d join a team known for ${k}, so ${s}.` },
+          { where: 'Your first message to a candidate', note: 'Lead with it.', text: `I’m hiring ${a} ${r}. Our team is known for ${k}, so ${s}. Open to a quick call?` },
+          { where: 'First line of the job post', note: 'The first thing a candidate reads.', text: `As our ${r}, you’ll join a team known for ${k}, so ${s}.` },
         ]
 
   const toggle = (word: string) => {
     const cur = picked ?? found.slice(0, 2).map((f) => f.word)
     const next = cur.includes(word) ? cur.filter((x) => x !== word) : [...cur, word].slice(-2)
     setPicked(next)
+    setKnownEdited(false)
   }
 
   const copy = async (i: number, text: string) => {
@@ -157,31 +172,17 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
           <span className="vp-n" aria-hidden="true">
             1
           </span>
-          <span className="vp-q">{c.role[0]}</span>
-          <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder={c.role[1]} maxLength={60} autoComplete="organization-title" />
-        </label>
-        <label className="vp-step">
-          <span className="vp-n" aria-hidden="true">
-            2
-          </span>
-          <span className="vp-q">{c.change[0].replace('a {role}', clean(role) ? `${article(rl)} ${rl}` : 'a [your job]')}</span>
-          <input type="text" value={change} onChange={(e) => setChange(e.target.value)} placeholder={c.change[1]} maxLength={110} />
-        </label>
-        {c.skills && (
-          <label className="vp-step">
-            <span className="vp-n" aria-hidden="true">
-              3
-            </span>
-            <span className="vp-q">{c.skills[0]}</span>
-            <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder={c.skills[1]} maxLength={140} />
-          </label>
-        )}
-        <label className="vp-step">
-          <span className="vp-n" aria-hidden="true">
-            {c.skills ? 4 : 3}
-          </span>
           <span className="vp-q">{c.said[0]}</span>
-          <textarea value={said} onChange={(e) => (setSaid(e.target.value), setPicked(null))} placeholder={c.said[1]} rows={5} maxLength={4000} />
+          <textarea
+            value={said}
+            onChange={(e) => {
+              setSaid(e.target.value)
+              setPicked(null)
+            }}
+            placeholder={c.said[1]}
+            rows={5}
+            maxLength={4000}
+          />
         </label>
         <div className="vp-words" aria-live="polite">
           <p className="vp-k">{found.length ? 'The words they use most. Pick up to two.' : c.empty}</p>
@@ -204,13 +205,66 @@ export function ValuePropBuilder({ side, noWords }: { side: Side; noWords?: { te
             </p>
           )}
         </div>
+        <label className="vp-step">
+          <span className="vp-n" aria-hidden="true">
+            2
+          </span>
+          <span className="vp-q">{c.known[0]}</span>
+          <span className="vp-lead-in">
+            <span className="vp-lead-k">{c.start}</span>
+            <input
+              type="text"
+              value={knownValue}
+              onChange={(e) => {
+                setKnown(e.target.value)
+                setKnownEdited(true)
+              }}
+              placeholder={c.known[1]}
+              maxLength={120}
+            />
+          </span>
+          <span className="vp-hint">
+            {knownEdited && words.length ? (
+              <button type="button" className="vp-reset" onClick={() => setKnownEdited(false)}>
+                Start over from their words
+              </button>
+            ) : (
+              'Their words fill this in. Change anything until it sounds like you.'
+            )}
+          </span>
+        </label>
+        <label className="vp-step">
+          <span className="vp-n" aria-hidden="true">
+            3
+          </span>
+          <span className="vp-q">{c.so[0]}</span>
+          <span className="vp-lead-in">
+            <span className="vp-lead-k">so</span>
+            <input type="text" value={so} onChange={(e) => setSo(e.target.value)} placeholder={c.so[1]} maxLength={110} />
+          </span>
+        </label>
+        <label className="vp-step">
+          <span className="vp-n" aria-hidden="true">
+            4
+          </span>
+          <span className="vp-q">{c.role[0]}</span>
+          <input type="text" value={role} onChange={(e) => setRole(e.target.value)} placeholder={c.role[1]} maxLength={60} />
+        </label>
         <p className="vp-private">It runs in your browser. Nothing you type is saved or sent.</p>
       </div>
 
       <div className="vp-out">
-        <p className="vp-out-k">Your line, four ways</p>
+        <div className="vp-main">
+          <p className="vp-where">{side === 'seekers' ? 'Your line' : 'Your team’s line'}</p>
+          <p className="vp-main-text">{mainLine}</p>
+          <p className="vp-note">{c.main}</p>
+          <button type="button" className="vp-copy" onClick={() => copy(-1, mainLine)}>
+            {copied === -1 ? 'Copied' : 'Copy'}
+          </button>
+        </div>
+        <p className="vp-out-k">{side === 'seekers' ? 'How it sounds when someone asks' : 'How it sounds at each step'}</p>
         <div className="vp-cards">
-          {outputs.map((o, i) => (
+          {moments.map((o, i) => (
             <div className="vp-card" key={o.where}>
               <p className="vp-where">{o.where}</p>
               <p className="vp-text">{o.text}</p>

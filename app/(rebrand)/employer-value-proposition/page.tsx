@@ -24,7 +24,7 @@ const TITLE = 'What’s our employer value proposition?'
 export const metadata: Metadata = {
   title: 'What’s Our Employer Value Proposition? Build Yours From What Your Team Says',
   description:
-    'A free builder for hiring teams: the role, what the person will do, and the words your team keeps using about working there, turned into one line for the job post, recruiter messages, the interview close and the offer. Nothing is saved.',
+    'Say what your team is known for, easily. Start with what your team says about working there, finish “Our team is known for…”, and see how it sounds when a candidate asks, in your first message and in the job post. Free, and nothing is saved.',
   alternates: { canonical: PATH },
 }
 
@@ -57,7 +57,7 @@ export default function Page() {
       url,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Any',
-      description: 'Build an employer value proposition for a role from what the team says about working there.',
+      description: 'Finish “Our team is known for…” from what the team says about working there, and hear how it sounds at each step of hiring.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       publisher: { '@id': `${SITE}/#organization` },
     },
@@ -85,14 +85,14 @@ export default function Page() {
         }
         sticker="Free, nothing saved"
         title={TITLE}
-        dek="Why would someone take this job? Your team has already said it. Turn their words into one line for the job post, your outreach and the offer."
+        dek="Why would someone take this job? It starts with “Our team is known for…”, and your team has already said the rest."
       />
       <p className="wrap vp-jump">
         Job seeker? <a className="tl" href="/professional-value-proposition">Build your professional value&nbsp;proposition</a>
       </p>
 
       <section className="wrap sec sl-sec sl-sec-hiring" id="build">
-        <StepHead title="Build yours" sub="Three steps. Your line updates as you type." />
+        <StepHead title="Build yours" sub="Start with what your team says. Your line updates as you type." />
         <ValuePropBuilder side="hiring" />
       </section>
 

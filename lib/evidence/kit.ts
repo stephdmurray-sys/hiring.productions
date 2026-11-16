@@ -102,12 +102,12 @@ export const FREE_TOOLS = {
   // Value propositions, both sides (Nov 15, 2026)
   valueProp: {
     title: 'What’s my professional value proposition?',
-    detail: 'Turn what people say about working with you into one line for your resume, LinkedIn About and interviews.',
+    detail: 'Finish “I’m known for…” with what people say about working with you, and say it easily when someone asks.',
     href: '/professional-value-proposition',
   },
   evp: {
     title: 'What’s our employer value proposition?',
-    detail: 'Turn what your team says about working there into one line for the job post, outreach and the offer.',
+    detail: 'Finish “Our team is known for…” with what your team says, and say it the same way at every step.',
     href: '/employer-value-proposition',
   },
   portfolio: {
