@@ -33,6 +33,8 @@ const SIGNS = [
   'The pay is far above what the job usually pays.',
 ]
 
+const SIGNS_LEAD = 'If you spot even one, stop. Look for the job on the company’s own website first, and never send money or bank details to get a job.'
+
 const TOOLS_LINE = 'We haven’t found a scam checker we’d recommend yet. When we do, it’ll be on this page.'
 const REAL_CHECKS =
   'Some employers now verify your identity during hiring. A real check comes from the company or a named verification service, never costs you money, and never asks for bank details before an offer.'
@@ -55,6 +57,7 @@ const css = `
   .job-hero .m-squig{top:48%;right:8%;color:#fff;}
   @media(max-width:760px){.job-hero .m-squig{display:none;}.job-hero .m-zig{right:8%;}.job-hero .m-dots{top:-30px;right:-62px;}}
   .job-sticker{position:relative;z-index:2;display:inline-block;margin:6px 0 18px;padding:9px 14px 8px;font-weight:900;font-size:14px;line-height:1;letter-spacing:.08em;text-transform:uppercase;background:var(--coral);color:var(--ink);border:3px solid var(--ink);border-radius:10px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-4deg);}
+  .signs-lead{margin-bottom:32px;}
   .signs{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:22px;margin:0;padding:0;}
   .sign{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:start;padding:22px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);font-size:clamp(17px,1.7vw,19px);line-height:1.5;font-weight:700;color:var(--ink);text-wrap:pretty;}
   .sign-n{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:var(--coral);color:var(--coral-deep);border:3px solid var(--ink);font-weight:900;font-size:18px;line-height:1;transform:rotate(-6deg);}
@@ -124,7 +127,15 @@ export default function Page() {
         </div>
       </header>
 
-      <section className="wrap sec-tight" id="signs" aria-label="The signs to check">
+      {/* Direction above the signs (Stephanie, Nov 16, 2026: "needs more direction above the 6 things to watch out for"). */}
+      <section className="wrap sec-tight" id="signs" aria-labelledby="signs-h">
+        <h2 id="signs-h">{keepLast('Before you reply, check for these')}</h2>
+        <p className="lead signs-lead">
+          {keepLast(SIGNS_LEAD)}{' '}
+          <a className="tl" href="#check">
+            Free ways to check <span className="arr">&darr;</span>
+          </a>
+        </p>
         <ol className="signs">
           {SIGNS.map((s, i) => (
             <li className="sign" key={s}>
