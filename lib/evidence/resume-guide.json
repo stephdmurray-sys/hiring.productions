@@ -27,9 +27,11 @@
     }
   ],
   "risingPick": {
-    "tool": "flowcv",
-    "label": "Stephanie's pick",
-    "line": "It hands you a clean, watermark-free PDF for nothing, and the people using it rate it as high as anything in the category.",
+    "tool": "huntr",
+    "label": "Stephanie's up-and-coming fav",
+    "line": "Get your job search out of the spreadsheet and onto one board. Save a job from any site in one click, and your resume lives right next to it.",
+    "facts": "free for up to 100 jobs",
+    "said": "Stephanie, Nov 16, 2026: \"I don't love FlowCV, I love Huntr. It's my up and coming fav.\" Label is hers; the line is a draft in her voice from Huntr's pricing page and Chrome Web Store listing, read Nov 16, 2026 (free plan: track up to 100 jobs, free PDF export; extension saves jobs from any site, autofills in one click).",
     "confirmed": false
   },
   "tools": {

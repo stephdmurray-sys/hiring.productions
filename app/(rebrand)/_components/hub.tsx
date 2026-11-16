@@ -139,7 +139,7 @@ export function Hub(props: HubProps) {
       </section>
 
       <section className="wrap sec" id="rising">
-        <h2>Stephanie&rsquo;s pick</h2>
+        <h2>{props.side === 'seekers' ? 'Stephanie\u2019s up-and-coming fav' : 'Stephanie\u2019s pick'}</h2>
         <p className="lead">This is Stephanie&rsquo;s opinion, and it has no effect on the score.</p>
         <OnTheRise side={props.side} showPicks />
       </section>

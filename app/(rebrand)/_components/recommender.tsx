@@ -2,6 +2,7 @@ import { Logo } from './logo'
 import { PickMark } from './pick-face'
 import { pickFaceCss } from './pick-face-css'
 import { verdictFor } from '@/lib/picks'
+import { risingPick } from '@/lib/evidence'
 import { keepLast } from '@/lib/site-line'
 import { PickerFeedback, TrackOnce } from './picker-track'
 import { FRAUD_QUESTION, REAL_JOB_QUESTION, REPVERA_PROBLEM, REPVERA_QUESTIONS, wholeList } from '@/lib/evidence/guided'
@@ -351,7 +352,7 @@ export function RecAnswer({ r, ask, headingLevel = 2, editHref }: { r: Recommend
               <div className="kit-also-row" key={a.name}>
                 <Logo domain={a.domain} name={a.name} size={44} />
                 <div>
-                  <span className={`kit-label kit-label-${r.side}`}>{a.label}</span>
+                  <span className={`kit-label kit-label-${r.side}`}>{a.label === 'Stephanie’s pick' && a.id === risingPick.tool ? risingPick.label : a.label}</span>
                   {a.label === 'Stephanie’s pick' && <PickMark verdict={verdictFor(a.id)} />}
                   <b>
                     {a.name} {a.score !== null && <span className="mono">{a.score.toFixed(2)}</span>}

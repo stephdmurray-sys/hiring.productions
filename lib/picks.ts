@@ -5,9 +5,9 @@
  * calls out as her pick, never beside RepVera, and a verdict never changes
  * a score.
  *
- * PICK_VERDICT is which face each pick gets. Drafts until Stephanie confirms
- * them: FlowCV's pick line began "The one I'd tell a friend about first",
- * so it starts on Love it.
+ * PICK_VERDICT is which face each pick gets. Huntr is Love it (Stephanie,
+ * Nov 16, 2026: "I love Huntr. It's my up and coming fav."). FlowCV is no
+ * longer a pick. The others are drafts until Stephanie confirms them.
  */
 export type Verdict = 'solid' | 'worth' | 'love'
 
@@ -18,7 +18,7 @@ export const VERDICTS: Record<Verdict, { label: string; face: string; alt: strin
 }
 
 export const PICK_VERDICT: Record<string, Verdict> = {
-  flowcv: 'love',
+  huntr: 'love',
   juicebox: 'solid',
   tofu: 'worth',
 }

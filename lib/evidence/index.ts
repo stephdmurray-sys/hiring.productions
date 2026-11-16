@@ -453,6 +453,9 @@ export interface RisingPick {
   tool: string
   label: string
   line: string
+  /** Short fact for the end of the pick's facts line, e.g. "free for up to 100 jobs". */
+  facts?: string
+  said?: string
   confirmed: boolean
 }
 

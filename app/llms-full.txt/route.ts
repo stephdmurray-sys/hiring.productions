@@ -288,7 +288,7 @@ ${comparePairs()
 
 ## Stephanie's picks (editorial, labeled as hers, never change a score)
 
-- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, Stephanie's pick. ${risingPick.line}
+- For job seekers: ${all.find((t) => t.id === risingPick.tool)?.name}, ${risingPick.label}. ${risingPick.line}
 - For hiring teams: ${hiringPick.name} (${hiringPick.category}, ${hiringPick.url}), her top pick. ${hiringPick.line} ${hiringPick.scoreStatus}
 
 ## On the rise: new tools to watch (not rated yet)
