@@ -40,6 +40,7 @@ export const repveraFillCss = `
   .rfw-row-full{grid-template-columns:1fr;}
   .rfw-k{margin:4px 0 0;font-size:13.5px;font-weight:900;color:var(--ink-3);}
   .rfw-known{margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.25;font-weight:900;letter-spacing:-0.015em;color:var(--ink);}
+  .rfw-known-more{margin:8px 0 0;max-width:760px;font-size:clamp(17px,1.6vw,19px);line-height:1.5;font-weight:600;color:var(--ink-2);}
   .rfw-known mark{background:linear-gradient(transparent 58%,var(--indigo-tint) 58%);color:inherit;padding:0 3px;}
 
   .rfw-stack{display:flex;height:16px;border-radius:8px;overflow:hidden;}

@@ -123,9 +123,12 @@ export function RepveraFill() {
 
           {/* A RepVera profile is written by other people, so it never says "I'm" (Stephanie, Nov 16, 2026). */}
           <div className="rfw-row rfw-row-full">
-            <p className="rfw-known">
-              Known for <mark>{R.knownFor}</mark>.
-            </p>
+            <div>
+              <p className="rfw-known">
+                Known for <mark>{R.knownFor}</mark>.
+              </p>
+              <p className="rfw-known-more">{R.knownMore}</p>
+            </div>
           </div>
 
           <div className={`rfw-row rf-sec${at(2)}`}>

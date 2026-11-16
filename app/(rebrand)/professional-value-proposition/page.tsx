@@ -101,7 +101,7 @@ export default function Page() {
         </div>
         <RepveraFill />
         <p className="vp-rv-src">
-          {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}. Every word and count is on the profile.`)}{' '}
+          {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}.`)}{' '}
           <a href={REPVERA_EXAMPLE.profileUrl} rel="noopener" target="_blank">
             See the whole profile
           </a>

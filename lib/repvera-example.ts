@@ -15,7 +15,9 @@ export const REPVERA_EXAMPLE = {
   profilePath: 'repvera.com/u/stephaniemurray',
   asOf: 'November 15, 2026',
   tabs: ['Overview', 'Receipts', 'Work', 'Impact', 'Over time', 'Companies'],
-  knownFor: 'building strong relationships',
+  /** Stephanie's wording for the "Known for" line, word for word (Nov 16, 2026). */
+  knownFor: 'balancing strategic thinking with execution',
+  knownMore: 'She adapts to complex environments while maintaining operational excellence.',
   who: [
     ['Peers', 14],
     ['Direct reports', 4],
