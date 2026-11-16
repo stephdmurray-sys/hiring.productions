@@ -23,6 +23,7 @@ export type FreeToolIcon =
   | 'calculator'
   | 'shield'
   | 'layers'
+  | 'value'
 
 export interface FreeToolCard {
   id: string
@@ -61,8 +62,8 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       id: 'screening',
       side: 'seekers',
       title: 'Is software screening me out?',
-      what: 'What published research says happens to your resume, and what to do about each finding.',
-      get: 'Three fixes',
+      what: 'What happens after you click apply, step by step, and the questions that can reject you on their own.',
+      get: 'What to do at each step',
       href: '/how-ats-actually-works',
       icon: 'screen',
     },
@@ -74,6 +75,15 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       get: 'Cancel reminders',
       href: '/build-your-stack',
       icon: 'bill',
+    },
+    {
+      id: 'value-prop',
+      side: 'seekers',
+      title: 'What’s my professional value proposition?',
+      what: 'Finish “I’m known for…” with what people say about working with you, and say it easily when someone asks.',
+      get: 'Your line, ready to say',
+      href: '/professional-value-proposition',
+      icon: 'value',
     },
     {
       id: 'free-search',
@@ -135,8 +145,8 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       id: 'screening-hiring',
       side: 'hiring',
       title: 'Is software screening them out?',
-      what: 'What the research says about qualified people getting filtered out, and what to do from your side.',
-      get: 'Three fixes',
+      what: 'How your own knockout rules screen out people you’d hire, and what to change.',
+      get: 'A checklist',
       href: '/how-ats-actually-works#hiring',
       icon: 'screen',
     },
@@ -148,6 +158,15 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
       get: 'A yearly bill',
       href: '/build-your-stack/hiring',
       icon: 'bill',
+    },
+    {
+      id: 'evp',
+      side: 'hiring',
+      title: 'What’s our employer value proposition?',
+      what: 'Finish “Our team is known for…” with what your team says, and say it the same way at every step.',
+      get: 'Your team’s line, ready to say',
+      href: '/employer-value-proposition',
+      icon: 'value',
     },
     {
       id: 'hire-cost',

@@ -50,6 +50,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/guides/portfolio-sites', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/free-job-search', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/how-ats-actually-works', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/professional-value-proposition', priority: 0.9, changeFrequency: 'monthly' },
+    { path: '/employer-value-proposition', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/is-this-list-paid-for', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/show-how-you-work', priority: 0.9, changeFrequency: 'monthly' },
     { path: '/pricing-traps', priority: 0.9, changeFrequency: 'monthly' },

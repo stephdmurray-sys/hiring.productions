@@ -109,6 +109,13 @@ export function ToolIcon({ name }: { name: FreeToolIcon }) {
             <path d="M24 14v12M24 32v.01" {...S} strokeWidth={3.4} />
           </>
         )
+      case 'value':
+        return (
+          <>
+            <path d="M24 7 L28.5 18.9 L41.1 19.4 L31.2 27.3 L34.6 39.6 L24 32.6 L13.4 39.6 L16.8 27.3 L6.9 19.4 L19.5 18.9z" fill={accent} {...F} />
+            <path d="M40 5v6M37 8h6M8 36v5M5.5 38.5h5" {...S} />
+          </>
+        )
       case 'layers':
         return (
           <>

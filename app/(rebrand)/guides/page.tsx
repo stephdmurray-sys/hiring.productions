@@ -25,7 +25,7 @@ const SEEKERS: Item[] = [
   { href: '/build-your-stack', kind: 'Free tool', title: 'What will your job search cost?', detail: 'Click tools into your stack and see the total, the cost if you forget to cancel, and the $0 version.' },
   { href: '/pricing-traps', kind: 'Pricing check', title: 'Which resume tools keep charging you?', detail: 'Every resume tool by what the first year costs if you forget to cancel, and which bill every 4 weeks.' },
   { href: '/free-job-search', kind: 'Free list', title: 'The $0 job search', detail: 'The resume tools with a real free version, what free gets you, and the free tools on this site.' },
-  { href: '/how-ats-actually-works', kind: 'Explainer', title: 'What does the screening software do to my resume?', detail: 'What published research and the systems’ own product pages say, and what to do about each one.' },
+  { href: '/how-ats-actually-works', kind: 'Explainer', title: 'What does the screening software do to my resume?', detail: 'Where the 75% rejection figure came from, the knockout questions that can reject you on their own, and what to do at each step.' },
   { href: '/show-how-you-work', kind: 'Free checklist', title: 'How do I show employers how I work before the interview?', detail: 'Proof from the people who have worked with you and from your work, in three steps.' },
   { href: '/is-this-list-paid-for', kind: 'Free check', title: 'Is this best-of list paid for?', detail: 'Who wrote the list you’re reading, and the four checks to run on any list.' },
   { href: '/interview-practice', kind: 'Free tool', title: 'What will they ask me in the interview?', detail: 'Practice the questions structured interviews use, and what a strong answer shows.' },

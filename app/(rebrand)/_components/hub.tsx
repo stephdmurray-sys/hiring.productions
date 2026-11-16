@@ -1,3 +1,4 @@
+import { keepLast } from '@/lib/site-line'
 import type { ReactNode } from 'react'
 import { wholeList } from '@/lib/evidence/guided'
 import { StartHere, retroCss } from './retro'
@@ -130,7 +131,7 @@ export function Hub(props: HubProps) {
       </header>
 
       <section className="wrap sec" id="scoreboard">
-        <h2>{props.board.heading ?? 'This month\u2019s scoreboard'}</h2>
+        <h2>{keepLast(props.board.heading ?? 'This month\u2019s scoreboard')}</h2>
         <p className="lead">{props.board.lead ?? 'Our picks are marked. Open any tool for the full review.'}</p>
         <div style={{ marginTop: 32 }}>
           <Scoreboard side={props.side} title={props.board.title} checked={props.board.checked} rows={props.board.rows} foot={props.board.foot} />

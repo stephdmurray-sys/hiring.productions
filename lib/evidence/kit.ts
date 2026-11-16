@@ -70,7 +70,7 @@ export const FREE_TOOLS = {
   },
   screening: {
     title: 'What does the screening software do to my resume?',
-    detail: 'What published research and the systems’ own product pages say, and what to do about each one.',
+    detail: 'What happens after you click apply, step by step, from the systems’ own help pages.',
     href: '/how-ats-actually-works',
   },
   listCheck: {
@@ -99,6 +99,17 @@ export const FREE_TOOLS = {
     detail: 'Click tools into your hiring stack and see the year’s cost for your team size.',
     href: '/build-your-stack/hiring',
   },
+  // Value propositions, both sides (Nov 15, 2026)
+  valueProp: {
+    title: 'What’s my professional value proposition?',
+    detail: 'Finish “I’m known for…” with what people say about working with you, and say it easily when someone asks.',
+    href: '/professional-value-proposition',
+  },
+  evp: {
+    title: 'What’s our employer value proposition?',
+    detail: 'Finish “Our team is known for…” with what your team says, and say it the same way at every step.',
+    href: '/employer-value-proposition',
+  },
   portfolio: {
     title: 'Portfolio sites to know',
     detail: 'Where to show your work, sorted by the kind of work you do. Most have a free plan.',
@@ -114,13 +125,16 @@ export const FREE_FROM_US: Record<string, FreeTool> = {
   'losing-track': FREE_TOOLS.stackSeekers,
   // Interview answers: the site's free interview practice
   'interview-practice': FREE_TOOLS.interviewPractice,
-  'interviews-stall': FREE_TOOLS.interviewPractice,
+  // They pick someone else after good interviews: say why you, in one line
+  'interviews-stall': FREE_TOOLS.valueProp,
   // Every interviewer asks something different: the scorecard builder
   'interviews-inconsistent': FREE_TOOLS.scorecard,
   // Hiring answers about cost or volume: the cost per hire tool
   spreadsheets: FREE_TOOLS.costPerHire,
   'choosing-ats': FREE_TOOLS.stackHiring,
   'too-many-applicants': FREE_TOOLS.costPerHire,
+  // The right people aren't applying: why someone would take this job
+  'cant-find-people': FREE_TOOLS.evp,
   // Fraud answers: the red flags checklist
   'fake-candidates': FREE_TOOLS.redFlags,
 }
