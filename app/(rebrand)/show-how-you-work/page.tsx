@@ -9,6 +9,9 @@ import { Dots, Squiggle } from '@/app/(rebrand)/_components/retro'
 import { keepLast } from '@/lib/site-line'
 import { PORTFOLIO_PICKS, PORTFOLIO_SITES } from '@/lib/evidence/shortlists'
 import { PROOF, REPVERA_QUESTIONS } from '@/lib/evidence/guided'
+import { RepveraFill } from '@/app/(rebrand)/_components/repvera-fill'
+import { repveraFillCss } from '@/app/(rebrand)/_components/repvera-fill-css'
+import { REPVERA_EXAMPLE } from '@/lib/repvera-example'
 
 /**
  * The proof kit (Stephanie approved, Nov 15, 2026): the picker's proof
@@ -31,7 +34,7 @@ export default function Page() {
   const repvera = PORTFOLIO_SITES.sections.flatMap((s) => s.tools).find((t) => t.name === 'RepVera')!
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + shortListCss + toolPageCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + captureCss + shortListCss + toolPageCss + repveraFillCss + css }} />
       <SiteNav active="seekers" />
       <ToolHero
         side="seekers"
@@ -50,6 +53,15 @@ export default function Page() {
         <div className="sl-tools sl-tools-one pk-one">
           <ShortToolRow t={repvera} side="seekers" />
         </div>
+        {/* The large profile on every profile view (Stephanie, Nov 16, 2026). */}
+        <h3 className="pk-prof-k">{PROOF.profileK}</h3>
+        <RepveraFill side="seekers" />
+        <p className="pk-prof-src">
+          {keepLast(`Stephanie’s own RepVera profile, as of ${REPVERA_EXAMPLE.asOf}.`)}{' '}
+          <a className="tl" href={REPVERA_EXAMPLE.profileUrl} rel="noopener" target="_blank">
+            See the whole profile <span className="arr">&#8599;</span>
+          </a>
+        </p>
       </section>
 
       <section className="wrap sec sl-sec sl-sec-seekers" id="work">
@@ -98,6 +110,9 @@ export default function Page() {
 const css = `
   .pk-rv-work{margin-top:18px;max-width:720px;padding-left:14px;border-left:4px solid var(--indigo);font-size:18px;line-height:1.5;font-weight:800;color:var(--ink);text-wrap:pretty;}
   .pk-one{margin-top:32px;}
+  .pk-prof-k{margin:48px 0 0;font-size:clamp(22px,2.4vw,26px);font-weight:900;letter-spacing:-0.01em;line-height:1.2;color:var(--ink);}
+  .pk-prof-src{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3);}
+  .pk-prof-src .tl{font-size:13.5px;}
   .pk-more{margin-top:24px;font-size:17px;font-weight:700;}
   .pk-email{align-items:center;}
 `
