@@ -353,6 +353,7 @@ export const REAL_JOB_QUESTION = { question: 'How do I know a job posting is rea
 
 /** The two new "Common questions, answered" entries, each linking to RepVera's answer for its side. */
 export const REPVERA_QUESTIONS: Record<Side, string> = {
-  seekers: 'How do I show employers how I work before the interview?',
-  hiring: 'How do we see how someone works before we interview them?',
+  // Stephanie, Nov 16, 2026: no "how" twice.
+  seekers: 'How do I prove what I’m like to work with?',
+  hiring: 'What are they really like to work with?',
 }

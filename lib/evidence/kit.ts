@@ -79,7 +79,7 @@ export const FREE_TOOLS = {
     href: '/is-this-list-paid-for',
   },
   proofKit: {
-    title: 'How do I show employers how I work before the interview?',
+    title: 'How do I prove what I’m like to work with?',
     detail: 'Proof from the people who have worked with you and from your work, in three steps.',
     href: '/show-how-you-work',
   },

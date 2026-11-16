@@ -25,7 +25,7 @@ const PATH = '/show-how-you-work'
 const TITLE = REPVERA_QUESTIONS.seekers
 
 export const metadata: Metadata = {
-  title: 'How Do I Show Employers How I Work Before the Interview? A Three-Step Proof Kit',
+  title: 'How Do I Prove What I’m Like to Work With? A Three-Step Proof Kit',
   description:
     'Send proof of how you work with your application: receipts from people who have worked with you, your work if people can see it, and where to put the link. No work samples? The first step covers it.',
   alternates: { canonical: PATH },

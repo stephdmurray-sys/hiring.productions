@@ -38,6 +38,8 @@ import { homeCss } from './home-css'
 import { FaceLoop } from '@/app/(rebrand)/_components/face-loop'
 import { pickFaceCss } from '@/app/(rebrand)/_components/pick-face-css'
 import { FreeToolsMirror, freeToolsCss } from '@/app/(rebrand)/_components/free-tools'
+import { HomeTop, homeTopCss } from '@/app/(rebrand)/_components/home-top'
+import { STUCK } from '@/lib/home-top'
 import { freeToolCount } from '@/lib/free-tools'
 
 export const metadata: Metadata = {
@@ -75,89 +77,12 @@ export default function Home() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss + freeToolsCss + pickFaceCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + calcCss + videoCardCss + followCss + homeCss + recCss + retroCss + guidedCss + freeToolsCss + pickFaceCss + homeTopCss }} />
       <JsonLd data={graph(resumeRankingLd(), atsRankingLd())} />
       <SiteNav />
 
-      <header className="wrap hero">
-        <p className="hero-tag">Hiring is a production.</p>
-        <h1 className="display hero-h1">
-          <span className="hero-l1">Tell us what&rsquo;s going wrong.</span>{' '}
-          <span className="hero-l2">
-            We&rsquo;ll{' '}
-            <Swash>
-              <span className="hero-hl">recommend</span>
-            </Swash>{' '}
-            what to use.
-          </span>
-        </h1>
-        <p className="dek">Straight answers on which hiring tools are worth it, for job seekers and hiring&nbsp;teams.</p>
-
-        <div className="sides">
-          <div className="lane lane-seekers">
-            <Dots className="lane-tl" />
-            <Zigzag className="lane-bl" />
-            <section className="side side-seekers" aria-labelledby="side-seekers-h">
-              <span className="side-k">
-                <i />
-                I&rsquo;m a job seeker
-              </span>
-              <h2 id="side-seekers-h">Resume tools,&nbsp;ranked</h2>
-              <div className="side-logos">
-                {SEEKER_LOGOS.map((id) => byId[id]).map((t) => (
-                  <a key={t.id} href={`/reviews/${t.id}`} aria-label={`${t.name} review`} data-tip={`${t.name} · ${t.overall !== null ? t.overall.toFixed(2) : 'not scored'}`}>
-                    <Logo domain={t.domain} name={t.name} size={52} />
-                  </a>
-                ))}
-              </div>
-              <div className="side-act">
-                <a className="side-go" href="/what-should-i-use?side=seekers#questions">
-                  Help me choose <span className="arr">&rarr;</span>
-                </a>
-                <a className="side-all" href="/guides/best-resume-tools">
-                  See all resume tools
-                </a>
-              </div>
-            </section>
-          </div>
-
-          <div className="lane lane-hiring">
-            <Squiggle className="lane-tr" />
-            <Dots className="lane-br" />
-            <section className="side side-hiring" aria-labelledby="side-hiring-h">
-              <span className="side-k">
-                <i />
-                I&rsquo;m hiring
-              </span>
-              <h2 id="side-hiring-h">Hiring software,&nbsp;ranked</h2>
-              <div className="side-logos">
-                {HIRING_LOGOS.map((n) => atsByName[n])
-                  .filter(Boolean)
-                  .map((t) => (
-                    <a key={t.name} href={atsHref(t.name)} aria-label={`${t.name} in the ATS guide`} data-tip={`${t.name} · ${atsScores(t).overall.toFixed(2)}`}>
-                      <Logo domain={t.domain} name={t.name} size={52} />
-                    </a>
-                  ))}
-              </div>
-              <div className="side-act">
-                <a className="side-go" href="/what-should-i-use?side=hiring#questions">
-                  Help me choose <span className="arr">&rarr;</span>
-                </a>
-                <a className="side-all" href="/guides/best-ats-for-small-teams">
-                  See all applicant tracking&nbsp;systems
-                </a>
-              </div>
-            </section>
-          </div>
-        </div>
-
-        <div className="hero-fine">
-          <p>Nobody pays to be featured. Every score is&nbsp;dated.</p>
-          <p>
-            <a href="#who-makes-this">Made by Stephanie Murray after twenty years in&nbsp;recruiting.</a>
-          </p>
-        </div>
-      </header>
+      {/* Stephanie picked option A, "Clapperboards" (Nov 16, 2026). */}
+      <HomeTop />
 
       <section className="wrap sec" id="what-to-use">
         <h2>What should I use?</h2>
@@ -176,7 +101,7 @@ export default function Home() {
           <p className="ftb-sticker">Free, no sign-up</p>
           <h2 id="free-tools-h">Free tools for both sides of the&nbsp;table</h2>
           <p className="lead ftb-lead">Each row asks the same question from both sides. Pick yours.</p>
-          <FreeToolsMirror rows={4} />
+          <FreeToolsMirror rows={4} skip={[...STUCK.seekers, ...STUCK.hiring].map((c) => c.id)} />
           <p className="ftb-cta">
             <a className="btn" href="/tools">
               {`See all ${freeToolCount()} free tools`} <span className="arr">&rarr;</span>

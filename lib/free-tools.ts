@@ -106,7 +106,7 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
     {
       id: 'proof',
       side: 'seekers',
-      title: 'How do I show how I work?',
+      title: 'How do I prove what I’m like to work with?',
       what: 'Proof from people who have worked with you and from your work, before the interview.',
       get: 'A checklist by email',
       href: '/show-how-you-work',
@@ -189,7 +189,7 @@ export const FREE_TOOL_CARDS: Record<'seekers' | 'hiring', FreeToolCard[]> = {
     {
       id: 'proof-hiring',
       side: 'hiring',
-      title: 'How do we see how they work?',
+      title: 'What are they really like to work with?',
       what: 'Hear from people who have worked with a candidate, before the first interview.',
       get: 'When to ask for it',
       href: '/what-should-i-use?side=hiring&problem=see-how-they-work',

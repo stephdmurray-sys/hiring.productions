@@ -154,9 +154,11 @@ function Card({ t }: { t: FreeToolCard }) {
 }
 
 /** Both sides, row by row. `rows` limits it to the first rows (the homepage shows four). */
-export function FreeToolsMirror({ rows, headings = true }: { rows?: number; headings?: boolean }) {
-  const seekers = FREE_TOOL_CARDS.seekers.slice(0, rows)
-  const hiring = FREE_TOOL_CARDS.hiring.slice(0, rows)
+export function FreeToolsMirror({ rows, headings = true, skip = [] }: { rows?: number; headings?: boolean; skip?: string[] }) {
+  // Rows are mirrored pairs, so a row is skipped whole when either side is already on the page.
+  const keep = FREE_TOOL_CARDS.seekers.map((_, i) => i).filter((i) => !skip.includes(FREE_TOOL_CARDS.seekers[i].id) && !skip.includes(FREE_TOOL_CARDS.hiring[i]?.id))
+  const seekers = keep.map((i) => FREE_TOOL_CARDS.seekers[i]).slice(0, rows)
+  const hiring = keep.map((i) => FREE_TOOL_CARDS.hiring[i]).slice(0, rows)
   const span = (n: number) => ({ gridRow: `span ${n + (headings ? 1 : 0)}` }) as CSSProperties
   return (
     <div className="ft-mirror">
