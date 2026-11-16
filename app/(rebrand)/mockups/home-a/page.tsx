@@ -56,7 +56,7 @@ export default function HomeA() {
                 {l.title[2]}
               </span>
               <span className="clap-line">{keepLast(l.line)}</span>
-              <span className={`btn ${l.side === 'seekers' ? 'btn-indigo' : 'btn-coral'} clap-go`}>
+              <span className="btn clap-go">
                 {l.cta} <span className="arr">&rarr;</span>
               </span>
             </a>
@@ -120,7 +120,8 @@ export default function HomeA() {
 const css = `
   /* Hero: words left, clapperboards right */
   .ha-nowrap{white-space:nowrap;}
-  .ha-hero{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.3fr);gap:clamp(32px,5vw,72px);align-items:center;padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(72px,9vw,120px);}
+  .ha-hero{overflow-x:clip;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.3fr);gap:clamp(32px,5vw,72px);align-items:center;padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(72px,9vw,120px);}
+  .ha-copy{position:relative;z-index:3;}
   .ha-h1{font-size:clamp(50px,6.4vw,84px);line-height:.98;}
   .ha-h1 .swash-line path{stroke:var(--indigo);}
   .ha-dek{margin-top:26px;max-width:520px;}
@@ -130,26 +131,29 @@ const css = `
   .ha-trust i::after{content:"";position:absolute;left:6px;top:2px;width:6px;height:11px;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg);}
 
   .ha-claps{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-top:40px;}
+  .ha-claps::before{content:"";position:absolute;z-index:0;inset:-8% -10% -14% -8%;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:var(--indigo-tint);}
+  .ha-claps > .m-dots,.ha-claps > .m-zig{z-index:1;}
   .ha-dots{top:-6px;right:-18px;color:var(--lavender);}
   .ha-zig{bottom:-46px;left:22%;color:var(--coral);}
 
   /* A clapperboard: a striped stick hinged at the left that snaps shut on hover */
-  .clap{--side:var(--indigo);--side-tint:var(--indigo-tint);position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;padding:58px 24px 26px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--side);text-decoration:none;}
-  .clap-hiring{--side:var(--coral);--side-tint:var(--coral-tint);}
-  .clap-band,.clap-stick{position:absolute;left:-3px;right:-3px;height:30px;border:3px solid var(--ink);background:repeating-linear-gradient(135deg,var(--side) 0 22px,#fff 22px 44px);}
+  .clap{--side:var(--indigo);position:relative;z-index:2;display:flex;flex-direction:column;gap:14px;padding:58px 26px 28px;background:var(--side);color:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:8px 8px 0 var(--ink);text-decoration:none;}
+  .clap-hiring{--side:var(--coral);color:var(--ink);}
+  .clap-band,.clap-stick{position:absolute;left:-3px;right:-3px;height:30px;border:3px solid var(--ink);background:repeating-linear-gradient(135deg,var(--ink) 0 22px,#fff 22px 44px);}
   .clap-band{top:-3px;border-radius:18px 18px 0 0;}
   .clap-stick{top:-34px;border-radius:8px;transform-origin:3px 100%;transform:rotate(-11deg);transition:transform .22s cubic-bezier(.3,1.6,.6,1);}
   .clap-stick::before{content:"";position:absolute;left:-2px;bottom:-12px;width:14px;height:14px;border-radius:50%;background:var(--ink);}
   .clap:hover .clap-stick,.clap:focus-visible .clap-stick{transform:rotate(0deg);}
-  .clap-k{font-size:14px;font-weight:800;color:var(--ink-2);}
+  .clap-k{font-size:14px;font-weight:800;opacity:.92;}
   .clap-title{font-size:clamp(28px,2.7vw,38px);font-weight:900;line-height:1.02;letter-spacing:-0.025em;text-wrap:balance;}
-  .clap-title mark{background:var(--side-tint);color:inherit;padding:0 4px;border-radius:8px;}
-  .clap-line{font-size:17px;line-height:1.5;color:var(--ink-2);}
-  .clap-go{align-self:flex-start;margin-top:6px;}
+  .clap-title mark{display:inline-block;background:#fff;color:var(--ink);padding:0 8px;border-radius:10px;transform:rotate(-2deg);}
+  .clap-hiring .clap-title mark{transform:rotate(2deg);}
+  .clap-line{font-size:17px;line-height:1.5;}
+  .clap-go{align-self:flex-start;margin-top:6px;background:#fff;color:var(--ink);}
   .clap:hover .clap-go{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
 
   /* Where are you stuck? */
-  .ha-stuck{position:relative;background:var(--indigo-tint);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:clamp(64px,8vw,104px) 0;}
+  .ha-stuck{position:relative;background:linear-gradient(90deg,var(--indigo-tint) 50%,var(--coral-tint) 50%);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);padding:clamp(64px,8vw,104px) 0;}
   .ha-stuck .wrap{position:relative;}
   .ha-squig{top:-18px;right:4%;color:var(--coral);}
   .ha-stuck h2{font-size:clamp(40px,6vw,64px);font-weight:900;letter-spacing:-0.025em;line-height:1.05;text-align:center;}
@@ -187,10 +191,15 @@ const css = `
   @media(max-width:1000px){
     .ha-hero{grid-template-columns:1fr;}
     .ha-groups{grid-template-columns:1fr;}
+    .ha-stuck{background:var(--paper);}
+    .ha-group{padding:22px 18px;border:3px solid var(--ink);border-radius:20px;}
+    .ha-group-seekers{background:var(--indigo-tint);}
+    .ha-group-hiring{background:var(--coral-tint);}
   }
   @media(max-width:640px){
     .ha-claps{grid-template-columns:1fr;gap:64px;padding-top:56px;}
     .clap-stick{transform:rotate(-6deg);}
+    .ha-claps::before{inset:20px -12px -24px -12px;border-radius:32px;}
     .ha-tiles{grid-template-columns:1fr;grid-template-rows:none;}
     .ha-tile{flex-direction:row;text-align:left;padding:16px;}
     .ha-icon{width:60px;height:60px;}

@@ -17,11 +17,12 @@ export const STUCK = {
 
 export const HERO = {
   h1: 'Hiring is a production.',
-  dek: 'See how the other side actually works, and what’s worth using, whether you’re getting hired or doing the hiring.',
+  /** Stephanie, Nov 16, 2026: it's about tools that help job seekers and hiring teams, not showing what the other side does. */
+  dek: 'Free tools for job seekers and hiring teams, and straight answers on which paid tools are worth it.',
   /** Four, so the list stays even. Each is true of the site today. */
   trust: ['Nobody pays to be featured.', 'Every number is sourced and dated.', 'Free tools for both sides of the table.', 'Made by Stephanie Murray, 20 years in talent.'],
-  seekers: { k: 'For job seekers', title: ['I’m building my ', 'career.', ''], line: 'See how recruiters actually read you, and which tools are worth paying for.', cta: 'Help me choose', href: '/what-should-i-use?side=seekers#questions' },
-  hiring: { k: 'For hiring teams', title: ['I’m building my ', 'team.', ''], line: 'See what strong candidates see, and which tools earn their price.', cta: 'Help me choose', href: '/what-should-i-use?side=hiring#questions' },
+  seekers: { k: 'For job seekers', title: ['I’m building my ', 'career.', ''], line: 'Free tools to get past the screening software and walk into interviews ready.', cta: 'Help me choose', href: '/what-should-i-use?side=seekers#questions' },
+  hiring: { k: 'For hiring teams', title: ['I’m building my ', 'team.', ''], line: 'Free tools to spot fake candidates and ask every candidate the same questions.', cta: 'Help me choose', href: '/what-should-i-use?side=hiring#questions' },
 }
 
 /** Two per side. Titles and lines from the pages themselves. */
