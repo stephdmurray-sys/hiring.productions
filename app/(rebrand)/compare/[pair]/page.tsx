@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
 import { Logo } from '@/app/(rebrand)/_components/logo'
+import { RepveraNote, repveraNoteCss } from '@/app/(rebrand)/_components/repvera-note'
 import { VideoEmbed } from '@/app/(rebrand)/_components/video-embed'
 import { videoCardCss } from '@/app/(rebrand)/_components/widgets-css'
 import { shortDate } from '@/app/(rebrand)/_components/data'
@@ -201,7 +202,7 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
 
   return (
     <div className={resume ? 'k-resume' : 'k-ats'}>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + videoCardCss + css }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + videoCardCss + css + repveraNoteCss }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <SiteNav active={resume ? 'seekers' : 'hiring'} />
 
@@ -308,6 +309,8 @@ export default async function ComparePage({ params }: { params: Promise<Params> 
           </a>
         </p>
       </section>
+
+      <RepveraNote campaign="compare" />
 
       <section className="wrap sec" id="next">
         <div className="cmp-cta">

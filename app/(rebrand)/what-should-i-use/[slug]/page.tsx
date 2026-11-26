@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import { NextStep } from '@/app/(rebrand)/_components/next-step'
+import { RepveraNote, repveraNoteCss } from '@/app/(rebrand)/_components/repvera-note'
+
+/** Answers where Stephanie's RepVera note sits in the page body (Nov 26, 2026): the questions RepVera speaks to. */
+const REPVERA_ANSWERS = new Set(['interviews-but-no-offers', 'inconsistent-interviews'])
 import { notFound } from 'next/navigation'
 import { siteCss } from '@/app/(rebrand)/_components/site-css'
 import { SiteNav, SiteFooter, chromeCss } from '@/app/(rebrand)/_components/site-chrome'
@@ -66,7 +70,7 @@ export default async function SituationPage({ params }: { params: Promise<Params
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + recCss + (REPVERA_ANSWERS.has(s.slug) ? repveraNoteCss : '') }} />
       <JsonLd data={ld} />
       <SiteNav active="recommend" />
 
@@ -88,6 +92,8 @@ export default async function SituationPage({ params }: { params: Promise<Params
       <section className="wrap sec-tight rec-answer-wrap" id="answer" aria-labelledby="answer-h">
         <RecAnswer r={r} ask={s.ask} editHref={`${REC_PATH}?${askToQuery(s.ask)}#questions`} />
       </section>
+
+      {REPVERA_ANSWERS.has(s.slug) && <RepveraNote campaign={`answer-${s.slug}`} />}
 
       <section className="wrap sec" id="common">
         <h2>More questions, answered</h2>
