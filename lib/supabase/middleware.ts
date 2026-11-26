@@ -19,6 +19,24 @@ export async function updateSession(request: NextRequest) {
     request,
   })
 
+  // Nobody signed in (every visitor and every search crawler since sign-in
+  // was retired on Nov 14, 2026): there is no session to refresh, so skip the
+  // Supabase call entirely. Nov 26, 2026: Search Console reported server
+  // errors (5xx); a page should never fail because this refresh did.
+  const hasSession = request.cookies.getAll().some((c) => c.name.startsWith('sb-'))
+  if (!hasSession) return supabaseResponse
+
+  try {
+    return await refreshSession(request, supabaseResponse)
+  } catch (err) {
+    console.error('Supabase session refresh failed; serving the page anyway', err)
+    return NextResponse.next({ request })
+  }
+}
+
+async function refreshSession(request: NextRequest, initial: NextResponse) {
+  let supabaseResponse = initial
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

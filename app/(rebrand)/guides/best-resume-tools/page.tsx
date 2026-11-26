@@ -3,6 +3,7 @@ import { PickFace } from '@/app/(rebrand)/_components/pick-face'
 import { verdictFor } from '@/lib/picks'
 import { keepLast } from '@/lib/site-line'
 import { NextStep } from '@/app/(rebrand)/_components/next-step'
+import { RepveraNote, repveraNoteCss } from '@/app/(rebrand)/_components/repvera-note'
 import { EvidenceSignup } from '@/app/(rebrand)/_components/evidence-signup'
 import { PAYS_US, moneyLine } from '@/lib/money'
 import { JsonLd, graph, resumeRankingLd, toolReviewLd } from '@/app/(rebrand)/_components/structured'
@@ -312,7 +313,7 @@ export default function Page() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + guidePageCss }} />
+      <style dangerouslySetInnerHTML={{ __html: siteCss + chromeCss + boardCss + risingCss + calcCss + videoCardCss + guidePageCss + repveraNoteCss }} />
       <JsonLd data={graph(resumeRankingLd(), ...all.map(toolReviewLd))} />
       <HashOpener prefix="evidence-" />
       <SiteNav active="seekers" />
@@ -720,6 +721,8 @@ export default function Page() {
           </Faq>
         </div>
       </section>
+
+      <RepveraNote campaign="best-resume-tools" />
 
       <NextStep side="seekers" line="Still deciding? Answer a few questions and get your best match." button="Help me choose" href="/what-should-i-use?side=seekers#questions" />
       <SiteFooter />
