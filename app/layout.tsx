@@ -49,7 +49,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://hiring.productions',
+    // No url here: it would be inherited by every page that sets no openGraph of its own,
+    // telling social sites every page is the homepage. Pages that need one set their own.
     siteName: 'hiring.productions',
     title: 'hiring.productions',
     description: SITE_LINE,

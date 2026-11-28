@@ -79,6 +79,16 @@ const map = {
   '/q/what-does-culture-fit-actually-mean': '/interview-practice',
 }
 const RETIRED = Object.entries(map).map(([source, destination]) => ({ source, destination, permanent: false }))
+// One address for Google (Nov 26, 2026): www.hiring.productions served a full copy of the site,
+// so every page existed twice. Send www to the same page on the main address for good (308).
+const WWW = [
+  {
+    source: '/:path*',
+    has: [{ type: 'host', value: 'www.hiring.productions' }],
+    destination: 'https://hiring.productions/:path*',
+    permanent: true,
+  },
+]
 // Renamed pages keep their old address working for good (308).
 const RENAMED = [
   { source: '/consulting', destination: '/hiring-stack', permanent: true },
@@ -165,7 +175,7 @@ const nextConfig = {
   // anywhere (search results, old emails, bookmarks, Stripe legacy
   // sessions, social posts) lands on /pro instead of 404'ing.
   async redirects() {
-    return [...RENAMED, ...GUESSES, ...RETIRED, ...RETIRED_PREFIXES]
+    return [...WWW, ...RENAMED, ...GUESSES, ...RETIRED, ...RETIRED_PREFIXES]
   },
 }
 
