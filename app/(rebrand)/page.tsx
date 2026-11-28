@@ -42,9 +42,13 @@ import { freeToolCount } from '@/lib/free-tools'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  title: 'Hiring Is a Production: Straight Answers on Which Hiring Tools Are Worth It',
+  // The brand leads the title so a search for the name finds the homepage.
+  // "Hiring Productions" alone collides with film and TV crew jobs, so the
+  // rest of the title ties the name to hiring tools. absolute: skips the
+  // "| hiring.productions" template so the name isn't said twice.
+  title: { absolute: 'hiring.productions | Hiring Tools Ranked for Job Seekers and Hiring Teams' },
   description:
-    'Hiring tools ranked for job seekers and hiring teams: resume builders, ATS checkers and applicant tracking systems. Every score is dated, the method is published, and nobody pays to be featured.',
+    'hiring.productions ranks hiring tools for job seekers and hiring teams: resume builders, ATS checkers and applicant tracking systems. Every score is dated and nobody pays to be featured.',
 }
 
 const SEEKER_LOGOS = ['teal', 'kickresume', 'flowcv', 'jobscan', 'rezi', 'resume-worded', 'enhancv', 'novoresume']
