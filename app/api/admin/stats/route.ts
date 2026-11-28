@@ -80,6 +80,9 @@ export async function GET(request: NextRequest) {
   const uniquesByDay: Record<string, Set<string>> = {}
   // Distinct anonIds across the whole window for the headline visitor count.
   const uniqueVisitors = new Set<string>()
+  // Where each visitor came from, judged by the first page view we saw
+  // from them in this window (Stephanie asked Nov 28, 2026).
+  const sourceByVisitor = new Map<string, string>()
   let costCents = 0
 
   for (const e of events) {
@@ -109,6 +112,9 @@ export async function GET(request: NextRequest) {
 
       const anonId = (e.meta.anonId as string) ?? ''
       if (anonId) {
+        if (!sourceByVisitor.has(anonId)) {
+          sourceByVisitor.set(anonId, sourceFromReferrer((e.meta.referrer as string) ?? ''))
+        }
         uniqueVisitors.add(anonId)
         uniquesByDay[dayKey] = uniquesByDay[dayKey] ?? new Set<string>()
         uniquesByDay[dayKey].add(anonId)
@@ -131,6 +137,20 @@ export async function GET(request: NextRequest) {
   const topPages = Object.entries(pageViewsByPath)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 15)
+
+  // Visitors per source, biggest first.
+  const sourceCounts: Record<string, number> = {}
+  for (const source of sourceByVisitor.values()) {
+    sourceCounts[source] = (sourceCounts[source] ?? 0) + 1
+  }
+  const visitorSources = Object.entries(sourceCounts).sort((a, b) => b[1] - a[1])
+
+  // Clicks over to RepVera (logged by TrackedLink through /api/track).
+  const repvera = {
+    profileClicks: byType.repvera_profile_click ?? 0,
+    callClicks: byType.repvera_call_click ?? 0,
+    answerViews: byType.repvera_answer_view ?? 0,
+  }
 
   // ----- Funnel -------------------------------------------------------------
   const toolAttempts = (byType.tool_run_success ?? 0) + (byType.tool_run_blocked ?? 0)
@@ -181,6 +201,8 @@ export async function GET(request: NextRequest) {
           : null,
     },
     uniquesByDay: uniquesByDayCounts,
+    visitorSources,
+    repvera,
     topPages,
     byType,
     byDay,
@@ -239,4 +261,27 @@ export async function GET(request: NextRequest) {
       costCents: e.costCents,
     })),
   })
+}
+
+/**
+ * Turns a raw referrer into a plain source name for the dashboard.
+ * Empty referrers and our own domain count as "Direct": the visitor typed
+ * the address, used a saved link, or came from an app that hides it.
+ */
+function sourceFromReferrer(referrer: string): string {
+  let host = ''
+  try {
+    host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, '')
+  } catch {
+    return 'Direct or saved link'
+  }
+  if (!host || host.endsWith('hiring.productions')) return 'Direct or saved link'
+  if (/(^|\.)(chatgpt\.com|openai\.com|perplexity\.ai|claude\.ai|gemini\.google\.com|copilot\.microsoft\.com)$/.test(host)) return 'AI assistants'
+  if (/(^|\.)google\./.test(host)) return 'Google'
+  if (/(^|\.)(bing\.com|duckduckgo\.com|yahoo\.com|search\.brave\.com|ecosia\.org)$/.test(host)) return 'Other search engines'
+  if (/(^|\.)(linkedin\.com|lnkd\.in)$/.test(host)) return 'LinkedIn'
+  if (/(^|\.)(facebook\.com|fb\.com|instagram\.com)$/.test(host)) return 'Facebook or Instagram'
+  if (/(^|\.)(t\.co|x\.com|twitter\.com)$/.test(host)) return 'X'
+  if (/(^|\.)repvera\.com$/.test(host)) return 'RepVera'
+  return host
 }
