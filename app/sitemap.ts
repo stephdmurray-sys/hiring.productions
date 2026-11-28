@@ -70,9 +70,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const seen = new Set(staticPages.map((p) => p.path))
   const merged = [...staticPages, ...reviewPages.filter((p) => !seen.has(p.path))]
 
+  // No lastModified: stamping every page with the time of the request told
+  // Google that all of them changed every time it looked, so it learns to
+  // ignore the date. Leaving it out is better than a date that isn't true.
   return merged.map((page) => ({
     url: `${base}${page.path}`,
-    lastModified: new Date(),
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }))

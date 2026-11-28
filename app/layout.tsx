@@ -87,7 +87,8 @@ const jsonLd = {
     {
       '@type': 'Organization',
       '@id': 'https://hiring.productions/#organization',
-      name: 'Hiring.Productions',
+      name: 'hiring.productions',
+      alternateName: ['Hiring Productions', 'Hiring.Productions'],
       url: 'https://hiring.productions',
       logo: {
         '@type': 'ImageObject',
@@ -124,8 +125,10 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': 'https://hiring.productions/#website',
-      url: 'https://hiring.productions',
-      name: 'Hiring.Productions',
+      url: 'https://hiring.productions/',
+      // Google reads name and alternateName for the site name it shows in results.
+      name: 'hiring.productions',
+      alternateName: ['Hiring Productions', 'Hiring.Productions'],
       publisher: {
         '@id': 'https://hiring.productions/#organization',
       },
