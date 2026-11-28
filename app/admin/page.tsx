@@ -277,6 +277,8 @@ interface Stats {
     pagesPerVisitor: number | null
   }
   uniquesByDay: Record<string, number>
+  visitorSources?: [string, number][]
+  repvera?: { profileClicks: number; callClicks: number; answerViews: number }
   topPages: [string, number][]
   byType: Record<string, number>
   byDay: Record<string, Record<string, number>>
@@ -336,6 +338,23 @@ function StatsView({ data }: { data: Stats }) {
             value={data.visitors.pagesPerVisitor ?? 0}
             accent="#A78BFA"
           />
+        </div>
+      </Section>
+
+      {/* Where visitors came from */}
+      <Section title="Where visitors came from">
+        <SimpleTable
+          rows={(data.visitorSources ?? []).map(([source, count]) => [source, count.toString()])}
+          headers={['Source', 'Visitors']}
+        />
+      </Section>
+
+      {/* Clicks over to RepVera */}
+      <Section title="Clicks over to RepVera">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
+          <FunnelCard label="Saw the RepVera answer" value={data.repvera?.answerViews ?? 0} />
+          <FunnelCard label="Clicked to a RepVera profile" value={data.repvera?.profileClicks ?? 0} accent="#5EE6A8" />
+          <FunnelCard label="Clicked to book a call" value={data.repvera?.callClicks ?? 0} />
         </div>
       </Section>
 
